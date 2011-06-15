@@ -15,6 +15,8 @@
 \RequirePackage[xetex]{geometry}
 \RequirePackage[pagestyles]{titlesec}
 \RequirePackage[titles]{tocloft}
+\RequirePackage[xetex]{xcolor}
+\RequirePackage[xetex]{graphicx}
 \RequirePackage[xetex, bookmarksnumbered, pdfstartview={XYZ null null 1}, pdfborder=001,
                 pdfpagemode=UseNone, pdfprintscaling=None]{hyperref}
 
@@ -66,8 +68,6 @@
 \newCJKfontfamily{\fzqiti}     [BoldFont=*] {FZQiTi-S14}                % 方正启体
 \newCJKfontfamily{\fzliukai}   [BoldFont=*] {FZSuXinShiLiuKaiS-R-GB}    % 方正苏新诗柳楷简体
 \setCJKfallbackfamilyfont{fzliukai}[BoldFont=*]{FZQiTi-S14}
-
-\def\textuni#1{\char"#1}
 
 \@namedef{xeCJK@kaiming：}{}
 \@namedef{xeCJK@kaiming；}{}
@@ -236,6 +236,16 @@
   \normalfont ——\,#1\parfillskip\z@ \finalhyphendemerits\z@ \par}}
 
 \newcommand\cipaim[1]{{\upshape\fzzhdxian 【#1】}\enspace\ignorespaces}
+
+\def\textuni#1{\char"#1}
+
+\def\textJinXia {\makebox[\ccwd]{\scalebox{.85}[.9]{釒}\kern-.55em\scalebox{.65}[1]{夏}}}
+\def\textShiJie {\makebox[\ccwd]{\scalebox{.9}[1]{飠}\kern-.5em\scalebox{.6}[1]{皆}}}
+\def\textShiHe  {\makebox[\ccwd]{\scalebox{.9}[1]{飠}\kern-.47em\scalebox{.58}[1]{禾}}}
+\def\textSiTang {\makebox[\ccwd]{\scalebox{.6}[1]{糹}\kern-.3em\scalebox{.7}[1]{堂}}}
+\def\textShiDian{\makebox[\ccwd]{砷\kern-.6em\fboxsep\z@\colorbox{white}{\kern-.1em\scalebox{.7}[1]{店}}}}
+\def\textShiFou {\makebox[\ccwd]{砷\kern-.6em\fboxsep\z@\colorbox{white}{\kern-.1em\scalebox{.7}[1]{否}}}}
+\def\textHuoKua {\makebox[\ccwd]{灿\kern-.6em\fboxsep\z@\colorbox{white}{\kern-.1em\scalebox{.7}[1]{夸}}}}
 
 \endinput
 %%
