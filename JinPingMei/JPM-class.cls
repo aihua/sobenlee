@@ -13,7 +13,7 @@
 \LoadClass[c5size,openany,nofonts]{ctexbook}
 
 \RequirePackage[xetex]{geometry}
-\RequirePackage[pagestyles]{titlesec}
+\RequirePackage[pagestyles,clearempty]{titlesec}
 \RequirePackage[titles]{tocloft}
 \RequirePackage[xetex]{xcolor}
 \RequirePackage[xetex]{graphicx}
@@ -47,26 +47,43 @@
       \fi}%
   \fi}
 
+\def\newCJKfontfamily{\@ifnextchar[%]
+  {\CJK@newfont@family@}
+  {\CJK@newfont@family}}
+\def\CJK@newfont@family#1{\@ifnextchar[%]
+  {\@CJK@newfont@family{#1}}
+  {\@CJK@newfont@family{#1}[]}}
+\def\CJK@newfont@family@[#1]#2{\@ifnextchar[%]
+  {\@@CJK@newfont@family{#1}{#2}}
+  {\@@CJK@newfont@family{#1}{#2}[]}}
+\def\@CJK@newfont@family#1[#2]#3{
+  \setCJKfamilyfont{\@cs@str#1}[#2]{#3}
+  \DeclareRobustCommand*{#1}{\CJKfamily{\@cs@str#1}}}
+\def\@@CJK@newfont@family#1#2[#3]#4{
+  \setCJKfamilyfont{#1}[#3]{#4}
+  \DeclareRobustCommand*{#2}{\CJKfamily{#1}}}
+
 \setCJKmainfont[BoldFont={FZHei-B01},ItalicFont={FZJKai-Z03S}]          {FZJSong-Z01S}
 \setCJKsansfont[BoldFont={FZLanTingHei-M-GBK},ItalicFont={FZJKai-Z03S}] {FZLanTingHei-R-GBK}
 \setCJKmonofont[BoldFont={FZHei-B01},ItalicFont={FZJKai-Z03S}]          {FZFangSong-Z02}
 
 \setCJKfallbackfamilyfont{\CJKrmdefault}
-  [BoldFont={FZHei-B01_GB18030},ItalicFont={FZKai-Z03_GB18030}]{FZShuSong_GB18030-Z01}
+  [BoldFont={FZHei-B01_GB18030},ItalicFont={FZKai-Z03_GB18030}]{FZShuSong-Z01_GB18030}
 \setCJKfallbackfamilyfont{\CJKsfdefault}
-  [BoldFont={FZHei-B01_GB18030},ItalicFont={FZKai-Z03_GB18030}]{FZLanTingHei-R-GB18030-YS}
+  [BoldFont={FZHei-B01_GB18030},ItalicFont={FZKai-Z03_GB18030}]{FZLanTingHei-R_GB18030_YS}
 \setCJKfallbackfamilyfont{\CJKttdefault}
   [BoldFont={FZHei-B01_GB18030},ItalicFont={FZKai-Z03_GB18030}]{FZFangSong-Z02_GB18030}
 
 \setCJKfallbackfamilyfont{fallback@\CJKrmdefault}[ItalicFont={FZKaiS-Extended(SIP)}]{Sun-ExtB}
 
-\newCJKfontfamily{\fzwkai}     [BoldFont=*] {FZBeiWeiKaiShu_GB18030}    % 方正北魏楷书
-\newCJKfontfamily{\fzzhdxian}  [BoldFont=*] {FZZhongDengXian_GB18030}   % 方正中等线
-\newCJKfontfamily{\fzltheib}   [BoldFont=*] {FZLanTingHei-RC-GBK}       % 方正兰亭黑扁
-\newCJKfontfamily{\fzydzhhei}  [BoldFont=*] {FZYunDongHei-M-GBK}        % 方正韵动中黑
-\newCJKfontfamily{\fzzhysong}  [BoldFont=*] {FZYaSong-DB-GBK}           % 方正中雅宋
-\newCJKfontfamily{\fzqiti}     [BoldFont=*] {FZQiTi-S14}                % 方正启体
-\newCJKfontfamily{\fzliukai}   [BoldFont=*] {FZSuXinShiLiuKaiS-R-GB}    % 方正苏新诗柳楷简体
+\newCJKfontfamily{\fzwkai}     [BoldFont=*] {FZBeiWeiKaiShu-S19_GB18030}  % 方正北魏楷书
+\newCJKfontfamily{\fzzhdxian}  [BoldFont=*] {FZZhongDengXian-Z07_GB18030} % 方正中等线
+\newCJKfontfamily{\fzltheib}   [BoldFont=*] {FZLanTingHei-RC-GBK}         % 方正兰亭黑扁
+\newCJKfontfamily{\fzydzhhei}  [BoldFont=*] {FZYunDongHei-M-GBK}          % 方正韵动中黑
+\newCJKfontfamily{\fzzhysong}  [BoldFont=*] {FZYaSong-DB-GBK}             % 方正中雅宋
+\newCJKfontfamily{\fzqiti}     [BoldFont=*] {FZQiTi-S14}                  % 方正启体
+\newCJKfontfamily{\fzliukai}   [BoldFont=*] {FZSuXinShiLiuKaiS-R-GB}      % 方正苏新诗柳楷简体
+
 \setCJKfallbackfamilyfont{fzliukai}[BoldFont=*]{FZQiTi-S14}
 
 \@namedef{xeCJK@kaiming：}{}
@@ -83,15 +100,6 @@
 
 \raggedbottom
 
-\def\cleardoublepage{\clearpage
-  \if@twoside
-    \ifodd\c@page\else
-      \hbox{}\thispagestyle{empty}\newpage
-      \if@twocolumn
-        \hbox{}\newpage
-      \fi
-    \fi
-  \fi}
 \newcommand\titlematter{%
   \cleardoublepage
   \@mainmatterfalse
