@@ -16,14 +16,17 @@
 \ProcessOptions\relax
 \PassOptionsToPackage{CJKchecksingle,no-math,silent,fallback}{xeCJK}
 \LoadClass[c5size,openany,nofonts]{ctexbook}[2009/05/05]
+
 \RequireXeTeX
+
 \def\hmmax{0}     % default 3
 \def\bmmax{0}     % default 4
+
 \RequirePackage[loosequotes,lf,onlymath]{MinionPro}
-\RequirePackage{amsmath,amsthm,empheq,bm,nccmath,extarrows,pmat,polynom,systeme}
+\RequirePackage{empheq,amsthm,bm,extarrows,pmat,polynom,systeme}
 \RequirePackage[uppi,fourier,mathscrf,mathcal,mathbb,comma]{localint}
 \RequirePackage{calc,pifont,marvosym,local-shortlst,afterpage,chngcntr}
-\RequirePackage{floatrow,caption,rotating}
+\RequirePackage{floatrow,caption,rotating,ifthen,varioref}
 \RequirePackage[perpage,stable,bottom]{footmisc}
 \RequirePackage[numbers,sort&compress]{natbib}
 \RequirePackage[pagestyles,nobottomtitles*]{titlesec}
@@ -33,8 +36,7 @@
 \def\pgfsysdriver{pgfsys-xetex.def}
 \RequirePackage{tikz}
 \usetikzlibrary{arrows,matrix}
-\RequirePackage[twoside,headheight=10mm,headsep=7mm,footskip=1em,bindingoffset=10mm]{geometry}
-\RequirePackage{ifthen,varioref,linegoal}
+\RequirePackage[showframe=false,twoside,headheight=5mm,headsep=7mm,footskip=1em,bindingoffset=10mm]{geometry}
 \RequirePackage[bookmarksnumbered,pdfstartview={XYZ null null 1},pdfpagemode=UseNone,pdfprintscaling=None]{hyperref}
 \RequirePackage[dvipdfm,color=purple]{bookmark}
 \RequirePackage{wrapfig,metalogo,multicol,tabularx,booktabs}
@@ -72,7 +74,7 @@
 
 \ifLA@wmark
   \newsavebox{\@watermark@box}
-  \sbox\@watermark@box{\includegraphics[totalheight=.8\textwidth,angle=-90]{arbres.pdf}}
+  \sbox\@watermark@box{\includegraphics[totalheight=.9\textwidth,angle=-90]{arbres.pdf}}
   \def\@watermark@CMD{\ifodd\c@page\usebox\@watermark@box\else\reflectbox{\usebox\@watermark@box}\fi}
 \fi
 \def\printwatermark{%
@@ -105,6 +107,8 @@
 \newcommand*\errorq{\hfill{(\kaishu{本题似有误})}}
 
 \renewcommand*\appendixname     {附录}
+%\renewcommand*\thechapter       {\chinese{chapter}}
+%\renewcommand*\thesection       {\arabic{chapter}.\arabic{section}}
 \renewcommand*\thesubsection    {习题~~\thesection}
 \renewcommand*\thesubsubsection {\chinese{subsubsection}}
 \renewcommand*\theparagraph     {\arabic{paragraph}}
@@ -180,8 +184,8 @@
 \renewcommand\cftchapfillnum[1]{\cftchapleader\nobreak{\cftchappagefont #1}\cftchapafterpnum\par}
 \renewcommand\cftsecfillnum [1]{\cftsecleader\nobreak{\cftsecpagefont #1}\cftsecafterpnum\par}
 
-\newsavebox\ch@end@box
-\newsavebox\em@page@box
+\newbox\ch@end@box
+\newbox\em@page@box
 \sbox\ch@end@box{\includegraphics{kochone.pdf}}
 \sbox\em@page@box{\includegraphics[width={.4\textwidth}]{hilbert.pdf}}
 
@@ -479,8 +483,7 @@
 \newenvironment{exercise}{\subsection{}\small\CTEXindent
     \renewcommand\labelenumi{\bfseries\sffamily\theenumi.}%
     \labelformat{enumi}{\protect\iscurrentsection{\thesection}习题~##1}%
-    \@list@penalty\asparaenum}
-  {\endasparaenum}
+    \@list@penalty\asparaenum}{\endasparaenum}
 \newenvironment{question}  {\CTEXindent\@list@penalty\asparaenum}{\endasparaenum}
 \newenvironment{enumitems} {\CTEXindent\@list@penalty\asparaenum}{\endasparaenum}
 \newenvironment{enumitems*}{\inparaenum}{\endinparaenum}
@@ -489,32 +492,14 @@
 \newcommand*\thmitemhspace[1]{\sbox{\@labels}{\unhbox\@labels\kern#1}}
 \newcommand*\fixthmitem[1][-\parindent]{\thmitemhspace{#1}}
 
-\newlength\enumcolswidth
-\newlength\enumcolsmargin
-\newlength\itemparindent
-\newenvironment{enumitemcols}[1][2]{\CTEXindent\shortenumerate
-    \ifcase#1\relax
-    \or\setlength\enumcolswidth{\textwidth-\leftmargin-\labelsep-\labelwidth}%
-    \or\setlength\enumcolswidth{\textwidth-\leftmargin-2\labelwidth-2\labelsep}%
-       \divide\enumcolswidth\tw@
-    \or\setlength\enumcolswidth{\textwidth-\leftmargin-3\labelwidth-3\labelsep}%
-       \divide\enumcolswidth\thr@@
-    \or\setlength\enumcolswidth{\textwidth-\leftmargin-4\labelwidth-6\labelsep}%
-       \divide\enumcolswidth 4\relax
-    \fi\relax
-    \setlength\enumcolsmargin{\labelsep+\labelwidth+\leftmargin}%
-    \setlength\itemparindent{\labelwidth+\labelsep}%
-    \setlength\shortitemwidth\enumcolswidth}%
+\newenvironment{enumitemcols}[1][2]{%
+    \CTEXindent\shortenumerate
+    \shortitemwidth\linewidth
+    \divide\shortitemwidth by #1\relax
+    \advance\shortitemwidth\dimexpr-\labelwidth-\labelsep}%
   {\endshortenumerate}
 
 \newcommand*\itemstrut{\strut}
-
-\DeclareRobustCommand*\fixlinegoal{\rlap{\rule{\linegoal}{\z@}}}
-\DeclareRobustCommand*\itemeqrule{\@ifstar{\@@itemeqrule}{\@itemeqrule}}
-\def\@itemeqrule{\rule{\linegoal}{\z@}}
-\def\@@itemeqrule{\newline%
-  \raisebox{\baselineskip}[\z@][\z@]{\rule{\linewidth}{\z@}}%
-  \vspace{-\baselineskip}\allowbreak}
 
 \newenvironment{IntroPar}{\kaishu\small%
     \multicolsep   = 10\p@
@@ -543,16 +528,16 @@
 \floatplacement{figure}{ht}
 \floatplacement{table}{ht}
 
-\intextsep    = \z@
-\textfloatsep = 2ex
+\intextsep    = 1.5ex minus .2ex
+\textfloatsep = 3ex   minus .5ex
 
 \labelformat{figure}{\figurename~#1}
 \labelformat{table}{\tablename~#1}
 
 \newfloatcommand{tablebox}{table}[\nocapbeside][\FBwidth]
-\DeclareFloatVCode{frpreskip} {\vskip 1.5ex minus .2ex}
-\DeclareFloatVCode{frpostskip}{\vskip \z@ minus .2ex}
-\DeclareFloatVCode{wrapfig}{\relax}
+\DeclareFloatVCode{frpreskip} {\relax}
+\DeclareFloatVCode{frpostskip}{\vskip-\intextsep}
+\DeclareFloatVCode{wrapfig}{\vskip-\intextsep}
 \DeclareFloatSeparators{frowsep}{\quad}
 \floatsetup{style=plain,capposition=bottom,floatrowsep=frowsep,captionskip=.75ex,%
             rowprecode=frpreskip,rowpostcode=frpostskip}
@@ -597,13 +582,13 @@
 \newcommand*\e{\varepsilon}
 \newcommand*\eset{\varnothing}
 \newcommand*\rest[1]{\bigr|_{#1}}
+\newcommand\minor[1]{\bigl(\begin{smallmatrix}#1\end{smallmatrix}\bigr)}
 \newcommand*\mvec[2][n]{%
   {#2}_1,\allowbreak{#2}_2,\allowbreak\dotsc,\allowbreak{#2}_{#1}}
 \newcommand*\operp{\mathbin{\text{%
   \raisebox{0.6\p@}{\scalebox{0.75}{$\bigcirc\mkern-21mu\perp$}}}}}
-\newcommand*\eqdots[1][3]{%
+\newcommand*\eqdots[1][2.5]{%
   \makebox[#1cm][c]{\titlerule*[5\p@]{$\cdot$}}}
-\newcommand\minor[1]{\bigl(\begin{smallmatrix}#1\end{smallmatrix}\bigr)}
 
 \@ifpackageloaded{MinionPro}%
   {\let\adots\udots}%
@@ -628,8 +613,6 @@
 \DeclareMathOperator{\ann}{ann}
 \DeclareMathOperator*{\dsums}{\sum\,\sum}
 
-\syslineskipcoeff{1}
-
 \let\overbrace\LaTeXoverbrace
 \let\underbrace\LaTeXunderbrace
 \mathtoolsset{centercolon,mathic}
@@ -637,10 +620,15 @@
 \DeclarePairedDelimiter\norm{\lVert}{\rVert}
 \DeclarePairedDelimiter\ideal{\langle}{\rangle}
 \DeclarePairedDelimiter\bform{\langle}{\rangle}
-\DeclarePairedDelimiter\Paren{(}{)}
-\DeclarePairedDelimiter\Brack{[}{]}
+\DeclarePairedDelimiter\Paren{\lparen}{\rparen}
+\DeclarePairedDelimiter\Brack{\lbrack}{\rbrack}
 \DeclarePairedDelimiter\Brace{\lbrace}{\rbrace}
-\DeclarePairedDelimiter\Floor{[}{]}
+\DeclarePairedDelimiter\Floor{\lbrack}{\rbrack}
+
+\newcases{cdcases}{\quad}{%
+  \hfil$\m@th\displaystyle{##}$\hfil}{$\m@th\displaystyle{##}$\hfil}{\lbrace}{.}
+\newcases{cdcases*}{\quad}{%
+  \hfil$\m@th\displaystyle{##}$\hfil}{{##}\hfil}{\lbrace}{.}
 
 \newcommand*\bformk{\bform{\,,}}
 \newcommand*\Parenb[1]{\Paren[\big]{#1}}
@@ -660,12 +648,36 @@
 
 \newbox\@tp@box@la
 \newbox\@tp@box@lb
-\AtBeginDocument{\sbox\@tp@box@la{$,$}}
-\AtBeginDocument{\sbox\@tp@box@lb{$;$}}
+\AtBeginDocument{\sbox\@tp@box@la{$,$}\sbox\@tp@box@lb{$;$}}
 
-\newcommand*\cid{\rlap{\usebox\@tp@box@la}}
-\newcommand*\sid{\rlap{\usebox\@tp@box@lb}}
+\newcommand*\cide{\rlap{\usebox\@tp@box@la}}
+\newcommand*\side{\rlap{\usebox\@tp@box@lb}}
+\newcommand*\cid{\rlap{$,$}}
+\newcommand*\sid{\rlap{$;$}}
 \newcommand*\pid{\rlap{．}}
+
+\syslineskipcoeff{1}
+
+\renewcommand*{\intertext}[1][]{\@amsmath@err{\Invalid@@\intertext}\@eha}
+\def\intertext@{%
+  \def\intertext{%
+    \ifvmode\else\\\@empty\fi
+    \noalign{\ifnum0=`}\fi
+      \@ifnextchar[{\NCC@intertext@}{\NCC@intertext@[]}%
+  }%
+}
+\def\NCC@intertext@[#1]#2{%
+  \penalty\postdisplaypenalty
+%%  \@ifempty{#1}{\vskip\belowdisplayskip}{\vskip#1\relax}%
+  \vbox{\normalbaselines
+    \ifdim\linewidth=\columnwidth
+    \else\parshape\@ne\@totalleftmargin\linewidth
+    \fi
+    \noindent#2\par}%
+  \penalty\predisplaypenalty
+  \@ifempty{#1}{}{\vskip#1\relax}%
+  \ifnum0=`{\fi}%
+}
 
 \newcommand\prefixtext[1]{%
   \ifvmode\else\\\@empty\fi

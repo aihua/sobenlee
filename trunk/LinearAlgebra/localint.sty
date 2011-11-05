@@ -27,7 +27,7 @@
 \ExecuteOptions{nouppi,noint}
 \ProcessOptions\relax
 
-\RequirePackage{bm,amsmath}
+\RequirePackage{bm,amsmath,etoolbox}
 
 \def\WarningIfLoaded@localint#1#2{%
     \AtBeginDocument{\@ifpackageloaded{#2}{\PackageWarning{#1}{%
@@ -209,27 +209,27 @@
 \fi\fi
 
 \ifx\LI@mathscr m\relax
-  \let\mathscr\@undefined
   \WarningIfLoaded@localint{localint}{mathrsfs}%
+  \let\mathscr\@undefined
   \DeclareFontFamily{OMS}{mdput@scr}{\skewchar\font=48}
   \DeclareFontShape{OMS}{mdput@scr}{m} {n}{<-> s    * [0.92]  mdputr7y} {}
   \DeclareFontShape{OMS}{mdput@scr}{b} {n}{<-> s    * [0.92]  mdputb7y} {}
   \DeclareFontShape{OMS}{mdput@scr}{bx}{n}{<-> ssub * mdput@scr/b/n}    {}
   \DeclareFontSubstitution{OMS}{mdput@scr}{m}{n}
-  \DeclareMathAlphabet{\LIMTmathscr}{OMS}{mdput@scr}{m}{n}%
+  \DeclareMathAlphabet{\LIMTmathscr}{OMS}{mdput@scr}{m}{n}
   \SetMathAlphabet{\LIMTmathscr}{bold}{OMS}{mdput@scr}{b}{n}
-  \DeclareRobustCommand\mathscr{\LIMTmathscr}
+  \newrobustcmd*\mathscr\LIMTmathscr\relax
 \else\ifx\LI@mathscr f\relax
-  \let\mathbb\@undefined
   \WarningIfLoaded@localint{localint}{mathrsfs}%
+  \let\mathscr\@undefined
   \DeclareFontFamily{OMS}{fourier@scr}{\skewchar\font=48}
   \DeclareFontShape{OMS}{fourier@scr}{m} {n}{<-> futsy}{}
   \DeclareFontShape{OMS}{fourier@scr}{b} {n}{<-> s    * [0.92]  mdputb7y} {}
   \DeclareFontShape{OMS}{fourier@scr}{bx}{n}{<-> ssub * fourier@scr/b/n}  {}
   \DeclareFontSubstitution{OMS}{fourier@scr}{m}{n}
-  \DeclareMathAlphabet{\LIMTmathscr}{OMS}{fourier@scr}{m}{n}%
+  \DeclareMathAlphabet{\LIMTmathscr}{OMS}{fourier@scr}{m}{n}
   \SetMathAlphabet{\LIMTmathscr}{bold}{OMS}{fourier@scr}{b}{n}
-  \DeclareRobustCommand\mathscr{\LIMTmathscr}
+  \newrobustcmd*\mathscr\LIMTmathscr\relax
 \fi\fi
 
 \ifx\LI@mathbb b\relax
@@ -241,8 +241,10 @@
   \DeclareFontShape{OMS}{mt2hr@bb}{bx}{n} {<-> ssub * mt2hr@bb/b/n}{}
   \DeclareFontSubstitution{OMS}{mt2hr@bb}{m}{n}
   \DeclareMathAlphabet{\LIMTmathbb}{OMS}{mt2hr@bb}{m}{n}
+  \DeclareMathAlphabet{\LIMTmathbbit}{OMS}{mt2hr@bb}{m}{it}
   \SetMathAlphabet{\LIMTmathbb}{bold}{OMS}{mt2hr@bb}{b}{n}
-  \DeclareRobustCommand\mathbb{\LIMTmathbb}
+  \newrobustcmd*\mathbb\LIMTmathbb\relax
+  \newrobustcmd*\mathbbit\LIMTmathbbit\relax
 \fi
 
 \ifx\LI@mathcal m\relax
@@ -256,8 +258,8 @@
   \DeclareMathAlphabet{\LIMTmathcal}  {OMS}{mt2ms@LI}{m}{it}
   \SetMathAlphabet{\LIMTmathcal}{bold}{OMS}{mt2ms@LI}{b}{it}
   \DeclareMathAlphabet{\LIMTmathbcal} {OMS}{mt2ms@LI}{b}{it}
-  \DeclareRobustCommand\mathcal{\LIMTmathcal}
-  \DeclareRobustCommand\mathbcal{\LIMTmathbcal}
+  \newrobustcmd*\mathcal\LIMTmathcal\relax
+  \newrobustcmd*\mathbcal\LIMTmathbcal\relax
 \fi
 
 \ifx\LI@mathfrak m\relax
@@ -269,7 +271,7 @@
   \DeclareFontSubstitution{OMS}{mt2mf@LI}{m}{n}
   \DeclareMathAlphabet{\LIMTmathfrak} {OMS}{mt2mf@LI}{m}{n}
   \SetMathAlphabet{\LIMTmathfrak}{bold}{OMS}{mt2mf@LI}{b}{n}
-  \DeclareRobustCommand\mathfrak{\LIMTmathfrak}
+  \newrobustcmd*\mathfrak\LIMTmathfrak\relax
 \fi
 
 \ifx\LI@wideparen w\relax
