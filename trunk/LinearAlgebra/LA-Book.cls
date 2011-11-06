@@ -25,13 +25,12 @@
 \RequirePackage[loosequotes,lf,onlymath]{MinionPro}
 \RequirePackage{empheq,amsthm,bm,extarrows,pmat,polynom,systeme}
 \RequirePackage[uppi,fourier,mathscrf,mathcal,mathbb,comma]{localint}
-\RequirePackage{calc,pifont,marvosym,local-shortlst,afterpage,chngcntr}
+\RequirePackage{pifont,marvosym,paralist,multicolist,afterpage,chngcntr}
 \RequirePackage{floatrow,caption,rotating,ifthen,varioref}
 \RequirePackage[perpage,stable,bottom]{footmisc}
 \RequirePackage[numbers,sort&compress]{natbib}
 \RequirePackage[pagestyles,nobottomtitles*]{titlesec}
 \RequirePackage[titles]{tocloft}
-\RequirePackage[defblank]{paralist}
 \RequirePackage[normalem]{ulem}
 \def\pgfsysdriver{pgfsys-xetex.def}
 \RequirePackage{tikz}
@@ -73,14 +72,13 @@
 \fi
 
 \ifLA@wmark
-  \newsavebox{\@watermark@box}
+  \newbox\@watermark@box
   \sbox\@watermark@box{\includegraphics[totalheight=.9\textwidth,angle=-90]{arbres.pdf}}
   \def\@watermark@CMD{\ifodd\c@page\usebox\@watermark@box\else\reflectbox{\usebox\@watermark@box}\fi}
 \fi
 \def\printwatermark{%
   \ifLA@wmark
     \AddToShipoutPictureBG{\AtTextCenter{\makebox(0,0)[c]{\@watermark@CMD}}}
-  \else\relax
   \fi}
 
 \predisplaypenalty   = \z@
@@ -92,8 +90,8 @@
 \brokenpenalty       = \sixt@@n
 \parskip             = \z@
 \thinmuskip          = 3 mu
-\medmuskip           = 4 mu  plus 1 mu  minus 4 mu
-\thickmuskip         = 5 mu  plus 1 mu  minus 2 mu
+\medmuskip           = 4 mu  \@plus 1 mu  \@minus 4 mu
+\thickmuskip         = 5 mu  \@plus 1 mu  \@minus 2 mu
 \hfuzz   = 10\p@
 \vfuzz   = 10\p@
 \topskip = 10\p@
@@ -107,8 +105,6 @@
 \newcommand*\errorq{\hfill{(\kaishu{本题似有误})}}
 
 \renewcommand*\appendixname     {附录}
-%\renewcommand*\thechapter       {\chinese{chapter}}
-%\renewcommand*\thesection       {\arabic{chapter}.\arabic{section}}
 \renewcommand*\thesubsection    {习题~~\thesection}
 \renewcommand*\thesubsubsection {\chinese{subsubsection}}
 \renewcommand*\theparagraph     {\arabic{paragraph}}
@@ -155,9 +151,9 @@
 \titlespacing*%
     {name=\chapter,numberless}{\z@}   {-1em}                  {2\baselineskip-2\ccwd}
 \titlespacing*{\chapter}      {\z@}   {-1em}                  {2\baselineskip-\ccwd}
-\titlespacing*{\section}      {\z@}   {7mm plus 2mm minus 2mm}{6mm plus 2mm minus 2mm}
-\titlespacing*{\subsection}   {\z@}   {5mm plus 2mm minus 2mm}{3mm plus 1mm minus 1mm}
-\titlespacing*{\subsubsection}{2\ccwd}{3mm plus 2mm minus 2mm}{2mm plus 1mm minus 1mm}
+\titlespacing*{\section}      {\z@}   {7mm \@plus 2mm \@minus 2mm}{6mm \@plus 2mm \@minus 2mm}
+\titlespacing*{\subsection}   {\z@}   {5mm \@plus 2mm \@minus 2mm}{3mm \@plus 1mm \@minus 1mm}
+\titlespacing*{\subsubsection}{2\ccwd}{3mm \@plus 2mm \@minus 2mm}{2mm \@plus 1mm \@minus 1mm}
 \titlespacing*{\paragraph}    {2\ccwd}{1.5ex}                 {0mm}
 
 \setcounter{secnumdepth}{5}
@@ -233,18 +229,15 @@
 \newcommand\titlematter{%
   \cleardoublepage
   \@mainmatterfalse
-  \pagestyle{empty}
-  \pagenumbering{Alph}}
+  \pagestyle{empty}\pagenumbering{Alph}}
 \renewcommand\frontmatter{%
   \cleardoublepage
   \@mainmatterfalse
-  \pagestyle{main}
-  \pagenumbering{Roman}}
+  \pagestyle{main}\pagenumbering{Roman}}
 \renewcommand\mainmatter{%
   \cleardoublepage
   \@mainmattertrue
-  \pagestyle{main}
-  \pagenumbering{arabic}}
+  \pagestyle{main}\pagenumbering{arabic}}
 \renewcommand\backmatter{%
   \clearpage
   \@mainmatterfalse}
@@ -351,8 +344,8 @@
                 {\theoremsep}
                 {\thmname{#1}\thmnumber{~#2}\thmnote{（#3\rlap{）}}}
 \newtheoremstyle{Remark}
-                {0ex plus .25ex}
-                {0ex plus .25ex}
+                {0ex \@plus .25ex}
+                {0ex \@plus .25ex}
                 {\the\theorembodyfont}
                 {\theoremindent}
                 {\the\theoremheaderfont}
@@ -360,8 +353,8 @@
                 {\theoremsep}
                 {\thmname{#1}\thmnumber{~#2}\thmnote{（#3\rlap{）}}}
 \newtheoremstyle{EmptyHead}
-                {0ex plus .25ex}
-                {0ex plus .25ex}
+                {0ex \@plus .25ex}
+                {0ex \@plus .25ex}
                 {\the\theorembodyfont}
                 {\theoremindent}
                 {\the\theoremheaderfont}
@@ -369,8 +362,8 @@
                 {\theoremsep}
                 {\@ifempty{#3}{\thmname{#1}\thmnumber{~#2}}{\thmnote{#3}}}
 \newtheoremstyle{Proof}
-                {0ex plus .25ex}
-                {0ex plus .25ex}
+                {0ex \@plus .25ex}
+                {0ex \@plus .25ex}
                 {\the\theorembodyfont\pushQED{\qed}}
                 {\theoremindent}
                 {\the\theoremheaderfont}
@@ -428,15 +421,14 @@
 \newcolumntype{C}{>{\centering\arraybackslash}X}
 \renewcommand*\tabularxcolumn[1]{>{\arraybackslash}m{#1}}
 
-\DeclareRobustCommand*\circlenum[1]{%
-  \@tempcnta=#1\relax%%\ding{83}
-  \ifnum\@tempcnta > 10%
-    \typeout{The value of input number is \number\@tempcnta, larger than 10}%
+\DeclareRobustCommand*\Ding[1]{%
+  \ifnum\number#1 > 10%
+    \typeout{The value of input number is \number#1, larger than 10}%
   \fi
-  \advance\@tempcnta by 171%
-  \ding{\@tempcnta}}
+  \ding{\number\numexpr#1 + 171}}
+\let\@Ding\Ding\relax
 
-\renewcommand*\thefootnote{\circlenum\c@footnote}
+\renewcommand*\thefootnote{\@Ding\c@footnote}
 \renewcommand*\footnoterule{\kern-3\p@\hrule\@width.45\columnwidth\@height.6\p@\kern2.4\p@}
 \newdimen\@footnote@indent
 {\footnotesize\global\@footnote@indent=1.2em}
@@ -444,14 +436,14 @@
   \@tempdima\hsize\advance\@tempdima-\@footnote@indent
   \parshape \@ne \@footnote@indent \@tempdima}%
   \par\noindent\llap{\makebox[1.2em][l]{\@thefnmark}}%
-  \linespread{1.2}\selectfont\interlinepenalty=0\CTEXindent#1}
-\def\@makefnmark{\raisebox{1ex}[0ex]{\small\@thefnmark}}
+  \linespread{1.2}\selectfont\interlinepenalty\z@\CTEXindent#1}
+\def\@makefnmark{\raisebox{1ex}[\z@]{\small\@thefnmark}}
 
 \setlength\footnotesep{1.2\footnotesep}
 
 \renewcommand*\theenumi{\@arabic\c@enumi}
 \renewcommand*\theenumii{\@arabic\c@enumii}
-\renewcommand*\theenumiii{\circlenum\c@enumiii}
+\renewcommand*\theenumiii{\@Ding\c@enumiii}
 \renewcommand*\theenumiv{\@Alph\c@enumiv}
 \renewcommand*\labelenumi{\bfseries(\theenumi)}
 \renewcommand*\labelenumii{(\theenumii)}
@@ -483,7 +475,7 @@
 \newenvironment{exercise}{\subsection{}\small\CTEXindent
     \renewcommand\labelenumi{\bfseries\sffamily\theenumi.}%
     \labelformat{enumi}{\protect\iscurrentsection{\thesection}习题~##1}%
-    \@list@penalty\asparaenum}{\endasparaenum}
+    \@list@penalty\asparaenum\CTEXindent}{\endasparaenum}
 \newenvironment{question}  {\CTEXindent\@list@penalty\asparaenum}{\endasparaenum}
 \newenvironment{enumitems} {\CTEXindent\@list@penalty\asparaenum}{\endasparaenum}
 \newenvironment{enumitems*}{\inparaenum}{\endinparaenum}
@@ -492,12 +484,14 @@
 \newcommand*\thmitemhspace[1]{\sbox{\@labels}{\unhbox\@labels\kern#1}}
 \newcommand*\fixthmitem[1][-\parindent]{\thmitemhspace{#1}}
 
-\newenvironment{enumitemcols}[1][2]{%
-    \CTEXindent\shortenumerate
-    \shortitemwidth\linewidth
-    \divide\shortitemwidth by #1\relax
-    \advance\shortitemwidth\dimexpr-\labelwidth-\labelsep}%
-  {\endshortenumerate}
+\newenvironment{enumitemcols}[1][2]{\CTEXindent
+    \listcolsleftmargin=\parindent
+    \multienumitems\relax
+    \totalistcolswidth\dimexpr\linewidth/#1\relax}%
+  {\endmultienumitems}
+\newenvironment{enumitemcols*}{\itemcolsinlist
+    \enumitemcols}%
+  {\endenumitemcols}
 
 \newcommand*\itemstrut{\strut}
 
@@ -528,8 +522,8 @@
 \floatplacement{figure}{ht}
 \floatplacement{table}{ht}
 
-\intextsep    = 1.5ex minus .2ex
-\textfloatsep = 3ex   minus .5ex
+\intextsep    = 1.5ex \@minus .2ex
+\textfloatsep = 3ex   \@minus .5ex
 
 \labelformat{figure}{\figurename~#1}
 \labelformat{table}{\tablename~#1}
@@ -682,11 +676,11 @@
 \newcommand\prefixtext[1]{%
   \ifvmode\else\\\@empty\fi
   \noalign{%
-    \penalty0%
+    \penalty\z@
     \vbox{\mathstrut}%
-    \penalty10000%
+    \penalty\@M%
     \vskip-\baselineskip
-    \penalty10000%
+    \penalty\@M
     \vbox to \z@{%
       \normalbaselines
       \ifdim\linewidth=\columnwidth
@@ -695,9 +689,9 @@
       \fi
       \vss
       \noindent#1\par}%
-    \penalty10000%
+    \penalty\@M
     \vskip-\baselineskip}%
-  \penalty10000}
+  \penalty\@M}
 
 
 %\def\adots{\mathinner{%
