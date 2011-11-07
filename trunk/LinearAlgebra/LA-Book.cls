@@ -309,8 +309,6 @@
 \newcommand\vhrulefill[2][\z@]{%
   \leavevmode\unskip\leaders\hbox{\rule[#1]{\p@}{#2}}\hfill\ignorespaces}
 
-\DeclareRobustCommand*\emphitem[1]{\mbox{\emph*{#1}\kern\ccwd}\ignorespaces}
-
 \newtoks\theorembodyfont
 \newtoks\theoremheaderfont
 \newtoks\theorempunct
@@ -453,18 +451,10 @@
 \labelformat{enumi}{(#1)}
 \labelformat{enumii}{(#1)}
 
-\def\pl@item[#1]{%
-  \if@noitemarg
-    \@noitemargfalse
-    \if@nmbrlist
-      \refstepcounter{\@listctr}%
-    \fi
-  \fi
-  \settowidth{\@tempdima}{#1}%
-  \ifdim\@tempdima>\z@\makelabel{{#1}}\hspace{\labelsep}\fi
-  \ignorespaces}
-\renewcommand\paradescriptionlabel[1]{%
-  \mbox{\emph*{#1}\kern-\labelsep\kern\ccwd}\ignorespaces}
+\pldesclabelsep=1\ccwd\relax
+\renewcommand*\paradescriptionlabel[1]{\mbox{\emph*{#1}}}
+
+\newcommand*\emphitem[1]{\mbox{\emph*{#1}\kern\pldesclabelsep}\ignorespaces}
 
 \def\@list@penalty{%
   \@beginparpenalty = \z@
@@ -472,12 +462,12 @@
   \@endparpenalty   = \z@}
 
 \newcommand*\iscurrentsection[1]{\ifthenelse{\equal{#1}{\thesection}}{}{~\CTEX@presection #1~}}
-\newenvironment{exercise}{\subsection{}\small\CTEXindent
+\newenvironment{exercise}{\subsection{}\small
     \renewcommand\labelenumi{\bfseries\sffamily\theenumi.}%
     \labelformat{enumi}{\protect\iscurrentsection{\thesection}习题~##1}%
-    \@list@penalty\asparaenum\CTEXindent}{\endasparaenum}
-\newenvironment{question}  {\CTEXindent\@list@penalty\asparaenum}{\endasparaenum}
-\newenvironment{enumitems} {\CTEXindent\@list@penalty\asparaenum}{\endasparaenum}
+    \@list@penalty\asparaenum}{\endasparaenum}
+\newenvironment{question}  {\@list@penalty\asparaenum}{\endasparaenum}
+\newenvironment{enumitems} {\@list@penalty\asparaenum}{\endasparaenum}
 \newenvironment{enumitems*}{\inparaenum}{\endinparaenum}
 \newenvironment{descitems} {\inparadesc}{\endinparadesc}
 
