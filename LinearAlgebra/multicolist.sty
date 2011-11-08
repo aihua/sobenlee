@@ -191,7 +191,7 @@
     \@noitemargfalse
     \if@nmbrlist
       \refstepcounter{\@listctr}%
-      \if@mcl@adjust@
+      \if@mcl@top@\if@mcl@adjust@
         \setlength\@tempdima{\widthof{#1}}%
         \ifdim\@tempdima < \labelwidth\relax
           \global\@mcl@adj@it@true
@@ -200,7 +200,7 @@
           \global\@mclaw@t=\@tempdima\relax
           \protected@write\@auxout{}{%
             \string\global\string\@namedef{\@mcl@cnt}{\widthof{#1}}}%
-      \fi\fi
+      \fi\fi\fi
     \fi
   \fi
   \begingroup\lrbox{\@tempboxa}\varwidth[t]{\linewidth}%
