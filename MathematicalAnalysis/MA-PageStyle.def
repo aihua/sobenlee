@@ -1,0 +1,74 @@
+%# -*- coding:utf-8 -*-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+\ProvidesFile{MA-PageStyle.def}
+
+\renewcommand\setheadrule[2][2mm]{%
+  \ifdim#1=\z@
+    \let\makeheadrule\@empty
+  \else
+    \def\makeheadrule{\rule[-#1]{\linewidth}{#2}}%
+  \fi}
+
+\newpagestyle{document}[\bfseries\small\fzlthei\CMRoman\let\\\relax]{%
+  \setmarks{chapter}{section}%
+  \sethead[$\cdot$\enskip\thepage\enskip$\cdot$]
+          []
+          [\ifthechapter{\CTEXthechapter\emspace\chaptertitle}{\chaptertitle}]
+          {\ifthesection{\CTEXthesection\emspace\sectiontitle}
+                        {\ifdefempty{\sectiontitle}
+                          {\ifthechapter{\CTEXthechapter\emspace\chaptertitle}{\chaptertitle}}
+                          {\sectiontitle}
+                        }
+          }
+          {}
+          {$\cdot$\enskip\thepage\enskip$\cdot$}%
+  \setheadrule\ruleheight}
+
+\assignpagestyle{\part}{empty}
+\assignpagestyle{\chapter}{empty}
+
+\def\titlematter{%
+  \cleardoublepage\@mainmatterfalse
+  \pagestyle{empty}\pagenumbering{Alph}}
+\def\frontmatter{%
+  \cleardoublepage\@mainmatterfalse
+  \pagestyle{document}\pagenumbering{Roman}}
+\def\mainmatter{%
+  \cleardoublepage\@mainmattertrue
+  \setcounter{chapter}{-1}%
+  \pagestyle{document}\pagenumbering{arabic}}
+\def\backmatter{%
+  \clearpage\@mainmatterfalse}
+\def\volfrontmatter{%
+  \cleardoublepage\@mainmatterfalse
+  \pagestyle{document}}
+\def\volmainmatter{%
+  \cleardoublepage\@mainmattertrue
+  \pagestyle{document}}
+
+\pagestyle{document}
+
+\newrobustcmd*\ParTocLine{%
+  \noindent\vspace{-\baselineskip}\bigskip
+  \hrule\bigskip\par}
+
+\def\@addappt@cline{%
+  \@writefile{toc}{\ParTocLine}%
+  \@writefile{\@ext@v}{\ParTocLine}}
+
+\newcounter{appcnt}
+\renewcommand\appendix{%
+  \counterwithin*{chapter}{appcnt}%
+  \cleardoublepage
+  \if@filesw
+    \immediate\write\@mainaux{\string\@addappt@cline}%
+  \fi
+  \refstepcounter{appcnt}%
+  \gdef\thechapter{\@Alph\c@chapter}%
+  \gdef\CTEX@prechapter{\appendixname}%
+  \gdef\CTEX@thechapter{\@empty}%
+  \gdef\CTEX@postchapter{\@empty}%
+  \gdef\CTEX@presection{\@empty}}
+
+\endinput
