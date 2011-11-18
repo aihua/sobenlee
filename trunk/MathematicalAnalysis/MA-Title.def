@@ -1,0 +1,154 @@
+%# -*- coding:utf-8 -*-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+\ProvidesFile{MA-Title.def}
+
+\newrobustcmd*\@S{\leavevmode\raise.15ex\hbox{\rmfamily\S}\kern.1\ccwd\ignorespaces}
+\newrobustcmd*\@SMM{\llap{$^\ast$}\ignorespaces}
+
+\newbool{push@star}
+\def\pushstar{\global\booltrue{push@star}}
+\def\popstar{\global\boolfalse{push@star}}
+\def\@SM{\ifbool{push@star}{\@SMM}{}}
+
+\def\appendixname{附录}
+\def\contentsname{总目录}
+\def\prefacename{前\kern\ccwd 言}
+
+\CTEXoptions[today=small]
+\def\CTEX@null{〇}
+\def\@chinese@O#1{\ifnumequal{\csuse{c@#1}}{\z@}{\CTEX@null}{\chinese{#1}}}
+\def\CTEX@thechapter{\@chinese@O{chapter}}
+\def\CTEX@postpart{册}
+\def\CTEX@presection{\@SM\@S}
+
+\setlabelformat*{part}      {\CTEXthepart}
+\setlabelformat*{chapter}   {\CTEXthechapter}
+\setlabelformat*{section}   {\CTEXthesection}
+\setlabelformat*{subsection}{\CTEXthesubsection}
+
+\def\ttl@chapterout{\typeout{\CTEXthechapter}}
+
+\def\FixCTEXtoclabel#1{%
+  \csgdef{ttl@toc#1}{%
+    \def\ttl@a{\protect\numberline{\csuse{CTEXthe#1}}}%
+  }%
+}
+
+\FixCTEXtoclabel{part}
+\FixCTEXtoclabel{chapter}
+\FixCTEXtoclabel{section}
+\FixCTEXtoclabel{subsection}
+
+\sectionformat\part{%
+     class=page,
+     shape=block,
+    format=\large\centering,
+   thepart=\CTEXthepart,
+       top=-\baselineskip,
+    bottom=\baselineskip,
+     label=\raggedright\fangsong\MAB@pretitle\\ \vspace{\stretch{3}},
+    before=\bfseries\Huge\fzcusong\ziju{.7}\MAB@title,
+     after={\normalfont\normalsize\ziju{0}\vspace{\stretch{1}}
+            {\ziju{.5}\fzsonghei\MAB@volume}\\
+             \vspace{\stretch{1}}
+            {\large\kaishu\MAB@institute\quad\MAB@author\quad 编}\\
+             \vspace{\stretch{15}}
+            {\Large\MAB@press}}}
+
+\sectionformat\chapter{%
+     class=top,
+     shape=block,
+    format=\bfseries\Large\sffamily\bfsansfea\fzcuheisong\filinner,
+     label=\CTEXthechapter,
+  labelsep=1.5\ccwd,
+    before={\varwidth[t]{\linewidth}#1\endvarwidth},
+     after={\vspace{2\baselineskip}\titlerule[\ruleheight]},
+       top=\baselineskip,
+    bottom=2\baselineskip}
+
+\sectionformat\chapter*{%
+     shape=block,
+    format=\bfseries\Large\sffamily\bfsansfea\fzcuheisong\filinner,
+    before={\varwidth[t]{\linewidth}#1\endvarwidth},
+       top=\baselineskip,
+    bottom=\baselineskip}
+
+\sectionformat\section{%
+     class=straight,
+     shape=hang,
+    format=\Needspace{.2\textheight}\bfseries\large\fzzysong\filcenter,
+     label=\CTEXthesection,
+  labelsep=.8\ccwd,
+    before=#1\rule\z@{2\ccwd},
+       top=\bigskipamount,
+    bottom=\bigskipamount}
+
+\sectionformat\subsection{%
+     class=straight,
+     shape=hang,
+    format=\goodbreak\bfseries\sffamily\filright,
+     label=\CTEXthesubsection,
+  labelsep=.6\ccwd,
+    before=#1,
+       top=\smallskipamount,
+    bottom=\smallskipamount,
+      left=\parindent}
+
+\gpreto\part{\cleardoublepage}
+
+\newcommand\Sign[2][\MAB@author]{%
+  \par\bigskip
+  \null\hfill\varwidth[c]{.5\linewidth}\centering
+    \mbox{\fzliukai\large #1}\\
+    \mbox{\normalfont\small #2于北京大学数学系}%
+  \endvarwidth\qquad\ResetVolInfo}
+
+\newenvironment{preface}{%
+    \chapter{\prefacename}%
+    \vspace{2\baselineskip}%
+    \titlerule[\ruleheight]%
+    \vspace{2\baselineskip}\kaishu}
+  {\relax}
+
+\newenvironment{exercise}{%
+    \advance\c@secnumdepth-\@m\relax
+    \subsection{习题~\thesection}\small}%
+  {\relax}
+\newenvironment{exercise*}{%
+    \advance\c@secnumdepth-\@m\relax
+    \section{复习题\CTEX@thechapter}}%
+  {\relax}
+
+
+\newcommand*\floatlabelformat[2]{\csdef{fnum@#1}{#2}}
+\floatlabelformat{figure}{\figurename\nobreakspace\thefigure}
+\floatlabelformat{table}{\tablename\nobreakspace\thetable}
+
+\floatplacement{figure}{ht}
+\floatplacement{table}{ht}
+
+\intextsep    = 1.5ex \@minus .2ex
+\textfloatsep = 3ex   \@minus .5ex
+
+\setlabelformat{figure}{\figurename~}
+\setlabelformat{table}{\tablename~}
+
+\newcommand*\figureboxsep{\quad}
+\newfloatcommand{figurebox}{figure}[\nocapbeside][\FBwidth]
+\DeclareFloatVCode{frpreskip} {\relax}
+\DeclareFloatVCode{frpostskip}{\vskip-\intextsep}
+\DeclareFloatVCode{wrapfig}{\vskip-\intextsep}
+\DeclareFloatSeparators{frowsep}{\figureboxsep}
+\floatsetup{style=plain,capposition=bottom,floatrowsep=frowsep,captionskip=.75ex,%
+            rowprecode=frpreskip,rowpostcode=frpostskip}
+\floatsetup[wrapfloat]{captionskip=-2\p@,rowprecode=wrapfig}
+
+\DeclareCaptionFont{captextfont} {\bfseries}
+\DeclareCaptionFont{caplabelfont}{\sffamily\bfseries}
+\DeclareCaptionLabelSeparator{captionlabelsep}{\quad}
+\captionsetup{labelfont=caplabelfont,textfont=captextfont,labelsep=captionlabelsep,%
+              hypcap=true,figurewithin=section,tablewithin=section,position=below}
+
+
+\endinput

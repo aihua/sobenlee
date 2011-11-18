@@ -1,0 +1,138 @@
+%# -*- coding:utf-8 -*-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+\ProvidesFile{MA-Theorem.def}
+
+\def\ifwidthzero#1{%
+  \settowidth\@tempdima{#1}%
+  \ifdim\@tempdima=\z@\relax
+    \expandafter\@firstoftwo
+  \else
+    \expandafter\@secondoftwo
+  \fi}
+
+\def\declareheadformat#1#2{\csdef{thmt@headstyle@#1}{#2}}
+
+\declareheadformat{note}{\ifwidthzero{\NOTE}{\NAME}{\NOTE}}
+\declareheadformat{normal}{\NAME~\NUMBER\NOTE}
+
+\newskip\thmskip
+\thmskip=.5ex\relax
+\def\thmheaderfont{\bfseries\sffamily\upshape}
+
+\declaretheoremstyle[
+   headformat=note,
+   spaceabove=\thmskip,
+   spacebelow=\thmskip,
+     headfont=\thmheaderfont,
+     notefont=\thmheaderfont,
+    headpunct=,
+   notebraces={}{},
+     bodyfont=\normalfont\sffamily,
+   headindent=\parindent,
+postheadspace=\ccwd
+]{Axiom}
+\declaretheoremstyle[
+   headformat=normal,
+   spaceabove=\thmskip,
+   spacebelow=\thmskip,
+     headfont=\thmheaderfont,
+     notefont=\thmheaderfont,
+    headpunct=,
+   notebraces={\,（}{\rlap{）}},
+     bodyfont=\normalfont\sffamily,
+   headindent=\parindent,
+postheadspace=\ccwd
+]{Theorem}
+\declaretheoremstyle[
+   headformat=normal,
+   spaceabove=\z@,
+   spacebelow=\z@,
+     headfont=\thmheaderfont,
+     notefont=\thmheaderfont,
+    headpunct=,
+   notebraces={（}{\rlap{）}},
+     bodyfont=\normalfont,
+   headindent=\parindent,
+postheadspace=\ccwd
+]{Remark}
+\declaretheoremstyle[
+   headformat=note,
+   spaceabove=\z@,
+   spacebelow=\z@,
+     headfont=\thmheaderfont,
+     notefont=\thmheaderfont,
+    headpunct=,
+   notebraces={}{},
+     bodyfont=\normalfont,
+   headindent=\parindent,
+postheadspace=\ccwd,
+          qed=\qedsymbol
+]{Proof}
+\declaretheoremstyle[
+   headformat=normal,
+   spaceabove=\z@,
+   spacebelow=\z@,
+     headfont=\thmheaderfont,
+     notefont=\thmheaderfont,
+    headpunct=,
+   notebraces={\,（}{\rlap{）}},
+     bodyfont=\normalfont,
+   headindent=\parindent,
+postheadspace=\ccwd,
+          qed=\qedsymbol
+]{ProofNum}
+\declaretheoremstyle[
+   headformat=note,
+   spaceabove=\z@,
+   spacebelow=\z@,
+     headfont=\thmheaderfont,
+     notefont=\thmheaderfont,
+    headpunct=,
+   notebraces={}{},
+     bodyfont=\normalfont,
+   headindent=\parindent,
+postheadspace=\ccwd
+]{Note}
+
+\let\thmt@space\relax
+\undef{\proof}
+\undef{\endproof}
+
+\def\proofname{证明}
+\def\solutionname{解}
+\def\qedsymbol{\ensuremath\blacksquare}
+
+\declaretheorem[style=Axiom, numbered=no, name=公理]{Axiom}
+\declaretheorem[style=Theorem, within=section, name=定义]{definition}
+\declaretheorem[style=Theorem, within=section, name=定理]{theorem}
+\declaretheorem[style=Theorem, within=section, name=引理]{lemma}
+\declaretheorem[style=Theorem, within=section, name=命题]{proposition}
+\declaretheorem[style=Theorem, within=section, name=性质]{property}
+\declaretheorem[style=Theorem, within=section, name=结论]{conclusion}
+\declaretheorem[style=Theorem, within=section, name=推论]{corollary}
+\declaretheorem[style=Theorem, within=section, name=例]  {example}
+\declaretheorem[style=Remark,  within=section, name=注]  {remark}
+\declaretheorem[style=Note,  numbered=no, name=\qedsymbol]   {note}
+\declaretheorem[style=Proof, numbered=no, name=\proofname]   {proof}
+\declaretheorem[style=Proof, numbered=no, name=\solutionname]{solution}
+\declaretheorem[style=ProofNum, name=证法]   {proof*}
+\declaretheorem[style=ProofNum, name=解法]{solution*}
+\counterwithin*{proof*}{example}
+\counterwithin*{solution*}{example}
+\counterwithin{equation}{section}
+
+\setlabelformat{definition} {定义~}
+\setlabelformat{theorem}    {定理~}
+\setlabelformat{lemma}      {引理~}
+\setlabelformat{proposition}{命题~}
+\setlabelformat{property}   {性质~}
+\setlabelformat{conclusion} {结论~}
+\setlabelformat{corollary}  {推论~}
+\setlabelformat{example}    {例~}
+\setlabelformat{remark}     {注~}
+\setlabelformat{proof*}     {证法~}
+\setlabelformat{solution*}  {解法~}
+\setlabelformat*{equation}  {(\theequation)}
+
+\endinput

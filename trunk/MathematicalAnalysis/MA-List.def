@@ -1,0 +1,61 @@
+%# -*- coding:utf-8 -*-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+\ProvidesFile{MA-List.def}
+
+\robustify{\ding}
+
+\def\DingNum#1{%
+  \ifnum\number#1>10%
+    \typeout{The value of input number is \number#1, larger than 10}%
+  \fi
+  \ding{\number\numexpr#1 + 171}}
+
+\def\Ding#1{\DingNum{\csuse{c@#1}}}
+
+\AddEnumerateCounter*\Ding\DingNum{1}
+
+\setlist{nosep}
+\setlist[enumerate,1]{labelindent=\parindent,leftmargin=*,font=\bfseries,label=(\arabic*)}
+
+\newcounter{LastItem}
+
+\SetEnumitemKey{adjust}{%
+       nosep,
+leftmargin=!,
+labelwidth=\widthof{\bfseries\ref{enumLastItem-\theLastItem}},
+     after=\unskip\label{enumLastItem-\theLastItem}\stepcounter{LastItem}\ignorespaces,
+    format=\bfseries,
+     label=\arabic*.}
+
+\newbool{push@star@}
+\newrobustcmd*\prestar{\ifbool{push@star}{\@SMM\popstar}{}}
+\def\StarItem{\pushstar\item}
+
+\newdimen\addleftskip
+
+\SetLabelAlign{hang}{%
+  \addleftskip=\z@\relax
+  \ifbool{push@star}{\booltrue{push@star@}}{}%
+  \settowidth\@tempdima{#1}%
+   \ifdimgreater{\@tempdima}{\labelwidth}%
+     {\global\addleftskip=\dimexpr\@tempdima-\labelwidth\relax}%
+     {\global\addleftskip=\z@\relax}%
+   \global\leftskip\addleftskip\relax
+   \ifbool{push@star@}{\booltrue{push@star}}{}%
+   \nobreak\hss\llap{#1}}
+
+\SetEnumitemKey{hang}{%
+          nosep,
+     align=hang,
+leftmargin=*,
+     label=\prestar\bfseries\arabic*.}
+
+\newdimen\ori@leftskip
+\preto{\enit@enumerate}{\global\ori@leftskip\leftskip\relax}
+\gappto{\enit@endenumerate}{\global\leftskip\ori@leftskip\relax}
+
+%%\BeforeBeginEnvironment{exlist}{\ori@leftskip\leftskip\relax}
+%%\AfterEndEnvironment{exlist}{\leftskip\ori@leftskip\relax}
+
+\endinput

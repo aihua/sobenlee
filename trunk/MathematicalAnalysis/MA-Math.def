@@ -1,0 +1,158 @@
+%# -*- coding:utf-8 -*-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+\ProvidesFile{MA-Math.def}
+
+\robustify{\LEFTROOT}
+\robustify{\UPROOT}
+\newrobustcmd*\Beta{\ensuremath{\mathord{\mathrm{B}}}}
+
+\let\le\leqslant
+\let\ge\geqslant
+\let\subset\subseteq
+\let\dps\displaystyle
+
+\newcommand*\mtilde[1]{\widetilde{#1}}
+\newcommand*\mequiv[1]{\overline{#1}}
+\newcommand*\mscr[1]{\mathscr{#1}}
+\newcommand*\mfield[1]{\mathbb{#1}}
+\newcommand*\amscr[1]{\mathcal{#1}}
+\newcommand*\map[3]{#1\colon#2\to#3}
+\newcommand*\smsqrt[1]{\sqrt{\smash[b]{#1}}}
+
+\newcommand*\mA{\mscr A}
+\newcommand*\mB{\mscr B}
+\newcommand*\mI{\mscr I}
+\newcommand*\mR{\mfield R}
+\newcommand*\mC{\mfield C}
+\newcommand*\mQ{\mfield Q}
+\newcommand*\mK{\mfield K}
+\newcommand*\mZ{\mfield Z}
+\newcommand*\mN{\mfield N}
+\newcommand*\mP{\mfield P}
+\newcommand*\mF{\mfield F}
+\newcommand*\uC{\mathrm C}
+\newcommand*\mi{\mathrm i}
+\newcommand*\me{\mathrm e}
+
+\newcommand*\diff{\mathop{}\negthinspace\mathrm{d}}
+\newcommand*\e{\varepsilon}
+\newcommand*\eset{\varnothing}
+
+\DeclareMathOperator{\arccot}{arccot}
+
+\let\overbrace\LaTeXoverbrace
+\let\underbrace\LaTeXunderbrace
+
+\mathtoolsset{centercolon,mathic}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}
+\DeclarePairedDelimiter\Paren{\lparen}{\rparen}
+\DeclarePairedDelimiter\Brack{\lbrack}{\rbrack}
+\DeclarePairedDelimiter\Floor{\lbrack}{\rbrack}
+
+\DeclarePairedDelimiterX\Brace[1]{\lbrace}{\rbrace}{\,#1\,}
+\DeclarePairedDelimiterX\Set[2]{\lbrace}{\rbrace}{\,#1\,\delimsize\vert\,#2\,}
+
+\newcases{cdcases}{\quad}{%
+  \hfil$\m@th\displaystyle{##}$\hfil}{$\m@th\displaystyle{##}$\hfil}{\lbrace}{.}
+\newcases{cdcases*}{\quad}{%
+  \hfil$\m@th\displaystyle{##}$\hfil}{{##}\hfil}{\lbrace}{.}
+
+\newcommand*\Parenb{\Paren[\big]}
+\newcommand*\Brackb{\Brack[\big]}
+\newcommand*\Braceb{\Brace[\big]}
+\newcommand*\Setb{\Set[\big]}
+
+\newcommand*\cid{\rlap{$,$}}
+\newcommand*\sid{\rlap{$;$}}
+\newcommand*\pid{\rlap{．}}
+
+\newcommand*\mvec[2][n]{%
+  {#2}_1,\allowbreak{#2}_2,\allowbreak\dotsc,\allowbreak{#2}_{#1}}
+
+\renewcommand*{\intertext}[1][]{\@amsmath@err{\Invalid@@\intertext}\@eha}
+\def\intertext@{%
+  \def\intertext{%
+    \ifvmode\else\\\@empty\fi
+    \noalign{\ifnum0=`}\fi
+      \@ifnextchar[{\NCC@intertext@}{\NCC@intertext@[]}%
+  }%
+}
+\def\NCC@intertext@[#1]#2{%
+  \penalty\postdisplaypenalty
+%%  \@ifempty{#1}{\vskip\belowdisplayskip}{\vskip#1\relax}%
+  \vbox{\normalbaselines
+    \ifdim\linewidth=\columnwidth
+    \else\parshape\@ne\@totalleftmargin\linewidth
+    \fi
+    \noindent#2\par}%
+  \penalty\predisplaypenalty
+  \@ifempty{#1}{}{\vskip#1\relax}%
+  \ifnum0=`{\fi}%
+}
+
+\newcommand\prefixtext[1]{%
+  \ifvmode\else\\\@empty\fi
+  \noalign{%
+    \penalty\z@
+    \vbox{\mathstrut}%
+    \penalty\@M
+    \vskip-\baselineskip
+    \penalty\@M
+    \vbox to \z@{%
+      \normalbaselines
+      \ifdim\linewidth=\columnwidth
+      \else
+        \parshape\@ne\@totalleftmargin\linewidth
+      \fi
+      \vss
+      \noindent#1\par}%
+    \penalty\@M
+    \vskip-\baselineskip}%
+  \penalty\@M
+}
+
+\MHInternalSyntaxOn
+\def\EQ_prevent_vertical_space:{%
+  \nointerlineskip
+%  \abovedisplayskip\dimexpr.7\abovedisplayskip\relax
+%  \belowdisplayskip\dimexpr.7\belowdisplayskip\relax
+}
+\MHInternalSyntaxOff
+
+\def\FixDisplaySkip{%
+  \multiply\abovedisplayskip\tw@\relax
+  \belowdisplayskip\abovedisplayskip\relax}
+
+\def\@empheqdef#1#2{%
+  \setkeys{EmphEqEnv}{#1}%
+  \setkeys{EmphEqOpt}{#2}%
+  \EmphEqMainEnv}
+
+\def\EMPHEQDEF#1#2{%
+  \newenvironment{#1}[1][]{%
+    \@empheqdef{#2}{##1}}{
+    \endEmphEqMainEnv}}
+
+\EMPHEQDEF{Equation}{equation}
+\EMPHEQDEF{Equation*}{equation*}
+\EMPHEQDEF{Align}{align}
+\EMPHEQDEF{Align*}{align*}
+\EMPHEQDEF{Flalign}{flalign}
+\EMPHEQDEF{Flalign*}{flalign*}
+\EMPHEQDEF{Gather}{gather}
+\EMPHEQDEF{Gather*}{gather*}
+\EMPHEQDEF{Multline}{multline}
+\EMPHEQDEF{Multline*}{multline*}
+
+\def\EMPHEQDEF@#1#2{%
+  \newenvironment{#1}[2][]{%
+    \@empheqdef{#2=##2}{##1}}{%
+    \endEmphEqMainEnv}}
+
+\EMPHEQDEF@{Alignat}{alignat}
+\EMPHEQDEF@{Alignat*}{alignat*}
+
+\endinput
