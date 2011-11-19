@@ -7,10 +7,13 @@
 \robustify{\UPROOT}
 \newrobustcmd*\Beta{\ensuremath{\mathord{\mathrm{B}}}}
 
-\let\le\leqslant
-\let\ge\geqslant
+\let\leq\leqslant
+\let\geq\geqslant
 \let\subset\subseteq
 \let\dps\displaystyle
+
+\let\notinslant\notin
+\def\notin{\mathrel{\overline{\in}}}
 
 \newcommand*\mtilde[1]{\widetilde{#1}}
 \newcommand*\mequiv[1]{\overline{#1}}
@@ -19,7 +22,7 @@
 \newcommand*\amscr[1]{\mathcal{#1}}
 \newcommand*\map[3]{#1\colon#2\to#3}
 \newcommand*\smsqrt[1]{\sqrt{\smash[b]{#1}}}
-
+\newcommand*\cset{\mathopen\complement}
 \newcommand*\mA{\mscr A}
 \newcommand*\mB{\mscr B}
 \newcommand*\mI{\mscr I}
@@ -53,13 +56,15 @@
 \DeclarePairedDelimiter\Floor{\lbrack}{\rbrack}
 
 \DeclarePairedDelimiterX\Brace[1]{\lbrace}{\rbrace}{\,#1\,}
-\DeclarePairedDelimiterX\Set[2]{\lbrace}{\rbrace}{\,#1\,\delimsize\vert\,#2\,}
+\DeclarePairedDelimiterX\Set[2]{\lbrace}{\rbrace}{\,#1\mathrel{\delimsize\vert}#2\,}
 
 \newcases{cdcases}{\quad}{%
   \hfil$\m@th\displaystyle{##}$\hfil}{$\m@th\displaystyle{##}$\hfil}{\lbrace}{.}
 \newcases{cdcases*}{\quad}{%
   \hfil$\m@th\displaystyle{##}$\hfil}{{##}\hfil}{\lbrace}{.}
 
+\newcommand*\absb{\abs[\big]}
+\newcommand*\normb{\norm[\big]}
 \newcommand*\Parenb{\Paren[\big]}
 \newcommand*\Brackb{\Brack[\big]}
 \newcommand*\Braceb{\Brace[\big]}
@@ -68,6 +73,9 @@
 \newcommand*\cid{\rlap{$,$}}
 \newcommand*\sid{\rlap{$;$}}
 \newcommand*\pid{\rlap{．}}
+
+\let\ori@dot\.\relax
+\def\.{\ifmmode\pid\else\ori@dot\fi}
 
 \newcommand*\mvec[2][n]{%
   {#2}_1,\allowbreak{#2}_2,\allowbreak\dotsc,\allowbreak{#2}_{#1}}

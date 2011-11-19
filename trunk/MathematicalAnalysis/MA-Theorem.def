@@ -100,6 +100,7 @@ postheadspace=\ccwd
 \undef{\endproof}
 
 \def\proofname{证明}
+\def\quizname{思考题}
 \def\solutionname{解}
 \def\qedsymbol{\ensuremath\blacksquare}
 
@@ -116,10 +117,13 @@ postheadspace=\ccwd
 \declaretheorem[style=Note,  numbered=no, name=\qedsymbol]   {note}
 \declaretheorem[style=Proof, numbered=no, name=\proofname]   {proof}
 \declaretheorem[style=Proof, numbered=no, name=\solutionname]{solution}
+\declaretheorem[style=Remark,numbered=no, name=\quizname]    {quiz}
 \declaretheorem[style=ProofNum, name=证法]   {proof*}
 \declaretheorem[style=ProofNum, name=解法]{solution*}
+\declaretheorem[style=Remark, name=\quizname] {quiz*}
 \counterwithin*{proof*}{example}
 \counterwithin*{solution*}{example}
+\counterwithin*{quiz*}{section}
 \counterwithin{equation}{section}
 
 \setlabelformat{definition} {定义~}
