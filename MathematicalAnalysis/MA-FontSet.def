@@ -56,26 +56,15 @@
 \newCJKfontfamily{\lishu}          [BoldFont=*] {FZLiShu-S01}
 \newCJKfontfamily{\yuanti}         [BoldFont=*] {FZZhunYuan-M02}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newCJKfontfamily{\MZDF}        [BoldFont=*] {CTZMaoZeDong}
-\newCJKfontfamily{\maokai}      [BoldFont=*] {AR MaoKaiB5 Heavy}           % 文鼎毛楷粗体
-\newCJKfontfamily{\yanti}       [BoldFont=*] {DFYanKai Std W7}             % 华康颜体
+\newCJKfontfamily{\MZDF}        [BoldFont=*] {CTZMaoZeDong}                % 草檀斋毛泽东字体
 \newCJKfontfamily{\fzcuheisong} [BoldFont=*] {FZCuHeiSongS-B-GB}           % 方正粗黑宋简体
-\newCJKfontfamily{\fzcuyasongb} [BoldFont=*] {FZYaSong-BC-GBK}             % 方正粗雅宋扁
-\newCJKfontfamily{\fzcuyasongc} [BoldFont=*] {FZCuSong-B09}                % 方正粗雅宋长
 \newCJKfontfamily{\fzcusong}    [BoldFont=*] {FZCuSong-B09}                % 方正粗宋
 \newCJKfontfamily{\fzbykans}    [BoldFont=*] {FZBoYaKanSongK}              % 方正博雅刊宋
 \newCJKfontfamily{\fzlthei}     [BoldFont=*] {FZLanTingHei-R-GBK}          % 方正兰亭黑
-\newCJKfontfamily{\fzltheib}    [BoldFont=*] {FZLanTingHei-RC-GBK}         % 方正兰亭黑扁
-\newCJKfontfamily{\fzltzhhei}   [BoldFont=*] {FZLanTingHei-DB-GBK}         % 方正兰亭中黑
 \newCJKfontfamily{\fzsonghei}   [BoldFont=*] {FZSongHei-B07_GB18030}       % 方正宋黑
-\newCJKfontfamily{\fzwkai}      [BoldFont=*] {FZBeiWeiKaiShu-S19_GB18030}  % 方正北魏楷书
-\newCJKfontfamily{\fzydzhhei}   [BoldFont=*] {FZYunDongHei-M-GBK}          % 方正韵动中黑
 \newCJKfontfamily{\fzxbsong}    [BoldFont=*] {FZXiaoBiaoSong-B05}          % 方正小标宋
-\newCJKfontfamily{\fzxian}      [BoldFont=*] {FZZhongDengXian-Z07_GB18030} % 方正中等线
 \newCJKfontfamily{\fzzysong}    [BoldFont=*] {FZYaSong-DB-GBK}             % 方正中雅宋
-\newCJKfontfamily{\fzfangguo}   [BoldFont=*] {FZFangGuo-R-GB}              % 方正仿郭简体
 \newCJKfontfamily{\fzliukai}    [BoldFont=*] {FZSuXinShiLiuKaiS-R-GB}      % 方正苏新诗柳楷简体
-\newCJKfontfamily{\fzqiti}      [BoldFont=*] {FZQiTi-S14}                  % 方正启体
 \setCJKfallbackfamilyfont{fzliukai}    [BoldFont=*] {FZQiTi-S14}
 \setCJKfallbackfamilyfont{fzcuheisong} [BoldFont=*] {FZYaSong-DB-GBK}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -83,7 +72,7 @@
 \@namedef{xeCJK@kaiming；}{}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \catcode`。=\active
-\newrobustcmd*{。}{．}
+\newcommand{。}{．}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \let\nbs\nobreakspace
 \DeclareRobustCommand*~{\unskip\hskip 0.2em minus 0.05em\ignorespaces}

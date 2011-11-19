@@ -30,7 +30,7 @@
     \global\advance\@tocpartcnt\@ne\relax
     \ifnum\@tocpartcnt>\@ne\relax
       \par\nopagebreak\medskip\hrule\relax
-      \Needspace{.2\textheight}%
+      \Needspace{2\baselineskip}%
       \medskip\vspace*{\medskipamount}%
     \else
       \hrule\medskip\smallskip

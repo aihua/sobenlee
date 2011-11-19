@@ -39,7 +39,9 @@
   \setcounter{chapter}{-1}%
   \pagestyle{document}\pagenumbering{arabic}}
 \def\backmatter{%
-  \clearpage\@mainmatterfalse}
+  \cleardoublepage\@mainmatterfalse
+  \def\CTEXthepart{习题集}%
+  \def\prefacename{编者的话}}
 \def\volfrontmatter{%
   \cleardoublepage\@mainmatterfalse
   \pagestyle{document}}
@@ -70,5 +72,7 @@
   \gdef\CTEX@thechapter{\@empty}%
   \gdef\CTEX@postchapter{\@empty}%
   \gdef\CTEX@presection{\@empty}}
+
+\AtEndDocument{\cleardoublepage}
 
 \endinput

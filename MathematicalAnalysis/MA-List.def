@@ -4,13 +4,11 @@
 \ProvidesFile{MA-List.def}
 
 \robustify{\ding}
-
 \def\DingNum#1{%
   \ifnum\number#1>10%
     \typeout{The value of input number is \number#1, larger than 10}%
   \fi
   \ding{\number\numexpr#1 + 171}}
-
 \def\Ding#1{\DingNum{\csuse{c@#1}}}
 
 \AddEnumerateCounter*\Ding\DingNum{1}
@@ -46,16 +44,53 @@ labelwidth=\widthof{\bfseries\ref{enumLastItem-\theLastItem}},
    \nobreak\hss\llap{#1}}
 
 \SetEnumitemKey{hang}{%
-          nosep,
-     align=hang,
-leftmargin=*,
-     label=\prestar\bfseries\arabic*.}
+           nosep,
+      align=hang,
+ leftmargin=*,
+labelindent=\z@}
+
+\newlist{exlist}{enumerate}{3}
+\setlist[exlist]{nosep,leftmargin=*,label=\prestar\bfseries\arabic*.}
+\setlist[exlist,2]{label=(\arabic*)}
+
+\newenvironment{exercise}{%
+    \advance\c@secnumdepth-\@m\relax
+    \let\subsec@align\centering\relax
+    \subsection{习题~\thesection}\small
+    \exlist[hang]}%
+  {\endexlist}
+\newenvironment{exercise*}{%
+    \advance\c@secnumdepth-\@m\relax
+    \section{复习题\CTEX@thechapter}
+    \exlist[hang]}%
+  {\endexlist}
 
 \newdimen\ori@leftskip
 \preto{\enit@enumerate}{\global\ori@leftskip\leftskip\relax}
 \gappto{\enit@endenumerate}{\global\leftskip\ori@leftskip\relax}
 
-%%\BeforeBeginEnvironment{exlist}{\ori@leftskip\leftskip\relax}
-%%\AfterEndEnvironment{exlist}{\leftskip\ori@leftskip\relax}
+\newenvironment{exlistcols}[1][2]{\CTEXindent
+    \listcolsleftmargin=\addleftskip\relax
+    \def\labelenumi{(\arabic{enumi})}%
+    \multienumitems\relax
+    \totalistcolswidth\dimexpr\linewidth/#1\relax
+    \listcolswidth\dimexpr\totalistcolswidth-\labelsep-\labelwidth\relax}%
+  {\endmultienumitems}
+\newenvironment{exlistcols*}{\itemindent\z@\item[]\itemcolsinlist
+    \enumitemcols}%
+  {\endenumitemcols}
+
+\newenvironment{enumitemcols}[1][2]{\CTEXindent
+    \listcolsleftmargin=\addleftskip\relax
+    \multienumitems\relax
+    \totalistcolswidth\dimexpr\linewidth/#1\relax
+    \listcolswidth\dimexpr\totalistcolswidth-\labelsep-\labelwidth\relax}%
+  {\endmultienumitems}
+\newenvironment{enumitemcols*}{\itemindent\z@\item[]\itemcolsinlist
+    \enumitemcols}%
+  {\endenumitemcols}
 
 \endinput
+
+%%\BeforeBeginEnvironment{exlist}{\ori@leftskip\leftskip\relax}
+%%\AfterEndEnvironment{exlist}{\leftskip\ori@leftskip\relax}

@@ -14,14 +14,16 @@
 \def\hmmax{0}     % default 3
 \def\bmmax{0}     % default 4
 
-\RequirePackage{tgtermes}
+\RequirePackage{XITS}
 \RequirePackage[mtphrb,mtpcal,subscriptcorrection]{mtpro2}
+\RequirePackage[uppi,comma]{localint}
 \RequirePackage{empheq,amsthm,thmtools}
 \RequirePackage{siunitx,needspace,varwidth,chngcntr,changepage,environ}
-\RequirePackage[pagestyles,explicit,clearempty,outermarks]{titlesec}
-\RequirePackage{enumitem,pifont,xcolor,labelformat}
 \RequirePackage{floatrow,caption,wrapfig}
+\RequirePackage[pagestyles,explicit,clearempty,outermarks]{titlesec}
 \RequirePackage[titlesec]{interfaces}
+\RequirePackage{enumitem,pifont,xcolor,labelformat}
+\RequirePackage[hang]{multicolist}
 \RequirePackage[showframe=false,twoside,headheight=5mm,headsep=7mm,footskip=1em,bindingoffset=10mm]{geometry}
 \RequirePackage[pdfstartview={XYZ null null 1},pdfpagemode=UseNone,pdfprintscaling=None]{hyperref}
 
@@ -41,6 +43,8 @@
 }
 
 \let\HyPsd@Warning\@gobble\relax
+
+\graphicspath{{includefiles/figures/}}
 
 \predisplaypenalty   = \z@
 \postdisplaypenalty  = \z@
@@ -66,7 +70,7 @@
 
 \gappto\bfseries{\boldmath}
 
-\sisetup{group-minimum-digits=4}
+\sisetup{group-minimum-digits=4,round-integer-to-decimal}
 
 \raggedbottom
 \allowdisplaybreaks[4]

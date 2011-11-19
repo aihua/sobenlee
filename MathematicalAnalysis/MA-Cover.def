@@ -11,32 +11,35 @@
   \def\MAB@copies{%
     \ifblank{#2}%
      {\num{#1}}
-     {\numrange[range-phrase=\SI@phrase]{#1}{#2}}%
+     {\numrange[minimum-integer-digits=5,range-phrase=\SI@phrase]{#1}{#2}}%
   }
 }
 
 \def\MAB@key{\define@key{MAbook}}
 
 \MAB@key{pretitle}[高等学校试用教材]{\def\MAB@pretitle{#1}}
-\MAB@key{title}[数学分析]{\def\MAB@title{#1}}
+\MAB@key{title}[\@title]{\def\MAB@title{#1}}
 \MAB@key{institute}[北京大学数学系]{\def\MAB@institute{#1}}
 \MAB@key{author}[]{\def\MAB@author{#1}}
 \MAB@key{volume}[\CTEXthepart]{\def\MAB@volume{#1}}
-\MAB@key{size}[$850\times 1168$\enspace 1/32]{\def\MAB@size{#1}}
+\MAB@key{size}[$\num{850}\times\num{1168}$\enspace 1/32]{\def\MAB@size{#1}}
 \MAB@key{sheets}[]{\def\MAB@sheets{#1}}
 \MAB@key{words}[]{\def\MAB@words{\num{#1}}}
 \MAB@key{copies}[;]{\MAB@copyrange[#1]}
 \MAB@key{version}[]{\def\MAB@version{#1}}
 \MAB@key{time}[]{\def\MAB@time{#1}}
 \MAB@key{ISBN}[]{\def\MAB@ISBN{#1}}
-\MAB@key{price}[]{\def\MAB@price{#1}}
+\MAB@key{price}[]{\def\MAB@price{\num[round-mode=places]{#1}}}
 \MAB@key{press}[{\MZDF 高等教育出版社}]{\def\MAB@press{#1}}
+\MAB@key{print}[河北省香河县印刷厂]{\def\MAB@print{#1}}
+\MAB@key{publication}[新华书店北京发行所]{\def\MAB@publication{#1}}
+
 
 \def\SetVolInfo#1{\setkeys{MAbook}{#1}}
 
 \def\ResetVolInfo{\SetVolInfo{%
   pretitle,title,institute,author,volume,size,
-  sheets,words,copies,version,time,ISBN,price,press}}
+  sheets,words,copies,version,time,ISBN,price,press,print,publication}}
 
 \ResetVolInfo
 
@@ -45,13 +48,13 @@
 \long\def\MakeVolInfo{%
   \begingroup\centering
     \MAB@pretitle\\[10\p@]
-    {\bfseries\large\fzxbsong\ziju{.5}\MAB@title}\\[8\p@]
-    \MAB@volume\\[4\p@]
-    \MAB@institute\quad{\kaishu\MAB@author}\quad 编\\
+    {\bfseries\large\fzxbsong\if@mainmatter\ziju{.5}\fi\MAB@title}\\[8\p@]
+    \if@mainmatter\MAB@volume\\[4\p@]\fi
+    \MAB@institute\quad{\kaishu\MAB@author}\rlap{\quad 编}\\
     $\ast$\\
     {\MAB@press}\enspace 出版\\[3\p@]
-    新华书店北京发行所发行\\
-    河北省香河县印刷厂印装\\
+    \MAB@publication 发行\\
+    \MAB@print 印装\\
     $\ast$\\
     \InfoItem{开本}\MAB@size\quad\InfoItem{印张}\MAB@sheets\qquad\InfoItem{字数}\MAB@words\\
     \MAB@version\quad\MAB@time\\
