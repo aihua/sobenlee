@@ -138,7 +138,7 @@
 \DeclareFloatSeparators{frowsep}{\@frowsep}
 \floatsetup{style=plain,capposition=bottom,floatrowsep=frowsep,
   captionskip=\abovecaptionskip,rowprecode=frpreskip,rowpostcode=frpostskip}
-\floatsetup[wrapfloat]{captionskip=.5\abovecaptionskip,rowprecode=wrapfig}
+\floatsetup[wrapfloat]{captionskip=.5\abovecaptionskip}
 
 \DeclareCaptionFont{captextfont} {\bfseries}
 \DeclareCaptionFont{caplabelfont}{\sffamily\bfseries}
@@ -150,8 +150,10 @@
 \sbox\@tempfig{%
   \includegraphics[width={.25\textwidth}]{ctanlion.pdf}}
 
-\def\somefigure{%
-  \ifnumodd{\c@page}
+\newcounter{lioncnt}
+
+\def\somefigure{\stepcounter{lioncnt}%
+  \ifnumodd{\c@lioncnt}
     {\reflectbox{\usebox\@tempfig}}
     {\usebox\@tempfig}}
 

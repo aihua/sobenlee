@@ -26,14 +26,14 @@
 \newcommand*\mA{\mscr A}
 \newcommand*\mB{\mscr B}
 \newcommand*\mI{\mscr I}
-\newcommand*\mR{\mfield R}
-\newcommand*\mC{\mfield C}
-\newcommand*\mQ{\mfield Q}
-\newcommand*\mK{\mfield K}
-\newcommand*\mZ{\mfield Z}
-\newcommand*\mN{\mfield N}
-\newcommand*\mP{\mfield P}
-\newcommand*\mF{\mfield F}
+\newcommand*\FR{\mfield R}
+\newcommand*\FC{\mfield C}
+\newcommand*\FQ{\mfield Q}
+\newcommand*\FK{\mfield K}
+\newcommand*\FZ{\mfield Z}
+\newcommand*\FN{\mfield N}
+\newcommand*\FP{\mfield P}
+\newcommand*\FF{\mfield F}
 \newcommand*\uC{\mathrm C}
 \newcommand*\mi{\mathrm i}
 \newcommand*\me{\mathrm e}
@@ -80,7 +80,7 @@
 \newcommand*\mvec[2][n]{%
   {#2}_1,\allowbreak{#2}_2,\allowbreak\dotsc,\allowbreak{#2}_{#1}}
 
-\renewcommand*{\intertext}[1][]{\@amsmath@err{\Invalid@@\intertext}\@eha}
+\renewcommand\intertext[1][]{\@amsmath@err{\Invalid@@\intertext}\@eha}
 \def\intertext@{%
   \def\intertext{%
     \ifvmode\else\\\@empty\fi
