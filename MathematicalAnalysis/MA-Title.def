@@ -3,6 +3,8 @@
 %%
 \ProvidesFile{MA-Title.def}
 
+\setcounter{secnumdepth}{\thr@@}
+
 \newrobustcmd*\@S{\leavevmode\raise.15ex\hbox{\rmfamily\S}\kern.1\ccwd\ignorespaces}
 \newrobustcmd*\@SMM{\llap{$^\ast$}\ignorespaces}
 
@@ -23,6 +25,7 @@
 \def\CTEX@postpart{册}
 \def\CTEX@presection{\@SM\@S}
 \def\CTEX@presubsection{\@SM}
+\def\CTEX@thesubsubsection{\chinese{subsubsection}}
 
 \setlabelformat*{part}      {\CTEXthepart}
 \setlabelformat*{chapter}   {\CTEXthechapter}
@@ -50,7 +53,7 @@
        top=-\baselineskip,
     bottom=\baselineskip,
      label=\raggedright\fangsong\MAB@pretitle\\ \vspace{\stretch{3}},
-    before=\bfseries\Huge\fzcusong\ziju{.2}\if@mainmatter\ziju{.7}\fi\MAB@title,
+    before=\bfseries\zihao{1}\fzcusong\ziju{.2}\if@mainmatter\ziju{.7}\fi\MAB@title,
      after={\normalfont\normalsize\ziju{0}\vspace{\stretch{1}}
             {\if@mainmatter\ziju{.5}\fzsonghei\MAB@volume\\ \fi}
              \vspace{\stretch{1}}
@@ -61,7 +64,7 @@
 \sectionformat\chapter{%
      class=top,
      shape=block,
-    format=\bfseries\Large\sffamily\bfsansfea\fzcuheisong\filinner,
+    format=\bfseries\zihao{3}\sffamily\bfsansfea\fzcuheisong\filinner,
      label=\CTEXthechapter,
   labelsep=1.5\ccwd,
     before={\varwidth[t]{\linewidth}#1\endvarwidth},
@@ -71,7 +74,7 @@
 
 \sectionformat\chapter*{%
      shape=block,
-    format=\bfseries\Large\sffamily\bfsansfea\fzcuheisong\filinner,
+    format=\bfseries\zihao{3}\sffamily\bfsansfea\fzcuheisong\filinner,
     before={\varwidth[t]{\linewidth}#1\endvarwidth},
        top=\baselineskip,
     bottom=\baselineskip}
@@ -79,24 +82,35 @@
 \sectionformat\section{%
      class=straight,
      shape=hang,
-    format=\Needspace{.2\textheight}\bfseries\large\fzzysong\filcenter,
+    format=\Needspace{.2\textheight}\bfseries\zihao{4}\fzzysong\filcenter,
      label=\CTEXthesection,
   labelsep=.8\ccwd,
     before=#1\rule\z@{2\ccwd},
        top=\bigskipamount,
     bottom=\bigskipamount}
 
-\def\subsec@align{\filright}
+\def\subsec@format{\filright\zihao{-4}}
 
 \sectionformat\subsection{%
      class=straight,
      shape=hang,
-    format=\goodbreak\bfseries\sffamily\subsec@align,
+    format=\goodbreak\bfseries\sffamily\subsec@format,
      label=\CTEXthesubsection,
   labelsep=.6\ccwd,
     before=#1,
        top=\smallskipamount,
     bottom=\smallskipamount,
+      left=\parindent}
+
+\sectionformat\subsubsection{%
+     class=straight,
+     shape=hang,
+    format=\bfseries\fzxbsong,
+     label={\CTEXthesubsubsection、},
+  labelsep=1ex,
+    before=#1,
+       top=\smallskipamount,
+    bottom=\z@,
       left=\parindent}
 
 \gpreto\part{\cleardoublepage}
@@ -133,15 +147,17 @@
 \figureboxsep{2}
 \newfloatcommand{figurebox}{figure}[\nocapbeside][\FBwidth]
 \DeclareFloatVCode{frpreskip} {\relax}
-\DeclareFloatVCode{frpostskip}{\vskip-1.2\intextsep}
+\DeclareFloatVCode{frpostskip}{\vskip-\intextsep}
 \DeclareFloatVCode{wrapfig}{\vskip-\intextsep}
 \DeclareFloatSeparators{frowsep}{\@frowsep}
 \floatsetup{style=plain,capposition=bottom,floatrowsep=frowsep,
   captionskip=\abovecaptionskip,rowprecode=frpreskip,rowpostcode=frpostskip}
 \floatsetup[wrapfloat]{captionskip=.5\abovecaptionskip}
 
-\DeclareCaptionFont{captextfont} {\bfseries}
-\DeclareCaptionFont{caplabelfont}{\sffamily\bfseries}
+\def\fix@capfontsize{\normalsize}
+
+\DeclareCaptionFont{captextfont} {\fix@capfontsize\bfseries}
+\DeclareCaptionFont{caplabelfont}{\fix@capfontsize\sffamily\bfseries}
 \DeclareCaptionLabelSeparator{captionlabelsep}{\quad}
 \captionsetup{labelfont=caplabelfont,textfont=captextfont,labelsep=captionlabelsep,
   hypcap=true,figurewithin=section,tablewithin=section,position=below}

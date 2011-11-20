@@ -13,22 +13,13 @@
 \[
   S_1\implies S_2
 \]
-表示命题~$S_1$~成立，则命题~$S_2$~成立；或条件~$S_1$~成立，则条件~$S_2$~也成立。符号
+表示命题（或条件）~$S_1$~蕴涵命题（或条件）~$S_2$；符号
 \[
   S_1\iff S_2
 \]
-表示命题（或条件）~$S_1$~与命题（或条件）~$S_2$~等价。即表示由命题（或条件）~$S_1$~可以推出命题（或条
-件）~$S_2$，反过来由命题（或条件）~$S_2$~也可以推出命题（或条件）~$S_1$。
+表示命题（或条件）~$S_1$~与命题（或条件）~$S_2$~等价。
 
-符号
-\[
-  \forall
-\]
-表示任意取定，写法是将英文字母~A~倒过来。符号
-\[
-  \exists
-\]
-表示存在，写法是将英文字母~E~反过来。
+符号~$\forall$~表示任意取定，而符号~$\exists$~表示存在。
 
 孤立地看这些符号没有什么意思，但组合起来可以表示一句话，这句话可以是正确的，也可以是错误的。如
 \begin{alignat*}{4}
@@ -50,7 +41,7 @@
 们可以给集合一个描述。先看几个集合的例子：
 
 \begin{enumerate}
-\item 所有自然数的全体为一集合，记作~$\mathbb N$；\label{enum:set1}
+\item 所有自然数的全体为一集合，记作~$\FN$；\label{enum:set1}
 \item 所有小于~$10$~并且是偶数的自然数全体为一集合；\label{enum:set2}
 \item 方程~$x^2+5x+4=0$~的根全体为一集合；\label{enum:set3}
 \item 具有北京市户口的人全体为一集合。\label{enum:set4}
@@ -95,7 +86,7 @@
 
 两个集合~$A,B$，若对任意~$a\in A$，都有~$a\in B$，这时集合~$A$~包含于集合~$B$，称~$A$~是~$B$~的\emph{子集}，记作
 \[
-  A\subset B\quad\text{或}\quad B\supseteq A\.
+  A\subset B\quad\text{或}\quad B\supseteq A。
 \]
 
 例如~$A=\Brace{1,2,3,4,5}$，则集合
@@ -104,12 +95,12 @@
 \]
 是~$A$~的子集。集合~$\Brace 1$~表示由~$1$~这一元素组成的集合，概念上不同于元素~$1$~本身，我们可以记
 \[
-  \Brace 1\subset A,\quad 1\in A\.
+  \Brace 1\subset A,\quad 1\in A。
 \]
 
 为了运算方便，我们把不含任何元素的集合称为\emph{空集}，记作~$\eset$。例如
 \[
-  \Setb x{x^2+1=0,~x~\text{是实数}}=\eset\.
+  \Setb x{x^2+1=0,~x~\text{是实数}}=\eset。
 \]
 空集包含于任一集合：
 \[
@@ -121,11 +112,11 @@
 
 若两集合~$A,B$，满足~$A\subset B$，且~$B\subset A$，则称~$A$~与~$B$~相等，记作
 \[
-  A=B\.
+  A=B。
 \]
 如
 \[
-  \Brace{1,2,3,4}=\Brace{4,3,2,1}=\Brace{1,1,2,3,4}\.
+  \Brace{1,2,3,4}=\Brace{4,3,2,1}=\Brace{1,1,2,3,4}。
 \]
 
 若~$A\subset B$，且~$A\neq B$，则称~$A$~是~$B$~的真子集。
@@ -136,7 +127,7 @@
 
 给定集合~$A,B$，集合~$A,B$~的\emph{并}记为~$A\cup B$，它是~$A,B$~全部元素组成的集合，定义为
 \[
-  A\cup B:=\Setb x{x\in A~\text{或}~x\in B}\.
+  A\cup B\coloneq\Setb x{x\in A~\text{或}~x\in B}。
 \]
 
 用平面图形表示集合，图形的点表示集合的元素，则~$A,B$~图形和在一起就是并集~$A\cup B$~的图形。如\ref{fig:sec0-1}~所示。
@@ -144,21 +135,14 @@
 由并集的定义易见：$A\cup\eset=A$；$A\cup A=A$；
 \begin{align*}
 A\cup B &=B\cup A;                     \tag*{（交换律）}\\*
-(A\cup B)\cup C & = A\cup(B\cup C)\.   \tag*{（结合律）}
+(A\cup B)\cup C & = A\cup(B\cup C)。   \tag*{（结合律）}
 \end{align*}
 
 给定集合~$A,B$，两集合的\emph{交}记为~$A\cap B$，它由~$A,B$~的公共元素组成，定义为：
 \[
-  A\cap B:=\Setb x{x\in A~\text{与}~x\in B}\.
+  A\cap B\coloneq\Setb x{x\in A~\text{与}~x\in B}。
 \]
 集合~$A,B$~图形的公共部分（见\ref{fig:sec0-2}）就是交集的图形。
-
-显然有：$A\cap\eset=\eset$；$A\cap A=A$；
-\begin{align*}
-A\cap B &=B\cap A;                     \tag*{（交换律）}\\*
-(A\cap B)\cup C & = A\cap(B\cap C)\.   \tag*{（结合律）}
-\end{align*}
-并且，若~$A\subset B$，则~$A\cap B=A$。
 
 \begin{figure}
 \begin{floatrow}[3]
@@ -171,27 +155,34 @@ A\cap B &=B\cap A;                     \tag*{（交换律）}\\*
 \end{floatrow}
 \end{figure}
 
+显然有：$A\cap\eset=\eset$；$A\cap A=A$；
+\begin{align*}
+A\cap B &=B\cap A;                     \tag*{（交换律）}\\*
+(A\cap B)\cup C & = A\cap(B\cap C)。   \tag*{（结合律）}
+\end{align*}
+并且，若~$A\subset B$，则~$A\cap B=A$。
+
 给定集合~$A,B$，两集合的\emph{差}记为~$A-B$~或~$A\backslash B$，它是在~$A$~内而不在~$B$~内的元素组成的集
 合（见\ref{fig:sec0-3}），定义为：
 \[
-  A-B=\Setb x{x\in A,x\notin B}\.
+  A-B=\Setb x{x\in A,x\notin B}。
 \]
 显然有
 \[
-  A-A=\eset;\quad A-\eset=A;\quad\eset-A=\eset;\quad A-B=A-(A\cap B)\.
+  A-A=\eset;\quad A-\eset=A;\quad\eset-A=\eset;\quad A-B=A-(A\cap B)。
 \]
 
 假设我们所考察的集合都是更大集合~$X$~（如实数集）的子集，这时我们把~$A$~对~$X$~的差集称为~$A$~的\emph{补集}，记
 为~$\cset A$，即
 \[
-  \cset A=X-A\.
+  \cset A=X-A。
 \]
 
 \begin{quiz}
 证明：
 \[
   \cset A\cap\cset B=\cset{(A\cup B)};\quad
-  \cset A\cup\cset B=\cset{(A\cap B)}\.
+  \cset A\cup\cset B=\cset{(A\cap B)}。
 \]
 \end{quiz}
 
@@ -199,29 +190,30 @@ A\cap B &=B\cap A;                     \tag*{（交换律）}\\*
 
 设~$x$~是实数，$x$~的\emph{绝对值}为一非负实数，记为~$\abs x$，定义为：
 \[
-  \abs x=\biggl\{\begin{array}{@{}r@{\quad}l}
+  \abs x=\begin{rbdcases}
     x, & x\geq 0;\\
-   -x, & x<0\.
-  \end{array}
+   -x, & x<0。
+  \end{rbdcases}
 \]
 例如~$\abs{3.5}=3.5$，而~$\abs{-3.5}=3.5$。
 
-要说明绝对值的几何意义，我们作一直线，在直线上取定方向，原点~$O$~和单位长度以后，就称此直线为一\emph{数轴}，实数
-可以与数轴上的点建立起一一对应，每一实数可用数轴上一点来表示，不同的实数用数轴上不同的点表示，因此数与点可以不加
-区分。这时，$\abs x$~就表示点~$x$~到原点~$O$~的距离。
-
-\begin{wrapfigure}[7]{O}{0mm}
+\begin{wrapfigure}{O}{0mm}
 \somefigure
 \caption{数轴}\label{fig:sec0-4}
 \end{wrapfigure}
 
-由\ref{fig:sec0-4}~可见：若~$r>0$，点~$x$~位于区间~$(-r,r)$~上时，则点~$x$~到原点的距离小于~$r$；反之，若点~$x$~到原点的距离
-小于~$r$，则点~$x$~位于区间~$(-r,r)$~上，即得
+要说明绝对值的几何意义，我们作一直线，在直线上取定方向，原点~$O$~和单位长度以后，就称此直线为一\emph{数轴}，实数
+可以与数轴上的点建立起一一对应，每一实数可用数轴上一点来表示，不同的实数用数轴上不同的点表示，因此数与点可以不加
+区分（严格来说，这一看似显然的事实只有在\ref{ch:9}对实数理论进行严格讨论后才能成立，在这里，我们不妨先承认之）。这
+时，$\abs x$~就表示点~$x$~到原点~$O$~的距离。
+
+由\ref{fig:sec0-4}~可见：若~$r>0$，点~$x$~位于区间~$(-r,r)$~上时，则点~$x$~到原点的距离小于~$r$；反之，若点~$x$~到
+原点的距离小于~$r$，则点~$x$~位于区间~$(-r,r)$~上，即得
 
 \begin{property}
 若~$r>0$，则
 \[
-  \abs x<r\iff -r<x<r\.
+  \abs x<r\iff -r<x<r。
 \]
 \end{property}
 
@@ -239,12 +231,12 @@ A\cap B &=B\cap A;                     \tag*{（交换律）}\\*
 \begin{corollary}
 对任意~$a_1,a_2,\dotsc,a_n\in\FR$，有
 \[
-  \abs[\Big]{\sum_{k=1}^na_k}\leq\sum_{k=1}^n\abs{a_k}\.
+  \abs[\Big]{\sum_{k=1}^na_k}\leq\sum_{k=1}^n\abs{a_k}。
 \]
 \end{corollary}
 \begin{corollary}
 \[
-  \absb{\abs x+\abs y}\leq\abs{x-y}\.
+  \absb{\abs x+\abs y}\leq\abs{x-y}。
 \]
 \end{corollary}
 \begin{proof}
@@ -254,7 +246,7 @@ A\cap B &=B\cap A;                     \tag*{（交换律）}\\*
 \]
 可得
 \[
-  \abs x-\abs y\leq\abs{x-y}\.
+  \abs x-\abs y\leq\abs{x-y}。
 \]
 同理
 \[
@@ -262,13 +254,13 @@ A\cap B &=B\cap A;                     \tag*{（交换律）}\\*
 \]
 所以
 \[
-  \absb{\abs x+\abs y}\leq\abs{x-y}\.\qedhere
+  \absb{\abs x+\abs y}\leq\abs{x-y}。\qedhere
 \]
 \end{proof}
 
 \begin{property}
 \[
-  \abs{x\cdot y}=\abs x\cdot\abs y\.
+  \abs{x\cdot y}=\abs x\cdot\abs y。
 \]
 \end{property}
 
@@ -296,7 +288,7 @@ A\cap B &=B\cap A;                     \tag*{（交换律）}\\*
 对~$n=k$~是成立的，则这个论断对~$n=k+1$~也是成立的。解释这个论断不是对任意~$n$~成立。
 \item 设~$x>-1$，且~$x\neq0$，$n\geq 2$，证明，
 \[
-  (1+x)^n>1+nx\.
+  (1+x)^n>1+nx。
 \]
 \item 证明，
   \begin{exlist}
@@ -306,15 +298,15 @@ A\cap B &=B\cap A;                     \tag*{（交换律）}\\*
   \end{exlist}
 \item 设~$n\geq 1$，证明，
 \[
-  \sum_{k=n+1}^{2n}\frac1k=\sum_{k=1}^{2n}\frac{(-1)^{k+1}}k\.
+  \sum_{k=n+1}^{2n}\frac1k=\sum_{k=1}^{2n}\frac{(-1)^{k+1}}k。
 \]
 \item 证明~$\abs{a-b}\leq\abs a+\abs b$。问下面证法是否正确？
 \[
-  \abs{a-b}\leq\abs{a+b}\leq\abs a+\abs b\.
+  \abs{a-b}\leq\abs{a+b}\leq\abs a+\abs b。
 \]
 \item 证明，
 \[
-  \abs[\Big]{\sum_{k=1}^na_k}\geq\abs{a_1}-\sum_{k=2}^n\abs{a_k}\.
+  \abs[\Big]{\sum_{k=1}^na_k}\geq\abs{a_1}-\sum_{k=2}^n\abs{a_k}。
 \]
 \item 解下列不等式。
 \begin{exlistcols}[3]
@@ -329,21 +321,21 @@ A\cap B &=B\cap A;                     \tag*{（交换律）}\\*
 \end{exlistcols}
 \item 设~$a<c<b$，证明，
 \[
-  \abs c\leq\max\Braceb{\abs a,\abs b}\.
+  \abs c\leq\max\Braceb{\abs a,\abs b}。
 \]
 \item 证明，
 \[
-  \frac{\abs{a+b}}{1+\abs{a+b}}\leq\frac{\abs a}{1+\abs a}+\frac{\abs b}{1+\abs b}\.
+  \frac{\abs{a+b}}{1+\abs{a+b}}\leq\frac{\abs a}{1+\abs a}+\frac{\abs b}{1+\abs b}。
 \]
 \item 证明，
 \[
   \max\Brace{a,b}=\frac{a+b}2+\frac{\abs{a-b}}2,\quad
-  \min\Brace{a,b}=\frac{a+b}2-\frac{\abs{a-b}}2\.
+  \min\Brace{a,b}=\frac{a+b}2-\frac{\abs{a-b}}2。
 \]
 并解释其几何意义。
 \item 证明，
 \[
-  \abs{a+b}^p\leq2^p\max\Braceb{\abs a^p,\abs b^p},\quad p>0\.
+  \abs{a+b}^p\leq2^p\max\Braceb{\abs a^p,\abs b^p},\quad p>0。
 \]
 \item 设~$a,b>0$，证明，
 \begin{exlistcols}
@@ -352,15 +344,15 @@ A\cap B &=B\cap A;                     \tag*{（交换律）}\\*
 \end{exlistcols}
 \item 证明，对任意实数~$a,b$，有
 \[
-  \max\Braceb{\abs{a+b},\abs{a-b},\abs{1-b}}\geq\frac12\.
+  \max\Braceb{\abs{a+b},\abs{a-b},\abs{1-b}}\geq\frac12。
 \]
 \item 证明，
 \[
-  \frac1{4n}<\Paren[\bigg]{\frac{1\cdot 3\cdot 5\cdot\dotsm\cdot(2n-1)}{2\cdot 4\cdot 6\cdot\dotsm\cdot(2n)}}^2<\frac1{2n}\.
+  \frac1{4n}<\Paren[\bigg]{\frac{1\cdot 3\cdot 5\cdot\dotsm\cdot(2n-1)}{2\cdot 4\cdot 6\cdot\dotsm\cdot(2n)}}^2<\frac1{2n}。
 \]
 \item 令~$\dps A_n=\prod_{k=1}^n(1+a_k)$，$\dps B_n=\prod_{k=1}^n\Parenb{1+\abs{a_k}}$，证明，
 \[
-  \abs{A_n-1}\leq B_n-1\.
+  \abs{A_n-1}\leq B_n-1。
 \]
 \end{exercise*}
 

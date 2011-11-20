@@ -51,23 +51,24 @@ labelindent=\z@}
 
 \newlist{exlist}{enumerate}{3}
 \setlist[exlist]{nosep,leftmargin=*,label=\prestar\bfseries\arabic*.}
-\setlist[exlist,2]{label=(\arabic*)}
+\setlist[exlist,2]{label=(\arabic*),labelindent=\addleftskip}
+
+\newdimen\ori@leftskip
 
 \newenvironment{exercise}{%
+    \ori@leftskip\leftskip\relax
     \advance\c@secnumdepth-\@m\relax
-    \let\subsec@align\centering\relax
+    \def\subsec@format{\normalsize\raggedright}%
     \subsection{习题~\thesection}\small
+    \let\fix@capfontsize\small\relax
     \exlist[hang]}%
-  {\endexlist}
+  {\endexlist\global\leftskip\ori@leftskip\relax}
 \newenvironment{exercise*}{%
+    \ori@leftskip\leftskip\relax
     \advance\c@secnumdepth-\@m\relax
     \section{复习题\CTEX@thechapter}
     \exlist[hang]}%
-  {\endexlist}
-
-\newdimen\ori@leftskip
-\preto{\enit@enumerate}{\global\ori@leftskip\leftskip\relax}
-\gappto{\enit@endenumerate}{\global\leftskip\ori@leftskip\relax}
+  {\endexlist\global\leftskip\ori@leftskip\relax}
 
 \newenvironment{exlistcols}[1][2]{\CTEXindent
     \listcolsleftmargin=\addleftskip\relax
@@ -91,6 +92,3 @@ labelindent=\z@}
   {\endenumitemcols}
 
 \endinput
-
-%%\BeforeBeginEnvironment{exlist}{\ori@leftskip\leftskip\relax}
-%%\AfterEndEnvironment{exlist}{\leftskip\ori@leftskip\relax}
