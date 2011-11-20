@@ -22,7 +22,7 @@
 \MAB@key{institute}[北京大学数学系]{\def\MAB@institute{#1}}
 \MAB@key{author}[]{\def\MAB@author{#1}}
 \MAB@key{volume}[\CTEXthepart]{\def\MAB@volume{#1}}
-\MAB@key{size}[$\num{850}\times\num{1168}$\enspace 1/32]{\def\MAB@size{#1}}
+\MAB@key{size}[\num{850 x 1168}\enspace 1/32]{\def\MAB@size{#1}}
 \MAB@key{sheets}[]{\def\MAB@sheets{#1}}
 \MAB@key{words}[]{\def\MAB@words{\num{#1}}}
 \MAB@key{copies}[;]{\MAB@copyrange[#1]}
@@ -86,7 +86,7 @@
   \MakeSumPage}
 
 \def\@MakeVolume@{%
-  \let\ttl@addcontentsline\ttl@addcontentsline\relax
+  \let\ttl@addcontentsline\ttl@addcontentsline@ori\relax
   \part[]{}%
   \let\VolumeTOC\relax
   \MakeSumPage}

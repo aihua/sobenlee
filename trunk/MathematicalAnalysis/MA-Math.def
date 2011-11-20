@@ -5,11 +5,19 @@
 
 \robustify{\LEFTROOT}
 \robustify{\UPROOT}
+\robustify{\int}
+\robustify{\big}
+\robustify{\Big}
+\robustify{\bigg}
+\robustify{\Bigg}
 \newrobustcmd*\Beta{\ensuremath{\mathord{\mathrm{B}}}}
 
 \let\leq\leqslant
 \let\geq\geqslant
 \let\subset\subseteq
+\let\phi\varphi
+\let\ln\log
+
 \let\dps\displaystyle
 
 \let\notinslant\notin
@@ -38,9 +46,19 @@
 \newcommand*\mi{\mathrm i}
 \newcommand*\me{\mathrm e}
 
-\newcommand*\diff{\mathop{}\negthinspace\mathrm{d}}
+\newrobustcmd*\diff{\mathop{}\negthinspace\mathrm{d}}
 \newcommand*\e{\varepsilon}
 \newcommand*\eset{\varnothing}
+
+%\newcommand\comp{\mathchoice%
+%  {\mathop{\raisebox{0.2ex}{\footnotesize$\circ$}}}%
+%  {\mathop{\raisebox{0.2ex}{\footnotesize$\circ$}}}%
+%  {\mathop{\raisebox{0.1ex}{$\scriptscriptstyle\circ$}}}%
+%  {\mathop{\raisebox{0.1ex}{$\scriptscriptstyle\circ$}}}%
+%}%
+
+
+\newcommand*\rest[1]{\bigr|_{#1}}
 
 \DeclareMathOperator{\arccot}{arccot}
 
@@ -62,6 +80,18 @@
   \hfil$\m@th\displaystyle{##}$\hfil}{$\m@th\displaystyle{##}$\hfil}{\lbrace}{.}
 \newcases{cdcases*}{\quad}{%
   \hfil$\m@th\displaystyle{##}$\hfil}{{##}\hfil}{\lbrace}{.}
+\newcases{bdcases}{\quad}{%
+  $\m@th\displaystyle{##}$\hfil}{$\m@th\displaystyle{##}$\hfil}{.\biggl\lbrace}{.}
+\newcases{bdcases*}{\quad}{%
+  $\m@th\displaystyle{##}$\hfil}{{##}\hfil}{.\biggl\lbrace}{.}
+\newcases{rbdcases}{\quad}{%
+  \hfil$\m@th\displaystyle{##}$}{$\m@th\displaystyle{##}$\hfil}{.\biggl\lbrace}{.}
+\newcases{rbdcases*}{\quad}{%
+  \hfil$\m@th\displaystyle{##}$}{{##}\hfil}{.\biggl\lbrace}{.}
+\newcases{cbdcases}{\quad}{%
+  \hfil$\m@th\displaystyle{##}$\hfil}{$\m@th\displaystyle{##}$\hfil}{.\biggl\lbrace}{.}
+\newcases{cbdcases*}{\quad}{%
+  \hfil$\m@th\displaystyle{##}$\hfil}{{##}\hfil}{.\biggl\lbrace}{.}
 
 \newcommand*\absb{\abs[\big]}
 \newcommand*\normb{\norm[\big]}
@@ -69,13 +99,6 @@
 \newcommand*\Brackb{\Brack[\big]}
 \newcommand*\Braceb{\Brace[\big]}
 \newcommand*\Setb{\Set[\big]}
-
-\newcommand*\cid{\rlap{$,$}}
-\newcommand*\sid{\rlap{$;$}}
-\newcommand*\pid{\rlap{．}}
-
-\let\ori@dot\.\relax
-\def\.{\ifmmode\pid\else\ori@dot\fi}
 
 \newcommand*\mvec[2][n]{%
   {#2}_1,\allowbreak{#2}_2,\allowbreak\dotsc,\allowbreak{#2}_{#1}}

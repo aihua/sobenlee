@@ -34,7 +34,7 @@
   bookmarksopenlevel=0,
   bookmarksnumbered,
   colorlinks, linkcolor=purple,
-  linktocpage,
+%  linktocpage,
   pdfinfo={
       Title={数学分析},
      Author={北京大学数学系},
