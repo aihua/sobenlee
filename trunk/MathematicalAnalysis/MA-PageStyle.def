@@ -56,15 +56,15 @@
   \hrule\bigskip\par}
 
 \def\@addappt@cline{%
-  \@writefile{toc}{\ParTocLine}%
-  \@writefile{\@ext@v}{\ParTocLine}}
+  \string\@writefile{toc}{\ParTocLine}%
+  \string\@writefile{\@ext@v}{\ParTocLine}}
 
 \newcounter{appcnt}
 \renewcommand\appendix{%
   \counterwithin*{chapter}{appcnt}%
   \cleardoublepage
   \if@filesw
-    \immediate\write\@mainaux{\string\@addappt@cline}%
+    \immediate\write\@mainaux{\@addappt@cline}%
   \fi
   \refstepcounter{appcnt}%
   \gdef\thechapter{\@Alph\c@chapter}%

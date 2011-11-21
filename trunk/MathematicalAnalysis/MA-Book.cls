@@ -19,22 +19,23 @@
 \RequirePackage[uppi,comma]{localint}
 \RequirePackage{empheq,amsthm,thmtools}
 \RequirePackage{siunitx,needspace,varwidth,chngcntr,changepage,environ}
-\RequirePackage{floatrow,caption,wrapfig}
+\RequirePackage{floatrow,caption,wrapfig,tabu}
 \RequirePackage[pagestyles,explicit,clearempty,outermarks]{titlesec}
 \RequirePackage[titlesec]{interfaces}
 \RequirePackage{enumitem,pifont,xcolor,labelformat}
 \RequirePackage[hang]{multicolist}
 \RequirePackage[showframe=false,twoside,headheight=5mm,headsep=7mm,footskip=1em,bindingoffset=10mm]{geometry}
+\RequirePackage{hypbmsec}
 \RequirePackage[pdfstartview={XYZ null null 1},pdfpagemode=UseNone,pdfprintscaling=None]{hyperref}
 
 \geometry{papersize={170mm,240mm},top=20mm,textwidth=130mm,lines=36,inner=15mm}
 
 \hypersetup{%
   bookmarksopen,
+  bookmarksdepth=2,
   bookmarksopenlevel=0,
   bookmarksnumbered,
   colorlinks, linkcolor=purple,
-%  linktocpage,
   pdfinfo={
       Title={数学分析},
      Author={北京大学数学系},
@@ -71,6 +72,7 @@
 \gappto\bfseries{\boldmath}
 
 \sisetup{group-minimum-digits=4,round-integer-to-decimal}
+
 
 \raggedbottom
 \allowdisplaybreaks[4]

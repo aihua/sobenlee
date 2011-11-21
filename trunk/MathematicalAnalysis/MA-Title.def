@@ -81,7 +81,7 @@
 
 \sectionformat\section{%
      class=straight,
-     shape=hang,
+     shape=block,
     format=\Needspace{.2\textheight}\bfseries\zihao{4}\fzzysong\filcenter,
      label=\CTEXthesection,
   labelsep=.8\ccwd,
@@ -93,7 +93,7 @@
 
 \sectionformat\subsection{%
      class=straight,
-     shape=hang,
+     shape=block,
     format=\goodbreak\bfseries\sffamily\subsec@format,
      label=\CTEXthesubsection,
   labelsep=.6\ccwd,
@@ -104,7 +104,7 @@
 
 \sectionformat\subsubsection{%
      class=straight,
-     shape=hang,
+     shape=block,
     format=\bfseries\fzxbsong,
      label={\CTEXthesubsubsection、},
   labelsep=1ex,
@@ -139,6 +139,7 @@
 \intextsep        = 1.5 ex\relax %\@minus .2ex
 \textfloatsep     =   2\intextsep \@minus .5ex\relax
 \abovecaptionskip =  .5\intextsep\relax
+\belowcaptionskip = \abovecaptionskip\relax
 
 \setlabelformat{figure}{\figurename~}
 \setlabelformat{table}{\tablename~}
@@ -148,11 +149,12 @@
 \newfloatcommand{figurebox}{figure}[\nocapbeside][\FBwidth]
 \DeclareFloatVCode{frpreskip} {\relax}
 \DeclareFloatVCode{frpostskip}{\vskip-\intextsep}
+\DeclareFloatVCode{fixskip}{\vskip-2\intextsep}
 \DeclareFloatVCode{wrapfig}{\vskip-\intextsep}
 \DeclareFloatSeparators{frowsep}{\@frowsep}
 \floatsetup{style=plain,capposition=bottom,floatrowsep=frowsep,
   captionskip=\abovecaptionskip,rowprecode=frpreskip,rowpostcode=frpostskip}
-\floatsetup[wrapfloat]{captionskip=.5\abovecaptionskip}
+%\floatsetup[wrapfloat]{captionskip=.5\abovecaptionskip}
 
 \def\fix@capfontsize{\normalsize}
 
@@ -161,6 +163,12 @@
 \DeclareCaptionLabelSeparator{captionlabelsep}{\quad}
 \captionsetup{labelfont=caplabelfont,textfont=captextfont,labelsep=captionlabelsep,
   hypcap=true,figurewithin=section,tablewithin=section,position=below}
+
+\appto\RawFloats{\captionsetup{belowskip=-14\p@}}
+
+\newdimen\tabuvskip
+\tabuvskip=\intextsep\relax
+\def\tabuvspace{\tabucline[\hbox{\rule\z@{\tabuvskip}}]{-}}
 
 \newsavebox\@tempfig
 \sbox\@tempfig{%

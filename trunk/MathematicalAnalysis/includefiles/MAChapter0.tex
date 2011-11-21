@@ -21,12 +21,12 @@
 
 符号~$\forall$~表示任意取定，而符号~$\exists$~表示存在。
 
-孤立地看这些符号没有什么意思，但组合起来可以表示一句话，这句话可以是正确的，也可以是错误的。如
+孤立地看这些符号没有什么意思，但组合起来可以表示一句话，这句话可以是正确的，也可以是错误的。比如
 \begin{alignat*}{4}
-&\exists x,\text{使得~}\dfrac 12<x<\dfrac 52 &\enspace&\text{（正确的）；}
-&\qquad&\forall x,\exists y,\text{使得~}x+y=1 &\enspace&\text{（正确的）；}\\
-&\forall x,\exists y,\text{使得~}x>y & &\text{（正确的）；}
-&\qquad&\exists x,\forall y,\text{使得~}x>y & &\text{（错误的）。}
+&\exists x,\text{使得~}\dfrac 12<x<\dfrac 52 &\enspace&\text{（正确）；}
+&\qquad&\forall x,\exists y,\text{使得~}x+y=1 &\enspace&\text{（正确）；}\\
+&\forall x,\exists y,\text{使得~}x>y & &\text{（正确）；}
+&\qquad&\exists x,\forall y,\text{使得~}x>y & &\text{（错误）。}
 \end{alignat*}
 后一句话是说，可以找到一实数，它比任何实数都大，这显然是错误的。
 
@@ -35,7 +35,7 @@
 自~Cantor~在十九世纪末创建集合论以来，集合论的概念和方法已渗入到数学的各个分支，成为数学的一种语言。集合论本身也发展
 成数学的一个分支，内容十分丰富。
 
-集合不能给予严格的定义，因为定义是用已知的概念去定义未知的概念。如用有理数去定义无理数，这里我们认为有理数是已知的，若
+集合不能给予严格的定义，因为定义是用已知的概念去定义未知的概念。比如有理数去定义无理数，这里我们认为有理数是已知的，若
 有人喜欢刨根问底，觉得有理数是什么也不清楚，我们可以用整数来定义有理数，进一步用自然数来定义整数，用集合来定义自然数。%
 这个过程不可能无穷无尽下去，总有一个概念不能定义，在数学里集合概念就到头了，不能再用其它的数学概念来定义。虽然如此，我
 们可以给集合一个描述。先看几个集合的例子：
@@ -50,10 +50,10 @@
 尽管集合没有定义，但我们能理解到它是什么意思。一般来说，把具有某种共同特征的事物的全体叫\emph{集合}，属于集合的每个个
 体叫作该集合的\emph{元素}。
 
-如例~\ref{enum:set1}~中集合的特性是正整数，例~\ref{enum:set4}~中集合的特性是具有北京市户口。根据给定的特性，我们可以判
+例~\ref{enum:set1}~中集合的特性是正整数，例~\ref{enum:set4}~中集合的特性是具有北京市户口。根据给定的特性，我们可以判
 断每一个元素是属于这个集合，还是不属于这个集合。前面三个例子是数集，例~\ref{enum:set4}~是非数集。以后我们只讨论数集。
 
-集合用大写字母~$A,C,C,X,Y,Z$~表示，元素用小写字母~$a,b,c,x,y,z$~表示。
+集合用大写字母~$A,B,C,X,Y,Z$~表示，元素用小写字母~$a,b,c,x,y,z$~表示。
 
 设~$A$~是一个集合，$a$~是~$A$~的元素，记作
 \[
@@ -66,17 +66,17 @@
 
 \subsection{集合表示法}
 
-集合有两种表示法：一是列举法，如集合
+集合有两种表示法：一是列举法，例如集合
 \[
   A=\Brace{2,4,6,8},
 \]
-这种表示法是将集合的元素在花括弧内一一列举出来；另一是描述法，如集合
+这种表示法是将集合的元素在花括弧内一一列举出来；另一种是描述法，例如集合
 \[
   A=\Setb x{x^2-5x+4=0},
 \]
 这种表示法将花括弧分两部分，用记号~$\mid$~隔开，前面为元素的代表符号，用~$x$~或其它符号，后面为元素具有的性质。
 
-第一种表示法在数学分析中用处不大，因为我们常用的集合为无穷个元素组成，无法一一列出，如所有实数的集合就不可能
+第一种表示法在数学分析中用处不大，因为我们常用的集合为无穷个元素组成，无法一一列出，例如所有实数的集合就不可能
 写出来。
 
 集合~$\Set x{a\leq x\leq b}$~称为\emph{闭区间}，记作~$\Brack{a,b}$；集合~$\Set x{a<x<b}$~称为\emph{开区间}，记
@@ -100,45 +100,45 @@
 
 为了运算方便，我们把不含任何元素的集合称为\emph{空集}，记作~$\eset$。例如
 \[
-  \Setb x{x^2+1=0,~x~\text{是实数}}=\eset。
+  \Setb x{x^2+1=0,~x~\text{是实数}}=\eset 。
 \]
-空集包含于任一集合：
+空集包含于任一集合，即
 \[
-  \eset\subset A,
+  \eset\subset A。
 \]
-因为，如果不成立，则至少有一元素属于~$\eset$~而不属于~$A$，显然这是不可能的。
+否则，至少有一元素属于~$\eset$~而不属于~$A$，显然这是不可能的。
 
 根据集合包含关系~$\subset$~的定义，显然有：$A\subset A$；若~$A\subset B$，$B\subset C$，则~$A\subset C$。
 
-若两集合~$A,B$，满足~$A\subset B$，且~$B\subset A$，则称~$A$~与~$B$~相等，记作
+若两集合~$A,B$~满足~$A\subset B$，且~$B\subset A$，则称~$A$~与~$B$~相等，记作
 \[
   A=B。
 \]
-如
+例如
 \[
   \Brace{1,2,3,4}=\Brace{4,3,2,1}=\Brace{1,1,2,3,4}。
 \]
 
-若~$A\subset B$，且~$A\neq B$，则称~$A$~是~$B$~的真子集。
+若~$A\subset B$，且~$A\neq B$，则称~$A$~是~$B$~的\emph{真子集}，记作~$A\subsetneqq B$。
 
 \subsection{集合的运算}
 
-集合除包含关系外，还可以考虑集合之间的并、交、差等运算。
+集合除包含关系外，还可以考虑集合之间的并，交，差等运算。
 
 给定集合~$A,B$，集合~$A,B$~的\emph{并}记为~$A\cup B$，它是~$A,B$~全部元素组成的集合，定义为
 \[
   A\cup B\coloneq\Setb x{x\in A~\text{或}~x\in B}。
 \]
 
-用平面图形表示集合，图形的点表示集合的元素，则~$A,B$~图形和在一起就是并集~$A\cup B$~的图形。如\ref{fig:sec0-1}~所示。
+用平面图形表示集合，图形的点表示集合的元素，则~$A,B$~图形合在一起就是并集~$A\cup B$~的图形。如\ref{fig:sec0-1}~所示。
 
-由并集的定义易见：$A\cup\eset=A$；$A\cup A=A$；
+由并集的定义，显然有：$A\cup\eset=A$；$A\cup A=A$；
 \begin{align*}
 A\cup B &=B\cup A;                     \tag*{（交换律）}\\*
 (A\cup B)\cup C & = A\cup(B\cup C)。   \tag*{（结合律）}
 \end{align*}
 
-给定集合~$A,B$，两集合的\emph{交}记为~$A\cap B$，它由~$A,B$~的公共元素组成，定义为：
+给定集合~$A,B$，两集合的\emph{交}记为~$A\cap B$，它由~$A,B$~的公共元素组成，定义为
 \[
   A\cap B\coloneq\Setb x{x\in A~\text{与}~x\in B}。
 \]
@@ -155,7 +155,7 @@ A\cup B &=B\cup A;                     \tag*{（交换律）}\\*
 \end{floatrow}
 \end{figure}
 
-显然有：$A\cap\eset=\eset$；$A\cap A=A$；
+由交集的定义，显然有：$A\cap\eset=\eset$；$A\cap A=A$；
 \begin{align*}
 A\cap B &=B\cap A;                     \tag*{（交换律）}\\*
 (A\cap B)\cup C & = A\cap(B\cap C)。   \tag*{（结合律）}
@@ -163,19 +163,19 @@ A\cap B &=B\cap A;                     \tag*{（交换律）}\\*
 并且，若~$A\subset B$，则~$A\cap B=A$。
 
 给定集合~$A,B$，两集合的\emph{差}记为~$A-B$~或~$A\backslash B$，它是在~$A$~内而不在~$B$~内的元素组成的集
-合（见\ref{fig:sec0-3}），定义为：
+合（见\ref{fig:sec0-3}），定义为
 \[
   A-B=\Setb x{x\in A,x\notin B}。
 \]
 显然有
 \[
-  A-A=\eset;\quad A-\eset=A;\quad\eset-A=\eset;\quad A-B=A-(A\cap B)。
+  A-A=\eset;\enspace A-\eset=A;\enspace\eset-A=\eset;\enspace A-B=A-(A\cap B)。
 \]
 
 假设我们所考察的集合都是更大集合~$X$~（如实数集）的子集，这时我们把~$A$~对~$X$~的差集称为~$A$~的\emph{补集}，记
 为~$\cset A$，即
 \[
-  \cset A=X-A。
+  \cset A\coloneq X-A。
 \]
 
 \begin{quiz}
@@ -202,7 +202,7 @@ A\cap B &=B\cap A;                     \tag*{（交换律）}\\*
 \caption{数轴}\label{fig:sec0-4}
 \end{wrapfigure}
 
-要说明绝对值的几何意义，我们作一直线，在直线上取定方向，原点~$O$~和单位长度以后，就称此直线为一\emph{数轴}，实数
+为说明绝对值的几何意义，我们作一直线，在直线上取定方向，原点~$O$~和单位长度以后，就称此直线为一\emph{数轴}。实数
 可以与数轴上的点建立起一一对应，每一实数可用数轴上一点来表示，不同的实数用数轴上不同的点表示，因此数与点可以不加
 区分（严格来说，这一看似显然的事实只有在\ref{ch:9}对实数理论进行严格讨论后才能成立，在这里，我们不妨先承认之）。这
 时，$\abs x$~就表示点~$x$~到原点~$O$~的距离。
@@ -236,7 +236,7 @@ A\cap B &=B\cap A;                     \tag*{（交换律）}\\*
 \end{corollary}
 \begin{corollary}
 \[
-  \absb{\abs x+\abs y}\leq\abs{x-y}。
+  \absb{\abs x-\abs y}\leq\abs{x-y}。
 \]
 \end{corollary}
 \begin{proof}
@@ -254,7 +254,7 @@ A\cap B &=B\cap A;                     \tag*{（交换律）}\\*
 \]
 所以
 \[
-  \absb{\abs x+\abs y}\leq\abs{x-y}。\qedhere
+  \absb{\abs x-\abs y}\leq\abs{x-y}。\qedhere
 \]
 \end{proof}
 
@@ -276,7 +276,7 @@ A\cap B &=B\cap A;                     \tag*{（交换律）}\\*
 \item 用数学归纳法证明下列各题。
   \begin{exlist}
   \item $\dps\frac 1{1\cdot 2}+\frac 1{2\cdot3}+\dotsb+\frac1{n(n+1)}=1-\frac1{n+1}$；
-  \item $1^2+2^2+\dotsb+n^2=\dfrac 1n(n+1)(2n+1)$；
+  \item $1^2+2^2+\dotsb+n^2=\dfrac 16n(n+1)(2n+1)$；
   \item $\abs{\sin nx}\leq n\abs{\sin x}$；
   \item $\cos\alpha\cdot\cos2\alpha\cdot\dotsm\cdot\cos 2^n\alpha=\dfrac{\sin 2^{n+1}\alpha}{2^{n+1}\sin\alpha}$，
         其中~$\alpha\neq k\pi$，~$k$~为整数。
@@ -300,7 +300,7 @@ A\cap B &=B\cap A;                     \tag*{（交换律）}\\*
 \[
   \sum_{k=n+1}^{2n}\frac1k=\sum_{k=1}^{2n}\frac{(-1)^{k+1}}k。
 \]
-\item 证明~$\abs{a-b}\leq\abs a+\abs b$。问下面证法是否正确？
+\item 证明~$\abs{a-b}\leq\abs a+\abs b$。判断并说明下面证法的正确性。
 \[
   \abs{a-b}\leq\abs{a+b}\leq\abs a+\abs b。
 \]
