@@ -72,7 +72,7 @@
 \@namedef{xeCJK@kaiming；}{}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \catcode`。=\active
-\newcommand{。}{．}
+\newcommand{。}{\ifmmode\rlap{．}\else ．\fi}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \let\nbs\nobreakspace
 \DeclareRobustCommand*~{\unskip\hskip 0.2em minus 0.05em\ignorespaces}
