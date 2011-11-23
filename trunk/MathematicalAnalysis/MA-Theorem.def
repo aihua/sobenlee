@@ -12,13 +12,13 @@
   \fi}
 
 \def\declareheadformat#1#2{\csdef{thmt@headstyle@#1}{#2}}
-
-\declareheadformat{note}{\ifwidthzero{\NOTE}{\NAME}{\NOTE}}
+\declareheadformat{note}{\ifwidthzero{\NOTE}{\NAME}{\let\thmt@space\relax\NOTE}}
 \declareheadformat{normal}{\NAME~\NUMBER\NOTE}
 
 \newskip\thmskip
 \thmskip=.5ex\relax
 \def\thmheaderfont{\bfseries\sffamily\upshape}
+\def\thmt@space{\unskip\kern\p@}
 
 \declaretheoremstyle[
    headformat=note,
@@ -39,7 +39,7 @@ postheadspace=\ccwd
      headfont=\thmheaderfont,
      notefont=\thmheaderfont,
     headpunct=,
-   notebraces={\,（}{\rlap{）}},
+   notebraces={（}{\rlap{）}},
      bodyfont=\normalfont\sffamily,
    headindent=\parindent,
 postheadspace=\ccwd
@@ -76,7 +76,7 @@ postheadspace=\ccwd,
      headfont=\thmheaderfont,
      notefont=\thmheaderfont,
     headpunct=,
-   notebraces={\,（}{\rlap{）}},
+   notebraces={（}{\rlap{）}},
      bodyfont=\normalfont,
    headindent=\parindent,
 postheadspace=\ccwd,
@@ -94,8 +94,20 @@ postheadspace=\ccwd,
    headindent=\parindent,
 postheadspace=\ccwd
 ]{Note}
+\declaretheoremstyle[
+   headformat=note,
+   spaceabove=\z@,
+   spacebelow=\z@,
+     headfont=\thmheaderfont,
+     notefont=\thmheaderfont,
+    headpunct=,
+   notebraces={}{},
+     bodyfont=\kaishu,
+   headindent=\z@,
+postheadspace=\ccwd,
+          qed={\ensuremath\square}
+]{ExProof}
 
-\let\thmt@space\relax
 \undef{\proof}
 \undef{\endproof}
 
@@ -114,13 +126,15 @@ postheadspace=\ccwd
 \declaretheorem[style=Theorem, within=section, name=推论]{corollary}
 \declaretheorem[style=Theorem, within=section, name=例]  {example}
 \declaretheorem[style=Remark,  within=section, name=注]  {remark}
-\declaretheorem[style=Note,  numbered=no, name=\qedsymbol]   {note}
-\declaretheorem[style=Proof, numbered=no, name=\proofname]   {proof}
-\declaretheorem[style=Proof, numbered=no, name=\solutionname]{solution}
-\declaretheorem[style=Remark,numbered=no, name=\quizname]    {quiz}
+\declaretheorem[style=Note,   numbered=no, name=\qedsymbol]   {note}
+\declaretheorem[style=Proof,  numbered=no, name=\proofname]   {proof}
+\declaretheorem[style=Proof,  numbered=no, name=\solutionname]{solution}
+\declaretheorem[style=Remark, numbered=no, name=\quizname]    {quiz}
 \declaretheorem[style=ProofNum, name=证法]   {proof*}
 \declaretheorem[style=ProofNum, name=解法]{solution*}
 \declaretheorem[style=Remark, name=\quizname] {quiz*}
+\declaretheorem[style=ExProof,numbered=no, name=\proofname,
+  postheadhook={\leftskip\addleftskip\relax}] {exproof}
 \counterwithin*{proof*}{example}
 \counterwithin*{solution*}{example}
 \counterwithin*{quiz*}{section}

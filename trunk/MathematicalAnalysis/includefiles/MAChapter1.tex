@@ -50,9 +50,9 @@
 \end{example}
 
 这里~$g=\SI{9.8}{m/s^2}$~是重力加速度，它是常量。$t$~与~$s$~是物体下落过程中的两个变量，当~$t=0$~时，$s=0$；%
-当~$t=\smsqrt{2h/g}$~时，得~$s=h$，表示物体已经到达地面。所以~$t$~的变化范围是从~$0$~到~$\smsqrt{2h/g}$，在这范围内，$g$~的每
-一个值，由公式~\ref{eq:sec1.1-1}~即可得到对应~$s$~的值。公式~\ref{eq:sec1.1-1}~给出了变量~$s$~与变量~$t$~之间的依赖关系，即
-所谓的函数关系。
+当~$t=\smsqrt{\sfrac{2h}g}$~时，得~$s=h$，表示物体已经到达地面。所以~$t$~的变化范围是从~$0$~到~$\smsqrt{\sfrac{2h}g}$，在这
+范围内，$g$~的每一个值，由公式~\ref{eq:sec1.1-1}~即可得到对应~$s$~的值。公式~\ref{eq:sec1.1-1}~给出了变量~$s$~与变量~$t$~之
+间的依赖关系，即所谓的函数关系。
 
 \begin{example}\label{ex:sec1.1-2}
 气象台用自动记录器画出了当地某一天的气温变化图（\ref{fig:sec1.1-1}），图中纵轴表示气温~$T\,(\si{\degreeCelsius})$，横轴表示时
@@ -85,7 +85,7 @@
 \[
   \frac12g(\enspace)^2,
 \]
-即先对自变量作平方运算，然后再乘常数~$g/2$，函数的定义域为闭区间~$\Brack{0,\smsqrt{2h/g}}$；
+即先对自变量作平方运算，然后再乘常数~$g/2$，函数的定义域为闭区间~$\Brack{0,\smsqrt{\sfrac{2h}g}}$；
 
 \ref{ex:sec1.1-2}~中对应规则~$f$~为给定的曲线，函数的定义域为~$[0,24]$；
 
@@ -274,9 +274,9 @@
 为~\ang{45}），称~\textit{ABCD}~为过水断面，确定过水断面的面积~$S$~与水深~$h$~的函数关系。
 
 \begin{figure}\RawFloats
-\begin{tabu}{*2{X[mc]}}
+\begin{tabu}{*2{X[mc]}F}
 \somefigure\caption{}\label{fig:sec1.1-ex1}&
-\somefigure\caption{}\label{fig:sec1.1-ex2}\\ \tabuvspace
+\somefigure\caption{}\label{fig:sec1.1-ex2}&\\[\figrowsep]
 \somefigure\caption{}\label{fig:sec1.1-ex3}&
 \somefigure\caption{}\label{fig:sec1.1-ex4}
 \end{tabu}
@@ -341,7 +341,8 @@ $y=\Floor x$~在~$\FR$~上单调上升。
 
 \subsection{函数的有界性}
 
-\begin{wrapfigure}[10]{O}{0mm}
+%\thisfloatsetup{rowprecode=wrapfig}
+\begin{wrapfigure}{O}{0mm}
 \somefigure
 \caption{有界函数}\label{fig:sec1.2-10}
 \end{wrapfigure}
@@ -352,7 +353,7 @@ $y=\Floor x$~在~$\FR$~上单调上升。
 \]
 则称函数~$f(x)$~在~$X$~上是\emph{有界}的。
 
-例如函数~$y=\sin x$~在~$\FR$~上是有界的，因为取~$M=1$，对任意~$x\in\FR$，都有~$\abs{\sin x}\leq1$。
+例如~$y=\sin x$~在~$\FR$~上是有界的，因为取~$M=1$，对任意~$x\in\FR$，都有~$\abs{\sin x}\leq1$。
 
 函数在~$X$~上有界，从几何上看，即它的图象（见\ref{fig:sec1.2-10}）位于直线~$y=-M$~与~$y=M$~之间。那么函数~$f(x)$~在~$X$~上
 无界，即找不到直线~$y=M$~和~$y=-M$，使曲线全部落在两直线之间。这么说不好检验，为了便于检验，我们不妨换一种方式来说：函
@@ -366,7 +367,7 @@ $y=\Floor x$~在~$\FR$~上单调上升。
 \]
 则称函数~$f(x)$~在~$X$~上是\emph{无界}的。
 
-例如函数~$f(x)=\dfrac1x$~在~$(0,+\infty)$~上无界。因为对任意~$M>0$，可以取~$x'=\dfrac1{2M}\in(0,+\infty)$，
+例如函数~$f(x)=\dfrac1x$~在~$(0,+\infty)$~上是无界的。因为对任意~$M>0$，可以取~$x'=\dfrac1{2M}\in(0,+\infty)$，则
 \[
   f(x')=2M>M,
 \]
@@ -619,7 +620,7 @@ $y=\Floor x$~在~$\FR$~上单调上升。
 需要指出的是，变量记号不是本质的，我们可以把~$x=f^{-1}(y)$，$y\in Y$，称为~$y=f(x)$~的反函数，同样，我们也可以把
 ~$y=f^{-1}(x)$，$x\in Y$，称为函数~$y=f(x)$~的反函数。
 
-反函数还有另一种定义，正如实数~$a$~的倒数有两种定义（一种是：$a\neq0$，称~$1/a$~为~$a$~的倒数；令一种是：若存在~$b\in\FR$，%
+反函数还有另一种定义，正如实数~$a$~的倒数有两种定义（一种是：$a\neq0$，称~$\sfrac 1a$~为~$a$~的倒数；令一种是：若存在~$b\in\FR$，%
 使得~$a\cdot b=1$，则称~$b$~为~$a$~的倒数）一样，反函数也可以用复合函数来定义。我们把它写成定理。
 
 \begin{theorem}
@@ -721,9 +722,9 @@ $y=\Floor x$~在~$\FR$~上单调上升。
 函数~$y=x^\alpha$~与~$y=x^{\frac1\alpha}$~互为反函数。
 
 \begin{figure}\RawFloats
-\begin{tabu}{*2{X[mc]}}
+\begin{tabu}{*2{X[mc]}F}
 \somefigure\caption{常数函数}\label{fig:sec1.2-15}&
-\somefigure\caption{幂函数}\label{fig:sec1.2-16}\\ \tabuvspace
+\somefigure\caption{幂函数}\label{fig:sec1.2-16} &\\[\figrowsep]
 \somefigure\caption{指数函数}\label{fig:sec1.2-17}&
 \somefigure\caption{对数函数}\label{fig:sec1.2-18}
 \end{tabu}
@@ -748,13 +749,13 @@ $y=\Floor x$~在~$\FR$~上单调上升。
 
 \ref{fig:sec1.2-19}~是正弦函数~$y=\sin x\,(x\in\FR)$~的图象，余弦函数~$y=\cos x\,(x\in\FR)$~的图象为\ref{fig:sec1.2-20}。%
 
-正切函数~$y=\tan x\,\Parenb{x\neq (k+1/2)\pi,k=0,\pm1,\pm2,\dotsc}$~的图象为\ref{fig:sec1.2-21}，而\ref{fig:sec1.2-22}~是
+正切函数~$y=\tan x\,\Parenb{x\neq (k+\sfrac12)\pi,k=0,\pm1,\pm2,\dotsc}$~的图象为\ref{fig:sec1.2-21}，而\ref{fig:sec1.2-22}~是
 余切函数~$y=\cot x\,(x\neq k\pi,k=0,\pm1,\pm2,\dotsc)$~的图象。
 
 \begin{figure}\RawFloats
-\begin{tabu}{*2{X[mc]}}
+\begin{tabu}{*2{X[mc]}F}
 \somefigure\caption{正弦函数}\label{fig:sec1.2-19}&
-\somefigure\caption{余弦函数}\label{fig:sec1.2-20}\\ \tabuvspace
+\somefigure\caption{余弦函数}\label{fig:sec1.2-20}&\\[\figrowsep]
 \somefigure\caption{正切函数}\label{fig:sec1.2-21}&
 \somefigure\caption{余切函数}\label{fig:sec1.2-22}
 \end{tabu}
@@ -774,9 +775,9 @@ $y=\Floor x$~在~$\FR$~上单调上升。
 反余切函数~$y=\arccot x\Paren[\Big]{x\in\FR,0<y<\pi}$~的图象为\ref{fig:sec1.2-26}。
 
 \begin{figure}\RawFloats
-\begin{tabu}{*2{X[mc]}}
+\begin{tabu}{*2{X[mc]}F}
 \somefigure\caption{反正弦函数}\label{fig:sec1.2-23}&
-\somefigure\caption{反余弦函数}\label{fig:sec1.2-24}\\ \tabuvspace
+\somefigure\caption{反余弦函数}\label{fig:sec1.2-24}&\\[\figrowsep]
 \somefigure\caption{反正切函数}\label{fig:sec1.2-25}&
 \somefigure\caption{反余切函数}\label{fig:sec1.2-26}
 \end{tabu}

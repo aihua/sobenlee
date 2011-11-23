@@ -151,6 +151,7 @@
 \DeclareFloatVCode{frpostskip}{\vskip-\intextsep}
 \DeclareFloatVCode{fixskip}{\vskip-2\intextsep}
 \DeclareFloatVCode{wrapfig}{\vskip-\intextsep}
+\DeclareFloatVCode{twrapfig}{\vskip-3\intextsep}
 \DeclareFloatSeparators{frowsep}{\@frowsep}
 \floatsetup{style=plain,capposition=bottom,floatrowsep=frowsep,
   captionskip=\abovecaptionskip,rowprecode=frpreskip,rowpostcode=frpostskip}
@@ -166,9 +167,30 @@
 
 \appto\RawFloats{\captionsetup{belowskip=-14\p@}}
 
+\newdimen\figrowsep
+\figrowsep=2\intextsep\relax
+
 \newdimen\tabuvskip
 \tabuvskip=\intextsep\relax
 \def\tabuvspace{\tabucline[\hbox{\rule\z@{\tabuvskip}}]{-}}
+
+\def\pushtabuvspace{\noalign{\global\belowtabulinesep=\intextsep}}
+\def\poptabuvspace{\noalign{\global\tabulinesep=\z@}}
+
+\newcolumntype{F}{@{}c@{}}
+
+\renewcommand*\thefootnote{\Ding{footnote}}
+\renewcommand*\footnoterule{\kern-3\p@\hrule\@width.45\columnwidth\@height.6\p@\kern2.4\p@}
+\newdimen\@footnote@indent
+{\footnotesize\global\@footnote@indent=1.2em}
+\long\def\@makefntext#1{\@setpar{\@@par
+  \@tempdima\hsize\advance\@tempdima-\@footnote@indent
+  \parshape\@ne\@footnote@indent\@tempdima}%
+  \par\noindent\llap{\makebox[\@footnote@indent][l]{\@thefnmark}}%
+  \linespread{1.2}\selectfont\interlinepenalty\z@\CTEXindent#1}
+\def\@makefnmark{\raisebox{1ex}[\z@]{\small\@thefnmark}}
+
+\setlength\footnotesep{1.2\footnotesep}
 
 \newsavebox\@tempfig
 \sbox\@tempfig{%

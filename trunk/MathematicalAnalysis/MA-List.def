@@ -14,7 +14,6 @@
 \AddEnumerateCounter*\Ding\DingNum{1}
 
 \setlist{nosep}
-\setlist[enumerate,1]{labelindent=\parindent,leftmargin=*,font=\bfseries,label=(\arabic*)}
 
 \newcounter{LastItem}
 
@@ -33,46 +32,54 @@ labelwidth=\widthof{\bfseries\ref{enumLastItem-\theLastItem}},
 \newdimen\addleftskip
 
 \SetLabelAlign{hang}{%
-  \addleftskip=\z@\relax
-  \ifbool{push@star}{\booltrue{push@star@}}{}%
-  \settowidth\@tempdima{#1}%
-   \ifdimgreater{\@tempdima}{\labelwidth}%
-     {\global\addleftskip=\dimexpr\@tempdima-\labelwidth\relax}%
-     {\global\addleftskip=\z@\relax}%
-   \global\leftskip\addleftskip\relax
-   \ifbool{push@star@}{\booltrue{push@star}}{}%
-   \nobreak\hss\llap{#1}}
+  \ifnum\@listdepth=\@ne\relax
+    \addleftskip=\z@\relax
+    \ifbool{push@star}{\booltrue{push@star@}}{}%
+    \settowidth\@tempdima{#1}%
+    \ifdimgreater{\@tempdima}{\labelwidth}
+       {\global\addleftskip=\dimexpr\@tempdima-\labelwidth\relax}
+       {\global\addleftskip=\z@\relax}%
+    \ifbool{push@star@}{\booltrue{push@star}}{}%
+  \fi
+  \global\leftskip=\addleftskip\relax
+  \nobreak\hss\llap{#1\strut}}
 
-\SetEnumitemKey{hang}{%
-           nosep,
-      align=hang,
- leftmargin=*,
-labelindent=\z@}
+\SetEnumitemKey{hang}{nosep,align=hang,leftmargin=*}
 
 \newlist{exlist}{enumerate}{3}
-\setlist[exlist]{nosep,leftmargin=*,label=\prestar\bfseries\arabic*.}
-\setlist[exlist,2]{label=(\arabic*),labelindent=\addleftskip}
+\setlist[exlist]{hang}
+\setlist[exlist,1]{label=\prestar\bfseries\arabic*.}
+\setlist[exlist,2]{label=\prestar(\arabic*)}
+\setlist[exlist,3]{label=\prestar\Ding*}
+
+\newlist{enumlist}{enumerate}{3}
+\setlist[enumlist,1]{wide,font=\bfseries,label=(\arabic*)}
+
+\newcommand*\thmitemhspace[1]{\sbox{\@labels}{\unhbox\@labels\kern#1}}
+\newcommand*\fixthmitem[1][-\parindent]{\thmitemhspace{#1}}
 
 \newdimen\ori@leftskip
 
 \newenvironment{exercise}{%
-    \ori@leftskip\leftskip\relax
+    \ori@leftskip=\leftskip\relax
     \advance\c@secnumdepth-\@m\relax
-    \def\subsec@format{\normalsize\raggedright}%
+    \def\subsec@format{\medskip\normalsize\raggedright
+      \ziju{.5}\fzydzhhei\TeXGyreBonum\let~\enspace}%
     \subsection{习题~\thesection}\small
     \let\fix@capfontsize\small\relax
-    \exlist[hang]}%
-  {\endexlist\global\leftskip\ori@leftskip\relax}
+    \exlist\relax}%
+  {\endexlist\global\leftskip=\ori@leftskip\relax}
 \newenvironment{exercise*}{%
-    \ori@leftskip\leftskip\relax
+    \ori@leftskip=\leftskip\relax
     \advance\c@secnumdepth-\@m\relax
     \section{复习题\CTEX@thechapter}
-    \exlist[hang]}%
-  {\endexlist\global\leftskip\ori@leftskip\relax}
+    \exlist\relax}%
+  {\endexlist\global\leftskip=\ori@leftskip\relax}
 
-\newenvironment{exlistcols}[1][2]{\CTEXindent
+\newenvironment{exlistcols}[1][2]{%
     \listcolsleftmargin=\addleftskip\relax
     \def\labelenumi{(\arabic{enumi})}%
+    \setlabelformat*{enumi}{(\arabic{enumi})}%
     \multienumitems\relax
     \totalistcolswidth\dimexpr\linewidth/#1\relax
     \listcolswidth\dimexpr\totalistcolswidth-\labelsep-\labelwidth\relax}%
@@ -81,13 +88,16 @@ labelindent=\z@}
     \enumitemcols}%
   {\endenumitemcols}
 
-\newenvironment{enumitemcols}[1][2]{\CTEXindent
-    \listcolsleftmargin=\addleftskip\relax
+\newenvironment{enumlistcols}[1][2]{\CTEXindent
+    \listcolsleftmargin=\parindent\relax
+    \def\labelenumi{\bfseries(\arabic{enumi})}%
+    \setlabelformat*{enumi}{(\arabic{enumi})}%
+    \nohangitemcols
     \multienumitems\relax
     \totalistcolswidth\dimexpr\linewidth/#1\relax
     \listcolswidth\dimexpr\totalistcolswidth-\labelsep-\labelwidth\relax}%
   {\endmultienumitems}
-\newenvironment{enumitemcols*}{\itemindent\z@\item[]\itemcolsinlist
+\newenvironment{enumlistcols*}{\itemindent\z@\item[]\itemcolsinlist
     \enumitemcols}%
   {\endenumitemcols}
 

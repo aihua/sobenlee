@@ -18,8 +18,9 @@
 \RequirePackage[mtphrb,mtpcal,subscriptcorrection]{mtpro2}
 \RequirePackage[uppi,comma]{localint}
 \RequirePackage{empheq,amsthm,thmtools}
-\RequirePackage{siunitx,needspace,varwidth,chngcntr,changepage,environ}
-\RequirePackage{floatrow,caption,wrapfig,tabu}
+\RequirePackage{xfrac,siunitx,needspace,varwidth,chngcntr,changepage,environ}
+\RequirePackage{floatrow,caption,wrapfig,floatflt,tabu}
+\RequirePackage[perpage,stable,bottom]{footmisc}
 \RequirePackage[pagestyles,explicit,clearempty,outermarks]{titlesec}
 \RequirePackage[titlesec]{interfaces}
 \RequirePackage{enumitem,pifont,xcolor,labelformat}
@@ -70,6 +71,7 @@
 \bigskipamount  =12\p@\relax
 
 \gappto\bfseries{\boldmath}
+\robustify{\bfseries}
 
 \sisetup{group-minimum-digits=4,round-integer-to-decimal}
 
