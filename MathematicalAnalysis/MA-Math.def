@@ -20,6 +20,8 @@
 
 \let\dps\displaystyle
 
+\everymath{\displaystyle}
+
 \let\notinslant\notin
 \def\notin{\mathrel{\overline{\in}}}
 
@@ -50,13 +52,16 @@
 \newcommand*\e{\varepsilon}
 \newcommand*\eset{\varnothing}
 
+\newcommand\ntoinf{{n\to\infty}}
+\newcommand\ntoinfp{{n\to+\infty}}
+\newcommand\ntoinfm{{n\to-\infty}}
+
 %\newcommand\comp{\mathchoice%
 %  {\mathop{\raisebox{0.2ex}{\footnotesize$\circ$}}}%
 %  {\mathop{\raisebox{0.2ex}{\footnotesize$\circ$}}}%
 %  {\mathop{\raisebox{0.1ex}{$\scriptscriptstyle\circ$}}}%
 %  {\mathop{\raisebox{0.1ex}{$\scriptscriptstyle\circ$}}}%
 %}%
-
 
 \newcommand*\rest[1]{\bigr|_{#1}}
 
@@ -144,6 +149,30 @@
     \vskip-\baselineskip}%
   \penalty\@M
 }
+
+%\ExplSyntaxOn
+%\DeclareInstance { xfrac } { slant } { math }
+%  {
+%    denominator-bot-sep = -2 pt      ,
+%    numerator-bot-sep   =  2 pt      ,
+%    slash-right-mkern   = -2 mu      ,
+%    slash-left-mkern    = -2 mu
+%  }
+%\DeclareCollectionInstance { slantmath } { xfrac } { mathdefault } { math }
+%  {
+%    denominator-bot-sep = -2 pt      ,
+%    numerator-bot-sep   =  2 pt      ,
+%    numerator-top-sep   = \c_max_dim ,
+%    scale-factor        = 1          ,
+%    scale-relative      = false      ,
+%    scaling             = true       ,
+%    slash-right-mkern   = -2 mu      ,
+%    slash-left-mkern    = -2 mu
+%  }
+%\ExplSyntaxOff
+%\UseCollection{xfrac}{slantmath}
+
+\UseCollection{xfrac}{plainmath}
 
 \MHInternalSyntaxOn
 \def\EQ_prevent_vertical_space:{%

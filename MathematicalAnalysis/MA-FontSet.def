@@ -9,6 +9,7 @@
 \setsansfont[BoldFont={MyriadPro-SemiboldSemiCn},ItalicFont={MyriadPro-SemiCnIt}]{MyriadPro-SemiCn}
 \setmonofont{Consolas}
 \newfontfamily{\CMRoman}{CMU Serif}
+\newfontfamily{\TeXGyreBonum}[Numbers=Uppercase]{TeXGyreBonum-Regular}
 \def\bfsansfea{\addfontfeature{BoldFont={MyriadPro-BoldSemiCn}}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \setCJKmainfont[BoldFont={FZHei-B01},ItalicFont={FZJKai-Z03S}] {FZJSong-Z01S}
@@ -63,6 +64,7 @@
 \newCJKfontfamily{\fzlthei}     [BoldFont=*] {FZLanTingHei-R-GBK}          % 方正兰亭黑
 \newCJKfontfamily{\fzsonghei}   [BoldFont=*] {FZSongHei-B07_GB18030}       % 方正宋黑
 \newCJKfontfamily{\fzxbsong}    [BoldFont=*] {FZXiaoBiaoSong-B05}          % 方正小标宋
+\newCJKfontfamily{\fzydzhhei}   [BoldFont=*] {FZYunDongHei-M-GBK}          % 方正韵动中黑
 \newCJKfontfamily{\fzzysong}    [BoldFont=*] {FZYaSong-DB-GBK}             % 方正中雅宋
 \newCJKfontfamily{\fzliukai}    [BoldFont=*] {FZSuXinShiLiuKaiS-R-GB}      % 方正苏新诗柳楷简体
 \setCJKfallbackfamilyfont{fzliukai}    [BoldFont=*] {FZQiTi-S14}

@@ -22,23 +22,732 @@
 
 试求由抛物线~$y=x^2$、$x$~轴、直线~$x=1$~所围成的曲边三角形的面积。
 
-我们会求直边形的面积，不会求曲边形的面积。但是我们可以分两步来求出曲边形面积：先是通过以直代曲，得到一系列越来越逼近
-曲边三角形面积的近似值；然后考察这一系列近似值的变化趋势，从而确定出曲边三角形面积的准确值。
+\begin{wrapfigure}[9]{O}{0mm}
+\somefigure
+\caption{}\label{fig:sec2.1-1}
+\end{wrapfigure}
 
+我们会求直边形的面积，不会求曲边形的面积。但是我们可以分两步来求出曲边形面积：先是通过以直代曲，得到一系列越来越逼近曲边三
+角形面积的近似值；然后考察这一系列近似值的变化趋势，从而确定出曲边三角形面积的准确值。为此，如\ref{fig:sec2.1-1}~所示，用分点
+\[
+  x=0,\enspace\frac1n,\enspace\frac2n,\dotsc\dotsc,\frac{n-1}n,1,
+\]
+把区间~$[0,1]$~分成~$n$~个小区间，相应的把曲边三角形分成~$n$~个细长的小曲边梯形。每一个小曲边梯形，用具有同底和左端点函数值
+为高的矩形近似代替，因而得到曲边三角形面积的近似值
+\begin{align*}
+a\approx x_n&=\sum_{i=0}^{n-1}\Paren[\Big]{\frac in}^2\cdot\frac1n
+ =\frac1{n^3}\sum_{i=0}^{n-1}i^2=\frac1{n^3}\frac{n(n-1)(2n-1)}6\\
+&=\frac16\Paren[\Big]{1-\frac1n}\Paren[\Big]{2-\frac1n}。\footnotemark
+\end{align*}
+\footnotetext{利用\begin{align*}
+\sum_{k=1}^mk^2
+& =\sum_{k=1}^mk(k-1)+\sum_{k=1}^mk
+  =\frac13\sum_{k=1}^{m+1}\Parenb{k(k-1)(k-2)-(k-1)(k-2)(k-3)}+\sum_{k=1}^mk\\
+& =\frac13(m+1)m(m-1)+\frac12m(m+1)=\frac16m(m+1)(2m+1)。
+\end{align*}}%
+其中~$x_n$~表示图中阶梯形的面积，$n$~越大阶梯越多，近似程度也就越高，但不管~$n$~多大总是近似的。要想从曲边三角形面
+积~$a$~的这一系列近似值~$x_n$~得到准确值~$a$，就必须考察~$n$~趋于无穷的过程。$n$~无限增大时，阶梯形面积~$x_n$~无限
+逼近于所求的面积~$a$。令~$\ntoinf$，得到
+\[
+  x_n=\frac16\Paren[\Big]{1-\frac1n}\Paren[\Big]{2-\frac1n}\to\frac13。
+\]
+即通过考察~$n$~趋于无穷时，一系列近似值~$x_n$~的变化趋势，确定出曲边三角形的面积~$a=\sfrac13$。
 
-
-
-
+在这个例子中，我们求出了值~$a=\sfrac13$，但我们目的不只是为了求~$a$~的值，也不只是关心如何以直代曲得到近似值~$x_n$~或~$x_n$~的
+具体表示形式，而是要从考察~$n$~趋于无穷时，由~$x_n$~的变化趋势确定出值~$a$~这一步中，抽象出序列极限的定义。
 
 \subsection{序列极限定义}
+
+一个接一个排起来的一串数叫作\emph{序列}。例如
+\begin{equation}\label{eq:ch1sec2.1-1}
+1,2,3,4,\dotsc; \quad
+1,\frac12,\frac13,\frac14,\dotsc;\quad
+1,\frac12,\frac1{2^2},\frac1{2^3},\dotsc;\quad
+1,-1,1,-1,\dotsc
+\end{equation}
+都是序列。我们只写出序列的前几项，后面用三点来表示未写出无穷多项。一般用
+\[
+  x_1,x_2,\dotsc,x_n,\dotsc
+\]
+来表示序列，简单记作~$\Brace{x_n}$，这里~$x_n$~称为序列的\emph{通项}。给定序列的通项公式，就可以写出序列的每一项；反之，给
+定一个序列，即给出一个映射~$\map f\FN\FR$，一般来说可以归纳出通项公式。比如~\ref{eq:ch1sec2.1-1}~中第一个序列的通项公式
+为~$x_n$；第二个序列为~$x_n=\sfrac1n$；第三个序列为~$x_n=\sfrac1{2^{n-1}}$；第四个序列为~$x_n=(-1)^{n-1}$。但序列
+\[
+  1.4,1.41,1.414,\dotsc
+\]
+的第~$n$~项是~$\sqrt2$~取小数点后~$n$~位的近似值。虽然通项的意义是明确的，但不能用明显的公式表示出来。
+
+在求曲边三角形面积的例子中，我们遇到了通项为
+\[
+  x_n=\frac16\Paren[\Big]{1-\frac1n}\Paren[\Big]{2-\frac1n}
+\]
+的序列~$\Brace{x_n}$，并看出~$n$~趋于无穷时，通项~$x_n$~趋于~$a=\sfrac13$。在其它问题中，也要考察~$n$~趋于无穷时，序列
+变化的趋势。为此我们引出序列极限的定性描述：
+
+给定序列~$\Brace{x_n}$，当~$n$~无限增大时，若~$x_n$~无限的接近~$a$，则称~$a$~为~$n$~趋于无穷时序列的
+极限，记作~$x_n\to a\,(\ntoinf)$，或
+\[
+  \lim_\ntoinf x_n=a。
+\]
+
+这种描述显然是很不够的，因为“无限增大”，“无限接近”并未给出确切的含义，只当作一般性用语来理解。要想给出极限的定义，必须
+分析一下“无限增大”，“无限接近”的确切含义是什么。
+
+再回到曲边三角形的例子。所谓~$n$~无限增大，$x_n$~无限接近于~$a$，是指阶梯形面积~$x_n$~与曲边三角形面积~$a$~的误差要多小就
+能多小，只要~$n$~充分大。具体来说，给定误差~$\sfrac1{100}$，只要去~$n=100$，即把~$[0,1]$~区间~$100$~等分，每一个小曲边梯形
+与矩形的误差加起来，就是~$x_n$~与~$a$~的误差。要估计小曲边梯形与矩形误差总和，只需如\ref{fig:sec2.1-1}~所示，将表示误差的
+图形平移到以~$1$~为高，以~$\sfrac1{100}$~为底的该图左边的矩形上，显然误差总和不超过矩形面积的~$\sfrac1{100}$，所以
+\[
+  \abs{x_{100}-a}<\frac1{100}。
+\]
+若给定误差~$\num{1/1000}$，则只要取~$n=\num{1000}$，就有
+\[
+  \abs{x_{1000}-a}<\frac1{\num{1000}}。
+\]
+由此可见，$x_n$~与~$a$~的误差要多小就能多小，只要~$x_n$~充分大。用希腊字母~$\e$~表示误差，我们先试着给出极限的定义如下：
+
+若给定~$\e>0$，总能找到自然数~$n$，使得
+\[
+  \abs{x_n-a}<\e,
+\]
+则称序列~$x_n$~的极限是~$a$，或~$a$~是序列的极限。
+
+这个定义是否妥当呢？从字面上看，它只告诉我们序列有一项~$x_n$~与~$a$~的误差小于~$\e$，这项以后的各项与~$a$~的误差是
+否小于~$\e$~呢？定义没有说，如果这项以后的项与~$a$~误差很大，则不能反映出~$x_n$~无限接近~$a$，所以定义应修改如下：
+
+如果给定~$\e>0$，存在~$N$，使得当~$n>N$~时，就有
+\[
+  \abs{x_n-a}<\e,
+\]
+则称~$x_n$~的极限时~$a$。
+
+这样修改后，保证自某一项以后各项与~$a$~的误差都小于~$\e$，究竟是否妥当了呢？可能想法是对的，但表达还有问题。给定~$\e>0$，只是
+说对一个误差~$\e$~能找到~$N$，对别的误差能否找到~$N$~呢？定义反映不出来。如果对于更小的误差~$\e_1$，不能保证序列自某一项以后
+各项与~$a$~的误差小于~$\e_1$，也不能反映出~$x_n$~无效接近与~$a$。因此，我们就得到了严格的极限定义。
+
+\begin{definition}\label{def:sec2.1-1}
+如果对于任意~$\e>0$，都存在非负整数~$N$，使得当~$n>N$~时，就有
+\[
+  \abs{x_n-1}<\e,
+\]
+则称序列~$\Brace{x_n}$~的\emph{极限}为~$a$，记作
+\[
+  \lim_\ntoinf x_n=a,
+\]
+或者~$x_n\to a\,(\ntoinf)$。
+\end{definition}
+
+极限的几何意义为：作以~$a$~为中心，以~$\e$~为半径的邻域~$(a-\e,a+\e)$，当~$n>N$~时，有
+\[
+  a-\e<x_n<a+\e,
+\]
+即随着~$n$~的变化，观察序列~$x_n$~在数轴上的变化时，发现开头有限项可能落在邻域外面，或一会儿落在邻域里边，一会儿又落在
+邻域外边，但当标号大于~$N$~后，序列的项总在邻域里变动，再也不会落在邻域外边。从静态来看，以~$a$~为中心，以任意~$\e$~为
+半径作一邻域，若序列在邻域外边只有有限项，则序列的极限是~$a$。
+
+\begin{example}
+证明~$\lim_\ntoinf\dfrac1n=0$。
+\end{example}
+\begin{proof}
+对于任意~$\e>0$，则
+\[
+  \abs[\Big]{\frac1n}=\frac1n<\e\impliedby n>\frac1\e。
+\]
+因此，取~$N=\Floor[\Big]{\dfrac1\e}$，则当~$n>N$~时，就有~$\abs[\Big]{\dfrac1n}<\e$，即
+\[
+  \lim_\ntoinf\frac1n=0。\qedhere
+\]
+\end{proof}
+
+这个例子说明~$N$~是依赖于~$\e$，$\e$~越小，$N$~越大。具体找~$N$~时，可以用分析法，即要使结论成立，看~$n$~应多大。
+
+\begin{example}
+证明~$\lim_\ntoinf q^n=0\,(0<q<1)$。
+\end{example}
+\begin{proof}
+对于任意~$\e>0$，不妨假定~$\e<1$，则
+\[
+  \abs{q^n}=q^n<\e\impliedby n\ln q<\ln\e\impliedby n>\frac{\ln\e}{\ln q}。
+\]
+因此，取~$N=\Floor[\Big]{\dfrac{\ln\e}{\ln q}}$，则当~$n>N$~时，就有~$\abs{q^n}<\e$，即
+\[
+  \lim_\ntoinf q^n=0。\qedhere
+\]
+\end{proof}
+
+\begin{example}
+证明~$\lim_\ntoinf\dfrac{a^n}{n!}\,(a>1)$。
+\end{example}
+\begin{proof}
+因为
+\[
+  \frac{a^n}{n!}=\frac a1\cdot\frac a2\dotsm\frac a{\Floor{a}}\cdot\frac a{\Floor a+1}\dotsm \frac an
+  <\frac{a^{\Floor a}}{\Floor a!}\cdot\frac an\eqcolon c\cdot \frac an,
+\]
+所以对于任意~$\e>0$，有
+\[
+  \abs[\Big]{\frac{a^n}{n!}}=\frac{a^n}{n!}<\e\impliedby \frac{ca}n<\e\impliedby n>\frac{ca}\e。
+\]
+取~$N=\Floor[\Big]{\dfrac{ca}\e}$，则当~$n>N$~时，就有~$\abs[\Big]{\frac{a^n}{n!}}<\e$，即
+\[
+  \lim_\ntoinf\dfrac{a^n}{n!},\quad a>1。\qedhere
+\]
+\end{proof}
+
+在极限定义中，我们关心的不是~$N$~的具体值，而是~$N$~的存在性。所以做题时，不一定直接去解不等式，可以用适当放大法来
+找~$N$。例如从不等式
+\[
+  \frac {a^n}{n!}<\e
+\]
+出发解~$n$~大于什么很困难，而放大后求出~$N$~就很容易。要注意，运用放大法时，不要把含有变数~$n$~的因子移到不等式的右端，只
+允许将左端逐步放大。还应注意反推法书写时，是由后面不等式成立，推出前面不等式成立；而不是前面不等式成立，推后面不等式成立。
+
+\begin{example}
+证明~$\lim_\ntoinf\sqrt[n]a=1\,(a>1)$。
+\end{example}
+\begin{proof*}
+对于任意~$\e>0$，有
+\begin{align*}
+\abs{\sqrt[n]a-1}=\sqrt[n]a-1<\e
+&\impliedby\sqrt[n]a<1+\e\impliedby\frac1n\ln a<\ln(1+\e)\\
+&\impliedby n>\frac{\ln a}{\ln(1+\e)}。
+\end{align*}
+因此取~$N=\Floor[\Big]{\dfrac{\ln a}{\ln(1+\e)}}$，则当~$n>N$~时，就有~$\abs{\sqrt[n]a-1}<\e$，即
+\[
+  \lim_\ntoinf\sqrt[n]a=1,\quad a>1 。\qedhere
+\]
+\end{proof*}
+\begin{proof*}
+令~$\sqrt[n]a-1=h_n$，为了对~$h_n$~用适当放大法，我们先估计~$h_n$。因为
+\[
+  a=(1+h_n)^n=1+nh_n+\frac{n(n-1)}{2!}h_n^2+\dotsb+h_n^n>nh_n,
+\]
+所以
+\[
+  0<h_n<\frac an。
+\]
+因此，对任意~$\e>0$，
+\[
+  \abs{\sqrt[n]a-1}=h_n<\e\impliedby \frac an<\e。
+\]
+取~$N=\Floor[\Big]{\dfrac an}$，则当~$n>N$~时，就有~$\abs{\sqrt[n]a-1}<\e$。
+\end{proof*}
+
 \begin{exercise}
-\item
+\item 用~$\e-N$~方法验证
+\[
+  \lim_\ntoinf\frac1{n^2-1}=0,
+\]
+并分别对~$\e=0.1,0.01$~确定相应的~$N$。
+\item 用~$\e-N$~方法验证下列极限为零。
+\begin{exlistcols}[3]
+\item $\lim_\ntoinf\dfrac1{n^2+n}$；
+\item $\lim_\ntoinf\dfrac1{n^4-n}$；
+\item $\lim_\ntoinf\dfrac{\sqrt[3]{n^2}}{n-3}$；
+\item $\lim_\ntoinf\Parenb{\sqrt{n+1}-\sqrt n}$；
+\item $\lim_\ntoinf\dfrac{10^n}{n!}$；
+\item $\lim_\ntoinf\dfrac{n!}{n^n}$；
+\item $\lim_\ntoinf\dfrac n{a^n}\,(a>1)$；
+\item $\lim_\ntoinf\Parenb{\ln(n+1)-\ln n}$。
+\end{exlistcols}
+\item 若~$\lim_\ntoinf x_n=a$，证明~$\lim_\ntoinf\abs{x_n}=\abs a$。
+\item 设~$x_n>0\,(n\geq 1)$，且~$\lim_\ntoinf x_n=a$。证明~$\lim_\ntoinf\sqrt{x_n}=\sqrt a$。
+\item 设~$\lim_\ntoinf x_n=a$，证明~$\lim_\ntoinf\sqrt[3]{x_n}=\sqrt[3]a$。
+\item 设~$x_n\leq a\leq y_n\,(n\geq 1)$，且~$\lim_\ntoinf(y_n-x_n)=0$。证明~$\lim_\ntoinf x_n=\lim_\ntoinf y_n=a$。
+\item 设~$n,p$~均为正整数。证明，
+\begin{exlistcols}[2]
+\item $n^p<\dfrac{(n+1)^{p+1}-n^p}{p+1}<(n+1)^p$；
+\item $\sum_{k=1}^{n-1}k^p<\dfrac{n^{p+1}}{p+1}<\sum_{k=1}^nk^p$；
+\item 求极限~$\lim_\ntoinf\dfrac1n\sum_{k=1}^n\Paren[\Big]{\dfrac kn}^p$。
+\end{exlistcols}
+\item 设~$\lim_\ntoinf x_n=a$，而~$\ell$~为确定的自然数。证明，$\lim_\ntoinf x_{n+\ell}=a$。试讨论相反的情况。
+\item\begin{exlist}
+  \item 证明~$\lim_\ntoinf x_n=a$~当且仅当~$\lim_\ntoinf x_{2n}=\lim_\ntoinf x_{2n+1}=a$；
+  \item 已知~$\lim_\ntoinf x_{2n}$~和$\lim_\ntoinf x_{2n+1}$~都存在，试讨论~$\lim_\ntoinf x_n$~的存在性。
+\end{exlist}
+\item 在序列极限定义中，对于~$N$~请说明下列问题。
+\begin{exlistcols}[2]
+  \item $N$~是否唯一；
+  \item $N$~是否是~$\e$~的函数；
+  \item 前~$N$~项是否有~$\abs{x_n-a}\geq\e$。
+\end{exlistcols}
+\item 判断并说明序列极限定义改成下面形式是否可以。
+\begin{exlist}
+  \item 对任意~$\e>0$，存在~$N>0$，使得当~$n\geq N$~时，有~$\abs{x_n-a}<\e$；
+  \item 对任意~$\e>0$，存在~$N>0$，使得当~$n> N$~时，有~$\abs{x_n-a}\leq\e$；
+  \item 对任意~$\e>0$，存在~$N>0$，使得当~$n> N$~时，有~$\abs{x_n-a}<M\e$，这里~$M$~为某固定常数。
+\end{exlist}
+\item 若对任意~$N>0$，存在~$\e>0$，使得当~$n>N$~时，有~$\abs{x_n-a}<\e$，则序列~$\Brace{x_n}$~具有什么性质？
+\item 若存在~$N>0$，对任意~$\e>0$，使得当~$n>N$~时，有~$\abs{x_n-a}<\e$，则序列~$\Brace{x_n}$~具有什么性质？
+\item 判断并说明下述对~$\lim_\ntoinf\sqrt[n]n=1$~的证明的正确性。
+\begin{exproof}
+对任意~$\e>0$，有
+\[
+  \sqrt[n]n<1+\e\impliedby\frac1n\ln n<\ln(1+\e)\impliedby
+  \frac1n<\frac{\ln(1+\e)}{\ln n}\leq\frac{\ln(1+\e)}{\ln 2}。
+\]
+取~$N=\Floor[\Big]{\dfrac{\ln 2}{\ln(1+\e)}}$，则当~$n>N$~时，有
+\[
+  1-\e<1<\sqrt[n]n<1+\e,
+\]
+由此即可得到~$\lim_\ntoinf\sqrt[n]n=1$。
+\end{exproof}
 \end{exercise}
+
+
 \section{序列极限的性质与运算}
+
+有了极限定义后，自然会问极限有什么性质和怎么求极限。为此，我们要讨论极限的唯一性、有界性，极限的四则运算和
+极限不等式。
+
+\begin{theorem}[唯一性]\label{thm:sec2.2-1}
+若序列~$\Brace{x_n}$~的极限存在，则极限值是唯一的。
+\end{theorem}
+
+这个定理保证了不管用什么方法求极限，得到的极限值应该是一样的。
+
+\begin{proof}
+我们用反证法。假设序列极限不唯一，至少有两个不相等的极限值，设为
+\[
+  \lim_\ntoinf x_n=a,\quad \lim_\ntoinf x_n=b,
+\]
+且~$a\neq b$。不妨设~$a<b$，取~$\e=\dfrac{b-a}2>0$，由极限的定义，存在~$N_1$，使得当~$n>N_1$~时，有
+\[
+  \abs{x_n-a}<\e\implies x_n<a+\e=\frac{a+b}2。
+\]
+并且存在~$N_2$，使得当~$n>N_2$~时，有
+\[
+  \abs{x_n-b}<\e\implies x_n>a-\e=\frac{a+b}2。
+\]
+所以当~$n>\max\Brace{N_1,N_2}$~时，就有
+\[
+  x_n>\frac{a+b}2>x_n。
+\]
+显然，这是一个矛盾（见\ref{fig:sec2.1-2}）。因此极限值确实是唯一的。
+\end{proof}
+
+\begin{wrapfigure}{O}{0mm}
+\somefigure
+\caption{}\label{fig:sec2.1-2}
+\end{wrapfigure}
+
+从函数观点来看，序列就是定义在自然数集合上的函数~$x_n=f(n)$，由函数有界定义，可以得到序列有界的定义。
+
+若存在~$M>0$，使得对任意~$n$，都有~$\abs{x_n}\leq M$，则称序列~$\Brace{x_n}$~\emph{有界}。
+
+\begin{theorem}[有界性]\label{thm:sec2.2-2}
+若序列~$\Brace{x_n}$~有极限，则~$\Brace{x_n}$~有界。
+\end{theorem}
+\begin{proof}
+设~$\lim_\ntoinf x_n=a$，取~$\e_0=1$，则存在~$N$，使得当~$n>N$~时，有~$\abs{x_n-a}<1$，那么
+\[
+  \abs{x_n}-\abs a\leq\abs{x_n-a}<1\implies\abs{x_n}<\abs a+1。
+\]
+令
+\[
+  M=\max\Braceb{1+\abs a,\abs{x_1},\abs{x_2},\dotsc,\abs{x_N}},
+\]
+则对任意~$n$，均有
+\[
+  \abs{x_n}\leq M,
+\]
+即序列~$\Brace{x_n}$~确实是有界的。
+\end{proof}
+
+在证明时必须分清什么时候取定~$\e$，什么时候任意给定~$\e$。上面证明中就必须取定~$\e$，不能任意给定~$\e$。如果
+改为任意给定~$\e>0$，则~$N$~随~$\e$~在变，找到的~$M$~也随~$\e$~在变，这时的界~$M$~的意义就不明确，有界性就难以保证。
+
+\begin{theorem}[极限的四则运算]\label{thm:sec2.2-3}
+设~$\lim_\ntoinf x_n=a$，$\lim_\ntoinf y_n=b$，则
+\begin{enumlistcols}
+  \item $\lim_\ntoinf(x_n\pm y_n)=a\pm b$；\label{thm:sec2.2-3-item-1}
+  \item $\lim_\ntoinf x_n\cdot y_n=a\cdot b$；\label{thm:sec2.2-3-item-2}
+  \item 若~$n\neq0$，且~$y_n\neq0$，则~$\lim_\ntoinf\dfrac{x_n}{y_n}=\dfrac ab$。\label{thm:sec2.2-3-item-3}
+\end{enumlistcols}
+\end{theorem}
+\begin{proof}\fixthmitem\begin{enumlist}
+\item 任给~$\e>0$，由~$\lim_\ntoinf x_n=a$，存在~$N_1$，使得当~$n>N_1$~时，有
+\[
+  \abs{x_n-a}<\frac\e2;
+\]
+又由~$\lim_\ntoinf y_n=b$，存在~$N_2$，使得当~$n>N_2$~时，有
+\[
+  \abs{y_n-b}<\frac\e2。
+\]
+取~$N=\max\Brace{N_1,N_2}$，则当~$n>N$~时，就有
+\[
+  \absb{(x_n\pm y_n)-(a\pm b)}\leq\abs{x_n-a}+\abs{y_n-b}<\frac\e2+\frac\e2=\e,
+\]
+即
+\[
+  \lim_\ntoinf(x_n\pm y_n)=a\pm b。
+\]
+\item 要使得~$n>N$~时，$\abs{x_n\cdot y_n-ab}<\e$，常用的方法是插入一项，这项的两个因子，一个因子与第一项的
+因子相同，另一个因子与第二项的因子相同。这样的话，
+\[
+  \abs{x_n\cdot y_n-ab}=\abs{x_n\cdot y_n-y_n\cdot a+y_n\cdot a-ab}
+  \leq\abs{y_n}\cdot\abs{x_n-a}+\abs a\cdot\abs{y_n-b},
+\]
+所以要使结论成立，只要~$n>N$~时，利用~$\Brace{y_n}$~有界证明
+\[
+  \abs{y_n}\cdot\abs{x_n-a}<\frac\e2,\quad \abs a\cdot\abs{y_n-b}<\frac\e2
+\]
+即可。这样我们就得到了下面的证明。
+
+由\ref{thm:sec2.2-2}，存在~$M_1>0$，使得对任意~$n$，均有~$\abs{y_n}\leq M_1$，令
+\[
+  M=\max\Brace{M_1,\abs a}>0。
+\]
+
+对任意~$\e>0$，由~$\lim_\ntoinf x_n=a$，存在~$N_1>0$，使得当~$n>N_1$~时，有
+\[
+  \abs{x_n-a}<\frac\e{2M};
+\]
+又由~$\lim_\ntoinf y_n=b$，存在~$N_2>0$~，使得当~$n>N_2$~时，有
+\[
+  \abs{y_n-b}<\frac\e{2M}。
+\]
+取~$N=\max\Brace{N_1,N_2}$，则当~$n>N$~时，就有
+\begin{align*}
+\abs{x_n\cdot y_n-ab}
+&\leq\abs{y_n}\cdot\abs{x_n-a}+\abs a\cdot\abs{y_n-b}\leq M\abs{x_n-a}+M\abs{y_n-b}\\
+&<M\cdot\frac\e{2M}+M\cdot\frac\e{2M}=\e,
+\end{align*}
+即
+\[
+  \lim_\ntoinf x_n\cdot y_n=a\cdot b。
+\]
+\item 由~\ref{thm:sec2.2-3-item-2}~可知，只要证明~$\lim_\ntoinf\dfrac1{y_n}=\lim_\ntoinf\dfrac1b$~即可。要使~$n>N$~时
+\[
+  \abs[\Big]{\frac1{y_n}-\frac1b}=\abs[\Big]{\frac{y_n-b}{y_n\cdot b}}<\e,
+\]
+就要先估计~$\Brace{y_n}$~的下界。为此，对于~$\dfrac{\abs b}2>0$，由~$\lim_\ntoinf y_n=b$，存在~$N_1$，使得当~$n>N_1$~时，有
+\[
+  \abs b-\abs{y_n}\leq\abs{y_n-b}<\frac{\abs b}2\implies\frac{\abs b}2\leq\abs{y_n}。
+\]
+
+对任意~$\e>0$，仍由~$\lim_\ntoinf y_n=b$，存在~$N_2$，使得当~$n>N_2$~时，有
+\[
+  \abs{y_n-b}<\frac{\abs b^2}2\e。
+\]
+取~$N=\max\Brace{N_1,N_2}$，则当~$n>N$~时，就有
+\[
+  \abs[\Big]{\frac 1{y_n}-\frac 1b}=\abs[\Big]{\frac{y_n-b}{y_n\cdot b}}\leq\frac{2\abs{y_n-b}}{\abs b^2}
+  <\frac2{\abs b^2}\cdot\frac{\abs b^2}2\e=\e,
+\]
+即
+\[
+  \lim_\ntoinf\frac1{y_n}=\frac1b。
+\]
+再由~~\ref{thm:sec2.2-3-item-2}，
+\[
+  \lim_\ntoinf\frac{x_n}{y_n}=\lim_\ntoinf x_n\cdot\frac1{y_n}=a\cdot\frac1b=\frac ab。\qedhere
+\]
+\end{enumlist}
+\end{proof}
+
+\ref{thm:sec2.2-3}~的结论可以推广至有限个序列的情形。例如如果每个序列极限都存在，则有
+\begin{Align*}
+  \lim_\ntoinf\Parenb{x_n+y_n+z_n}&=\lim_\ntoinf x_n+\lim_\ntoinf y_n+\lim_\ntoinf z_n,\\
+  \lim_\ntoinf\Parenb{x_n\cdot y_n\cdot z_n}&=\lim_\ntoinf x_n\cdot\lim_\ntoinf y_n\cdot\lim_\ntoinf z_n。
+\end{Align*}
+
+\begin{example}
+求极限
+\[
+  \lim_\ntoinf\frac{4n^2-6n+1}{3n^2+n+7}。
+\]
+\end{example}
+\begin{solution}
+\[
+\lim_\ntoinf\frac{4n^2-6n+1}{3n^2+n+7}=\lim_\ntoinf\frac{4-\dfrac6n+\dfrac1{n^2}}{3+\dfrac1n+\dfrac7{n^2}}
+=\frac{\dps\lim_\ntoinf\Paren[\Big]{4-\frac6n+\frac1{n^2}}}{\dps\lim_\ntoinf\Paren[\Big]{3+\dfrac1n+\dfrac7{n^2}}}
+=\dfrac43。\qedhere
+\]
+\end{solution}
+
+\begin{example}
+求极限~$\lim_\ntoinf\Parenb{1+a+\dotsb+a^n}\,(0<a<1)$。
+\end{example}
+\begin{solution}
+\begin{align*}
+\lim_\ntoinf\Parenb{1+a+\dotsb+a^n}
+&=\lim_\ntoinf\frac{1-a^{n+1}}{1-a}=\lim_\ntoinf\frac1{1-a}-\lim_\ntoinf\frac{a^{n+1}}{1-a}\\
+&=\frac1{1-a}。\qedhere
+\end{align*}
+\end{solution}
+
+\begin{quiz*}\fixthmitem
+\begin{enumlist}
+\item 判断并说明下面推导是否正确。
+\begin{align*}
+\lim_\ntoinf\Paren[\Big]{1+\frac1n}^n
+&=\lim_\ntoinf\Paren[\Big]{1+\frac1n}\cdot\lim_\ntoinf\Paren[\Big]{1+\frac1n}\cdot\dotsm\cdot
+  \lim_\ntoinf\Paren[\Big]{1+\frac1n}\\
+&=1\times1\times\dotsm\times1=1;
+\end{align*}
+\item 在证明\ref{thm:sec2.2-3}~的结论~\ref{thm:sec2.2-3-item-3}~时，令~$\lim_\ntoinf\dfrac{x_n}{y_n}=c$，则
+\[
+  a=\lim_\ntoinf x_n=\lim_\ntoinf\frac{x_n}{y_n}\cdot y_n=c\cdot b\implies c=\frac ab,
+\]
+判断并说明上述推导的正确性。
+\end{enumlist}
+\end{quiz*}
+
+\begin{theorem}\label{thm:sec2.2-4}
+给定序列~$\Brace{x_n}$~和~$\Brace{y_n}$，若~$x_n\leq y_n\,(n\geq1)$，且
+\[
+  \lim_\ntoinf x_n=a,\quad \lim_\ntoinf y_n=b,
+\]
+则~$a\leq b$。
+\end{theorem}
+\begin{proof}
+用反证法。不妨假定~$a>b$，取
+\[
+  \e=\frac{a-b}2>0,
+\]
+由~$\lim_\ntoinf x_n=a$，存在~$N_1$，使得当~$n>N_1$~时，
+\[
+  \abs{x_n-a}<\e\implies x_n>a-\e=\frac{a+b}2;
+\]
+又由~$\lim_\ntoinf y_n=b$，存在~$N_2$，使得当~$n>N_2$~时，有
+\[
+  \abs{y_n-b}<\e\implies y_n<b+\e=\frac{a+b}2。
+\]
+因此，当~$n>\max\Brace{N_1,N_2}$~时，得到
+\[
+  x_n>\frac{a+b}2>y_n。
+\]
+这与条件矛盾（见\ref{fig:sec2.1-3}）。所以~$a\leq b$。
+\end{proof}
+
+\thisfloatsetup{rowprecode=wrapfig}
+\begin{wrapfigure}[10]{O}{0mm}
+\somefigure
+\caption{}\label{fig:sec2.1-3}
+\end{wrapfigure}
+
+下面我们来讨论极限的所谓夹逼原理。
+
+\begin{theorem}\label{thm:sec2.2-5}
+给定序列~$\Brace{x_n},\Brace{y_n}$~和~$\Brace{z_n}$，满足
+\[
+x_n\leq z_n\leq y_n,\quad n\geq1,
+\]
+且
+\[
+  \lim_\ntoinf x_n=a=\lim_\ntoinf y_n,
+\]
+则~$\lim_\ntoinf z_n=a$。
+\end{theorem}
+\begin{proof}
+对任意~$\e>0$，由~$\lim_\ntoinf x_n=a$，存在~$N_1$，使得当~$n>N_1$~时，有
+\[
+  \abs{x_n-a}<\e\implies a-\e<x_n<a+\e;
+\]
+又由~$\lim_\ntoinf y_n=a$，存在~$N_2$，使得当~$n>N_2$~时，有
+\[
+  \abs{y_n-a}<\e\implies a-\e<y_n<a+\e 。
+\]
+取~$N=\max\Brace{N_1,N_2}$，则当~$n>N$~时，就有
+\[
+  a-\e<x_n\leq z_n\leq y_n<a+\e\implies\abs{z_n-a}<\e,
+\]
+即~$\lim_\ntoinf z_n=a$。
+\end{proof}
+
+\begin{example}
+设~$a,b>0$，证明
+\[
+  \lim_\ntoinf\sqrt[n]{a^n+b^n}=\max\Brace{a,b}。
+\]
+\end{example}
+\begin{proof}
+因为
+\[
+  \Paren[\Big]{\Parenb{\max\Brace{a,b}}^n}^{\frac1n}\leq\Parenb{a^n+b^n}^{\frac1n}\leq
+  \Paren[\Big]{2\Parenb{\max\Brace{a,b}}^n}^{\frac1n},
+\]
+即
+\[
+  \max\Brace{a,b}\leq\sqrt[n]{a^n+b^n}\leq\max\Brace{a,b}\cdot\sqrt[n]2。
+\]
+由~$\lim_\ntoinf\sqrt[n]2=1$~及\ref{thm:sec2.2-5}~即可得到
+\[
+  \lim_\ntoinf\sqrt[n]{a^n+b^n}=\max\Brace{a,b}。\qedhere
+\]
+\end{proof}
+
+\begin{quiz*}\fixthmitem\begin{enumlist}
+\item 在\ref{thm:sec2.2-4}~中若将条件改为~$x_n<y_n$，结论能否改为~$a<b$？
+\item 考虑能否利用\ref{thm:sec2.2-4}~直接得到\ref{thm:sec2.2-5}，即
+\[
+  a=\lim_\ntoinf x_n\leq\lim_\ntoinf z_n\leq\lim_\ntoinf y_n=a。
+\]
+\end{enumlist}
+\end{quiz*}
+
+作为序列极限的特殊情形，我们引入无穷小量的概念及其运算。
+
+\begin{definition}
+  极限为零的变量称为\emph{无穷小量}。
+\end{definition}
+
+若变量以序列形式表示，若序列极限为零，则称序列就叫作无穷小量。例如
+\[
+  \Brace[\Big]{\frac1n},\quad \Brace{q^n}\,(0<q<1),\quad
+  \Brace[\Big]{\frac{a^n}{n!}}\,(a>0)
+\]
+都是无穷小量。所以无穷小量不是很小的量，而是极限值为零的变量。
+
+\begin{corollary}\label{cor:sec2.2-1}
+\fixthmitem\begin{enumlist}
+  \item 无穷小量的绝对值是无穷小量；\label{cor:sec2.2-1-item-1}
+  \item 无穷小量与有界变量的乘积是无穷小量。\label{cor:sec2.2-1-item-2}
+\end{enumlist}
+\end{corollary}
+\begin{proof}\fixthmitem\begin{enumlist}
+\item 设~$\lim_\ntoinf x_n=0$，即对任意~$\e>0$，存在~$N$，使得当~$n>N$~时，有
+\[
+  \abs{x_n-0}=\abs{x_n}<\e\implies\absb{\abs{x_n}-0}=\abs{x_n}<\e,
+\]
+故~$\lim_\ntoinf\abs{x_n}=0$。
+\item 设~$\lim_\ntoinf x_n=0$，而~$\abs{y_n}\leq M$，则
+\[
+  \abs{x_ny_n}\leq M\abs{x_n}\implies
+  -M\abs{x_n}\leq x_n\cdot y_n\leq M\abs{x_n}。
+\]
+由~\ref{cor:sec2.2-1-item-1}~可知~$\lim_\ntoinf M\abs{x_n}=\lim_\ntoinf(-M\abs{x_n})=0$，利用\ref{thm:sec2.2-5}~可得
+\[
+  \lim_\ntoinf x_n\cdot y_n=0。\qedhere
+\]
+\end{enumlist}
+\end{proof}
+
+\begin{corollary}\label{cor:sec2.2-2}
+变量有极限~$a$~当且仅当变量可以分解成~$a$~与无穷小量之和。
+\end{corollary}
+\begin{proof}
+设~$\lim_\ntoinf x_n=0$，则
+\[
+  \lim_\ntoinf(x_n-a)=0。
+\]
+令~$\alpha_n=x_n-a$，由定义可知~$\Brace{\alpha_n}$~是无穷小量，并有~$x_n=a+\alpha_n$。
+
+反之，若~$x_n=a+\alpha_n$，且~$\lim_\ntoinf\alpha_n=0$，则
+\[
+  \lim_\ntoinf x_n=\lim_\ntoinf(a+\alpha_n)=a。\qedhere
+\]
+\end{proof}
+
+\begin{example}
+证明~$\lim_\ntoinf\sqrt[n]n=1$。
+\end{example}
+\begin{proof}
+令~$\sqrt[n]n=1+h_n$，只要证明~$h_n$~是无穷小量。事实上，
+\[
+  n=(1+h_n)^n=1+nh_n+\frac{n(n-1)}2h_n^2+\dotsb+h_n^n\geq\frac{n(n-1)}2h_n^2,
+\]
+所以
+\[
+  0<h_n<\frac2{\sqrt{n-1}},\quad n>1,
+\]
+由~$\lim_\ntoinf\dfrac2{\sqrt{n-1}}=0$~以及\ref{thm:sec2.2-5}，可得~$\lim_\ntoinf h_n=0$，再
+由\ref{cor:sec2.2-1}~就可以得到
+\[
+\lim_\ntoinf\sqrt[n]n=1。\qedhere
+\]
+\end{proof}
+
 \begin{exercise}
-\item
+\item 若~$\lim_\ntoinf(y_n-x_n)=0$，且~$\lim_\ntoinf x_n=a$。证明~$\lim_\ntoinf y_n=a$。判断并说明下述证法的正确性。
+\[
+  0=\lim_\ntoinf(y_n-x_n)=\lim_\ntoinf y_n-\lim_\ntoinf x_n=\lim_\ntoinf y_n-a\implies\lim_\ntoinf y_n=a。
+\]
+\item 求下列极限。
+\begin{exlistcols}
+  \item $\lim_\ntoinf\Paren[\Big]{\dfrac1{n^2}+\dfrac2{n^2}+\dotsb+\dfrac n{n^2}}$；
+  \item $\lim_\ntoinf\dfrac{a^n}{1+a+\dotsb+a^{n-1}}\;(a>0)$；
+  \item $\lim_\ntoinf\Paren[\bigg]{\dfrac1{1\cdot2}+\dfrac1{2\cdot3}+\dotsb+\dfrac1{n(n+1)}}$；
+  \item $\lim_\ntoinf\Parenb{\sqrt[3]{n+1}-\sqrt[3]n}$；
+  \item $\lim_\ntoinf\sqrt[n]a\;(0<a<1)$；
+  \item $\lim_\ntoinf\dfrac{n^k}{a^n}\;(a>1,k>0)$。
+\end{exlistcols}
+\item 设~$\lim_\ntoinf x_n=a$，$\lim_\ntoinf y_n=b$。证明，
+\begin{exlistcols}
+  \item $\lim_\ntoinf\max\Brace{x_n,y_n}=\max\Brace{a,b}$；
+  \item $\lim_\ntoinf\min\Brace{x_n,y_n}=\min\Brace{a,b}$。
+\end{exlistcols}
+\item 证明序列~$\Brace{\cos n}$~的极限不存在。
+\item 证明序列~$\Brace{\tan n}$~与~$\Brace{\sfrac1{\tan n}}$~的极限不存在。
+\item 求下列极限。
+\begin{exlistcols}
+  \item $\lim_\ntoinf\dfrac{\sin n}{\sqrt[3]{1-n^2}}$；
+  \item $\lim_\ntoinf\sqrt[n]{n\cdot\ln n}$；
+  \item $\lim_\ntoinf\Paren[\bigg]{\dfrac{1\cdot3\cdot5\cdot\dotsm\cdot(2n-1)}{2\cdot4\cdot6\cdot\dotsm\cdot(2n)}}^{\frac1n}$；
+  \item $\lim_\ntoinf\dfrac{1\cdot3\cdot5\cdot\dotsm\cdot(2n-1)}{2\cdot4\cdot6\cdot\dotsm\cdot(2n)}$；
+  \item $\lim_\ntoinf\dfrac1{\sqrt[n]{n!}}$。
+\end{exlistcols}
+\item 若~$\abs{x_{n+1}}\leq k\abs{x_n}\,(0<k<1)$~对任意~$n$~成立。证明~$\lim_\ntoinf x_n=0$。
+\item 设~$f(x)=\frac{x+2}{x+1}$，而~$x_0=1$，$x_{n+1}=f(x_n)\,(n\geq0)$。证明~$\lim_\ntoinf x_n=\sqrt2$。
+\item 设~$x_1=1$，而~$x_{n+1}=\sqrt{2+x_n}\;(n\geq1)$。求~$\lim_\ntoinf x_n$。
+\item 设~$x_0=1$，而~$x_{n+1}=1+\dfrac1{x_n}\,(n\geq0)$。求~$\lim_\ntoinf x_n$。
+\item\begin{exlist}
+  \item 设~$b>1$，$\lim_\ntoinf x_n=0$。证明，对任意~$\e$，$0<\e<1$，存在~$N$，使得当~$n>N$~时，有
+  \[
+    \log_b(1-\e)<x_n<\log_b(1+\e);
+  \]
+  \item 设~$b>1$，$\lim_\ntoinf x_n=0$，证明~$\lim_\ntoinf b^{x_n}=1$；
+  \item 设~$0<b<1$，$\lim_\ntoinf x_n=0$，证明~$\lim_\ntoinf b^{x_n}=1$；
+  \item 设~$b>0$，$\lim_\ntoinf x_n=a$，证明~$\lim_\ntoinf b^{x_n}=b^a$。
+\end{exlist}
+\item\begin{exlist}
+  \item 设~$\lim_\ntoinf y_n=1$。证明，对任意~$\e$，$0<\e<1$，存在~$N$，使得当~$n>N$~时，有~$\me^{-\e}<y_n<\me^\e$；
+  \item 设~$\lim_\ntoinf y_n=1$，证明~$\lim_\ntoinf\ln y_n=0$；
+  \item 设~$\lim_\ntoinf y_n=b\,(b>0)$，证明~$\lim_\ntoinf\ln y_n=b$；
+  \item 设~$\lim_\ntoinf y_n=b\,(b>0)$，$\lim_\ntoinf x_n=a$，证明~$\lim_\ntoinf y_n^{x_n}=b^a$。
+\end{exlist}
+\item\begin{exlist}
+  \item 设~$x_n>0$，且~$\lim_\ntoinf\sqrt[n]{x_n}=q<1$，证明~$\lim_\ntoinf x_n=0$；
+  \item 设~$x_n>0$，且~$\lim_\ntoinf\sqrt[n]{x_n}=\ell>1$，证明~$\lim_\ntoinf\dfrac1{x_n}=0$。
+\end{exlist}
+\item 设~$\Brace{x_n}$~为无穷小量。判断并说明，
+\begin{exlistcols}
+  \item $\Brace{x_n^n}$~是否为无穷小量；
+  \item $\Brace{\!\sqrt[n]{x_n}}\,(x_n>0)$~是否为无穷小量。
+\end{exlistcols}
 \end{exercise}
+
+
 \section{确界与单调有界序列}
+
+在这一节中，我们将讨论极限的存在性。给定序列~$\Brace{x_n}$，怎么判定它有没有极限呢？用极限定义判定，就必须先要看出极限值，这
+对稍微复杂的序列是办不到的，所以只能通过序列本身来判断它有没有极限。判定一般序列是否有极限，我们以后再讨论。对单调序列有简单
+的判别准则。这个准则要用到所谓确界的概念，为此，我们先讨论集合的确界。
+
+设有实数集合~$E\subset\FR$，若存在实数~$M$，使得对任意~$x\in E$，均有
+\[
+  x\leq M,
+\]
+则称~$M$~是集合~$E$~的一个\emph{上界}。集合~$E$~有一个上界，显然就有无穷个上界，那么这些上界中有没有最小上界呢？
+
+若集合~$E$~由无限个元素组成，那么它的最大元素就是集合的最小上界。若~$E$~是无限集，这时~$E$~可以没有最大集合，那么它的最小上界
+是什么意思呢？它有没有最小上界呢？首先我们给出最小上界的定义。
+
+\begin{definition}
+给定实数集合~$E$，若实数~$M$~满足
+\begin{enumlist}
+\item $M$~是集合~$E$~的上界；
+\item 若~$M'$~是集合~$E$~的一个上界，则必有~$M\leq M'$，
+\end{enumlist}
+则称~$M$~是集合~$E$~的\emph{上确界}或\emph{最小上界}，记作
+\[
+  M=\sup E\quad\text{或}\quad M=\sup_{x\in E}x。
+\]
+\end{definition}
+
+
+
 \begin{exercise}
 \item
 \end{exercise}
