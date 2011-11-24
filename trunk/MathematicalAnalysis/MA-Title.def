@@ -181,6 +181,7 @@
 
 \renewcommand*\thefootnote{\Ding{footnote}}
 \renewcommand*\footnoterule{\kern-3\p@\hrule\@width.45\columnwidth\@height.6\p@\kern2.4\p@}
+
 \newdimen\@footnote@indent
 {\footnotesize\global\@footnote@indent=1.2em}
 \long\def\@makefntext#1{\@setpar{\@@par
@@ -188,6 +189,7 @@
   \parshape\@ne\@footnote@indent\@tempdima}%
   \par\noindent\llap{\makebox[\@footnote@indent][l]{\@thefnmark}}%
   \linespread{1.2}\selectfont\interlinepenalty\z@\CTEXindent#1}
+
 \def\@makefnmark{\raisebox{1ex}[\z@]{\small\@thefnmark}}
 
 \setlength\footnotesep{1.2\footnotesep}
