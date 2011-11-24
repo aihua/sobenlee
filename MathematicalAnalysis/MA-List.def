@@ -4,6 +4,7 @@
 \ProvidesFile{MA-List.def}
 
 \robustify{\ding}
+
 \def\DingNum#1{%
   \ifnum\number#1>10%
     \typeout{The value of input number is \number#1, larger than 10}%
@@ -53,10 +54,40 @@ labelwidth=\widthof{\bfseries\ref{enumLastItem-\theLastItem}},
 \setlist[exlist,3]{label=\prestar\Ding*}
 
 \newlist{enumlist}{enumerate}{3}
-\setlist[enumlist,1]{wide,font=\bfseries,label=(\arabic*)}
+\setlist[enumlist]{wide}
+\setlist[enumlist,1]{format=\bfseries,label=(\arabic*)}
+\setlist[enumlist,2]{label=\Ding*}
+
+\newenvironment{exlistcols}[1][2]{%
+    \def\labelenumi{\prestar(\arabic{enumi})}%
+    \setlabelformat*{enumi}{(\arabic{enumi})}%
+    \listcolsleftmargin=\z@\relax
+    \multienumitems\relax
+    \leftskip=\addleftskip\relax
+    \totalistcolswidth\dimexpr\linewidth/#1\relax
+    \listcolswidth\dimexpr\totalistcolswidth-\labelsep-\labelwidth\relax}%
+  {\endmultienumitems}
+
+\newenvironment{enumlistcols}[1][2]{\CTEXindent
+    \listcolsleftmargin=\parindent\relax
+    \def\labelenumi{\bfseries(\arabic{enumi})}%
+    \setlabelformat*{enumi}{(\arabic{enumi})}%
+    \nohangitemcols\multienumitems\relax
+    \totalistcolswidth\dimexpr\linewidth/#1\relax
+    \listcolswidth\dimexpr\totalistcolswidth-\labelsep-\labelwidth\relax}%
+  {\endmultienumitems}
+
+\newenvironment{exlistcols*}[1][2]{\item[]\relax
+%%    \settowidth\@tempdima{\@itemlabel}%
+    \listcolsleftmargin=\dimexpr-\labelwidth-\labelsep\relax
+    \itemcolsinlist\multienumitems\relax
+    \totalistcolswidth\dimexpr\linewidth/#1\relax
+    \listcolswidth\dimexpr\totalistcolswidth-\labelsep-\labelwidth\relax}%
+  {\endmultienumitems}
 
 \newcommand*\thmitemhspace[1]{\sbox{\@labels}{\unhbox\@labels\kern#1}}
 \newcommand*\fixthmitem[1][-\parindent]{\thmitemhspace{#1}}
+\newcommand*\emphitem[1]{\mbox{\emph*{#1}\kern\ccwd}\ignorespaces}
 
 \newdimen\ori@leftskip
 
@@ -64,7 +95,7 @@ labelwidth=\widthof{\bfseries\ref{enumLastItem-\theLastItem}},
     \ori@leftskip=\leftskip\relax
     \advance\c@secnumdepth-\@m\relax
     \def\subsec@format{\medskip\normalsize\raggedright
-      \ziju{.5}\fzydzhhei\TeXGyreBonum\let~\enspace}%
+      \ziju{.4}\fzydzhhei\TeXGyreBonum\let~\enspace}%
     \subsection{习题~\thesection}\small
     \let\fix@capfontsize\small\relax
     \exlist\relax}%
@@ -75,30 +106,5 @@ labelwidth=\widthof{\bfseries\ref{enumLastItem-\theLastItem}},
     \section{复习题\CTEX@thechapter}
     \exlist\relax}%
   {\endexlist\global\leftskip=\ori@leftskip\relax}
-
-\newenvironment{exlistcols}[1][2]{%
-    \listcolsleftmargin=\addleftskip\relax
-    \def\labelenumi{(\arabic{enumi})}%
-    \setlabelformat*{enumi}{(\arabic{enumi})}%
-    \multienumitems\relax
-    \totalistcolswidth\dimexpr\linewidth/#1\relax
-    \listcolswidth\dimexpr\totalistcolswidth-\labelsep-\labelwidth\relax}%
-  {\endmultienumitems}
-\newenvironment{exlistcols*}{\itemindent\z@\item[]\itemcolsinlist
-    \enumitemcols}%
-  {\endenumitemcols}
-
-\newenvironment{enumlistcols}[1][2]{\CTEXindent
-    \listcolsleftmargin=\parindent\relax
-    \def\labelenumi{\bfseries(\arabic{enumi})}%
-    \setlabelformat*{enumi}{(\arabic{enumi})}%
-    \nohangitemcols
-    \multienumitems\relax
-    \totalistcolswidth\dimexpr\linewidth/#1\relax
-    \listcolswidth\dimexpr\totalistcolswidth-\labelsep-\labelwidth\relax}%
-  {\endmultienumitems}
-\newenvironment{enumlistcols*}{\itemindent\z@\item[]\itemcolsinlist
-    \enumitemcols}%
-  {\endenumitemcols}
 
 \endinput

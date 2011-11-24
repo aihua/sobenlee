@@ -16,10 +16,10 @@
 
 \RequirePackage{XITS}
 \RequirePackage[mtphrb,mtpcal,subscriptcorrection]{mtpro2}
-\RequirePackage[uppi,comma]{localint}
+\RequirePackage[uppi]{localint}
 \RequirePackage{empheq,amsthm,thmtools}
 \RequirePackage{xfrac,siunitx,needspace,varwidth,chngcntr,changepage,environ}
-\RequirePackage{floatrow,caption,wrapfig,floatflt,tabu}
+\RequirePackage{floatrow,caption,wrapfig,tabu}
 \RequirePackage[perpage,stable,bottom]{footmisc}
 \RequirePackage[pagestyles,explicit,clearempty,outermarks]{titlesec}
 \RequirePackage[titlesec]{interfaces}
