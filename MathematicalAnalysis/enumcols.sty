@@ -39,7 +39,6 @@
 \RequirePackage{kvoptions}
 \RequirePackage{etoolbox}
 \RequirePackage{varwidth}
-\RequirePackage{labelformat}
 \RequirePackage{calc}
 
 \SetupKeyvalOptions{family=ecols,prefix=ecols@}
@@ -109,8 +108,17 @@
 
 \def\ecols@refkey@#1*#2\@nil{%
   \def\ecols@reformat{%
-    \setlabelformat*{\@enumctr}{#1{\@enumctr}#2}}%
+    \ecols@ref@format{\@enumctr}{#1{\@enumctr}#2}}%
 }
+
+\let\ecols@save@refstepcounter\refstepcounter
+\def\refstepcounter#1{%
+  \ecols@save@refstepcounter{#1}%
+  \ifcsundef{ecols@ref@the#1}{}{%
+    \protected@edef\@currentlabel{\csuse{ecols@ref@the#1}}%
+  }%
+}
+\def\ecols@ref@format#1#2{\csdef{ecols@ref@the#1}{#2}}
 
 \ECOLS@key{label}{\ecols@labelkey{#1}}
 \ECOLS@key{ref}{\ecols@refkey{#1}}
@@ -149,7 +157,7 @@
 \newtoggle{ecols@toglb}
 
 
-\newbool{ecols@boolarg}
+\newbool{ecols@argbool}
 \newbool{ecols@hyper@load}
 \newbool{ecols@widthitem}
 \newbool{ecols@varwidth@a}
@@ -198,7 +206,7 @@
         \iftoggle{ecols@formatogl}{%
             \def\@itemlabel{\ecols@format\ecols@labelformat}%
             \iftoggle{ecols@reftogl}{}
-              {\setlabelformat*{\@enumctr}{\ecols@labelformat}}%
+              {\ecols@ref@format{\@enumctr}{\ecols@labelformat}}%
         }{%
             \def\@itemlabel{\ecols@format
               \ifbool{ecols@itemize}{\csuse{\@itemitem}}{\csuse{label\@enumctr}}%
@@ -207,16 +215,17 @@
         \ifbool{ecols@itemize}{}
           {\iftoggle{ecols@reftogl}{\ecols@reformat}{}}%
         \settowidth\ecols@labelwidth{\@itemlabel}%
-        \ifbool{ecols@itemize}{\@nmbrlistfalse}
-            {\@nmbrlisttrue\def\@listctr{\@enumctr}}%
-        \ifecols@top
+        \ifbool{ecols@itemize}
+          {\@nmbrlistfalse}
+          {\@nmbrlisttrue\def\@listctr{\@enumctr}}%
+        \ifbool{ecols@top}{%
           \ifbool{ecols@itemize}{%
             \boolfalse{ecols@adjust}%
             \boolfalse{ecols@flushleft}%
           }{%
             \setcounter\@enumctr{\@ne}%
           }%
-          \ifecols@adjust
+          \ifbool{ecols@adjust}{%
             \settowidth\ecols@dima{\@itemlabel}%
             \settowidth\ecols@dimb{\@itemlabel}%
             \ifcsundef{\ecols@currlist}
@@ -224,11 +233,11 @@
               {\setlength\ecols@labelwidth{\csuse{\ecols@currlist}}%
                \toggletrue{ecols@togla}%
                \advance\ecols@dimb-\ecols@labelwidth}%
-          \else
+          }{%
             \settowidth\ecols@labelwidth{\@itemlabel}%
-          \fi
+          }%
             \ifbool{ecols@itemize}{}{\setcounter{\@enumctr}{\z@}}%
-        \fi
+        }{}%
         \leftskip=\ecols@leftskip@l\relax
         \advance\linewidth-\leftskip\relax
         \advance\linewidth-\ecols@itemleftskip@l\relax
@@ -318,7 +327,7 @@
   \@inmatherr\item
   \@ifnextchar[%]
     {\ecols@item}
-    {\@noitemargtrue\booltrue{ecols@boolarg}\ecols@item[\@itemlabel]}%
+    {\@noitemargtrue\booltrue{ecols@argbool}\ecols@item[\@itemlabel]}%
 }
 
 \def\ecols@item[#1]{%
@@ -383,9 +392,9 @@
   \begingroup\ecols@udbox{\@tempboxa}%
   \rightskip\z@skip\relax
   \leftskip\ecols@itemleftskip@l\relax
-  \ifbool{ecols@boolarg}
+  \ifbool{ecols@argbool}
     {%
-      \global\boolfalse{ecols@boolarg}%
+      \global\boolfalse{ecols@argbool}%
       \ifbool{ecols@top}
         {%
           \ifbool{ecols@flushleft}
