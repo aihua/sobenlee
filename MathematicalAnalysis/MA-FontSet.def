@@ -1,130 +1,135 @@
 %# -*- coding: utf-8 -*-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\ProvidesFile{MA-FontSet.def}
-%%
+\def\fileversion{2.0}
+\def\filedate{2010/11/04}
+\ProvidesFile{MA-FontSet.def}[\filedate\space\fileversion]
 \RequireXeTeX
-%%
-\RequirePackage[normalem]{ulem}
-%%
-\setsansfont[BoldFont={MyriadPro-SemiboldSemiCn},ItalicFont={MyriadPro-SemiCnIt}]{MyriadPro-SemiCn}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setsansfont[
+   BoldFont={MyriadPro-SemiboldSemiCn},
+ ItalicFont={MyriadPro-SemiCnIt},
+SlantedFont=*,SlantedFeatures={FakeSlant=.167}] {MyriadPro-SemiCn}
 \setmonofont{Consolas}
 \newfontfamily{\CMRoman}{CMU Serif}
 \newfontfamily{\TeXGyreBonum}[Numbers=Uppercase]{TeXGyreBonum-Regular}
 \def\bfsansfea{\addfontfeature{BoldFont={MyriadPro-BoldSemiCn}}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\setCJKmainfont[BoldFont={FZHei-B01},ItalicFont={FZJKai-Z03S}] {FZJSong-Z01S}
-\setCJKsansfont[BoldFont={FZHei-B01},ItalicFont={FZJKai-Z03S}] {FZZhongDengXian-Z07}
-\setCJKmonofont[BoldFont={FZHei-B01},ItalicFont={FZJKai-Z03S}] {FZFangSong-Z02}
-\setCJKfallbackfamilyfont{\CJKrmdefault}%
-  [BoldFont={FZHei-B01_GB18030},ItalicFont={FZKai-Z03_GB18030}] {FZShuSong-Z01_GB18030}
-\setCJKfallbackfamilyfont{\CJKsfdefault}%
-  [BoldFont={FZHei-B01_GB18030},ItalicFont={FZKai-Z03_GB18030}] {FZZhongDengXian-Z07_GB18030}
-\setCJKfallbackfamilyfont{\CJKttdefault}%
-  [BoldFont={FZHei-B01_GB18030},ItalicFont={FZKai-Z03_GB18030}] {FZFangSong-Z02_GB18030}
+\setCJKmainfont[BoldFont={FZHei-B01},ItalicFont={FZJKai-Z03S},SlantedFont={FZFangSong-Z02}] {FZJSong-Z01S}
+\setCJKsansfont[BoldFont={FZHei-B01},ItalicFont={FZJKai-Z03S},SlantedFont={FZFangSong-Z02}] {FZZhongDengXian-Z07}
+\setCJKmonofont[BoldFont={FZHei-B01},ItalicFont={FZJKai-Z03S},SlantedFont={FZFangSong-Z02}] {FZJKai-Z03S}
+\setCJKfallbackfamilyfont{\CJKrmdefault}
+  [BoldFont={FZHei-B01_GB18030},ItalicFont={FZKai-Z03_GB18030},SlantedFont={FZFangSong-Z02_GB18030}] {FZShuSong-Z01_GB18030}
+\setCJKfallbackfamilyfont{\CJKsfdefault}
+  [BoldFont={FZHei-B01_GB18030},ItalicFont={FZKai-Z03_GB18030},SlantedFont={FZFangSong-Z02_GB18030}] {FZZhongDengXian-Z07_GB18030}
+\setCJKfallbackfamilyfont{\CJKttdefault}
+  [BoldFont={FZHei-B01_GB18030},ItalicFont={FZKai-Z03_GB18030},SlantedFont={FZFangSong-Z02_GB18030}] {FZKai-Z03_GB18030}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\ifcsname ExplSyntaxOn\endcsname
-  \ExplSyntaxOn
-    \let\CStoStr\cs_to_str:N\relax
-  \ExplSyntaxOff
-\else
-  \def\CStoStr#1{%
-    \expandafter\@gobble\detokenize\expandafter{\string#1}}%
-\fi
-\def\newCJKfontfamily{\@ifnextchar[%]
-  {\CJK@newfont@family@}
-  {\CJK@newfont@family}}
-\def\CJK@newfont@family@[#1]#2{\@ifnextchar[%]
-  {\@@CJK@newfont@family[#1]{#2}}
-  {\@@CJK@newfont@family[#1]{#2}[]}}
-\def\@@CJK@newfont@family[#1]#2[#3]#4{
-  \setCJKfamilyfont{#1}[#3]{#4}
-  \DeclareRobustCommand*{#2}{\CJKfamily{#1}}}
-\def\CJK@newfont@family#1{\@ifnextchar[%]
-  {\@CJK@newfont@family{#1}}
-  {\@CJK@newfont@family{#1}[]}}
-\def\@CJK@newfont@family#1[#2]#3{
-  \setCJKfamilyfont{\CStoStr#1}[#2]{#3}
-  \DeclareRobustCommand*{#1}{\CJKfamily{\CStoStr#1}}}
+\ExplSyntaxOn
+\NewDocumentCommand\newCJKfontfamily{o m O{} m}{
+  \IfNoValueTF{#1}
+    {\edef\@CJKfamilyName{\cs_to_str:N #2}}
+    {\edef\@CJKfamilyName{#1}}
+  \setCJKfamilyfont{\@CJKfamilyName}[
+       BoldFont=*, ItalicFont=*, SlantedFont=*,
+       ItalicFeatures={FakeSlant=.167},
+      SlantedFeatures={FakeSlant=.167},#3]{#4}
+  \edef#2{\noexpand\CJKfamily{\@CJKfamilyName}}
+  \robustify{#2}
+}
+\ExplSyntaxOff
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newCJKfontfamily{\songti}         [BoldFont=*] {FZJSong-Z01S}
-\setCJKfallbackfamilyfont{songti}  [BoldFont=*] {FZShuSong-Z01_GB18030}
-\newCJKfontfamily{\kaishu}         [BoldFont=*] {FZJKai-Z03S}
-\setCJKfallbackfamilyfont{kaishu}  [BoldFont=*] {FZKai-Z03_GB18030}
-\newCJKfontfamily{\heiti}          [BoldFont=*] {FZHei-B01}
-\setCJKfallbackfamilyfont{heiti}   [BoldFont=*] {FZHei-B01_GB18030}
-\newCJKfontfamily{\fangsong}       [BoldFont=*] {FZFangSong-Z02}
+\newCJKfontfamily{\songti}        {FZJSong-Z01S}
+\setCJKfallbackfamilyfont{songti} [BoldFont=*] {FZShuSong-Z01_GB18030}
+\newCJKfontfamily{\kaishu}        {FZJKai-Z03S}
+\setCJKfallbackfamilyfont{kaishu} [BoldFont=*] {FZKai-Z03_GB18030}
+\newCJKfontfamily{\heiti}         {FZHei-B01}
+\setCJKfallbackfamilyfont{heiti}  [BoldFont=*] {FZHei-B01_GB18030}
+\newCJKfontfamily{\fangsong}      {FZFangSong-Z02}
 \setCJKfallbackfamilyfont{fangsong}[BoldFont=*] {FZFangSong-Z02_GB18030}
-\newCJKfontfamily{\lishu}          [BoldFont=*] {FZLiShu-S01}
-\newCJKfontfamily{\yuanti}         [BoldFont=*] {FZZhunYuan-M02}
+\newCJKfontfamily{\lishu}         {FZLiShu-S01}
+\newCJKfontfamily{\yuanti}        {FZZhunYuan-M02}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newCJKfontfamily{\MZDF}        [BoldFont=*] {CTZMaoZeDong}                % 草檀斋毛泽东字体
-\newCJKfontfamily{\fzcuheisong} [BoldFont=*] {FZCuHeiSongS-B-GB}           % 方正粗黑宋简体
-\newCJKfontfamily{\fzcusong}    [BoldFont=*] {FZCuSong-B09}                % 方正粗宋
-\newCJKfontfamily{\fzbykans}    [BoldFont=*] {FZBoYaKanSongK}              % 方正博雅刊宋
-\newCJKfontfamily{\fzlthei}     [BoldFont=*] {FZLanTingHei-R-GBK}          % 方正兰亭黑
-\newCJKfontfamily{\fzsonghei}   [BoldFont=*] {FZSongHei-B07_GB18030}       % 方正宋黑
-\newCJKfontfamily{\fzxbsong}    [BoldFont=*] {FZXiaoBiaoSong-B05}          % 方正小标宋
-\newCJKfontfamily{\fzydzhhei}   [BoldFont=*] {FZYunDongHei-M-GBK}          % 方正韵动中黑
-\newCJKfontfamily{\fzzysong}    [BoldFont=*] {FZYaSong-DB-GBK}             % 方正中雅宋
-\newCJKfontfamily{\fzliukai}    [BoldFont=*] {FZSuXinShiLiuKaiS-R-GB}      % 方正苏新诗柳楷简体
-\setCJKfallbackfamilyfont{fzliukai}    [BoldFont=*] {FZQiTi-S14}
-\setCJKfallbackfamilyfont{fzcuheisong} [BoldFont=*] {FZYaSong-DB-GBK}
+\newCJKfontfamily{\MZDF}       {CTZMaoZeDong}                % 草檀斋毛泽东字体
+\newCJKfontfamily{\maokai}     {AR MaoKaiB5 Heavy}           % 文鼎毛楷粗体
+\newCJKfontfamily{\yanti}      {DFYanKai Std W7}             % 华康颜体
+\newCJKfontfamily{\fzcuheisong}{FZCuHeiSongS-B-GB}           % 方正粗黑宋简体
+\newCJKfontfamily{\fzcuyasongb}{FZYaSong-BC-GBK}             % 方正粗雅宋扁
+\newCJKfontfamily{\fzcuyasongc}{FZCuSong-B09}                % 方正粗雅宋长
+\newCJKfontfamily{\fzcusong}   {FZCuSong-B09}                % 方正粗宋
+\newCJKfontfamily{\fzbykans}   {FZBoYaKanSongK}              % 方正博雅刊宋
+\newCJKfontfamily{\fzlthei}    {FZLanTingHei-R-GBK}          % 方正兰亭黑
+\newCJKfontfamily{\fzltheib}   {FZLanTingHei-RC-GBK}         % 方正兰亭黑扁
+\newCJKfontfamily{\fzltzhhei}  {FZLanTingHei-DB-GBK}         % 方正兰亭中黑
+\newCJKfontfamily{\fzsonghei}  {FZSongHei-B07_GB18030}       % 方正宋黑
+\newCJKfontfamily{\fzwkai}     {FZBeiWeiKaiShu-S19_GB18030}  % 方正北魏楷书
+\newCJKfontfamily{\fzydzhhei}  {FZYunDongHei-M-GBK}          % 方正韵动中黑
+\newCJKfontfamily{\fzxbsong}   {FZXiaoBiaoSong-B05}          % 方正小标宋
+\newCJKfontfamily{\fzxian}     {FZZhongDengXian-Z07_GB18030} % 方正中等线
+\newCJKfontfamily{\fzzysong}   {FZYaSong-DB-GBK}             % 方正中雅宋
+\newCJKfontfamily{\fzfangguo}  {FZFangGuo-R-GB}              % 方正仿郭简体
+\newCJKfontfamily{\fzliukai}   {FZSuXinShiLiuKaiS-R-GB}      % 方正苏新诗柳楷简体
+\newCJKfontfamily{\fzqiti}     {FZQiTi-S14}                  % 方正启体
+\setCJKfallbackfamilyfont{fzliukai}   [BoldFont=*] {FZQiTi-S14}
+\setCJKfallbackfamilyfont{fzcuheisong}[BoldFont=*] {FZYaSong-DB-GBK}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\@namedef{xeCJK@kaiming：}{}
-\@namedef{xeCJK@kaiming；}{}
+\csdef{xeCJK@kaiming：}{}
+\csdef{xeCJK@kaiming；}{}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \catcode`。=\active
 \newcommand{。}{\ifmmode\rlap{．}\else ．\fi}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \let\nbs\nobreakspace
-\DeclareRobustCommand*~{\unskip\hskip 0.2em minus 0.05em\ignorespaces}
-\AtBeginDocument{\punctstyle{mixedwidth}}
+\newrobustcmd*~{\unskip\hskip 0.2em minus 0.05em\ignorespaces}
+\AtEndPreamble{\punctstyle{mixedwidth}}
 \CJKsetecglue{}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\appto\bfseries{\boldmath}
+\robustify{\bfseries}
 \let\oriemph\emph
-\edef\test@bf{\bfdefault}
-\DeclareRobustCommand\emphfont{\normalfont\bfseries\boldmath}
+\renewcommand\CJKunderlinecolor{}
+\renewcommand\ULthickness{.8\p@}
+\newrobustcmd*\emphfont{\normalfont\bfseries}
 \DeclareTextFontCommand\@textemph{\emphfont}
-\DeclareRobustCommand\textem[1]{%
-  \ifx\f@series\test@bf\relax
-    \@textemph{\uline{#1}}%
-  \else
-    \@textemph{#1}%
-  \fi}
-\DeclareRobustCommand\emph{\EMPH}
-\def\EMPH{\@ifstar{\@tempem}{\@ifnextchar[{\@@@tempem}{\@@tempem}}}
-\def\@tempem#1{\textem{#1}}
-\def\@@tempem#1{\textem{#1}\index{#1}}
-\def\@@@tempem[#1]#2{\textem{#2}\index{#1}}
+\newrobustcmd\textem[1]{%
+  \ifdefstrequal{\f@series}{\bfdefault}
+    {\@textemph{\CTEXunderline{#1}}}
+    {\@textemph{#1}}%
+}
+\RenewDocumentCommand\emph{s o m}{%
+  \IfBooleanTF{#1}
+    {\textem{#3}}
+    {\IfNoValueTF{#2}
+      {\textem{#3}\index{#3}}
+      {\textem{#3}\index{#2}}%
+     }%
+}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\def\ULthickness{.8\p@}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\renewcommand\normalsize{% 10.5bp
+\renewrobustcmd*\normalsize{% 10.5bp
   \@setfontsize\normalsize{\CTEX@fs@five}{\CTEX@fs@fiveskip}%
-  \abovedisplayskip       .75ex \@plus .2ex \@minus .2ex
-  \abovedisplayshortskip -1.2ex \@plus .6ex \@minus .6ex
-  \belowdisplayskip      \abovedisplayskip
-  \belowdisplayshortskip \abovedisplayskip
+  \abovedisplayskip       .75ex \@plus .2ex \@minus .2ex\relax
+  \abovedisplayshortskip -1.2ex \@plus .6ex \@minus .6ex\relax
+  \belowdisplayskip      \abovedisplayskip\relax
+  \belowdisplayshortskip \abovedisplayskip\relax
   \jot \z@
   \let\@listi\@listI}
 \normalsize
-\renewcommand\small{% 9bp
+\renewrobustcmd*\small{% 9bp
   \@setfontsize\small{\CTEX@fs@sfive}{\CTEX@fs@sfiveskip}%
-  \abovedisplayskip        .6ex \@plus .2ex \@minus .2ex
-  \abovedisplayshortskip -1.5ex \@plus .6ex \@minus .6ex
-  \belowdisplayskip      \abovedisplayskip
-  \belowdisplayshortskip \abovedisplayskip
+  \abovedisplayskip        .6ex \@plus .2ex \@minus .2ex\relax
+  \abovedisplayshortskip -1.5ex \@plus .6ex \@minus .6ex\relax
+  \belowdisplayskip      \abovedisplayskip\relax
+  \belowdisplayshortskip \abovedisplayskip\relax
   \jot \z@
   \def\@listi{\leftmargin\leftmargini
               \topsep 4\p@ \@plus2\p@ \@minus2\p@
               \parsep 2\p@ \@plus\p@ \@minus\p@
               \itemsep \parsep}}
-\renewcommand\footnotesize{% 7.5bp
+\renewrobustcmd*\footnotesize{% 7.5bp
   \@setfontsize\footnotesize{\CTEX@fs@six}{\CTEX@fs@sixskip}%
-  \abovedisplayskip        .5ex \@plus .2ex \@minus .2ex
-  \abovedisplayshortskip -1.5ex \@plus .6ex \@minus .6ex
-  \belowdisplayskip      \abovedisplayskip
-  \belowdisplayshortskip \abovedisplayskip
+  \abovedisplayskip        .5ex \@plus .2ex \@minus .2ex\relax
+  \abovedisplayshortskip -1.5ex \@plus .6ex \@minus .6ex\relax
+  \belowdisplayskip      \abovedisplayskip\relax
+  \belowdisplayshortskip \abovedisplayskip\relax
   \jot \z@
   \def\@listi{\leftmargin\leftmargini
               \topsep 3\p@ \@plus\p@ \@minus\p@

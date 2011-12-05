@@ -91,9 +91,12 @@
   \let\VolumeTOC\relax
   \MakeSumPage}
 
+\newdimen\SumPageMargin
+\SumPageMargin=4\ccwd\relax
+
 \def\MakeSumPage{%
   \clearpage\thispagestyle{empty}%
-  \begin{adjustwidth}{3em}{3em}%
+  \begin{adjustwidth}{\SumPageMargin}{\SumPageMargin}%
     \small\SummaryText\\ \vfill
     \MakeVolInfo
   \end{adjustwidth}%

@@ -103,7 +103,7 @@ postheadspace=\ccwd
     headpunct=,
    notebraces={}{},
      bodyfont=\kaishu,
-   headindent=\z@,
+   headindent=\parindent,
 postheadspace=\ccwd,
           qed={\ensuremath\square}
 ]{ExProof}

@@ -45,7 +45,7 @@
 \begin{example}\label{ex:sec1.1-1}
 在重力作用下，物体从离地面高为~$h$~米处自由下落，不计空气阻力时，下落路程~$s$~与时间~$t$~满足关系式：
 \begin{equation}\label{eq:sec1.1-1}
-  s=\frac12gt^2,\quad 0\leq t\leq\sqrt{\frac{2h}{\smash[b]{g}}}。
+  s=\frac12gt^2\mcond*{0\leq t\leq\sqrt{\frac{2h}{\smash[b]{g}}}}。
 \end{equation}
 \end{example}
 
@@ -55,8 +55,8 @@
 间的依赖关系，即所谓的函数关系。
 
 \begin{example}\label{ex:sec1.1-2}
-气象台用自动记录器画出了当地某一天的气温变化图（\ref{fig:sec1.1-1}），图中纵轴表示气温~$T\,(\si{\degreeCelsius})$，横轴表示时
-间~$t$（小时）。
+气象台用自动记录器画出了当地某一天的气温变化图（\ref{fig:sec1.1-1}），图中纵轴表示气温~$T\mcond[\,]{\si{\degreeCelsius}}$，横
+轴表示时间~$t$（小时）。
 \end{example}
 
 从~$0$~到~$24$~小时内的任一时刻~$t$~的值，根据这条曲线，就可以找出气温~$T$~的唯一确定的值与之对应。这条曲线给
@@ -73,10 +73,10 @@
 由上面例子可以看出，变量间有没有函数关系，在于有没有对应关系，不在于有没有公式或图象。这样，就有函数的如下定义。
 
 \begin{definition}
-给定集合~$X$，若存在某种对应规则~$f$，对于~$X$~中每一元素~$x\in X$，都有实数集~$\FR$~中唯一的元素~$y$~与之对应，则称~$f$~
-是从~$X$~到~$\FR$~的一个\emph{函数}，记作
+给定集合~$X$，若存在某种对应规则~$f$，对于~$X$~中每一元素~$x\in X$，都有实数集~$\mR$~中唯一的元素~$y$~与之对应，则称~$f$~
+是从~$X$~到~$\mR$~的一个\emph{函数}，记作
 \[
-  \map fX\FR。
+  \map fX\mR。
 \]
 函数~$f$~在~$x$~点的值记作~$y=f(x)$，而~$X$~称为函数~$f$~的\emph{定义域}，~$x$~称为\emph{自变量}，~$y$~称为\emph{因变量}。
 \end{definition}
@@ -85,14 +85,14 @@
 \[
   \frac12g(\enspace)^2,
 \]
-即先对自变量作平方运算，然后再乘常数~$g/2$，函数的定义域为闭区间~$\Brack{0,\smsqrt{\sfrac{2h}g}}$；
+即先对自变量作平方运算，然后再乘常数~$\sfrac g2$，函数的定义域为闭区间~$\mbrack{0,\smsqrt{\sfrac{2h}g}}$；
 
 \ref{ex:sec1.1-2}~中对应规则~$f$~为给定的曲线，函数的定义域为~$[0,24]$；
 
 \ref{ex:sec1.1-3}~中对应规则~$f$~为不超过自变数的素数个数，函数的定义域为开区间~$(0,+\infty)$。
 
 函数定义中包含两个要素，对应规则与定义域。对应规则比能求值的公式更为一般，有了能求值的公式当然就有对应规则，但有对应规则
-不一定存在能求值的公式。所以在函数定义中我们只说：“有实数集~$\FR$~中唯一的元素~$y$~与之对应”，而不说“能求出实数~$y$~与
+不一定存在能求值的公式。所以在函数定义中我们只说：“有实数集~$\mR$~中唯一的元素~$y$~与之对应”，而不说“能求出实数~$y$~与
 之对应”。从函数定义来说，没有求定义域的问题，但在习惯上函数往往是通过公式给出的，这时候，使式子有意义的自变量取值范围就
 称为函数的定义域。
 
@@ -100,7 +100,7 @@
 是不同的。例如~$y=\sin x$，无论~$y$~或~$\sin x$~都不能说是~$x$~的函数，而是函数值，函数是~$\sin$。知道函数我们可以确定各点
 的函数值；反之，知道各点的函数值，也就确定了一个函数。比如给定~$y=f(x)$，~$x\in X$，则由它所确定的函数的平方记为~$f^2$，
 \[
-  f^2\colon x\longmapsto\Parenb{f(x)}^2,\quad x\in X。
+  f^2\colon x\longmapsto\mparenb{f(x)}^2\mcond*{x\in X}。
 \]
 
 在分析范围内，除去今后要讲的微分概念及外微分概念之外，我们常把函数与函数值不加区分，函数可以用~$f$，也可以用~$f(x)$~或
@@ -108,14 +108,14 @@
 
 设~$A$~是~$X$~的子集，函数~$f$~在~$X$~上定义，我们称函数
 \[
-  \phi\colon x\longmapsto f(x),\quad x\in A,
+  \phi\colon x\longmapsto f(x)\mcond*{x\in A},
 \]
 为函数~$f$~在~$A$~上的\emph{限制函数}，记作~$f\rest A$；相反，函数~$f$~就称为函数~$\phi$~在~$X$~上的\emph{扩充}或\emph{延拓}。
 
 如果两个对应关系有相同的定义域和相同的对应规则，不管变量采用什么记号，都认为是同一个函数。例如
 \[
-  y=\pi x^2,\enspace x\in[0,+\infty),\qquad
-  A=\pi R^2,\enspace R\in[0,+\infty),
+  y=\pi x^2\mcond*[\enspace]{x\in[0,+\infty)},\qquad
+  A=\pi R^2\mcond*[\enspace]{R\in[0,+\infty)},
 \]
 应认为是同一个函数。
 
@@ -124,14 +124,14 @@
 \[
   f(x)=g(x),
 \]
-则称这两个函数\emph{相等}。例如在~$\FR$~上，函数~$f(x)=2\cos^2x-1$~与~$g(x)=1-2\sin^2x$~是相等的。
+则称这两个函数\emph{相等}。例如在~$\mR$~上，函数~$f(x)=2\cos^2x-1$~与~$g(x)=1-2\sin^2x$~是相等的。
 
 下面再举几个函数的例子。
 
 \begin{example}\label{ex:sec1.1-4}
 绝对值函数
 \[
-  y=\abs x=\begin{rbdcases}
+  y=\mabs x=\begin{rbdcases}
     x, & x\geq 0;\\
    -x, & x<0。
   \end{rbdcases}
@@ -139,18 +139,18 @@
 \end{example}
 
 这个函数的对应规则是：在~$x\geq0$~时按公式~$y=x$~计算函数值；在~$x<0$~时按公式~$y=-x$~计算函数值。从函数定义来看，它是定义
-在~$\FR$~上的一个函数，称为分段定义的函数，而不是两个函数。
+在~$\mR$~上的一个函数，称为分段定义的函数，而不是两个函数。
 
 \begin{example}\label{ex:sec1.1-5}
-取整函数~$y=\Floor x$，记号~$\Floor x$~表示不超过~$x$~的最大整数。
+取整函数~$y=\mfloor x$，记号~$\mfloor x$~表示不超过~$x$~的最大整数。
 \end{example}
 
-当~$x=3.5$~时，$\Floor{3.5}=3$；当~$x=3$~时，$\Floor{3}=3$；当~$x=-3.5$~时，$\Floor{3.5}=-4$。一般有
+当~$x=3.5$~时，$\mfloor{3.5}=3$；当~$x=3$~时，$\mfloor{3}=3$；当~$x=-3.5$~时，$\mfloor{3.5}=-4$。一般有
 \[
-  \Floor x\leq x<\Floor x+1。
+  \mfloor x\leq x<\mfloor x+1。
 \]
 
-这个例子中，事实上我们先给出了对应规则，然后用记号~$\Floor{\enspace}$~表示这一对应规则，记号用熟了以后，也可以说是公式。所
+这个例子中，事实上我们先给出了对应规则，然后用记号~$\mfloor{\enspace}$~表示这一对应规则，记号用熟了以后，也可以说是公式。所
 以，一些最基本的公式，实质上是对应规则的符号表示。例如~$y=\sin x$，是先有角边对应规则，然后引入符号~$\sin$~表示这一对应规则。
 
 \begin{example}\label{ex:sec1.1-6}
@@ -164,13 +164,13 @@
 函数的公式表示法，有它的优缺点。优点是便于计算、便于推理，但缺点是不直观、不形象。而我们考虑的问题，寻找方法时，常常凭借
 函数的直观形象，所以有必要讨论函数的图象表示。
 
-给定~$x\in X$，求出函数值~$f(x)$，以~$x$~为横坐标，以~$f(x)$~为纵坐标，可以画出平面上一点~$\Parenb{x,f(x)}$。然后让点~$x$~
-在定义域~$X$~上变化，相应的点~$\Parenb{x,f(x)}$~就画出平面上一条曲线~$y=f(x)$，这条曲线就称为函数~$f(x)$~的图象。
+给定~$x\in X$，求出函数值~$f(x)$，以~$x$~为横坐标，以~$f(x)$~为纵坐标，可以画出平面上一点~$\mintob x{f(x)}$。然后让点~$x$~
+在定义域~$X$~上变化，相应的点~$\mintob x{f(x)}$~就画出平面上一条曲线~$y=f(x)$，这条曲线就称为函数~$f(x)$~的图象。
 
 \begin{definition}
 称平面上点集
 \[
-  D=\Setb{\Parenb{x,f(x)}}{x\in X}
+  D=\mathsetb{\mintob x{f(x)}}{x\in X}
 \]
 为函数~$f(x)$~的\emph{图象}。
 \end{definition}
@@ -194,15 +194,15 @@
 
 并不是每一个函数的图象都能画出来。比如数学上有名的~Dirichlet~函数，它对人们提高函数概念的认识是有意义的，其定义为：
 \[
-  D(x)=\chi_{_\FQ}(x)\coloneq\begin{cbdcases}
-  1, & x\in\FQ;\\
-  0, & x\in\FR-\FQ.
+  D(x)=\chi_{_{\mQ}}(x)\coloneq\begin{cbdcases}
+  1, & x\in\mQ;\\
+  0, & x\in\mR-\mQ 。
   \end{cbdcases}
 \]
 
 函数也可以解释成变换、映照或映射，它把集合~$X$~中的点，变为集合
 \[
-  \Setb{f(x)}{x\in X}
+  \mathsetb{f(x)}{x\in X}
 \]
 中的点。上述集合称为函数的\emph{值域}，记作~$f(X)$。设点~$x\in X$，称~$y=f(x)$~是~$x$~的\emph{象}，而~$x$~则
 称为~$y$~的\emph{原象}。这时\ref{ex:sec1.1-4}，\ref{ex:sec1.1-5}~和\ref{ex:sec1.1-6}~的函数可分别用\ref{fig:sec1.1-5}，%
@@ -235,39 +235,39 @@
   x+1, & x\leq 1;\\
   x^2,&x>1。\end{cbdcases}
 \]
-求~$f(x)$，~$f\Parenb{f(1)}$。
-\item 设~$f(x)=2x^2+2x-4$。求~$f(1)$，~$f\Parenb{f(1)}$，~$f(x^2)$，~$f^2(x)$，~$f(-x^2)$，~$f(a+b)$，~$f(a)+f(b)$。
+求~$f(x)$，~$f\mparenb{f(1)}$。
+\item 设~$f(x)=2x^2+2x-4$。求~$f(1)$，~$f\mparenb{f(1)}$，~$f(x^2)$，~$f^2(x)$，~$f(-x^2)$，~$f(a+b)$，~$f(a)+f(b)$。
 \item 设~$f(x)=\dfrac{x+2}{x+1}$。
 \begin{exlistcols}
-  \item 求~$f(1)$，~$f\Parenb{f(1)}$，~$f\Parenb{f\Parenb{f(1)}}$；
+  \item 求~$f(1)$，~$f\mparenb{f(1)}$，~$f\mparenb{f\mparenb{f(1)}}$；
   \item 求~$f(\sqrt2)$；
-  \item 证明，对任意~$x>0$，且~$x\neq\sqrt2$，有~$\abs{f^2(x)-2}<\abs{x^2-2}$。
+  \item 证明，对任意~$x>0$，且~$x\neq\sqrt2$，有~$\mabs{f^2(x)-2}<\mabs{x^2-2}$。
 \end{exlistcols}
 \item 确定下列函数的定义域。
 \begin{exlistcols}
   \item $y=\sqrt{\ln\dfrac1{\smash[b]{4}}(5x-x^2)}$；
   \item $y=\dfrac1x-\sqrt{2x^2+5x+3}$；
   \item $y=\sqrt{\cos x^2}$；
-  \item $y=\ln\Paren[\Big]{\sin\dfrac\pi x}$。
+  \item $y=\ln\mparenB{\sin\dfrac\pi x}$。
 \end{exlistcols}
 \item 确定函数~$y=\sqrt{x-x^2}$~的定义域和值域。
 \item 作出下列函数的图象。
 \begin{exlistcols}[3]
-  \item $y=\abs{x-1}$；
-  \item $y=x-\Floor x$；
+  \item $y=\mabs{x-1}$；
+  \item $y=x-\mfloor x$；
   \item $y=\ln(1+x)$；
   \item $y=\ln ax$，~$a=\pm2$；
-  \item $y=3\sin2\Paren[\Big]{x+\dfrac\pi8}$；
-  \item $y=3\sin\Paren[\Big]{2x+\dfrac\pi8}$。
+  \item $y=3\sin2\mparenB{x+\dfrac\pi8}$；
+  \item $y=3\sin\mparenB{2x+\dfrac\pi8}$。
 \end{exlistcols}
-\item 作出函数~$y=\abs{x-a}+\dfrac12\abs{x-b}$~的图象，其中~$a<b$。
+\item 作出函数~$y=\mabs{x-a}+\dfrac12\mabs{x-b}$~的图象，其中~$a<b$。
 \item 设~$f(x)$~如\ref{fig:sec1.1-ex1}~所示，试写出其表达式，并作出下列函数的图象。
 \begin{exlistcols}[3]
   \item $y=f(-x)$；
   \item $y=-f(x)$；
-  \item $y=\abs{f(x)}$；
-  \item $y=f(\abs x)$；
-  \item $y=f\Paren[\Big]{\dfrac x2}$；
+  \item $y=\mabs{f(x)}$；
+  \item $y=f(\mabs x)$；
+  \item $y=f\mparenB{\dfrac x2}$；
   \item $y=f(2x)$。
 \end{exlistcols}
 \item 某水渠的横断面是一个等腰梯形（见\ref{fig:sec1.1-ex2}），底宽~$2$~米，坡度为~$1:1$~（即倾角
@@ -283,7 +283,7 @@
 \end{figure}
 
 \item 一窗户（见\ref{fig:sec1.1-ex3}）下面为矩形，上面为半圆形，周长为~$\ell$，试将窗户的面积表示成底边~$x$~的函数。
-\item 梯形如\ref{fig:sec1.1-ex4}~所示，当一垂直于~$x$~轴的直线扫过该梯形时，若直线的垂足为~$x\,(x\in\FR)$，试将扫过面
+\item 梯形如\ref{fig:sec1.1-ex4}~所示，当一垂直于~$x$~轴的直线扫过该梯形时，若直线的垂足为~$x\mcond{x\in\mR}$，试将扫过面
 积表示为~$x$~的函数。
 \end{exercise}
 
@@ -303,11 +303,11 @@ f(-x)=f(x),
 \end{equation}
 则称~$f(x)$~是\emph{偶函数}。
 
-奇函数的图象是关于原点对称的。因为由~\ref{eq:sec2.1-1}，若~$\Parenb{x,f(x)}$~在图象上，则它的关于原点对称的
-点~$\Parenb{-x,-f(x)}=\Parenb{-x,f(-x)}$~也在图象上（见\ref{fig:sec1.2-8}）。
+奇函数的图象是关于原点对称的。因为由~\ref{eq:sec2.1-1}，若~$\mintob{x}{f(x)}$~在图象上，则它的关于原点对称的
+点~$\mintob{-x}{-f(x)}=\mintob{-x}{f(-x)}$~也在图象上（见\ref{fig:sec1.2-8}）。
 
-偶函数的图象是关于~$y$~轴对称的。因为由~\ref{eq:sec2.1-2}，若~$\Parenb{x,f(x)}$~在图象上，则它的关于~$y$~轴对称的
-点~$\Parenb{-x,f(x)}=\Parenb{-x,f(-x)}$~也在图象上（见\ref{fig:sec1.2-9}）。
+偶函数的图象是关于~$y$~轴对称的。因为由~\ref{eq:sec2.1-2}，若~$\mintob{x}{f(x)}$~在图象上，则它的关于~$y$~轴对称的
+点~$\mintob{-x}{f(x)}=\mintob{-x}{f(-x)}$~也在图象上（见\ref{fig:sec1.2-9}）。
 
 \begin{figure}\figureboxsep{5}
 \begin{floatrow}[2]
@@ -324,20 +324,20 @@ f(-x)=f(x),
 
 设函数~$f(x)$~在区间~$X$~上有定义，若对任意~$x_1,x_2\in X$，且~$x_1<x_2$~时，有
 \[
-  f(x_1)\leq f(x_2)\quad\Parenb{f(x_1)\geq f(x_2)},
+  f(x_1)\leq f(x_2)\quad\mparenb{f(x_1)\geq f(x_2)},
 \]
 则称~$f(x)$~在此区间上\emph{单调上升}或\emph{单调递增}（\emph{单调下降}或\emph{单调递减}）。
 
 又若~$x_1<x_2$~时，有
 \[
-  f(x_1)<f(x_2)\quad\Parenb{f(x_1)>f(x_2)},
+  f(x_1)<f(x_2)\quad\mparenb{f(x_1)>f(x_2)},
 \]
 则称~$f(x)$~在此区间上\emph{严格单调上升}或\emph{严格单调递增}（\emph{严格单调下降}或\emph{严格单调递减}）。
 
 上述函数统称为\emph{单调函数}。
 
-例如~$y=x^2$~在~$(0,+\infty)$~上严格单调上升，在~$(-\infty,0)$~上严格单调下降；$y=x^3$~在~$\FR$~上严格单调上升；%
-$y=\Floor x$~在~$\FR$~上单调上升。
+例如~$y=x^2$~在~$\minto 0{+\infty}$~上严格单调上升，在~$\minto{-\infty}0$~上严格单调下降；$y=x^3$~在~$\mR$~上严格单调上升；%
+$y=\mfloor x$~在~$\mR$~上单调上升。
 
 \subsection{函数的有界性}
 
@@ -349,21 +349,21 @@ $y=\Floor x$~在~$\FR$~上单调上升。
 
 设函数~$f(x)$~在~$X$~上有定义，若存在~$M>0$，使得对于任意~$x\in X$，都有
 \[
-  \abs{f(x)}\leq M,
+  \mabs{f(x)}\leq M,
 \]
 则称函数~$f(x)$~在~$X$~上是\emph{有界}的。
 
-例如~$y=\sin x$~在~$\FR$~上是有界的，因为取~$M=1$，对任意~$x\in\FR$，都有~$\abs{\sin x}\leq1$。
+例如~$y=\sin x$~在~$\mR$~上是有界的，因为取~$M=1$，对任意~$x\in\mR$，都有~$\mabs{\sin x}\leq1$。
 
 函数在~$X$~上有界，从几何上看，即它的图象（见\ref{fig:sec1.2-10}）位于直线~$y=-M$~与~$y=M$~之间。那么函数~$f(x)$~在~$X$~上
 无界，即找不到直线~$y=M$~和~$y=-M$，使曲线全部落在两直线之间。这么说不好检验，为了便于检验，我们不妨换一种方式来说：函
 数~$f(x)$~在~$X$~上无界，即任意取直线~$y=M$~和~$y=-M$，曲线不全落在两直线之间（若曲线全落在两直线之间，必然导致函数有界），%
-而曲线不全落在两直线之间，意味着总有一点落在两直线之外。%%可用符号表示为，存在~$x'\in X$，使得~$\abs{f(x')}>M$。
+而曲线不全落在两直线之间，意味着总有一点落在两直线之外。%%可用符号表示为，存在~$x'\in X$，使得~$\mabs{f(x')}>M$。
 于是，我们就得到了函数~$f(x)$~在~$X$~上无界的定义：
 
 设函数~$f(x)$~在~$X$~上有定义，若对于任意~$M>0$，都存在~$x'\in X$，使得
 \[
-  \abs{f(x')}>M,
+  \mabs{f(x')}>M,
 \]
 则称函数~$f(x)$~在~$X$~上是\emph{无界}的。
 
@@ -377,7 +377,7 @@ $y=\Floor x$~在~$\FR$~上单调上升。
 
 \subsection{函数的周期性}
 
-设函数~$f(x)$~在~$\FR$~上有定义，若存在~$\ell>0$，使得对任意~$x\in\FR$，都有
+设函数~$f(x)$~在~$\mR$~上有定义，若存在~$\ell>0$，使得对任意~$x\in\mR$，都有
 \[
   f(x+\ell)=f(x),
 \]
@@ -385,7 +385,7 @@ $y=\Floor x$~在~$\FR$~上单调上升。
 
 显然周期函数有无穷多个周期。假如~$\ell$~是函数的周期，则有
 \[
-  f(x+2\ell)=f\Parenb{(x+\ell)+\ell}=f(x+\ell)=f(x),
+  f(x+2\ell)=f\mparenb{(x+\ell)+\ell}=f(x+\ell)=f(x),
 \]
 所以~$2\ell$~也是~$f(x)$~的周期。一般地，有
 \[
@@ -402,7 +402,7 @@ $y=\Floor x$~在~$\FR$~上单调上升。
 
 不在整个实轴上定义的函数，也可以讨论它的周期性。比如正切函数~$t=\tan x$~的定义域为实轴除去点
 \[
-  x=\Paren[\Big]{k+\frac12}\pi,\quad k=0,\pm1,\pm2,\dotsc,
+  x=\mparenB{k+\frac12}\pi\mcond*{k=0,\pm1,\pm2,\dotsc},
 \]
 同样可以讨论它的周期性。因为
 \[
@@ -422,9 +422,9 @@ $y=\Floor x$~在~$\FR$~上单调上升。
 \begin{exercise}
 \item 对下列函数
 \begin{exlistcols}[3]
-  \item $y=\abs{\sin x}$；
-  \item $y=x-\Floor x$；
-  \item $y=\tan\abs x$；
+  \item $y=\mabs{\sin x}$；
+  \item $y=x-\mfloor x$；
+  \item $y=\tan\mabs x$；
   \item $y=\sec 2x$；
   \item $y=\cos x+\sin x$；
   \item $y=\sqrt{x(2-x)}$，
@@ -436,22 +436,22 @@ $y=\Floor x$~在~$\FR$~上单调上升。
   \item 函数的周期性；
   \item 作出函数的图象。
 \end{exlistcols}
-\item 证明~$y=\ln\Parenb{x+\sqrt{1+x^2}}$~在~$\FR$~上是奇函数，且严格单调上升。
-\item 设~$f(x)$~在~$\FR$~上为奇函数，且在~$[0,+\infty)$~上严格单调上升，证明~$f(x)$~在~$\FR$~上严格单调上升。
-\item 设~$f(x)=\sqrt x\,(0\leq x<1)$。
+\item 证明~$y=\ln\mparenb{x+\sqrt{1+x^2}}$~在~$\mR$~上是奇函数，且严格单调上升。
+\item 设~$f(x)$~在~$\mR$~上为奇函数，且在~$[0,+\infty)$~上严格单调上升，证明~$f(x)$~在~$\mR$~上严格单调上升。
+\item 设~$f(x)=\sqrt x\mcond{0\leq x<1}$。
 \begin{exlist}
   \item 将~$f(x)$~延拓到~$(-1,1)$~上，使其成为偶函数；
-  \item 将~$f(x)$~延拓到~$\FR$~上，使其成为周期为~$1$~的周期函数。
+  \item 将~$f(x)$~延拓到~$\mR$~上，使其成为周期为~$1$~的周期函数。
 \end{exlist}
 \item 设~$f(x)$~在~$[0,a)$~上有定义，这里~$a>0$。
 \begin{exlist}
   \item 将~$f(x)$~延拓到~$(-a,a)$，使其成为偶函数；
-  \item 将~$f(x)$~延拓到~$\FR$~上，使其成为周期为~$a$~的周期函数。
+  \item 将~$f(x)$~延拓到~$\mR$~上，使其成为周期为~$a$~的周期函数。
 \end{exlist}
 \item 证明，两个奇函数之积为偶函数，而奇函数与偶函数之积为奇函数。
-\item 证明，任一在~$\FR$~上定义的函数都可分解为奇函数与偶函数之和。
-\item 设~$f(x)$~是周期为~$T\,(T>0)$~的周期函数，证明，~$f(-x)$~也是周期为~$T$~的周期函数。
-\item 设~$f(x),g(x)$~为~$\FR$~上的单调函数，证明，~$f\Parenb{g(x)}$~也是~$\FR$~上的单调函数。
+\item 证明，任一在~$\mR$~上定义的函数都可分解为奇函数与偶函数之和。
+\item 设~$f(x)$~是周期为~$T\mcond{T>0}$~的周期函数，证明，~$f(-x)$~也是周期为~$T$~的周期函数。
+\item 设~$f(x),g(x)$~为~$\mR$~上的单调函数，证明，~$f\mparenb{g(x)}$~也是~$\mR$~上的单调函数。
 \item 设~$f(x)$~在~$(0,+\infty)$~上定义，$x_1,x_2>0$。证明，
 \begin{exlist}
   \item 若~$\dfrac{f(x)}x$~单调下降，则~$f(x_1+x_2)\leq f(x_1)+f(x_2)$；
@@ -462,8 +462,8 @@ $y=\Floor x$~在~$\FR$~上单调上升。
   \item $(x_1+x_2)^p\leq x_1^p+x_2^p$，~$0<p\leq1$；
   \item $(x_1+x_2)^p\geq x_1^p+x_2^p$，~$p>1$。
 \end{exlistcols}
-\item 设~$f(x),g(x)$~在~$(a,b)$~上单调上升。证明，~$\max\Braceb{f(x),g(x)}$~和~$\min\Braceb{f(x),g(x)}$~也在~$(a,b)$~上单调上升。
-\item 用肯定语气叙述，在~$\FR$~上，
+\item 设~$f(x),g(x)$~在~$(a,b)$~上单调上升。证明，~$\max\mrange{f(x)}{g(x)}$~和~$\min\mintob{f(x)}{g(x)}$~也在~$(a,b)$~上单调上升。
+\item 用肯定语气叙述，在~$\mR$~上，
 \begin{exlistcols}
   \item $f(x)$~不是奇函数；
   \item $f(x)$~不是周期函数；
@@ -486,7 +486,7 @@ $y=\Floor x$~在~$\FR$~上单调上升。
 
 设~$f(x),g(x)$~在~$X$~上定义，则
 \[
-  f(x)\pm g(x),\quad f(x)\cdot g(x),\quad\frac{f(x)}{g(x)}\,\Parenb{g(x)\neq0}
+  f(x)\pm g(x),\quad f(x)\cdot g(x),\quad\frac{f(x)}{g(x)}\;\mparenb{g(x)\neq0}
 \]
 也是~$X$~上的函数。四则运算没有什么新的内容，需要讨论的是复合函数与反函数。
 
@@ -502,7 +502,7 @@ $y=\Floor x$~在~$\FR$~上单调上升。
 \begin{definition}
 设函数~$y=f(u)$~的定义域包含函数~$u=g(x)$~的值域，则在函数~$g(x)$~的定义域~$X$~上可以确定一个函数
 \[
-  y=f\Parenb{g(x)},
+  y=f\mparenb{g(x)},
 \]
 称为~$g$~与~$f$~的\emph{复合函数}，有时也记作~$f\comp g$。
 \end{definition}
@@ -511,7 +511,7 @@ $y=\Floor x$~在~$\FR$~上单调上升。
 就建立起自变量~$x$~与因变量~$y$~之间的对应规则~$f\comp g$。
 
 我们知道，函数概念中主要是对应规则、定义域和值域。至于自变量和因变量采用什么记号是无关紧要的。所以只要~$f(x)$~的定义域包
-含~$g(x)$~的值域，就可以讨论复合函数~$f\Parenb{g(x)}$。
+含~$g(x)$~的值域，就可以讨论复合函数~$f\mparenb{g(x)}$。
 
 若函数~$f(x)$~的定义域包含~$g(x)$~的值域，并且函数~$g(x)$~的定义域包含~$f(x)$~的值域，那么复合函数~$f\comp g$~与~$g\comp f$~存
 在。一般来说，
@@ -620,13 +620,13 @@ $y=\Floor x$~在~$\FR$~上单调上升。
 需要指出的是，变量记号不是本质的，我们可以把~$x=f^{-1}(y)$，$y\in Y$，称为~$y=f(x)$~的反函数，同样，我们也可以把
 ~$y=f^{-1}(x)$，$x\in Y$，称为函数~$y=f(x)$~的反函数。
 
-反函数还有另一种定义，正如实数~$a$~的倒数有两种定义（一种是：$a\neq0$，称~$\sfrac 1a$~为~$a$~的倒数；令一种是：若存在~$b\in\FR$，%
+反函数还有另一种定义，正如实数~$a$~的倒数有两种定义（一种是：$a\neq0$，称~$\sfrac 1a$~为~$a$~的倒数；令一种是：若存在~$b\in\mR$，%
 使得~$a\cdot b=1$，则称~$b$~为~$a$~的倒数）一样，反函数也可以用复合函数来定义。我们把它写成定理。
 
 \begin{theorem}
 给定函数~$y=f(x)$，其定义域和值域分别记作~$X$~和~$Y$，若在集合~$Y$~上存在函数~$g(y)$，满足对任意~$x\in X$，都有
 \[
-  g\Parenb{f(x)}=x,
+  g\mparenb{f(x)}=x,
 \]
 则对任意~$y\in Y$，有
 \[
@@ -638,7 +638,7 @@ $y=\Floor x$~在~$\FR$~上单调上升。
 
 先证明反函数存在，即要证~$f(x)$~在~$X$~上是一一对应的。事实上，对于任意~$x_1,\allowbreak x_2\in X$，若~$f(x_1)=f(x_2)$，由定理条件
 \[
-  g\Parenb{f(x_1)}=x_1,\quad g\Parenb{f(x_2)}=x_2。
+  g\mparenb{f(x_1)}=x_1,\quad g\mparenb{f(x_2)}=x_2。
 \]
 由于函数~$g(y)$~在同一点的函数值应相同，因此~$x_1=x_2$，这就确保了函数~$f(x)$~在~$X$~上是一一对应的。
 
@@ -652,7 +652,7 @@ $y=\Floor x$~在~$\FR$~上单调上升。
 \]
 又由定理条件可知
 \[
-  g(y)=g\Parenb{f(x)}=x,
+  g(y)=g\mparenb{f(x)}=x,
 \]
 结合以上两式，即可得到
 \[
@@ -661,21 +661,21 @@ $y=\Floor x$~在~$\FR$~上单调上升。
 \end{proof}
 
 \begin{exercise}
-\item 设~$f(x)=\dfrac{1-x}{1+x}$，证明，$f\Parenb{f(x)}=x$。
-\item 设~$f(x)=\dfrac{ax+b}{cx+d}$，确定~$f\Parenb{f(x)}=x$~的条件。
+\item 设~$f(x)=\dfrac{1-x}{1+x}$，证明，$f\mparenb{f(x)}=x$。
+\item 设~$f(x)=\dfrac{ax+b}{cx+d}$，确定~$f\mparenb{f(x)}=x$~的条件。
 \item 确定下列函数的反函数及其定义域。
 \begin{exlistcols}
-  \item $\dps y=\frac12\Paren[\Big]{x-\frac 1x}$，\enspace$x\in(0,+\infty)$；
-  \item $y=\dfrac12\Parenb{\me^x-\me^{-x}}$，\enspace$x\in\FR$。
+  \item $\dps y=\frac12\mparenB{x-\frac 1x}\mcond*[\enspace]{x\in(0,+\infty)}$；
+  \item $y=\dfrac12\mparenb{\me^x-\me^{-x}}\mcond*[\enspace]{x\in\mR}$。
 \end{exlistcols}
-\item 在下列指定定义域上确定函数~$\dps y=\frac12\Paren[\Big]{x+\frac1x}$~的反函数。
+\item 在下列指定定义域上确定函数~$\dps y=\frac12\mparenB{x+\frac1x}$~的反函数。
 \begin{exlistcols}
-  \item $0<\abs x<1$；
-  \item $\abs x>1$。
+  \item $0<\mabs x<1$；
+  \item $\mabs x>1$。
 \end{exlistcols}
 \item 若~$f(x)$~是一一对应的奇函数，证明其反函数也是奇函数。
-\item 讨论函数~$y=x-\e\sin x\,(0<\e<1)$~的反函数的存在性。
-\item 设~$f(x)=\arccos x$，而~$g(x)=\sin x$。确定复合函数~$f\Parenb{g(x)}$~和~$g\Parenb{f(x)}$~的定义域和值域，并作出它们的图象。
+\item 讨论函数~$y=x-\e\sin x\mcond{0<\e<1}$~的反函数的存在性。
+\item 设~$f(x)=\arccos x$，而~$g(x)=\sin x$。确定复合函数~$f\mparenb{g(x)}$~和~$g\mparenb{f(x)}$~的定义域和值域，并作出它们的图象。
 \item 设
 \[
   f(x)=\begin{cbdcases}
@@ -684,19 +684,19 @@ $y=\Floor x$~在~$\FR$~上单调上升。
   \end{cbdcases}\qquad
   g(x)=\begin{cbdcases}
     x,    & x\leq0;\\
-    -x^2, & x>0。
+    \cramped{-x^2}, & x>0。
   \end{cbdcases}
 \]
-确定复合函数~$f\Parenb{g(x)}$~和~$g\Parenb{f(x)}$。
+确定复合函数~$f\mparenb{g(x)}$~和~$g\mparenb{f(x)}$。
 \item 设~$f(x)=\dfrac x{\sqrt{1+x^2}}$，确定~$n$~次复合函数~$(f\comp f\comp\dotsb\comp f)(x)$。
-\item 设~$f(x)=\abs{1+x}-\abs{1-x}$，确定~$n$~次复合函数~$(f\comp f\comp\dotsb\comp f)(x)$。
-\item 若~$f(x)$~在~$\FR$~上定义，且~$f\Parenb{f(x)}\equiv x$。
+\item 设~$f(x)=\mabs{1+x}-\mabs{1-x}$，确定~$n$~次复合函数~$(f\comp f\comp\dotsb\comp f)(x)$。
+\item 若~$f(x)$~在~$\mR$~上定义，且~$f\mparenb{f(x)}\equiv x$。
 \begin{exlistcols}
   \item 确定这种函数的数量；
-  \item 在要求~$f(x)$~在~$\FR$~上严格上升的条件下，重新确定这种函数的数量。
+  \item 在要求~$f(x)$~在~$\mR$~上严格上升的条件下，重新确定这种函数的数量。
 \end{exlistcols}
 \item 若~$f(x),g(x)$~可以按两种顺序复合，且~$f\comp g=g\comp f$，判断并说明~$f$~与~$g$~是否互为反函数。
-\item 设函数~$y=f(x)$~的定义域为~$X$，值域为~$Y$，函数~$z=g(y)$~的定义域为~$Y$，值域为~$Z$。证明，函数~$z=g\Parenb{f(x)}$~有
+\item 设函数~$y=f(x)$~的定义域为~$X$，值域为~$Y$，函数~$z=g(y)$~的定义域为~$Y$，值域为~$Z$。证明，函数~$z=g\mparenb{f(x)}$~有
 反函数当且仅当~$f(x)$~和~$g(y)$~都有反函数，且~$(g\comp f)^{-1}=f^{-1}\comp g^{-1}$。
 \end{exercise}
 
@@ -710,11 +710,11 @@ $y=\Floor x$~在~$\FR$~上单调上升。
 
 \subsubsection{常数函数}
 
-常数函数~$y=C\,(x\in\FR)$~的图象是通过~$(0,C)$~点，且平行于~$x$~轴的直线（见\ref{fig:sec1.2-15}）。
+常数函数~$y=C\mcond{x\in\mR}$~的图象是通过~$(0,C)$~点，且平行于~$x$~轴的直线（见\ref{fig:sec1.2-15}）。
 
 \subsubsection{幂函数}
 
-\ref{fig:sec1.2-16}~是幂函数~$y=x^\alpha\,(0<x<+\infty,\alpha\neq0)$~的图象。
+\ref{fig:sec1.2-16}~是幂函数~$y=x^\alpha\mcond[,]{0<x<+\infty,\alpha\neq0}$~的图象。
 
 当~$\alpha>0$~时，函数~$y=x^\alpha$~在~$(0,+\infty)$~上严格上升；而当~$\alpha<0$~时，函
 数~$y=x^\alpha$~在~$(0,+\infty)$~上严格下降。
@@ -733,13 +733,13 @@ $y=\Floor x$~在~$\FR$~上单调上升。
 
 \subsubsection{指数函数}
 
-\ref{fig:sec1.2-17}~是指数函数~$y=a^x\,(a>0,a\neq1)$~的图象。
+\ref{fig:sec1.2-17}~是指数函数~$y=a^x\mcond[,]{a>0,a\neq1}$~的图象。
 
-当~$a>1$~时，函数~$y=a^x$~在~$\FR$~上严格上升；而当~$a<1$~时，函数~$y=a^x$~在~$\FR$~上严格下降。
+当~$a>1$~时，函数~$y=a^x$~在~$\mR$~上严格上升；而当~$a<1$~时，函数~$y=a^x$~在~$\mR$~上严格下降。
 
 \subsubsection{对数函数}
 
-\ref{fig:sec1.2-18}~是对数函数~$y=\log_ax\,(a>0,a\neq1,0<x<+\infty)$~的图象。
+\ref{fig:sec1.2-18}~是对数函数~$y=\log_ax\mcond{a>0,a\neq1,0<x<+\infty}$~的图象。
 
 当~$a>1$~时~$y=\log_ax$~在~$(0,+\infty)$~上严格上升；而当~$a<1$~时，函数~$y=\log_ax$~在~$(0,+\infty)$~上严格下降。
 
@@ -747,10 +747,10 @@ $y=\Floor x$~在~$\FR$~上单调上升。
 
 \subsubsection{三角函数}
 
-\ref{fig:sec1.2-19}~是正弦函数~$y=\sin x\,(x\in\FR)$~的图象，余弦函数~$y=\cos x\,(x\in\FR)$~的图象为\ref{fig:sec1.2-20}。%
+\ref{fig:sec1.2-19}~是正弦函数~$y=\sin x\mcond{x\in\mR}$~的图象，余弦函数~$y=\cos x\mcond{x\in\mR}$~的图象为\ref{fig:sec1.2-20}。%
 
-正切函数~$y=\tan x\,\Parenb{x\neq (k+\sfrac12)\pi,k=0,\pm1,\pm2,\dotsc}$~的图象为\ref{fig:sec1.2-21}，而\ref{fig:sec1.2-22}~是
-余切函数~$y=\cot x\,(x\neq k\pi,k=0,\pm1,\pm2,\dotsc)$~的图象。
+正切函数~$y=\tan x\,\mparenb{x\neq (k+\sfrac12)\pi,k=0,\pm1,\pm2,\dotsc}$~的图象为\ref{fig:sec1.2-21}，而\ref{fig:sec1.2-22}~是
+余切函数~$y=\cot x\mcond{x\neq k\pi,k=0,\pm1,\pm2,\dotsc}$~的图象。
 
 \begin{figure}\RawFloats
 \begin{tabu}{*2{X[mc]}F}
@@ -764,15 +764,15 @@ $y=\Floor x$~在~$\FR$~上单调上升。
 \subsubsection{反三角函数}
 
 反三角函数不是一一对应的，为了讨论反函数，我们需要取定一个严格单调分支。对于正弦函数，我们
-取~$\Brack[\Big]{-\dfrac\pi2,\dfrac\pi2}$~上这一严格上升分支；对于余弦函数，我们取~$[0,\pi]$~上这一严格下降分支；对于正切函数，%
-取~$\Paren[\Big]{-\dfrac\pi2,\dfrac\pi2}$~上这一严格上升分支；对于余切函数，取~$(0,\pi)$~上这一严格下降分支。每个分支都是
+取~$\mintcB{-\dfrac\pi2}{\dfrac\pi2}$~上这一严格上升分支；对于余弦函数，我们取~$[0,\pi]$~上这一严格下降分支；对于正切函数，%
+取~$\mintoB{-\dfrac\pi2}{\dfrac\pi2}$~上这一严格上升分支；对于余切函数，取~$(0,\pi)$~上这一严格下降分支。每个分支都是
 一一对应的函数，所以保证了反函数存在。
 
-反正弦函数~$y=\arcsin x\Paren[\Big]{x\in[-1,1],-\dfrac\pi2\leq y\leq\dfrac\pi2}$~的图象为\ref{fig:sec1.2-23}；%
-反余弦函数~$y=\arccos x\Parenb{x\in[-1,1],0\leq y\leq\pi}$~的图象为\ref{fig:sec1.2-24}。
+反正弦函数~$y=\arcsin x\;\mparenB{x\in[-1,1],-\dfrac\pi2\leq y\leq\dfrac\pi2}$~的图象为\ref{fig:sec1.2-23}；%
+反余弦函数~$y=\arccos x\;\mparenb{x\in[-1,1],0\leq y\leq\pi}$~的图象为\ref{fig:sec1.2-24}。
 
-反正切函数~$y=\arctan x\Paren[\Big]{x\in\FR,-\dfrac\pi2<y<\dfrac\pi2}$~的图象为\ref{fig:sec1.2-25}；%
-反余切函数~$y=\arccot x\Paren[\Big]{x\in\FR,0<y<\pi}$~的图象为\ref{fig:sec1.2-26}。
+反正切函数~$y=\arctan x\;\mparenB{x\in\mR,-\dfrac\pi2<y<\dfrac\pi2}$~的图象为\ref{fig:sec1.2-25}；%
+反余切函数~$y=\arccot x\;\mparenB{x\in\mR,0<y<\pi}$~的图象为\ref{fig:sec1.2-26}。
 
 \begin{figure}\RawFloats
 \begin{tabu}{*2{X[mc]}F}
@@ -807,11 +807,11 @@ $y=\Floor x$~在~$\FR$~上单调上升。
 \end{figure}
 
 \begin{example}
-作出函数~$y=\sin\Paren[\Big]{x+\dfrac\pi4}$~的图象。
+作出函数~$y=\sin\mparenB{x+\dfrac\pi4}$~的图象。
 \end{example}
 \begin{solution}
-把这个函数与~$y=\sin x$~比较，发现这两个函数振幅相同，周期也相同，而函数~$y=\sin\Paren[\Big]{x+\dfrac\pi4}$~在~$x=-\dfrac\pi4$~处
-的值正好等于函数~$y=\sin x$~在~$x=0$~处的值，所以函数~$y=\sin\Paren[\Big]{x+\dfrac\pi4}$~的图象，可以由函数~$y=\sin x$~的
+把这个函数与~$y=\sin x$~比较，发现这两个函数振幅相同，周期也相同，而函数~$y=\sin\mparenB{x+\dfrac\pi4}$~在~$x=-\dfrac\pi4$~处
+的值正好等于函数~$y=\sin x$~在~$x=0$~处的值，所以函数~$y=\sin\mparenB{x+\dfrac\pi4}$~的图象，可以由函数~$y=\sin x$~的
 图象往左平移~$\dfrac\pi4$~个单位而得到（见\ref{fig:sec1.2-29}）。
 \end{solution}
 
@@ -824,13 +824,13 @@ $y=\Floor x$~在~$\FR$~上单调上升。
 若结论对~$k=0,1,\dotsc,n-1$~已成立，要证~$k=n$~时也成立。由恒等式
 \begin{align*}
 y_n+y_{n+2}
-&=\cos(n\arccos x)+\cos\Parenb{(n-2)\arccos x}\\
-&=2\cos\Parenb{(n-1)\arccos x}\cos(\arccos x)\\
+&=\cos(n\arccos x)+\cos\mparenb{(n-2)\arccos x}\\
+&=2\cos\mparenb{(n-1)\arccos x}\cos(\arccos x)\\
 &=2x\cdot y_{n-1}
 \end{align*}
 由此可得
 \[
-  y_n=2x\cdot y_{n-1}-y_{n-2},\quad n\geq2，
+  y_n=2x\cdot y_{n-1}-y_{n-2}\mcond*{n\geq2}。
 \]
 由归纳假设，$y_{n-1}$~和~$y_{n-2}$~分别为~$n-1$~次和~$n-2$~次代数多项式，所以~$y_n$~是~$n$~次代数多项式。
 \end{proof}
@@ -838,12 +838,12 @@ y_n+y_{n+2}
 \ref{ex:sec1.3-4}~中多项式~$y_n$~称为~\emph{Чебышёв~多项式}。
 
 \begin{example}
-设~$f(x)=\arctan x$，~$g(x)=\tan x$，确定复合函数~$f\Paren{g(x)}$~与~$g\Paren{f(x)}$，并作出它们的图象。
+设~$f(x)=\arctan x$，~$g(x)=\tan x$，确定复合函数~$f\mparen{g(x)}$~与~$g\mparen{f(x)}$，并作出它们的图象。
 \end{example}
 \begin{proof}
-当~$g(x)$~在~$f$~的值域~$\Paren[\Big]{-\dfrac\pi2,\dfrac\pi2}$~上考虑时，$g$~与~$f$~互为反函数，所以
+当~$g(x)$~在~$f$~的值域~$\mintoB{-\dfrac\pi2}{\dfrac\pi2}$~上考虑时，$g$~与~$f$~互为反函数，所以
 \[
-  g\Parenb{f(x)}\equiv x,\quad x\in\FR,
+  g\mparenb{f(x)}\equiv x\mcond*{x\in\mR},
 \]
 图象为\ref{fig:sec1.2-30}。
 
@@ -856,20 +856,20 @@ y_n+y_{n+2}
 \end{floatrow}
 \end{figure}
 
-为了确定~$f\Parenb{g(x)}$，注意在~$g$~的定义域上，$f$~不是~$g$~的反函数，但由~$g$~的周期性可证~$f\comp g$~的周期性。%
+为了确定~$f\mparenb{g(x)}$，注意在~$g$~的定义域上，$f$~不是~$g$~的反函数，但由~$g$~的周期性可证~$f\comp g$~的周期性。%
 因为~$g(x+\pi)=g(x)$，所以
 \[
-  f\Parenb{g(x+\pi)}=f\Parenb{g(x)},
+  f\mparenb{g(x+\pi)}=f\mparenb{g(x)},
 \]
-即~$f\Parenb{g(x)}$~也是周期为~$\pi$~的周期函数，只要作出函数在一个周期上的图象即可。当限制自变量
-在~$\Paren[\Big]{-\dfrac\pi2,\dfrac\pi2}$~区间时，$f$~是~$g$~的反函数，由反函数定义
+即~$f\mparenb{g(x)}$~也是周期为~$\pi$~的周期函数，只要作出函数在一个周期上的图象即可。当限制自变量
+在~$\mintoB{-\dfrac\pi2}{\dfrac\pi2}$~区间时，$f$~是~$g$~的反函数，由反函数定义
 \[
-  f\Parenb{g(x)}=x,\quad x\in\Paren[\Big]{-\dfrac\pi2,\dfrac\pi2},
+  f\mparenb{g(x)}=x\mcond*{x\in\mintoB{-\dfrac\pi2}{\dfrac\pi2}},
 \]
-所以函数~$f\Parenb{g(x)}$~的图象（见\ref{fig:sec1.2-31}）为无穷多条平行的直线段。利用取整函数的记号，可以
+所以函数~$f\mparenb{g(x)}$~的图象（见\ref{fig:sec1.2-31}）为无穷多条平行的直线段。利用取整函数的记号，可以
 统一表达式为
 \[
-f\Parenb{g(x)}=x-\Floor[\Big]{\frac1\pi\Paren[\Big]{x+\frac\pi2}}\pi,\quad x\neq\Paren[\Big]{k+\frac12}\pi,
+f\mparenb{g(x)}=x-\mfloorB{\frac1\pi\mparenB{x+\frac\pi2}}\pi\mcond*{x\neq\mparenB{k+\frac12}\pi},
 \]
 上式中，$k=0,\pm1,\pm2,\dotsc$。
 \end{proof}
@@ -878,12 +878,12 @@ f\Parenb{g(x)}=x-\Floor[\Big]{\frac1\pi\Paren[\Big]{x+\frac\pi2}}\pi,\quad x\neq
 \begin{exercise*}
 \item\relax
 \begin{exlist}
-  \item 有一个身高为~$a$~的人，在离路灯杆~$b$~处沿一直线以匀速~$c$~在路灯下行走，设路灯高为~$h\,(h>a)$，确定他的头影的轨迹；
+  \item 有一个身高为~$a$~的人，在离路灯杆~$b$~处沿一直线以匀速~$c$~在路灯下行走，设路灯高为~$h\mcond{h>a}$，确定他的头影的轨迹；
   \item 如果这个人沿着曲线~$y=f(x)$~行进，重新确定他的头影的轨迹。
 \end{exlist}
 \item\relax
 \begin{exlist}
-  \item 在同一坐标系上画出~$y_1=\sin x$~和~$y_2=\dfrac2\pi x$~在~$x\in\Brack[\Big]{0,\dfrac\pi2}$~部分~的图象，并
+  \item 在同一坐标系上画出~$y_1=\sin x$~和~$y_2=\dfrac2\pi x$~在~$x\in\mintcB 0{\dfrac\pi2}$~部分~的图象，并
         观察~$y_1,y_2$~的图象位置关系；
   \item 通过以上观察证明，在非钝角~$\triangle\mathit{ABC}$~中，有~$\sin A+\sin B+\sin C>2$。
 \end{exlist}
@@ -893,8 +893,8 @@ f\Parenb{g(x)}=x-\Floor[\Big]{\frac1\pi\Paren[\Big]{x+\frac\pi2}}\pi,\quad x\neq
   \item 若~$R(-x)=R(x)$，则~$R(x)=R_1(x^2)$，这里~$R_1$~为某一有理函数；
   \item 若~$R(-x)=-R(x)$，则~$R(x)=x R_2(x^2)$，这里~$R_2$~为某一有理函数。
 \end{exlist}
-\item 设~$f(x)$~在~$\FR$~上有定义，若~$f\Parenb{f(x)}$~存在唯一的不动点，证明~$f(x)$~也存在唯一的不动点。
-\item 设~$f(x)$~在~$\FR$~上有定义，若~$f\Parenb{f(x)}$~有且仅有两个相异的不动点~$a,b$，证明只存在下列两种情况：
+\item 设~$f(x)$~在~$\mR$~上有定义，若~$f\mparenb{f(x)}$~存在唯一的不动点，证明~$f(x)$~也存在唯一的不动点。
+\item 设~$f(x)$~在~$\mR$~上有定义，若~$f\mparenb{f(x)}$~有且仅有两个相异的不动点~$a,b$，证明只存在下列两种情况：
 \begin{exlistcols}
   \item $a$~和~$b$~都是~$f$~的不动点；
   \item $f(a)=b$，~$f(b)=a$。

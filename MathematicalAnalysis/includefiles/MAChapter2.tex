@@ -35,21 +35,21 @@
 把区间~$[0,1]$~分成~$n$~个小区间，相应的把曲边三角形分成~$n$~个细长的小曲边梯形。每一个小曲边梯形，用具有同底和左端点函数值
 为高的矩形近似代替，因而得到曲边三角形面积的近似值
 \begin{align*}
-a\approx x_n&=\sum_{i=0}^{n-1}\Paren[\Big]{\frac in}^2\cdot\frac1n
+a\approx x_n&=\sum_{i=0}^{n-1}\mparenB{\frac in}^2\cdot\frac1n
  =\frac1{n^3}\sum_{i=0}^{n-1}i^2=\frac1{n^3}\frac{n(n-1)(2n-1)}6\\
-&=\frac16\Paren[\Big]{1-\frac1n}\Paren[\Big]{2-\frac1n}。\footnotemark
+&=\frac16\mparenB{1-\frac1n}\mparenB{2-\frac1n}。\footnotemark
 \end{align*}
 \footnotetext{利用\begin{align*}
 \sum_{k=1}^mk^2
 & =\sum_{k=1}^mk(k-1)+\sum_{k=1}^mk
-  =\frac13\sum_{k=1}^{m+1}\Parenb{k(k-1)(k-2)-(k-1)(k-2)(k-3)}+\sum_{k=1}^mk\\
+  =\frac13\sum_{k=1}^{m+1}\mparenb{k(k-1)(k-2)-(k-1)(k-2)(k-3)}+\sum_{k=1}^mk\\
 & =\frac13(m+1)m(m-1)+\frac12m(m+1)=\frac16m(m+1)(2m+1)。
 \end{align*}}%
 其中~$x_n$~表示图中阶梯形的面积，$n$~越大阶梯越多，近似程度也就越高，但不管~$n$~多大总是近似的。要想从曲边三角形面
 积~$a$~的这一系列近似值~$x_n$~得到准确值~$a$，就必须考察~$n$~趋于无穷的过程。$n$~无限增大时，阶梯形面积~$x_n$~无限
 逼近于所求的面积~$a$。令~$\ntoinf$，得到
 \[
-  x_n=\frac16\Paren[\Big]{1-\frac1n}\Paren[\Big]{2-\frac1n}\to\frac13。
+  x_n=\frac16\mparenB{1-\frac1n}\mparenB{2-\frac1n}\to\frac13。
 \]
 即通过考察~$n$~趋于无穷时，一系列近似值~$x_n$~的变化趋势，确定出曲边三角形的面积~$a=\sfrac13$。
 
@@ -69,8 +69,8 @@ a\approx x_n&=\sum_{i=0}^{n-1}\Paren[\Big]{\frac in}^2\cdot\frac1n
 \[
   x_1,x_2,\dotsc,x_n,\dotsc
 \]
-来表示序列，简单记作~$\Brace{x_n}$，这里~$x_n$~称为序列的\emph{通项}。给定序列的通项公式，就可以写出序列的每一项；反之，给
-定一个序列，即给出一个映射~$\map f\FN\FR$，一般来说可以归纳出通项公式。比如~\ref{eq:ch1sec2.1-1}~中第一个序列的通项公式
+来表示序列，简单记作~$\mbrace{x_n}$，这里~$x_n$~称为序列的\emph{通项}。给定序列的通项公式，就可以写出序列的每一项；反之，给
+定一个序列，即给出一个映射~$\map f\mN\mR$，一般来说可以归纳出通项公式。比如~\ref{eq:ch1sec2.1-1}~中第一个序列的通项公式
 为~$x_n$；第二个序列为~$x_n=\sfrac1n$；第三个序列为~$x_n=\sfrac1{2^{n-1}}$；第四个序列为~$x_n=(-1)^{n-1}$。但序列
 \[
   1.4,1.41,1.414,\dotsc
@@ -79,13 +79,13 @@ a\approx x_n&=\sum_{i=0}^{n-1}\Paren[\Big]{\frac in}^2\cdot\frac1n
 
 在求曲边三角形面积的例子中，我们遇到了通项为
 \[
-  x_n=\frac16\Paren[\Big]{1-\frac1n}\Paren[\Big]{2-\frac1n}
+  x_n=\frac16\mparenB{1-\frac1n}\mparenB{2-\frac1n}
 \]
-的序列~$\Brace{x_n}$，并看出~$n$~趋于无穷时，通项~$x_n$~趋于~$a=\sfrac13$。在其它问题中，也要考察~$n$~趋于无穷时，序列
+的序列~$\mbrace{x_n}$，并看出~$n$~趋于无穷时，通项~$x_n$~趋于~$a=\sfrac13$。在其它问题中，也要考察~$n$~趋于无穷时，序列
 变化的趋势。为此我们引出序列极限的定性描述：
 
-给定序列~$\Brace{x_n}$，当~$n$~无限增大时，若~$x_n$~无限的接近~$a$，则称~$a$~为~$n$~趋于无穷时序列的
-极限，记作~$x_n\to a\,(\ntoinf)$，或
+给定序列~$\mbrace{x_n}$，当~$n$~无限增大时，若~$x_n$~无限的接近~$a$，则称~$a$~为~$n$~趋于无穷时序列的
+极限，记作~$x_n\to a\mcond{\ntoinf}$，或
 \[
   \lim_\ntoinf x_n=a。
 \]
@@ -98,17 +98,17 @@ a\approx x_n&=\sum_{i=0}^{n-1}\Paren[\Big]{\frac in}^2\cdot\frac1n
 与矩形的误差加起来，就是~$x_n$~与~$a$~的误差。要估计小曲边梯形与矩形误差总和，只需如\ref{fig:sec2.1-1}~所示，将表示误差的
 图形平移到以~$1$~为高，以~$\sfrac1{100}$~为底的该图左边的矩形上，显然误差总和不超过矩形面积的~$\sfrac1{100}$，所以
 \[
-  \abs{x_{100}-a}<\frac1{100}。
+  \mabs{x_{100}-a}<\frac1{100}。
 \]
 若给定误差~$\num{1/1000}$，则只要取~$n=\num{1000}$，就有
 \[
-  \abs{x_{1000}-a}<\frac1{\num{1000}}。
+  \mabs{x_{1000}-a}<\frac1{\num{1000}}。
 \]
 由此可见，$x_n$~与~$a$~的误差要多小就能多小，只要~$x_n$~充分大。用希腊字母~$\e$~表示误差，我们先试着给出极限的定义如下：
 
 若给定~$\e>0$，总能找到自然数~$n$，使得
 \[
-  \abs{x_n-a}<\e,
+  \mabs{x_n-a}<\e,
 \]
 则称序列~$x_n$~的极限是~$a$，或~$a$~是序列的极限。
 
@@ -117,7 +117,7 @@ a\approx x_n&=\sum_{i=0}^{n-1}\Paren[\Big]{\frac in}^2\cdot\frac1n
 
 如果给定~$\e>0$，存在~$N$，使得当~$n>N$~时，就有
 \[
-  \abs{x_n-a}<\e,
+  \mabs{x_n-a}<\e,
 \]
 则称~$x_n$~的极限时~$a$。
 
@@ -128,13 +128,13 @@ a\approx x_n&=\sum_{i=0}^{n-1}\Paren[\Big]{\frac in}^2\cdot\frac1n
 \begin{definition}\label{def:sec2.1-1}
 如果对于任意~$\e>0$，都存在非负整数~$N$，使得当~$n>N$~时，就有
 \[
-  \abs{x_n-1}<\e,
+  \mabs{x_n-1}<\e,
 \]
-则称序列~$\Brace{x_n}$~的\emph{极限}为~$a$，记作
+则称序列~$\mbrace{x_n}$~的\emph{极限}为~$a$，记作
 \[
   \lim_\ntoinf x_n=a,
 \]
-或者~$x_n\to a\,(\ntoinf)$。
+或者~$x_n\to a\mcond{\ntoinf}$。
 \end{definition}
 
 极限的几何意义为：作以~$a$~为中心，以~$\e$~为半径的邻域~$(a-\e,a+\e)$，当~$n>N$~时，有
@@ -151,9 +151,9 @@ a\approx x_n&=\sum_{i=0}^{n-1}\Paren[\Big]{\frac in}^2\cdot\frac1n
 \begin{proof}
 对于任意~$\e>0$，则
 \[
-  \abs[\Big]{\frac1n}=\frac1n<\e\impliedby n>\frac1\e。
+  \mabsB{\frac1n}=\frac1n<\e\impliedby n>\frac1\e。
 \]
-因此，取~$N=\Floor[\Big]{\dfrac1\e}$，则当~$n>N$~时，就有~$\abs[\Big]{\dfrac1n}<\e$，即
+因此，取~$N=\mfloorB{\dfrac1\e}$，则当~$n>N$~时，就有~$\mabsB{\dfrac1n}<\e$，即
 \[
   \lim_\ntoinf\frac1n=0。\qedhere
 \]
@@ -162,35 +162,35 @@ a\approx x_n&=\sum_{i=0}^{n-1}\Paren[\Big]{\frac in}^2\cdot\frac1n
 这个例子说明~$N$~是依赖于~$\e$，$\e$~越小，$N$~越大。具体找~$N$~时，可以用分析法，即要使结论成立，看~$n$~应多大。
 
 \begin{example}
-证明~$\lim_\ntoinf q^n=0\,(0<q<1)$。
+证明~$\lim_\ntoinf q^n=0\mcond{0<q<1}$。
 \end{example}
 \begin{proof}
 对于任意~$\e>0$，不妨假定~$\e<1$，则
 \[
-  \abs{q^n}=q^n<\e\impliedby n\ln q<\ln\e\impliedby n>\frac{\ln\e}{\ln q}。
+  \mabs{q^n}=q^n<\e\impliedby n\ln q<\ln\e\impliedby n>\frac{\ln\e}{\ln q}。
 \]
-因此，取~$N=\Floor[\Big]{\dfrac{\ln\e}{\ln q}}$，则当~$n>N$~时，就有~$\abs{q^n}<\e$，即
+因此，取~$N=\mfloorB{\dfrac{\ln\e}{\ln q}}$，则当~$n>N$~时，就有~$\mabs{q^n}<\e$，即
 \[
   \lim_\ntoinf q^n=0。\qedhere
 \]
 \end{proof}
 
 \begin{example}
-证明~$\lim_\ntoinf\dfrac{a^n}{n!}\,(a>1)$。
+证明~$\lim_\ntoinf\dfrac{a^n}{n!}\mcond{a>1}$。
 \end{example}
 \begin{proof}
 因为
 \[
-  \frac{a^n}{n!}=\frac a1\cdot\frac a2\dotsm\frac a{\Floor{a}}\cdot\frac a{\Floor a+1}\dotsm \frac an
-  <\frac{a^{\Floor a}}{\Floor a!}\cdot\frac an\eqcolon c\cdot \frac an,
+  \frac{a^n}{n!}=\frac a1\cdot\frac a2\dotsm\frac a{\mfloor{a}}\cdot\frac a{\mfloor a+1}\dotsm \frac an
+  <\frac{a^{\mfloor a}}{\mfloor a!}\cdot\frac an\eqcolon c\cdot \frac an,
 \]
 所以对于任意~$\e>0$，有
 \[
-  \abs[\Big]{\frac{a^n}{n!}}=\frac{a^n}{n!}<\e\impliedby \frac{ca}n<\e\impliedby n>\frac{ca}\e。
+  \mabsB{\frac{a^n}{n!}}=\frac{a^n}{n!}<\e\impliedby \frac{ca}n<\e\impliedby n>\frac{ca}\e。
 \]
-取~$N=\Floor[\Big]{\dfrac{ca}\e}$，则当~$n>N$~时，就有~$\abs[\Big]{\frac{a^n}{n!}}<\e$，即
+取~$N=\mfloorB{\dfrac{ca}\e}$，则当~$n>N$~时，就有~$\mabsB{\frac{a^n}{n!}}<\e$，即
 \[
-  \lim_\ntoinf\dfrac{a^n}{n!},\quad a>1。\qedhere
+  \lim_\ntoinf\dfrac{a^n}{n!}\mcond*{a>1}。\qedhere
 \]
 \end{proof}
 
@@ -203,18 +203,18 @@ a\approx x_n&=\sum_{i=0}^{n-1}\Paren[\Big]{\frac in}^2\cdot\frac1n
 允许将左端逐步放大。还应注意反推法书写时，是由后面不等式成立，推出前面不等式成立；而不是前面不等式成立，推后面不等式成立。
 
 \begin{example}
-证明~$\lim_\ntoinf\sqrt[n]a=1\,(a>1)$。
+证明~$\lim_\ntoinf\sqrt[n]a=1\mcond{a>1}$。
 \end{example}
 \begin{proof*}
 对于任意~$\e>0$，有
 \begin{align*}
-\abs{\sqrt[n]a-1}=\sqrt[n]a-1<\e
+\mabs{\sqrt[n]a-1}=\sqrt[n]a-1<\e
 &\impliedby\sqrt[n]a<1+\e\impliedby\frac1n\ln a<\ln(1+\e)\\
 &\impliedby n>\frac{\ln a}{\ln(1+\e)}。
 \end{align*}
-因此取~$N=\Floor[\Big]{\dfrac{\ln a}{\ln(1+\e)}}$，则当~$n>N$~时，就有~$\abs{\sqrt[n]a-1}<\e$，即
+因此取~$N=\mfloorB{\dfrac{\ln a}{\ln(1+\e)}}$，则当~$n>N$~时，就有~$\mabs{\sqrt[n]a-1}<\e$，即
 \[
-  \lim_\ntoinf\sqrt[n]a=1,\quad a>1 。\qedhere
+  \lim_\ntoinf\sqrt[n]a=1\mcond*{a>1}。\qedhere
 \]
 \end{proof*}
 \begin{proof*}
@@ -228,9 +228,9 @@ a\approx x_n&=\sum_{i=0}^{n-1}\Paren[\Big]{\frac in}^2\cdot\frac1n
 \]
 因此，对任意~$\e>0$，
 \[
-  \abs{\sqrt[n]a-1}=h_n<\e\impliedby \frac an<\e。
+  \mabs{\sqrt[n]a-1}=h_n<\e\impliedby \frac an<\e。
 \]
-取~$N=\Floor[\Big]{\dfrac an}$，则当~$n>N$~时，就有~$\abs{\sqrt[n]a-1}<\e$。
+取~$N=\mfloorB{\dfrac an}$，则当~$n>N$~时，就有~$\mabs{\sqrt[n]a-1}<\e$。
 \end{proof*}
 
 \begin{exercise}
@@ -244,21 +244,21 @@ a\approx x_n&=\sum_{i=0}^{n-1}\Paren[\Big]{\frac in}^2\cdot\frac1n
 \item $\lim_\ntoinf\dfrac1{n^2+n}$；
 \item $\lim_\ntoinf\dfrac1{n^4-n}$；
 \item $\lim_\ntoinf\dfrac{\sqrt[3]{n^2}}{n-3}$；
-\item $\lim_\ntoinf\Parenb{\sqrt{n+1}-\sqrt n}$；
+\item $\lim_\ntoinf\mparenb{\sqrt{n+1}-\sqrt n}$；
 \item $\lim_\ntoinf\dfrac{10^n}{n!}$；
 \item $\lim_\ntoinf\dfrac{n!}{n^n}$；
-\item $\lim_\ntoinf\dfrac n{a^n}\,(a>1)$；
-\item $\lim_\ntoinf\Parenb{\ln(n+1)-\ln n}$。
+\item $\lim_\ntoinf\dfrac n{a^n}\mcond{a>1}$；
+\item $\lim_\ntoinf\mparenb{\ln(n+1)-\ln n}$。
 \end{exlistcols}
-\item 若~$\lim_\ntoinf x_n=a$，证明~$\lim_\ntoinf\abs{x_n}=\abs a$。
-\item 设~$x_n>0\,(n\geq 1)$，且~$\lim_\ntoinf x_n=a$。证明~$\lim_\ntoinf\sqrt{x_n}=\sqrt a$。
+\item 若~$\lim_\ntoinf x_n=a$，证明~$\lim_\ntoinf\mabs{x_n}=\mabs a$。
+\item 设~$x_n>0\mcond{n\geq 1}$，且~$\lim_\ntoinf x_n=a$。证明~$\lim_\ntoinf\sqrt{x_n}=\sqrt a$。
 \item 设~$\lim_\ntoinf x_n=a$，证明~$\lim_\ntoinf\sqrt[3]{x_n}=\sqrt[3]a$。
-\item 设~$x_n\leq a\leq y_n\,(n\geq 1)$，且~$\lim_\ntoinf(y_n-x_n)=0$。证明~$\lim_\ntoinf x_n=\lim_\ntoinf y_n=a$。
+\item 设~$x_n\leq a\leq y_n\mcond{n\geq 1}$，且~$\lim_\ntoinf(y_n-x_n)=0$。证明~$\lim_\ntoinf x_n=\lim_\ntoinf y_n=a$。
 \item 设~$n,p$~均为正整数。证明，
 \begin{exlistcols}[2]
 \item $n^p<\dfrac{(n+1)^{p+1}-n^p}{p+1}<(n+1)^p$；
 \item $\sum_{k=1}^{n-1}k^p<\dfrac{n^{p+1}}{p+1}<\sum_{k=1}^nk^p$；
-\item 求极限~$\lim_\ntoinf\dfrac1n\sum_{k=1}^n\Paren[\Big]{\dfrac kn}^p$。
+\item 求极限~$\lim_\ntoinf\dfrac1n\sum_{k=1}^n\mparenB{\dfrac kn}^p$。
 \end{exlistcols}
 \item 设~$\lim_\ntoinf x_n=a$，而~$\ell$~为确定的自然数。证明，$\lim_\ntoinf x_{n+\ell}=a$。试讨论相反的情况。
 \item\begin{exlist}
@@ -269,16 +269,16 @@ a\approx x_n&=\sum_{i=0}^{n-1}\Paren[\Big]{\frac in}^2\cdot\frac1n
 \begin{exlistcols}[2]
   \item $N$~是否唯一；
   \item $N$~是否是~$\e$~的函数；
-  \item 前~$N$~项是否有~$\abs{x_n-a}\geq\e$。
+  \item 前~$N$~项是否有~$\mabs{x_n-a}\geq\e$。
 \end{exlistcols}
 \item 判断并说明序列极限定义改成下面形式是否可以。
 \begin{exlist}
-  \item 对任意~$\e>0$，存在~$N>0$，使得当~$n\geq N$~时，有~$\abs{x_n-a}<\e$；
-  \item 对任意~$\e>0$，存在~$N>0$，使得当~$n> N$~时，有~$\abs{x_n-a}\leq\e$；
-  \item 对任意~$\e>0$，存在~$N>0$，使得当~$n> N$~时，有~$\abs{x_n-a}<M\e$，这里~$M$~为某固定常数。
+  \item 对任意~$\e>0$，存在~$N>0$，使得当~$n\geq N$~时，有~$\mabs{x_n-a}<\e$；
+  \item 对任意~$\e>0$，存在~$N>0$，使得当~$n> N$~时，有~$\mabs{x_n-a}\leq\e$；
+  \item 对任意~$\e>0$，存在~$N>0$，使得当~$n> N$~时，有~$\mabs{x_n-a}<M\e$，这里~$M$~为某固定常数。
 \end{exlist}
-\item 若对任意~$N>0$，存在~$\e>0$，使得当~$n>N$~时，有~$\abs{x_n-a}<\e$，则序列~$\Brace{x_n}$~具有什么性质？
-\item 若存在~$N>0$，对任意~$\e>0$，使得当~$n>N$~时，有~$\abs{x_n-a}<\e$，则序列~$\Brace{x_n}$~具有什么性质？
+\item 若对任意~$N>0$，存在~$\e>0$，使得当~$n>N$~时，有~$\mabs{x_n-a}<\e$，则序列~$\mbrace{x_n}$~具有什么性质？
+\item 若存在~$N>0$，对任意~$\e>0$，使得当~$n>N$~时，有~$\mabs{x_n-a}<\e$，则序列~$\mbrace{x_n}$~具有什么性质？
 \item 判断并说明下述对~$\lim_\ntoinf\sqrt[n]n=1$~的证明的正确性。
 \begin{exproof}
 对任意~$\e>0$，有
@@ -286,7 +286,7 @@ a\approx x_n&=\sum_{i=0}^{n-1}\Paren[\Big]{\frac in}^2\cdot\frac1n
   \sqrt[n]n<1+\e\impliedby\frac1n\ln n<\ln(1+\e)\impliedby
   \frac1n<\frac{\ln(1+\e)}{\ln n}\leq\frac{\ln(1+\e)}{\ln 2}。
 \]
-取~$N=\Floor[\Big]{\dfrac{\ln 2}{\ln(1+\e)}}$，则当~$n>N$~时，有
+取~$N=\mfloorB{\dfrac{\ln 2}{\ln(1+\e)}}$，则当~$n>N$~时，有
 \[
   1-\e<1<\sqrt[n]n<1+\e,
 \]
@@ -301,7 +301,7 @@ a\approx x_n&=\sum_{i=0}^{n-1}\Paren[\Big]{\frac in}^2\cdot\frac1n
 极限不等式。
 
 \begin{theorem}[唯一性]\label{thm:sec2.2-1}
-若序列~$\Brace{x_n}$~的极限存在，则极限值是唯一的。
+若序列~$\mbrace{x_n}$~的极限存在，则极限值是唯一的。
 \end{theorem}
 
 这个定理保证了不管用什么方法求极限，得到的极限值应该是一样的。
@@ -313,13 +313,13 @@ a\approx x_n&=\sum_{i=0}^{n-1}\Paren[\Big]{\frac in}^2\cdot\frac1n
 \]
 且~$a\neq b$。不妨设~$a<b$，取~$\e=\dfrac{b-a}2>0$，由极限的定义，存在~$N_1$，使得当~$n>N_1$~时，有
 \[
-  \abs{x_n-a}<\e\implies x_n<a+\e=\frac{a+b}2。
+  \mabs{x_n-a}<\e\implies x_n<a+\e=\frac{a+b}2。
 \]
 并且存在~$N_2$，使得当~$n>N_2$~时，有
 \[
-  \abs{x_n-b}<\e\implies x_n>a-\e=\frac{a+b}2。
+  \mabs{x_n-b}<\e\implies x_n>a-\e=\frac{a+b}2。
 \]
-所以当~$n>\max\Brace{N_1,N_2}$~时，就有
+所以当~$n>\max\mbrace{N_1,N_2}$~时，就有
 \[
   x_n>\frac{a+b}2>x_n。
 \]
@@ -333,25 +333,25 @@ a\approx x_n&=\sum_{i=0}^{n-1}\Paren[\Big]{\frac in}^2\cdot\frac1n
 
 从函数观点来看，序列就是定义在自然数集合上的函数~$x_n=f(n)$，由函数有界定义，可以得到序列有界的定义。
 
-若存在~$M>0$，使得对任意~$n$，都有~$\abs{x_n}\leq M$，则称序列~$\Brace{x_n}$~\emph{有界}。
+若存在~$M>0$，使得对任意~$n$，都有~$\mabs{x_n}\leq M$，则称序列~$\mbrace{x_n}$~\emph{有界}。
 
 \begin{theorem}[有界性]\label{thm:sec2.2-2}
-若序列~$\Brace{x_n}$~有极限，则~$\Brace{x_n}$~有界。
+若序列~$\mbrace{x_n}$~有极限，则~$\mbrace{x_n}$~有界。
 \end{theorem}
 \begin{proof}
-设~$\lim_\ntoinf x_n=a$，取~$\e_0=1$，则存在~$N$，使得当~$n>N$~时，有~$\abs{x_n-a}<1$，那么
+设~$\lim_\ntoinf x_n=a$，取~$\e_0=1$，则存在~$N$，使得当~$n>N$~时，有~$\mabs{x_n-a}<1$，那么
 \[
-  \abs{x_n}-\abs a\leq\abs{x_n-a}<1\implies\abs{x_n}<\abs a+1。
+  \mabs{x_n}-\mabs a\leq\mabs{x_n-a}<1\implies\mabs{x_n}<\mabs a+1。
 \]
 令
 \[
-  M=\max\Braceb{1+\abs a,\abs{x_1},\abs{x_2},\dotsc,\abs{x_N}},
+  M=\max\mbraceb{1+\mabs a,\mabs{x_1},\mabs{x_2},\dotsc,\mabs{x_N}},
 \]
 则对任意~$n$，均有
 \[
-  \abs{x_n}\leq M,
+  \mabs{x_n}\leq M,
 \]
-即序列~$\Brace{x_n}$~确实是有界的。
+即序列~$\mbrace{x_n}$~确实是有界的。
 \end{proof}
 
 在证明时必须分清什么时候取定~$\e$，什么时候任意给定~$\e$。上面证明中就必须取定~$\e$，不能任意给定~$\e$。如果
@@ -362,55 +362,55 @@ a\approx x_n&=\sum_{i=0}^{n-1}\Paren[\Big]{\frac in}^2\cdot\frac1n
 \begin{enumlistcols}
   \item $\lim_\ntoinf(x_n\pm y_n)=a\pm b$；\label{thm:sec2.2-3-item-1}
   \item $\lim_\ntoinf x_n\cdot y_n=a\cdot b$；\label{thm:sec2.2-3-item-2}
-  \item 若~$n\neq0$，且~$y_n\neq0$，则~$\lim_\ntoinf\dfrac{x_n}{y_n}=\dfrac ab$。\label{thm:sec2.2-3-item-3}
+  \item 若~$b\neq0$，且~$y_n\neq0$，则~$\lim_\ntoinf\dfrac{x_n}{y_n}=\dfrac ab$。\label{thm:sec2.2-3-item-3}
 \end{enumlistcols}
 \end{theorem}
-\begin{proof}\fixthmitem\begin{enumlist}
+\begin{proof}\begin{thmenumlist}
 \item 任给~$\e>0$，由~$\lim_\ntoinf x_n=a$，存在~$N_1$，使得当~$n>N_1$~时，有
 \[
-  \abs{x_n-a}<\frac\e2;
+  \mabs{x_n-a}<\frac\e2;
 \]
 又由~$\lim_\ntoinf y_n=b$，存在~$N_2$，使得当~$n>N_2$~时，有
 \[
-  \abs{y_n-b}<\frac\e2。
+  \mabs{y_n-b}<\frac\e2。
 \]
-取~$N=\max\Brace{N_1,N_2}$，则当~$n>N$~时，就有
+取~$N=\max\mbrace{N_1,N_2}$，则当~$n>N$~时，就有
 \[
-  \absb{(x_n\pm y_n)-(a\pm b)}\leq\abs{x_n-a}+\abs{y_n-b}<\frac\e2+\frac\e2=\e,
+  \mabsb{(x_n\pm y_n)-(a\pm b)}\leq\mabs{x_n-a}+\mabs{y_n-b}<\frac\e2+\frac\e2=\e,
 \]
 即
 \[
   \lim_\ntoinf(x_n\pm y_n)=a\pm b。
 \]
-\item 要使得~$n>N$~时，$\abs{x_n\cdot y_n-ab}<\e$，常用的方法是插入一项，这项的两个因子，一个因子与第一项的
+\item 要使得~$n>N$~时，$\mabs{x_n\cdot y_n-ab}<\e$，常用的方法是插入一项，这项的两个因子，一个因子与第一项的
 因子相同，另一个因子与第二项的因子相同。这样的话，
 \[
-  \abs{x_n\cdot y_n-ab}=\abs{x_n\cdot y_n-y_n\cdot a+y_n\cdot a-ab}
-  \leq\abs{y_n}\cdot\abs{x_n-a}+\abs a\cdot\abs{y_n-b},
+  \mabs{x_n\cdot y_n-ab}=\mabs{x_n\cdot y_n-y_n\cdot a+y_n\cdot a-ab}
+  \leq\mabs{y_n}\cdot\mabs{x_n-a}+\mabs a\cdot\mabs{y_n-b},
 \]
-所以要使结论成立，只要~$n>N$~时，利用~$\Brace{y_n}$~有界证明
+所以要使结论成立，只要~$n>N$~时，利用~$\mbrace{y_n}$~有界证明
 \[
-  \abs{y_n}\cdot\abs{x_n-a}<\frac\e2,\quad \abs a\cdot\abs{y_n-b}<\frac\e2
+  \mabs{y_n}\cdot\mabs{x_n-a}<\frac\e2,\quad \mabs a\cdot\mabs{y_n-b}<\frac\e2
 \]
 即可。这样我们就得到了下面的证明。
 
-由\ref{thm:sec2.2-2}，存在~$M_1>0$，使得对任意~$n$，均有~$\abs{y_n}\leq M_1$，令
+由\ref{thm:sec2.2-2}，存在~$M_1>0$，使得对任意~$n$，均有~$\mabs{y_n}\leq M_1$，令
 \[
-  M=\max\Brace{M_1,\abs a}>0。
+  M=\max\mrangeb{M_1}{\mabs a}>0。
 \]
 
 对任意~$\e>0$，由~$\lim_\ntoinf x_n=a$，存在~$N_1>0$，使得当~$n>N_1$~时，有
 \[
-  \abs{x_n-a}<\frac\e{2M};
+  \mabs{x_n-a}<\frac\e{2M};
 \]
 又由~$\lim_\ntoinf y_n=b$，存在~$N_2>0$~，使得当~$n>N_2$~时，有
 \[
-  \abs{y_n-b}<\frac\e{2M}。
+  \mabs{y_n-b}<\frac\e{2M}。
 \]
-取~$N=\max\Brace{N_1,N_2}$，则当~$n>N$~时，就有
+取~$N=\max\mbrace{N_1,N_2}$，则当~$n>N$~时，就有
 \begin{align*}
-\abs{x_n\cdot y_n-ab}
-&\leq\abs{y_n}\cdot\abs{x_n-a}+\abs a\cdot\abs{y_n-b}\leq M\abs{x_n-a}+M\abs{y_n-b}\\
+\mabs{x_n\cdot y_n-ab}
+&\leq\mabs{y_n}\cdot\mabs{x_n-a}+\mabs a\cdot\mabs{y_n-b}\leq M\mabs{x_n-a}+M\mabs{y_n-b}\\
 &<M\cdot\frac\e{2M}+M\cdot\frac\e{2M}=\e,
 \end{align*}
 即
@@ -419,21 +419,21 @@ a\approx x_n&=\sum_{i=0}^{n-1}\Paren[\Big]{\frac in}^2\cdot\frac1n
 \]
 \item 由~\ref{thm:sec2.2-3-item-2}~可知，只要证明~$\lim_\ntoinf\dfrac1{y_n}=\lim_\ntoinf\dfrac1b$~即可。要使~$n>N$~时
 \[
-  \abs[\Big]{\frac1{y_n}-\frac1b}=\abs[\Big]{\frac{y_n-b}{y_n\cdot b}}<\e,
+  \mabsB{\frac1{y_n}-\frac1b}=\mabsB{\frac{y_n-b}{y_n\cdot b}}<\e,
 \]
-就要先估计~$\Brace{y_n}$~的下界。为此，对于~$\dfrac{\abs b}2>0$，由~$\lim_\ntoinf y_n=b$，存在~$N_1$，使得当~$n>N_1$~时，有
+就要先估计~$\mbrace{y_n}$~的下界。为此，对于~$\dfrac{\mabs b}2>0$，由~$\lim_\ntoinf y_n=b$，存在~$N_1$，使得当~$n>N_1$~时，有
 \[
-  \abs b-\abs{y_n}\leq\abs{y_n-b}<\frac{\abs b}2\implies\frac{\abs b}2\leq\abs{y_n}。
+  \mabs b-\mabs{y_n}\leq\mabs{y_n-b}<\frac{\mabs b}2\implies\frac{\mabs b}2\leq\mabs{y_n}。
 \]
 
 对任意~$\e>0$，仍由~$\lim_\ntoinf y_n=b$，存在~$N_2$，使得当~$n>N_2$~时，有
 \[
-  \abs{y_n-b}<\frac{\abs b^2}2\e。
+  \mabs{y_n-b}<\frac{\mabs b^2}2\e。
 \]
-取~$N=\max\Brace{N_1,N_2}$，则当~$n>N$~时，就有
+取~$N=\max\mbrace{N_1,N_2}$，则当~$n>N$~时，就有
 \[
-  \abs[\Big]{\frac 1{y_n}-\frac 1b}=\abs[\Big]{\frac{y_n-b}{y_n\cdot b}}\leq\frac{2\abs{y_n-b}}{\abs b^2}
-  <\frac2{\abs b^2}\cdot\frac{\abs b^2}2\e=\e,
+  \mabsB{\frac 1{y_n}-\frac 1b}=\mabsB{\frac{y_n-b}{y_n\cdot b}}\leq\frac{2\mabs{y_n-b}}{\mabs b^2}
+  <\frac2{\mabs b^2}\cdot\frac{\mabs b^2}2\e=\e,
 \]
 即
 \[
@@ -443,13 +443,13 @@ a\approx x_n&=\sum_{i=0}^{n-1}\Paren[\Big]{\frac in}^2\cdot\frac1n
 \[
   \lim_\ntoinf\frac{x_n}{y_n}=\lim_\ntoinf x_n\cdot\frac1{y_n}=a\cdot\frac1b=\frac ab。\qedhere
 \]
-\end{enumlist}
+\end{thmenumlist}
 \end{proof}
 
 \ref{thm:sec2.2-3}~的结论可以推广至有限个序列的情形。例如如果每个序列极限都存在，则有
 \begin{Align*}
-  \lim_\ntoinf\Parenb{x_n+y_n+z_n}&=\lim_\ntoinf x_n+\lim_\ntoinf y_n+\lim_\ntoinf z_n,\\
-  \lim_\ntoinf\Parenb{x_n\cdot y_n\cdot z_n}&=\lim_\ntoinf x_n\cdot\lim_\ntoinf y_n\cdot\lim_\ntoinf z_n。
+  \lim_\ntoinf\mparenb{x_n+y_n+z_n}&=\lim_\ntoinf x_n+\lim_\ntoinf y_n+\lim_\ntoinf z_n,\\
+  \lim_\ntoinf\mparenb{x_n\cdot y_n\cdot z_n}&=\lim_\ntoinf x_n\cdot\lim_\ntoinf y_n\cdot\lim_\ntoinf z_n。
 \end{Align*}
 
 \begin{example}
@@ -461,41 +461,41 @@ a\approx x_n&=\sum_{i=0}^{n-1}\Paren[\Big]{\frac in}^2\cdot\frac1n
 \begin{solution}
 \[
 \lim_\ntoinf\frac{4n^2-6n+1}{3n^2+n+7}=\lim_\ntoinf\frac{4-\dfrac6n+\dfrac1{n^2}}{3+\dfrac1n+\dfrac7{n^2}}
-=\frac{\dps\lim_\ntoinf\Paren[\Big]{4-\frac6n+\frac1{n^2}}}{\dps\lim_\ntoinf\Paren[\Big]{3+\dfrac1n+\dfrac7{n^2}}}
+=\frac{\dps\lim_\ntoinf\mparenB{4-\frac6n+\frac1{n^2}}}{\dps\lim_\ntoinf\mparenB{3+\dfrac1n+\dfrac7{n^2}}}
 =\dfrac43。\qedhere
 \]
 \end{solution}
 
 \begin{example}
-求极限~$\lim_\ntoinf\Parenb{1+a+\dotsb+a^n}\,(0<a<1)$。
+求极限~$\lim_\ntoinf\mparenb{1+a+\dotsb+a^n}\mcond{0<a<1}$。
 \end{example}
 \begin{solution}
 \begin{align*}
-\lim_\ntoinf\Parenb{1+a+\dotsb+a^n}
+\lim_\ntoinf\mparenb{1+a+\dotsb+a^n}
 &=\lim_\ntoinf\frac{1-a^{n+1}}{1-a}=\lim_\ntoinf\frac1{1-a}-\lim_\ntoinf\frac{a^{n+1}}{1-a}\\
 &=\frac1{1-a}。\qedhere
 \end{align*}
 \end{solution}
 
-\begin{quiz*}\fixthmitem
-\begin{enumlist}
+\begin{quiz*}
+\begin{thmenumlist}
 \item 判断并说明下面推导是否正确。
 \begin{align*}
-\lim_\ntoinf\Paren[\Big]{1+\frac1n}^n
-&=\lim_\ntoinf\Paren[\Big]{1+\frac1n}\cdot\lim_\ntoinf\Paren[\Big]{1+\frac1n}\cdot\dotsm\cdot
-  \lim_\ntoinf\Paren[\Big]{1+\frac1n}\\
+\lim_\ntoinf\mparenB{1+\frac1n}^n
+&=\lim_\ntoinf\mparenB{1+\frac1n}\cdot\lim_\ntoinf\mparenB{1+\frac1n}\cdot\dotsm\cdot
+  \lim_\ntoinf\mparenB{1+\frac1n}\\
 &=1\times1\times\dotsm\times1=1;
 \end{align*}
-\item 在证明\ref{thm:sec2.2-3}~的结论~\ref{thm:sec2.2-3-item-3}~时，令~$\lim_\ntoinf\dfrac{x_n}{y_n}=c$，则
+\item 在证明\ref{thm:sec2.2-3}~的结论~\ref{thm:sec2.2-3-item-3}~时，如果令~$\lim_\ntoinf\dfrac{x_n}{y_n}=c$，则
 \[
   a=\lim_\ntoinf x_n=\lim_\ntoinf\frac{x_n}{y_n}\cdot y_n=c\cdot b\implies c=\frac ab,
 \]
 判断并说明上述推导的正确性。
-\end{enumlist}
+\end{thmenumlist}
 \end{quiz*}
 
 \begin{theorem}\label{thm:sec2.2-4}
-给定序列~$\Brace{x_n}$~和~$\Brace{y_n}$，若~$x_n\leq y_n\,(n\geq1)$，且
+给定序列~$\mbrace{x_n}$~和~$\mbrace{y_n}$，若~$x_n\leq y_n\mcond{n\geq1}$，且
 \[
   \lim_\ntoinf x_n=a,\quad \lim_\ntoinf y_n=b,
 \]
@@ -508,13 +508,13 @@ a\approx x_n&=\sum_{i=0}^{n-1}\Paren[\Big]{\frac in}^2\cdot\frac1n
 \]
 由~$\lim_\ntoinf x_n=a$，存在~$N_1$，使得当~$n>N_1$~时，
 \[
-  \abs{x_n-a}<\e\implies x_n>a-\e=\frac{a+b}2;
+  \mabs{x_n-a}<\e\implies x_n>a-\e=\frac{a+b}2;
 \]
 又由~$\lim_\ntoinf y_n=b$，存在~$N_2$，使得当~$n>N_2$~时，有
 \[
-  \abs{y_n-b}<\e\implies y_n<b+\e=\frac{a+b}2。
+  \mabs{y_n-b}<\e\implies y_n<b+\e=\frac{a+b}2。
 \]
-因此，当~$n>\max\Brace{N_1,N_2}$~时，得到
+因此，当~$n>\max\mbrace{N_1,N_2}$~时，得到
 \[
   x_n>\frac{a+b}2>y_n。
 \]
@@ -530,9 +530,9 @@ a\approx x_n&=\sum_{i=0}^{n-1}\Paren[\Big]{\frac in}^2\cdot\frac1n
 下面我们来讨论极限的所谓夹逼原理。
 
 \begin{theorem}\label{thm:sec2.2-5}
-给定序列~$\Brace{x_n},\Brace{y_n}$~和~$\Brace{z_n}$，满足
+给定序列~$\mbrace{x_n},\mbrace{y_n}$~和~$\mbrace{z_n}$，满足
 \[
-x_n\leq z_n\leq y_n,\quad n\geq1,
+x_n\leq z_n\leq y_n\mcond*{n\geq1},
 \]
 且
 \[
@@ -543,15 +543,15 @@ x_n\leq z_n\leq y_n,\quad n\geq1,
 \begin{proof}
 对任意~$\e>0$，由~$\lim_\ntoinf x_n=a$，存在~$N_1$，使得当~$n>N_1$~时，有
 \[
-  \abs{x_n-a}<\e\implies a-\e<x_n<a+\e;
+  \mabs{x_n-a}<\e\implies a-\e<x_n<a+\e;
 \]
 又由~$\lim_\ntoinf y_n=a$，存在~$N_2$，使得当~$n>N_2$~时，有
 \[
-  \abs{y_n-a}<\e\implies a-\e<y_n<a+\e 。
+  \mabs{y_n-a}<\e\implies a-\e<y_n<a+\e 。
 \]
-取~$N=\max\Brace{N_1,N_2}$，则当~$n>N$~时，就有
+取~$N=\max\mbrace{N_1,N_2}$，则当~$n>N$~时，就有
 \[
-  a-\e<x_n\leq z_n\leq y_n<a+\e\implies\abs{z_n-a}<\e,
+  a-\e<x_n\leq z_n\leq y_n<a+\e\implies\mabs{z_n-a}<\e,
 \]
 即~$\lim_\ntoinf z_n=a$。
 \end{proof}
@@ -559,32 +559,32 @@ x_n\leq z_n\leq y_n,\quad n\geq1,
 \begin{example}
 设~$a,b>0$，证明
 \[
-  \lim_\ntoinf\sqrt[n]{a^n+b^n}=\max\Brace{a,b}。
+  \lim_\ntoinf\sqrt[n]{a^n+b^n}=\max\mbrace{a,b}。
 \]
 \end{example}
 \begin{proof}
 因为
 \[
-  \Paren[\Big]{\Parenb{\max\Brace{a,b}}^n}^{\frac1n}\leq\Parenb{a^n+b^n}^{\frac1n}\leq
-  \Paren[\Big]{2\Parenb{\max\Brace{a,b}}^n}^{\frac1n},
+  \mparenB{\mparenb{\max\mbrace{a,b}}^n}^{\frac1n}\leq\mparenb{a^n+b^n}^{\frac1n}\leq
+  \mparenB{2\mparenb{\max\mbrace{a,b}}^n}^{\frac1n},
 \]
 即
 \[
-  \max\Brace{a,b}\leq\sqrt[n]{a^n+b^n}\leq\max\Brace{a,b}\cdot\sqrt[n]2。
+  \max\mbrace{a,b}\leq\sqrt[n]{a^n+b^n}\leq\max\mbrace{a,b}\cdot\sqrt[n]2。
 \]
 由~$\lim_\ntoinf\sqrt[n]2=1$~及\ref{thm:sec2.2-5}~即可得到
 \[
-  \lim_\ntoinf\sqrt[n]{a^n+b^n}=\max\Brace{a,b}。\qedhere
+  \lim_\ntoinf\sqrt[n]{a^n+b^n}=\max\mbrace{a,b}。\qedhere
 \]
 \end{proof}
 
-\begin{quiz*}\fixthmitem\begin{enumlist}
+\begin{quiz*}\begin{thmenumlist}
 \item 在\ref{thm:sec2.2-4}~中若将条件改为~$x_n<y_n$，结论能否改为~$a<b$？
 \item 考虑能否利用\ref{thm:sec2.2-4}~直接得到\ref{thm:sec2.2-5}，即
 \[
   a=\lim_\ntoinf x_n\leq\lim_\ntoinf z_n\leq\lim_\ntoinf y_n=a。
 \]
-\end{enumlist}
+\end{thmenumlist}
 \end{quiz*}
 
 作为序列极限的特殊情形，我们引入无穷小量的概念及其运算。
@@ -595,33 +595,33 @@ x_n\leq z_n\leq y_n,\quad n\geq1,
 
 若变量以序列形式表示，若序列极限为零，则称序列就叫作无穷小量。例如
 \[
-  \Brace[\Big]{\frac1n},\quad \Brace{q^n}\,(0<q<1),\quad
-  \Brace[\Big]{\frac{a^n}{n!}}\,(a>0)
+  \mbraceB{\frac1n},\quad \mbrace{q^n}\mcond{0<q<1},\quad
+  \mbraceB{\frac{a^n}{n!}}\mcond{a>0}
 \]
 都是无穷小量。所以无穷小量不是很小的量，而是极限值为零的变量。
 
 \begin{corollary}\label{cor:sec2.2-1}
-\fixthmitem\begin{enumlist}
+\begin{thmenumlist}
   \item 无穷小量的绝对值是无穷小量；\label{cor:sec2.2-1-item-1}
   \item 无穷小量与有界变量的乘积是无穷小量。\label{cor:sec2.2-1-item-2}
-\end{enumlist}
+\end{thmenumlist}
 \end{corollary}
-\begin{proof}\fixthmitem\begin{enumlist}
+\begin{proof}\begin{thmenumlist}
 \item 设~$\lim_\ntoinf x_n=0$，即对任意~$\e>0$，存在~$N$，使得当~$n>N$~时，有
 \[
-  \abs{x_n-0}=\abs{x_n}<\e\implies\absb{\abs{x_n}-0}=\abs{x_n}<\e,
+  \mabs{x_n-0}=\mabs{x_n}<\e\implies\mabsb{\mabs{x_n}-0}=\mabs{x_n}<\e,
 \]
-故~$\lim_\ntoinf\abs{x_n}=0$。
-\item 设~$\lim_\ntoinf x_n=0$，而~$\abs{y_n}\leq M$，则
+故~$\lim_\ntoinf\mabs{x_n}=0$。
+\item 设~$\lim_\ntoinf x_n=0$，而~$\mabs{y_n}\leq M$，则
 \[
-  \abs{x_ny_n}\leq M\abs{x_n}\implies
-  -M\abs{x_n}\leq x_n\cdot y_n\leq M\abs{x_n}。
+  \mabs{x_ny_n}\leq M\mabs{x_n}\implies
+  -M\mabs{x_n}\leq x_n\cdot y_n\leq M\mabs{x_n}。
 \]
-由~\ref{cor:sec2.2-1-item-1}~可知~$\lim_\ntoinf M\abs{x_n}=\lim_\ntoinf(-M\abs{x_n})=0$，利用\ref{thm:sec2.2-5}~可得
+由~\ref{cor:sec2.2-1-item-1}~可知~$\lim_\ntoinf M\mabs{x_n}=\lim_\ntoinf(-M\mabs{x_n})=0$，利用\ref{thm:sec2.2-5}~可得
 \[
   \lim_\ntoinf x_n\cdot y_n=0。\qedhere
 \]
-\end{enumlist}
+\end{thmenumlist}
 \end{proof}
 
 \begin{corollary}\label{cor:sec2.2-2}
@@ -632,7 +632,7 @@ x_n\leq z_n\leq y_n,\quad n\geq1,
 \[
   \lim_\ntoinf(x_n-a)=0。
 \]
-令~$\alpha_n=x_n-a$，由定义可知~$\Brace{\alpha_n}$~是无穷小量，并有~$x_n=a+\alpha_n$。
+令~$\alpha_n=x_n-a$，由定义可知~$\mbrace{\alpha_n}$~是无穷小量，并有~$x_n=a+\alpha_n$。
 
 反之，若~$x_n=a+\alpha_n$，且~$\lim_\ntoinf\alpha_n=0$，则
 \[
@@ -650,7 +650,7 @@ x_n\leq z_n\leq y_n,\quad n\geq1,
 \]
 所以
 \[
-  0<h_n<\frac2{\sqrt{n-1}},\quad n>1,
+  0<h_n<\frac2{\sqrt{n-1}}\mcond*{n>1},
 \]
 由~$\lim_\ntoinf\dfrac2{\sqrt{n-1}}=0$~以及\ref{thm:sec2.2-5}，可得~$\lim_\ntoinf h_n=0$，再
 由\ref{cor:sec2.2-1}~就可以得到
@@ -666,32 +666,32 @@ x_n\leq z_n\leq y_n,\quad n\geq1,
 \]
 \item 求下列极限。
 \begin{exlistcols}
-  \item $\lim_\ntoinf\Paren[\Big]{\dfrac1{n^2}+\dfrac2{n^2}+\dotsb+\dfrac n{n^2}}$；
-  \item $\lim_\ntoinf\dfrac{a^n}{1+a+\dotsb+a^{n-1}}\;(a>0)$；
-  \item $\lim_\ntoinf\Paren[\bigg]{\dfrac1{1\cdot2}+\dfrac1{2\cdot3}+\dotsb+\dfrac1{n(n+1)}}$；
-  \item $\lim_\ntoinf\Parenb{\sqrt[3]{n+1}-\sqrt[3]n}$；
-  \item $\lim_\ntoinf\sqrt[n]a\;(0<a<1)$；
-  \item $\lim_\ntoinf\dfrac{n^k}{a^n}\;(a>1,k>0)$。
+  \item $\lim_\ntoinf\mparenB{\dfrac1{n^2}+\dfrac2{n^2}+\dotsb+\dfrac n{n^2}}$；
+  \item $\lim_\ntoinf\dfrac{a^n}{1+a+\dotsb+a^{n-1}}\mcond{a>0}$；
+  \item $\lim_\ntoinf\mparenbb{\dfrac1{1\cdot2}+\dfrac1{2\cdot3}+\dotsb+\dfrac1{n(n+1)}}$；
+  \item $\lim_\ntoinf\mparenb{\sqrt[3]{n+1}-\sqrt[3]n}$；
+  \item $\lim_\ntoinf\sqrt[n]a\mcond{0<a<1}$；
+  \item $\lim_\ntoinf\dfrac{n^k}{a^n}\mcond{a>1,k>0}$。
 \end{exlistcols}
 \item 设~$\lim_\ntoinf x_n=a$，$\lim_\ntoinf y_n=b$。证明，
 \begin{exlistcols}
-  \item $\lim_\ntoinf\max\Brace{x_n,y_n}=\max\Brace{a,b}$；
-  \item $\lim_\ntoinf\min\Brace{x_n,y_n}=\min\Brace{a,b}$。
+  \item $\lim_\ntoinf\max\mbrace{x_n,y_n}=\max\mbrace{a,b}$；
+  \item $\lim_\ntoinf\min\mbrace{x_n,y_n}=\min\mbrace{a,b}$。
 \end{exlistcols}
-\item 证明序列~$\Brace{\cos n}$~的极限不存在。
-\item 证明序列~$\Brace{\tan n}$~与~$\Brace{\sfrac1{\tan n}}$~的极限不存在。
+\item 证明序列~$\mbrace{\cos n}$~的极限不存在。
+\item 证明序列~$\mbrace{\tan n}$~与~$\mbrace{\sfrac1{\tan n}}$~的极限不存在。
 \item 求下列极限。
 \begin{exlistcols}
   \item $\lim_\ntoinf\dfrac{\sin n}{\sqrt[3]{1-n^2}}$；
   \item $\lim_\ntoinf\sqrt[n]{n\cdot\ln n}$；
-  \item $\lim_\ntoinf\Paren[\bigg]{\dfrac{1\cdot3\cdot5\cdot\dotsm\cdot(2n-1)}{2\cdot4\cdot6\cdot\dotsm\cdot(2n)}}^{\frac1n}$；
+  \item $\lim_\ntoinf\mparenbb{\dfrac{1\cdot3\cdot5\cdot\dotsm\cdot(2n-1)}{2\cdot4\cdot6\cdot\dotsm\cdot(2n)}}^{\frac1n}$；
   \item $\lim_\ntoinf\dfrac{1\cdot3\cdot5\cdot\dotsm\cdot(2n-1)}{2\cdot4\cdot6\cdot\dotsm\cdot(2n)}$；
   \item $\lim_\ntoinf\dfrac1{\sqrt[n]{n!}}$。
 \end{exlistcols}
-\item 若~$\abs{x_{n+1}}\leq k\abs{x_n}\,(0<k<1)$~对任意~$n$~成立。证明~$\lim_\ntoinf x_n=0$。
-\item 设~$f(x)=\frac{x+2}{x+1}$，而~$x_0=1$，$x_{n+1}=f(x_n)\,(n\geq0)$。证明~$\lim_\ntoinf x_n=\sqrt2$。
-\item 设~$x_1=1$，而~$x_{n+1}=\sqrt{2+x_n}\;(n\geq1)$。求~$\lim_\ntoinf x_n$。
-\item 设~$x_0=1$，而~$x_{n+1}=1+\dfrac1{x_n}\,(n\geq0)$。求~$\lim_\ntoinf x_n$。
+\item 若~$\mabs{x_{n+1}}\leq k\mabs{x_n}\mcond{0<k<1}$~对任意~$n$~成立。证明~$\lim_\ntoinf x_n=0$。
+\item 设~$f(x)=\frac{x+2}{x+1}$，而~$x_0=1$，$x_{n+1}=f(x_n)\mcond{n\geq0}$。证明~$\lim_\ntoinf x_n=\sqrt2$。
+\item 设~$x_1=1$，而~$x_{n+1}=\sqrt{2+x_n}\mcond{n\geq1}$。求~$\lim_\ntoinf x_n$。
+\item 设~$x_0=1$，而~$x_{n+1}=1+\dfrac1{x_n}\mcond{n\geq0}$。求~$\lim_\ntoinf x_n$。
 \item\begin{exlist}
   \item 设~$b>1$，$\lim_\ntoinf x_n=0$。证明，对任意~$\e$，$0<\e<1$，存在~$N$，使得当~$n>N$~时，有
   \[
@@ -704,28 +704,28 @@ x_n\leq z_n\leq y_n,\quad n\geq1,
 \item\begin{exlist}
   \item 设~$\lim_\ntoinf y_n=1$。证明，对任意~$\e$，$0<\e<1$，存在~$N$，使得当~$n>N$~时，有~$\me^{-\e}<y_n<\me^\e$；
   \item 设~$\lim_\ntoinf y_n=1$，证明~$\lim_\ntoinf\ln y_n=0$；
-  \item 设~$\lim_\ntoinf y_n=b\,(b>0)$，证明~$\lim_\ntoinf\ln y_n=b$；
-  \item 设~$\lim_\ntoinf y_n=b\,(b>0)$，$\lim_\ntoinf x_n=a$，证明~$\lim_\ntoinf y_n^{x_n}=b^a$。
+  \item 设~$\lim_\ntoinf y_n=b\mcond{b>0}$，证明~$\lim_\ntoinf\ln y_n=b$；
+  \item 设~$\lim_\ntoinf y_n=b\mcond{b>0}$，$\lim_\ntoinf x_n=a$，证明~$\lim_\ntoinf y_n^{x_n}=b^a$。
 \end{exlist}
 \item\begin{exlist}
   \item 设~$x_n>0$，且~$\lim_\ntoinf\sqrt[n]{x_n}=q<1$，证明~$\lim_\ntoinf x_n=0$；
   \item 设~$x_n>0$，且~$\lim_\ntoinf\sqrt[n]{x_n}=\ell>1$，证明~$\lim_\ntoinf\dfrac1{x_n}=0$。
 \end{exlist}
-\item 设~$\Brace{x_n}$~为无穷小量。判断并说明，
+\item 设~$\mbrace{x_n}$~为无穷小量。判断并说明，
 \begin{exlistcols}
-  \item $\Brace{x_n^n}$~是否为无穷小量；
-  \item $\Brace{\!\sqrt[n]{x_n}}\,(x_n>0)$~是否为无穷小量。
+  \item $\mbrace{x_n^n}$~是否为无穷小量；
+  \item $\mbrace{\!\sqrt[n]{x_n}}\mcond{x_n>0}$~是否为无穷小量。
 \end{exlistcols}
 \end{exercise}
 
 
 \section{确界与单调有界序列}
 
-在这一节中，我们将讨论极限的存在性。给定序列~$\Brace{x_n}$，怎么判定它有没有极限呢？用极限定义判定，就必须先要看出极限值，这
+在这一节中，我们将讨论极限的存在性。给定序列~$\mbrace{x_n}$，怎么判定它有没有极限呢？用极限定义判定，就必须先要看出极限值，这
 对稍微复杂的序列是办不到的，所以只能通过序列本身来判断它有没有极限。判定一般序列是否有极限，我们以后再讨论。对单调序列有简单
 的判别准则。这个准则要用到所谓确界的概念，为此，我们先讨论集合的确界。
 
-设有实数集合~$E\subset\FR$，若存在实数~$M$，使得对任意~$x\in E$，均有
+设有实数集合~$E\subset\mR$，若存在实数~$M$，使得对任意~$x\in E$，均有
 \[
   x\leq M,
 \]
@@ -742,7 +742,7 @@ x_n\leq z_n\leq y_n,\quad n\geq1,
 \end{enumlist}
 则称~$M$~是集合~$E$~的\emph{上确界}或\emph{最小上界}，记作
 \[
-  M=\sup E\quad\text{或}\quad M=\sup_{x\in E}\Brace x。
+  M=\sup E\quad\text{或}\quad M=\sup_{x\in E}\mbrace x。
 \]
 \end{definition}
 
@@ -788,34 +788,34 @@ $M$~是集合~$E$~的上确界当且仅当
 \end{enumlist}
 则称~$m$~是集合~$E$~的\emph{下确界}或\emph{最大上界}，记作
 \[
-  M=\inf E\quad\text{或}\quad M=\inf_{x\in E}\Brace x。
+  M=\inf E\quad\text{或}\quad M=\inf_{x\in E}\mbrace x。
 \]
 \end{definition}
 
-下面这个例子讨论三个集合~$\Set{f(x)}{x\in X}$，$\Set{g(x)}{x\in X}$~和~$\Set{f(x)+g(x)}{x\in X}$~的上、下确界之间的关系。
+下面这个例子讨论三个集合~$\mathset{f(x)}{x\in X}$，$\mathset{g(x)}{x\in X}$~和~$\mathset{f(x)+g(x)}{x\in X}$~的上、下确界之间的关系。
 
 \begin{example}
 设~$f(x),g(x)$~是定义在~$X=[a,b]$~上的有界函数，证明
 \[
-  \sup_{x\in X}\Braceb{f(x)+g(x)}\geq\sup_{x\in X}\Brace{f(x)}+\sup_{x\in X}\Brace{g(x)}。
+  \sup_{x\in X}\mbraceb{f(x)+g(x)}\geq\sup_{x\in X}\mbrace{f(x)}+\sup_{x\in X}\mbrace{g(x)}。
 \]
 \end{example}
 \begin{proof}
 有上确界定义中的~\ref{def:sec2.3-1-item-2}~及下确界定义中的~\ref{def:sec2.3-2-item-1}，对任意~$\e>0$，存在~$x'\in X$，使得
 \[
-  f(x')>\sup_{x\in X}\Brace{f(x)}-\e,\quad g(x')\geq\inf_{x\in X}\Brace{g(x)}。
+  f(x')>\sup_{x\in X}\mbrace{f(x)}-\e,\quad g(x')\geq\inf_{x\in X}\mbrace{g(x)}。
 \]
 相加得到
 \[
-  f(x')+g(x')\geq\sup_{x\in X}\Brace{f(x)}+\inf_{x\in X}\Brace{g(x)}-\e 。
+  f(x')+g(x')\geq\sup_{x\in X}\mbrace{f(x)}+\inf_{x\in X}\mbrace{g(x)}-\e 。
 \]
 再由上确界定义中的~\ref{def:sec2.3-1-item-1}
 \[
-  \sup_{x\in X}\Braceb{f(x)+g(x)}\geq f(x')+g(x'),
+  \sup_{x\in X}\mbraceb{f(x)+g(x)}\geq f(x')+g(x'),
 \]
 所以
 \[
-  \sup_{x\in X}\Braceb{f(x)+g(x)}\geq\sup_{x\in X}\Brace{f(x)}+\inf_{x\in X}\Brace{g(x)}-\e 。
+  \sup_{x\in X}\mbraceb{f(x)+g(x)}\geq\sup_{x\in X}\mbrace{f(x)}+\inf_{x\in X}\mbrace{g(x)}-\e 。
 \]
 又由于上、下确界是确定的数和~$\e$~的任意性，令~$\e\to0$，就得到结论。
 \end{proof}
@@ -829,18 +829,18 @@ $M$~是集合~$E$~的上确界当且仅当
 
 有了确界概念之后，就可以解决单调序列极限的存在问题。
 
-若序列~$\Brace{x_n}$~满足
+若序列~$\mbrace{x_n}$~满足
 \[
   x_1\leq x_2\leq\cdots\leq x_n\leq\cdots,
 \]
-则称~$\Brace{x_n}$~是\emph{单调上升}的；若满足
+则称~$\mbrace{x_n}$~是\emph{单调上升}的；若满足
 \[
   x_1\geq x_2\geq\cdots\geq x_n\geq\cdots,
 \]
-则称~$\Brace{x_n}$~是\emph{单调下降}的。
+则称~$\mbrace{x_n}$~是\emph{单调下降}的。
 
 \begin{theorem}[单调有界定理]\label{thm:sec2.3-3}
-若序列单调上升（下降）且有上（下）界，那么序列极限存在。
+如果序列单调上升（下降）并且有上（下）界，那么序列极限存在。
 \end{theorem}
 \begin{proof}
 已知序列单调上升，即
@@ -849,13 +849,13 @@ $M$~是集合~$E$~的上确界当且仅当
 \]
 且有上界，即存在~$M$，使得
 \[
-  x_n\leq M,\quad n=1,2,\dotsc 。
+  x_n\leq M\mcond*{n=1,2,\dotsc}。
 \]
 
-现在考虑集合~$\Set{x_n}{n\in\FN}$，它是一个非空的、有上界集合，由\ref{thm:sec2.3-2}~可知集合~$\Set{x_n}{n\in\FN}$~有
+现在考虑集合~$\mathset{x_n}{n\in\mN}$，它是一个非空的、有上界集合，由\ref{thm:sec2.3-2}~可知集合~$\mathset{x_n}{n\in\mN}$~有
 上确界，记为
 \[
-  a\coloneq\sup_{n\in\FN}x_n 。
+  a\coloneq\sup_{n\in\mN}\mbrace{x_n}。
 \]
 
 对任意~$\e>0$，由上确界性质，存在~$N$，使得~$a-\e<x_N$。故当~$x>N$~时，由序列单调上升可得
@@ -864,28 +864,28 @@ $M$~是集合~$E$~的上确界当且仅当
 \]
 再由上确界定义，有
 \[
-  a-\e<x_n<a+\e\implies\abs{x_n-a}<\e,
+  a-\e<x_n<a+\e\implies\mabs{x_n-a}<\e,
 \]
 也就是说
 \[
-  \lim_\ntoinf x_n=a\sup_{n\in\FN}x_n 。
+  \lim_\ntoinf x_n=a=\sup_{n\in\mN}\mbrace{x_n}。
 \]
 
-同理，若序列~$\Brace{x_n}$~单调下降、有下界，可得
+同理，若序列~$\mbrace{x_n}$~单调下降、有下界，可得
 \[
-  \lim_\ntoinf x_n=a\inf_{n\in\FN}x_n 。\qedhere
+  \lim_\ntoinf x_n=\inf_{n\in\mN}\mbrace{x_n}。\qedhere
 \]
 \end{proof}
 
 \begin{example}\label{ex:sec2.3-2}
-求极限~$\lim_\ntoinf\dfrac{a^n}{n!}\;(a>1)$。
+求极限~$\lim_\ntoinf\dfrac{a^n}{n!}\mcond{a>1}$。
 \end{example}
 \begin{proof}
 注意到
 \[
-  0<x_{n+1}=\frac{a^{n+1}}{(n+1)!}=\frac a{n+1}\cdot x_n\leq x_n,\quad x>\Floor a,
+  0<x_{n+1}=\frac{a^{n+1}}{(n+1)!}=\frac a{n+1}\cdot x_n\leq x_n\mcond*{x>\mfloor a},
 \]
-这说明~$n>\Floor a$~以后，序列单调下降、有下界，因此序列极限存在，记极限值为~$\ell$。为了确定出~$\ell$，我们对等式
+这说明~$n>\mfloor a$~以后，序列单调下降、有下界，因此序列极限存在，记极限值为~$\ell$。为了确定出~$\ell$，我们对等式
 \[
   x_{n+1}=\frac a{n+1}\cdot x_n
 \]
@@ -893,29 +893,29 @@ $M$~是集合~$E$~的上确界当且仅当
 \end{proof}
 
 \begin{example}\label{ex:sec2.3-3}
-证明极限~$\lim_\ntoinf\Paren[\Big]{1+\dfrac1n}^n$~存在。
+证明极限~$\lim_\ntoinf\mparenB{1+\dfrac1n}^n$~存在。
 \end{example}
 \begin{proof}
 先证明序列单调上升。事实上
 \begin{spreadlines}{3pt}
 \begin{align*}
-x_n&=\Paren[\Big]{1+\frac1n}^n\\
+x_n&=\mparenB{1+\frac1n}^n\\
 &=1+1\frac{n(n-1)}{2!}\frac1{n^2}+\frac{n(n-1)(n-2)}{3!}\frac1{n^3}+\dotsb+
-  \frac{n(n-1)\dotsm\Parenb{n-(n-1)}}{n!}\frac1{n^n}\\
-&=1+1+\frac1{2!}\Paren[\Big]{1-\frac1n}+\frac1{3!}\Paren[\Big]{1-\frac1n}\Paren[\Big]{1-\frac2n}+\dotsb+
-  \frac1{n!}\Paren[\Big]{1-\frac1n}\dotsm\Paren[\Big]{1-\frac{n-1}n}。
+  \frac{n(n-1)\dotsm\mparenb{n-(n-1)}}{n!}\frac1{n^n}\\
+&=1+1+\frac1{2!}\mparenB{1-\frac1n}+\frac1{3!}\mparenB{1-\frac1n}\mparenB{1-\frac2n}+\dotsb+
+  \frac1{n!}\mparenB{1-\frac1n}\dotsm\mparenB{1-\frac{n-1}n}。
 \end{align*}
 并且
 \begin{align*}
-x_{n+1}&=\Paren[\Big]{1+\frac1{n+1}}^{n+1}\\
+x_{n+1}&=\mparenB{1+\frac1{n+1}}^{n+1}\\
 &=1\!\begin{lgathered}[t]
-  {}+1+\frac1{2!}\Paren[\Big]{1-\frac1{n+1}}+\frac1{3!}\Paren[\Big]{1-\frac1{n+1}}\Paren[\Big]{1-\frac2{n+1}}+\dotsb\\
-  {}+\frac1{n!}\Paren[\Big]{1-\frac1{n+1}}\dotsm\Paren[\Big]{1-\frac{n-1}{n+1}}
-  +\frac1{(n+1)!}\Paren[\Big]{1-\frac1{n+1}}\dotsm\Paren[\Big]{1-\frac n{n+1}}。
+  {}+1+\frac1{2!}\mparenB{1-\frac1{n+1}}+\frac1{3!}\mparenB{1-\frac1{n+1}}\mparenB{1-\frac2{n+1}}+\dotsb\\
+  {}+\frac1{n!}\mparenB{1-\frac1{n+1}}\dotsm\mparenB{1-\frac{n-1}{n+1}}
+  +\frac1{(n+1)!}\mparenB{1-\frac1{n+1}}\dotsm\mparenB{1-\frac n{n+1}}。
   \end{lgathered}
 \end{align*}
 比较~$x_n$~与~$x_{n+1}$，$x_n$~有~$n+1$~项，$x_{n+1}$~有~$n+2$~项，其中前~$n+1$~项分别比~$x_n$~中相应的项要大或相等，最后
-一项大于~$0$，所以序列~$\Brace{x_n}$~单调上升。
+一项大于~$0$，所以序列~$\mbrace{x_n}$~单调上升。
 
 再证明序列有上界。事实上
 \begin{align*}
@@ -927,7 +927,7 @@ x_n
 \end{spreadlines}
 由\ref{thm:sec2.3-3}~可知序列极限存在，其值记为~$\me$，它是一个无理数。即
 \[
-  \me\coloneq\lim_\ntoinf\Paren[\Big]{1+\frac1n}^n=\num{2.718281828459}\dotsc 。\qedhere
+  \me\coloneq\lim_\ntoinf\mparenB{1+\frac1n}^n=\num{2.718281828459}\dotsc 。\qedhere
 \]
 \end{proof}
 
@@ -936,33 +936,33 @@ x_n
 \begin{exercise}
 \item 确定下列集合的上、下确界。
 \begin{exlistcols}
-  \item $E=\Set[\Big]{\Parenb{1+(-1)^n\dfrac{n+1}n}}{n\in\FN}$；
-  \item $E=\Set[\Big]{\dfrac mn}{0<m<n,~m,n\in\FN}$；
-  \item $E=\Set[\Big]{\dfrac{n-1}{n+1}\cos\dfrac{2n}3\pi}{n\in\FN}$；
-  \item $E=\Set[\big]{\sqrt[n]{1+2^{n(-1)^n}}}{n\in\FN}$；
-  \item $E=\Set[\Big]{x-\Floor x}{x\in\FR}$。
+  \item $E=\mathsetB{\mparenb{1+(-1)^n\dfrac{n+1}n}}{n\in\mN}$；
+  \item $E=\mathsetB{\dfrac mn}{0<m<n,~m,n\in\mN}$；
+  \item $E=\mathsetB{\dfrac{n-1}{n+1}\cos\dfrac{2n}3\pi}{n\in\mN}$；
+  \item $E=\mathsetb{\!\sqrt[n]{1+2^{n(-1)^n}}}{n\in\mN}$；
+  \item $E=\mathsetB{x-\mfloor x}{x\in\mR}$。
 \end{exlistcols}
 \item 设~$f(x),g(x)$~在~$D$~上定义，且对任意~$x\in D$，有~$f(x)\leq g(x)$。证明
 \begin{exlistcols}
-  \item $\sup_{x\in D}\Brace{f(x)}\leq\sup_{x\in D}\Brace{g(x)}$；
-  \item $\inf_{x\in D}\Brace{f(x)}\leq\inf_{x\in D}\Brace{g(x)}$。
+  \item $\sup_{x\in D}\mbrace{f(x)}\leq\sup_{x\in D}\mbrace{g(x)}$；
+  \item $\inf_{x\in D}\mbrace{f(x)}\leq\inf_{x\in D}\mbrace{g(x)}$。
 \end{exlistcols}
 \item 设~$f(x)$~在~$D$~上定义。证明
 \begin{exlistcols}
-  \item $\sup_{x\in D}\Brace{-f(x)}=-\inf_{x\in D}\Brace{f(x)}$；
-  \item $\inf_{x\in D}\Brace{-f(x)}=-\sup_{x\in D}\Brace{f(x)}$。
+  \item $\sup_{x\in D}\mbrace{-f(x)}=-\inf_{x\in D}\mbrace{f(x)}$；
+  \item $\inf_{x\in D}\mbrace{-f(x)}=-\sup_{x\in D}\mbrace{f(x)}$。
 \end{exlistcols}
 \item 设~$f(x),g(x)$~在~$D$~上有界。证明
 \begin{align*}
-   \inf_{x\in D}\Brace{f(x)}+\inf_{x\in D}\Brace{g(x)}
-  &\leq\inf_{x\in D}\Brace{f(x)+g(x)}\leq\inf_{x\in D}\Brace{f(x)}+\sup_{x\in D}\Brace{g(x)}\\
-  &\leq\sup_{x\in D}\Brace{f(x)+g(x)}\leq\sup_{x\in D}\Brace{f(x)}+\sup_{x\in D}\Brace{g(x)}。
+   \inf_{x\in D}\mbrace{f(x)}+\inf_{x\in D}\mbrace{g(x)}
+  &\leq\inf_{x\in D}\mbrace{f(x)+g(x)}\leq\inf_{x\in D}\mbrace{f(x)}+\sup_{x\in D}\mbrace{g(x)}\\
+  &\leq\sup_{x\in D}\mbrace{f(x)+g(x)}\leq\sup_{x\in D}\mbrace{f(x)}+\sup_{x\in D}\mbrace{g(x)}。
 \end{align*}
 \item 设~$f(x),g(x)$~在~$D$~上有界且大于~$0$。证明
 \begin{align*}
-   \inf_{x\in D}\Brace{f(x)}\cdot\inf_{x\in D}\Brace{g(x)}
-  &\leq\inf_{x\in D}\Brace{f(x)\cdot g(x)}\leq\inf_{x\in D}\Brace{f(x)}\cdot\sup_{x\in D}\Brace{g(x)}\\
-  &\leq\sup_{x\in D}\Brace{f(x)\cdot g(x)}\leq\sup_{x\in D}\Brace{f(x)}\cdot\sup_{x\in D}\Brace{g(x)}。
+   \inf_{x\in D}\mbrace{f(x)}\cdot\inf_{x\in D}\mbrace{g(x)}
+  &\leq\inf_{x\in D}\mbrace{f(x)\cdot g(x)}\leq\inf_{x\in D}\mbrace{f(x)}\cdot\sup_{x\in D}\mbrace{g(x)}\\
+  &\leq\sup_{x\in D}\mbrace{f(x)\cdot g(x)}\leq\sup_{x\in D}\mbrace{f(x)}\cdot\sup_{x\in D}\mbrace{g(x)}。
 \end{align*}
 \item 求下列序列的极限。
 \begin{exlistcols}
@@ -974,64 +974,1368 @@ x_n
 \[
   a_{n+1}=\sqrt{a_n\cdot b_n},\quad b_{n+1}=\frac{a_n+b_n}2。
 \]
-证明序列~$\Brace{a_n},\Brace{b_n}$~极限存在且相等。
+证明序列~$\mbrace{a_n},\mbrace{b_n}$~极限存在且相等。
 \item 设~$0<a_1<b_1<c_1$，对~$n=1,2,\dotsc$，令
 \[
   a_{n+1}=\frac1{\dfrac1{a_n}+\dfrac1{b_n}+\dfrac1{c_n}},\quad
   b_{n+1}=\sqrt[3]{a_n\cdot b_n\cdot c_n},\quad
   c_{n+1}=\frac{a_n+b_n+c_n}3。
 \]
-证明序列~$\Brace{a_n},\Brace{b_n},\Brace{c_n}$~极限存在且相等。
+证明序列~$\mbrace{a_n},\mbrace{b_n},\mbrace{c_n}$~极限存在且相等。
 \item 证明，
 \begin{exlistcols}
-  \item $\dfrac1{n+1}<\ln\Paren[\Big]{1+\dfrac1n}<\dfrac1n$；
+  \item $\dfrac1{n+1}<\ln\mparenB{1+\dfrac1n}<\dfrac1n$；
   \item 序列~$x_n=1+\dfrac12+\dotsb+\dfrac1n-\ln n$~的极限存在；
-  \item $\lim_\ntoinf\Paren[\Big]{1-\dfrac12+\dfrac13-\dfrac14+\dotsb+(-1)^{n-1}\dfrac1n}=\ln2$。
+  \item $\lim_\ntoinf\mparenB{1-\dfrac12+\dfrac13-\dfrac14+\dotsb+(-1)^{n-1}\dfrac1n}=\ln2$。
 \end{exlistcols}
-\item 设~$A>0$，$x_1>0$，$x_{n+1}=\dfrac12\Paren[\Big]{x_n+\dfrac A{x_n}}$。证明序列~$\Brace{x_n}$~的极限存在，并求此极限。
-\item 设~$A>0$，$0<x_1<\dfrac1n$，$x_{n+1}=x_n(2-Ax_n)$。证明序列~$\Brace{x_n}$~的极限存在，并求此极限。
-\item 设序列~$\Brace{q_n}$~满足~$0<q_n<1$~且~$(1-q_n)q_{n+1}>\dfrac14$。证明~$\Brace{q_n}$~单调上
+\item 设~$A>0$，$x_1>0$，$x_{n+1}=\dfrac12\mparenB{x_n+\dfrac A{x_n}}$。证明序列~$\mbrace{x_n}$~的极限存在，并求出此极限。
+\item 设~$A>0$，$0<x_1<\dfrac1n$，$x_{n+1}=x_n(2-Ax_n)$。证明序列~$\mbrace{x_n}$~的极限存在，并求出此极限。
+\item 设序列~$\mbrace{q_n}$~满足~$0<q_n<1$~且~$(1-q_n)q_{n+1}>\dfrac14$。证明~$\mbrace{q_n}$~单调上
 升，且~$\lim_\ntoinf q_n=\dfrac12$。
-\item 设~$\Brace{a_n}$~单调下降收敛于~$0$，令
+\item 设~$\mbrace{a_n}$~单调下降收敛于~$0$，令
 \[
   b_n=\frac{a_1+a_2+\dotsb+a_n}n。
 \]
 证明，
 \begin{exlistcols}[3]
-  \item $\Brace{b_n}$~单调下降；
+  \item $\mbrace{b_n}$~单调下降；
   \item $b_{2n}\leq\dfrac12(a_n+b_n)$；
   \item $\lim_\ntoinf b_n=0$。
 \end{exlistcols}
 \end{exercise}
+
 \section{函数的极限}
+
+先考察一个实例：求自由落体
+\[
+s=\dfrac12gt^2
+\]
+在~$t_0$~时刻的瞬时速度。
+
+我们会求匀速运动的速度，现在自由落体不是作匀速运动，而是变速运动，下落的速度愈来愈快，怎么来求~$t_0$~时刻的瞬时速度呢？回顾
+一下求曲边三角形面积的方法，那时我们遇到直与曲的矛盾，解决这个矛盾分两步，第一步在局部上以直代曲得到阶梯形面积，它是曲边三角
+形面积的近似值；第二部通过取极限，由近似值得到准确值。现在解决速度匀速与不匀速的矛盾，仍用同样办法处理，并从第二步中抽象出函
+数极限的定义。
+
+考虑时间间隔~$[t_0,t]$，若在间隔较短情况下，速度变化不大，可以近似看作匀速运动，求出该时间间隔内的平均速度
+\[
+  \mbar v=\frac{s(t)-s(t_0)}{t-t_0}=\frac{\dfrac12gt^2-\dfrac12gt_0^2}{t-t_0}=\frac12g(t+t_0),
+\]
+这个速度是要求速度的近似值，若时间间隔取得越小，近似程度就越高，但不管间隔多小，总有一个近似值，而取间隔为~$0$，得到~$\sfrac00$，%
+什么也得不到。
+
+要想得到~$t_0$~时刻的瞬时速度，必须让~$t$~趋向于~$t_0$，这时平均速度就趋向于~$gt_0$，
+\[
+  \lim_{t\to t_0}\frac{s(t)-s(t_0)}{t-t_0}=gt_0。
+\]
+通过极限过程，我们求出了瞬时速度为~$gt_0$。
+
+在给出函数定义前，为了叙述方便，先定义两个名词。
+
+称集合
+\[
+  \mathsetb x{\mabs{x-x_0}<h}
+\]
+为~$x_0$~的一个\emph{邻域}，记作~$U(x_0;h)$；称集合~$U(x_0;h)-\mbrace x$~为~$x_0$~的一个\emph{空心邻域}，记作~$U_0(x_0;h)$。%
+当不需要知道邻域半径时，我们用~$U(x_0)$~和~$U_0(x_0)$~分别表示~$x_0$~的邻域和~$x_0$~的空心邻域。
+
+\begin{definition}\label{def:sec2.4-1}
+设~$f(x)$~在~$U_0(x_0)$~上定义，如果对任意~$\e>0$，存在~$\delta>0$，使得当~$0<\mabs{x-x_0}<\delta$~时，有
+\[
+  \mabs{f(x)-A}<\e,
+\]
+则称~$x$~趋向于~$x_0$~时，\emph{函数~$f(x)$~的极限}为~$A$，记作~$f(x)\to A\mcond{x\to x_0}$，或
+\[
+  \lim_{x\to x_0}f(x)=A,
+\]
+\end{definition}
+
+
+%\thisfloatsetup{rowprecode=wrapfig}
+\begin{wrapfigure}{O}{0mm}
+\somefigure
+\caption{}\label{fig:sec2.4-1}
+\end{wrapfigure}
+
+函数定义的几何意义是，任给一~$A$~为中心的~$\e$~邻域，总可找出以~$x_0$~为中心的~$\delta$~空心邻域，当动点落在空心
+邻域~$U_0(x_0;\delta)$~中时，动点函数值落在~$U(A;\e)$~内（见\ref{fig:sec2.4-1}）。
+
+\begin{example}
+证明~$\lim_{x\to1}\dfrac{x^2-1}{x-1}=2$。
+\end{example}
+\begin{proof}
+对任意~$\e>0$，有
+\[
+  \mabsB{\frac{x^2-1}{x-1}-2}<\e\impliedby\mabs{x+1-2}=\mabs{x-1}<\e,
+\]
+取~$\delta=\e$，则当~$0<\mabs{x-1}<\delta$~时，就有
+\[
+  \mabsB{\frac{x^2-1}{x-1}-2}<\e,
+\]
+即
+\[
+  \lim_{x\to1}\dfrac{x^2-1}{x-1}=2。\qedhere
+\]
+\end{proof}
+
+\begin{example}
+证明~$\lim_{x\to a}\sqrt x=\sqrt a\mcond{a>0}$。
+\end{example}
+\begin{proof}
+对任意~$\e>0$，有
+\[
+  \mabsb{\sqrt x-\sqrt a}<\e\impliedby\mabsB{\frac{x-a}{\sqrt x+\sqrt a}}\leq\frac1{\sqrt a}\mabs{x-a}<\e 。
+\]
+取~$\delta=\sqrt a\,\e$，则当~$0<\mabs{x-a}<\delta$~时，就有
+\[
+  \mabsb{\sqrt x-\sqrt a}<\e,
+\]
+即
+\[
+  \lim_{x\to a}\sqrt x=\sqrt a\mcond*{a>0}。\qedhere
+\]
+\end{proof}
+
+\begin{example}
+证明~$\lim_{x\to a}\dfrac1x=\dfrac1a\mcond{a\neq0}$。
+\end{example}
+
+由\ref{def:sec2.4-1}~的几何意义可以看出，对任意~$\e>0$~找到符合定义要求的~$\delta$~时，那么比~$\delta$~小的正数也符合定义的
+要求。所以在找~$\delta$~前，可以先限制小于某正数。如这个例子中分母有~$x$，为了防止~$x$~接近原点，我们先对~$\delta$~作一限制。
+
+\begin{proof}
+考虑~$x$~满足
+\[
+  \mabs{x-a}<\frac{\mabs a}2\implies
+  \mabs x>\mabs a-\frac{\mabs a}2=\frac{\mabs a}2。
+\]
+
+那么对任意~$\e>0$，有
+\[
+  \mabsB{\frac1x-\frac1a}<\e\impliedby
+  \mabsB{\frac{x-a}{xa}}\leq\frac{2\mabs{x-a}}{\mabs a^2}<\e 。
+\]
+取
+\[
+  \delta=\min\mbraceB{\frac{\mabs a}2,~\frac{\mabs a^2}2\e},
+\]
+则当~$0<\mabs{x-a}<\delta$~时，就有
+\[
+  \mabsB{\frac1x-\frac1a}<\e,
+\]
+即
+\[
+  \lim_{x\to a}\frac1x=\frac1a\mcond*{a\neq0}。\qedhere
+\]
+\end{proof}
+
+函数~$\sfrac1x$~当~$x\to 0$~时无限增大，所以极限~$\lim_{x\to0}\sfrac1x$~不存在，函数~$\sin\sfrac1x$~当~$x\to0$~时，其值
+不停地在~$-1$~与~$1$~之间振荡，所以极限~$\lim_{x\to0}\sin\sfrac1x$~也不存在。
+
+关于函数极限，同样有唯一性、局部有界性、四则运算和极限的不等式，因为证法与序列相同，我们只挑选两个予以证明。
+
+\begin{theorem}\label{thm:sec2.4-1}
+若极限~$\lim_{x\to x_0}f(x)$~存在，则极限值唯一。
+\end{theorem}
+
+
+\begin{theorem}\label{thm:sec2.4-2}
+若极限~$\lim_{x\to x_0}f(x)$~存在，则函数在~$x_0$~的某一空心邻域上有界。
+\end{theorem}
+\begin{proof}
+取~$\e_0=1$，由条件，存在~$\delta>0$，当~$0<\mabs{x-x_0}<\delta$~时，有
+\[
+  \mabs{f(x)-A}<1\implies\mabs{f(x)}<\mabs A+1 。
+\]
+这说明函数在~$U_0(x_0;\delta)$~上有界，界为~$\mabs A+1$。
+\end{proof}
+
+\begin{remark}
+函数在原定义域上不一定有界，所以我们只称函数局部有界。
+\end{remark}
+
+\begin{theorem}\label{thm:sec2.4-3}
+设~$\lim_{x\to x_0}=A$，而~$\lim_{x\to x_0}g(x)=B$，则
+\begin{enumlistcols}
+  \item $\lim_{x\to x_0}\mparenb{f(x)\pm g(x)}=A\pm B$；\label{thm:sec2.4-3-item-1}
+  \item $\lim_{x\to x_0}f(x)\cdot g(x)=A\cdot B$；\label{thm:sec2.4-3-item-2}
+  \item $\lim_{x\to x_0}\dfrac{f(x)}{g(x)}=\dfrac AB\mcond{B\neq0}$。\label{thm:sec2.4-3-item-3}
+\end{enumlistcols}
+\end{theorem}
+\begin{proof}
+这里只证明~\ref{thm:sec2.4-3-item-3}，而由~\ref{thm:sec2.4-3-item-2}，只需证明
+\[
+  \lim_{x\to x_0}\frac1{g(x)}=\frac1B 。
+\]
+
+事实上，取~$\e_0=\dfrac{\mabs B}2>0$，由~$\lim_{x\to x_0}g(x)=B$，存在~$\delta_1$，当~$0<\mabs{x-x_0}<\delta_1$~时，有
+\[
+  \mabsb{\mabs{g(x)}-\mabs B}\leq\mabs{g(x)-B}<\frac{\mabs B}2\implies
+  \mabs{g(x)}\geq\mabs B-\frac{\mabs B}2=\frac{\mabs B}2。
+\]
+
+对任意~$\e>0$，同样由~$\lim_{x\to x_0}g(x)=B$，存在~$\delta_2$，当~$0<\mabs{x-x_0}<\delta_2$~时，有
+\[
+  \mabs{g(x)-B}<\frac{\mabs B^2}2\e 。
+\]
+令~$\delta=\min\mbrace{\delta_1,\delta_2}>0$，所以当~$0<\mabs{x-x_0}<\delta$~时，就有
+\[
+  \mabsB{\frac1{g(x)}-\frac1B}=\frac{\mabs{g(x)-B}}{g(x)\cdot B}\leq
+  \frac2{\mabs B^2}\mabs{g(x)-B}<\frac2{\mabs B^2}\cdot\frac{\mabs B^2}2\e=\e 。
+\]
+即
+\[
+  \lim_{x\to x_0}\frac1{g(x)}=\frac1B 。\qedhere
+\]
+\end{proof}
+
+\begin{theorem}\label{thm:sec2.4-4}
+设在~$U_0(x_0)$~上有~$f(x)\leq g(x)$，且~$\lim_{x\to x_0}f(x)=A$，$\lim_{x\to x_0}g(x)=B$，则
+\[
+  A\leq B。
+\]
+\end{theorem}
+
+\begin{theorem}\label{thm:sec2.4-5}
+设在~$U_0(x_0)$~上有~$f(x)\leq g(x)\leq h(x)$，且
+\[
+  \lim_{x\to x_0}f(x)=A=\lim_{x\to x_0}g(x),
+\]
+则~$\lim_{x\to x_0}g(x)=A$。
+\end{theorem}
+
+类似序列情形，若~$\lim_{x\to x_0}f(x)=0$，则称~$x\to x_0$~时，函数~$f(x)$~是无穷小量。序列中关于无穷小量的结论，相应地
+对~$f(x)$~也成立。
+
 \begin{exercise}
-\item
+\item 判断并说明函数极限定义与下列形式是否等价。
+\begin{exlist}
+  \item 对任意~$\dfrac1{2^n}$，都存在~$\delta>0$，当~$0<\mabs{x-a}<\delta$~时，有~$\mabs{f(x)-A}<\dfrac1{2^n}$；
+  \item 对任意~$\e>0$，都存在~$\dfrac1n>0$，当~$0<\mabs{x-a}<\dfrac1n$~时，有~$\mabs{f(x)-A}<\e$；
+  \item 对任意~$\e>0$，都存在~$\delta>0$，当~$0<\mabs{x-a}<\delta$~时，有~$\mabs{f(x)-A}<\e^2$；
+  \item 对任意~$\e>0$，都存在~$\delta>0$，当~$0<\mabs{x-a}<\e\cdot\delta$~时，有~$\mabs{f(x)-A}<\e^2$；
+  \item 对任意~$\e>0$，都存在~$\delta>0$，当~$0<\mabs{x-a}<\delta$~时，有~$\mabs{f(x)-A}<\e\cdot\delta$。
+\end{exlist}
+\item 用~$\e-\delta$~方法验证下列各题。
+\begin{exlistcols}[3]
+  \item $\lim_{x\to a}\mabs x=\mabs a$；
+  \item $\lim_{x\to a}x^2=a^2$；
+  \item $\lim_{x\to a}\sqrt x=\sqrt a\mcond{a>0}$；
+  \item $\lim_{x\to a}x^3=a^3$；
+  \item $\lim_{x\to a}\dfrac1x=\dfrac1a\mcond{a\neq0}$。
+\end{exlistcols}
+\item 设~$\lim_{x\to a}f(x)=A$，用~$\e-\delta$~方法验证下列各题。
+\begin{exlistcols}
+  \item $\lim_{x\to a}\mabs{f(x)}=\mabs A$；
+  \item $\lim_{x\to a}f^2(x)=A^2$；
+  \item $\lim_{x\to a}\sqrt{f(x)}=\sqrt A\mcond{A>0}$；
+  \item $\lim_{x\to a}\sqrt[3]{f(x)}=\sqrt[3]A$；
+  \item $\lim_{x\to a}\dfrac1{\sqrt{f(x)}}=\dfrac1{\sqrt A}\mcond{A>0}$。
+\end{exlistcols}
+\item 求下列极限。
+\begin{exlistcols}
+  \item $\lim_{x\to1}\dfrac{x^n-1}{x-1}$；
+  \item $\lim_{x\to2}\dfrac{x^2-5x+6}{x^3-2x^2-4x+8}$；
+  \item $\lim_{x\to0}\dfrac{\sqrt{1-x}-\sqrt[3]{1+x}}x$；
+  \item $\lim_{x\to0}\dfrac{\sqrt[3]{1+x}-1}{\sqrt{1+x}-1}$。
+\end{exlistcols}
 \end{exercise}
-\section{函数极限的推广}
+
+
+\section{函数极限的推广}\label{sec:2.5}
+
 \subsection{自变量趋于无穷的情形}
+
+求曲线的渐近线时，遇到自变量趋于无穷时的极限。
+
+\thisfloatsetup{rowprecode=wrapfig}
+\begin{wrapfigure}[8]{O}{0mm}
+\somefigure
+\caption{}\label{fig:sec2.5-1}
+\end{wrapfigure}
+
+设有一伸展到无穷的曲线~$y=f(x)$。当点~$(x,y)$~沿曲线趋于无穷时，若它到定直线~$y=kx+b$~的距离趋于零，则
+称该直线为曲线的\emph{斜渐近线}（见\ref{fig:sec2.5-1}）。
+
+曲线上的点~$\mparenb{x,f(x)}$~到直线~$y=kx+b$~的距离为
+\[
+  \frac{\mabs{f(x)-kx-b}}{1+k^3},
+\]
+所以直线是曲线的斜渐近线当且仅当
+\[
+  \lim_{\substack{x\to+\infty\\(x\to-\infty)}}\frac{\mabs{f(x)-kx-b}}{1+k^3}=0
+  \quad\text{或}\quad
+  \lim_{\substack{x\to+\infty\\(x\to-\infty)}}\mparenb{f(x)-kx-b}=0 。
+\]
+
+怎么求出曲线~$y=f(x)$~的斜渐近线呢？即怎么确定出常数~$k$~与~$b$~的值。
+
+由斜渐近线定义
+\begin{equation}\label{eq:sec2.5-1}
+\lim_{x\to+\infty}\mparenb{f(x)-kx-b}=0,
+\end{equation}
+即得
+\begin{equation}\label{eq:sec2.5-2}
+\lim_{x\to+\infty}\mparenb{f(x)-kx}=b。
+\end{equation}
+若知道~$k$，即可由上式确定出~$b$。那么怎么求出~$k$~呢？由~$\lim_{x\to+\infty}\dfrac1x=0$~和极限的乘法运算，可得
+\[
+  \lim_{x\to+\infty}\mparenB{\frac{f(x)}x-k}=0,
+\]
+即
+\begin{equation}\label{eq:sec2.5-3}
+  \lim_{x\to+\infty}\frac{f(x)}x=k 。
+\end{equation}
+
+具体做题时，先由~\ref{eq:sec2.5-3}~求出~$k$，再由~\ref{eq:sec2.5-2}~求出~$b$。因为~\ref{eq:sec2.5-2}~蕴涵~\ref{eq:sec2.5-1}。这
+表明所求出的直线~$y=kx+b$~确实为曲线~$y=f(x)$~的斜渐近线。若~$k=0$，则称直线~$y=b$~为曲线~$y=f(x)$~的\emph{水平渐近线}。
+
+在叙述自变量趋于无穷时的函数极限之前，我们先引入几个名词。
+
+\begin{enumlist}
+\item 称集合~$\mathsetb x{\mabs x>h}$~为~\emph{$\infty$~的邻域}，记作~$U(\infty;h)$~或~$U(\infty)$；
+\item 称集合~$\mathset x{h<x<+\infty}$~与~$\mathset x{-\infty<x<h}$~为~\emph{$\infty$~的单侧邻域}，记作~$U^+(\infty;h)$~
+与~$U^-(\infty;h)$~或记作~$U^+(\infty)$~与~$U^-(\infty)$。
+\end{enumlist}
+
+\begin{definition}
+设~$f(x)$~在~$U^+(\infty)$~上定义，如果存在~$A$，使得对任意~$\e>0$，存在~$X$，当~$x>X$~（自然要求~$X\in U^+(\infty)$）时，有
+\[
+  \mabs{f(x)-A}<\e,
+\]
+则称~$x\to+\infty$~时，\emph{函数~$f(x)$~的极限为~$A$}，记作~$f(x)\to A\mcond{x\to+\infty}$，或
+\[
+  \lim_{x\to+\infty}f(x)=A 。
+\]
+\end{definition}
+
+\begin{enumlist}
+\item 设~$f(x)$~在~$U^-(\infty)$~上定义，式子~$\lim_{x\to-\infty}f(x)=A$~的定义为：对任意~$\e>0$，存在~$X$，使得
+当~$x<X$~时，有
+\[
+  \mabs{f(x)-A}<\e 。
+\]
+\item 设~$f(x)$~在~$U(\infty)$~上定义，式子~$\lim_{x\to\infty}f(x)=A$~的定义为：对任意~$\e>0$，存在~$X>0$，使得
+当~$\mabs x<X$~时，有
+\[
+  \mabs{f(x)-A}<\e 。
+\]
+\end{enumlist}
+
+对于这类极限，同样有极限的唯一性、局部有界性、四则运算和极限不等式，就不再一一赘述。
+
+\begin{example}
+证明~$\lim_{x\to\infty}\sqrt{1+\dfrac1{x^2}}=1$。
+\end{example}
+\begin{proof}
+对任意~$\e>0$，有
+\[
+  \mabsB{\sqrt{1+\dfrac1{x^2}}-1}<\e\impliedby
+  \mabsB{\frac{\sfrac1{x^2}}{\sqrt{1+\sfrac1{x^2}}+1}}\leq
+  \mabsB{\frac1{x^2}}<\e\impliedby
+  x^2>\frac1\e 。
+\]
+取~$X=\dfrac1{\sqrt\e}$，则当~$\mabs x>X$~时，就有
+\[
+  \mabsB{\sqrt{1+\dfrac1{x^2}}-1}<\e 。\qedhere
+\]
+\end{proof}
+
+\begin{example}
+求极限~$\lim_{x\to+\infty}\dfrac{4x^2-3x+2}{x^2+4x-3}$。
+\end{example}
+\begin{solution}
+\[
+  \lim_{x\to+\infty}\frac{4x^2-3x+2}{x^2+4x-3}=
+  \lim_{x\to+\infty}\frac{4-\dfrac3x+\dfrac2{x^2}}{1+\dfrac4x-\dfrac3{x^2}}=4 。\qedhere
+\]
+\end{solution}
+
+\begin{example}
+求曲线~$y=\sqrt{1+x^2}$~的渐近线。
+\end{example}
+\begin{solution}
+先确定~$k$，
+\[
+  k=\lim_{x\to+\infty}\frac{\sqrt{1+x^2}}x=\lim_{x\to+\infty}\sqrt{1+\frac1{x^2}}=1;
+\]
+再确定~$b$，
+\[
+  b=\lim_{x\to+\infty}\mparenb{\sqrt{1+x^2}-1\cdot x}=\lim_{x\to+\infty}\frac1{\sqrt{1+x^2}+x}=0 。
+\]
+所以曲线有渐近线~$y=x$。
+
+又因为
+\begin{align*}
+\lim_{x\to-\infty}\frac{\sqrt{1+x^2}}x&=\lim_{x\to-\infty}\frac{\sqrt{1+x^2}}{-\sqrt{x^2}}=-1,\\
+\lim_{x\to+\infty}\mparenb{\sqrt{1+x^2}-(-1)\cdot x}&=\lim_{x\to-\infty}\frac1{\sqrt{1+x^2}-x}=0,
+\end{align*}
+所以~$y=-x$~也是曲线的渐近线。
+\end{solution}
+
 \subsection{无穷大量}
+
+%\thisfloatsetup{rowprecode=wrapfig}
+\begin{wrapfigure}{O}{0mm}
+\somefigure
+\caption{}\label{fig:sec2.5-2}
+\end{wrapfigure}
+
+曲线除斜渐近线外，还可能有垂直渐近线，如\ref{fig:sec2.5-2}，$x=x_0$~是它的垂直渐近线。当~$x\to x_0$~时，$f(x)$~的值无限
+增大（见\ref{fig:sec2.5-2}），这时我们说函数极限不存在，但函数有确定的变化趋势，于是我们有下面的定义。
+
+\begin{definition}\label{def:sec2.5-2}
+设~$f(x)$~在~$U_0(x_0)$~上有定义。如果对任意~$M>0$，存在~$\delta>0$，使得当~$0<\mabs{x-x_0}<\delta$~时，有
+\[
+  f(x)>M,
+\]
+则称~$x\to x_0$~时，函数~$f(x)$~的极限为~$+\infty$。记为~$f(x)\to+\infty\mcond{x\to x_0}$，或
+\[
+  \lim_{x\to x_0}f(x)=+\infty 。
+\]
+\end{definition}
+
+\begin{enumlist}
+\item 记号~$\lim_{x\to x_0}f(x)=-\infty$~的定义为：对任意~$M>0$，存在~$\delta>0$，使得当~$0<\mabs{x-x_0}<\delta$~时，有
+\[
+  f(x)<M 。
+\]
+\item 记号~$\lim_{x\to x_0}f(x)=\infty$~的定义为：对任意~$M>0$，存在~$\delta>0$，使得当~$0<\mabs{x-x_0}<\delta$~时，有
+\[
+  \mabs{f(x)}<M 。
+\]
+\end{enumlist}
+
+对序列类似可以定义：
+\[
+  \lim_{x\to+\infty}x_n=+\infty,\quad
+  \lim_{x\to+\infty}x_n=-\infty,\quad
+  \lim_{x\to+\infty}x_n=\infty 。
+\]
+
+极限为无穷时，我们数极限不存在。因为它与极限为有限数情形有本质的不同。极限为无穷情形自然没有局部有界性。极限的四则运算与
+极限不等式是否存在，要具体问题具体分析。极限为无穷或有限时，我们称\emph{广义极限存在}。极限不等式成立的条件，可以改为只要
+变量的广义极限存在。
+
+\begin{example}
+证明~$\lim_{x\to0}\dfrac1x=\infty$。
+\end{example}
+\begin{proof}
+对任意~$M>0$，取~$\delta=\dfrac1M>0$，当~$0<\mabs x<\delta$~时，有
+\[
+  \mabsB{\frac1x}>\frac1\delta=M,
+\]
+即
+\[
+  \lim_{x\to0}\frac1x=\infty 。\qedhere
+\]
+\end{proof}
+
+\begin{example}
+证明~$\lim_\ntoinf q^n=\infty\mcond{\mabs q>1}$。
+\end{example}
+\begin{proof}
+对任意~$M>0$，有
+\[
+  \mabs{q^n}>M\impliedby n\ln\mabs q>\ln M 。
+\]
+取~$N=\mfloorB{\frac{\ln M}{\ln\mabs q}}$，则当~$n>N$~时，就有~$\mabs{q^n}>M$，即
+\[
+  \lim_\ntoinf q^n=\infty\mcond*{\mabs q>1}。\qedhere
+\]
+\end{proof}
+
+\begin{definition}\label{def:sec2.5-3}
+极限为无穷（包括~$+\infty$~或~$-\infty$）的变量称为\emph{无穷大量}。
+\end{definition}
+
+若变量不取零值，显然变量为无穷大量当且仅当它的倒数为无穷小量。
+
+\begin{quiz*}
+\begin{thmenumlist}
+  \item 无界变量是否是无穷大量；
+  \item \ref{def:sec2.5-2}~中“任意~$M>0$”，是否可改为“任意~$M$”。
+\end{thmenumlist}
+\end{quiz*}
+
 \subsection{单侧极限}
+
+为了更好地考察函数的变化趋势，特别是对单调函数和分段定义的函数讨论其变化趋势时，我们需要单侧极限的概念。
+
+称集合~$\mathset x{x_0\leq x_0+h}$~和~$\mathset x{x_0-h<x\leq x_0}$~为点~$x_0$~的\emph{右邻域}和\emph{左邻域}，%
+记作~$U^+(x_0;h)$~和~$U^-(x_0;h)$。若上面集合除去~$x_0$~点，就称为~$x_0$~的\emph{空心右邻域}和\emph{空心左邻域}，%
+记作~$U_0^+(x_0;h)$~和~$U_0^-(x_0;h)$。不必指明邻域半径时，记号中可省略~$h$。
+
+\begin{definition}\label{def:sec2.5-4}
+设~$f(x)$~在~$U_0^+(x_0)$~上定义。若存在~$A$，使得对任意~$\e>0$，存在~$\delta>0$，当~$0<x-x_0<\delta$~时，有
+\[
+  \mabs{f(x)-A}<\e,
+\]
+则称~$f(x)$~在~$x_0$~点的\emph{右极限}存在，记作
+\[
+  \lim_{x\to x_0+0}f(x)=A,
+\]
+右极限~$A$~也记作~$f(x_0+0)$。
+
+设~$f(x)$~在~$U_0^-(x_0)$~上定义。若存在~$B$，使得对任意~$\e>0$，存在~$\delta>0$，当~$0<x_0-x<\delta$~时，有
+\[
+  \mabs{f(x)-B}<\e,
+\]
+则称~$f(x)$~在~$x_0$~点的\emph{左极限}存在，记作
+\[
+  \lim_{x\to x_0-0}f(x)=B,
+\]
+左极限~$B$~也记作~$f(x_0-0)$。
+\end{definition}
+
+例如
+\begin{Align*}
+\lim_{x\to0+0}\arctan\frac1x&= \frac\pi2; & \lim_{x\to n+0}\mfloor x&=n;\\[2pt]
+\lim_{x\to0-0}\arctan\frac1x&=-\frac\pi2; & \lim_{x\to n-0}\mfloor x&=n-1。
+\end{Align*}
+
+容易看出有下面定理。
+
+\begin{theorem}\label{thm:sec2.5-1}
+函数在~$x_0$~点极限存在当且仅当函数在~$x-0$~点的左、右极限存在且相等。
+\end{theorem}
+
+\begin{quiz*}
+\begin{thmenumlist}
+\item 讨论\ref{thm:sec2.5-1}~中极限存在是否可改为广义极限存在，给出\ref{thm:sec2.4-1}~的证明；
+\item 函数极限定义中，自变量有~$6$~种变化方式，函数有~$4$~种变化方式，共有~$24$~种组合。\ref{tab:sec2.5-1}~中
+打“$\surd$”的表示这种组合的极限定义已经给出，试写出其它组合的极限定义；
+\begin{table}
+\extrarowsep=1mm
+\begin{tabu}{X[1.5,mc]*6{|X[mc,$]}}
+\toprule
+ \diagbox[width=\linewidth+2\tabcolsep,height=3em]{$f(x)$}{$x$}
+          &x_0  &x_0+0&x_0-0&+\infty&-\infty&\infty\\ \hline
+ $A$      &\surd&\surd&\surd&\surd  &\surd  &\surd \\ \hline
+ $+\infty$&\surd&&&&\\ \hline
+ $-\infty$&\surd&&&&\\ \hline
+ $ \infty$&\surd&&&&\\
+\bottomrule
+\end{tabu}
+\caption{}\label{tab:sec2.5-1}
+\end{table}
+\item 对于单侧极限，分别讨论极限的唯一性、局部有界性、四则运算和极限不等式是否成立。
+\end{thmenumlist}
+\end{quiz*}
+
 \subsection{极限存在性}
+
+单调有界序列有极限的定理，可以推广到函数情形，不过只对单侧极限和自变量趋于~$+\infty$~或~$-\infty$~情形才有意义。
+
+为了叙述更一般，我们规定无上界的集合~$E$，虽无上确界，仍记~$\sup E=+\infty$；无下界的集合~$E$，虽无下确界，仍
+记~$\inf E=-\infty$。
+
+\begin{theorem}
+设~$f(x)$~在~$U_0^-(x_0)$~上定义，且~$f(x)$~单调上升，则
+\[
+  \lim_{x\to x_0-0}f(x)=\sup_{x\in U_0^-(x_0)}\mbrace{f(x)} 。
+\]
+\end{theorem}
+\begin{proof}
+考虑集合
+\[
+  \mathsetb{f(x)}{x\in U_0^-(x_0)}\quad\text{和}\quad
+  A=\sup_{x\in U_0^-(x_0)}\mbrace{f(x)}。
+\]
+
+分两种情形讨论。
+
+\begin{enumlist}
+\item $A<+\infty$~的情形
+
+对任意~$\e>0$，由上确界定义，存在~$x'\in U_0^-(x_0)$，使得
+\[
+  f(x')>A-\e 。
+\]
+取~$\delta=x_0-x'>0$，则当~$0<x_0-x<\delta$~时，由函数的上升性，得
+\[
+  f(x)\geq f(x')>A-\e,
+\]
+再结合上确界定义，有
+\[
+  A+\e>f(x)>A-\e\implies\mabs{f(x)-A}<\e,
+\]
+即
+\[
+  \lim_{x\to x_0-0}f(x)=A=\sup_{x\in U_0^-(x_0)}\mbrace{f(x)} 。
+\]
+\item $A=+\infty$~的情形（见\ref{fig:sec2.5-3}）
+
+对任意~$M>0$，因为集合无上界，存在~$x'\in U_0^-(x_0)$，使得
+\[
+  f(x')>M 。
+\]
+取~$\delta=x_0-x'>0$，则当~$0<x_0-x<\delta$~时，就有
+\[
+  f(x)\geq f(x')>M,
+\]
+即
+\[
+  \lim_{x\to x_0-0}f(x)=+\infty=\sup_{x\in U_0^-(x_0)}\mbrace{f(x)} 。\qedhere
+\]
+\end{enumlist}
+\end{proof}
+
+%\thisfloatsetup{rowprecode=wrapfig}
+\begin{wrapfigure}{O}{0mm}
+\somefigure
+\caption{}\label{fig:sec2.5-3}
+\end{wrapfigure}
+
+同样，若~$f(x)$~在~$U_0^-(x_0)$~上单调下降，则有
+\[
+  \lim_{x\to x_0-0}f(x)=\inf_{x\in U_0^-(x_0)}\mbrace{f(x)} 。
+\]
+
+若~$f(x)$~在~$U_0^+(x_0)$~上定义，且~$x\to x_0+0$~时，函数单调上升（作为自变量由小变大变化趋势来看，函数是单调下降的），则有
+\[
+  \lim_{x\to x_0+0}f(x)=\sup_{x\in U_0^+(x_0)}\mbrace{f(x)};
+\]
+若当~$x\to x_0+0$~时，函数单调下降，则有
+\[
+  \lim_{x\to x_0+0}f(x)=\inf_{x\in U_0^+(x_0)}\mbrace{f(x)}。
+\]
+
+
 \subsection{复合函数求极限}
+
+求函数极限比求序列极限多了一种变换的方法。例如，求极限
+\[
+  \lim_{x\to0}\frac{\sqrt[3]{1+x}-1}x,
+\]
+我们不能直接用极限的除法运算，这时可以作~$1+x=t$~的变换来求此极限。即
+\begin{align*}
+\lim_{x\to0}\frac{\sqrt[3]{1+x}-1}x
+&=\lim_{t\to1}\frac{\sqrt[3]t-1}{t-1}=\lim_{t\to1}\frac{\sqrt[3]t-1}{\mparenb{\sqrt[3]t-1}\mparenb{\sqrt[3]{t^2}+\sqrt[3]t+1}}\\
+&=\lim_{t\to1}\frac1{\sqrt[3]{t^2}+\sqrt[3]t+1}=\frac13 。
+\end{align*}
+
+但是，这样做的理论依据是什么呢？为了说清楚起见，令
+\[
+  f(t)=\frac{\sqrt[3]t-1}{t-1},\quad
+  t=g(x)=x+1 。
+\]
+即已知
+\[
+  \lim_{t\to1}f(t)=\frac13,\quad \lim_{x\to0}g(x)=1,
+\]
+则由下面\ref{thm:sec2.5-3}~得复合函数极限：
+\[
+  \lim_{x\to0}f\mparenb{g(x)}=\lim_{x\to0}\frac{\sqrt[3]{1+x}-1}x=\frac13 。
+\]
+
+下面证明复合函数求极限定理。
+
+\begin{theorem}\label{thm:sec2.5-3}
+设~$f(t)$~在空心邻域~$U_0(t_0)$~上定义，且
+\[
+  \lim_{t\to t_0}f(t)=A;
+\]
+$t=g(x)$~在~$U_0(x_0)$~上定义。当~$x\in U_0(x_0)$~时，$t=g(x)\in U_0(t_0)$，且
+\[
+  \lim_{x\to x_0}g(x)=t_0,
+\]
+则
+\[
+  \lim_{x\to x_0}f\mparenb{g(x)}=A 。
+\]
+\end{theorem}
+\begin{proof}
+对任意~$\e>0$，由~$\lim_{t\to t_0}f(t)=A$，存在~$\eta>0$，当~$0<\mabs{t-t_0}<\eta$~时，有
+\[
+  \mabs{f(t)-A}<\e 。
+\]
+对任意~$\eta>0$，由~$\lim_{x\to x_0}g(x)=t_0$，存在~$\delta>0$，当~$0<\mabs{x-x_0}<\delta$~时，有
+\[
+  \mabs{g(x)-t_0}<\eta 。
+\]
+根据~$x\in U_0(x_0)$~时~$g(x)=t\in U_0(t_0)$，所以上式可写成
+\[
+  0<\mabs{g(x)-t_0}=\mabs{t-t_0}<\eta,
+\]
+这样当~$0<\mabs{x-x_0}<\delta$~时，就有
+\[
+  \mabs{f(t)-A}=\mabsb{f\mparenb{g(x)}-A}<\e,
+\]
+即
+\[
+  \lim_{x\to x_0}f\mparenb{g(x)}=A 。\qedhere
+\]
+\end{proof}
+
+定理只对自变量、中间变量、因变量趋于有限情形加以证明，事实上每个量都可以趋于有限或无穷，组合以后共有~$8$~种可能。若
+考虑单侧极限，组合情形就更多，每种组合的复合函数求极限形式，以后都可以应用。
+
+\begin{quiz*}
+若~$f(t)$~在邻域~$U(t_0)$~上定义，讨论关于函数~$g(x)$~的条件能否改为：当~$x\in U_0(x_0)$~时，$g(x)\in U(t_0)$。
+\end{quiz*}
+
 \begin{exercise}
-\item
+\item 求下列极限。
+\begin{exlistcols}
+  \item $\lim_{x\to+\infty}\mparenB{\sqrt{x+\smsqrt{x+\sqrt x}}-x}$；
+  \item $\lim_{x\to-\infty}\mparenb{\sqrt{x^2+x}-x}$。
+\end{exlistcols}
+\item 求下列极限。
+\begin{exlistcols}[4]
+  \item $\lim_{x\to0+0}x\mfloorB{\dfrac1x}$；
+  \item $\lim_{x\to2+0}\dfrac{\mfloor x^2-4}{x^2-4}$；
+  \item $\lim_{x\to2-0}\dfrac{\mfloor x^2-4}{x^2-4}$；
+  \item $\lim_{x\to1+0}\dfrac{\mfloor{4x}}{1+x}$。
+\end{exlistcols}
+\item 讨论下列有理函数的极限。
+\[
+  \lim_{x\to\infty}\dfrac{a_0x^n+a_1x^{n-1}+\dotsb+a_n}{b_0x^m+b_1x^{m-1}+\dotsb+b_m}
+  \mcond*{a_0\cdot b_0\neq0}。
+\]
+\item 求下列曲线的渐近线。
+\begin{exlistcols}[3]
+  \item $y=\dfrac{2x^2+4x+3}{x-1}$；
+  \item $y=\sqrt{4x^2+2x+3}$；
+  \item $y=\sqrt{\dfrac{x^2}{x+1}}$。
+\end{exlistcols}
+\item 设~$a>1,k>0$，用极限不等式证明~$\lim_{x\to+\infty}\dfrac{x^k}{a^x}=0$。
+\item 用变量替换求下列极限。
+\begin{exlistcols}
+  \item $\lim_{x\to+\infty}\dfrac{\ln x}{x^\alpha}\mcond{\alpha>0}$；
+  \item $\lim_{x\to0+0}x^\alpha\ln x\mcond{\alpha>0}$；
+  \item $\lim_{x\to+\infty}x^{\frac1x}$；
+  \item $\lim_{x\to0+0}x^x$。
+\end{exlistcols}
+\item 设函数~$f(x)$~在集合~$X$~上定义，则~$f(x)$~在~$X$~上无界当且仅当存在~$x_n\in X\mcond{n=1,2,\dotsc}$，使
+得~$\lim_\ntoinf f(x_n)=+\infty$。
+\item 设~$f(x)$~在~$(a,+\infty)$~上单调上升，且~$\lim_\ntoinf x_n=+\infty$。若~$\lim_\ntoinf f(x_n)=A$，证
+明~$\lim_{x\to+\infty}f(x)=A$~（$A$~可以为无穷）。
+\item 设~$f(x)$~在~$(a,+\infty)$~上单调上升。若~$\lim_\ntoinf f(x_n)=\lim_{x\to+\infty}f(x)$，证明~$\lim_\ntoinf x_n=+\infty$。
+\item 设~$f(x),g(x)$~在~$\mR$~上定义，且~$g(x)$~单调。若~$\lim_{x\to\infty}g\mparenb{f(x)}=\infty$，%
+证明~$\lim_{x\to\infty}f(x)=\infty$。
+\item 叙述~$\lim_{x\to a}f(x)=+\infty$~的定义，并证明
+\begin{exlist}
+  \item 设~$\lim_{x\to a}f(x)=+\infty$，且~$\lim_{x\to a}g(x)=A$，则~$\lim_{x\to a}\mparenb{f(x)+g(x)}=+\infty$；
+  \item 设~$\lim_{x\to a}f(x)=+\infty$，且~$\lim_{x\to a}g(x)=A\mcond{A>0}$，则~$\lim_{x\to a}\mparenb{f(x)\cdot g(x)}=+\infty$。
+\end{exlist}
+\item 设~$f(x)$~是~$\mR$~上的周期函数，且~$\lim_{x\to+\infty}f(x)=0$，证明~$f(x)\equiv 0$。
+\item 设~$f(x)$~在~$(0,+\infty)$~上满足函数方程~$f(2x)=f(x)$，及~$\lim_{x\to+\infty}f(x)=\ell$。证明~$f(x)\equiv\ell$。
+\item 设~$\lim_{x\to+\infty}f(x)=A$。证明，对任意~$\e>0$，存在~$X$，使得当~$x_1,x_2>X$~时，有~$\mabs{f(x_1)-f(x_2)}<\e$。%
+判断下面证法的正确性。
+\begin{exproof}
+对任意~$\e>0$，由~$\lim_{x\to+\infty}f(x)=A$，存在~$X_1$，当~$x_1>X_1$~时，有
+\[
+  \mabs{f(x_1)-A}<\frac\e2。
+\]
+又由~$\lim_{x\to+\infty}f(x)=A$，存在~$X_2$，当~$x_2>X_2$~时，有
+\[
+  \mabs{f(x_2)-A}<\frac\e2。
+\]
+取~$X=\max\mbrace{X_1,X_2}$，则当~$x_1,x_2>X$~时，就有
+\[
+  \mabs{f(x_1)-f(x_2)}\leq\mabs{f(x_1)-A}+\mabs{f(x_2)-A}<\frac\e2+\frac\e2=\e 。\qedhere
+\]
+\end{exproof}
 \end{exercise}
+
+
 \section{两个重要极限}
+
+\thisfloatsetup{rowprecode=wrapfig}
+\begin{wrapfigure}{O}{0mm}
+\somefigure
+\caption{}\label{fig:sec2.6-1}
+\end{wrapfigure}
+
+有两个函数的极限是以后求导数的基础，这节我们讨论这两个极限。
+
+\begin{theorem}\label{thm:sec2.6-1}
+\[
+  \lim_{x\to0}\frac{\sin x}x=1。
+\]
+\end{theorem}
+
+\ref{thm:sec2.6-1}~有鲜明的几何意义。作单位圆，且~$x$~表示以弧度为单位的圆心角~$\angle AOB$~（见\ref{fig:sec2.6-1}），则
+\[
+  x=\marc{AB},\quad \sin x=\mbar{BC}。
+\]
+为了明显起见，在上半圆上取与~$B$~对称的点~$B'$，则
+\[
+  2x=2\marc{AB}=\marc{BB'},\quad
+  2\sin x=2\mbar{BC}=\mbar{BB'},
+\]
+所以
+\[
+  \lim_{x\to0}\frac{\sin x}x=\lim_{x\to0}\frac{2\sin x}{2x}=\lim_{x\to0}\frac{\marc{BB'}}{\mbar{BB'}}=1。
+\]
+即当圆心角趋于零时，对应的弧长与弦长之比趋于~$1$。
+
+\begin{proof}
+设~$0<x<\frac\pi2$，显然有面积关系
+\[
+  S_{\triangle OAB}<S_{\marc{OAB}}<S_{\triangle OAD}  A,
+\]
+即
+\[
+  \frac12\sin x<\frac12x<\frac12\tan x\implies \sin x<x<\tan x 。
+\]
+因此，当~$0<x<\dfrac\pi2$~时，有
+\[
+  \cos x<\frac{\sin x}x<1 。
+\]
+利用偶函数的性质，上式在~$-\dfrac\pi2<x<0$~上也成立。由~$\lim_{x\to0}\cos x=1$~（证明可利用下面的\ref{cor:sec2.6-1}）以
+及\ref{thm:sec2.4-5}可得
+\[
+  \lim_{x\to0}\frac{\sin x}x=1。\qedhere
+\]
+\end{proof}
+
+若~$x$~的单位是度，则极限为
+\[
+  \lim_{x\to\ang 0}\frac{\sin x}x=\frac\pi{180}。
+\]
+所以我们在今后凡角度都取弧度为单位，可以使结果简单明了。
+
+\begin{corollary}\label{cor:sec2.6-1}
+对任意~$x\in\mR$，有
+\[
+  \mabs{\sin x}\leq\mabs x,
+\]
+等式当且仅当~$x=0$~时成立。
+\end{corollary}
+\begin{proof}
+上面已经证得，当~$0<\mabs x<\dfrac\pi2$~时，
+\[
+  \frac{\sin x}x=\frac{\mabs{\sin x}}{\mabs x}<1\implies\mabs{\sin x}<\mabs x。
+\]
+而~$\mabs x\geq\dfrac\pi2>1$~时，显然上式成立。所以当~$\mabs x>0$~时，有
+\[
+  \mabs{\sin x}<\mabs x。
+\]
+而~$x=0$~时等式成立，且只有~$x=0$~时等式成立。
+\end{proof}
+
+\begin{theorem}
+\[
+  \lim_{x\to\infty}\mparenB{1+\frac1x}^x=\me 。
+\]
+\end{theorem}
+\begin{proof}
+先证明~$x\to+\infty$~的情形。事实上，当~$x>1$~时，显然有
+\[
+  1+\frac1{\mfloor x+1}\leq 1+\frac1x\leq 1+\frac1{\mfloor x}。
+\]
+利用幂函数的递增性，可得
+\[
+  \mparenB{1+\frac1{\mfloor x+1}}^x\leq\mparenB{1+\frac1x}^x\leq\mparenB{1+\frac1{\mfloor x}}^x;
+\]
+再由指数函数（底数大于~$1$）的递增性，可得
+\[
+  \mparenB{1+\frac1{\mfloor x+1}}^{\mfloor x}\leq\mparenB{1+\frac1x}^x\leq
+  \mparenB{1+\frac1{\mfloor x}}^{\mfloor x+1} 。
+\]
+利用~$\lim_\ntoinf\mparenB{1+\frac1n}^n=\me$，可知
+\begin{align*}
+\lim_{x\to+\infty}\mparenB{1+\frac1{\mfloor x}}^{\mfloor x+1}
+&=\lim_{x\to+\infty}\mparenB{1+\frac1{\mfloor x}}^{\mfloor x}\mparenB{1+\frac1{\mfloor x}}=\me\\[2pt]
+\lim_{x\to+\infty}\mparenB{1+\frac1{\mfloor x+1}}^{\mfloor x}
+&=\lim_{x\to+\infty}\mparenB{1+\frac1{\mfloor x+1}}^{\mfloor x+1}\mparenB{1+\frac1{\mfloor x+1}}^{-1}=\me,
+\end{align*}
+所以
+\[
+  \lim_{x\to+\infty}\mparenB{1+\frac1x}^x=\me 。
+\]
+
+再证~$x\to-\infty$~的情形。为此，令~$x=-y$，则~$y\to+\infty$。所以
+\begin{align*}
+\lim_{x\to-\infty}\mparenB{1+\frac1x}^x
+&=\lim_{y\to+\infty}\mparenB{1-\frac1y}^{-y}=\lim_{y\to+\infty}\mparenB{\frac y{y-1}}^y\\[2pt]
+&=\lim_{y\to+\infty}\mparenB{1+\frac1{y-1}}^{y-1}\mparenB{1+\frac1{y-1}}=\me 。
+\end{align*}
+
+最后由单侧极限与极限的关系，得到
+\[
+  \lim_{x\to\infty}\mparenB{1+\frac1x}^x=\me 。\qedhere
+\]
+\end{proof}
+
+\begin{corollary}\label{cor:sec2.6-2}
+\[
+  \lim_{t\to0}(1+t)^{\frac1t}=\me 。
+\]
+\end{corollary}
+\begin{proof}
+令~$t=\dfrac1x$，则
+\[
+\lim_{t\to0}(1+t)^{\frac1t}=\lim_{x\to\infty}\mparenB{1+\frac1x}^x=\me 。\qedhere
+\]
+\end{proof}
+
 \begin{exercise}
-\item
+\item 求下列极限。
+\begin{exlistcols}
+  \item $\lim_{x\to0}\dfrac{\tan 3x}{\tan 5x}$；
+  \item $\lim_{x\to0}\dfrac{2\sin x-\sin2x}{x^3}$；
+  \item $\lim_{x\to0}\dfrac{\cos5x-\cos3x}{x^2}$；
+  \item $\lim_{x\to\pi}\dfrac{\sin mx}{\sin nx}\mcond{m,n\in\mZ}$；
+  \item $\lim_{x\to\sfrac\pi4}\dfrac{\tan x-1}{x-\sfrac\pi4}$；
+  \item $\lim_{x\to0}\dfrac{\cos(n\arccos x)}x\mcond{x~\text{为奇数}}$；
+  \item $\lim_\ntoinf\mparenb{\cos\sqrt{n+1}-\cos\sqrt n}$；
+  \item $\lim_\ntoinf\sin\mparenb{\pi\sqrt{n^2+1}}$。
+\end{exlistcols}
+\item 求极限~$\lim_\ntoinf\cos\dfrac x2\cos\dfrac x4\dotsm\cos\dfrac x{2^n}$。
+\item 求下列极限。
+\begin{exlistcols}
+  \item $\lim_{x\to0}\sqrt[x]{1-2x}$；
+  \item $\lim_{x\to\infty}\mparenB{1+\dfrac2x}^{-x}$；
+  \item $\lim_{x\to\infty}\mparenB{\frac{x^2-1}{x^2+1}}^{x^2}$；
+  \item $\lim_{x\to+\infty}\mparenB{\cos\dfrac ax}^{x^2}\mcond{a\neq0}$；
+  \item $\lim_{x\to\sfrac\pi2}(\sin x)^{\tan x}$；
+  \item $\lim_{x\to\infty}\mparenB{\sin\dfrac1x+\cos\dfrac1x}^x$；
+  \item $\lim_\ntoinf\mparenB{\dfrac{n+x}{n-1}}^n$；
+  \item $\lim_\ntoinf\mparenB{\dfrac{n+\ln n}{n-\ln n}}^{\frac n{\ln n}}$。
+\end{exlistcols}
 \end{exercise}
+
+
 \section{无穷小量的阶以及无穷大量的阶的比较}
+
+两个无穷小量或两个无穷大量怎么比较其变化的速度呢？例如
+\[
+  \lim_{x\to0}\frac{\sin x}x=1,
+\]
+我们可以说当~$x\to0$~时，两个无穷小量~$\sin x$~与~$x$~趋于零的快慢一样。再例如
+\[
+  \lim_{x\to0}\frac{1-\cos x}{x^2}=\lim_{x\to0}\frac{2\sin^2\dfrac x2}{x^2}=\frac12,
+\]
+我们说当~$x\to0$~时，两个无穷小量~$1-\cos x$~与~$x^2$~趋于零的速度成正比例。例如
+\[
+  \lim_{x\to0}\frac{\sin^2x}x=0,
+\]
+我们说当~$x\to0$~时，$\sin^2x$~趋于零的速度比~$x$~要快。又例如
+\[
+  \lim_{x\to+\infty}\frac{\sfrac1{(x+x^2)}}{\sfrac1{x^2}}=1,
+\]
+我们说当~$x\to+\infty$~时，两个无穷小量~$\dfrac1{x+x^2}$~与~$\dfrac1{x^2}$~趋于零的速度一样。
+
+类似有两个无穷大量的比较。例如
+\[
+  \lim_{x\to0+0}\frac{\mparen{\sfrac1{\sqrt x}}\me^{-x}}{\sfrac1{\sqrt x}}=1,
+\]
+我们说当~$x\to0+0$~时，两个无穷大量~$\dfrac1{\sqrt x}\me^{-x}$~与~$\dfrac1{\sqrt x}$~趋于无穷的速度一样。又例如
+\[
+  \lim_{x\to+\infty}\frac{a_0+a_1x+\dotsb+a_nx^n}{b_0+b_1x+\dotsb+b_nx^n}=\frac{a_n}{b_n}
+  \mcond*{a_n,b_n\neq0}。
+\]
+我们说当~$x\to+\infty$~时，上述两个多项式趋于无穷的速度称比例。这样我们就有如下定义。
+
+\begin{definition}\label{def:sec2.7-1}
+设~$f(x),g(x)$~在~$U_0(x_0)$~上定义（$x_0$~可以是无穷），且~$g(x)\neq0$。
+\begin{enumlist}
+\item 如果
+\[
+  \lim_{x\to x_0}\frac{f(x)}{g(x)}=A\neq0,
+\]
+则记作
+\[
+  f(x)\sim Ag(x)\mcond*{x\to x_0}。
+\]
+
+当~$f(x),g(x)$~是无穷小（大）量时，称为\emph{同阶无穷小（大）量}，特别~$A=1$~时，称为\emph{等价无穷小（大）量}；
+\item 如果
+\[
+  \lim_{x\to x_0}\frac{f(x)}{g(x)}=0,
+\]
+则记作
+\[
+  f(x)=o\mparenb{g(x)}\mcond*{x\to x_0}。
+\]
+
+当~$f(x),g(x)$~是无穷小（大）量时，称为~$f(x)$~是~$g(x)$~的\emph{高（低）阶无穷小（大）量}；
+\item 如果
+\[
+  \mabs{f(x)}\leq M\mabs{g(x)}\mcond*{x\in U_0(x_0)},
+\]
+则记作
+\[
+  f(x)=O\mparenb{g(x)}\mcond*{x\to x_0}。
+\]
+\end{enumlist}
+\end{definition}
+
+由定义我们可以写
+\begin{align*}
+\sin x&\sim x\mcond{x\to0}, & 1-\cos x&\sim\frac12x^2\mcond{x\to0},\\
+\frac1{1+x^2}&\sim\frac1{x^2}\mcond{x\to+\infty}, & \frac1{\sqrt x}\me^{-x}&\sim\dfrac1{\sqrt x}\mcond{x\to0+0},\\
+\sin^2x&=o(x)\mcond{x\to0}, & \sin x\sin\frac1x&=O(x)\mcond{x\to0}。
+\end{align*}
+
+当~$x\to x_0$~时，若~$f(x)$~与~$(x-x_0)^k$~为同阶无穷小量，则称~$f(x)$~是\emph{~$k$~阶无穷小量}。若~$k$~不是自然数，而是
+大于零的实数时，极限过程只等考虑~$x\to x_0+0$。当~$x\to+\infty$~时，若~$f(x)$~与~$\sfrac1{x^k}$~是同阶无穷小量，%
+称~$f(x)$~是~$k$~阶无穷小量。类似将无穷大量~$f(x)$~与基本无穷大量比较，可以定义无穷大量的阶。
+
+由定义看出，若~$f(x)=o\mparenb{g(x)}$，必有~$f(x)=O\mparenb{g(x)}$，特别当~$g(x)\equiv1$~时，任一无穷小量总可以写成~$o(1)$，任
+一有界变量总可写成~$O(1)$。
+
+当然不是任意两个无穷小量或无穷大量都可以比较。例如~$x\to0$~时，无穷小量
+\[
+  x\sin\frac1x\quad\text{与}\quad x
+\]
+就不能比较。
+
+为了找~$f(x)$~的等价无穷小（大）量，我们给出下面定理。
+
+\begin{theorem}\label{thm:sec2.7-1}
+在\ref{def:sec2.7-1}~条件下，$f(x)\sim g(x)$~当且仅当
+\[
+  f(x)=g(x)+o\mparenb{g(x)}\mcond*{x\to x_0}。
+\]
+\end{theorem}
+\begin{proof}
+若~$f(x)\sim g(x)$，即
+\[
+  \lim_{x\to x_0}\frac{f(x)}{g(x)}=1\implies
+  \lim_{x\to x_0}\frac{f(x)-g(x)}{g(x)}=0 。
+\]
+按\ref{def:sec2.7-1}
+\[
+  f(x)-g(x)=o\mparenb{g(x)}\implies f(x)=g(x)+o\mparenb{g(x)}\mcond{x\to x_0}。
+\]
+
+反之，若上式成立，只要把上面步骤倒回去即得所求。
+\end{proof}
+
+要把无穷小量~$f(x)$~的等价无穷小量，根据\ref{thm:sec2.7-1}，只要把~$f(x)$~拆成~$g(x)$~加上高于~$g(x)$~的无穷小量，则~$f(x)$~就
+等价于无穷小量~$g(x)$。怎么把~$f(x)$~拆成~$g(x)$~和~$o\mparenb{g(x)}$~呢？一方面需要后面将要讲到的~Taylor~公式，另一方面需要关于
+符号~$o$~的运算。其实符号~$o$~也正是为了这个需要才引进的。因为对高于~$g(x)$~的无穷小量，我们关心的不是它具体的值，而是它趋于零
+的速度比~$g(x)$~要快，这样当几个高于~$g(x)$~的无穷小量进行运算时，可以避免不必要地数值运算，而直接去判断运算结果是高于~$g(x)$~的
+无穷小量。
+
+关于符号~$o$~和~$O$~的运算，我们有下面的定理。
+
+\begin{theorem}
+\begin{thmenumlist}
+\item\begin{equation}
+o\mparenb{g(x)}\pm o\mparenb{g(x)}=o\mparenb{g(x)}\mcond*{x\to x_0}。\label{eq:sec2.7-1}
+\end{equation}
+\item\[
+O\mparenb{g_1(x)}\cdot o\mparenb{g_2(x)}=o\mparenb{g_1(x)\cdot g_2(x)}\mcond*{x\to x_0}。
+\]
+\item\begin{Align*}
+o\mparenb{O\mparenb{g(x)}}&=o\mparenb{g(x)}\mcond*{x\to x_0};\\
+O\mparenb{o\mparenb{g(x)}}&=o\mparenb{g(x)}\mcond*{x\to x_0} 。
+\end{Align*}
+\end{thmenumlist}
+\end{theorem}
+\begin{proof}
+\begin{thmenumlist}
+\item 令~$\alpha(x)=o\mparenb{g(x)}$，$\beta(x)=o\mparenb{g(x)}$，即
+\[
+  \lim_{x\to x_0}\frac{\alpha(x)}{g(x)}=0,\quad
+  \lim_{x\to x_0}\frac{\beta(x)}{g(x)}=0。
+\]
+则
+\[
+  \lim_{x\to x_0}\frac{\alpha(x)\pm\beta(x)}{g(x)}=
+  \lim_{x\to x_0}\frac{\alpha(x)}{g(x)}\pm\lim_{x\to x_0}\frac{\beta(x)}{g(x)}=0,
+\]
+即
+\[
+  \alpha(x)\pm\beta(x)=o\mparenb{g(x)}。
+\]
+\item~$\alpha(x)=O\mparenb{g_1(x)}$，$\beta(x)=o\mparenb{g_2(x)}$，即已知~$x\in U_0(x_0)$，
+\[
+  \mabsB{\frac{\alpha(x)}{g_1(x)}}\leq M,\quad\lim_{x\to x_0}\frac{\beta(x)}{g_2(x)}=0,
+\]
+要证
+\[
+  \lim_{x\to x_0}\frac{\alpha(x)\cdot\beta(x)}{g_1(x)g_2(x)}=0。
+\]
+根据\ref{cor:sec2.2-1}~之~\ref{cor:sec2.2-1-item-2}，上式显然是成立的。
+\item 只证第一式。令~$\alpha(x)=O\mparenb{g(x)}$，$\beta(x)=o\mparenb{\alpha(x)}$，即
+\[
+  \mabsB{\frac{\alpha(x)}{g(x)}}\leq M,\quad
+  \lim_{x\to x_0}\frac{\beta(x)}{\alpha(x)}=0。
+\]
+要证
+\[
+  \lim_{x\to x_0}\frac{\beta(x)}{g(x)}=0。
+\]
+显然结论成立。\qedhere
+\end{thmenumlist}
+\end{proof}
+
+\begin{remark}
+等式~\ref{eq:sec2.7-1}~意义与通常意义不同。等式左端为条件，右端为结论，等式两端的意义是不一样的。如果把等式两端交换一
+下，写成
+\[
+o\mparenb{g(x)}=o\mparenb{g(x)}\pm o\mparenb{g(x)},
+\]
+这样，等式就失去了意义。另外，等式~\ref{eq:sec2.7-1}~反映的是某种性质，不是指数值关系，所以当然不能
+说~$o\mparenb{g(x)}-o\mparenb{g(x)}$~等于零。
+\end{remark}
+
+例如
+\[
+  o(\sin x)=o\mparenb{O\mparenb{g(x)}}=o(x)\mcond*{x\to0}。
+\]
+
+又例如，当~$x\to0$~时，要求~$1-\cos(\sin x)$~的等价无穷小量，可以利用符号~$o$~运算。因为
+\[
+  1-\cos x=\frac12x^2+o(x^2),
+\]
+所以
+\begin{Align*}
+1-\cos(\sin x)
+&=\frac12\sin^2x+o(\sin^2x)=\frac12\mparenb{x+o(x)}^2+o\mparenb{O(x^2)}\\[2pt]
+&=\frac12x^2+x\cdot o(x)+o(x)\cdot o(x)+o(x^2)\\[2pt]
+&=\frac12x^2+o(x^2)+o(x^2)+o(x^2)
+ =\frac12x^2+o(x^2)。
+\end{Align*}
+故~$1-\cos(\sin x)$~的等价无穷小量为~$\dfrac12x^2$。
+
+\begin{quiz}
+讨论下面等式是否成立。
+\begin{enumlist}
+\item $o(x)=O(x)$，$\sfrac{o(x^2)}x=o(x)\mcond{x\to x_0}$；
+\item $O\mparenb{g_1(x)}\cdot O\mparenb{g_2(x)}=O\mparenb{g_1(x)\cdot g_2(x)}\mcond{x\to x_0}$；
+\item $o\mparenb{g_1(x)}\cdot o\mparenb{g_2(x)}=o\mparenb{g_1(x)\cdot g_2(x)}\mcond{x\to x_0}$；
+\item $o\mparenb{o\mparenb{g(x)}}=o\mparenb{g(x)}\mcond{x\to x_0}$；
+\item $O\mparenb{O\mparenb{g(x)}}=O\mparenb{g(x)}\mcond{x\to x_0}$。
+\end{enumlist}
+\end{quiz}
+
 \begin{exercise}
-\item
+\item 确定下列量的等价无穷小量~$(x\to 0)$。
+\begin{exlistcols}
+  \item $\ln(1+x)$；
+  \item $\me^x-1$；
+  \item $\sqrt[n]{1+x}-1$；
+  \item $\sqrt{x+\smsqrt{x+\sqrt x}}$。
+\end{exlistcols}
+\item 求下列量的等价无穷大量。
+\begin{exlistcols}
+  \item $2x^3+3x^2-5x-6\mcond{x\to\infty}$；
+  \item $\sqrt{x+\smsqrt{x+\sqrt x}}\mcond{x\to+\infty}$；
+  \item $\dfrac{x+1}{x^2+3x-3}\mcond{x\to0}$；
+  \item $\dfrac{\arctan x}{x^2}\mcond{x\to0}$。
+\end{exlistcols}
+\item 当~$x\to0$~时，讨论下面等式的正确性。
+\begin{exlistcols}[3]
+  \item $o(x^2)=o(x)$；
+  \item $O(x^2)=o(x)$；
+  \item $x\cdot o(x^2)=o(x^3)$；
+  \item $\dfrac{o(x^2)}x=o(x)$；
+  \item $\dfrac{o(x^2)}{o(x)}=o(x)$；
+  \item $o(x)=O(x^2)$。
+\end{exlistcols}
+\item 设~$x\to a$~时，$f_1(x)$与~$f_2(x)$~为等价无穷小，$g_1(x)$~与~$g_2(x)$~为等价无穷大，%
+且~$\lim_{x\to a}f_2(x)\cdot g_2(x)$~存在。证明
+\[
+  \lim_{x\to a}f_1(x)\cdot g_1(x)=\lim_{x\to a}f_2(x)\cdot g_2(x)。
+\]
+\item 设~$x\to a$~时，$f_1(x)$与~$f_2(x)$~为同阶无穷小，$g_1(x)$~与~$g_2(x)$~为等价无穷小，且~$f_1(x),f_2(x)>0$，并设
+~$\lim_{x\to a}f_2(x)^{g_2(x)}=A\mcond{A>0}$。证明
+\[
+  \lim_{x\to a}f_1(x)^{g_1(x)}=A 。
+\]
 \end{exercise}
+
+
 \section{用肯定语气叙述极限不是某常数}
+
 \subsection{极限不是某常数的肯定描述}
+
+已知序列~$\mbrace{x_n}$~的极限为~$a$~的几何意义是：以~$a$~为中心，以任意给定的~$\e>0$~为半径作一邻域，在邻域外最多只有序列的
+有限项。反之有这一性质时，我们说序列的极限为~$a$。
+
+现在我们问，序列~$\mbrace{x_n}$~的极限不是~$a$，应该怎么表述呢？是否以~$a$~为中心，以任意~$\e$~为半径的邻域之外，序列有无穷
+多项呢？当然不是。因为所有邻域外只有有限多项的反面，应该是存在一个邻域，在该邻域之外序列有无穷多项。
+
+设该邻域半径为~$\e_0>0$，在邻域~$U(a;\e_0)$~外有无穷多项又是什么意思呢？是否从某一标号~$N$~以后，序列的项都在该邻域之外呢？当然
+不是。因为邻域外有无穷多项，不等于说邻域内只有有限多项，邻域内也可以有无穷多项。所以邻域外有无穷多项的确切意思是：任意给定一个
+标号~$N$，总可以找到比~$N$~大的元素~$x_n$~在邻域之外，即
+\[
+  \mabs{x_n-a}\geq\e_0 。
+\]
+
+总结上面的叙述，我们得到序列~$\mbrace{x_n}$~的极限不是~$a$~的肯定描述：
+
+\begin{centering}
+存在~$\e_0>0$，对任意~$N$，存在~$n>N$，使得~$\mabs{x_n-a}\geq\e_0$。\\
+\end{centering}
+\noindent
+把它与序列极限为~$a$~的定义
+
+\begin{centering}
+对任意~$\e>0$，存在~$N$，使得当~$n>N$~时，有~$\mabs{x_n-a}<\e$。\\
+\end{centering}
+\noindent
+加以比较，我们发现两者是何等相似，只是把“任意”换成“存在”，“存在”换成“任意”，“$<$”换成“$\geq$”即成。掌握
+这一特点，我们不难写出~$x\to x_0$~时~$f(x)$~极限不是~$A$~的肯定语气描述：
+
+存在~$\e_0>0$，对任意~$\delta>0$，存在~$x'$，即使~$0<\mabs{x'-x_0}<\delta$，但
+\[
+  \mabs{f(x')-A}\geq\e_0 。
+\]
+
+它的几何意义是：存在以~$y=A$~为中心线，宽为~$2\e_0$~的带子，对任一以~$x_0$~为中心，以~$\delta$~为半径的空心邻域，在该邻域内总可以
+找到一点~$x'$，使~$x'$~点的函数值落在带子的外边。
+
 \subsection{序列极限与函数极限的关系}
+
+设~$f(x)$~在~$U_0(x_0)$~上定义，且
+\begin{equation}\label{eq:sec2.8-1}
+\lim_{x\to x_0}f(x)=A 。
+\end{equation}
+在邻域~$U_0(x_0)$~内任取一个序列~$\mbrace{x_n}$，且
+\begin{equation}\label{eq:sec2.8-2}
+  \lim_\ntoinf x_n=x_0,
+\end{equation}
+则有
+\begin{equation}\label{eq:sec2.8-3}
+  \lim_\ntoinf f(x_n)=A 。
+\end{equation}
+
+事实上，对任意~$\e>0$，由~\ref{eq:sec2.8-1}，存在~$\delta>0$，当~$0<\mabs{x-x_0}<\delta$~时，有
+\[
+  \mabs{f(x)-A}<\e 。
+\]
+对于~$\delta>0$，再由~\ref{eq:sec2.8-2}，存在~$N$，当~$n>N$~时，有
+\[
+  \mabs{x_n-x_0}<\delta 。
+\]
+因为序列在空心邻域内，所以当~$n>N$~时，有~$0<\mabs{x_n-x_0}<\delta$，也就有
+\[
+  \mabs{f(x_n)-A}<\e\implies\lim_\ntoinf f(x_n)=A 。
+\]
+
+反之，对任一位于~$U_0(x_0)$~内的序列，若满足~\ref{eq:sec2.8-2}，且有~\ref{eq:sec2.8-3}~成立，则可得~\ref{eq:sec2.8-1}~成立。%
+否则的话，假设~\ref{eq:sec2.8-1}~不成立，即~$x\to x_0$~时，函数~$f(x)$~不趋于~$A$。根据上面所述，%
+存在~$\e_0>0$，对任意~$\delta>0$，存在~$x'\in U_0(x_0)$，即使~$0<\mabs{x'-x_0}<\delta$，但
+\[
+  \mabs{f(x')-A}\geq\e_0 。
+\]
+现在利用~$\delta$~的任意性，取定~$\delta=\dfrac1n\mcond{n=1,2,\dotsc}$，存在~$x_n\in U_0(x_0)$，使得
+\[
+0<\mabs{x_n-x_0}<\dfrac1n,
+\]
+而
+\[
+  \mabs{f(x_n)-A}\geq\e_0 。
+\]
+即找到位于~$U_0(x_0)$~内的序列~$\mbrace{x_n}$，$\lim_\ntoinf x_n=x_0$，但是
+\[
+  \mabs{f(x_n)-A}\geq\e_0,
+\]
+这与条件~$\lim_\ntoinf f(x_n)=A$~矛盾，所以~\ref{eq:sec2.8-1}~成立。
+
+这样我们就得到所谓函数极限的归结原则。
+
+\begin{theorem}[归结原则]
+设~$f(x)$~在~$U_0(x_0)$~上定义，则
+\[
+  \lim_{x\to x_0}f(x)=A
+\]
+成立当且仅当对于~$U_0(x_0)$~内任一序列，若~$\lim_\ntoinf x_n=x_0$~时都有
+\[
+  \lim_\ntoinf f(x_n)=A 。
+\]
+\end{theorem}
+
+归结原则说明了函数极限与序列极限的联系。我们也可以用序列极限来定义函数极限。由归结原则我们可以得到判断函数极限不存在的方法。
+
+若在空心邻域~$U_0(x_0)$~内能找出两个趋于~$x_0$~的序列~$\mbrace{x_n'}$~与~$\mbrace{x_n''}$，相应的函数序列~$\mbrace{f(x_n')}$~与
+~$\mbrace{f(x_n'')}$~的极限不等：
+\[
+  \lim_\ntoinf f(x_n')\neq\lim_\ntoinf f(x_n''),
+\]
+则~$x\to x_0$~时，函数极限~$\lim_{x\to x_0}f(x)$~不存在。因为如果极限存在，根据归结原则就有
+\[
+  \lim_\ntoinf f(x_n')=\lim_\ntoinf f(x_n''),
+\]
+这显然是一个矛盾。
+
+\begin{example}
+证明~$\lim_{x\to0}\sin\dfrac1x$~不存在。
+\end{example}
+\begin{proof}
+对于~$n=1,2,\dotsc$，取
+\[
+  x_n'=\dfrac1{2n\pi},\quad
+  x_n''=\dfrac1{\mparenB{2n+\dfrac12}\pi},
+\]
+则
+\[
+  \lim_\ntoinf x_n'=0=\lim_\ntoinf x_n''。
+\]
+但
+\[
+  \lim_\ntoinf\sin\dfrac1{x_n'}=\lim_\ntoinf\sin2n\pi=0,\quad
+  \lim_\ntoinf\sin\dfrac1{x_n''}=\lim_\ntoinf\sin\mparenB{2n+\dfrac12}\pi=1,
+\]
+所以由归结原则，函数极限不存在。
+\end{proof}
+
+
 \begin{exercise}
-\item
+\begin{exlistcols*}
+\item 用肯定语气叙述~$\lim_\ntoinf x_n\neq+\infty$。
+\item 用肯定语气叙述~$\lim_\ntoinf x_n$~不存在。
+\end{exlistcols*}
+\item 证明下列极限不存在。
+\begin{exlistcols}[3]
+  \item $x_n=\dfrac{n-1}{n+2}\cos\dfrac{2n}3\pi$；
+  \item $x_n=\sqrt[n]{1+2^{n(-1)^n}}$；
+  \item $x_n=\sin\mparenb{\pi\sqrt{n^2+n}}$。
+\end{exlistcols}
 \end{exercise}
+
 \begin{exercise*}
-\item
+\item 设~$\lim_\ntoinf x_n=a$，将序列~$\mbrace{x_n}$~的项进行重新排列后，得到新的序列~$\mbrace{x_n'}$。证明~$\lim_\ntoinf x_n'=a$。
+\item 设~$\lim_\ntoinf a_n=a$。证明~$\lim_\ntoinf\dfrac{a_1+a_2+\dotsb+a_n}n=a$。
+\item 设~$\lim_\ntoinf a_n=a\mcond{a_n>0}$。证明~$\lim_\ntoinf\sqrt[n]{a_1\cdot a_2\cdot\dotsm\cdot a_n}=a$。
+\item 设~$a_n>0$，且~$\lim_\ntoinf\dfrac{a_{n+1}}{a_n}=a$。证明~$\lim_\ntoinf\sqrt[n]{a_n}=a$。
+\item 证明
+\begin{exlistcols}
+  \item $\lim_\ntoinf\sqrt[n]n=1$；
+  \item $\lim_\ntoinf\dfrac n{\sqrt[n]{n!}}=\me$。
+\end{exlistcols}
+\item 设~$\lim_{x\to0}f(x)=0$，而且
+\[
+  f(x)-f\mparenB{\dfrac x2}=o(x)。
+\]
+证明~$f(x)=o(x)$。
+\item 设~$f(x)$~在~$x>a$~上定义，并且在每一有限区间~$(a,b)$~上有界。证明，如果
+\[
+  \lim_{x\to+\infty}\mparenb{f(x+1)-f(x)}=+\infty,
+\]
+则
+\[
+  \lim_{x\to+\infty}\frac{f(x)}x=+\infty 。
+\]
+\item\begin{exlist}
+  \item 设~$0<a_1,a_2,\dotsc,a_n<1$。证明
+  \[
+    (1-a_1)(1-a_2)\dotsm(1-a_n)\geq1-(a_1+a_2+\dotsb+a_n);
+  \]
+  \item 已知~$\lim_\ntoinf\mparenB{1+\dfrac1n}^n=\me$。证明
+  \[
+    \lim_\ntoinf\mparenB{1+1+\dfrac1{2!}+\dotsb+\dfrac1{n!}}=\me;
+  \]
+  \item 证明
+  \[
+    \dfrac1{(n+1)!}<\me-\mparenB{1+1+\dfrac1{2!}+\dotsb+\dfrac1{n!}}<\dfrac1{n!\cdot n};
+  \]
+  \item 证明
+  \[
+    \me=1+1+\dfrac1{2!}+\dotsb+\dfrac1{n!}+\dfrac{\theta_n}{n!\cdot n}
+    \mcond*[\enspace]{\frac n{n+1}<\theta_n<1}。
+  \]
+\end{exlist}
+\item 证明~$\me$~是无理数。
+\item 证明~$\lim_\ntoinf n\sin(2\pi n!\,\me)=2\pi$。
 \end{exercise*}
 
 
