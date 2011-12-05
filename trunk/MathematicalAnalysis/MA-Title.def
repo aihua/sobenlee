@@ -179,6 +179,9 @@
 
 \newcolumntype{F}{@{}c@{}}
 
+\providecommand\toprule{\tabucline[\p@]{-}}
+\providecommand\bottomrule{\tabucline[\p@]{-}}
+
 \renewcommand*\thefootnote{\Ding{footnote}}
 \renewcommand*\footnoterule{\kern-3\p@\hrule\@width.45\columnwidth\@height.6\p@\kern2.4\p@}
 
@@ -198,9 +201,13 @@
 \sbox\@tempfig{%
   \includegraphics[width={.25\textwidth}]{ctanlion.pdf}}
 
+\def\coverfig{%
+  \noindent\resizebox{\linewidth}{!}{\usebox\@tempfig}}
+
 \newcounter{lioncnt}
 
-\def\somefigure{\stepcounter{lioncnt}%
+\def\somefigure{%
+  \stepcounter{lioncnt}%
   \ifnumodd{\c@lioncnt}
     {\reflectbox{\usebox\@tempfig}}
     {\usebox\@tempfig}}

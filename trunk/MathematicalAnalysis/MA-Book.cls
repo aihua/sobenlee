@@ -6,37 +6,38 @@
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{ctexbook}}
 \ProcessOptions\relax
-\PassOptionsToPackage{CJKchecksingle,no-math,silent,fallback}{xeCJK}
-\LoadClass[c5size,openany,nofonts]{ctexbook}[2009/05/05]
+\PassOptionsToPackage{no-math,silent}{fontspec}
+\PassOptionsToPackage{CJKchecksingle,fallback}{xeCJK}
+\LoadClass[twoside,openany,c5size,nofonts,fntef]{ctexbook}[2009/05/05]
 
 \RequireXeTeX
 
-\def\hmmax{0}     % default 3
-\def\bmmax{0}     % default 4
-
 \RequirePackage{XITS}
 \RequirePackage[mtphrb,mtpcal,subscriptcorrection]{mtpro2}
-\RequirePackage[uppi]{localint}
-\RequirePackage{empheq,amsthm,thmtools}
-\RequirePackage{xfrac,siunitx,needspace,varwidth,chngcntr,changepage,environ}
-\RequirePackage{floatrow,caption,wrapfig,tabu}
+\RequirePackage{empheq,amsthm,thmtools,mlist,xfrac,siunitx}
+\RequirePackage[uppi,comma,overparen,mathscrf,mtpro2]{localint}
+\RequirePackage{needspace,chngcntr,changepage,environ,afterpage}
+\RequirePackage{floatrow,caption,wrapfig,labelformat}
+\RequirePackage{enumitem,enumcols,tabu,diagbox}
 \RequirePackage[perpage,stable,bottom]{footmisc}
 \RequirePackage[pagestyles,explicit,clearempty,outermarks]{titlesec}
 \RequirePackage[titlesec]{interfaces}
-\RequirePackage{enumitem,pifont,xcolor,labelformat}
-\RequirePackage[hang]{multicolist}
-\RequirePackage[showframe=false,twoside,headheight=5mm,headsep=7mm,footskip=1em,bindingoffset=10mm]{geometry}
+\RequirePackage{pifont,xcolor}
+\RequirePackage[showframe=false,headheight=5mm,headsep=7mm,footskip=1em,bindingoffset=10mm]{geometry}
 \RequirePackage{hypbmsec}
 \RequirePackage[pdfstartview={XYZ null null 1},pdfpagemode=UseNone,pdfprintscaling=None]{hyperref}
 
 \geometry{papersize={170mm,240mm},top=20mm,textwidth=130mm,lines=36,inner=15mm}
+
+%\RequirePackage[cam,a4,center,noinfo]{crop}
 
 \hypersetup{%
   bookmarksopen,
   bookmarksdepth=2,
   bookmarksopenlevel=0,
   bookmarksnumbered,
-  colorlinks, linkcolor=purple,
+  colorlinks,
+  linkcolor=purple,
   pdfinfo={
       Title={数学分析},
      Author={北京大学数学系},
@@ -47,6 +48,8 @@
 \let\HyPsd@Warning\@gobble\relax
 
 \graphicspath{{includefiles/figures/}}
+
+\definecolor{titlegray}{gray}{.75}
 
 \predisplaypenalty   = \z@
 \postdisplaypenalty  = \z@
@@ -70,11 +73,7 @@
 \medskipamount  =6 \p@\relax
 \bigskipamount  =12\p@\relax
 
-\gappto\bfseries{\boldmath}
-\robustify{\bfseries}
-
 \sisetup{group-minimum-digits=4,round-integer-to-decimal}
-
 
 \raggedbottom
 \allowdisplaybreaks[4]

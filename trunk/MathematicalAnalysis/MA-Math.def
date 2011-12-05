@@ -5,12 +5,10 @@
 
 \robustify{\LEFTROOT}
 \robustify{\UPROOT}
-\robustify{\int}
 \robustify{\big}
 \robustify{\Big}
 \robustify{\bigg}
 \robustify{\Bigg}
-\newrobustcmd*\Beta{\ensuremath{\mathord{\mathrm{B}}}}
 
 \let\leq\leqslant
 \let\geq\geqslant
@@ -23,105 +21,156 @@
 \everymath{\displaystyle}
 
 \let\notinslant\notin
-\def\notin{\mathrel{\overline{\in}}}
+\def\notin{\mathrel{\overline\in}}
 
+\newcommand*\marc[1]{\overparen{#1}}
 \newcommand*\mtilde[1]{\widetilde{#1}}
+\newcommand*\mbar[1]{\overline{#1}}
 \newcommand*\mequiv[1]{\overline{#1}}
+\newcommand*\mcal[1]{\mathcal{#1}}
 \newcommand*\mscr[1]{\mathscr{#1}}
 \newcommand*\mfield[1]{\mathbb{#1}}
-\newcommand*\amscr[1]{\mathcal{#1}}
 \newcommand*\map[3]{#1\colon#2\to#3}
 \newcommand*\smsqrt[1]{\sqrt{\smash[b]{#1}}}
-\newcommand*\cset{\mathopen\complement}
-\newcommand*\mA{\mscr A}
-\newcommand*\mB{\mscr B}
-\newcommand*\mI{\mscr I}
-\newcommand*\FR{\mfield R}
-\newcommand*\FC{\mfield C}
-\newcommand*\FQ{\mfield Q}
-\newcommand*\FK{\mfield K}
-\newcommand*\FZ{\mfield Z}
-\newcommand*\FN{\mfield N}
-\newcommand*\FP{\mfield P}
-\newcommand*\FF{\mfield F}
+\newcommand*\mcset{\mathopen\complement}
+
+\newmlist\mvec[
+   wrapcmd=\mlistnowrap,
+wraponecmd=\mlistnowrap,
+   elemcmd=\mlistsub,
+   headcmd=\bm,
+      dots=\dotsc,
+      sep={,\allowbreak},
+]
+
+\renewmlist\mset[
+  headcmd=\mfield,
+      sep=\times,
+  wrapcmd=\mlistsup,
+   wraponecmd,
+]
+
+\newmset\mN{N}
+\newmset\mZ{Z}
+\newmset\mQ{Q}
+\newmset\mR{R}
+\newmset\mC{C}
+\newmset\mK{K}
+\newmset\mP{P}
+\newmset\mF{F}
+
 \newcommand*\uC{\mathrm C}
 \newcommand*\mi{\mathrm i}
 \newcommand*\me{\mathrm e}
 
+\newrobustcmd*\Beta{\mathord{\mathrm{B}}}
 \newrobustcmd*\diff{\mathop{}\negthinspace\mathrm{d}}
+\newrobustcmd*\Diff{\mathop{}\negthinspace\mathrm{D}}
 \newcommand*\e{\varepsilon}
 \newcommand*\eset{\varnothing}
 
+\newcommand\pinf{+\infty}
+\newcommand\minf{-\infty}
 \newcommand\ntoinf{{n\to\infty}}
-\newcommand\ntoinfp{{n\to+\infty}}
-\newcommand\ntoinfm{{n\to-\infty}}
+\newcommand\ntopinf{{n\to\pinf}}
+\newcommand\ntominf{{n\to\minf}}
 
-%\newcommand\comp{\mathchoice%
-%  {\mathop{\raisebox{0.2ex}{\footnotesize$\circ$}}}%
-%  {\mathop{\raisebox{0.2ex}{\footnotesize$\circ$}}}%
-%  {\mathop{\raisebox{0.1ex}{$\scriptscriptstyle\circ$}}}%
-%  {\mathop{\raisebox{0.1ex}{$\scriptscriptstyle\circ$}}}%
-%}%
+\providecommand\comp{\mathchoice
+  {\mathop{\raisebox{0.2ex}{\footnotesize$\circ$}}}
+  {\mathop{\raisebox{0.2ex}{\footnotesize$\circ$}}}
+  {\mathop{\raisebox{0.1ex}{$\scriptscriptstyle\circ$}}}
+  {\mathop{\raisebox{0.1ex}{$\scriptscriptstyle\circ$}}}%
+}%
 
-\newcommand*\rest[1]{\bigr|_{#1}}
+\newcommand*\rest[2][\bigr]{#1|_{#2}}
 
+\DeclareMathOperator{\sgn}{sgn}
 \DeclareMathOperator{\arccot}{arccot}
-
-\let\overbrace\LaTeXoverbrace
-\let\underbrace\LaTeXunderbrace
 
 \mathtoolsset{centercolon,mathic}
 
-\DeclarePairedDelimiter\abs{\lvert}{\rvert}
-\DeclarePairedDelimiter\norm{\lVert}{\rVert}
-\DeclarePairedDelimiter\Paren{\lparen}{\rparen}
-\DeclarePairedDelimiter\Brack{\lbrack}{\rbrack}
-\DeclarePairedDelimiter\Floor{\lbrack}{\rbrack}
+\MHInternalSyntaxOn
+\def\MakeShortMTPairedDelimiterCMD#1{%
+  \@xp\@xp\@xp\newrobustcmd\@xp\csname \MH_cs_to_str:N #1 b\endcsname{#1[\big]}
+  \@xp\@xp\@xp\newrobustcmd\@xp\csname \MH_cs_to_str:N #1 B\endcsname{#1[\Big]}
+  \@xp\@xp\@xp\newrobustcmd\@xp\csname \MH_cs_to_str:N #1 bb\endcsname{#1[\bigg]}
+  \@xp\@xp\@xp\newrobustcmd\@xp\csname \MH_cs_to_str:N #1 BB\endcsname{#1[\Bigg]}}
+\MHInternalSyntaxOff
 
-\DeclarePairedDelimiterX\Brace[1]{\lbrace}{\rbrace}{\,#1\,}
-\DeclarePairedDelimiterX\Set[2]{\lbrace}{\rbrace}{\,#1\mathrel{\delimsize\vert}#2\,}
+\def\MTDeclarePairedDelimiter#1#2#3{%
+  \DeclarePairedDelimiter{#1}{#2}{#3}
+  \MakeShortMTPairedDelimiterCMD{#1}}
 
-\newcases{cdcases}{\quad}{%
-  \hfil$\m@th\displaystyle{##}$\hfil}{$\m@th\displaystyle{##}$\hfil}{\lbrace}{.}
-\newcases{cdcases*}{\quad}{%
-  \hfil$\m@th\displaystyle{##}$\hfil}{{##}\hfil}{\lbrace}{.}
-\newcases{bdcases}{\quad}{%
-  $\m@th\displaystyle{##}$\hfil}{$\m@th\displaystyle{##}$\hfil}{.\biggl\lbrace}{.}
-\newcases{bdcases*}{\quad}{%
-  $\m@th\displaystyle{##}$\hfil}{{##}\hfil}{.\biggl\lbrace}{.}
-\newcases{rbdcases}{\quad}{%
-  \hfil$\m@th\displaystyle{##}$}{$\m@th\displaystyle{##}$\hfil}{.\biggl\lbrace}{.}
-\newcases{rbdcases*}{\quad}{%
-  \hfil$\m@th\displaystyle{##}$}{{##}\hfil}{.\biggl\lbrace}{.}
-\newcases{cbdcases}{\quad}{%
-  \hfil$\m@th\displaystyle{##}$\hfil}{$\m@th\displaystyle{##}$\hfil}{.\biggl\lbrace}{.}
-\newcases{cbdcases*}{\quad}{%
-  \hfil$\m@th\displaystyle{##}$\hfil}{{##}\hfil}{.\biggl\lbrace}{.}
+\def\MTDeclarePairedDelimiterX#1[#2]#3#4#5{%
+  \DeclarePairedDelimiterX{#1}[#2]{#3}{#4}{#5}
+  \MakeShortMTPairedDelimiterCMD{#1}}
 
-\newcommand*\absb{\abs[\big]}
-\newcommand*\normb{\norm[\big]}
-\newcommand*\Parenb{\Paren[\big]}
-\newcommand*\Brackb{\Brack[\big]}
-\newcommand*\Braceb{\Brace[\big]}
-\newcommand*\Setb{\Set[\big]}
+\MTDeclarePairedDelimiter\mabs{\lvert}{\rvert}
+\MTDeclarePairedDelimiter\norm{\lVert}{\rVert}
+\MTDeclarePairedDelimiter\mparen{\lparen}{\rparen}
+\MTDeclarePairedDelimiter\mbrack{\lbrack}{\rbrack}
+\MTDeclarePairedDelimiter\mfloor{\lbrack}{\rbrack}
 
-\newcommand*\mvec[2][n]{%
-  {#2}_1,\allowbreak{#2}_2,\allowbreak\dotsc,\allowbreak{#2}_{#1}}
+\MTDeclarePairedDelimiterX\mbrace[1]{\lbrace}{\rbrace}{\,#1\,}
+\MTDeclarePairedDelimiterX\mathset[2]{\lbrace}{\rbrace}{\,#1\mathrel{\delimsize\vert}#2\,}
+
+\MTDeclarePairedDelimiterX\minto[2]{\lparen}{\rparen}{#1,#2}
+\MTDeclarePairedDelimiterX\mintc[2]{\lbrack}{\rbrack}{#1,#2}
+\MTDeclarePairedDelimiterX\mintoc[2]{\lparen}{\rbrack}{#1,#2}
+\MTDeclarePairedDelimiterX\mintco[2]{\lbrack}{\rparen}{#1,#2}
+\MTDeclarePairedDelimiterX\mrange[2]{\lbrace}{\rbrace}{\,#1,#2\,}
+
+\newcases{cdcases}{\quad}
+  {\hfil$\m@th\displaystyle{##}$\hfil}
+  {$\m@th\displaystyle{##}$\hfil}
+  {\lbrace}{.}
+\newcases{cdcases*}{\quad}
+  {\hfil$\m@th\displaystyle{##}$\hfil}
+  {{##}\hfil}
+  {\lbrace}{.}
+\newcases{bdcases}{\quad}
+  {$\m@th\displaystyle{##}$\hfil}
+  {$\m@th\displaystyle{##}$\hfil}
+  {.\n@space\biggl\lbrace}{.}
+\newcases{bdcases*}{\quad}
+  {$\m@th\displaystyle{##}$\hfil}
+  {{##}\hfil}
+  {.\n@space\biggl\lbrace}{.}
+\newcases{rbdcases}{\quad}
+  {\hfil$\m@th\displaystyle{##}$}
+  {$\m@th\displaystyle{##}$\hfil}
+  {.\n@space\biggl\lbrace}{.}
+\newcases{rbdcases*}{\quad}
+  {\hfil$\m@th\displaystyle{##}$}
+  {{##}\hfil}
+  {.\n@space\biggl\lbrace}{.}
+\newcases{cbdcases}{\quad}
+  {\hfil$\m@th\displaystyle{##}$\hfil}
+  {$\m@th\displaystyle{##}$\hfil}
+  {.\n@space\biggl\lbrace}{.}
+\newcases{cbdcases*}{\quad}
+  {\hfil$\m@th\displaystyle{##}$\hfil}
+  {{##}\hfil}
+  {.\n@space\biggl\lbrace}{.}
+
+\newcommand\mcond{\@ifstar{\@@mcond}{\@mcond}}
+\newcommand\@mcond[2][\;]{#1(#2)}
+\newcommand\@@mcond[2][\quad]{,#1#2}
 
 \renewcommand\intertext[1][]{\@amsmath@err{\Invalid@@\intertext}\@eha}
 \def\intertext@{%
   \def\intertext{%
     \ifvmode\else\\\@empty\fi
     \noalign{\ifnum0=`}\fi
-      \@ifnextchar[{\NCC@intertext@}{\NCC@intertext@[]}%
+      \@ifnextchar[{\MA@intertext@}{\MA@intertext@[]}%
   }%
 }
-\def\NCC@intertext@[#1]#2{%
+\def\MA@intertext@[#1]#2{%
   \penalty\postdisplaypenalty
 %%  \@ifempty{#1}{\vskip\belowdisplayskip}{\vskip#1\relax}%
   \vbox{\normalbaselines
-    \ifdim\linewidth=\columnwidth
-    \else\parshape\@ne\@totalleftmargin\linewidth
+    \ifdim\linewidth=\columnwidth\else
+      \parshape\@ne\@totalleftmargin\linewidth
     \fi
     \noindent#2\par}%
   \penalty\predisplaypenalty

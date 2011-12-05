@@ -4,30 +4,1106 @@
 
 
 \chapter{连\emspace 续}\label{ch:3}
+
+事物的运动和变化有两种形式：一种是渐变，一种是突变。比如公共汽车行驶时，车速是连续变化的，或称渐变。遇到急刹车时，车速
+有一突变。反映自然界的渐变与突变，人们提出了连续与间断的概念。这些概念虽然不能用来描述自然界中一切渐变与突变现象（如脉
+冲现象等），但能很好地描述自然界中一类渐变与突变现象。
+
 \section{连续与间断}
+
+怎么去刻画连续性呢？能否说函数在每一点极限存在，它就表示一条连续曲线呢？不能。比如在~$\mR$~上定义的函数
+\[
+  f(x)=\begin{bdcases}
+    2, & x=1;\\
+    1, & x\neq1,
+  \end{bdcases}
+\]
+它在每一点~$x_0$~的极限都存在，且
+\[
+  \lim_{x\to x_0}f(x)=1。
+\]
+但函数的图形不是一条连续的直线，而是在~$(1,1)$~点有一点窟窿的直线加上一点~$(1,2)$，显然不能认为函数是连续的。原因是在~$x=1$~处
+极限值不等于函数值：
+\[
+  \lim_{x\to1}f(x)=1\neq 2=f(1)。
+\]
+
+于是我们有如下定义。
+
+\begin{definition}\label{def:sec3.1-1}
+在~$(a,b)$~上给定函数~$f(x)$，$x_0\in(a,b)$，若
+\begin{equation}\label{eq:sec3.1-1}
+\lim_{x\to x_0}f(x)=f(x_0),
+\end{equation}
+则称函数~$f(x)$~在~$x_0$~点连续，$x_0$~称为\emph{连续点}，否则就称~$x_0$~为\emph{间断点}。
+\end{definition}
+
+直观地说，就是当动点~$x$~趋于定点~$x_0$~时，若动点函数值趋于定点的函数值，则函数在~$x_0$~点连续。若~$x_0$~是连续点，则
+当自变量在~$x_0$~点有无限小的变化，引起因变量的变化也无限的小。
+
+$(a,b)$~上给定的函数~$f(x)$~在~$x_0\in(a,b)$~连续的定义改用“$\e-\delta$”说法，就是对任意~$\e>0$，都存在~$\delta>0$，当
+~$\mabs{x-x_0}<\delta$~时，有
+\[
+  \mabs{f(x)-f(x_0)}<\e 。
+\]
+
+\begin{example}
+设函数
+\[
+  f(x)=\begin{bdcases}
+    x, & x\in\mR-\mQ;\\
+    0, & x\in\mQ 。
+  \end{bdcases}
+\]
+证明~$x=0$~是函数~$f(x)$~的连续点。
+\end{example}
+\begin{proof}
+对任意~$\e>0$，取~$\delta=\e$，当~$\mabs{x-0}=\mabs x<\delta$~时，
+\[
+  \mabs{f(x)-f(0)}=\mabs{f(x)}\leq\mabs x<\e,
+\]
+由\ref{def:sec3.1-1}~可知~$f(x)$~在~$x=0$~点连续。
+\end{proof}
+
+\begin{remark}
+容易看出，当~$x_0\neq0$~时，极限~$\lim_{x\to x_0}f(x)$~不存在，即~$x_0$~不是~$f(x)$~的连续点。所以函数在一点连续，不能保证
+在该点的一个邻域内也连续。
+\end{remark}
+
+\ref{eq:sec3.1-1}~可以拆成下面三个式子
+\begin{equation}\label{eq:sec3.1-2}
+\begin{gathered}
+\lim_{x\to x_0-0}f(x)=f(x_0-0);\\
+\lim_{x\to x_0+0}f(x)=f(x_0+0);\\
+f(x_0-0)=f(x_0)=f(x_0+0) 。
+\end{gathered}
+\end{equation}
+这三个式子也可以合并成~\ref{eq:sec3.1-1}~一个式子。即函数在~$x_0$~点连续，等价于函数在~$x_0$~点的左、右极限存在，且左、右极限
+等于该点的函数值。\ref{eq:sec3.1-2}~中只要有一个式子不成立，\ref{eq:sec3.1-1}~就不成立。所以，对于一点，只要~\ref{eq:sec3.1-2}~中
+有一个不成立，该点就是间断点。根据~\ref{eq:sec3.1-2}~不成立的情形，我们可以把间断点加以分类。
+
+\begin{definition}\label{def:sec3.1-2}
+\begin{thmenumlist}
+\item 若函数在~$x_0$~点左、右极限存在并相等，但不等于该点的函数值，则称~$x_0$~为\emph{可去间断点}；
+\item 若函数在~$x_0$~点左、右极限存在但不相等，则称~$x_0$~为\emph{第一类间断点}；
+\item 若函数在~$x_0$~点左、右极限至少有一个不存在，则称~$x_0$~为\emph{第二类间断点}。
+\end{thmenumlist}
+\end{definition}
+
+例如，函数
+\[
+  f(x)=\begin{cdcases}
+    \arctan\frac1x, & x\neq0;\\
+    0, & x=0,
+  \end{cdcases}
+\]
+在~$x_0=0$~点的左、右极限分别为~$-\dfrac\pi2$~和~$\dfrac\pi2$，所以~$x=0$~是函数的第一类间断点（见\ref{fig:sec3.1-1}）。
+
+\begin{figure}
+\begin{floatrow}[3]
+\figurebox{\caption{}\label{fig:sec3.1-1}}
+          {\somefigure}
+\figurebox{\caption{}\label{fig:sec3.1-2}}
+          {\somefigure}
+\figurebox{\caption{}\label{fig:sec3.1-3}}
+          {\somefigure}
+\end{floatrow}
+\end{figure}
+
+又例如，函数
+\[
+  f(x)=\begin{cdcases}
+    \frac1x, & x\neq0;\\
+    0, & x=0,
+  \end{cdcases}
+\]
+在~$x_0=0$~点的左、右极限不存在，所以~$x=0$~是函数的第二类间断点（见\ref{fig:sec3.1-2}）。
+
+再例如，函数
+\[
+  f(x)=\begin{cdcases}
+    \sin\frac1x, & x\neq0;\\
+    0, & x=0,
+  \end{cdcases}
+\]
+在~$x_0=0$~点的左、右极限不存在，所以~$x=0$~也是函数的第二类间断点（见\ref{fig:sec3.1-3}）。
+
+关于间断点有下面定理。
+
+\begin{theorem}\label{thm:sec3.1-1}
+设~$f(x)$~在区间~$(a,b)$~上单调，则~$f(x)$~只有第一类间断点。
+\end{theorem}
+\begin{proof}
+不妨设~$f(x)$~单调上升。那么对任意~$x_0\in(a,b)$，当~$x\to x_0-0$~时，函数值~$f(x)$~上升，并有上界~$f(x_0)$，所以极限存在，且
+\[
+  \lim_{x\to x_0-0}f(x)=f(x_0-0)\leq f(x_0) 。
+\]
+同理，当~$x\to x_0+0$~时，函数值~$f(x)$~下降，并有下界~$f(x_0)$，所以极限存在，且
+\[
+  \lim_{x\to x_0+0}f(x)=f(x_0+0)\geq f(x_0) 。
+\]
+
+若~$f(x_0-0)=f(x_0+0)$，则~$x_0$~是函数的连续点；若~$f(x_0-0)\neq f(x_0+0)$，则~$x_0$~是函数的第一类间断点。由于~$x_0$~的
+任意性，所以区间上每一点不是连续点就是第一类间断点。
+\end{proof}
+
+\begin{remark}
+\ref{thm:sec3.1-1}~中条件改为闭区间~$[a,b]$~时，结论仍成立。比如在~$x=a$~点，有
+\[
+  \lim_{x\to a+0}f(x)=f(a+0)\geq f(a)。
+\]
+若等号成立，则称~$a$~为连续点；否则为第一类间断点。
+\end{remark}
+
+由函数一点连续的定义可得函数在区间上连续的定义。
+
+\begin{definition}
+若函数~$f(x)$~在区间上每一点连续（闭区间情形，区间端点指单侧连续），则称函数在\emph{区间上连续}。
+\end{definition}
+
+记号~$C(a,b)$~表示区间~$(a,b)$~上所有连续函数的集合，记号~$f(x)\in C(a,b)$~表示~$f(x)$~是~$(a,b)$~上的连续函数。记
+号~$f(x)\in C[a,b]$~作类似理解。
+
+\begin{quiz}
+\begin{thmenumlist}
+\item 讨论单调函数能否有无穷多个间断点；
+\item 试举出每一点都是第二类间断点的函数。
+\end{thmenumlist}
+\end{quiz}
+
 \begin{exercise}
-\item
+\item 研究下列函数的连续性，并指出间断点的类型。
+\begin{exlistcols}
+  \item $f(x)=\sgn x$；
+  \item $g(x)=x-\mfloor x$；
+  \item $f\mparenb{g(x)}$，~$g\mparenb{f(x)}$；
+  \item $\mparenB{\dfrac1x-\dfrac1{x+1}}\Big/\mparenB{\dfrac1{x-1}-\dfrac1x}$。
+\end{exlistcols}
+\item 指出下列函数的间断点，并说明间断点的类型。
+\begin{exlistcols}
+  \item $y=\dfrac x{(1+x)^2}$；
+  \item $y=\cos^2\dfrac1x$；
+  \item $y=\sgn(\sin x)$；
+  \item $y=1\Big/\mfloorB{\dfrac1x}\mcond{0<x\leq 1}$。
+\end{exlistcols}
+\item 适当选取常数~$a$，使得下列函数~$f(x)$~连续。
+\[
+  f(x)=\begin{cbdcases}
+    \me^x, & x<0; \\
+    a+x,   & x\geq0
+  \end{cbdcases}
+\]
+\item 设~$f(x)$~在~$x=x_0$~连续，$g(x)$~在~$x=x_0$~间断。判断~$f(x)+g(x)$~和~$f(x)\cdot g(x)$~在~$x=x_0$~的连续性。
+\item 设~$f(x),g(x)$~在~$x=x_0$~间断。判断~$f(x)+g(x)$~和~$f(x)\cdot g(x)$~在~$x=x_0$~的连续性。
+\item 举出处处都不连续，但取绝对值后却是处处连续的函数的例子。
+\item 设~$f(x)$~在~$x=x_0$~点连续，且~$f(x_0)>0$。证明，存在~$\delta>0$，当~$x\in U(x_0;\delta)$~时，$f(x)>0$。并判断下面证法的
+正确性。
+\begin{exproof}
+对任意~$\e>0$，不妨设~$0<\e<f(x_0)$。由函数~$f(x)$~在~$x_0$~点连续，存在~$\delta>0$，当~$\mabs{x-x_0}<\delta$~时，有
+\[
+  \mabs{f(x)-f(x_0)}<\e,
+\]
+即有
+\[
+  f(x)>f(x_0)-\e>0\mcond*{x\in U(x_0;\delta)}。\qedhere
+\]
+\end{exproof}
 \end{exercise}
-\section{连续函数的性质}
+
+
+\section{连续函数的运算}
+
+连续是极限的一种特殊情形，由极限运算即可得到连续函数的运算。
+
+\begin{theorem}\label{thm:sec3.2-1}
+设~$f(x),g(x)$~在~$x_0$~点连续，则
+\begin{enumlistcols}
+\item $f(x)\pm g(x)$~在~$x_0$~点连续；
+\item $f(x)\cdot g(x)$~在~$x_0$~点连续；
+\item 若~$g(x_0)\neq0$，$\dfrac{f(x)}{g(x)}$~在~$x_0$~点连续。
+\end{enumlistcols}
+\end{theorem}
+
+由此可得，若~$f(x),g(x)\in C(a,b)$，则
+\[
+  f(x)\pm g(x)\in C(a,b);\quad
+  f(x)\cdot g(x)\in C(a,b)。
+\]
+若对任意~$x\in(a,b)$，均有~$g(x)\neq0$，则
+\[
+  \dfrac{f(x)}{g(x)}\in C(a,b)。
+\]
+
+\begin{theorem}\label{thm:sec3.2-2}
+设~$y=f(t)$~在~$t=t_0$~点连续，$t=g(x)$~在~$x=x_0$~点连续，且~$t_0=g(x_0)$，则~$y=f\mparenb{g(x)}$~在~$x=x_0$~点连续。
+\end{theorem}
+\begin{proof}
+对任意~$\e>0$，由~$f(t)$~在~$t_0$~点连续，存在~$\eta>0$，当~$\mabs{t-t_0}<\eta$~时，有
+\[
+  \mabs{f(t)-f(t_0)}<\e;
+\]
+对于~$\eta>0$，由~$g(x)$~在~$x_0$~点连续，存在~$\delta>0$，当~$\mabs{x-x_0}<\delta$~时，有
+\[
+  \mabs{g(x)-g(x_0)}=\mabs{t-t_0}<\eta 。
+\]
+所以，当~$\mabs{x-x_0}<\delta$~时，有
+\[
+  \mabs{f(t)-f(t_0)}=\mabsb{f\mparenb{g(x)}-f\mparenb{g(x_0)}}<\e,
+\]
+即函数~$f\mparenb{g(x)}$~在~$x_0$~点连续。
+\end{proof}
+
+\begin{remark}
+有\ref{thm:sec3.2-2}~可得，若~$g(x)\in C(a,b)$，值域属于~$(\alpha,\beta)$，$f(t)\in C(\alpha,\beta)$，%
+则~$f\mparenb{g(x)}\in C(a,b)$。
+\end{remark}
+
+下面讨论一些初等函数的连续性。
+
+\begin{enumlist}
+\item 多项式
+\[
+  P_n(x)=a_0+a_1x+\dotsb+a_nx^n\in C(\mR);
+\]
+\item 有理函数
+\[
+  R(x)=\frac{P_n(x)}{Q_m(x)},
+\]
+其中分子、分母分别为~$n$~次和~$m$~次多项式。定义域可能要除去分母为零的点，记作~$D$，则~$R(x)\in C(D)$。
+
+上面两条结论由常数与~$x$~在~$\mR$~上连续及连续函数的四则运算即可看出。
+\item 三角函数~$y=\sin x\in C(\mR)$。
+\begin{proof}
+对任意~$x_0\in\mR$~和任意~$\e>0$，要使
+\[
+  \mabs{\sin x-\sin x_0}<\e,
+\]
+只要
+\[
+  \mabsB{2\cos\frac{x+x_0}2\sin\frac{x-x_0}2}\leq2\mabsB{\sin\frac{x-x_0}2}
+  \leq2\mabsB{\frac{x-x_0}2}=\mabs{x-x_0}<\e 。
+\]
+
+取~$\delta=\e$，则当~$\mabs{x-x_0}<\delta$~时，就有~$\mabs{\sin x-\sin x_0}<\e$。所以~$\sin x$~在~$x_0$~点连续。%
+由于~$x_0$~的任意性，得~$\sin x\in C(\mR)$。
+\end{proof}
+\end{enumlist}
+
+由正弦函数~$\sin x$~的连续性可知
+\[
+y=\cos x=\sin\mparenB{\frac\pi2-x}\in C(\mR);\quad
+y=\tan x=\frac{\sin x}{\cos x}\in C(D),
+\]
+这里~$D$~为~$\mR$~除去点
+\[
+  x=\mparenB{k+\frac12}\pi\mcond*{0,\pm1,\pm2,\dotsc}
+\]
+的集合。
+
 \begin{exercise}
-\item
+\item 设~$f(x),g(x)$~在~$[a,b]$~上连续。证明
+\begin{exlistcols}
+  \item $\mabs{f(x)}\in C[a,b]$；
+  \item $\max\mrange{f(x)}{g(x)}\in C[a,b]$；
+  \item $\min\mrange{f(x)}{g(x)}\in C[a,b]$。
+\end{exlistcols}
+\item 设~$f(x)\in C[a,b]$，证明~$f_t(x)\in C[a,b]$，其中
+\[
+  f_t(x)=\begin{cbdcases}
+    f(x),& x\in\mathset x{f(x)>t};\\
+    t,   & x\in\mathset x{f(x)\leq t}。
+  \end{cbdcases}
+\]
+\item 设~$f(x)$~在~$(0,+\infty)$~上连续，且满足
+\[
+  f(\cramped{x^2})=f(x)\mcond*{x>0}。
+\]
+证明~$f(x)$~为一常数。
+\item 设~$f(x)$~在~$x=0$~处连续，且对任意~$x,y\in\mR$，有
+\[
+  f(x+y)=f(x)+f(y)。
+\]
+证明，$f(x)$~在~$\mR$~上连续，且~$f(x)=f(1)\cdot x$。
+\item 设~$f(x)$~在~$(a,b)$~上只有第一类间断点，且对任意~$x,y\in(a,b)$，有
+\[
+  f\mparenB{\frac{x+y}2}\leq\frac{f(x)+f(y)}2。
+\]
+证明~$f(x)$~在~$(a,b)$~上连续。
+\item 设~$f(x)$~在~$\mintco 0\pinf$~上连续，且~$0\leq f(x)\leq x\mcond{x\geq0}$。设~$a_1\geq0$，%
+而~$a_{n+1}=f(a_n)\mcond{n=1,2,\dotsc}$。证明，
+\begin{exlistcols}
+  \item $\lim_\ntoinf a_n$~存在；
+  \item 设~$\lim_\ntoinf a_n=\ell$，则~$f(\ell)=\ell$；
+  \item 如果将条件改为~$0\leq f(x)<x\mcond{x>0}$，则~$\ell=0$。
+\end{exlistcols}
 \end{exercise}
+
+
 \section{连续函数的中间值性质}
+
+我们叙述连续函数的零点性质，它的证明以后再给出。
+
+\begin{theorem}\label{thm:sec3.3-1}
+设~$f(x)\in C\mintc ab$且~$f(a)f(b)<0$，则存在~$\xi\in\minto ab$，使得
+\[
+  f(\xi)=0 。
+\]
+\end{theorem}
+
+\ref{thm:sec3.3-1}~的几何意义是，若连续曲线由~$x$~轴之下跑到~$x$~轴之上，则中间至少要经过~$x$~轴一次（见\ref{fig:sec3.3-1}）。
+
+\begin{figure}
+\figureboxsep{5}
+\begin{floatrow}[2]
+\figurebox{\caption{}\label{fig:sec3.3-1}}
+          {\somefigure}
+\figurebox{\caption{}\label{fig:sec3.3-2}}
+          {\somefigure}
+\end{floatrow}
+\end{figure}
+
+\begin{theorem}[中间值定理]\label{thm:sec3.3-2}
+设~$f(x)\in C\mintc ab$，且~$\eta$~介于~$f(a)$~与~$f(b)$~之间，则存在~$\xi\in\mintc ab$，使得
+\[
+  f(\xi)=\eta 。
+\]
+\end{theorem}
+\begin{proof}
+若~$\eta$~等于~$f(a)$~或~$f(b)$，取~$\xi=a$~或~$b$~即可。
+
+若~$\eta$~严格介于~$f(a)$~与~$f(b)$~之间，即
+\[
+  f(a)<\eta<f(b)\quad\text{或}\quad f(a)>\eta>f(b) 。
+\]
+作函数~$F(x)=f(x)-\eta\in C\mintc ab$。显然
+\[
+  F(a)\cdot F(b)=\mparenb{f(a)-\eta}\cdot\mparenb{f(b)-\eta}<0,
+\]
+根据\ref{thm:sec3.3-1}，存在~$\xi\in(a,b)$，使得
+\[
+  F(\xi)=0\implies f(\xi)=\eta 。\qedhere
+\]
+\end{proof}
+
+\ref{thm:sec3.3-2}~说明，连续函数可以取得~$f(a)$~与~$f(b)$~之间的一切值。反之，若一个函数能取到~$f(a)$~与~$f(b)$~之间
+的一切值，它是否一定连续呢？例如函数
+\[
+  f(x)=\begin{cdcases}
+    x, & x\in\mintco 01;\\
+    3-x, & x\in\mintc 12;\\
+    x, & x\in\mintoc 23,
+  \end{cdcases}
+\]
+它取到~$f(0)=0$~与~$f(3)=3$~之间的一切值，但显然函数~$f(x)$~不连续（见\ref{fig:sec3.3-2}）。
+
+\begin{example}
+证明方程
+\[
+  x^3+4x^2-3x-1=0
+\]
+在~$\mR$~上有三个根。
+\end{example}
+\begin{proof}
+令
+\[
+  f(x)=x^3-x^2-3x-1\in C(\mR) 。
+\]
+\begin{enumlist}
+\item 因为~$f(0)=-1<0$，而~$f(1)=1>0$，所以多项式~$f(x)$~在~$\minto 01$~有一个零点，即方程~$f(x)=0$~有一个实根；
+\item 因为~$f(-1)=5>0$，所以方程在~$\minto {-1}0$~内有一个实根；
+\item 因为~$\lim_{x\to\minf}f(x)=\minf$，故存在~$x_2$，使得~$f(x_2)<0$，所以方程在~$\minto{-x_2}{-1}$~内有一个实根。\qedhere
+\end{enumlist}
+\end{proof}
+
+\begin{theorem}\label{thm:sec3.3-3}
+设~$y=f(x)\in C\minto ab$，且严格上升，记
+\[
+  \alpha\coloneq\inf_{a<x<b}\mbrace{f(x)},\quad\beta\coloneq\sup_{a<x<b}\mbrace{f(x)},
+\]
+其中~$\alpha$~可以使~$\minf$，而~$\beta$~可以为~$\pinf$，则
+\begin{enumlistcols}
+\item 在~$\minto\alpha\beta$~上存在反函数~$x=\phi(y)$；
+\item $x=\phi(y)$~在~$\minto\alpha\beta$~上严格单调上升；
+\item $\phi(y)\in C\minto\alpha\beta$。
+\end{enumlistcols}
+\end{theorem}
+\begin{proof}
+\begin{thmenumlist}
+\item 因为~$y=f(x)$~严格上升，所以反函数一定存在，需要证明的是反函数的定义域恰好为~$\minto\alpha\beta$，也就是要证明
+区间上的严格单调函数，如果函数连续，则其值域一定是区间。
+
+事实上，对任意~$y_0\in\minto\alpha\beta$，由上、下确界的定义，存在~$x',x''\in\minto\alpha\beta$，使得
+\[
+  f(x')<y_0<f(x'')。
+\]
+在~$\mintc{x'}{x''}$~（或~$\mintc{x''}{x'}$）上应用\ref{thm:sec3.3-2}，则存在~$x_0\in\minto{x'}{x''}\subset\minto ab$，使得
+~$f(x_0)=y_0$，即~$y_0$~是~$f(x)$~的函数值。由~$y_0$~的任意性，得到~$\minto\alpha\beta$~为~$f(x)$~的值域（$\alpha,\beta$~不
+可能是~$f(x)$~的函数值），即~$\minto\alpha\beta$~为~$x=\phi(y)$~的定义域。
+\item 设~$y_1,y_2\in\minto\alpha\beta$，且~$y_1<y_2$，往证
+\[
+  x_1=\phi(y_1)<\phi(y_2)=x_2 。
+\]
+事实上，假若~$x_1\geq x_2$，由反函数定义及~$f(x)$~的严格上说，得到
+\[
+  y_1=f(x_1)\geq f(x_2)=y_2,
+\]
+这与~$y_1<y_2$~矛盾，所以~$\phi(y)$~严格上升。
+\item 已知~$\phi(y)$~在~$\minto\alpha\beta$~上严格上升，值域为区间~$\minto ab$，要证明~$\phi(y)\in C\minto\alpha\beta$，也就是要
+证明区间上的严格单调函数，如果函数的值域为一个区间，则函数一定连续。
+
+事实上，设~$\phi(y)$~在~$y_0\in\minto\alpha\beta$~点不连续。由\ref{thm:sec3.1-1}~可知
+\[
+  \lim_{y\to y_0-0}\phi(y)=\phi(y_0-0)\leq\phi(y_0),\quad
+  \lim_{y\to y_0+0}\phi(y)=\phi(y_0+0)\geq\phi(y_0)。
+\]
+以上两式必有一式不等号成立，不妨设~$\phi(y_0-0)<\phi(y_0)$，则函数的值域包含在两个不相交的区间
+~$\mintob{\phi(\alpha+0)}{\phi(y_0-0)}$~与~$\mintcb{\phi(y_0)}{\phi(\beta-0)}$内，这与值域为一区间~$\minto ab$~矛盾，这
+矛盾说明~$\phi(y)\in C\minto\alpha\beta$。\qedhere
+\end{thmenumlist}
+\end{proof}
+\begin{remark}\label{rem:sec3.3-1}
+\ref{thm:sec3.3-3}~中条件改为~$f(x)\in\minto ab$，且严格上升，令~$f(a)=\alpha$，而~$f(b)=\beta$，则结论中的
+开区间~$\minto\alpha\beta$~相应地改为闭区间~$\mintc\alpha\beta$~即可。对严格下降函数，可以同样讨论。
+\end{remark}
+
+利用\ref{thm:sec3.3-3}，我们可以得出反三角函数的连续性。
+\begin{enumlist}
+\item $y=\arcsin x\in C\mintc{-1}1$。
+
+因为~$x=\sin y$~在~$\mintc{-\sfrac\pi2}{\sfrac\pi2}$~上严格上升、连续，由\ref{thm:sec3.3-3}~的证明及\ref{rem:sec3.3-1}~可知
+~$\sin y$~的值域为~$\mintc{-1}1$，且~$y=\arcsin x$~在~$\mintc{-1}1$~上严格上升、连续。
+\item $y=\arccos x\in C\mintc{-1}1$。
+
+因为~$x=\cos y$~在~$\mintc 0\pi$~上严格下降、连续，故其值域为~$\mintc{-1}1$，且~$y=\arccos x$~在~$\mintc{-1}1$~上严格下降、连续。
+\item $y=\arctan x\in C(\mR)$。
+
+因为~$x=\tan y$~在~$\minto{-\sfrac\pi2}{\sfrac\pi2}$~上严格上升、连续，故其值域为~$\mR$，且~$x=\arctan x$~在~$\mR$~上
+严格上升、连续。
+\end{enumlist}
+
 \begin{exercise}
-\item
+\item 证明方程~$x^3+x+q=0\mcond{p>0}$~有且只有一个实根。
+\item 设~$f(x)$~在~$\minto ab$~上连续，而~$\mvec x{1,2,:,n}\in\minto ab$。证明，存在~$\xi\in\minto ab$，使得
+\[
+  f(\xi)=\frac1n\sum_{i=1}^nf(x_i) 。
+\]
+\item 设~$f(x)$~在~$\minto ab$~上连续，若~$x_n,y_n\in\minto ab\mcond{n\geq1}$~且~$\lim_\ntoinf x_n=\lim_\ntoinf y_n=b$，
+\[
+  \lim_\ntoinf f(x_n)=A,\quad \lim_\ntoinf f(y_n)=B\mcond{B>A}。
+\]
+证明，对任意~$\eta\in\minto AB$，存在~$\mbrace{z_n}\subset\minto ab$，使得~$\lim_\ntoinf z_n=b$，并且~$\lim_\ntoinf f(z_n)=\eta$。
+\item 设~$f(x)\in C\mintc ab$，而~$\mabs{f(x)}$~在~$\mintc ab$~上单调。证明~$f(x)$~也在~$\mintc ab$~上单调。
+\item 设~$f(x)\in C\mintc ab$，且~对任意$x_1,x_2\in\mintc ab$，当~$x_1\neq x_2$~时，有~$f(x_1)\neq f(x_2)$。证
+明，$f(x)$~在~$\mintc ab$~上严格单调上升或严格单调下降。
+\item 设~$f(x)\in C(\mR)$，并且对任意~$x,y\in\mR$，函数~$f(x)$~满足
+\[
+  \mabs{f(x)-f(y)}\leq k\mabs{x-y}\mcond*{0<k<1}。
+\]
+证明，
+\begin{exlistcols}
+  \item 函数~$kx-f(x)$~单调上升；
+  \item 存在~$\xi\in\mR$，使得~$f(\xi)=\xi$。
+\end{exlistcols}
 \end{exercise}
+
+
 \section{初等函数的连续性}
+
+前面我们已知多项式、有理函数、三角函数与反三角函数在其定义域上是连续的。这节我们讨论指数函数、对数函数和幂函数的连续性。
+
+由\ref{thm:sec3.3-3}~的证明，我们可得出如下结论：区间上的单调函数，它连续当且仅当其值域为一区间。当讨论指数函数~$a^x\mcond{a>0}$~
+的连续性时，如果用到正实数的对数存在，实质上是用到单调函数~$a^x$~的值域为一区间，而~$a^x$~的值域为一区间时用到~$a^x$~的连续性，这
+无异于用~$a^x$~的连续性来证其连续性。为了避免这个逻辑上的毛病，我们从指数定义出发来证明其连续性。
+
+在给出指数函数定义之前，我们需要下面的引理。同时，为了叙述简单起见，只考虑~$a>1$~情形。
+
+\begin{lemma}\label{lem:sec3.4-1}
+设~$a>1$，$n$~为正整数，则存在实数~$b>1$，使得~$a=b^n$~或者~$\sqrt[n]a=b$。
+\end{lemma}
+\begin{proof}
+在区间~$\mintc 1a$~上考虑函数
+\[
+  f(x)=x^n 。
+\]
+显然它是连续的，且
+\[
+  f(1)=1<a<f(a)=a^n 。
+\]
+由连续函数中间值定理（见\ref{fig:sec3.4-1}），存在~$b\in\minto 1a$，使得
+\[
+  a=b^n\quad\text{或}\quad\sqrt[n]a=b 。\qedhere
+\]
+\end{proof}
+
+\begin{wrapfigure}[8]{O}{0mm}
+\somefigure
+\caption{}\label{fig:sec3.4-1}
+\end{wrapfigure}
+
+\ref{lem:sec3.4-1}~保证大于~$1$~的实数的~$n$~次算术根总是存在的，且算术根也大于~$1$。这样就有下面定义。
+
+\begin{definition}\label{def:sec3.4-1}
+若正有理数~$q=\dfrac mn$，其中~$n,m$~为正整数且互素，定义
+\[
+  a^q\coloneq\mparenb{\sqrt[n]a}^m;
+\]
+若~$q$~为负有理数，定义
+\[
+  a^q\coloneq\frac1{a^{-q}};
+\]
+而定义~$a^0\coloneq1$。
+
+若~$\lambda$~无理数，定义
+\[
+  a^\lambda\coloneq\sup_{q<\lambda}\mbrace{a^q}\mcond*{q\in\mQ}。
+\]
+\end{definition}
+
+还需说明\ref{def:sec3.4-1}~中上确界的存在性。不难证明，当~$q$~为有理数时，$a^q$~仍满足熟知的指数的三条性质，所以当
+有理数~$q_1<q_2$~时，
+\[
+  \frac{a^{q_2}}{a^{q_1}}=a^{q_2-q_1}>1\implies a^{q_2}>a^{q_1}。
+\]
+由此即可看出定义中上确界存在，且不管~$x$~是无理数还是有理数，总有
+\[
+  a^x\coloneq\sup_{q<x}\mbrace{a^q}\mcond*{q\in\mQ}。
+\]
+这样我们就得到在~$\mR$~上定义的指数函数~$a^x$。
+
+首先证明~$a^x$~严格上升。
+
+设给定实数~$x_1,x_2$，且~$x_1<x_2$，总可以找到有理数~$q_1,q_2$，使得
+\[
+  x_1<q_1<q_2<x_2,
+\]
+因此
+\[
+  a^{x_1}=\sup_{q\leq x_1}\mbrace{a^q}\leq a^{q_1}<a^{q_2}\leq\sup_{q\leq x_2}\mbrace{a^q}=a^{x_2},
+\]
+即~$a^x$~在~$\mR$~上严格上升。
+
+其次证明~$f(x)=a^x$~在~$\mR$~上连续。
+
+对任意~$\e>0$，存在自然数~$N$，使得
+\[
+  a<(1+\e)^N 。
+\]
+对任意~$x_0\in\mR$，总可以找到有理数~$q_1,q_2$，使得
+\[
+  q_1<x_0<q_2,\quad q_2-q_1=\frac 1N 。
+\]
+事实上，用~$\sfrac kN$~的点把实轴分成无穷个小区间，这里~$k=0,\pm1,\pm2,\dotsc$，若~$x_0$~落在某一小区间内部，则把该
+小区间的左、右端点即为~$q_1$~和~$q_2$；若~$x_0$~正好是小区间端点，只要把小区间平移~$\sfrac1{(2N)}$，即化为内点情形。由%
+\ref{thm:sec3.1-1}~可知
+\[
+  f(x_0)\leq f(x_0+0)\leq a^{q_2},\quad
+  f(x_0)\geq f(x_0-0)\geq a^{q_1}。
+\]
+所以
+\[
+  1\leq\frac{f(x_0+0)}{f(x_0-0)}\leq\frac{a^{q_2}}{a^{q_1}}=a^{q_2-q_1}=a^{\frac1N}<1+\e,
+\]
+由~$\e$~的任意性，即得
+\[
+  f(x_0+0)=f(x_0-0)=f(x_0)=a^{x_0},
+\]
+这说明函数~$a^x$~在~$x_0$~点连续。由~$x_0$~的任意性可知~$a^x$~在~$\mR$~上连续。
+
+利用函数~$a^x$~的连续性，已知性质~$a^{x_1}a^{x_2}=a^{x_1+x_2}$~对有理数~$x_1,x_2$~成立，通过取极限，即得上述性质对任意
+实数~$x_1,x_2$~成立。
+
+进一步可得出对数函数与幂函数的连续性。
+
+\begin{enumlist}
+\item $y=\log_ax\in C\minto 0{+\infty}$。
+
+因为~$x=a^y$~在~$\mR$~上严格上升、连续，故其值域为~$\minto 0{+\infty}$，且~$y=\log_ax$~在~$\minto 0{+\infty}$~上严格上升、连续。
+\item ~$y=x^\alpha\in C\minto 0{+\infty}$。
+
+因为~$y=x^\alpha=\me^{\alpha\ln x}$，由复合函数连续性即可看出。
+\end{enumlist}
+
+最后可得结论：\emph{一切初等函数在其定义域上是连续的}。
+
+\begin{example}\label{ex:sec3.4-1}
+若~$u(x),v(x)$~在~$x_0$~点连续，且~$u(x_0)>0$，则~$u(x)^{v(x)}$~也在~$x_0$~点连续（在~$x_0$~附近考虑）。
+\end{example}
+\begin{proof}
+注意到，$u(x)^{v(x)}=\me^{v(x)\ln u(x)}$。因为~$u(x)$~在~$x_0$~点连续，$\ln t$~在~$t=u(x_0)$~点连续，由复合函数的连续性，%
+可知~$\ln u(x)$~在~$x_0$~点连续。由乘积的连续性，可得~$v(x)\ln u(x)$~在~$x_0$~点连续。又~$\me^y$~在~$y=v(x_0)\ln u(x_0)$~点
+连续，再用复合函数的连续性，得
+\[
+  u(x)^{v(x)}=\me^{v(x)\ln u(x)}
+\]
+在~$x_0$~点连续。
+\end{proof}
+
+\begin{example}
+若~$\lim_{x\to x_0}u(x)=a>0$，$\lim_{x\to x_0}v(x)=b$，则
+\[
+  \lim_{x\to x_0}u(x)^{v(x)}=a^b 。
+\]
+\end{example}
+\begin{proof}
+补充定义
+\[
+  u(x_0)=a,\quad v(x_0)=b,
+\]
+则函数~$u(x),v(x)$~在~$x_0$~点连续。由\ref{ex:sec3.4-1}~可得
+\[
+  \lim_{x\to x_0}u(x)^{v(x)}=u(x_0)^{v(x_0)}=a^b 。
+\]
+
+当~$x_0=+\infty$~或~$-\infty$~时，利用变换~$x=\sfrac1t$，就可以化为~$t=0$~情形，所以这时候结论仍成立。
+\end{proof}
+
+求极限我们讨论过加、减、乘、除四条运算法则，现在又多了一条幂指运算法则，这样共有五条求极限的法则。
+
+\begin{example}
+\[
+  \lim_{x\to+\infty}\mparenB{1+\sin\frac1x}^x 。
+\]
+\end{example}
+\begin{proof}
+注意到
+\[
+  \mparenB{1+\sin\frac1x}^x=\mparenB{1+\sin\frac1x}^{\frac1{\sin(\sfrac1x)}\cdot\frac{\sin(\sfrac1x)}{\sfrac1x}},
+\]
+令
+\[
+  u(x)=\mparenB{1+\sin\frac1x}^{\frac1{\sin(\sfrac1x)}},\quad
+  v(x)=\frac{\sin(\sfrac1x)}{\sfrac1x} 。
+\]
+由
+\[
+  \lim_{x\to+\infty}u(x)=\me,\quad \lim_{x\to+\infty}v(x)=1,
+\]
+所以
+\[
+  \lim_{x\to+\infty}\mparenB{1+\sin\frac1x}^x=\me^1=\me 。\qedhere
+\]
+\end{proof}
+
+
 \begin{exercise}
-\item
+\item 求下列极限。
+\begin{exlistcols}
+  \item $\lim_{x\to1}\mparenB{\dfrac{1+x}{2+x}}^{\frac{1-\sqrt x}{1+x}}$；
+  \item $\lim_\ntoinf\mparen{\arctan x}^{\cos\frac1x}$。
+\end{exlistcols}
+\item 求下列极限。
+\begin{exlistcols}
+  \item $\lim_{x\to0}\mparen{\cos x}^{\frac1{x^2}}$；
+  \item $\lim_{x\to0}\mparen{\cos x+\sin x}^{\frac1x}$。
+\end{exlistcols}
+\item 证明，方程~$x^\alpha=\ln x\mcond{\alpha<0}$~在正实轴上有且仅有一根。
 \end{exercise}
+
+
+
 \section{有界闭区间上连续函数的性质}
+
+这节我们讨论连续函数的最大最小值与一致连续性，它们的证明以后再给出。
+
+\begin{theorem}[最大最小值定理]\label{thm:sec3.5-1}
+设~$f(x)\in C\mintc ab$，则~$f(x)$~一定有最大值与最小值。即存在~$x_1,x_2\in\mintc ab$，使得对任意~$x\in\mintc ab$，有
+\[
+  f(x)\leq f(x_1)=\max_{a\leq x\leq b}\mbrace{f(x)},\quad
+  f(x)\geq f(x_2)=\min_{a\leq x\leq b}\mbrace{f(x)}。
+\]
+此时，$x_1,x_2$~分别称为函数的\emph{最大值点}与\emph{最小值点}。
+\end{theorem}
+
+从几何上看，若连续曲线有最左、最右的点，则必有最高、最低的点。
+
+注意\ref{thm:sec3.5-1}~中闭区间条件不能减弱。例如，函数~$f(x)=\sfrac1x$~在~$\minto 01$~上连续，但函数在开区间上没有最大值和
+最小值。
+
+下面介绍一致连续的概念。
+
+设~$f(x)$~在~$\minto ab$~上连续，即指每一点连续。例如，它在~$x_1$~点连续，则对任意~$\e>0$，存在~$\delta_1=\delta(\e,x_1)>0$，当
+~$\mabs{x-x_1}<\delta_1$~时，有
+\[
+  \mabsb{f(x)-f(x_1)}<\e 。
+\]
+由它在~$x_2$~点连续，则对上述~$\e>0$，存在~$\delta_2=\delta(\e,x_2)>0$，当~$\mabs{x-x_2}<\delta_2$~时，有
+~$\mabs{x-x_1}<\delta_1$~时，有
+\[
+  \mabsb{f(x)-f(x_2)}<\e 。
+\]
+
+我们发现，对同一个~$\e>0$，由于函数在每一点连续，多以每一点都存在~$\delta(\e,x)>0$，但对不同的点~$x$，找到的~$\delta$~的大小
+是不同的，$\delta$~不仅依赖于~$\e$，也依赖于~$x$。在曲线平坦部分（比如~$x_1$~点附近）找到的~$\delta$~可以大一些，而在曲线
+陡的部分（比如~$x_2$~点附近）找到的~$\delta$~必须小一些。从图形上看，在陡处的点适用的~$\delta$，对平坦处的点也是适用的，如
+~$x$~落在~$x_1$~的~$\delta_1$~邻域时，$f(x)$~落在~$f(x_1)$~的~$\e$~邻域，则~$x$~落在~$x_1$~的~$\delta_2$~时，$f(x)$~更落
+在~$f(x_1)$~的~$\e$~邻域。但在平坦处的点适用的~$\delta$，对陡处的点不一定适用（见\ref{fig:sec3.5-1}）。这样，就提出一个问
+题，对任意~$\e>0$，能否找到对每一个~$x$~都适用的公共~$\delta$~呢？
+
+\thisfloatsetup{rowprecode=wrapfig}
+\begin{wrapfigure}{O}{0mm}
+\somefigure
+\caption{}\label{fig:sec3.5-1}
+\end{wrapfigure}
+
+定义域上有无穷个~$x$，也就有无穷个~$\delta$，若只有有限个~$\delta$，则最小的~$\delta$~就是公共的~$\delta$，现在无穷个~$\delta$~里
+面，不一定有大于零的最小~$\delta$，也就不一定存在公共的~$\delta$。从几何直观来看，如果曲线有一个地方最陡，则最陡处的~$\delta$，对
+其它点也适用，这时就找到了公共的~$\delta$；若曲线无限地变陡，没有一处坡度最陡的地方，这时就找不到公共的~$\delta$。
+
+对于用公共~$\delta$~的函数，我们给出如下定义。
+
+\begin{definition}
+设~$f(x)$~在区间~$I$~上定义，若对任意~$\e>0$，存在~$\delta=\delta(\e)>0$，使得对任意~$x_1,x_2\in I$，%
+当~$\mabs{x_1-x_2}<\delta$~时，有
+\[
+  \mabsb{f(x-1)-f(x_2)}<\e,
+\]
+则称~$f(x)$~在~$I$~上\emph{一致连续}。
+\end{definition}
+
+显然，函数在区间~$I$~上一致连续，必在区间~$I$~上连续。
+
+\begin{example}
+证明~$y=x^2$~在~$\mintc 0a$~上一致连续。
+\end{example}
+\begin{proof}
+对任意~$\e>0$，当~$x_1,x_2\in\mintc 0a$~时，有
+\[
+  \mabsb{x_1^2-x_2^2}<\e\impliedby
+  \mabs{x_1+x_2}\cdot\mabs{x_1-x_2}\leq 2a\mabs{x_1-x_2}<\e 。
+\]
+去~$\delta=\dfrac\e{2a}$，则当~$\mabs{x_1-x_2}<\delta$~时，就有
+\[
+  \mabsb{x_1^2-x_2^2}<\e 。
+\]
+由定义可知函数在~$\mintc 0a$~上一致连续。
+\end{proof}
+
+\begin{example}
+证明~$y=\sqrt x$~在~$\mintco 0{+\infty}$~上一致连续。
+\end{example}
+
+由\ref{fig:sec3.5-2}~看出，函数在~$x=0$~处坡度最陡，$x=0$~处的~$\delta$~即可最为公共的~$\delta$。
+
+%\thisfloatsetup{rowprecode=wrapfig}
+\begin{wrapfigure}{O}{0mm}
+\somefigure
+\caption{}\label{fig:sec3.5-2}
+\end{wrapfigure}
+
+\begin{proof}
+对任意~$\e>0$，取~$\delta=\e^2>0$，当~$x_1,x_2\in\mintco 0\pinf$，$\mabs{x_1-x_2}<\delta$，我们分两种情形讨论。
+\begin{enumlist}
+\item $\max\mrange{x_1}{x_2}\geq\e^2$~时，
+\[
+  \mabsb{\sqrt{x_1}-\sqrt{x_2}}=\mabsB{\frac{x_1-x_2}{\sqrt{x_1}+\sqrt{x_2}}}\leq\frac{\mabs{x_1-x_2}}{\sqrt{\e^2}}
+  <\frac\delta\e=\e;
+\]
+\item $\max\mrange{x_1}{x_2}<\e^2$~时，无妨设~$x_1\geq x_2$~时
+\[
+  \mabsb{\sqrt{x_1}-\sqrt{x_2}}\leq\sqrt{x_1}<\sqrt{\e^2}=\e 。
+\]
+所以函数~$\sqrt x$~在~$\mintco 0\pinf$~上一致连续。\qedhere
+\end{enumlist}
+\end{proof}
+
+从图形可以看出，闭区间上的连续函数，总有一处坡度最陡，在这一处坡度最陡，在这一处使用的~$\delta$~即为公共的~$\delta$，于是
+有如下定理。
+
+\begin{theorem}\label{thm:sec3.5-3}
+设函数~$f(x)\in C\mintc ab$，则~$f(x)$~在~$\mintc ab$~上一致连续。
+\end{theorem}
+
+有没有不一致连续的连续函数呢？有的。例如，函数~$y=\sfrac1x$，当~$x\to0$~是，曲线无限地变陡，且没有最陡的点，因此没有
+公共的~$\delta$，也就在~$\minto 01$~上不一致连续。又例如~$y=\sin(\sfrac1x)$，当~$x\to 0$~时，也无限地变陡，且没有最陡的点，因此
+不可能找出公共的~$\delta$，所以在~$\minto 01$~上也不一致连续。上面只是直观叙述，怎么来严格论证呢？为此我们还是从一致连续开始。
+
+一致连续是说，对区间上任意两点，不管这两点位置在哪儿，只要这两点距离小于~$\delta$，相应的曲线高度之差总小于~$\e$。根据这一点，要
+检查曲线是否一致连续，可以作一形象的说法，把曲线比作工厂的产品，一致连续表示合格品。我们是用如下办法检查产品是否是合格品。用一系列
+直径为~$\e$~的空心圆管，若对每一直径为~$\e$~的空心圆管，总能锯下长为~$\delta$~的一小段，把这小段圆管套进曲线一端，允许小段管子上下
+评语，而不允许倾斜或侧转，如果圆管能从曲线一端进去，平行移动从另一端出来，而不碰到曲线，就认为检查通过。对每一直径为~$\e$~的圆
+管，检查都能通过，产品就是合格品，即曲线一致连续。
+
+%\thisfloatsetup{rowprecode=wrapfig}
+\begin{wrapfigure}{O}{0mm}
+\somefigure
+\caption{}\label{fig:sec3.5-3}
+\end{wrapfigure}
+
+所以，不一致连续，即产品是不合格品，那么总有一道检查手续通不过，即存在~$\e_0>0$~的圆管，不可能锯下一小段使得上面的检查通过。也就
+是是，对任意~$\delta>0$，总可以锯下长为~$\delta'$~的一小段（$\delta>\delta'$），不可能从曲线一端套进去，平行移动从另一端出来，而
+不碰到曲线，这意味着小圆管总要在曲线的某个地方被卡住（见\ref{fig:sec3.5-3}），即存在~$x',x''$，$\mabs{x'-x''}=\delta'<\delta$，但
+\[
+  \mabsb{f(x')-f(x'')}\geq\e_0 。
+\]
+
+综上所述，就可以得到不一致连续的“$\e-\delta$”说法：
+
+存在~$\e_0>0$，使得对任意~$\delta>0$，都存在~$x',x''\in I$，即使~$\mabs{x'-x''}<\delta$，但是
+\begin{equation}\label{eq:sec3.5-1}
+  \mabsb{f(x')-f(x'')}\geq\e_0 。
+\end{equation}
+
+形式上把“任意”与“存在”交换一下，由一致连续的说法就变为不一致连续的说法。
+
+在~\ref{eq:sec3.5-1}~中取~$\delta_n=\sfrac1n\mcond{n=1,2,\dotsc}$，就可以把不一致连续改述如下：
+
+存在~$\e_0>0$，存在~$I$~内的序列~$\mbrace{x_n'},\mbrace{x_n''}$，$\lim_\ntoinf\mparen{x_n'-x_n''}=0$，但
+\begin{equation}\label{eq:sec3.5-2}
+  \mabsb{f(x_n')-f(x_n'')}\geq\e_0 。
+\end{equation}
+
+反之，若~\ref{eq:sec3.5-2}~成立，则~\ref{eq:sec3.5-1}~也成立，所以不一致连续的两种说法是等价的。
+
+把序列看成动点所取得值，不一致连续就是说，存在两个动点，动点变动时距离趋于零，而动点的函数值总保持一定距离~$\e_0$。
+
+利用~\ref{eq:sec3.5-2}~判别不一致连续，我们还嫌不便，事实上可以改得更简便些：
+
+存在~$I$~内的序列~$\mbrace{x_n'}$~和~$\mbrace{x_n''}$，$\lim_\ntoinf\mparen{x_n'-x_n''}=0$，而
+\begin{equation}\label{eq:sec3.5-3}
+\lim_\ntoinf\mparenb{f(x_n')-f(x_n'')}=C\neq 0,
+\end{equation}
+则函数在~$I$~内不一致连续。
+
+\ref{eq:sec3.5-3}~蕴涵~\ref{eq:sec3.5-2}。事实上，令~$\e_0=\sfrac{\mabs C}2>0$，当~$n>N$~时，
+\[
+  \mabsb{\mabs{f(x_n')-f(x_n'')}-\mabs C}\leq\frac{\mabs C}2,
+\]
+所以
+\[
+  \mabsb{f(x_n')-f(x_n'')}\geq\mabs C-\frac{\mabs C}2=\frac{\mabs C}2 。
+\]
+再令~$\tilde x_n'=x_{N+n}'$~和~$\tilde x_n''=x_{N+n}''$，则
+\[
+  \lim_\ntoinf\mparenb{\tilde x_n'-\tilde x_n''}=\lim_\ntoinf\mparenb{x_{n+N}'-x_{n+N}''}=0,
+\]
+但是
+\[
+  \mabsb{\tilde x_n'-\tilde x_n''}\geq\frac{\mabs C}2=\e_0 。
+\]
+这就是说找到了~\ref{eq:sec3.5-2}~所要求的~$\e_0$~与序列~$\mbrace{\tilde x_n'}$~和~$\mbrace{\tilde x_n'}$。
+
+这样，判断不一致连续，就归结为寻找符合~\ref{eq:sec3.5-3}~的两个序列即可。
+
+\begin{example}
+证明~$f(x)=\dfrac1x$~在~$\minto 01$~上不一致连续。
+\end{example}
+\begin{proof}
+对于~$n=1,2,\dotsc$，取
+\[
+  x_n'=\dfrac1{n+1},\quad x_n''=\dfrac1{n+2},
+\]
+则
+\[
+  x_n'-x_n''=\frac1{n+1}-\frac1{n+2}\to 0,
+\]
+但
+\[
+  f(x_n')-f(x_n'')=(n+1)-(n+2)\to -1\neq 0,
+\]
+所以~$\sfrac1x$~在~$\minto01$~上不一致连续。
+\end{proof}
+
+\begin{example}
+证明~$f(x)=x^2$~在~$\minto 0\pinf$~上不一致连续。
+\end{example}
+\begin{proof}
+对于~$n=1,2,\dotsc$，取~$x_n'=\sqrt n$，$x_n''=\sqrt{n+1}$，则
+\[
+  x_n'-x_n''=\sqrt n-\sqrt{n+1}=\frac{-1}{\sqrt n+\sqrt{n+1}}\to 0,
+\]
+但是
+\[
+  f(x_n')-f(x_n'')=n-(n+1)=-1\to -1\neq0,
+\]
+所以~$x^2$~在~$\minto 0\pinf$~上不一致连续。
+\end{proof}
+
 \begin{exercise}
-\item
+\item 设~$f(x)\in C\mintco a\pinf$，且~$\lim_{x\to\pinf}f(x)$~存在。证明~$f(x)$~在~$\mintco a\pinf$~上有界。
+\item 设~$f(x)\in C(\mR)$，且~$\lim_{x\to\pm\infty}f(x)=+\infty$。证明~$f(x)$~在~$\mR$~上取到它的最小值。
+\item 设~$f(x)\in C\mintco ab$，且~$\lim_{x\to b-0}f(x)=B$。
+\begin{exlist}
+  \item 若存在~$x_1\in\mintco ab$，使得~$f(x_1)>B$，证明~$f(x)$~在~$\mintco ab$~上达到最大值；
+  \item 若存在~$x_1\in\mintco ab$，使得~$f(x_1)=B$，讨论~$f(x)$~在~$\mintco ab$~上能否达到最大值。
+\end{exlist}
+\item 设~$f(x),g(x)\in C\mintc ab$。证明
+\[
+  \max_{a\leq x\leq b}\mbrace{\mabs{f(x)+g(x)}}\leq
+  \max_{a\leq x\leq b}\mbrace{\mabs{f(x)}}+\max_{a\leq x\leq b}\mbrace{\mabs{g(x)}}。
+\]
+\item 设~$f(x)\in C(\mR)$，且~$\lim_{x\to\infty}f\mparenb{f(x)}=\infty$。证明~$\lim_{x\to\infty}f(x)=\infty$。
+\item 设~$f(x)\in C\mintc 01$，且~$f(x)>0$。令
+\[
+  M(x)\coloneq\max_{0\leq t\leq x}\mbrace{f(t)}\mcond*{x\in\mintc 01}。
+\]
+证明函数
+\[
+  Q(x)\coloneq\lim_\ntoinf\mparenB{\frac{f(x)}{M(x)}}^n
+\]
+连续当且仅当~$f(x)$~在~$\mintc 01$~上时单调上升的。
+\item 设~$f(x)\in C\mintc ab$，记
+\[
+  g(x)\coloneq\max_{a\leq t\leq x}\mbrace{f(t)}\mcond*{x\in\mintc ab}。
+\]
+证明~$g(x)\in C\mintc ab$。
+\item 设~$f(x)\in C\mintc ab$，并且对任意~$x\in\mintc ab$，存在~$y\in\mintc ab$，使得~$\mabs{f(y)}\leq\dfrac12\mabs{f(x)}$。证
+明，存在~$\xi\in\mintc ab$，使得~$f(\xi)=0$。
+\item 设~$f(x)\in C(\mR)$，若~$\lim_{x\to+\infty}f(x)=+\infty$，且~$f(x)$~的最小值~$f(a)<a$。证明~$f\mparenb{f(x)}$~至少在
+两点取到最小值。
+\item 设~$f(x)\in\mintc{-1}1$，$f(0)>0$，$f(\pm1)=0$。证明，存在常数~$a>0$~和~$b$，使得
+\[
+g(x)=-a\mabs x+b\geq f(x)\mcond*{x\in\mintc{-1}1};
+\]
+且存在~$c\mcond{-1<c<1}$，使得~$g(c)=-a\mabs c+b=f(c)$。
+\item 证明~$y=x$~和~$y=\sin x$~在~$\mR$~上一致连续。
+\item 证明~$y=\sqrt[3]x$~在~$\mintco 0\pinf$~上一致连续。
+\item 证明下列函数在~$\mR$~上不一致连续。
+\begin{exlistcols}
+  \item $y=x^3$；
+  \item $y=x\cdot\sin x$。
+\end{exlistcols}
+\item 证明~$f(x)=\dfrac{\mabs{\sin x}}x$~在~$\minto{-1}0$~和~$\minto 01$~上一致连续，但是在~$0<\mabs x<1$~上并非一致连续。
+\item 设~$f(x)$~在~$\minto ab$~上一致连续。证明，
+\begin{exlistcols}
+  \item $f(x)$~在~$\minto ab$~上有界；
+  \item $y=\ln x$~在~$\minto 01$~上不一致连续。
+\end{exlistcols}
+\item 设~$f(x),g(x)$~在~$\minto ab$~上一致连续。证明~$f(x)+g(x)$~和~$f(x)\cdot g(x)$~也在~$\minto ab$~上一致连续。
+\item 若周期函数~$f(x)\in C(\mR)$，证明
+\begin{exlistcols}
+  \item $f(x)$~在~$\mR$~上一致连续；
+  \item $f(x)=\sin^2x+\sin x^2$~不是周期函数。
+\end{exlistcols}
+\item 设~$f(x)$~在~$\mintc ab$~上满足~Lipschitz~条件，即对任意~$x,y\in\mintc ab$，有
+\[
+  \mabsb{f(x)-f(y)}\leq k\mabs{x-y},
+\]
+这里~$k$~为常数。证明~$f(x)$~在~$\mintc ab$~上一致连续。
+\item 设~$f(x)$~在~$\mintco a\pinf\mcond{a>0}$~上满足~Lipschitz~条件，证明~$\dfrac{f(x)}x$~在~$\mintco a\pinf$~上一致连续。
+\item 设~$f(x)\in C(\mR)$，且~$\lim_{x\to-\infty}f(x)$~与~$\lim_{x\to+\infty}f(x)$~存在。证明~$f(x)$~在~$\mR$~上一致连续，并
+判断下述证明的正确性。
+\begin{exproof}
+对任意~$\e>0$，有~$\lim_{x\to+\infty}f(x)=A$，存在~$X_1>0$，使得当~$x>X_1$~时，有
+\[
+  \mabsb{f(x)-A}<\frac\e2 。
+\]
+所以当~$x_1,x_2>X_1$~时，有
+\[
+  \mabsb{f(x_1)-f(x_2)}\leq\mabsb{f(x_1)-A}+\mabsb{f(x_2)-A}<\e 。
+\]
+由此即可得到~$f(x)$~在~$\mintco {X_1}\pinf$~上一致连续。
+
+同理，由~$\lim_{x\to-\infty}f(x)=B$，存在~$X_2<0$，当~$x_1,x_2<X_2$~时，有
+\[
+  \mabsb{f(x_1)-f(x_2)}<\e 。
+\]
+由此即可得到~$f(x)$~在~$\mintco\minf{X_2}$~上一致连续。
+
+又因为~$f(x)$~在闭区间~$\mintc{X_2}{X_1}$~上连续，故在闭区间~$\mintc{X_2}{X_1}$~上一致连续。
+
+综上所述就得到~$f(x)$~在~$\mR$~上一致连续。
+\end{exproof}
+\item 证明~$f(x)$~在闭区间~$\mintc ab$~上连续必一致连续，并判断下述证明的正确性。
+\begin{exproof}
+用反证法。若~$f(x)$~在~$\mintc ab$~上不一致连续，则存在~$\e_0>0$，使得对任意~$\delta_1>0$，存在~$x_1,x_2\in\mintc ab$，%
+即使~$\mabs{x_1}{x_2}<\delta_1$，但是
+\begin{equation}\label{eq:sec3.5-ex-1}
+\mabsb{f(x_1)-f(x_2)}\geq\e_0 。
+\end{equation}
+
+由~$f(x)$~在~$x=x_2$~点连续，对上述~$\e_0$，存在~$\delta>0$，使得当~$\mabs{x-x_2}<\delta$~时，有
+\begin{equation}\label{eq:sec3.5-ex-2}
+\mabsb{f(x_1)-f(x_2)}<\e_0 。
+\end{equation}
+
+由于~\ref{eq:sec3.5-ex-1}~对任意~$\delta_1>0$~成立，取~$\delta_1=\delta$，则当~$\mabs{x_1-x_2}<\delta$~时，有
+\begin{equation}\label{eq:sec3.5-ex-3}
+\mabsb{f(x_1)-f(x_2)}\geq\e_0 。
+\end{equation}
+
+又因为~\ref{eq:sec3.5-ex-2}~对任意满足~$\mabs{x-x_2}<\delta$~的~$x$~成立。取~$x=x_1$，则当~$\mabs{x_1-x_2}<\delta$~时，有
+\begin{equation}\label{eq:sec3.5-ex-4}
+\mabsb{f(x_1)-f(x_2)}<\e_0 。
+\end{equation}
+\ref{eq:sec3.5-ex-3}~与~\ref{eq:sec3.5-ex-4}~矛盾，这说明反证法假设不成立，从而~$f(x)$~在~$\mintc ab$~上一致连续。
+\end{exproof}
 \end{exercise}
 
 \begin{exercise*}
-\item
+\item 设~$f(x)$~在~$\mR$~上单调，且对任意~$x,y\in\mR$，都满足函数方程
+\[
+  f(x+y)=f(x)+f(y) 。
+\]
+证明，
+\begin{exlistcols}
+  \item $f(nx)=nf(x)\mcond{n\in\mZ}$；
+  \item $f\mparenB{\dfrac xn}=\dfrac1nf(x)\mcond{n\in\mZ-\mbrace 0}$；
+  \item $f(\alpha x)=\alpha f(x)\mcond{\alpha\in\mQ}$；
+  \item $f(x)$~在~$x=0$~处连续；
+  \item $f(x)$~在~$\mR$~上连续；
+  \item $f(x)=f(1)\cdot x$。
+\end{exlistcols}
+\item 设~$f(x)$~在~$\mR$~上单调，且对任意~$x,y\in\mR$，都满足函数方程
+\[
+  f\mparenB{\frac{x+y}2}=\frac{f(x)+f(y)}2 。
+\]
+证明~$f(x)=f(0)+f(1)\cdot x$。
+\item 设~$f(x)$~在~$\minto ab$~上连续，且对任意~$x,y\in\minto ab$，有
+\[
+  f\mparenB{\frac{x+y}2}\leq\frac{f(x)+f(y)}2 。
+\]
+证明，
+\begin{exlist}
+  \item 对任意~$\mvec x{1,2,:,n}\in\minto ab$，有
+  \[
+    f\mparenB{\frac{x_1+x_2+\dotsb+x_n}n}\leq\frac1n\mparenb{f(x_1)+f(x_2)+\dotsb+f(x_n)};
+  \]
+  \item 对任意~$t\in\minto 01$~和任意~$x_1,x_2\in\minto ab$，有
+  \[
+    f\mparenb{tx_1+(1-t)x_2}\leq tf(x_1)+(1-t)f(x_2)。
+  \]
+\end{exlist}
+\item 证明~Riemann~函数
+\[
+  R(x)=\begin{dcases}
+    \frac1n, & x=\frac mn,\text{且}~(m,n)=1;\\
+    0,       & x\in\mR-\mQ,
+  \end{dcases}
+\]
+在任一有理点间断，而在任一无理点连续。
+\item 设~$f(x)\in C\mintc 01$，$f(0)=f(1)=0$，并且~$f(x)$~有正的最大值。证明，存在二次多项式
+\[
+  Q(x)=ax^2+bx+c\mcond{a<0},
+\]
+使得~$Q(x)\geq f(x)\mcond{0\leq x\leq 1}$~且~$Q(\alpha)=f(\alpha)\mcond{0<\alpha<1}$。
+\item 设~$f(x)\in C(\mR)$，且~$\lim_{x\to\pm\infty}f\mparenb{f(x)}=+\infty$。证明~$\lim_{x\to\pm\infty}f(x)=+\infty$。
+\item 证明，方程~$x^2+3x^3+7x^4-5x^6-8x^7=0$~有且仅有一个正实数根。
+\item 设~$f(x),g(x)\in C\mintc ab$。证明，
+\begin{exlist}
+  \item 若~$f(x_0)=\max_{a\leq x\leq b}\mbrace{\mabs{f(x)}}>\max_{a\leq x\leq b}\mbrace{\mabs{g(x)}}$，则~$f(x_0)>g(x_0)$；
+  \item 若~$\max_{a\leq x\leq b}\mbrace{\mabs{f(x)}}>\max_{a\leq x\leq b}\mbrace{\mabs{g(x)}}$，则~$f(x)$~与~$f(x)-g(x)$~在
+  ~$\mabs{f(x)}$~的最大值点处有相同的符号。
+\end{exlist}
+\item 设在~$\mintc{-1}1$~上，对于~$n=1,2,\dotsc$，有
+\[
+  T_n(x)=\frac1{2^{n-1}}\cos(n\arccos x) 。
+\]
+证明，
+\begin{exlist}
+  \item $\mabs{T_n(x)}$~在~$n+1$~个点~$x_k=\cos\dfrac kn\pi\mcond{k=0,1,\dotsc,n}$~上达到最大值；
+  \item 对任一首项系数为~$1$~的~$n$~次多项式~$P(x)=x^n+a_1x^{n-1}+\dotsc+a_n$，必有
+  \[
+    \max_{-1\leq x\leq 1}\mbrace{\mabs{P(x)}}\geq\max_{-1\leq x\leq 1}\mbrace{\mabs{T_n(x)}}=\frac1{2^{n-1}} 。
+  \]  
+\end{exlist}
+\item 设~$f(x)$~在~$\mintc ab$~上定义。对~$\mintc ab$~上任一闭区间~$\mintc{x_1}{x_2}\subset\mintc ab$~和介于~$f(x_1)$~与~$f(x_2)$~
+之间的任一常数~$\ell$，方程~$f(x)=\ell$~在~$\mintc{x_1}{x_2}$~上有且仅有有限个解。证明~$f(x)\in C\mintc ab$。
+\item 证明，在~$x\geq0$~上有非零基本初等连续函数~$f(x)$~满足
+\[
+  f(2^2x)=f(2x)+f(x) 。
+\]
 \end{exercise*}
+
 
 
 \endinput

@@ -59,8 +59,7 @@
     \begingroup
       \def\numberline##1{%%\let\hspace\@gobble
         \edef\@tocchlabel{##1\kern\ccwd}%
-        \settowidth\@tempdima{\@tocchlabel}%
-        \global\@tempdima\@tempdima
+        \settowidth{\global\@tempdima}{\@tocchlabel}%
         \@tocchlabel}%
       \let\\ \relax \relax
       \leftskip\z@ \rightskip\z@

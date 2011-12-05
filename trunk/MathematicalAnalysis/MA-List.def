@@ -48,7 +48,7 @@ labelwidth=\widthof{\bfseries\ref{enumLastItem-\theLastItem}},
 \SetEnumitemKey{hang}{nosep,align=hang,leftmargin=*}
 
 \newlist{exlist}{enumerate}{3}
-\setlist[exlist]{hang}
+\setlist[exlist]{hang,listparindent=\parindent}
 \setlist[exlist,1]{label=\prestar\bfseries\arabic*.}
 \setlist[exlist,2]{label=\prestar(\arabic*)}
 \setlist[exlist,3]{label=\prestar\Ding*}
@@ -58,53 +58,53 @@ labelwidth=\widthof{\bfseries\ref{enumLastItem-\theLastItem}},
 \setlist[enumlist,1]{format=\bfseries,label=(\arabic*)}
 \setlist[enumlist,2]{label=\Ding*}
 
+\setenumcols[cols=2]
+
 \newenvironment{exlistcols}[1][2]{%
-    \def\labelenumi{\prestar(\arabic{enumi})}%
-    \setlabelformat*{enumi}{(\arabic{enumi})}%
-    \listcolsleftmargin=\z@\relax
-    \multienumitems\relax
-    \leftskip=\addleftskip\relax
-    \totalistcolswidth\dimexpr\linewidth/#1\relax
-    \listcolswidth\dimexpr\totalistcolswidth-\labelsep-\labelwidth\relax}%
-  {\endmultienumitems}
+    \enumcols[hang, counter=exlist,
+         label=\prestar(\arabic*), leftmargin=\z@,
+      leftskip=\addleftskip,#1]\relax}
+  {\endenumcols}
+
+\newenvironment{exlistcols*}[1][2]
+  {\enumcols[inlist,#1]\relax}
+  {\endenumcols}
 
 \newenvironment{enumlistcols}[1][2]{\CTEXindent
-    \listcolsleftmargin=\parindent\relax
-    \def\labelenumi{\bfseries(\arabic{enumi})}%
-    \setlabelformat*{enumi}{(\arabic{enumi})}%
-    \nohangitemcols\multienumitems\relax
-    \totalistcolswidth\dimexpr\linewidth/#1\relax
-    \listcolswidth\dimexpr\totalistcolswidth-\labelsep-\labelwidth\relax}%
-  {\endmultienumitems}
-
-\newenvironment{exlistcols*}[1][2]{\item[]\relax
-%%    \settowidth\@tempdima{\@itemlabel}%
-    \listcolsleftmargin=\dimexpr-\labelwidth-\labelsep\relax
-    \itemcolsinlist\multienumitems\relax
-    \totalistcolswidth\dimexpr\linewidth/#1\relax
-    \listcolswidth\dimexpr\totalistcolswidth-\labelsep-\labelwidth\relax}%
-  {\endmultienumitems}
+    \enumcols[hang=false, format=\bfseries,
+      label=(\arabic*), leftmargin=\parindent, #1]\relax}
+  {\endenumcols}
 
 \newcommand*\thmitemhspace[1]{\sbox{\@labels}{\unhbox\@labels\kern#1}}
 \newcommand*\fixthmitem[1][-\parindent]{\thmitemhspace{#1}}
 \newcommand*\emphitem[1]{\mbox{\emph*{#1}\kern\ccwd}\ignorespaces}
 
+\newenvironment{thmenumlist}[1][before=\fixthmitem]
+  {\enumlist[#1]}{\endenumlist}
+
 \newdimen\ori@leftskip
 
 \newenvironment{exercise}{%
-    \ori@leftskip=\leftskip\relax
-    \advance\c@secnumdepth-\@m\relax
-    \def\subsec@format{\medskip\normalsize\raggedright
-      \ziju{.4}\fzydzhhei\TeXGyreBonum\let~\enspace}%
-    \subsection{习题~\thesection}\small
-    \let\fix@capfontsize\small\relax
-    \exlist\relax}%
-  {\endexlist\global\leftskip=\ori@leftskip\relax}
+  \ori@leftskip=\leftskip\relax
+  \advance\c@secnumdepth-\@m\relax
+  \def\subsec@format{%
+    \medskip\normalsize\raggedright
+    \ziju{.4}\fzydzhhei\TeXGyreBonum\let~\enspace
+  }%
+  \subsection{习题~\thesection}\small
+  \let\fix@capfontsize\small\relax
+  \exlist\relax
+}{%
+  \endexlist\global\leftskip=\ori@leftskip\relax
+}
+
 \newenvironment{exercise*}{%
-    \ori@leftskip=\leftskip\relax
-    \advance\c@secnumdepth-\@m\relax
-    \section{复习题\CTEX@thechapter}
-    \exlist\relax}%
-  {\endexlist\global\leftskip=\ori@leftskip\relax}
+  \ori@leftskip=\leftskip\relax
+  \advance\c@secnumdepth-\@m\relax
+  \section{复习题\CTEX@thechapter}
+  \exlist\relax
+}{%
+  \endexlist\global\leftskip=\ori@leftskip\relax
+}
 
 \endinput
