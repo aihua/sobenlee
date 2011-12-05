@@ -71,16 +71,16 @@
 \fi
 
 \ifx\LI@tau t\relax
-  \undef{\tau}%
   \DeclareFontFamily{OML}{mt@greek}{\skewchar\font45}
   \DeclareFontShape{OML}{mt@greek}{m}{it}{
     <-7> s * [1.1]  mt2mif  <7-9> s * [1.1]  mt2mis  <9-> s * [1.1]  mt2mit}{}
   \DeclareFontShape{OML}{mt@greek}{b}{it}{
     <-7> s * [1.1]  mt2bmif <7-9> s * [1.1]  mt2bmis <9-> s * [1.1]  mt2bmit}{}
   \DeclareFontSubstitution{OML}{mt@greek}{m}{it}
-  \DeclareSymbolFont{mt@greek}{OML}{mt@greek}{m}{it}
+  \DeclareSymbolFont{mt@greek}{OML}  {mt@greek}{m}{it}
   \SetSymbolFont{mt@greek}{bold}{OML}{mt@greek}{b}{it}
-  \DeclareMathSymbol{\tau}{\mathalpha}{mt@greek}{"1C}
+  \DeclareMathSymbol{\LItau}{\mathalpha}{mt@greek}{"1C}
+  \renewrobustcmd*{\tau}{\LItau}
 \fi
 
 \ifx\LI@upint@ u\relax
@@ -267,95 +267,105 @@
 \fi
 
 \ifx\LI@partial p\relax
-  \undef{\partial}%
+  \providecommand\partial{}%
   \DeclareFontFamily{OML}{mt@letters}{\skewchar\font45}
   \DeclareFontShape{OML}{mt@letters}{m}{it}{<-7> mt2mif   <7-9> mt2mis   <9-> mt2mit}{}
   \DeclareFontShape{OML}{mt@letters}{b}{it}{<-7> mt2bmif  <7-9> mt2bmis  <9-> mt2bmit}{}
   \DeclareFontSubstitution{OML}{mt@letters}{m}{it}
-  \DeclareSymbolFont{mt@letters}{OML}{mt@letters}{m}{it}
+  \DeclareSymbolFont{mt@letters}{OML}  {mt@letters}{m}{it}
   \SetSymbolFont{mt@letters}{bold}{OML}{mt@letters}{b}{it}
-  \DeclareMathSymbol{\partial}{\mathord}{mt@letters}{"40}
+  \DeclareMathSymbol{\LIpartial}{\mathord}{mt@letters}{"40}
+  \renewrobustcmd*\partial{\LIpartial}
 \else\ifx\LI@partial l\relax
-  \undef{\partial}%
+  \providecommand\partial{}%
   \DeclareFontFamily{OML}{lu@letters}{\skewchar\font=127}
   \DeclareFontShape{OML}{lu@letters}{m}{it}{<->hlcrim}{}
   \DeclareFontShape{OML}{lu@letters}{b}{it}{<->hlcdim}{}
   \DeclareFontSubstitution{OML}{lu@letters}{m}{it}
-  \DeclareSymbolFont{lu@letters}{OML}{lu@letters}{m}{it}
+  \DeclareSymbolFont{lu@letters}{OML}  {lu@letters}{m}{it}
   \SetSymbolFont{lu@letters}{bold}{OML}{lu@letters}{b}{it}
-  \DeclareMathSymbol{\partial}{\mathord}{lu@letters}{"40}
+  \DeclareMathSymbol{\LIpartial}{\mathord}{lu@letters}{"40}
+  \renewrobustcmd*\partial{\LIpartial}
 \fi\fi
 
 \ifx\LI@mathscr m\relax
-  \WarningIfLoaded@localint{localint}{mathrsfs}%
-  \undef{\mathscr}%
+  \WarningIfLoaded@localint{localint}{mathrsfs}
+  \providecommand\mathscr{}
   \DeclareFontFamily{OMS}{mdput@scr}{\skewchar\font=48}
   \DeclareFontShape{OMS}{mdput@scr}{m} {n}{<-> s    * [0.92]  mdputr7y} {}
   \DeclareFontShape{OMS}{mdput@scr}{b} {n}{<-> s    * [0.92]  mdputb7y} {}
   \DeclareFontShape{OMS}{mdput@scr}{bx}{n}{<-> ssub * mdput@scr/b/n}    {}
   \DeclareFontSubstitution{OMS}{mdput@scr}{m}{n}
-  \DeclareMathAlphabet{\mathscr}{OMS}{mdput@scr}{m}{n}
-  \SetMathAlphabet{\mathscr}{bold}{OMS}{mdput@scr}{b}{n}
+  \DeclareMathAlphabet{\LImathscr}  {OMS}{mdput@scr}{m}{n}
+  \SetMathAlphabet{\LImathscr}{bold}{OMS}{mdput@scr}{b}{n}
+  \renewrobustcmd*\mathscr{\LImathscr}
 \else\ifx\LI@mathscr f\relax
-  \WarningIfLoaded@localint{localint}{mathrsfs}%
-  \undef{\mathscr}%
+  \WarningIfLoaded@localint{localint}{mathrsfs}
+  \providecommand\mathscr{}
   \DeclareFontFamily{OMS}{fourier@scr}{\skewchar\font=48}
   \DeclareFontShape{OMS}{fourier@scr}{m} {n}{<-> futsy}{}
   \DeclareFontShape{OMS}{fourier@scr}{b} {n}{<-> s    * [0.92]  mdputb7y} {}
   \DeclareFontShape{OMS}{fourier@scr}{bx}{n}{<-> ssub * fourier@scr/b/n}  {}
   \DeclareFontSubstitution{OMS}{fourier@scr}{m}{n}
-  \DeclareMathAlphabet{\mathscr}{OMS}{fourier@scr}{m}{n}
-  \SetMathAlphabet{\mathscr}{bold}{OMS}{fourier@scr}{b}{n}
+  \DeclareMathAlphabet{\LImathscr}  {OMS}{fourier@scr}{m}{n}
+  \SetMathAlphabet{\LImathscr}{bold}{OMS}{fourier@scr}{b}{n}
+  \renewrobustcmd*\mathscr{\LImathscr}
 \fi\fi
 
 \ifx\LI@mathbb b\relax
-  \undef{\mathbb}%
-  \undef{\mathbbit}%
-  \DeclareFontFamily{OMS}{mt2hr@bb}{}%
+  \providecommand\mathbb{}
+  \providecommand\mathbbit{}
+  \DeclareFontFamily{OMS}{mt2hr@bb}{}
   \DeclareFontShape{OMS}{mt2hr@bb}{m} {n} {<-7> mt2hrbf  <7-9> mt2hrbs  <9-> mt2hrbt} {}
   \DeclareFontShape{OMS}{mt2hr@bb}{m} {it}{<-7> mt2hbif  <7-9> mt2hbis  <9-> mt2hbit} {}
   \DeclareFontShape{OMS}{mt2hr@bb}{b} {n} {<-7> mt2hrbdf <7-9> mt2hrbds <9-> mt2hrbdt}{}
   \DeclareFontShape{OMS}{mt2hr@bb}{bx}{n} {<-> ssub * mt2hr@bb/b/n}{}
   \DeclareFontSubstitution{OMS}{mt2hr@bb}{m}{n}
-  \DeclareMathAlphabet{\mathbb}{OMS}{mt2hr@bb}{m}{n}
-  \DeclareMathAlphabet{\mathbbit}{OMS}{mt2hr@bb}{m}{it}
-  \SetMathAlphabet{\mathbb}{bold}{OMS}{mt2hr@bb}{b}{n}
+  \DeclareMathAlphabet{\LImathbb}  {OMS}{mt2hr@bb}{m}{n}
+  \DeclareMathAlphabet{\LImathbbit}{OMS}{mt2hr@bb}{m}{it}
+  \SetMathAlphabet{\LImathbb}{bold}{OMS}{mt2hr@bb}{b}{n}
+  \renewrobustcmd*\mathbb{\LImathbb}
+  \renewrobustcmd*\mathbbit{\LImathbbit}
 \fi
 
 \ifx\LI@mathcal m\relax
-  \undef{\mathcal}%
-  \undef{\mathbcal}%
+  \providecommand{\mathcal}{}
+  \providecommand{\mathbcal}{}
   \DeclareFontFamily{OMS}{mt2ms@LI}{}
   \DeclareFontShape{OMS}{mt2ms@LI}{m} {n} {<-7> mt2mcf  <7-9> mt2mcs  <9-> mt2mct} {}
   \DeclareFontShape{OMS}{mt2ms@LI}{m} {it}{<-7> mt2msf  <7-9> mt2mss  <9-> mt2mst} {}
   \DeclareFontShape{OMS}{mt2ms@LI}{b} {it}{<-7> mt2bmsf <7-9> mt2bmss <9-> mt2bmst}{}
   \DeclareFontShape{OMS}{mt2ms@LI}{bx}{n} {<->  ssub * mt2ms@LI/b/n}{}
   \DeclareFontSubstitution{OMS}{mt2ms@LI}{m}{n}
-  \DeclareMathAlphabet{\mathcal}  {OMS}{mt2ms@LI}{m}{it}
-  \SetMathAlphabet{\mathcal}{bold}{OMS}{mt2ms@LI}{b}{it}
-  \DeclareMathAlphabet{\mathbcal} {OMS}{mt2ms@LI}{b}{it}
+  \DeclareMathAlphabet{\LImathcal}  {OMS}{mt2ms@LI}{m}{it}
+  \DeclareMathAlphabet{\LImathbcal} {OMS}{mt2ms@LI}{b}{it}
+  \SetMathAlphabet{\LImathcal}{bold}{OMS}{mt2ms@LI}{b}{it}
+  \renewrobustcmd*\mathcal{\LImathcal}
+  \renewrobustcmd*\mathbcal{\LImathbcal}
 \fi
 
 \ifx\LI@mathfrak m\relax
-  \undef{\mathfrak}%
+  \providecommand\mathfrak{}%
   \DeclareFontFamily{OMS}{mt2mf@LI}{}
   \DeclareFontShape{OMS}{mt2mf@LI}{m} {n} {<-7> mt2mff  <7-9> mt2mfs  <9-> mt2mft} {}
   \DeclareFontShape{OMS}{mt2mf@LI}{b} {n} {<-7> mt2bmff <7-9> mt2bmfs <9-> mt2bmft}{}
   \DeclareFontShape{OMS}{mt2mf@LI}{bx}{n} {<->  ssub * mt2mf@LI/b/n}{}
   \DeclareFontSubstitution{OMS}{mt2mf@LI}{m}{n}
-  \DeclareMathAlphabet{\mathfrak}  {OMS}{mt2mf@LI}{m}{n}
-  \SetMathAlphabet{\mathfrak}{bold}{OMS}{mt2mf@LI}{b}{n}
+  \DeclareMathAlphabet{\LImathfrak}  {OMS}{mt2mf@LI}{m}{n}
+  \SetMathAlphabet{\LImathfrak}{bold}{OMS}{mt2mf@LI}{b}{n}
+  \renewrobustcmd*\mathfrak{\LImathfrak}
 \fi
 
 \ifx\LI@overparen w\relax
-  \undef{\overparen}%
+  \providecommand\overparen{}
   \DeclareFontFamily{OMX}{mdput@ex}{}
   \DeclareFontShape{OMX}{mdput@ex}{m} {n}{<-> mdugmr7v}{}
   \DeclareFontShape{OMX}{mdput@ex}{b} {n}{<-> mdugmm7v}{}
   \DeclareFontShape{OMX}{mdput@ex}{bx}{n}{<->ssub * mdput@ex/b/n} {}
-  \DeclareSymbolFont{md@ex@}{OMX}{mdput@ex}{m}{n}
+  \DeclareSymbolFont{md@ex@}{OMX}  {mdput@ex}{m}{n}
   \SetSymbolFont{md@ex@}{bold}{OMX}{mdput@ex}{b}{n}
-  \DeclareMathAccent{\overparen}{\mathord}{md@ex@}{243}
+  \DeclareMathAccent{\LIoverparen}{\mathord}{md@ex@}{243}
+  \renewrobustcmd*\overparen{\LIoverparen}
 \fi
 
 \ifx\LI@comma c\relax
@@ -364,7 +374,7 @@
   \DeclareFontShape{OML}{zhc@mma}{m} {n}{<-> ZhMathPunct}{}
   \DeclareFontShape{OML}{zhc@mma}{b} {n}{<-> ZhMathPunctBd}{}
   \DeclareFontShape{OML}{zhc@mma}{bx}{n}{<->ssub * zhc@mma/b/n}{}
-  \DeclareSymbolFont{zhc@mm@}{OML}{zhc@mma}{m}{n}
+  \DeclareSymbolFont{zhc@mm@}{OML}  {zhc@mma}{m}{n}
   \SetSymbolFont{zhc@mm@}{bold}{OML}{zhc@mma}{b}{n}
   \DeclareFontSubstitution{OML}{zhc@mma}{m}{n}
   \AtBeginDocument{%
