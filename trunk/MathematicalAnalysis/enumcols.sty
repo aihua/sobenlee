@@ -75,7 +75,6 @@
    {listparindent==\parindent},
    {leftmargin==\z@},
    {leftskip==\z@},
-   {itemleftskip==\z@},
    {ecolswidth==\z@},
    {ecolstotalwidth==\linewidth/\tw@},
 }
@@ -133,8 +132,9 @@
 \ECOLS@key{inlist}[true]{%
   \ifbool{#1}{%
     \boolfalse{ecols@top}%
-    \dimdef\ecols@leftmargin@l{\z@}%
-    \dimdef\ecols@leftskip@l{-\labelsep-\labelwidth}%
+    \settowidth\@tempdima{\@itemlabel}%
+    \dimdef\ecols@leftmargin@l{-\@tempdima-\labelsep}%
+    \dimdef\ecols@leftskip@l{\z@}%
   }{}%
 }
 
@@ -242,8 +242,8 @@
         }{}%
         \leftskip=\ecols@leftskip@l\relax
         \advance\linewidth-\leftskip\relax
-        \advance\linewidth-\ecols@itemleftskip@l\relax
-        \dimdef\ecols@savelinewidth{\linewidth}%
+        \ifdimequal{\ecols@itemindent@l}{\z@}
+          {}{\boolfalse{ecols@hang}}%
         \ifdimgreater{\ecols@ecolswidth@l}{\z@}{%
           \dimdef\ecols@ecolstotalwidth@l
             {\ecols@ecolswidth@l+\ecols@labelwidth+\ecols@labelsep@l}}{}%
@@ -263,6 +263,8 @@
         \setcounter{enumcols}{1*\ratio{\linewidth}{\ecols@ecolstotalwidth@l}}%
         \ecolswidth=\ecols@ecolswidth@l\relax
         \ecolstotalwidth=\ecols@ecolstotalwidth@l\relax
+        \advance\linewidth\ecols@itemindent@l\relax
+        \dimdef\ecols@savelinewidth{\linewidth}%
         \let\@endecols@item\indent
         \let\item\ecols@item@
       \fi
@@ -310,11 +312,14 @@
   \color@setgroup
   \hsize=\linewidth  \columnwidth=\hsize
   \textwidth=\hsize    \linewidth=\hsize
-  \ifboolexpr{bool {ecols@varwidth} and bool {ecols@varwidth@b}}{%
-    \global\booltrue{ecols@varwidth@c}%
-    \ifbool{ecols@varwidth@a}
-      {\@vwid@setup}{}%
-  }{\boolfalse{ecols@varwidth@c}}%
+  \ifboolexpr{ bool {ecols@varwidth} and bool {ecols@varwidth@b} }
+   {%
+     \global\booltrue{ecols@varwidth@c}%
+     \ifbool{ecols@varwidth@a}
+       {\@vwid@setup}{}%
+   }{%
+     \boolfalse{ecols@varwidth@c}%
+   }%
 }{}{}
 
 \let\ecols@endvarwidth\endvarwidth
@@ -326,7 +331,8 @@
       {\ecols@endvarwidth}
       {\global\booltrue{ecols@varwidth@a}}%
   }{\global\booltrue{ecols@varwidth@b}}%
-  \unskip\color@endgroup}
+  \unskip\color@endgroup
+}
 
 \def\ecols@item@{%
   \@endecols@item
@@ -357,7 +363,7 @@
     \ifboolexpr
       {     test {\ifdimgreater{\ht\@tempboxa}{\baselineskip}}
         and test {\ifdimgreater{\wd\@tempboxa}{\ecols@tempdima}}
-        or  togl {ecols@toglc}%
+        or  togl {ecols@toglc}
       }{%
         \protected@write\@auxout{}{%
           \csdimgdef{\ecols@curritem @leftskip}{\textwidth-\ecols@savelinewidth}}%
@@ -374,8 +380,8 @@
     \if@nmbrlist
       \ifbool{ecols@hyper@load}{\@hyper@itemtrue}{}%
       \refstepcounter{\@listctr}%
-      \ifboolexpr{ bool {ecols@top} and bool {ecols@adjust}}{%
-          \setlength\@tempdima{\widthof{#1}}%
+      \ifboolexpr{ bool {ecols@top} and bool {ecols@adjust} }{%
+          \settowidth\@tempdima{#1}%
           \ifdimless\@tempdima\ecols@labelwidth
             {\global\toggletrue{ecols@toglb}}{}%
           \ifdimless\ecols@dima\@tempdima
@@ -392,8 +398,9 @@
   \ifbool{ecols@widthitem}
     {\advance\linewidth\ecols@item@fix@l\relax}{}%
   \begingroup\ecols@udbox{\@tempboxa}%
-  \rightskip\z@skip\relax
-  \leftskip\ecols@itemleftskip@l\relax
+  \rightskip\@rightskip\relax
+  \leftskip-\ecols@itemindent@l\relax
+  \parindent-\leftskip\relax
   \ifbool{ecols@argbool}
     {%
       \global\boolfalse{ecols@argbool}%
@@ -402,7 +409,7 @@
           \ifbool{ecols@flushleft}
             {%
               \makebox[\ecols@labelwidth][l]{#1\ecols@itemstrut}%
-              \ifboolexpr{ bool {ecols@adjust} and togl {ecols@toglb}}
+              \ifboolexpr{ bool {ecols@adjust} and togl {ecols@toglb} }
                 {%
                   \global\togglefalse{ecols@toglb}%
                   \iftoggle{ecols@togla}{%
@@ -410,7 +417,7 @@
                     \advance\ecolswidth-\ecols@dimb\relax}{}%
                 }{}%
             }{%
-              \ifboolexpr{ bool {ecols@adjust} and togl {ecols@toglb}}
+              \ifboolexpr{ bool {ecols@adjust} and togl {ecols@toglb} }
                 {%
                   \global\togglefalse{ecols@toglb}%
                   \iftoggle{ecols@togla}{%
@@ -435,9 +442,9 @@
     }{%
       \ifblank{#1}
         {\dimdef\ecols@labelsep@l\z@\ecols@itemstrut}
-        {\mbox{#1\ecols@itemstrut}}%
+        {\mbox{\ecols@format#1\ecols@itemstrut}}%
       \ifbool{ecols@hang}{%
-          \settowidth\@tempdima{#1}%
+          \settowidth\@tempdima{\ecols@format#1}%
           \dimdef\ecols@hangindent{\ecols@labelsep@l+\@tempdima}%
         }{}%
     }%
@@ -450,7 +457,7 @@
     \hangindent\ecols@hangindent\relax
     \advance\parindent\hangindent}{}%
   \ifbool{ecols@widthitem}
-    {\advance\leftskip\ecols@item@fix@l\relax}{}%
+    {\leftskip\ecols@item@fix@l\relax}{}%
   \ignorespaces
 }
 
