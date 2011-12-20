@@ -14,36 +14,33 @@
 \DeclareOption{watermark}{\LA@wmarktrue}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{ctexbook}}
 \ProcessOptions\relax
-\PassOptionsToPackage{CJKchecksingle,no-math,silent,fallback}{xeCJK}
-\LoadClass[c5size,openany,nofonts]{ctexbook}[2009/05/05]
+\PassOptionsToPackage{log-declarations=false}{xparse}
+\PassOptionsToPackage{no-math,silent}{fontspec}
+\PassOptionsToPackage{CJKchecksingle,fallback}{xeCJK}
+\LoadClass[twoside,openany,c5size,nofonts,fntef]{ctexbook}[2009/05/05]
 
 \RequireXeTeX
 
-\def\hmmax{0}     % default 3
-\def\bmmax{0}     % default 4
-
 \RequirePackage[loosequotes,lf,onlymath]{MinionPro}
-\RequirePackage{empheq,amsthm,bm,extarrows,pmat,polynom,systeme}
-\RequirePackage[uppi,fourier,mathscrf,mathcal,mathbb,comma]{localint}
-\RequirePackage{pifont,marvosym,paralist,multicolist,afterpage,chngcntr}
-\RequirePackage{floatrow,caption,rotating,ifthen,varioref}
+\RequirePackage{empheq,amsthm,extarrows,polynom,systeme}
+\RequirePackage[uppi,tau,fourier,mathscrf,mathcal,mathbb,comma]{localint}
+\RequirePackage{pifont,marvosym,metalogo,multicol,afterpage,chngcntr,xifthen}
+\RequirePackage{floatrow,caption,rotating,wrapfig,varioref}
+\RequirePackage{paralist,enumcols,booktabs}
+\RequirePackage[delarray]{tabu}
 \RequirePackage[perpage,stable,bottom]{footmisc}
 \RequirePackage[numbers,sort&compress]{natbib}
 \RequirePackage[pagestyles,nobottomtitles*]{titlesec}
 \RequirePackage[titles]{tocloft}
-\RequirePackage[normalem]{ulem}
 \def\pgfsysdriver{pgfsys-xetex.def}
 \RequirePackage{tikz}
 \usetikzlibrary{arrows,matrix}
-\RequirePackage[showframe=false,twoside,headheight=5mm,headsep=7mm,footskip=1em,bindingoffset=10mm]{geometry}
+\RequirePackage[showframe=false,headheight=5mm,headsep=7mm,footskip=1em,bindingoffset=10mm]{geometry}
 \RequirePackage[bookmarksnumbered,pdfstartview={XYZ null null 1},pdfpagemode=UseNone,pdfprintscaling=None]{hyperref}
-\RequirePackage[dvipdfm,color=purple]{bookmark}
-\RequirePackage{wrapfig,metalogo,multicol,tabularx,booktabs}
+\RequirePackage[xetex,color=purple]{bookmark}
 \ifLA@wmark
   \RequirePackage{eso-pic}
 \fi
-\@ifpackageloaded{graphicx}{}{%
-  \RequirePackage{graphicx}}
 
 \graphicspath{{includefiles/figures/}}
 \hypersetup{%
@@ -78,7 +75,7 @@
 \fi
 \def\printwatermark{%
   \ifLA@wmark
-    \AddToShipoutPictureBG{\AtTextCenter{\makebox(0,0)[c]{\@watermark@CMD}}}
+    \AddToShipoutPictureBG{\AtTextCenter{\makebox(0,0)[c]{\@watermark@CMD}}}%
   \fi}
 
 \predisplaypenalty   = \z@
@@ -112,7 +109,7 @@
 \renewcommand*\bibsection       {\chapter{\bibname}}
 \bibsep = \p@
 
-\DeclareRobustCommand*\prethesection{{\MyriadPro\S\kern0.1em}}
+\newrobustcmd*\prethesection{{\MyriadPro\S\kern0.1em}}
 \def\CTEX@presection{\prethesection}
 
 \labelformat{part}{\CTEX@prepart~#1~\CTEX@postpart}
@@ -124,17 +121,17 @@
   \goodbreak\renewcommand*\bottomtitlespace{.3\textheight}}
 
 \titleformat{\chapter}[display]
-            {\bfseries\boldmath\fzcuheisong\addfontfeature{BoldFont={MyriadPro-Bold}}}
+            {\bfseries\fzcuheisong\addfontfeature{BoldFont={MyriadPro-Bold}}}
             {\fillouter\zihao{-3}\fzydzhhei\CTEXthechapter\\ \titlerule[\ruleheight]}
             {\z@}
             {\ifthechapter{\zihao{-2}\fillinner}{\zihao{3}\filcenter}}
 \titleformat{\section}
-            {\filcenter\vspace*{2mm}\bfseries\boldmath\CMRoman\fzzysong\zihao{-3}}
+            {\filcenter\vspace*{2mm}\bfseries\CMRoman\fzzysong\zihao{-3}}
             {\CTEXthesection}
             {\ccwd}
             {\gdef\bottomtitlespace{\z@}}
 \titleformat{\subsection}
-            {\filcenter\bfseries\boldmath\fzltzhhei\TeXGyreBonum\normalsize}
+            {\filcenter\bfseries\fzltzhhei\TeXGyreBonum\normalsize}
             {习\hspace\ccwd 题\hspace\ccwd\thesection}
             {\z@}
             {}
@@ -177,7 +174,7 @@
 \renewcommand\cftsecfont       {\kaishu\let\TitHspace\@gobble}
 \renewcommand\cftchapleader    {\cftchapfont\cftsecleader}
 \renewcommand\cftchappagefont  {\cftchapfont}
-\renewcommand\cftchapfillnum[1]{\cftchapleader\nobreak{\cftchappagefont #1}\cftchapafterpnum\par}
+\renewcommand\cftchapfillnum[1]{\cftchapleader\nobreak{\cftchappagefont #1}\cftchapafterpnum\par\nopagebreak}
 \renewcommand\cftsecfillnum [1]{\cftsecleader\nobreak{\cftsecpagefont #1}\cftsecafterpnum\par}
 
 \newbox\ch@end@box
@@ -185,8 +182,8 @@
 \sbox\ch@end@box{\includegraphics{kochone.pdf}}
 \sbox\em@page@box{\includegraphics[width={.4\textwidth}]{hilbert.pdf}}
 
-\DeclareRobustCommand*\PrintChEndLogo{\vspace{\stretch{50}}\centerline{\usebox\ch@end@box}}
-\DeclareRobustCommand*\ParTocLine    {\noindent\bigskip\titlerule[\ruleheight]\vspace{-\baselineskip}\par}
+\newrobustcmd*\PrintChEndLogo{\vspace{\stretch{50}}\centerline{\usebox\ch@end@box}}
+\newrobustcmd*\ParTocLine    {\noindent\bigskip\titlerule[\ruleheight]\vspace{-\baselineskip}\par}
 
 \raggedbottom
 \allowdisplaybreaks[4]
@@ -197,7 +194,7 @@
   \else
     \def\makeheadrule{\rule[-#1]{\linewidth}{#2}}%
   \fi}
-\newpagestyle{main}[\bfseries\boldmath\small\fzlthei\CMRoman]{%
+\newpagestyle{main}[\bfseries\small\fzlthei\CMRoman]{%
   \sethead[$\cdot$\enskip\thepage\enskip$\cdot$]
           []
           [\ifthechapter{\CTEXthechapter\hspace\ccwd\chaptertitle}{\chaptertitle}%
@@ -208,7 +205,7 @@
           {}
           {$\cdot$\enskip\thepage\enskip$\cdot$}%
   \setheadrule\ruleheight}
-\newpagestyle{appendix}[\bfseries\boldmath\small\fzlthei\CMRoman]{%
+\newpagestyle{appendix}[\bfseries\small\fzlthei\CMRoman]{%
   \setmarks{part}{chapter}
   \sethead[$\cdot$\enskip\thepage\enskip$\cdot$]
           [\ziju{1}\thepart]
@@ -241,7 +238,7 @@
 \renewcommand\backmatter{%
   \clearpage
   \@mainmatterfalse}
-\newpagestyle{apppart}{\addtocontents{toc}{\protect\ParTocLine\let\string\prethesection\relax}}
+\newpagestyle{apppart}{\addtocontents{toc}{\ParTocLine\let\prethesection\relax}}
 \renewcommand\appendix{%
   \let\prethesection\relax
   \cleardoublepage
@@ -253,18 +250,18 @@
   \pagestyle{appendix}
   \renewcommand*\thesection{A\arabic{chapter}.\arabic{section}}
   \titleformat{\part}[display]
-              {\filcenter\bfseries\boldmath\ziju{.5}\yanti\fontsize{30bp}{\baselineskip}\selectfont}
+              {\filcenter\bfseries\ziju{.5}\yanti\fontsize{30bp}{\baselineskip}\selectfont}
               {\fillouter\zihao{-4}\fzydzhhei\fbox{\ziju{.5}\thepart}\vspace{\stretch{1}}}
               {0\ccwd}
               {\pagecolor{titlegray}\thispagestyle{apppart}}
               [\vspace{\stretch{2}}\afterpage{\pagecolor{white}}]
   \titleformat{\chapter}[display]%
-              {\bfseries\boldmath\fzcuheisong\ifthechapter{\zihao{3}\fillinner}{\zihao{-3}\filcenter}}
+              {\bfseries\fzcuheisong\ifthechapter{\zihao{3}\fillinner}{\zihao{-3}\filcenter}}
               {\fillouter\zihao{-4}\fzydzhhei\CTEXthechapter\\ \titlerule[\ruleheight]\vspace{-\baselineskip}}
               {0\ccwd}
               {}
   \titleformat{\section}
-              {\filcenter\vspace*{3mm}\bfseries\boldmath\CMRoman\fzzysong\zihao{4}}
+              {\filcenter\vspace*{3mm}\bfseries\CMRoman\fzzysong\zihao{4}}
               {\CTEXthesection}
               {\ccwd}
               {\gdef\bottomtitlespace{\z@}}
@@ -296,10 +293,10 @@
     \ifodd\c@page\relax
     \else
       \thispagestyle{empty}
-      \strut\vfill\centerline{\usebox\em@page@box}\vfill
+      \null\vfill\centerline{\usebox\em@page@box}\vfill
       \newpage
       \if@twocolumn
-        \strut\newpage
+        \null\newpage
       \fi
     \fi
   \fi}
@@ -416,10 +413,9 @@
 
 \numberwithin{equation}{section}
 
-\newcolumntype{C}{>{\centering\arraybackslash}X}
-\renewcommand*\tabularxcolumn[1]{>{\arraybackslash}m{#1}}
+\robustify{\ding}
 
-\DeclareRobustCommand*\Ding[1]{%
+\newcommand*\Ding[1]{%
   \ifnum\number#1 > 10%
     \typeout{The value of input number is \number#1, larger than 10}%
   \fi
@@ -430,10 +426,10 @@
 \renewcommand*\footnoterule{\kern-3\p@\hrule\@width.45\columnwidth\@height.6\p@\kern2.4\p@}
 \newdimen\@footnote@indent
 {\footnotesize\global\@footnote@indent=1.2em}
-\long\def\@makefntext#1{\@setpar{\@@par%
+\long\def\@makefntext#1{\@setpar{\@@par
   \@tempdima\hsize\advance\@tempdima-\@footnote@indent
-  \parshape \@ne \@footnote@indent \@tempdima}%
-  \par\noindent\llap{\makebox[1.2em][l]{\@thefnmark}}%
+  \parshape\@ne\@footnote@indent\@tempdima}%
+  \par\noindent\llap{\makebox[\@footnote@indent][l]{\@thefnmark}}%
   \linespread{1.2}\selectfont\interlinepenalty\z@\CTEXindent#1}
 \def\@makefnmark{\raisebox{1ex}[\z@]{\small\@thefnmark}}
 
@@ -461,10 +457,11 @@
   \@itempenalty     = \z@
   \@endparpenalty   = \z@}
 
-\newcommand*\iscurrentsection[1]{\ifthenelse{\equal{#1}{\thesection}}{}{~\CTEX@presection #1~}}
+\newrobustcmd*\iscurrentsection[1]{%
+  \ifthenelse{\equal{\thesection}{#1}}{}{~\CTEX@presection #1~}}
 \newenvironment{exercise}{\subsection{}\small
     \renewcommand\labelenumi{\bfseries\sffamily\theenumi.}%
-    \labelformat{enumi}{\protect\iscurrentsection{\thesection}习题~##1}%
+    \labelformat{enumi}{\iscurrentsection{\thesection}习题~##1}%
     \@list@penalty\asparaenum}{\endasparaenum}
 \newenvironment{question}  {\@list@penalty\asparaenum}{\endasparaenum}
 \newenvironment{enumitems} {\@list@penalty\asparaenum}{\endasparaenum}
@@ -474,18 +471,16 @@
 \newcommand*\thmitemhspace[1]{\sbox{\@labels}{\unhbox\@labels\kern#1}}
 \newcommand*\fixthmitem[1][-\parindent]{\thmitemhspace{#1}}
 
-\newenvironment{enumitemcols}[1][2]{\CTEXindent
-    \listcolsleftmargin=\parindent
-    \multienumitems\relax
-    \totalistcolswidth\dimexpr\linewidth/#1\relax}%
-  {\endmultienumitems}
-\newenvironment{enumitemcols*}{\itemcolsinlist
-    \enumitemcols}%
-  {\endenumitemcols}
+\setenumcols[cols=2,leftmargin=\parindent,itemindent=\parindent]
 
-\newcommand*\itemstrut{\strut}
+\newenvironment{enumitemcols}[1][2]
+  {\enumcols[leftmargin=\parindent,itemindent=\parindent,#1]\relax}
+  {\endenumcols}
+\newenvironment{enumitemcols*}[1][2]
+  {\enumcols[inlist,leftskip=\z@,leftmargin=-\labelsep,#1]\relax}
+  {\endenumcols}
 
-\newenvironment{IntroPar}{\kaishu\small%
+\newenvironment{IntroPar}{\kaishu\small
     \multicolsep   = 10\p@
     \columnsep     = 12\p@
     \columnseprule =   \z@
@@ -518,11 +513,12 @@
 \labelformat{figure}{\figurename~#1}
 \labelformat{table}{\tablename~#1}
 
+\newcommand*\tableboxsep{\quad}
 \newfloatcommand{tablebox}{table}[\nocapbeside][\FBwidth]
 \DeclareFloatVCode{frpreskip} {\relax}
 \DeclareFloatVCode{frpostskip}{\vskip-\intextsep}
 \DeclareFloatVCode{wrapfig}{\vskip-\intextsep}
-\DeclareFloatSeparators{frowsep}{\quad}
+\DeclareFloatSeparators{frowsep}{\tableboxsep}
 \floatsetup{style=plain,capposition=bottom,floatrowsep=frowsep,captionskip=.75ex,%
             rowprecode=frpreskip,rowpostcode=frpostskip}
 \floatsetup[wrapfloat]{captionskip=-2\p@,rowprecode=wrapfig}
@@ -561,7 +557,7 @@
 \newcommand*\mi{\mathrm i}
 \newcommand*\me{\mathrm e}
 \newcommand*\tran{^{\mathrm T}}
-\newcommand*\diff{\mathop{}\!\mathrm{d}}
+\newcommand*\diff{\mathop{}\negthinspace\mathrm{d}}
 \newcommand*\hsep{\hphantom{-}}
 \newcommand*\e{\varepsilon}
 \newcommand*\eset{\varnothing}
@@ -597,8 +593,9 @@
 \DeclareMathOperator{\ann}{ann}
 \DeclareMathOperator*{\dsums}{\sum\,\sum}
 
-\let\overbrace\LaTeXoverbrace
 \let\underbrace\LaTeXunderbrace
+\let\overbrace\LaTeXoverbrace
+
 \mathtoolsset{centercolon,mathic}
 \DeclarePairedDelimiter\abs{\lvert}{\rvert}
 \DeclarePairedDelimiter\norm{\lVert}{\rVert}
@@ -609,10 +606,14 @@
 \DeclarePairedDelimiter\Brace{\lbrace}{\rbrace}
 \DeclarePairedDelimiter\Floor{\lbrack}{\rbrack}
 
-\newcases{cdcases}{\quad}{%
-  \hfil$\m@th\displaystyle{##}$\hfil}{$\m@th\displaystyle{##}$\hfil}{\lbrace}{.}
-\newcases{cdcases*}{\quad}{%
-  \hfil$\m@th\displaystyle{##}$\hfil}{{##}\hfil}{\lbrace}{.}
+\newcases{cdcases}{\quad}
+  {\hfil$\m@th\displaystyle{##}$\hfil}
+  {$\m@th\displaystyle{##}$\hfil}
+  {\lbrace}{.}
+\newcases{cdcases*}{\quad}
+  {\hfil$\m@th\displaystyle{##}$\hfil}
+  {{##}\hfil}
+  {\lbrace}{.}
 
 \newcommand*\bformk{\bform{\,,}}
 \newcommand*\Parenb[1]{\Paren[\big]{#1}}
@@ -622,17 +623,17 @@
 \newenvironment{tmatrix}{\biggl(\begin{matrix}}{\end{matrix}\biggr)}
 \newenvironment{rtmatrix}{\biggl(\begin{matrix*}[r]}{\end{matrix*}\biggr)}
 
-\DeclareRobustCommand*\mdiv{\mathchoice
-  {\mathbin{\big\vert}}{\mathbin{\big\vert}}%
+\newrobustcmd*\mdiv{\mathchoice
+  {\mathbin{\big\vert}}{\mathbin{\big\vert}}
   {\mathbin\vert}{\mathbin\vert}}
-\DeclareRobustCommand*\nmdiv{\mathchoice
-  {\mathbin{\raisebox{-.3ex}{\scalebox{1.1}[1.55]{\ensuremath\nmid}}}}%
-  {\mathbin{\raisebox{-.3ex}{\scalebox{1.1}[1.55]{\ensuremath\nmid}}}}%
+\newrobustcmd*\nmdiv{\mathchoice
+  {\mathbin{\raisebox{-.3ex}{\scalebox{1.1}[1.55]{\ensuremath\nmid}}}}
+  {\mathbin{\raisebox{-.3ex}{\scalebox{1.1}[1.55]{\ensuremath\nmid}}}}
   {\mathbin\nmid}{\mathbin\nmid}}
 
 \newbox\@tp@box@la
 \newbox\@tp@box@lb
-\AtBeginDocument{\sbox\@tp@box@la{$,$}\sbox\@tp@box@lb{$;$}}
+\AtBeginDocument{\sbox\@tp@box@la{\small$,$}\sbox\@tp@box@lb{\small$;$}}
 
 \newcommand*\cide{\rlap{\usebox\@tp@box@la}}
 \newcommand*\side{\rlap{\usebox\@tp@box@lb}}
