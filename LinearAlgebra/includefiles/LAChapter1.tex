@@ -476,11 +476,12 @@ f_{\ell-1}(x) \\ b_m^{-1}d_sx^{s-m}g(x) \\ f_{\ell}(x) \\ b_m^{-1}e_hx^{h-m}g(x)
 \end{lrbox}
 \CenterFloatBoxes
 \begin{floatrow}[5]
+\def\tableboxsep{\enskip}
 \tablebox{}{\rotatebox{90}{\usebox{\EuclidChangchu}}}
-\tablebox{}{\makebox[1\ccwd][l]{\rotcaption{Euclid~长除法}\label{Euclid-chufa}}}
-\tablebox{}{\rule{.6pt}{.8\wd\EuclidChangchu}}
+\tablebox{}{\makebox[\ccwd][l]{\rotcaption{Euclid~长除法}\label{Euclid-chufa}}}
+\tablebox[\ccwd]{}{\rule{.6pt}{.8\wd\EuclidChangchu}}
 \tablebox{}{\rotatebox{90}{\usebox{\EuclidLiTi}}}
-\tablebox{}{\makebox[1\ccwd][l]{\rotcaption{Euclid~长除法（\ref{ltEuclid-chufa}）}\label{Euclid-chufa-LiTi}}}
+\tablebox{}{\makebox[\ccwd][l]{\rotcaption{Euclid~长除法（\ref{ltEuclid-chufa}）}\label{Euclid-chufa-LiTi}}}
 \end{floatrow}
 \end{table}
 
@@ -1984,7 +1985,7 @@ A_{\ell_1\ell_2\dotsm \ell_n}\sigma_1^{\ell_1-\ell_2}\sigma_2^{\ell_2-\ell_3}\do
 关于~$A_{\ell_1\ell_2\dotsm \ell_n}$~的方程，解之即得~$A_{\ell_1\ell_2\dotsm \ell_n}$．通常特殊值可以取
 为~$x_1=x_2=\dotsb=x_k=1$，$x_{k+1}=\dotsb=x_n=0$．把它们代入~$\sigma_j(\mvec x)$，得到
 \[
-\sigma_j\Parenb{\underbrace{1,1,\dotsc,1}_{\text{$k$\rlap{~个}}},~0,\dotsc,0}=\biggl\{\begin{array}{cl}
+\sigma_j\Parenb{\underbrace{1,1,\dotsc,1}_{\text{$k$\rlap{~个}}},~0,\dotsc,0}=\biggl\{\begin{array}{@{}c@{\quad}l}
 \uC_k^j, & 1\le j\le k\cid\\
 0      , & k<j\le n \pid
 \end{array}
@@ -2170,8 +2171,8 @@ f(\mvec x)=g\Parenb{s_1(\mvec x),s_2(\mvec x),\dotsc,s_n(\mvec x)}\pid
 \item $\displaystyle\sumsep\sum_{\mathclap{\begin{subarray}{c}1\le i<j\le n\\ k\ne i,j \end{subarray}}}\sumsep(x_i+x_j-x_k)^2\sid$
 \item $\displaystyle\sumsep\sum_{\mathclap{\minor{1&2&\cdots&n\\ i_1&i_2&\cdots& i_n }}}\sumsep
         \Parenb{a_1x_{i_1}+a_2x_{i_2}+\dotsb+a_nx_{i_n}}^2$，
-\item[]\rlap{\parbox[t]{\totalistcolswidth}{这里的求和号表示对遍历自然
-        数~$1,2,\dotsc,n$~的所有排列~$i_1,i_2,\dotsc,i_n$~求和．\itemstrut}}
+\item[]\rlap{\parbox[t]{\ecolstotalwidth}{这里的求和号表示对遍历自然
+        数~$1,2,\dotsc,n$~的所有排列~$i_1,i_2,\dotsc,i_n$~求和．\strut}}
 \end{enumitemcols}
 \item 证明，三次实系数方程~$x^3+ax^2+bx+c=0$~的每个根的实部都是负数的充分必要条件为
 \[
