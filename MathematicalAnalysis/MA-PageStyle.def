@@ -3,6 +3,8 @@
 %%
 \ProvidesFile{MA-PageStyle.def}
 
+\newrobustcmd*\killnewline{\let\\=\relax}
+
 \renewcommand\setheadrule[2][2mm]{%
   \ifdim#1=\z@
     \let\makeheadrule\@empty
@@ -10,16 +12,18 @@
     \def\makeheadrule{\rule[-#1]{\linewidth}{#2}}%
   \fi}
 
-\newpagestyle{document}[\bfseries\small\fzlthei\CMRoman\let\\\relax]{%
+\newpagestyle{document}[\bfseries\small\fzlthei\CMRoman\notextaccent\killnewline]{%
   \setmarks{chapter}{section}%
   \sethead[$\cdot$\enskip\thepage\enskip$\cdot$]
           []
           [\ifthechapter{\CTEXthechapter\emspace\chaptertitle}{\chaptertitle}]
           {\ifthesection{\CTEXthesection\emspace\sectiontitle}
                         {\ifdefempty{\sectiontitle}
-                          {\ifthechapter{\CTEXthechapter\emspace\chaptertitle}{\chaptertitle}}
-                          {\sectiontitle}
-                        }
+                          {\ifthechapter
+                            {\CTEXthechapter\emspace\chaptertitle}
+                            {\chaptertitle}}
+                          {\sectiontitle}%
+                        }%
           }
           {}
           {$\cdot$\enskip\thepage\enskip$\cdot$}%
@@ -53,18 +57,14 @@
 
 \newrobustcmd*\ParTocLine{%
   \noindent\vspace{-\baselineskip}\bigskip
-  \hrule\bigskip\par}
-
-\def\@addappt@cline{%
-  \string\@writefile{toc}{\ParTocLine}%
-  \string\@writefile{\@ext@v}{\ParTocLine}}
+  \hrule\medskip\par}
 
 \newcounter{appcnt}
 \renewcommand\appendix{%
   \counterwithin*{chapter}{appcnt}%
   \cleardoublepage
   \if@filesw
-    \immediate\write\@mainaux{\@addappt@cline}%
+    \immediate\write\@mainaux{\string\@writefile{toc}{\ParTocLine}}%
   \fi
   \refstepcounter{appcnt}%
   \gdef\thechapter{\@Alph\c@chapter}%

@@ -5,7 +5,7 @@
 
 \let\and\enspace\relax
 
-\def\SI@phrase{\,\rule[\heightof{1}/2-.4\p@]{1em}{.8\p@}\,}
+\newcommand*\SI@phrase{\,\rule[\heightof{1}/2-.4\p@]{1em}{.8\p@}\,}
 
 \def\MAB@copyrange[#1;#2]{%
   \def\MAB@copies{%
@@ -15,7 +15,7 @@
   }
 }
 
-\def\MAB@key{\define@key{MAbook}}
+\newcommand*\MAB@key{\define@key{MAbook}}
 
 \MAB@key{pretitle}[高等学校试用教材]{\def\MAB@pretitle{#1}}
 \MAB@key{title}[\@title]{\def\MAB@title{#1}}
@@ -35,17 +35,18 @@
 \MAB@key{publication}[新华书店北京发行所]{\def\MAB@publication{#1}}
 
 
-\def\SetVolInfo#1{\setkeys{MAbook}{#1}}
+\newrobustcmd*\SetVolInfo[1]{\setkeys{MAbook}{#1}}
 
-\def\ResetVolInfo{\SetVolInfo{%
+\newrobustcmd*\ResetVolInfo{\SetVolInfo{%
   pretitle,title,institute,author,volume,size,
-  sheets,words,copies,version,time,ISBN,price,press,print,publication}}
+  sheets,words,copies,version,time,ISBN,price,
+  press,print,publication}}
 
 \ResetVolInfo
 
-\newcommand\InfoItem[2][\enspace]{#2#1}
+\newcommand*\InfoItem[2][\enspace]{#2#1}
 
-\long\def\MakeVolInfo{%
+\newcommand\MakeVolInfo{%
   \begingroup\centering
     \MAB@pretitle\\[10\p@]
     {\bfseries\large\fzxbsong\if@mainmatter\ziju{.5}\fi\MAB@title}\\[8\p@]
@@ -63,30 +64,24 @@
     \InfoItem{定价}\MAB@price~元\\[\baselineskip]
   \endgroup}
 
-\long\def\@Sum@Box#1{\long\gdef\SummaryText{%
+\newcommand\@Sum@Box[1]{\long\gdef\SummaryText{%
   {\fzlthei 内容简介}\bigskip\bigskip\fzbykans\small\CTEXindent\par\leavevmode#1}}
 
-\newenvironment{summary}{\Collect@Body\@Sum@Box}{\ignorespacesafterend}
+\newenvironment{summary}
+  {\Collect@Body\@Sum@Box}
+  {\ignorespacesafterend}
 
-\def\VolumeTOC{}
+\newcommand*\VolumeTOC{}
 
-\def\@ext@v{toc\@roman\c@part}
+\newcommand*\MakeVolume{\startcontents[part]\@ifstar{\@MakeVolume@s}{\@MakeVolume@}}
+\newcommand*\DoNotMakeVolume{\let\@MakeVolume@s\relax\let\@MakeVolume@\relax}
 
-\let\ttl@addcontentsline@ori\ttl@addcontentsline\relax
-\def\MakeVolume{\@ifstar{\@MakeVolume@s}{\@MakeVolume@}}
-\def\DoNotMakeVolume{\let\@MakeVolume@s\relax\let\@MakeVolume@\relax}
-
-\def\@MakeVolume@s{%
-  \def\ttl@addcontentsline##1##2{%
-    \addcontentsline{toc}{##1}{\ifttl@toclabel\ttl@a\fi##2}%
-    \addcontentsline{\@ext@v}{##1}{\ifttl@toclabel\ttl@a\fi##2}%
-    \nobreak}%
+\newcommand\@MakeVolume@s{%
   \part[]{}%
   \let\VolumeTOC\@VolumeTOC\relax
   \MakeSumPage}
 
-\def\@MakeVolume@{%
-  \let\ttl@addcontentsline\ttl@addcontentsline@ori\relax
+\newcommand\@MakeVolume@{%
   \part[]{}%
   \let\VolumeTOC\relax
   \MakeSumPage}
@@ -94,7 +89,7 @@
 \newdimen\SumPageMargin
 \SumPageMargin=4\ccwd\relax
 
-\def\MakeSumPage{%
+\newcommand\MakeSumPage{%
   \clearpage\thispagestyle{empty}%
   \begin{adjustwidth}{\SumPageMargin}{\SumPageMargin}%
     \small\SummaryText\\ \vfill
@@ -103,18 +98,4 @@
   \global\let\SummaryText\relax
   \clearpage}
 
-\def\@VolumeTOC{%
-  \cleardoublepage
-  \begingroup
-    \phantomsection
-    \addcontentsline{toc}{chapter}{\CTEXthepart 目录}%
-    \chapter*{\CTEXthepart
-      目录\@mkboth{\CTEXthepart 目录}{\CTEXthepart 目录}}%
-    \advance\c@tocdepth\@ne
-    \killemspace\relax
-    \renewcommand*\l@part[2]{\par\hrule\bigskip}%
-    \AfterFile*{\jobname.\@ext@v}{\AtEndTOC}%
-    \@starttoc{\@ext@v}%
-  \endgroup}
-
-\endinput
+\endinput 

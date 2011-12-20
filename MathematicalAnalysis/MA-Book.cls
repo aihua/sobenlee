@@ -5,24 +5,25 @@
   [2011/11/14 v2.0 MA-Book document class]
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{ctexbook}}
-\ProcessOptions\relax
+\ProcessOptions*\relax
+
+\PassOptionsToPackage{log-declarations=false}{xparse}
 \PassOptionsToPackage{no-math,silent}{fontspec}
 \PassOptionsToPackage{CJKchecksingle,fallback}{xeCJK}
 \LoadClass[twoside,openany,c5size,nofonts,fntef]{ctexbook}[2009/05/05]
 
 \RequireXeTeX
 
-\RequirePackage{XITS}
-\RequirePackage[mtphrb,mtpcal,subscriptcorrection]{mtpro2}
-\RequirePackage{empheq,amsthm,thmtools,mlist,xfrac,siunitx}
-\RequirePackage[uppi,comma,overparen,mathscrf,mtpro2]{localint}
-\RequirePackage{needspace,chngcntr,changepage,environ,afterpage}
-\RequirePackage{floatrow,caption,wrapfig,labelformat}
-\RequirePackage{enumitem,enumcols,tabu,diagbox}
+\RequirePackage[lucidasmallscale,math-style=iso,nofontinfo]{lucimatx}
+\RequirePackage{empheq,amsthm,thmtools,mlist,siunitx}
+\RequirePackage[uppi,comma,overparen,mathscrf,mathbb,lucida]{localint}
+\RequirePackage{needspace,chngcntr,changepage,environ,afterpage,xifthen}
+\RequirePackage{caption,floatrow,wrapfig,labelref}
+\RequirePackage{enumitem,tabu,diagbox,enumcols}
 \RequirePackage[perpage,stable,bottom]{footmisc}
 \RequirePackage[pagestyles,explicit,clearempty,outermarks]{titlesec}
 \RequirePackage[titlesec]{interfaces}
-\RequirePackage{pifont,xcolor}
+\RequirePackage{titletoc,pifont,marvosym,xcolor}
 \RequirePackage[showframe=false,headheight=5mm,headsep=7mm,footskip=1em,bindingoffset=10mm]{geometry}
 \RequirePackage{hypbmsec}
 \RequirePackage[pdfstartview={XYZ null null 1},pdfpagemode=UseNone,pdfprintscaling=None]{hyperref}
@@ -31,7 +32,7 @@
 
 %\RequirePackage[cam,a4,center,noinfo]{crop}
 
-\hypersetup{%
+\hypersetup{
   bookmarksopen,
   bookmarksdepth=2,
   bookmarksopenlevel=0,
@@ -46,10 +47,9 @@
 }
 
 \let\HyPsd@Warning\@gobble\relax
-
 \graphicspath{{includefiles/figures/}}
-
 \definecolor{titlegray}{gray}{.75}
+\newrobustcmd*\MAB@error{\ClassError{MA-Book}}
 
 \predisplaypenalty   = \z@
 \postdisplaypenalty  = \z@
@@ -87,10 +87,10 @@
 \input{MA-Theorem.def}
 \input{MA-Math.def}
 
-\let\includeonly@ori\includeonly\relax
-\def\includeonly{%
-  \@ifstar{\DoNotMakeVolume\includeonly@ori}{%
-  \includeonly@ori}}
+\let\orig@includeonly=\includeonly
+\def\includeonly{\@ifstar
+  {\DoNotMakeVolume\orig@includeonly}
+  {\orig@includeonly}}
 
 \endinput
 %%
