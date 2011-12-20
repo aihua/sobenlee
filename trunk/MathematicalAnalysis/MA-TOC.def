@@ -6,93 +6,117 @@
 \setcounter{tocdepth}{1}
 
 \newrobustcmd*\emspace[1][1]{\unskip\kern#1\ccwd\ignorespaces}
-\def\killemspace{\def\emspace{\@ifnextchar[{\k@emspace}{\relax}}}
+\newrobustcmd*\killemspace{\def\emspace{\@ifnextchar[{\k@emspace}{\relax}}}
 \def\k@emspace[#1]{\relax}
-
-\def\AtEndTOC{\par}
 
 \renewcommand\tableofcontents{%
   \cleardoublepage
   \phantomsection
-  \pdfbookmark[-1]{《\MAB@title》\contentsname}{toc}%
+  \pdfbookmark[-1]{《\MAB@title》\contentsname}{book}%
   \begingroup
     \chapter*{\contentsname
       \@mkboth{\contentsname}{\contentsname}}%
-    \killemspace\relax
-    \AfterFile*{\jobname.toc}{\AtEndTOC}%
+    \killemspace\killnewline\relax
     \@starttoc{toc}%
   \endgroup}
 
-\newcount\@tocpartcnt
+\newcount\tocpartcnt
+\newdimen\chaplabelwidth
+\newdimen\seclabelwidth
 
-\renewcommand*\l@part[2]{%
-  \ifnum \c@tocdepth > -\tw@\relax
-    \global\advance\@tocpartcnt\@ne\relax
-    \ifnum\@tocpartcnt>\@ne\relax
-      \par\nopagebreak\medskip\hrule\relax
-      \Needspace{2\baselineskip}%
-      \medskip\vspace*{\medskipamount}%
-    \else
-      \hrule\medskip\smallskip
-    \fi
-    \begingroup
-      \parindent\z@ \leftskip\z@ \rightskip\z@
-      \let\numberline\@firstofone\relax
-      \leavevmode\centering
-      \ziju{1}\fzxbsong\large\bfseries #1\relax
-      \ifnum\@tocpartcnt>\@ne
-        \bigskip
-      \else
-        \medskip\smallskip
-      \fi
-      \hrule\medskip
-      \par\nobreak
-      \global\@nobreaktrue
-      \everypar{\global\@nobreakfalse\everypar{}}%
-    \endgroup
-  \fi}
+\newdimen\toclabelsep
+\setlength\toclabelsep{\ccwd}
 
-\renewcommand*\l@chapter[2]{%
-  \ifnum\c@tocdepth > \m@ne\relax
-    \par\addpenalty{-\@highpenalty}%
-    \parindent\z@
-    \begingroup
-      \def\numberline##1{%%\let\hspace\@gobble
-        \edef\@tocchlabel{##1\kern\ccwd}%
-        \settowidth{\global\@tempdima}{\@tocchlabel}%
-        \@tocchlabel}%
-      \let\\ \relax \relax
-      \leftskip\z@ \rightskip\z@
-      \leavevmode\bfseries\sffamily
-      #1\nobreak\leaders\hbox{\ensuremath{%
-        \m@th\mkern\@dotsep mu \cdot\mkern\@dotsep mu}}\hfill\nobreak
-      #2\par\nopagebreak
-    \endgroup
-  \fi}
+\renewcommand*\@dotsep{8}
+\newcommand*\contentsfill[1][\@dotsep\p@]{\titlerule*[#1]{\ensuremath\cdot}\,}
 
-\renewcommand*\l@section[2]{%
-  \ifnum\c@tocdepth > \z@\relax
-    \par
-    \begingroup
-      \parindent\z@ \leftskip\@tempdima \rightskip\z@
-      \def\numberline##1{##1\kern\ccwd}%
-      \leavevmode
-      #1\nobreak\leaders\hbox{\ensuremath{%
-        \m@th\mkern\@dotsep mu \cdot\mkern\@dotsep mu}}\hfill\nobreak
-      #2\par
-    \endgroup
-  \fi}
+\renewcommand*\@tocrmarg{15\p@}
+\contentsmargin[\@tocrmarg]{\z@}
 
-\renewcommand*\l@subsection[2]{%
-  \ifnum\c@tocdepth > \@ne\relax
-    \hangafter\z@ \hangindent\@tempdima\relax
-    \rightskip\@flushglue\relax
-    \advance\rightskip.5\ccwd\relax
-    \begingroup
-      \interlinepenalty\@M
-      \def\numberline##1{##1\kern5\p@}%
-      \mbox{\kaishu\small #1~(#2)}\quad
-    \endgroup\ignorespaces
-  \fi}
+\titlecontents{part}[\z@]
+  {%
+    \global\advance\tocpartcnt\@ne\relax
+    \ifnumgreater{\tocpartcnt}{\@ne}{%
+      \nopagebreak\medskip\hrule\Needspace{4\baselineskip}%
+      \smallskip\vspace*{\medskipamount}%
+    }{\hrule\medskip}%
+    \centering\ziju{1}\large\bfseries\fzxbsong
+  }
+  {\let\numberline=\@firstofone}
+  {}
+  {}%
+  [\ifnumgreater{\tocpartcnt}{\@ne}{\medskip}{}\smallskip\hrule\medskip]
+\titlecontents{chapter}[\z@]
+  {%
+    \normalsize\bfseries\sffamily
+     \ifbool{ttl@label}
+       {%
+         \settowidth\chaplabelwidth{\thecontentslabel}%
+         \global\advance\chaplabelwidth\toclabelsep\relax
+         \hangindent=\chaplabelwidth\relax
+       }{%
+         \ifdimequal{\chaplabelwidth}{\z@}
+           {\global\chaplabelwidth=4\ccwd\relax}{}%
+         \hangindent=\z@\relax
+       }%
+  }
+  {\def\numberline{\makebox[\chaplabelwidth][l]{\thecontentslabel}\@gobble}}
+  {}
+  {\contentsfill\rmfamily\thecontentspage}
+\titlecontents{section}[\chaplabelwidth]
+  {%
+    \normalsize\normalfont
+    \ifbool{ttl@label}{%
+      \settowidth\hangindent{\thecontentslabel}%
+      \advance\hangindent\toclabelsep\relax
+    }{\hangindent=\z@\relax}%
+  }
+  {\def\numberline{\thecontentslabel\kern\toclabelsep\@gobble}}
+  {}
+  {\contentsfill\thecontentspage}
+\titlecontents{ptc@section}[\z@]
+  {\normalsize\normalfont\hangindent=\chaplabelwidth\relax}
+  {%
+    \settowidth\seclabelwidth{\thecontentslabel}%
+    \global\seclabelwidth=\dimexpr\chaplabelwidth-\seclabelwidth-\toclabelsep\relax
+    \def\numberline{%
+      \makebox[\chaplabelwidth][r]{\thecontentslabel\kern\toclabelsep}\@gobble}%
+  }
+  {\hspace*{\seclabelwidth}}
+  {\contentsfill\thecontentspage}
+\titlecontents*{subsection}[\chaplabelwidth]
+  {%
+    \small\kaishu\widowpenalty=\@m\relax\rightskip=\@flushglue\relax
+%%    \@tempdimc=\dimexpr\chaplabelwidth-\seclabelwidth\relax
+%%    \makebox[\z@][r]{\hb@xt@\@tempdimc{\RewindToStart\hss}}%
+  }
+  {\def\numberline{\thecontentslabel\kern.5\toclabelsep\@gobble}\hbox}
+  {\hbox}
+  {\nobreak~(\thecontentspage)}%
+  [\kern\toclabelsep\allowbreak]%
+%%  [\hfill\ForwardToEnd]
+
+\newcommand\l@ptc@part{\par\hrule\bigskip\@gobbletwo}
+\let\ttl@savel@part\l@ptc@part
+\renewcommand\l@ptc@part{\ttl@lselect{part}}
+
+\let\ttl@savel@section\l@ptc@section
+\renewcommand\l@ptc@section{\ttl@lselect{section}}
+
+\newcommand\@VolumeTOC{%
+  \cleardoublepage
+  \phantomsection
+  \addcontentsline{toc}{chapter}{\contentsname}%
+  \begingroup
+    \chapter*{\contentsname
+      \@mkboth{\contentsname}{\contentsname}}%
+    \killemspace\killnewline
+    \ifundef\ParTocLine{}{%
+      \let\orig@ParTocLine\ParTocLine
+      \pretocmd\contentsline{\let\ParTocLine\orig@ParTocLine}{}{}%
+      \pretocmd\ttl@gobblecontents{\let\ParTocLine\ignorespaces}{}{}%
+    }%
+    \printcontents[part]{ptc@}{-1}{\advance\c@tocdepth\@ne}%
+  \endgroup}
 
 \endinput

@@ -3,15 +3,6 @@
 %%
 \ProvidesFile{MA-List.def}
 
-\robustify{\ding}
-
-\def\DingNum#1{%
-  \ifnum\number#1>10%
-    \typeout{The value of input number is \number#1, larger than 10}%
-  \fi
-  \ding{\number\numexpr#1 + 171}}
-\def\Ding#1{\DingNum{\csuse{c@#1}}}
-
 \AddEnumerateCounter*\Ding\DingNum{1}
 
 \setlist{nosep}
@@ -26,30 +17,30 @@ labelwidth=\widthof{\bfseries\ref{enumLastItem-\theLastItem}},
     format=\bfseries,
      label=\arabic*.}
 
-\newbool{push@star@}
 \newrobustcmd*\prestar{\ifbool{push@star}{\@SMM\popstar}{}}
-\def\StarItem{\pushstar\item}
+\newcommand*\StarItem{\pushstar\item}
 
 \newdimen\addleftskip
 
 \SetLabelAlign{hang}{%
-  \ifnum\@listdepth=\@ne\relax
-    \addleftskip=\z@\relax
-    \ifbool{push@star}{\booltrue{push@star@}}{}%
-    \settowidth\@tempdima{#1}%
+  \sbox\@tempboxa{#1}%
+  \ifnumequal{\@listdepth}{\@ne}{%
+    \@tempdima=\wd\@tempboxa\relax
     \ifdimgreater{\@tempdima}{\labelwidth}
        {\global\addleftskip=\dimexpr\@tempdima-\labelwidth\relax}
        {\global\addleftskip=\z@\relax}%
-    \ifbool{push@star@}{\booltrue{push@star}}{}%
-  \fi
+  }{}%
   \global\leftskip=\addleftskip\relax
-  \nobreak\hss\llap{#1\strut}}
+  \nobreak\hss\llap{\unhbox\@tempboxa\strut}}
+
+\newrobustcmd*\iscurrentsection[1]{%
+  \ifthenelse{\equal{\thesection}{#1}}{}{~\CTEX@presection #1~}}
 
 \SetEnumitemKey{hang}{nosep,align=hang,leftmargin=*}
 
 \newlist{exlist}{enumerate}{3}
 \setlist[exlist]{hang,listparindent=\parindent}
-\setlist[exlist,1]{label=\prestar\bfseries\arabic*.}
+\setlist[exlist,1]{label=\bfseries\prestar\arabic*.,ref={\iscurrentsection{\thesection}习题~\arabic*}}
 \setlist[exlist,2]{label=\prestar(\arabic*)}
 \setlist[exlist,3]{label=\prestar\Ding*}
 
@@ -58,7 +49,7 @@ labelwidth=\widthof{\bfseries\ref{enumLastItem-\theLastItem}},
 \setlist[enumlist,1]{format=\bfseries,label=(\arabic*)}
 \setlist[enumlist,2]{label=\Ding*}
 
-\setenumcols[cols=2]
+\setenumcols[cols=2,adjust]
 
 \newenvironment{exlistcols}[1][2]{%
     \enumcols[hang, counter=exlist,
@@ -67,7 +58,7 @@ labelwidth=\widthof{\bfseries\ref{enumLastItem-\theLastItem}},
   {\endenumcols}
 
 \newenvironment{exlistcols*}[1][2]
-  {\enumcols[inlist,#1]\relax}
+  {\enumcols[inlist,leftmargin=\z@,leftmargin=-\labelwidth-\labelsep,#1]\relax}
   {\endenumcols}
 
 \newenvironment{enumlistcols}[1][2]{\CTEXindent
@@ -82,10 +73,10 @@ labelwidth=\widthof{\bfseries\ref{enumLastItem-\theLastItem}},
 \newenvironment{thmenumlist}[1][before=\fixthmitem]
   {\enumlist[#1]}{\endenumlist}
 
-\newdimen\ori@leftskip
+\newdimen\orig@leftskip
 
 \newenvironment{exercise}{%
-  \ori@leftskip=\leftskip\relax
+  \orig@leftskip=\leftskip\relax
   \advance\c@secnumdepth-\@m\relax
   \def\subsec@format{%
     \medskip\normalsize\raggedright
@@ -95,16 +86,16 @@ labelwidth=\widthof{\bfseries\ref{enumLastItem-\theLastItem}},
   \let\fix@capfontsize\small\relax
   \exlist\relax
 }{%
-  \endexlist\global\leftskip=\ori@leftskip\relax
+  \endexlist\global\leftskip=\orig@leftskip\relax
 }
 
 \newenvironment{exercise*}{%
-  \ori@leftskip=\leftskip\relax
+  \orig@leftskip=\leftskip\relax
   \advance\c@secnumdepth-\@m\relax
   \section{复习题\CTEX@thechapter}
   \exlist\relax
 }{%
-  \endexlist\global\leftskip=\ori@leftskip\relax
+  \endexlist\global\leftskip=\orig@leftskip\relax
 }
 
 \endinput

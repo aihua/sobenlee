@@ -3,36 +3,52 @@
 %%
 \ProvidesFile{MA-Math.def}
 
-\robustify{\LEFTROOT}
-\robustify{\UPROOT}
-\robustify{\big}
-\robustify{\Big}
-\robustify{\bigg}
-\robustify{\Bigg}
-
 \let\leq\leqslant
 \let\geq\geqslant
 \let\subset\subseteq
+\let\supset\supseteq
 \let\phi\varphi
-\let\ln\log
+\let\limsup\varlimsup
+\let\liminf\varliminf
+\let\nto\nrightarrow
+
+\newrobustcmd*\MAB@csrobustify[1]{%
+  \expandafter\robustify\expandafter{\csname#1\endcsname}}
+
+\forcsvlist\robustify{\leftroot,\uproot,\dfrac,\tfrac}
 
 \let\dps\displaystyle
+\let\txts\textstyle
 
-\everymath{\displaystyle}
+\newrobustcmd*\MAB@applimitsto[1]{\ifundef{#1}
+  {\MAB@error{\string#1 undefined!}\@eha}
+  {\appto{#1}{\limits}\robustify{#1}}}
+\newrobustcmd*\MAB@predpsto[1]{\ifundef{#1}
+  {\MAB@error{\string#1 undefined!}\@eha}
+  {\preto{#1}{\displaystyle}\robustify{#1}}}
 
-\let\notinslant\notin
-\def\notin{\mathrel{\overline\in}}
+\let\AMSr@@t\r@@t
 
-\newcommand*\marc[1]{\overparen{#1}}
-\newcommand*\mtilde[1]{\widetilde{#1}}
-\newcommand*\mbar[1]{\overline{#1}}
-\newcommand*\mequiv[1]{\overline{#1}}
-\newcommand*\mcal[1]{\mathcal{#1}}
-\newcommand*\mscr[1]{\mathscr{#1}}
-\newcommand*\mfield[1]{\mathbb{#1}}
-\newcommand*\map[3]{#1\colon#2\to#3}
-\newcommand*\smsqrt[1]{\sqrt{\smash[b]{#1}}}
-\newcommand*\mcset{\mathopen\complement}
+\AfterEndPreamble{%
+  \forcsvlist\MAB@applimitsto{\lim,\sup,\inf,\limsup,\liminf,\max,\min}%
+  \forcsvlist\MAB@predpsto{\sum,\prod,\int,\iint,\iiint,\iiiint,\oint,\oiint,\oiiint}%
+  \let\r@@t\AMSr@@t}
+
+\newrobustcmd*\marc[1]{\overparen{#1}}
+\newrobustcmd*\mtilde[1]{\widetilde{#1}}
+\newrobustcmd*\mbar[1]{\overline{#1}}
+\newrobustcmd*\mcal[1]{\mathcal{#1}}
+\newrobustcmd*\mscr[1]{\mathscr{#1}}
+\newrobustcmd*\mfield[1]{\mathbb{#1}}
+\newrobustcmd*\setfam[1]{\mathcal{#1}}
+\newrobustcmd*\map[3]{#1\colon#2\to#3}
+\newrobustcmd*\mcset{\mathopen\complement}
+\newrobustcmd*\sfrac[3][]{#2\mathord{#1/}#3}
+
+\NewDocumentCommand\smbsqrt{o m}{%
+  \IfNoValueTF{#1}
+    {\sqrt{\smash[b]{#2}}}
+    {\sqrt[#1]{\smash[b]{#2}}}}
 
 \newmlist\mvec[
    wrapcmd=\mlistnowrap,
@@ -59,45 +75,80 @@ wraponecmd=\mlistnowrap,
 \newmset\mP{P}
 \newmset\mF{F}
 
-\newcommand*\uC{\mathrm C}
-\newcommand*\mi{\mathrm i}
-\newcommand*\me{\mathrm e}
+\newrobustcmd*\mi{\mathrm i}
+\newrobustcmd*\me{\mathrm e}
+\newrobustcmd*\Beta{\mathord{B}}
 
-\newrobustcmd*\Beta{\mathord{\mathrm{B}}}
-\newrobustcmd*\diff{\mathop{}\negthinspace\mathrm{d}}
-\newrobustcmd*\Diff{\mathop{}\negthinspace\mathrm{D}}
-\newcommand*\e{\varepsilon}
-\newcommand*\eset{\varnothing}
+\let\slDelta\Delta
+\let\Delta\upDelta
 
-\newcommand\pinf{+\infty}
-\newcommand\minf{-\infty}
-\newcommand\ntoinf{{n\to\infty}}
-\newcommand\ntopinf{{n\to\pinf}}
-\newcommand\ntominf{{n\to\minf}}
+\newrobustcmd*\nin{\mathrel{\overline\in}}
+\newrobustcmd*\dif{\mathop{}\negthinspace\mathrm d}
+\newrobustcmd*\Dif{\mathop{}\negthinspace\mathrm D}
+\newrobustcmd*\pdif{\partial}
+\newrobustcmd*\e{\varepsilon}
+\newrobustcmd*\eset{\varnothing}
+\newrobustcmd*\difset[1][]{\mathord{#1\backslash}}
+\newrobustcmd*\mbinom[2]{\mathrm C_{#1}^{#2}}
 
-\providecommand\comp{\mathchoice
-  {\mathop{\raisebox{0.2ex}{\footnotesize$\circ$}}}
-  {\mathop{\raisebox{0.2ex}{\footnotesize$\circ$}}}
-  {\mathop{\raisebox{0.1ex}{$\scriptscriptstyle\circ$}}}
-  {\mathop{\raisebox{0.1ex}{$\scriptscriptstyle\circ$}}}%
-}%
+\newrobustcmd*\bound[1]{\partial#1}
+\newrobustcmd*\interior[1]{{#1}^\circ}
+\newrobustcmd*\closure[1]{\overline{#1}}
 
-\newcommand*\rest[2][\bigr]{#1|_{#2}}
+\newrobustcmd*\msp[1][5]{\mspace{-#1mu}}
+
+\newrobustcmd*\pinf{{+\infty}}
+\newrobustcmd*\sinf{\infty}
+\newrobustcmd*\minf{{-\infty}}
+\newrobustcmd*\ntoinf{{n\to\infty}}
+\newrobustcmd*\ntopinf{{n\to\pinf}}
+\newrobustcmd*\ntominf{{n\to\minf}}
+
+\newrobustcmd*\unito{\rightrightarrows}
+%%%\newrobustcmd*\unito[1][3ex]{%
+%%%  \mathrel{\vcenter{\offinterlineskip
+%%%    \ialign{\hbox to#1{##}\cr
+%%%    \rightarrowfill\cr\noalign{\kern\m@ne\p@}%
+%%%    \rightarrowfill\cr}}}}
+
+\newrobustcmd*\comp{\mathchoice
+  {\mathop{\vcenter{\hbox{\small$\circ$}}}}
+  {\mathop{\vcenter{\hbox{\small$\circ$}}}}
+  {\mathop{\vcenter{\hbox{\footnotesize$\circ$}}}}
+  {\mathop{\vcenter{\hbox{\footnotesize$\circ$}}}}}
+
+\newrobustcmd*\mrest[2][\bigr]{#1|_{#2}}
+
+\newrobustcmd*\mcond{\@ifstar{\@@mcond}{\@mcond}}
+\newcommand*\@mcond[2][\,]{\ensuremath{#1(#2)}}
+\newcommand*\@@mcond[2][\quad]{\ensuremath{,#1#2}}
 
 \DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\diag}{diag}
 \DeclareMathOperator{\arccot}{arccot}
+\DeclareMathOperator{\BetaF}{B}
+\DeclareMathOperator{\GammaF}{\upGamma}
+
+\providecommand*\biggg{\bBigg@\thr@@}
+\providecommand*\Biggg{\bBigg@{3.5}}
+\providecommand*\bigggl{\mathopen\biggg}
+\providecommand*\bigggr{\mathclose\biggg}
+\providecommand*\Bigggl{\mathopen\Biggg}
+\providecommand*\Bigggr{\mathclose\Biggg}
 
 \mathtoolsset{centercolon,mathic}
 
 \MHInternalSyntaxOn
-\def\MakeShortMTPairedDelimiterCMD#1{%
+\def\MakeShortMTPairedDelimiterCMD#1{
   \@xp\@xp\@xp\newrobustcmd\@xp\csname \MH_cs_to_str:N #1 b\endcsname{#1[\big]}
   \@xp\@xp\@xp\newrobustcmd\@xp\csname \MH_cs_to_str:N #1 B\endcsname{#1[\Big]}
   \@xp\@xp\@xp\newrobustcmd\@xp\csname \MH_cs_to_str:N #1 bb\endcsname{#1[\bigg]}
-  \@xp\@xp\@xp\newrobustcmd\@xp\csname \MH_cs_to_str:N #1 BB\endcsname{#1[\Bigg]}}
+  \@xp\@xp\@xp\newrobustcmd\@xp\csname \MH_cs_to_str:N #1 BB\endcsname{#1[\Bigg]}
+  \@xp\@xp\@xp\newrobustcmd\@xp\csname \MH_cs_to_str:N #1 bbb\endcsname{#1[\biggg]}
+  \@xp\@xp\@xp\newrobustcmd\@xp\csname \MH_cs_to_str:N #1 BBB\endcsname{#1[\Biggg]}}
 \MHInternalSyntaxOff
 
-\def\MTDeclarePairedDelimiter#1#2#3{%
+\def\MTDeclarePairedDelimiter#1#2#3{
   \DeclarePairedDelimiter{#1}{#2}{#3}
   \MakeShortMTPairedDelimiterCMD{#1}}
 
@@ -106,66 +157,93 @@ wraponecmd=\mlistnowrap,
   \MakeShortMTPairedDelimiterCMD{#1}}
 
 \MTDeclarePairedDelimiter\mabs{\lvert}{\rvert}
-\MTDeclarePairedDelimiter\norm{\lVert}{\rVert}
+\MTDeclarePairedDelimiter\mnorm{\lVert}{\rVert}
 \MTDeclarePairedDelimiter\mparen{\lparen}{\rparen}
 \MTDeclarePairedDelimiter\mbrack{\lbrack}{\rbrack}
 \MTDeclarePairedDelimiter\mfloor{\lbrack}{\rbrack}
 
-\MTDeclarePairedDelimiterX\mbrace[1]{\lbrace}{\rbrace}{\,#1\,}
-\MTDeclarePairedDelimiterX\mathset[2]{\lbrace}{\rbrace}{\,#1\mathrel{\delimsize\vert}#2\,}
+\MTDeclarePairedDelimiterX\mbrace[1]{\lbrace}{\rbrace}{#1}
+\MTDeclarePairedDelimiterX\mathset[2]{\lbrace}{\rbrace}{#1\mathrel{\delimsize\vert}#2}
+
+\MTDeclarePairedDelimiterX\mangle[2]{\langle}{\rangle}{#1,#2}
+\MTDeclarePairedDelimiterX\minp[2]{\lparen}{\rparen}{#1,#2}
 
 \MTDeclarePairedDelimiterX\minto[2]{\lparen}{\rparen}{#1,#2}
 \MTDeclarePairedDelimiterX\mintc[2]{\lbrack}{\rbrack}{#1,#2}
 \MTDeclarePairedDelimiterX\mintoc[2]{\lparen}{\rbrack}{#1,#2}
 \MTDeclarePairedDelimiterX\mintco[2]{\lbrack}{\rparen}{#1,#2}
-\MTDeclarePairedDelimiterX\mrange[2]{\lbrace}{\rbrace}{\,#1,#2\,}
+\MTDeclarePairedDelimiterX\mrange[2]{\lbrace}{\rbrace}{#1,#2}
 
+\newcases{ndcases}{\quad}
+  {$\m@th\displaystyle{##}$\hfil}
+  {$\m@th\displaystyle{##}$\hfil}
+  {.}{.}
+\newcases{cndcases}{\quad}
+  {\hfil$\m@th\displaystyle{##}$\hfil}
+  {$\m@th\displaystyle{##}$\hfil}
+  {.}{.}
 \newcases{cdcases}{\quad}
   {\hfil$\m@th\displaystyle{##}$\hfil}
   {$\m@th\displaystyle{##}$\hfil}
-  {\lbrace}{.}
-\newcases{cdcases*}{\quad}
-  {\hfil$\m@th\displaystyle{##}$\hfil}
-  {{##}\hfil}
   {\lbrace}{.}
 \newcases{bdcases}{\quad}
   {$\m@th\displaystyle{##}$\hfil}
   {$\m@th\displaystyle{##}$\hfil}
   {.\n@space\biggl\lbrace}{.}
-\newcases{bdcases*}{\quad}
+\newcases{Bdcases}{\quad}
   {$\m@th\displaystyle{##}$\hfil}
-  {{##}\hfil}
-  {.\n@space\biggl\lbrace}{.}
+  {$\m@th\displaystyle{##}$\hfil}
+  {.\n@space\Biggl\lbrace}{.}
+\newcases{bbdcases}{\quad}
+  {$\m@th\displaystyle{##}$\hfil}
+  {$\m@th\displaystyle{##}$\hfil}
+  {.\n@space\bigggl\lbrace}{.}
+\newcases{BBdcases}{\quad}
+  {$\m@th\displaystyle{##}$\hfil}
+  {$\m@th\displaystyle{##}$\hfil}
+  {.\n@space\Bigggl\lbrace}{.}
 \newcases{rbdcases}{\quad}
   {\hfil$\m@th\displaystyle{##}$}
   {$\m@th\displaystyle{##}$\hfil}
   {.\n@space\biggl\lbrace}{.}
-\newcases{rbdcases*}{\quad}
+\newcases{rBdcases}{\quad}
   {\hfil$\m@th\displaystyle{##}$}
-  {{##}\hfil}
-  {.\n@space\biggl\lbrace}{.}
+  {$\m@th\displaystyle{##}$\hfil}
+  {.\n@space\Biggl\lbrace}{.}
+\newcases{rbbdcases}{\quad}
+  {\hfil$\m@th\displaystyle{##}$}
+  {$\m@th\displaystyle{##}$\hfil}
+  {.\n@space\bigggl\lbrace}{.}
+\newcases{rBBdcases}{\quad}
+  {\hfil$\m@th\displaystyle{##}$}
+  {$\m@th\displaystyle{##}$\hfil}
+  {.\n@space\Bigggl\lbrace}{.}
 \newcases{cbdcases}{\quad}
   {\hfil$\m@th\displaystyle{##}$\hfil}
   {$\m@th\displaystyle{##}$\hfil}
   {.\n@space\biggl\lbrace}{.}
-\newcases{cbdcases*}{\quad}
+\newcases{cBdcases}{\quad}
   {\hfil$\m@th\displaystyle{##}$\hfil}
-  {{##}\hfil}
-  {.\n@space\biggl\lbrace}{.}
-
-\newcommand\mcond{\@ifstar{\@@mcond}{\@mcond}}
-\newcommand\@mcond[2][\;]{#1(#2)}
-\newcommand\@@mcond[2][\quad]{,#1#2}
+  {$\m@th\displaystyle{##}$\hfil}
+  {.\n@space\Biggl\lbrace}{.}
+\newcases{cbbdcases}{\quad}
+  {\hfil$\m@th\displaystyle{##}$\hfil}
+  {$\m@th\displaystyle{##}$\hfil}
+  {.\n@space\bigggl\lbrace}{.}
+\newcases{cBBdcases}{\quad}
+  {\hfil$\m@th\displaystyle{##}$\hfil}
+  {$\m@th\displaystyle{##}$\hfil}
+  {.\n@space\Bigggl\lbrace}{.}
 
 \renewcommand\intertext[1][]{\@amsmath@err{\Invalid@@\intertext}\@eha}
 \def\intertext@{%
   \def\intertext{%
     \ifvmode\else\\\@empty\fi
     \noalign{\ifnum0=`}\fi
-      \@ifnextchar[{\MA@intertext@}{\MA@intertext@[]}%
+      \@ifnextchar[{\MAB@intertext@}{\MAB@intertext@[]}%
   }%
 }
-\def\MA@intertext@[#1]#2{%
+\def\MAB@intertext@[#1]#2{%
   \penalty\postdisplaypenalty
 %%  \@ifempty{#1}{\vskip\belowdisplayskip}{\vskip#1\relax}%
   \vbox{\normalbaselines
@@ -198,30 +276,6 @@ wraponecmd=\mlistnowrap,
     \vskip-\baselineskip}%
   \penalty\@M
 }
-
-%\ExplSyntaxOn
-%\DeclareInstance { xfrac } { slant } { math }
-%  {
-%    denominator-bot-sep = -2 pt      ,
-%    numerator-bot-sep   =  2 pt      ,
-%    slash-right-mkern   = -2 mu      ,
-%    slash-left-mkern    = -2 mu
-%  }
-%\DeclareCollectionInstance { slantmath } { xfrac } { mathdefault } { math }
-%  {
-%    denominator-bot-sep = -2 pt      ,
-%    numerator-bot-sep   =  2 pt      ,
-%    numerator-top-sep   = \c_max_dim ,
-%    scale-factor        = 1          ,
-%    scale-relative      = false      ,
-%    scaling             = true       ,
-%    slash-right-mkern   = -2 mu      ,
-%    slash-left-mkern    = -2 mu
-%  }
-%\ExplSyntaxOff
-%\UseCollection{xfrac}{slantmath}
-
-\UseCollection{xfrac}{plainmath}
 
 \MHInternalSyntaxOn
 \def\EQ_prevent_vertical_space:{%

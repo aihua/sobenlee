@@ -3,17 +3,23 @@
 %%
 \ProvidesFile{MA-Theorem.def}
 
-\def\ifwidthzero#1{%
+\newrobustcmd*\ifwidthzero[1]{%
   \settowidth\@tempdima{#1}%
-  \ifdim\@tempdima=\z@\relax
-    \expandafter\@firstoftwo
-  \else
-    \expandafter\@secondoftwo
-  \fi}
+  \ifdimequal\@tempdima\z@}
 
-\def\declareheadformat#1#2{\csdef{thmt@headstyle@#1}{#2}}
-\declareheadformat{note}{\ifwidthzero{\NOTE}{\NAME}{\let\thmt@space\relax\NOTE}}
-\declareheadformat{normal}{\NAME~\NUMBER\NOTE}
+\newrobustcmd*\ifcntruniqinsec[1]{%
+  \edef\uniq@toggle{#1@\arabic{chapter}.\arabic{section}}%
+  \ifnumgreater{\value{#1}}{\@ne}{%
+    \if@filesw
+      \immediate\write\@auxout{\csgdef{\uniq@toggle}{\arabic{#1}}}%
+    \fi
+  }{}%
+  \ifcsundef\uniq@toggle}
+
+\def\declarethmheadformat#1#2{\csdef{thmt@headstyle@#1}{#2}}
+\declarethmheadformat{note}  {\ifwidthzero{\NOTE}{\NAME}{\let\thmt@space\relax\NOTE}}
+\declarethmheadformat{unique}{\NAME\ifcntruniqinsec{\thmt@envname}{}{\NUMBER}\NOTE}
+\declarethmheadformat{normal}{\NAME~\NUMBER\NOTE}
 
 \newskip\thmskip
 \thmskip=.5ex\relax
@@ -103,10 +109,22 @@ postheadspace=\ccwd
     headpunct=,
    notebraces={}{},
      bodyfont=\kaishu,
-   headindent=\parindent,
+   headindent=\z@,
 postheadspace=\ccwd,
           qed={\ensuremath\square}
 ]{ExProof}
+\declaretheoremstyle[
+   headformat=unique,
+   spaceabove=\z@,
+   spacebelow=\z@,
+     headfont=\thmheaderfont,
+     notefont=\thmheaderfont,
+    headpunct=,
+   notebraces={（}{\rlap{）}},
+     bodyfont=\normalfont,
+   headindent=\parindent,
+postheadspace=\ccwd
+]{Unique}
 
 \undef{\proof}
 \undef{\endproof}
@@ -116,41 +134,33 @@ postheadspace=\ccwd,
 \def\solutionname{解}
 \def\qedsymbol{\ensuremath\blacksquare}
 
+\define@key{thmdef}{ref}[\thmt@thmname~]{\setlabelref{\thmt@envname}{#1}}
+
 \declaretheorem[style=Axiom, numbered=no, name=公理]{Axiom}
-\declaretheorem[style=Theorem, within=section, name=定义]{definition}
-\declaretheorem[style=Theorem, within=section, name=定理]{theorem}
-\declaretheorem[style=Theorem, within=section, name=引理]{lemma}
-\declaretheorem[style=Theorem, within=section, name=命题]{proposition}
-\declaretheorem[style=Theorem, within=section, name=性质]{property}
-\declaretheorem[style=Theorem, within=section, name=结论]{conclusion}
-\declaretheorem[style=Theorem, within=section, name=推论]{corollary}
-\declaretheorem[style=Theorem, within=section, name=例]  {example}
-\declaretheorem[style=Remark,  within=section, name=注]  {remark}
-\declaretheorem[style=Note,   numbered=no, name=\qedsymbol]   {note}
-\declaretheorem[style=Proof,  numbered=no, name=\proofname]   {proof}
-\declaretheorem[style=Proof,  numbered=no, name=\solutionname]{solution}
-\declaretheorem[style=Remark, numbered=no, name=\quizname]    {quiz}
-\declaretheorem[style=ProofNum, name=证法]   {proof*}
-\declaretheorem[style=ProofNum, name=解法]{solution*}
-\declaretheorem[style=Remark, name=\quizname] {quiz*}
-\declaretheorem[style=ExProof,numbered=no, name=\proofname,
+\declaretheorem[style=Theorem, within=section, name=定义, ref]{definition}
+\declaretheorem[style=Theorem, within=section, name=定理, ref]{theorem}
+\declaretheorem[style=Theorem, within=section, name=引理, ref]{lemma}
+\declaretheorem[style=Theorem, within=section, name=命题, ref]{proposition}
+\declaretheorem[style=Theorem, within=section, name=性质, ref]{property}
+\declaretheorem[style=Theorem, within=section, name=结论, ref]{conclusion}
+\declaretheorem[style=Theorem, within=section, name=推论, ref]{corollary}
+\declaretheorem[style=Theorem, within=section, name=例, ref]  {example}
+\declaretheorem[style=Remark,  within=section, name=注, ref]  {remark}
+\declaretheorem[style=Unique,  within=section, name=\quizname]{quiz}
+\declaretheorem[style=Note,    unnumbered, name=\qedsymbol]   {note}
+\declaretheorem[style=Proof,   unnumbered, name=\proofname]   {proof}
+\declaretheorem[style=Proof,   unnumbered, name=\solutionname]{solution}
+\declaretheorem[style=ProofNum, name=证法,ref]   {proof*}
+\declaretheorem[style=ProofNum, name=解法,ref]{solution*}
+\declaretheorem[style=ExProof, unnumbered, name=\proofname,
   postheadhook={\leftskip\addleftskip\relax}] {exproof}
+
 \counterwithin*{proof*}{example}
 \counterwithin*{solution*}{example}
-\counterwithin*{quiz*}{section}
 \counterwithin{equation}{section}
 
-\setlabelformat{definition} {定义~}
-\setlabelformat{theorem}    {定理~}
-\setlabelformat{lemma}      {引理~}
-\setlabelformat{proposition}{命题~}
-\setlabelformat{property}   {性质~}
-\setlabelformat{conclusion} {结论~}
-\setlabelformat{corollary}  {推论~}
-\setlabelformat{example}    {例~}
-\setlabelformat{remark}     {注~}
-\setlabelformat{proof*}     {证法~}
-\setlabelformat{solution*}  {解法~}
-\setlabelformat*{equation}  {(\theequation)}
+\renewcommand*\thequiz{\chinese{quiz}}
+
+\setlabelref*{equation}{(\theequation)}
 
 \endinput

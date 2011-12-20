@@ -3,7 +3,7 @@
 %%
 \ProvidesFile{MA-Title.def}
 
-\setcounter{secnumdepth}{\thr@@}
+\setcounter{secnumdepth}{3}
 
 \newrobustcmd*\@S{\leavevmode\raise.15ex\hbox{\rmfamily\S}\kern.1\ccwd\ignorespaces}
 \newrobustcmd*\@SMM{\llap{$^\ast$}\ignorespaces}
@@ -14,28 +14,28 @@
 \def\@SM{\ifbool{push@star}{\@SMM}{}}
 
 \def\appendixname{附录}
-\def\contentsname{总目录}
-\def\prefacename{\CTEXthepart 前言}
+\def\contentsname{\ifnumequal{\c@part}{\z@}{总}{\MAB@volume}目录}
+\def\prefacename{\MAB@volume 前言}
 \title{数学分析}
 
 \CTEXoptions[today=small]
 \def\CTEX@null{〇}
-\def\@chinese@O#1{\ifnumequal{\csuse{c@#1}}{\z@}{\CTEX@null}{\chinese{#1}}}
+\def\@chinese@O#1{\ifnumequal{\value{#1}}{\z@}{\CTEX@null}{\chinese{#1}}}
 \def\CTEX@thechapter{\@chinese@O{chapter}}
 \def\CTEX@postpart{册}
 \def\CTEX@presection{\@SM\@S}
 \def\CTEX@presubsection{\@SM}
 \def\CTEX@thesubsubsection{\chinese{subsubsection}}
 
-\setlabelformat*{part}      {\CTEXthepart}
-\setlabelformat*{chapter}   {\CTEXthechapter}
-\setlabelformat*{section}   {\CTEXthesection}
-\setlabelformat*{subsection}{\CTEXthesubsection}
+\setlabelref*{part}      {\CTEXthepart}
+\setlabelref*{chapter}   {\CTEXthechapter}
+\setlabelref*{section}   {\CTEXthesection}
+\setlabelref*{subsection}{\CTEXthesubsection}
 
 \def\ttl@chapterout{\typeout{\CTEXthechapter}}
 
 \def\FixCTEXtoclabel#1{%
-  \csgdef{ttl@toc#1}{%
+  \csdef{ttl@toc#1}{%
     \def\ttl@a{\protect\numberline{\csuse{CTEXthe#1}}}%
   }%
 }
@@ -64,7 +64,7 @@
 \sectionformat\chapter{%
      class=top,
      shape=block,
-    format=\bfseries\zihao{3}\sffamily\bfsansfea\fzcuheisong\filinner,
+    format=\bfseries\zihao{3}\TeXGyreBonum\fzcuheisong\filinner,
      label=\CTEXthechapter,
   labelsep=1.5\ccwd,
     before={\varwidth[t]{\linewidth}#1\endvarwidth},
@@ -74,7 +74,7 @@
 
 \sectionformat\chapter*{%
      shape=block,
-    format=\bfseries\zihao{3}\sffamily\bfsansfea\fzcuheisong\filinner,
+    format=\bfseries\zihao{3}\TeXGyreBonum\fzcuheisong\filinner,
     before={\varwidth[t]{\linewidth}#1\endvarwidth},
        top=\baselineskip,
     bottom=\baselineskip}
@@ -82,7 +82,7 @@
 \sectionformat\section{%
      class=straight,
      shape=block,
-    format=\Needspace{.2\textheight}\bfseries\zihao{4}\fzzysong\filcenter,
+    format=\Needspace{.2\textheight}\bfseries\zihao{4}\fzzysong\CMRoman\notextaccent\filcenter,
      label=\CTEXthesection,
   labelsep=.8\ccwd,
     before=#1\rule\z@{2\ccwd},
@@ -113,7 +113,7 @@
     bottom=\z@,
       left=\parindent}
 
-\gpreto\part{\cleardoublepage}
+\pretocmd\part{\cleardoublepage}{}{}
 
 \newcommand\Sign[2][\MAB@author]{%
   \par\bigskip
@@ -129,10 +129,6 @@
     \vspace{2\baselineskip}\kaishu}
   {\relax}
 
-\newcommand*\floatlabelformat[2]{\csdef{fnum@#1}{#2}}
-\floatlabelformat{figure}{\figurename\nobreakspace\thefigure}
-\floatlabelformat{table}{\tablename\nobreakspace\thetable}
-
 \floatplacement{figure}{htb}
 \floatplacement{table}{htb}
 
@@ -141,72 +137,86 @@
 \abovecaptionskip =  .5\intextsep\relax
 \belowcaptionskip = \abovecaptionskip\relax
 
-\setlabelformat{figure}{\figurename~}
-\setlabelformat{table}{\tablename~}
+\setlabelref{figure}{\figurename~}
+\setlabelref{table}{\tablename~}
 
-\def\figureboxsep#1{\def\@frowsep{\hskip#1\ccwd\@plus1fill}}
-\figureboxsep{2}
+\ifdefdimen\FRboxsep{}{\newdimen\FRboxsep}
+\newcommand*\setFRboxsep[1]{\setlength\FRboxsep{#1}}
+\setFRboxsep{2\ccwd}
+
+\DeclareFloatVCode{FRca}{\numdef\@FRboxcntr{\c@FRobj}}
+\DeclareFloatVCode{FRcb}{\gdef\FBbskip{-\intextsep}}
+\DeclareFloatSeparators{FRsep}{%
+  \ifnumgreater\@FRboxcntr\tw@{\kern\FRboxsep}{\kern\tw@\FRboxsep}}
+\floatsetup{style=plain,capposition=bottom,floatrowsep=FRsep,
+  captionskip=\abovecaptionskip,rowprecode=FRca,rowpostcode=FRcb}
+
 \newfloatcommand{figurebox}{figure}[\nocapbeside][\FBwidth]
-\DeclareFloatVCode{frpreskip} {\relax}
-\DeclareFloatVCode{frpostskip}{\vskip-\intextsep}
-\DeclareFloatVCode{fixskip}{\vskip-2\intextsep}
-\DeclareFloatVCode{wrapfig}{\vskip-\intextsep}
-\DeclareFloatVCode{twrapfig}{\vskip-3\intextsep}
-\DeclareFloatSeparators{frowsep}{\@frowsep}
-\floatsetup{style=plain,capposition=bottom,floatrowsep=frowsep,
-  captionskip=\abovecaptionskip,rowprecode=frpreskip,rowpostcode=frpostskip}
-%\floatsetup[wrapfloat]{captionskip=.5\abovecaptionskip}
+\newfloatcommand{tablebox}{table}[\nocapbeside][\FBwidth]
 
-\def\fix@capfontsize{\normalsize}
+%%\floatsetup[wrapfloat]{captionskip=.5\abovecaptionskip}
+%%\appto\RawFloats{\captionsetup{belowskip=-14\p@}}
 
-\DeclareCaptionFont{captextfont} {\fix@capfontsize\bfseries}
-\DeclareCaptionFont{caplabelfont}{\fix@capfontsize\sffamily\bfseries}
-\DeclareCaptionLabelSeparator{captionlabelsep}{\quad}
-\captionsetup{labelfont=caplabelfont,textfont=captextfont,labelsep=captionlabelsep,
-  hypcap=true,figurewithin=section,tablewithin=section,position=below}
+\newcommand*\fixwrapfloatsep[1][-\intextsep]{\gdef\FBaskip{#1}}
+\newcommand*\newFRline[1][\dimexpr\intextsep+\abovecaptionskip\relax]{\leavevmode\\[#1]}
+\newcommand*\fix@capfontsize{\normalsize}
 
-\appto\RawFloats{\captionsetup{belowskip=-14\p@}}
+\DeclareCaptionFont{sf}{\fix@capfontsize\sffamily}
+\DeclareCaptionLabelFormat{plain}{\bothIfFirst{#1}{\nobreakspace}#2}
+\DeclareCaptionLabelSeparator{en}{\enspace}
+\captionsetup{format=hang,font=sf,labelfont=bf,labelformat=plain,labelsep=en,
+  hypcap=true,position=below,figurewithin=section,tablewithin=section}
 
-\newdimen\figrowsep
-\figrowsep=2\intextsep\relax
+\newcommand*\tabu@cline@v[1][\intextsep]{\tabu@cline[\hbox{\rule\z@{#1}}]-}
+\newcommand*\tabuvskip{\noalign{\ifnum0=`}\fi \tabu@cline@v}
 
-\newdimen\tabuvskip
-\tabuvskip=\intextsep\relax
-\def\tabuvspace{\tabucline[\hbox{\rule\z@{\tabuvskip}}]{-}}
+\ifdefdimen\heavyrulewidth{}{\newdimen\heavyrulewidth}
+\ifdefdimen\lightrulewidth{}{\newdimen\lightrulewidth}
+\ifdefdimen\cmidrulewidth {}{\newdimen\cmidrulewidth}
 
-\def\pushtabuvspace{\noalign{\global\belowtabulinesep=\intextsep}}
-\def\poptabuvspace{\noalign{\global\tabulinesep=\z@}}
+\heavyrulewidth=  \p@
+\lightrulewidth=.6\p@
+\cmidrulewidth =\arrayrulewidth
 
-\newcolumntype{F}{@{}c@{}}
+\newcommand*\tabu@cline@h[1][\heavyrulewidth]{\tabu@cline[#1]-}
+\newcommand*\tabu@cline@l[1][\lightrulewidth]{\tabu@cline[#1]-}
+\newcommand*\tabu@cline@c[1][\cmidrulewidth] {\tabu@cline[#1]}
 
-\providecommand\toprule{\tabucline[\p@]{-}}
-\providecommand\bottomrule{\tabucline[\p@]{-}}
+\providecommand*\toprule   {\noalign{\ifnum0=`}\fi \tabu@cline@h}
+\providecommand*\bottomrule{\noalign{\ifnum0=`}\fi \tabu@cline@h}
+\providecommand*\midrule   {\noalign{\ifnum0=`}\fi \tabu@cline@l}
+\providecommand*\cmidrule  {\noalign{\ifnum0=`}\fi \tabu@cline@c}
 
+\ifdefdimen\footnotemargin{}{\newdimen\footnotemargin}
 \renewcommand*\thefootnote{\Ding{footnote}}
-\renewcommand*\footnoterule{\kern-3\p@\hrule\@width.45\columnwidth\@height.6\p@\kern2.4\p@}
-
-\newdimen\@footnote@indent
-{\footnotesize\global\@footnote@indent=1.2em}
-\long\def\@makefntext#1{\@setpar{\@@par
-  \@tempdima\hsize\advance\@tempdima-\@footnote@indent
-  \parshape\@ne\@footnote@indent\@tempdima}%
-  \par\noindent\llap{\makebox[\@footnote@indent][l]{\@thefnmark}}%
-  \linespread{1.2}\selectfont\interlinepenalty\z@\CTEXindent#1}
-
-\def\@makefnmark{\raisebox{1ex}[\z@]{\small\@thefnmark}}
-
-\setlength\footnotesep{1.2\footnotesep}
+\renewcommand*\footnoterule{%
+  \kern-3.6\p@
+  \hrule\@width.4\columnwidth\@height.6\p@
+  \kern3\p@}
+\begingroup
+ \footnotesize
+ \settowidth\footnotemargin{\DingNum{1}}
+ \footnotemargin=\dimexpr\footnotemargin+\labelsep\relax
+\endgroup
+\renewcommand\@makefntext[1]{%
+  \@setpar{\@@par
+           \@tempdima\dimexpr\hsize-\footnotemargin\relax
+           \parshape\@ne\footnotemargin\@tempdima}%
+  \par\CTEXindent\noindent
+  \linespread{1.2}\selectfont
+  \llap{\makebox[\footnotemargin][l]{\@thefnmark}}%
+  \ignorespaces#1}
+\renewcommand*\@makefnmark{\raisebox{1ex}[\z@]{\small\@thefnmark}}
+\dimdef\footnotesep{1.2\footnotesep}
 
 \newsavebox\@tempfig
 \sbox\@tempfig{%
   \includegraphics[width={.25\textwidth}]{ctanlion.pdf}}
 
-\def\coverfig{%
+\newcommand\coverfig{%
   \noindent\resizebox{\linewidth}{!}{\usebox\@tempfig}}
-
 \newcounter{lioncnt}
-
-\def\somefigure{%
+\newcommand\somefigure{%
   \stepcounter{lioncnt}%
   \ifnumodd{\c@lioncnt}
     {\reflectbox{\usebox\@tempfig}}
