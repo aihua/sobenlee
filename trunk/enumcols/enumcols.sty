@@ -1,0 +1,470 @@
+%%
+%% This is file `enumcols.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% enumcols.dtx  (with options: `package')
+%%
+%% This is a generated file.
+%%
+%%  Based On
+%%
+%%    The shortlst Package
+%%    Copyright (C) 1998 by Mogens Lemvig Hansen
+%%    mlhansen@uniserve.com
+%% --------------------------------------------------------------------------
+%%      You may use this software.
+%%      You may copy this software and the documentation for your own use.
+%%      You may distribute the file \texttt{shortlst.dtx} to others provided
+%%      you do not make a profit doing so.
+%%      You may modify my code and the documentation---including incorporating
+%%      it into your own work---provided you do not make a profit on my work
+%%      or allow others to.
+%% --------------------------------------------------------------------------
+%%
+%%  Modified by Qing Lee <sobenlee@gmail.com>
+%% --------------------------------------------------------------------------
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%%   http://www.latex-project.org/lppl.txt
+%% and version 1.3 or later is part of all distributions of LaTeX
+%% version 2005/12/01 or later.
+%%
+\NeedsTeXFormat{LaTeX2e}[1999/12/01]
+\ProvidesPackage{enumcols}
+    [2011/12/03 v2.0 Produce an enumerated array of multiple columns]
+\RequirePackage{kvoptions}
+\RequirePackage{etoolbox}
+\RequirePackage{varwidth}
+\RequirePackage{calc}
+
+\SetupKeyvalOptions{family=ecols,prefix=ecols@}
+
+\DeclareBoolOption[true]{top}
+\DeclareBoolOption[true]{varwidth}
+\DeclareBoolOption{itemize}
+\DeclareBoolOption{hang}
+\DeclareBoolOption{adjust}
+\DeclareBoolOption{flushleft}
+\DeclareStringOption[enum]{counter}
+\DeclareStringOption{format}
+
+\def\ECOLS@key{\define@key{ecols}}
+
+\DeclareListParser*{\ecols@forcsvlist}{,}
+
+\def\ecols@for@lengthkey#1{
+  \ecols@lengthkey@for#1\@nil
+}
+
+\def\ecols@lengthkey@for#1==#2\@nil{
+  \csgluedef{ecols@#1@l}{#2}
+  \ECOLS@key{#1}{\csgluedef{ecols@#1@l}{##1}}
+}
+
+\ecols@forcsvlist{\ecols@for@lengthkey}{
+   {parsep==\parskip},
+   {labelsep==\labelsep},
+   {partopsep==\z@},
+   {topsep==\z@},
+   {itemsep==\z@},
+   {itemindent==\z@},
+   {listparindent==\parindent},
+   {leftmargin==\z@},
+   {leftskip==\z@},
+   {ecolswidth==\z@},
+   {ecolstotalwidth==\linewidth/\tw@},
+}
+
+\def\ecols@for@colskey#1{
+  \ECOLS@key{#1}[#1]{\numdef\ecols@cols{##1}}
+}
+
+\ecols@forcsvlist{\ecols@for@colskey}{
+ -1,0,1,2,3,4,5,6,7,8,9,10,
+}
+
+\newtoggle{ecols@formatogl}
+\newtoggle{ecols@reftogl}
+
+\def\ecols@labelkey#1{%
+  \toggletrue{ecols@formatogl}%
+  \ifbool{ecols@itemize}
+    {\toggletrue{ecols@reftogl}\def\ecols@labelformat{#1}}
+    {\ecols@labelkey@#1\@nil}%
+}
+
+\def\ecols@labelkey@#1*#2\@nil{%
+  \def\ecols@labelformat{#1{\@enumctr}#2}%
+}
+
+\def\ecols@refkey#1{%
+  \toggletrue{ecols@reftogl}%
+  \ecols@refkey@#1\@nil
+}
+
+\def\ecols@refkey@#1*#2\@nil{%
+  \def\ecols@reformat{%
+    \ecols@ref@format{\@enumctr}{#1{\@enumctr}#2}}%
+}
+
+\let\ecols@save@refstepcounter\refstepcounter
+\def\refstepcounter#1{%
+  \ecols@save@refstepcounter{#1}%
+  \ifcsundef{ecols@ref@the#1}{}{%
+    \protected@edef\@currentlabel{\csuse{ecols@ref@the#1}}%
+  }%
+}
+\def\ecols@ref@format#1#2{\csdef{ecols@ref@the#1}{#2}}
+
+\ECOLS@key{label}{\ecols@labelkey{#1}}
+\ECOLS@key{ref}{\ecols@refkey{#1}}
+\ECOLS@key{cols}[\tw@]{\numdef\ecols@cols{#1}}
+
+\ECOLS@key{ecolswidth*}{%
+  \numdef\ecols@cols\m@ne
+  \dimdef\ecols@ecolswidth@l{#1}%
+}
+
+\ECOLS@key{inlist}[true]{%
+  \ifbool{#1}{%
+    \boolfalse{ecols@top}%
+    \settowidth\@tempdima{\@itemlabel}%
+    \dimdef\ecols@leftmargin@l{-\@tempdima-\labelsep}%
+    \dimdef\ecols@leftskip@l{\z@}%
+  }{}%
+}
+
+\ProcessKeyvalOptions*\relax
+
+\newrobustcmd*\setenumcols[1][]{\setkeys{ecols}{#1}}
+
+\newdimen\ecolsleftmargin
+\newdimen\ecolswidth
+\newdimen\ecolstotalwidth
+
+\newdimen\ecols@labelwidth
+\newdimen\ecols@dima
+\newdimen\ecols@dimb
+
+\newcounter{enumcols}
+
+\newcounter{ecols@list}
+\newcounter{ecols@item}[ecols@list]
+\def\theecols@list{ecols@\number\c@ecols@list}
+\def\theecols@item{\theecols@list.\number\c@ecols@item}
+
+\newtoggle{ecols@togla}
+\newtoggle{ecols@toglb}
+\newtoggle{ecols@toglc}
+
+\newbool{ecols@argbool}
+\newbool{ecols@hyper@load}
+\newbool{ecols@widthitem}
+\newbool{ecols@varwidth@a}
+\newbool{ecols@varwidth@b}
+\newbool{ecols@varwidth@c}
+
+\AtEndPreamble{%
+  \@ifpackageloaded{hyperref}{\booltrue{ecols@hyper@load}}{}}
+
+\newenvironment{enumcols}[1][]{%
+    \ifnum\@listdepth >\thr@@
+      \@toodeep
+      \let\@endecols@item\relax
+    \else
+      \ifx\item\ecols@item@
+        \ecols@nesterr
+        \let\@endecols@item\relax
+      \else
+        \setenumcols[itemize=false,#1]%
+        \ecolsleftmargin=\ecols@leftmargin@l\relax
+        \stepcounter{ecols@list}%
+        \edef\ecols@currlist{\theecols@list}%
+        \ifbool{ecols@top}{%
+          \advance\@listdepth\@ne
+          \ifbool{ecols@itemize}{%
+            \ifdefstring{\ecols@counter}{enum}{\def\ecols@counter{item}}{}%
+            \edef\@itemitem{label\ecols@counter\romannumeral\the\@listdepth}%
+          }{%
+            \edef\@enumctr{\ecols@counter\romannumeral\the\@listdepth}%
+            \ifltxcounter{\@enumctr}{}{\newcounter{\@enumctr}}%
+          }%
+          \advance\@listdepth\m@ne
+        }{\item[]}%
+        \list{}{%
+          \itemsep      \z@\relax
+          \itemindent   \z@\relax
+          \listparindent\z@\relax
+          \leftmargin   \ecols@leftmargin@l\relax
+          \parsep       \ecols@parsep@l\relax
+          \partopsep    \ecols@partopsep@l\relax
+          \topsep       \ecols@topsep@l\relax
+        }%
+        \item\relax
+        \rightskip\@flushglue
+        \iftoggle{ecols@formatogl}{%
+            \def\@itemlabel{\ecols@format\ecols@labelformat}%
+            \iftoggle{ecols@reftogl}{}
+              {\ecols@ref@format{\@enumctr}{\ecols@labelformat}}%
+        }{%
+            \def\@itemlabel{\ecols@format
+              \ifbool{ecols@itemize}{\csuse{\@itemitem}}{\csuse{label\@enumctr}}%
+            }%
+        }%
+        \ifbool{ecols@itemize}{}
+          {\iftoggle{ecols@reftogl}{\ecols@reformat}{}}%
+        \settowidth\ecols@labelwidth{\@itemlabel}%
+        \ifbool{ecols@itemize}
+          {\@nmbrlistfalse}
+          {\@nmbrlisttrue\def\@listctr{\@enumctr}}%
+        \ifbool{ecols@top}{%
+          \ifbool{ecols@itemize}{%
+            \boolfalse{ecols@adjust}%
+            \boolfalse{ecols@flushleft}%
+          }{%
+            \setcounter\@enumctr{\@ne}%
+          }%
+          \ifbool{ecols@adjust}{%
+            \settowidth\ecols@dima{\@itemlabel}%
+            \settowidth\ecols@dimb{\@itemlabel}%
+            \ifcsundef{\ecols@currlist}
+              {\ecols@labelwidth=\ecols@dimb\relax}
+              {\setlength\ecols@labelwidth{\csuse{\ecols@currlist}}%
+               \toggletrue{ecols@togla}%
+               \advance\ecols@dimb-\ecols@labelwidth}%
+          }{%
+            \settowidth\ecols@labelwidth{\@itemlabel}%
+          }%
+            \ifbool{ecols@itemize}{}{\setcounter{\@enumctr}{\z@}}%
+        }{}%
+        \leftskip=\ecols@leftskip@l\relax
+        \advance\linewidth-\leftskip\relax
+        \ifdimequal{\ecols@itemindent@l}{\z@}
+          {}{\boolfalse{ecols@hang}}%
+        \ifdimgreater{\ecols@ecolswidth@l}{\z@}{%
+          \dimdef\ecols@ecolstotalwidth@l
+            {\ecols@ecolswidth@l+\ecols@labelwidth+\ecols@labelsep@l}}{}%
+        \ifdef{\ecols@cols}
+          {\ifnumgreater{\ecols@cols}{\z@}{%
+              \dimdef\ecols@ecolstotalwidth@l{\linewidth/\ecols@cols}%
+            }{%
+              \ifnumequal{\ecols@cols}{\z@}
+                {\dimdef\ecols@ecolstotalwidth@l{\linewidth}}{}%
+            }%
+          }{}%
+        \dimdef\ecols@ecolswidth@l
+            {\ecols@ecolstotalwidth@l-\ecols@labelwidth-\ecols@labelsep@l}%
+        \dimdef\ecols@tempdima{\linewidth-\ecols@labelwidth}%
+        \dimdef\ecols@itemsep@l{\ecols@itemsep@l+\ht\strutbox}%
+        \def\ecols@itemstrut{\vrule\@height\ecols@itemsep@l\@width\z@\relax\strut}%
+        \setcounter{enumcols}{1*\ratio{\linewidth}{\ecols@ecolstotalwidth@l}}%
+        \ecolswidth=\ecols@ecolswidth@l\relax
+        \ecolstotalwidth=\ecols@ecolstotalwidth@l\relax
+        \advance\linewidth\ecols@itemindent@l\relax
+        \dimdef\ecols@savelinewidth{\linewidth}%
+        \let\@endecols@item\indent
+        \let\item\ecols@item@
+      \fi
+    \fi\ignorespaces
+}{%
+    \@endecols@item
+    \global\booltrue{ecols@top}%
+    \global\booltrue{ecols@varwidth}%
+    \global\togglefalse{ecols@togla}%
+    \global\togglefalse{ecols@toglb}%
+    \global\togglefalse{ecols@toglc}%
+    \endlist
+    \ignorespacesafterend
+}
+
+\newenvironment{enumcols*}[1][]
+  {\enumcols[inlist,#1]}
+  {\endenumcols}
+
+\newenvironment{itemcols}[1][]
+  {\enumcols[itemize,#1]}
+  {\endenumcols}
+
+\newenvironment{itemcols*}[1][]
+  {\enumcols[itemize,inlist,#1]}
+  {\endenumcols}
+
+\newrobustcmd*\pushequation{\global\toggletrue{ecols@toglc}}
+
+\booltrue{ecols@varwidth@a}
+\booltrue{ecols@varwidth@b}
+\booltrue{ecols@varwidth@c}
+
+\newrobustcmd*\pushvarwidth{%
+  \global\booltrue{ecols@varwidth}%
+  \global\booltrue{ecols@varwidth@b}}
+
+\newrobustcmd*\popvarwidth{%
+  \global\boolfalse{ecols@varwidth@b}%
+  \@ifstar{}{\global\boolfalse{ecols@varwidth}}}
+
+\let\ecols@udbox\lrbox
+\patchcmd\ecols@udbox\hbox\vbox{}{}
+\patchcmd\ecols@udbox\color@setgroup{%
+  \color@setgroup
+  \hsize=\linewidth  \columnwidth=\hsize
+  \textwidth=\hsize    \linewidth=\hsize
+  \ifboolexpr{ bool {ecols@varwidth} and bool {ecols@varwidth@b} }
+   {%
+     \global\booltrue{ecols@varwidth@c}%
+     \ifbool{ecols@varwidth@a}
+       {\@vwid@setup}{}%
+   }{%
+     \boolfalse{ecols@varwidth@c}%
+   }%
+}{}{}
+
+\let\ecols@endvarwidth\endvarwidth
+\patchcmd\ecols@endvarwidth\endminipage{}{}{}
+
+\def\endecols@udbox{%
+  \ifbool{ecols@varwidth@c}{%
+    \ifbool{ecols@varwidth@a}
+      {\ecols@endvarwidth}
+      {\global\booltrue{ecols@varwidth@a}}%
+  }{\global\booltrue{ecols@varwidth@b}}%
+  \unskip\color@endgroup
+}
+
+\def\ecols@item@{%
+  \@endecols@item
+  \@inmatherr\item
+  \@ifnextchar[%]
+    {\ecols@item}
+    {\@noitemargtrue\booltrue{ecols@argbool}\ecols@item[\@itemlabel]}%
+}
+
+\def\ecols@item[#1]{%
+  \stepcounter{ecols@item}%
+  \edef\ecols@curritem@l{l@\theecols@item}%
+  \ifcsdef{\ecols@curritem@l}{%
+    \booltrue{ecols@widthitem}%
+    \boolfalse{ecols@varwidth@a}%
+    \dimdef\ecols@item@fix@l{\csuse{\ecols@curritem@l}}%
+  }{\boolfalse{ecols@widthitem}}%
+  \long\def\@endecols@item{%
+    \endecols@udbox\endgroup
+    \@tempdima = \wd\@tempboxa\relax
+    \@tempdimb = \ecols@ecolstotalwidth@l\relax
+    \advance \@tempdima  \m@ne sp\relax
+    \divide  \@tempdima  \@tempdimb
+    \advance \@tempdima  \@ne  sp\relax
+    \multiply\@tempdimb  \@tempdima
+    \@tempdima = \wd\@tempboxa\relax
+    \advance \@tempdimb -\@tempdima
+    \ifboolexpr
+      {     test {\ifdimgreater{\ht\@tempboxa}{\baselineskip}}
+        and test {\ifdimgreater{\wd\@tempboxa}{\ecols@tempdima}}
+        or  togl {ecols@toglc}
+      }{%
+        \protected@write\@auxout{}{%
+          \csdimgdef{\ecols@curritem@l}{\textwidth-\ecols@savelinewidth}}%
+        \unvbox\@tempboxa\hrule \@height\dp\strutbox \@width\z@\relax
+      }{%
+        \usebox\@tempboxa\hskip\@tempdimb\relax
+      }%
+    \endgroup
+    \global\togglefalse{ecols@toglc}%
+  }%
+  \if@noitemarg
+    \@noitemargfalse
+    \ifbool{ecols@hyper@load}{\@hyper@itemfalse}{}%
+    \if@nmbrlist
+      \ifbool{ecols@hyper@load}{\@hyper@itemtrue}{}%
+      \refstepcounter{\@listctr}%
+      \ifboolexpr{ bool {ecols@top} and bool {ecols@adjust} }{%
+          \settowidth\@tempdima{#1}%
+          \ifdimless\@tempdima\ecols@labelwidth
+            {\global\toggletrue{ecols@toglb}}{}%
+          \ifdimless\ecols@dima\@tempdima
+            {%
+              \global\ecols@dima=\@tempdima\relax
+              \protected@write\@auxout{}{%
+                \csgdef{\ecols@currlist}{\widthof{#1}}%
+              }%
+            }{}%
+        }{}%
+    \fi
+  \fi
+  \begingroup
+  \ifbool{ecols@widthitem}
+    {\advance\linewidth\ecols@item@fix@l\relax}{}%
+  \begingroup\ecols@udbox{\@tempboxa}%
+  \rightskip\@rightskip\relax
+  \leftskip-\ecols@itemindent@l\relax
+  \parindent-\leftskip\relax
+  \ifbool{ecols@argbool}
+    {%
+      \global\boolfalse{ecols@argbool}%
+      \ifbool{ecols@top}
+        {%
+          \ifbool{ecols@flushleft}
+            {%
+              \makebox[\ecols@labelwidth][l]{#1\ecols@itemstrut}%
+              \ifboolexpr{ bool {ecols@adjust} and togl {ecols@toglb} }
+                {%
+                  \global\togglefalse{ecols@toglb}%
+                  \iftoggle{ecols@togla}{%
+                    \dimdef\ecols@labelsep@l{\ecols@labelsep@l+\ecols@dimb}%
+                    \advance\ecolswidth-\ecols@dimb\relax}{}%
+                }{}%
+            }{%
+              \ifboolexpr{ bool {ecols@adjust} and togl {ecols@toglb} }
+                {%
+                  \global\togglefalse{ecols@toglb}%
+                  \iftoggle{ecols@togla}{%
+                    \advance\ecols@labelwidth\ecols@dimb\relax
+                    \advance\ecolswidth-\ecols@dimb\relax}{}%
+                }{%
+                  \settowidth\@tempdima{#1}%
+                  \ifdimgreater{\@tempdima}{\ecols@labelwidth}
+                      {\advance\ecolswidth\dimexpr-\@tempdima+\ecols@labelwidth\relax}{}%
+                }%
+              \makebox[\ecols@labelwidth][r]{#1\ecols@itemstrut}%
+            }%
+          \ifbool{ecols@hang}
+            {\dimdef\ecols@hangindent{\ecols@labelwidth+\ecols@labelsep@l}}{}%
+        }{%
+           \ifbool{ecols@hang}{%
+               \settowidth\@tempdima{#1}%
+               \dimdef\ecols@hangindent{\@tempdima}%
+             }{}%
+           \mbox{#1\ecols@itemstrut}%
+        }%
+    }{%
+      \ifblank{#1}
+        {\dimdef\ecols@labelsep@l\z@\ecols@itemstrut}
+        {\mbox{\ecols@format#1\ecols@itemstrut}}%
+      \ifbool{ecols@hang}{%
+          \settowidth\@tempdima{\ecols@format#1}%
+          \dimdef\ecols@hangindent{\ecols@labelsep@l+\@tempdima}%
+        }{}%
+    }%
+  \ifbool{ecols@varwidth@c}{}{%
+    \settowidth\@tempdima{#1}%
+    \ecolswidth=\dimexpr\linewidth-\@tempdima-\ecols@labelsep@l\relax}%
+  \hskip\ecols@labelsep@l\relax
+  \parindent\ecols@listparindent@l\relax
+  \ifbool{ecols@hang}{%
+    \hangindent\ecols@hangindent\relax
+    \advance\parindent\hangindent}{}%
+  \ifbool{ecols@widthitem}
+    {\leftskip\ecols@item@fix@l\relax}{}%
+  \ignorespaces
+}
+
+\def\ecols@nesterr{\PackageError{enumcols}%
+   {nested enumcols-list, don't nest enumcols-list environments within each other.}}
+
+\endinput
+%%
+%% End of file `enumcols.sty'.

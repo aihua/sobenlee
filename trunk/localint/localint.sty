@@ -25,10 +25,11 @@
 \DeclareOption{mathcal}{\let\LI@mathcal=m}
 \DeclareOption{mathfrak}{\let\LI@mathfrak=m}
 \DeclareOption{overparen}{\let\LI@overparen=w}
+\DeclareOption{brace}{\let\LI@brace=f}
 \DeclareOption{nouppi}{\let\LI@uppi=n}
 \DeclareOption{comma}{\let\LI@comma=c}
 \ExecuteOptions{nouppi,upint,esint}
-\ProcessOptions\relax
+\ProcessOptions*\relax
 
 \def\hmmax{0}     % default 3
 \def\bmmax{0}     % default 4
@@ -38,11 +39,17 @@
 \@ifpackageloaded{etoolbox}{}{\RequirePackage{etoolbox}}
 
 \def\WarningIfLoaded@localint#1#2{%
-    \AtBeginDocument{\@ifpackageloaded{#2}{\PackageWarning{#1}{%
-            Package '#2' shouldn't be used in conjonction with
-            package #1,}}{}}}
+  \AtBeginDocument{\@ifpackageloaded{#2}{\PackageWarning{#1}{%
+        Package '#2' shouldn't be used in conjonction with
+        package #1,}}{}}}
+
+\def\LI@RedeclareMathFont#1{
+  \providecommand*#1{\relax}
+  \renewrobustcmd*#1{\csuse{LI\expandafter\@gobble\string#1}}
+}
+
 \ifx\LI@uppi n\relax
-\else\undef{\uppi}%
+\else\undef{\uppi}
 \ifx\LI@uppi t\relax
     \PackageInfo{localint}{Using txfonts for upright Greek}
     \DeclareFontFamily{OML}{la@txmia}{\skewchar\font127 }
@@ -67,7 +74,7 @@
     \DeclareFontSubstitution{OML}{la@psy}{m}{n}
     \DeclareMathSymbol{\uppi}{\mathord}{ugrf@m}{`p}
 \else\relax\fi\fi\fi
-    \ifdef{\uppi}{\let\pi\uppi}{}%
+    \ifdef{\uppi}{\let\pi\uppi}{}
 \fi
 
 \ifx\LI@tau t\relax
@@ -84,10 +91,9 @@
 \fi
 
 \ifx\LI@upint@ u\relax
-  \begingroup
-    \renewcommand*\do[1]{\global\csundef{LI@#1op}}
-    \docsvlist{int,oint,oiint,barint,idotsint,iint,iiint,oiiint,iiiint}
-  \endgroup
+  \def\LI@int@list{int,oint,oiint,barint,idotsint,iint,iiint,oiiint,iiiint}
+  \newrobustcmd*\LI@forcs@a[1]{\csundef{LI@#1op}}
+  \expandafter\forcsvlist\expandafter\LI@forcs@a\expandafter{\LI@int@list}
   \def\intkern@{\mkern-12mu\mathchoice{\mkern-1mu}{}{}{}}
   \def\LI@intdots#1{{\cdotp}\mkern#1mu{\cdotp}\mkern#1mu{\cdotp}}
   \def\intdots@{\mathchoice
@@ -118,7 +124,7 @@
   \else\ifx\LI@upint f\relax
     \PackageInfo{localint}{Using fourier-int style}
     \DeclareFontFamily{OMX}{fouri@er}{}
-    \DeclareFontShape{OMX}{fouri@er}{m}{n}{<-> s * [.95] fourier-mex}{}
+    \DeclareFontShape{OMX}{fouri@er}{m}{n}{<-> s * [.99] fourier-mex}{}
     \DeclareSymbolFont{fouri@er}{OMX}{fouri@er}{m}{n}
     \DeclareFontSubstitution{OMX}{fouri@er}{m}{n}
     \DeclareMathSymbol{\LI@intop}     {\mathop}{fouri@er}{82}
@@ -194,13 +200,14 @@
   \else\ifx\LI@upint l\relax
     \PackageInfo{localint}{Using lucida-int style}
     \DeclareFontFamily{OMX}{ld@int}{}
-    \DeclareFontShape{OMX}{ld@int}{m}{n}{<-> s * [.95] hlcrv}{}
+    \DeclareFontShape{OMX}{ld@int}{m}{n}{<-> s * [.99] hlcrv}{}
     \DeclareSymbolFont{ld@int}{OMX}{ld@int}{m}{n}
     \DeclareFontSubstitution{OMX}{ld@int}{m}{n}
     \DeclareMathSymbol{\LI@intop}     {\mathop}{ld@int}{82}
     \DeclareMathSymbol{\LI@ointop}    {\mathop}{ld@int}{72}
     \DeclareMathSymbol{\LI@oiintop}   {\mathop}{ld@int}{144}
-    \def\intkern@{\mkern-7mu\mathchoice{\mkern-1mu}{}{}{}}
+    \def\intkern@{\mkern-7.4mu\mathchoice{\mkern-.6mu}{}{}{}}
+    \def\ints@b{\mathop\bgroup\let\ilimits@\egroup}
     \newrobustcmd*\upint{\mathchoice
         {\mkern9mu\overline{\vphantom{\LI@intop}\mkern7mu}\mkern-15mu}
         {\mkern6mu\overline{\vphantom{\LI@intop}\mkern7mu}\mkern-13mu}
@@ -245,29 +252,27 @@
   \providerobustcmd*\lowint{\mkern3mu\underline{\vphantom{\LI@intop}\mkern7mu}\mkern-10mu\int}
   \providerobustcmd*\LI@barintop{\@X@int{\bm{-}}}
   \AfterEndPreamble{%
-    \begingroup
-      \renewcommand*\do[1]{\global\csundef{#1}\global\csletcs{#1op}{LI@#1op}}%
-      \docsvlist{int,oint,oiint,barint,idotsint,iint,iiint,oiiint,iiiint}
-    \endgroup
-    \newrobustcmd*\int{\DOTSI\LI@intop\ilimits@}
-    \newrobustcmd*\oint{\DOTSI\LI@ointop\ilimits@}
-    \newrobustcmd*\oiint{\DOTSI\LI@oiintop\ilimits@}
-    \newrobustcmd*\barint{\DOTSI\LI@barintop\ilimits@}
+    \newrobustcmd*\LI@forcs@b[1]{\csundef{#1}\csletcs{#1op}{LI@#1op}}%
+    \expandafter\forcsvlist\expandafter\LI@forcs@b\expandafter{\LI@int@list}%
+    \newrobustcmd*\int{\DOTSI\LI@intop\ilimits@}%
+    \newrobustcmd*\oint{\DOTSI\LI@ointop\ilimits@}%
+    \newrobustcmd*\oiint{\DOTSI\LI@oiintop\ilimits@}%
+    \newrobustcmd*\barint{\DOTSI\LI@barintop\ilimits@}%
     \newrobustcmd*\idotsint{\ifdef{\LI@idotsintop}
-      {\DOTSI\LI@idotsintop\ilimits@}{\DOTSI\MultiIntegral{0}}}
+      {\DOTSI\LI@idotsintop\ilimits@}{\DOTSI\MultiIntegral{0}}}%
     \newrobustcmd*\iint{\ifdef{\LI@iintop}
-      {\DOTSI\LI@iintop\ilimits@}{\DOTSI\MultiIntegral{2}}}
+      {\DOTSI\LI@iintop\ilimits@}{\DOTSI\MultiIntegral{2}}}%
     \newrobustcmd*\iiint{\ifdef{\LI@iiintop}
-      {\DOTSI\LI@iiintop\ilimits@}{\DOTSI\MultiIntegral{3}}}
+      {\DOTSI\LI@iiintop\ilimits@}{\DOTSI\MultiIntegral{3}}}%
     \newrobustcmd*\oiiint{\ifdef{\LI@oiiintop}
-      {\DOTSI\LI@oiiintop\ilimits@}{\oint}}
+      {\DOTSI\LI@oiiintop\ilimits@}{\oint}}%
     \newrobustcmd*\iiiint{\ifdef{\LI@iiiintop}
-      {\DOTSI\LI@iiiintop\ilimits@}{\DOTSI\MultiIntegral{4}}}
-  }%
+      {\DOTSI\LI@iiiintop\ilimits@}{\DOTSI\MultiIntegral{4}}}%
+  }
 \fi
 
 \ifx\LI@partial p\relax
-  \providecommand\partial{}%
+  \LI@RedeclareMathFont{\partial}
   \DeclareFontFamily{OML}{mt@letters}{\skewchar\font45}
   \DeclareFontShape{OML}{mt@letters}{m}{it}{<-7> mt2mif   <7-9> mt2mis   <9-> mt2mit}{}
   \DeclareFontShape{OML}{mt@letters}{b}{it}{<-7> mt2bmif  <7-9> mt2bmis  <9-> mt2bmit}{}
@@ -275,9 +280,8 @@
   \DeclareSymbolFont{mt@letters}{OML}  {mt@letters}{m}{it}
   \SetSymbolFont{mt@letters}{bold}{OML}{mt@letters}{b}{it}
   \DeclareMathSymbol{\LIpartial}{\mathord}{mt@letters}{"40}
-  \renewrobustcmd*\partial{\LIpartial}
 \else\ifx\LI@partial l\relax
-  \providecommand\partial{}%
+  \LI@RedeclareMathFont{\partial}
   \DeclareFontFamily{OML}{lu@letters}{\skewchar\font=127}
   \DeclareFontShape{OML}{lu@letters}{m}{it}{<->hlcrim}{}
   \DeclareFontShape{OML}{lu@letters}{b}{it}{<->hlcdim}{}
@@ -285,12 +289,11 @@
   \DeclareSymbolFont{lu@letters}{OML}  {lu@letters}{m}{it}
   \SetSymbolFont{lu@letters}{bold}{OML}{lu@letters}{b}{it}
   \DeclareMathSymbol{\LIpartial}{\mathord}{lu@letters}{"40}
-  \renewrobustcmd*\partial{\LIpartial}
 \fi\fi
 
 \ifx\LI@mathscr m\relax
   \WarningIfLoaded@localint{localint}{mathrsfs}
-  \providecommand\mathscr{}
+  \LI@RedeclareMathFont{\mathscr}
   \DeclareFontFamily{OMS}{mdput@scr}{\skewchar\font=48}
   \DeclareFontShape{OMS}{mdput@scr}{m} {n}{<-> s    * [0.92]  mdputr7y} {}
   \DeclareFontShape{OMS}{mdput@scr}{b} {n}{<-> s    * [0.92]  mdputb7y} {}
@@ -298,10 +301,9 @@
   \DeclareFontSubstitution{OMS}{mdput@scr}{m}{n}
   \DeclareMathAlphabet{\LImathscr}  {OMS}{mdput@scr}{m}{n}
   \SetMathAlphabet{\LImathscr}{bold}{OMS}{mdput@scr}{b}{n}
-  \renewrobustcmd*\mathscr{\LImathscr}
 \else\ifx\LI@mathscr f\relax
   \WarningIfLoaded@localint{localint}{mathrsfs}
-  \providecommand\mathscr{}
+  \LI@RedeclareMathFont{\mathscr}
   \DeclareFontFamily{OMS}{fourier@scr}{\skewchar\font=48}
   \DeclareFontShape{OMS}{fourier@scr}{m} {n}{<-> futsy}{}
   \DeclareFontShape{OMS}{fourier@scr}{b} {n}{<-> s    * [0.92]  mdputb7y} {}
@@ -309,12 +311,11 @@
   \DeclareFontSubstitution{OMS}{fourier@scr}{m}{n}
   \DeclareMathAlphabet{\LImathscr}  {OMS}{fourier@scr}{m}{n}
   \SetMathAlphabet{\LImathscr}{bold}{OMS}{fourier@scr}{b}{n}
-  \renewrobustcmd*\mathscr{\LImathscr}
 \fi\fi
 
 \ifx\LI@mathbb b\relax
-  \providecommand\mathbb{}
-  \providecommand\mathbbit{}
+  \LI@RedeclareMathFont{\mathbb}
+  \LI@RedeclareMathFont{\mathbbit}
   \DeclareFontFamily{OMS}{mt2hr@bb}{}
   \DeclareFontShape{OMS}{mt2hr@bb}{m} {n} {<-7> mt2hrbf  <7-9> mt2hrbs  <9-> mt2hrbt} {}
   \DeclareFontShape{OMS}{mt2hr@bb}{m} {it}{<-7> mt2hbif  <7-9> mt2hbis  <9-> mt2hbit} {}
@@ -324,13 +325,11 @@
   \DeclareMathAlphabet{\LImathbb}  {OMS}{mt2hr@bb}{m}{n}
   \DeclareMathAlphabet{\LImathbbit}{OMS}{mt2hr@bb}{m}{it}
   \SetMathAlphabet{\LImathbb}{bold}{OMS}{mt2hr@bb}{b}{n}
-  \renewrobustcmd*\mathbb{\LImathbb}
-  \renewrobustcmd*\mathbbit{\LImathbbit}
 \fi
 
 \ifx\LI@mathcal m\relax
-  \providecommand{\mathcal}{}
-  \providecommand{\mathbcal}{}
+  \LI@RedeclareMathFont{\mathcal}
+  \LI@RedeclareMathFont{\mathbcal}
   \DeclareFontFamily{OMS}{mt2ms@LI}{}
   \DeclareFontShape{OMS}{mt2ms@LI}{m} {n} {<-7> mt2mcf  <7-9> mt2mcs  <9-> mt2mct} {}
   \DeclareFontShape{OMS}{mt2ms@LI}{m} {it}{<-7> mt2msf  <7-9> mt2mss  <9-> mt2mst} {}
@@ -340,12 +339,10 @@
   \DeclareMathAlphabet{\LImathcal}  {OMS}{mt2ms@LI}{m}{it}
   \DeclareMathAlphabet{\LImathbcal} {OMS}{mt2ms@LI}{b}{it}
   \SetMathAlphabet{\LImathcal}{bold}{OMS}{mt2ms@LI}{b}{it}
-  \renewrobustcmd*\mathcal{\LImathcal}
-  \renewrobustcmd*\mathbcal{\LImathbcal}
 \fi
 
 \ifx\LI@mathfrak m\relax
-  \providecommand\mathfrak{}%
+  \LI@RedeclareMathFont{\mathfrak}
   \DeclareFontFamily{OMS}{mt2mf@LI}{}
   \DeclareFontShape{OMS}{mt2mf@LI}{m} {n} {<-7> mt2mff  <7-9> mt2mfs  <9-> mt2mft} {}
   \DeclareFontShape{OMS}{mt2mf@LI}{b} {n} {<-7> mt2bmff <7-9> mt2bmfs <9-> mt2bmft}{}
@@ -353,11 +350,10 @@
   \DeclareFontSubstitution{OMS}{mt2mf@LI}{m}{n}
   \DeclareMathAlphabet{\LImathfrak}  {OMS}{mt2mf@LI}{m}{n}
   \SetMathAlphabet{\LImathfrak}{bold}{OMS}{mt2mf@LI}{b}{n}
-  \renewrobustcmd*\mathfrak{\LImathfrak}
 \fi
 
 \ifx\LI@overparen w\relax
-  \providecommand\overparen{}
+  \LI@RedeclareMathFont{\overparen}
   \DeclareFontFamily{OMX}{mdput@ex}{}
   \DeclareFontShape{OMX}{mdput@ex}{m} {n}{<-> mdugmr7v}{}
   \DeclareFontShape{OMX}{mdput@ex}{b} {n}{<-> mdugmm7v}{}
@@ -365,7 +361,6 @@
   \DeclareSymbolFont{md@ex@}{OMX}  {mdput@ex}{m}{n}
   \SetSymbolFont{md@ex@}{bold}{OMX}{mdput@ex}{b}{n}
   \DeclareMathAccent{\LIoverparen}{\mathord}{md@ex@}{243}
-  \renewrobustcmd*\overparen{\LIoverparen}
 \fi
 
 \ifx\LI@comma c\relax
@@ -379,7 +374,30 @@
   \DeclareFontSubstitution{OML}{zhc@mma}{m}{n}
   \AtBeginDocument{%
     \DeclareMathSymbol{,}{\mathpunct}{zhc@mm@}{"0C}%
-    \DeclareMathSymbol{;}{\mathpunct}{zhc@mm@}{"1B}}
+    \DeclareMathSymbol{;}{\mathpunct}{zhc@mm@}{"1B}%
+  }
+\fi
+
+\ifx\LI@brace f\relax
+  \DeclareFontFamily{OMS}{f@brace}{\skewchar \font =48}
+  \DeclareFontShape{OMS}{f@brace}{m}{n}{<-> futsy}{}
+  \DeclareFontFamily{OMX}{f@brace}{}
+  \DeclareFontShape{OMX}{f@brace}{m}{n}{<-> s * [.92] fourier-mex}{}
+  \DeclareFontSubstitution{OMS}{f@brace}{m}{n}
+  \DeclareFontSubstitution{OMX}{f@brace}{m}{n}
+  \DeclareSymbolFont{f@bsym}{OMS}{f@brace}{m}{n}
+  \DeclareSymbolFont{f@blsym}{OMX}{f@brace}{m}{n}
+  \DeclareMathDelimiter{\rbrace}{\mathclose}{f@bsym}{103}{f@blsym}{170}
+  \DeclareMathDelimiter{\lbrace}{\mathopen}{f@bsym}{102}{f@blsym}{169}
+  \providecommand*\biggg{\relax}
+  \providecommand*\Biggg{\relax}
+  \def\bigggl{\mathopen\biggg}
+  \def\bigggr{\mathclose\biggg}
+  \def\Bigggl{\mathopen\Biggg}
+  \def\Bigggr{\mathclose\Biggg}
+  \AfterEndPreamble{%
+    \renewrobustcmd*\biggg{\bBigg@{3.5}}%
+    \renewrobustcmd*\Biggg{\bBigg@{4}}}
 \fi
 
 \endinput

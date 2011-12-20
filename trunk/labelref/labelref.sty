@@ -1,0 +1,28 @@
+%%
+%% This is file `labelref.sty',
+%%
+\NeedsTeXFormat{LaTeX2e}[1995/12/01]
+\ProvidesPackage{labelref}[2011/12/18 v 2.0]
+
+\@ifpackageloaded{hyperref}{%
+  \PackageWarningNoLine{labelref}{%
+    labelref loaded after hyperref !
+  }%
+}{}
+
+\let\LBF@save@refstepcounter\refstepcounter
+
+\def\refstepcounter#1{%
+  \LBF@save@refstepcounter{#1}%
+  \@ifundefined{@LabelF@the#1}{}{%
+    \protected@edef\@currentlabel{\@nameuse{@LabelF@the#1}}%
+  }%
+}
+
+\def\setlabelref{\@ifstar{\@labelref@s}{\@labelref@}}
+\def\@labelref@#1#2{\@namedef{@LabelF@the#1}{#2\@nameuse{the#1}}}
+\def\@labelref@s#1#2{\@namedef{@LabelF@the#1}{#2}}
+
+\endinput
+%%
+%% End of file `labelref.sty'.
