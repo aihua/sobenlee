@@ -4,14 +4,27 @@
 \def\filedate{2010/11/04}
 \ProvidesFile{LA-FontSet.def}[\filedate\space\fileversion]
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%\defaultfontfeatures{Ligatures=TeX,SlantedFont={*},SlantedFeatures={FakeSlant=.2}}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\setmainfont[BoldFont={MinionPro-Bold},ItalicFont={MinionPro-It}]{MinionPro-Regular}
-%%\setsansfont[BoldFont={MyriadPro-Semibold},ItalicFont={MyriadPro-It}]{MyriadPro-Regular}
-\setsansfont[BoldFont={MyriadPro-SemiboldSemiCn},ItalicFont={MyriadPro-SemiCnIt}]{MyriadPro-SemiCn}
+\setmainfont[
+          Extension = .otf ,
+        UprightFont = *-Regular ,
+           BoldFont = *-Bold ,
+         ItalicFont = *-It ,
+     BoldItalicFont = *-BoldIt ,
+        SlantedFont = *-Regular ,
+    BoldSlantedFont = *-Bold ,
+    SlantedFeatures = {FakeSlant=.167} ,
+BoldSlantedFeatures = {FakeSlant=.167}]{MinionPro}
+\setsansfont[
+          Extension = .otf ,
+        UprightFont = *-SemiCn ,
+           BoldFont = *-SemiboldSemiCn ,
+         ItalicFont = *-SemiCnIt ,
+     BoldItalicFont = *-SemiboldSemiCnIt ,
+        SlantedFont = *-SemiCn ,
+    BoldSlantedFont = *-SemiboldSemiCn ,
+    SlantedFeatures = {FakeSlant=.167} ,
+BoldSlantedFeatures = {FakeSlant=.167}]{MyriadPro}
 \setmonofont[Scale=MatchLowercase]{Consolas}
-\newfontfamily{\MinionPro}[Numbers={Lowercase,Proportional},BoldFont={MinionPro-Bold}]{MinionPro-Regular}
-\newfontfamily{\MyriadPro}[Scale=MatchLowercase,BoldFont={MyriadPro-Semibold}]{MyriadPro-Regular}
 \newfontfamily{\TeXGyreBonum}[Numbers=Uppercase]{TeXGyreBonum-Regular}
 \newfontfamily{\CMRoman}[Numbers=Uppercase]{CMU Serif}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -26,33 +39,36 @@
   [BoldFont={FZHei-B01_GB18030},ItalicFont={FZKai-Z03_GB18030}] {FZFangSong-Z02_GB18030}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \ExplSyntaxOn
-\NewDocumentCommand\newCJKfontfamily{o m O{} m}{
+\NewDocumentCommand\newCJKfontfamily{o m O{} m o O{}}{
   \IfNoValueTF{#1}
     {\edef\@CJKfamilyName{\cs_to_str:N #2}}
     {\edef\@CJKfamilyName{#1}}
   \setCJKfamilyfont{\@CJKfamilyName}[
        BoldFont=*, ItalicFont=*, SlantedFont=*,
-       ItalicFeatures={FakeSlant=.167},
-      SlantedFeatures={FakeSlant=.167},#3]{#4}
+       ItalicFeatures={FakeSlant=.167}, BoldItalicFeatures={FakeSlant=.167},
+      SlantedFeatures={FakeSlant=.167},BoldSlantedFeatures={FakeSlant=.167},
+    #3]{#4}
   \edef#2{\noexpand\CJKfamily{\@CJKfamilyName}}
   \robustify{#2}
+  \IfNoValueTF{#5}{}{
+    \setCJKfallbackfamilyfont{\@CJKfamilyName}[
+       BoldFont=*, ItalicFont=*, SlantedFont=*,
+       ItalicFeatures={FakeSlant=.167}, BoldItalicFeatures={FakeSlant=.167},
+      SlantedFeatures={FakeSlant=.167},BoldSlantedFeatures={FakeSlant=.167},
+    #6]{#5}
+  }
 }
 \ExplSyntaxOff
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newCJKfontfamily{\songti}        {FZJSong-Z01S}
-\setCJKfallbackfamilyfont{songti}  [BoldFont=*] {FZShuSong-Z01_GB18030}
-\newCJKfontfamily{\kaishu}        {FZJKai-Z03S}
-\setCJKfallbackfamilyfont{kaishu}  [BoldFont=*] {FZKai-Z03_GB18030}
-\newCJKfontfamily{\heiti}         {FZHei-B01}
-\setCJKfallbackfamilyfont{heiti}   [BoldFont=*] {FZHei-B01_GB18030}
-\newCJKfontfamily{\fangsong}      {FZFangSong-Z02}
-\setCJKfallbackfamilyfont{fangsong}[BoldFont=*] {FZFangSong-Z02_GB18030}
-\newCJKfontfamily{\lishu}         {FZLiShu-S01}
-\newCJKfontfamily{\yuanti}        {FZZhunYuan-M02}
+\newCJKfontfamily{\songti}  {FZJSong-Z01S}[FZShuSong-Z01_GB18030]
+\newCJKfontfamily{\kaishu}  {FZJKai-Z03S}[FZKai-Z03_GB18030]
+\newCJKfontfamily{\heiti}   {FZHei-B01}[FZHei-B01_GB18030]
+\newCJKfontfamily{\fangsong}{FZFangSong-Z02}[FZFangSong-Z02_GB18030]
+\newCJKfontfamily{\lishu}   {FZLiShu-S01}
+\newCJKfontfamily{\yuanti}  {FZZhunYuan-M02}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newCJKfontfamily{\maokai}     {AR MaoKaiB5 Heavy}           % 文鼎毛楷粗体
 \newCJKfontfamily{\yanti}      {DFYanKai Std W7}             % 华康颜体
-\newCJKfontfamily{\fzcuheisong}{FZCuHeiSongS-B-GB}           % 方正粗黑宋简体
 \newCJKfontfamily{\fzcuyasongb}{FZYaSong-BC-GBK}             % 方正粗雅宋扁
 \newCJKfontfamily{\fzcuyasongc}{FZYaSong-BN-GBK}             % 方正粗雅宋长
 \newCJKfontfamily{\fzlthei}    {FZLanTingHei-R-GBK}          % 方正兰亭黑
@@ -65,10 +81,9 @@
 \newCJKfontfamily{\fzxian}     {FZZhongDengXian-Z07_GB18030} % 方正中等线
 \newCJKfontfamily{\fzzysong}   {FZYaSong-DB-GBK}             % 方正中雅宋
 \newCJKfontfamily{\fzfangguo}  {FZFangGuo-R-GB}              % 方正仿郭简体
-\newCJKfontfamily{\fzliukai}   {FZSuXinShiLiuKaiS-R-GB}      % 方正苏新诗柳楷简体
 \newCJKfontfamily{\fzqiti}     {FZQiTi-S14}                  % 方正启体
-\setCJKfallbackfamilyfont{fzliukai}    [BoldFont=*] {FZQiTi-S14}
-\setCJKfallbackfamilyfont{fzcuheisong} [BoldFont=*] {FZYaSong-DB-GBK}
+\newCJKfontfamily{\fzliukai}   {FZSuXinShiLiuKaiS-R-GB}[FZQiTi-S14]% 方正苏新诗柳楷简体
+\newCJKfontfamily{\fzcuheisong}{FZCuHeiSongS-B-GB}[FZYaSong-DB-GBK]% 方正粗黑宋简体
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \csdef{xeCJK@kaiming：}{}
 \csdef{xeCJK@kaiming；}{}
@@ -78,9 +93,11 @@
 \AtEndPreamble{\punctstyle{mixedwidth}}
 \CJKsetecglue{}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\appto\mdseries{\unboldmath}
 \appto\bfseries{\boldmath}
+\robustify{\mdseries}
 \robustify{\bfseries}
-\let\oriemph\emph
+\let\origemph\emph
 \renewcommand\CJKunderlinecolor{}
 \renewcommand\ULthickness{.8\p@}
 \newrobustcmd*\emphfont{\normalfont\bfseries}

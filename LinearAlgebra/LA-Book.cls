@@ -13,7 +13,8 @@
 \DeclareOption{a4paper}{\LA@previewtrue\LA@printfalse\LA@bookfalse}
 \DeclareOption{watermark}{\LA@wmarktrue}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{ctexbook}}
-\ProcessOptions\relax
+\ProcessOptions*\relax
+
 \PassOptionsToPackage{log-declarations=false}{xparse}
 \PassOptionsToPackage{no-math,silent}{fontspec}
 \PassOptionsToPackage{CJKchecksingle,fallback}{xeCJK}
@@ -25,7 +26,7 @@
 \RequirePackage{empheq,amsthm,extarrows,polynom,systeme}
 \RequirePackage[uppi,tau,fourier,mathscrf,mathcal,mathbb,comma]{localint}
 \RequirePackage{pifont,marvosym,metalogo,multicol,afterpage,chngcntr,xifthen}
-\RequirePackage{floatrow,caption,rotating,wrapfig,varioref}
+\RequirePackage{caption,floatrow,rotating,wrapfig,varioref}
 \RequirePackage{paralist,enumcols,booktabs}
 \RequirePackage[delarray]{tabu}
 \RequirePackage[perpage,stable,bottom]{footmisc}
@@ -99,7 +100,9 @@
 \newdimen\ruleheight
 \ruleheight = .8\p@
 
-\newcommand*\errorq{\hfill{(\kaishu{本题似有误})}}
+\newcommand*\fillblank[1]{%
+  \unskip\nobreak\hfill\allowbreak\null\nobreak\hfill\hbox{#1}}
+\newcommand*\errorq{\fillblank{\kaishu 本题似有误}}
 
 \renewcommand*\appendixname     {附录}
 \renewcommand*\thesubsection    {习题~~\thesection}
@@ -109,7 +112,7 @@
 \renewcommand*\bibsection       {\chapter{\bibname}}
 \bibsep = \p@
 
-\newrobustcmd*\prethesection{{\MyriadPro\S\kern0.1em}}
+\newrobustcmd*\prethesection{{\sffamily\S\kern0.1em}}
 \def\CTEX@presection{\prethesection}
 
 \labelformat{part}{\CTEX@prepart~#1~\CTEX@postpart}
@@ -170,7 +173,7 @@
 \renewcommand\cftpartafterpnum {\hfill\medskip}
 \renewcommand\cftsecpresnum    {\prethesection}
 \renewcommand\cftpartfont      {\bfseries\zihao{-4}\fzzysong\ziju{.5}\hfill}
-\renewcommand\cftchapfont      {\MyriadPro\emphfont\let\TitHspace\@gobble}
+\renewcommand\cftchapfont      {\emphfont\sffamily\let\TitHspace\@gobble}
 \renewcommand\cftsecfont       {\kaishu\let\TitHspace\@gobble}
 \renewcommand\cftchapleader    {\cftchapfont\cftsecleader}
 \renewcommand\cftchappagefont  {\cftchapfont}
@@ -194,26 +197,29 @@
   \else
     \def\makeheadrule{\rule[-#1]{\linewidth}{#2}}%
   \fi}
+
+\newcommand*\showthepage{%
+  \textcentereddot\enspace\thepage\enspace\textcentereddot}
 \newpagestyle{main}[\bfseries\small\fzlthei\CMRoman]{%
-  \sethead[$\cdot$\enskip\thepage\enskip$\cdot$]
+  \sethead[\showthepage]
           []
           [\ifthechapter{\CTEXthechapter\hspace\ccwd\chaptertitle}{\chaptertitle}%
            {\normalsize\makebox[3\ccwd][r]{\small\ForwardToIndex}}]
           {{\normalsize\makebox[3\ccwd][l]{\small\RewindToIndex}}%
-            \ifthesection{\CTEXthesection\hspace\ccwd\sectiontitle}
-                         {\ifthechapter{\CTEXthechapter\hspace\ccwd\chaptertitle}{\chaptertitle}}}
+            \ifthesection{\CTEXthesection\kern\ccwd\sectiontitle}
+                         {\ifthechapter{\CTEXthechapter\kern\ccwd\chaptertitle}{\chaptertitle}}}
           {}
-          {$\cdot$\enskip\thepage\enskip$\cdot$}%
+          {\showthepage}%
   \setheadrule\ruleheight}
 \newpagestyle{appendix}[\bfseries\small\fzlthei\CMRoman]{%
   \setmarks{part}{chapter}
-  \sethead[$\cdot$\enskip\thepage\enskip$\cdot$]
+  \sethead[\showthepage]
           [\ziju{1}\thepart]
           [\parttitle{\normalsize\makebox[3\ccwd][r]{\small\ForwardToIndex}}]
           {{\normalsize\makebox[3\ccwd][l]{\small\RewindToIndex}}%
             \ifthechapter{\CTEXthechapter\hspace\ccwd\chaptertitle}{\chaptertitle}}
           {}
-          {$\cdot$\enskip\thepage\enskip$\cdot$}%
+          {\showthepage}%
   \setheadrule\ruleheight}
 \renewpagestyle{plain}{}
 \pagestyle{main}
@@ -243,11 +249,11 @@
   \let\prethesection\relax
   \cleardoublepage
   \@mainmattertrue
-  \counterwithin*{chapter}{part}
-  \counterwithin*{paragraph}{section}
+  \counterwithin*{chapter}{part}%
+  \counterwithin*{paragraph}{section}%
   \renewcommand*\thepart{\appendixname}
-  \setcounter{section}{0}
-  \pagestyle{appendix}
+  \setcounter{section}{0}%
+  \pagestyle{appendix}%
   \renewcommand*\thesection{A\arabic{chapter}.\arabic{section}}
   \titleformat{\part}[display]
               {\filcenter\bfseries\ziju{.5}\yanti\fontsize{30bp}{\baselineskip}\selectfont}
@@ -309,17 +315,17 @@
 \newtoks\theorembodyfont
 \newtoks\theoremheaderfont
 \newtoks\theorempunct
-\global\theoremheaderfont{\MyriadPro\bfseries\sffamily\upshape\boldmath}
-\global\theorembodyfont{\normalfont}
-\global\theorempunct{}
+\theoremheaderfont{\bfseries\sffamily\upshape\boldmath}
+\theorembodyfont{\normalfont}
+\theorempunct{}
 \newskip\theorempreskipamount
 \newskip\theorempostskipamount
 \newskip\theoremindent
 \newskip\theoremsep
-\global\theorempreskipamount  = .5ex
-\global\theorempostskipamount = .5ex
-\global\theoremindent = \parindent
-\global\theoremsep    = \ccwd
+\theorempreskipamount  = .5ex\relax
+\theorempostskipamount = .5ex\relax
+\theoremindent = \parindent\relax
+\theoremsep    = \ccwd\relax
 \newtheoremstyle{Axiom}
                 {\theorempreskipamount}
                 {\theorempostskipamount}
@@ -383,8 +389,8 @@
 \theoremstyle{EmptyHead}
   \newtheorem*{emptyhead}{空白}
 \theoremstyle{Proof}
-  \let\proof\@undefined
-  \let\endproof\@undefined
+  \undef{\proof}
+  \undef{\endproof}
   \def\proofname{证明}
   \def\solutionname{解}
   \def\qedsymbol{\ensuremath\blacksquare}
@@ -414,30 +420,37 @@
 \numberwithin{equation}{section}
 
 \robustify{\ding}
+\newcommand*\DingNum[1]{%
+  \ifnumgreater{#1}{10}%
+    {\typeout{The value of input number is \number#1, larger than 10}}{}%
+  \ding{\number\numexpr#1 + 171\relax}}
+\newcommand*\Ding[1]{\DingNum{\value{#1}}}
 
-\newcommand*\Ding[1]{%
-  \ifnum\number#1 > 10%
-    \typeout{The value of input number is \number#1, larger than 10}%
-  \fi
-  \ding{\number\numexpr#1 + 171}}
-\let\@Ding\Ding\relax
-
-\renewcommand*\thefootnote{\@Ding\c@footnote}
-\renewcommand*\footnoterule{\kern-3\p@\hrule\@width.45\columnwidth\@height.6\p@\kern2.4\p@}
-\newdimen\@footnote@indent
-{\footnotesize\global\@footnote@indent=1.2em}
-\long\def\@makefntext#1{\@setpar{\@@par
-  \@tempdima\hsize\advance\@tempdima-\@footnote@indent
-  \parshape\@ne\@footnote@indent\@tempdima}%
-  \par\noindent\llap{\makebox[\@footnote@indent][l]{\@thefnmark}}%
-  \linespread{1.2}\selectfont\interlinepenalty\z@\CTEXindent#1}
-\def\@makefnmark{\raisebox{1ex}[\z@]{\small\@thefnmark}}
-
-\setlength\footnotesep{1.2\footnotesep}
+\ifdefdimen\footnotemargin{}{\newdimen\footnotemargin}
+\renewcommand*\thefootnote{\Ding{footnote}}
+\renewcommand*\footnoterule{%
+  \kern-3.6\p@
+  \hrule\@width.4\columnwidth\@height.6\p@
+  \kern3\p@}
+\begingroup
+ \footnotesize
+ \settowidth\footnotemargin{\DingNum{1}}
+ \global\footnotemargin=\dimexpr\footnotemargin+\labelsep\relax
+\endgroup
+\renewcommand\@makefntext[1]{%
+  \@setpar{\@@par
+           \@tempdima\dimexpr\hsize-\footnotemargin\relax
+           \parshape\@ne\footnotemargin\@tempdima}%
+  \par\CTEXindent\noindent
+  \linespread{1.2}\selectfont
+  \llap{\makebox[\footnotemargin][l]{\@thefnmark}}%
+  \ignorespaces#1}
+\renewcommand*\@makefnmark{\raisebox{1ex}[\z@]{\small\@thefnmark}}
+\footnotesep=\dimexpr1.2\footnotesep\relax
 
 \renewcommand*\theenumi{\@arabic\c@enumi}
 \renewcommand*\theenumii{\@arabic\c@enumii}
-\renewcommand*\theenumiii{\@Ding\c@enumiii}
+\renewcommand*\theenumiii{\DingNum\c@enumiii}
 \renewcommand*\theenumiv{\@Alph\c@enumiv}
 \renewcommand*\labelenumi{\bfseries(\theenumi)}
 \renewcommand*\labelenumii{(\theenumii)}
@@ -447,12 +460,12 @@
 \labelformat{enumi}{(#1)}
 \labelformat{enumii}{(#1)}
 
-\pldesclabelsep=1\ccwd\relax
+\pldesclabelsep=\ccwd\relax
 \renewcommand*\paradescriptionlabel[1]{\mbox{\emph*{#1}}}
 
 \newcommand*\emphitem[1]{\mbox{\emph*{#1}\kern\pldesclabelsep}\ignorespaces}
 
-\def\@list@penalty{%
+\newcommand*\@list@penalty{%
   \@beginparpenalty = \z@
   \@itempenalty     = \z@
   \@endparpenalty   = \z@}
@@ -500,12 +513,8 @@
     \item[]}%
   {\endlist}
 
-\newcommand*\floatlabelformat[2]{\@namedef{fnum@#1}{#2}}
-\floatlabelformat{figure}{\figurename\nobreakspace\thefigure}
-\floatlabelformat{table}{\tablename\nobreakspace\thetable}
-
-\floatplacement{figure}{ht}
-\floatplacement{table}{ht}
+\floatplacement{figure}{htb}
+\floatplacement{table}{htb}
 
 \intextsep    = 1.5ex \@minus .2ex
 \textfloatsep = 3ex   \@minus .5ex
@@ -513,26 +522,25 @@
 \labelformat{figure}{\figurename~#1}
 \labelformat{table}{\tablename~#1}
 
+\newcommand*\fixwrapfloatsep[1][-.5\intextsep]{\gdef\FBaskip{#1}}
 \newcommand*\tableboxsep{\quad}
+\DeclareFloatVCode{FRca}{\relax}
+\DeclareFloatVCode{FRcb}{\gdef\FBbskip{-\intextsep}}
+\DeclareFloatSeparators{FRsep}{\tableboxsep}
+\floatsetup{style=plain,capposition=bottom,floatrowsep=FRsep,
+  captionskip=.75ex,rowprecode=FRca,rowpostcode=FRcb}
+\floatsetup[wrapfloat]{captionskip=-2\p@}
 \newfloatcommand{tablebox}{table}[\nocapbeside][\FBwidth]
-\DeclareFloatVCode{frpreskip} {\relax}
-\DeclareFloatVCode{frpostskip}{\vskip-\intextsep}
-\DeclareFloatVCode{wrapfig}{\vskip-\intextsep}
-\DeclareFloatSeparators{frowsep}{\tableboxsep}
-\floatsetup{style=plain,capposition=bottom,floatrowsep=frowsep,captionskip=.75ex,%
-            rowprecode=frpreskip,rowpostcode=frpostskip}
-\floatsetup[wrapfloat]{captionskip=-2\p@,rowprecode=wrapfig}
 
-\DeclareCaptionFont{captextfont} {\bfseries}
-\DeclareCaptionFont{caplabelfont}{\sffamily\bfseries}
-\DeclareCaptionLabelSeparator{captionlabelsep}{\quad}
-\captionsetup{labelfont=caplabelfont,textfont=captextfont,labelsep=captionlabelsep,%
-              hypcap=true,figurewithin=section,tablewithin=section,position=below}
+\DeclareCaptionLabelFormat{plain}{\bothIfFirst{#1}{\nobreakspace}#2}
+\DeclareCaptionLabelSeparator{en}{\enspace}
+\captionsetup{format=hang,font=sf,labelfont=bf,labelformat=plain,labelsep=en,
+  hypcap=true,position=below,figurewithin=section,tablewithin=section}
 
-\renewcommand*\le\leqslant
-\renewcommand*\ge\geqslant
+\let\le\leqslant
+\let\ge\geqslant
+\let\dps\displaystyle
 \renewcommand*\mid{\bigm\vert}
-\newcommand*\dps{\displaystyle}
 \newcommand*\sumsep[1][.5]{\kern#1\ccwd}
 \newcommand*\mtilde[1]{\widetilde{#1}}
 \newcommand*\mequiv[1]{\overline{#1}}
@@ -574,8 +582,8 @@
   {\let\adots\udots}%
   {\def\adots{\mathinner{\reflectbox{\ensuremath\ddots}}}}
 
-\let\ker\@undefined
-\let\hom\@undefined
+\undef{\ker}
+\undef{\hom}
 \DeclareMathOperator{\ker}{Ker}
 \DeclareMathOperator{\hom}{Hom}
 \DeclareMathOperator{\rank}{rank}
