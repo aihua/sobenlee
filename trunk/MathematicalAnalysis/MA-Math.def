@@ -22,10 +22,10 @@
 
 \newrobustcmd*\MAB@applimitsto[1]{\ifundef{#1}
   {\MAB@error{\string#1 undefined!}\@eha}
-  {\appto{#1}{\limits}\robustify{#1}}}
+  {\protected\appto{#1}{\limits}}}
 \newrobustcmd*\MAB@predpsto[1]{\ifundef{#1}
   {\MAB@error{\string#1 undefined!}\@eha}
-  {\preto{#1}{\displaystyle}\robustify{#1}}}
+  {\protected\preto{#1}{\displaystyle}}}
 
 \let\AMSr@@t\r@@t
 
@@ -50,6 +50,11 @@
     {\sqrt{\smash[b]{#2}}}
     {\sqrt[#1]{\smash[b]{#2}}}}
 
+\renewmlist\matr[
+   sep=&,
+sepsep=\\,
+  wrap={\begin{pmatrix}}{\end{pmatrix}},
+]
 \newmlist\mvec[
    wrapcmd=\mlistnowrap,
 wraponecmd=\mlistnowrap,
@@ -58,7 +63,6 @@ wraponecmd=\mlistnowrap,
       dots=\dotsc,
       sep={,\allowbreak},
 ]
-
 \renewmlist\mset[
   headcmd=\mfield,
       sep=\times,
@@ -83,9 +87,6 @@ wraponecmd=\mlistnowrap,
 \let\Delta\upDelta
 
 \newrobustcmd*\nin{\mathrel{\overline\in}}
-\newrobustcmd*\dif{\mathop{}\negthinspace\mathrm d}
-\newrobustcmd*\Dif{\mathop{}\negthinspace\mathrm D}
-\newrobustcmd*\pdif{\partial}
 \newrobustcmd*\e{\varepsilon}
 \newrobustcmd*\eset{\varnothing}
 \newrobustcmd*\difset[1][]{\mathord{#1\backslash}}
@@ -117,7 +118,7 @@ wraponecmd=\mlistnowrap,
   {\mathop{\vcenter{\hbox{\footnotesize$\circ$}}}}
   {\mathop{\vcenter{\hbox{\footnotesize$\circ$}}}}}
 
-\newrobustcmd*\mrest[2][\bigr]{#1|_{#2}}
+\newrobustcmd*\mrest[2][\bigr]{#1\rvert_{#2}}
 
 \newrobustcmd*\mcond{\@ifstar{\@@mcond}{\@mcond}}
 \newcommand*\@mcond[2][\,]{\ensuremath{#1(#2)}}
@@ -125,6 +126,7 @@ wraponecmd=\mlistnowrap,
 
 \DeclareMathOperator{\sgn}{sgn}
 \DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\grad}{grad}
 \DeclareMathOperator{\arccot}{arccot}
 \DeclareMathOperator{\BetaF}{B}
 \DeclareMathOperator{\GammaF}{\upGamma}
@@ -234,6 +236,45 @@ wraponecmd=\mlistnowrap,
   {\hfil$\m@th\displaystyle{##}$\hfil}
   {$\m@th\displaystyle{##}$\hfil}
   {.\n@space\Bigggl\lbrace}{.}
+
+\newrobustcmd*\dif{\mathop{}\negthinspace\mathrm d}
+\newrobustcmd*\Dif{\mathop{}\negthinspace\mathrm D}
+\newrobustcmd*\pdif{\mathop{}\negthinspace\mathord\partial}
+\newrobustcmd*\diff{\@Diff@cmd{\dif}}
+\newrobustcmd*\Diff{\@Diff@cmd{\Dif}}
+\newrobustcmd*\pdiff{\@Diff@cmd{\pdif}}
+
+%% codes from Martin Scharrer @ tex.stackexchange.com
+\newcommand*\@Diff@cmd[3]{%
+  \begingroup
+    \@temptokena{\@gobble}%
+    \@tempcnta\z@
+    \def\@Diff@symbol{#1}%
+    \expandafter\@Diff@var#3\relax
+    \ensuremath{\dfrac{\@Diff@symbol
+    \ifnum\@tempcnta>\@ne
+      ^{\the\@tempcnta}%
+    \fi
+    #2}{\the\@temptokena}}%
+  \endgroup
+}
+\def\@Diff@var#1{%
+  \ifx\relax#1\empty\else
+    \def\next{\expandafter\@Diff@num\expandafter{\the\@tempcntb}{#1}}%
+      \afterassignment\next
+      \@tempcntb=0%
+  \fi
+}
+\def\@Diff@num#1#2{%
+  \ifnum#1=\z@
+    \advance\@tempcnta by \@ne
+    \@temptokena\expandafter{\the\@temptokena\relax\@Diff@symbol{#2}}%
+  \else
+    \advance\@tempcnta by #1\relax
+    \@temptokena\expandafter{\the\@temptokena\relax\@Diff@symbol{#2}^{#1}}%
+  \fi
+  \@Diff@var
+}
 
 \renewcommand\intertext[1][]{\@amsmath@err{\Invalid@@\intertext}\@eha}
 \def\intertext@{%
