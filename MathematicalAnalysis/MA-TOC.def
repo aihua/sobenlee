@@ -30,7 +30,7 @@
 \renewcommand*\@dotsep{8}
 \newcommand*\contentsfill[1][\@dotsep\p@]{\titlerule*[#1]{\ensuremath\cdot}\,}
 
-\renewcommand*\@tocrmarg{15\p@}
+\renewcommand*\@tocrmarg{2\ccwd}
 \contentsmargin[\@tocrmarg]{\z@}
 
 \titlecontents{part}[\z@]
@@ -86,7 +86,9 @@
   {\contentsfill\thecontentspage}
 \titlecontents*{subsection}[\chaplabelwidth]
   {%
-    \small\kaishu\widowpenalty=\@m\relax\rightskip=\@flushglue\relax
+    \small\kaishu\widowpenalty=\@m\relax
+    \rightskip=\@flushglue\relax
+    \advance\parfillskip\ttl@corr\relax
 %%    \@tempdimc=\dimexpr\chaplabelwidth-\seclabelwidth\relax
 %%    \makebox[\z@][r]{\hb@xt@\@tempdimc{\RewindToStart\hss}}%
   }
@@ -118,5 +120,77 @@
     }%
     \printcontents[part]{ptc@}{-1}{\advance\c@tocdepth\@ne}%
   \endgroup}
+
+\endinput
+
+\renewcommand*\l@part[2]{%
+  \ifnum \c@tocdepth > -\tw@\relax
+    \global\advance\tocpartcnt\@ne\relax
+    \ifnum\tocpartcnt>\@ne\relax
+      \par\nopagebreak\medskip\hrule\relax
+      \Needspace{2\baselineskip}%
+      \medskip\vspace*{\medskipamount}%
+    \else
+      \hrule\medskip\smallskip
+    \fi
+    \begingroup
+      \parindent\z@ \leftskip\z@ \rightskip\z@
+      \let\numberline\@firstofone\relax
+      \leavevmode\centering
+      \ziju{1}\fzxbsong\large\bfseries #1\relax
+      \ifnum\tocpartcnt>\@ne
+        \bigskip
+      \else
+        \medskip\smallskip
+      \fi
+      \hrule\medskip
+      \par\nobreak
+      \global\@nobreaktrue
+      \everypar{\global\@nobreakfalse\everypar{}}%
+    \endgroup
+  \fi}
+
+\renewcommand*\l@chapter[2]{%
+  \ifnum\c@tocdepth > \m@ne\relax
+    \par\addpenalty{-\@highpenalty}%
+    \parindent\z@
+    \begingroup
+      \def\numberline##1{%%\let\hspace\@gobble
+        \edef\@tocchlabel{##1\kern\ccwd}%
+        \settowidth{\global\@tempdima}{\@tocchlabel}%
+        \@tocchlabel}%
+      \let\\ \relax \relax
+      \leftskip\z@ \rightskip\z@
+      \leavevmode\bfseries\sffamily
+      #1\nobreak\leaders\hbox{\ensuremath{%
+        \m@th\mkern\@dotsep mu \cdot\mkern\@dotsep mu}}\hfill\nobreak
+      \rmfamily#2\par\nopagebreak
+    \endgroup
+  \fi}
+
+\renewcommand*\l@section[2]{%
+  \ifnum\c@tocdepth > \z@\relax
+    \par
+    \begingroup
+      \parindent\z@ \leftskip\@tempdima \rightskip\z@
+      \def\numberline##1{##1\kern\ccwd}%
+      \leavevmode
+      #1\nobreak\leaders\hbox{\ensuremath{%
+        \m@th\mkern\@dotsep mu \cdot\mkern\@dotsep mu}}\hfill\nobreak
+      #2\par
+    \endgroup
+  \fi}
+
+\renewcommand*\l@subsection[2]{%
+  \ifnum\c@tocdepth > \@ne\relax
+    \hangafter\z@ \hangindent\@tempdima\relax
+    \rightskip\@flushglue\relax
+    \advance\rightskip.5\ccwd\relax
+    \begingroup
+      \interlinepenalty\@M
+      \def\numberline##1{##1\kern5\p@}%
+      \mbox{\kaishu\small #1~(#2)}\quad
+    \endgroup\ignorespaces
+  \fi}
 
 \endinput

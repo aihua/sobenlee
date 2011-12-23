@@ -5,15 +5,20 @@
 \ProvidesFile{MA-FontSet.def}[\filedate\space\fileversion]
 \RequireXeTeX
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%\setmainfont[BoldFont={MinionPro-Bold},ItalicFont={MinionPro-It}]    {MinionPro-Regular}
-\setsansfont[
-   BoldFont={MyriadPro-SemiboldSemiCn},
- ItalicFont={MyriadPro-SemiCnIt},
-SlantedFont=*,SlantedFeatures={FakeSlant=.167}] {MyriadPro-SemiCn}
-\setmonofont{Consolas}
-\def\bfsansfea{\addfontfeature{BoldFont={MyriadPro-BoldSemiCn}}}
+%%%\setmonofont{Consolas}
+\newfontfamily{\MyriadPro}[
+          Extension = .otf ,
+        UprightFont = *-Regular ,
+           BoldFont = *-Semibold ,
+         ItalicFont = *-It ,
+     BoldItalicFont = *-SemiboldIt ,
+        SlantedFont = *-Regular ,
+    BoldSlantedFont = *-Semibold ,
+    SlantedFeatures = {FakeSlant=.167} ,
+BoldSlantedFeatures = {FakeSlant=.167}]{MyriadPro}
 \newfontfamily{\CMRoman}{CMU Serif}
 \newfontfamily{\TeXGyreBonum}[Numbers=Uppercase]{TeXGyreBonum-Regular}
+\def\bfsansfea{\addfontfeature{BoldFont={MyriadPro-BoldSemiCn}}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \setCJKmainfont[BoldFont={FZHei-B01},ItalicFont={FZJKai-Z03S},SlantedFont={FZFangSong-Z02}] {FZJSong-Z01S}
 \setCJKsansfont[BoldFont={FZHei-B01},ItalicFont={FZJKai-Z03S},SlantedFont={FZFangSong-Z02}] {FZZhongDengXian-Z07}
@@ -26,29 +31,31 @@ SlantedFont=*,SlantedFeatures={FakeSlant=.167}] {MyriadPro-SemiCn}
   [BoldFont={FZHei-B01_GB18030},ItalicFont={FZKai-Z03_GB18030},SlantedFont={FZFangSong-Z02_GB18030}] {FZKai-Z03_GB18030}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \ExplSyntaxOn
-\NewDocumentCommand\newCJKfontfamily{o m O{} m o O{}}{
+\NewDocumentCommand\newCJKfontfamily{o m O{} m O{} g}{
   \IfNoValueTF{#1}
     {\edef\@CJKfamilyName{\cs_to_str:N #2}}
     {\edef\@CJKfamilyName{#1}}
   \setCJKfamilyfont{\@CJKfamilyName}[
        BoldFont=*, ItalicFont=*, SlantedFont=*,
-       ItalicFeatures={FakeSlant=.167},
-      SlantedFeatures={FakeSlant=.167},#3]{#4}
-  \expandafter\newrobustcmd\expandafter#2\expandafter
-    {\expandafter\CJKfamily\expandafter{\@CJKfamilyName}}
-  \IfNoValueTF{#5}{}{
+       ItalicFeatures={FakeSlant=.167}, BoldItalicFeatures={FakeSlant=.167},
+      SlantedFeatures={FakeSlant=.167},BoldSlantedFeatures={FakeSlant=.167},
+    #3]{#4}
+  \newcommand*{#2}{}
+  \protected\edef#2{\noexpand\CJKfamily{\@CJKfamilyName}}
+  \IfNoValueTF{#6}{}{
     \setCJKfallbackfamilyfont{\@CJKfamilyName}[
        BoldFont=*, ItalicFont=*, SlantedFont=*,
-       ItalicFeatures={FakeSlant=.167},
-      SlantedFeatures={FakeSlant=.167},#6]{#5}
+       ItalicFeatures={FakeSlant=.167}, BoldItalicFeatures={FakeSlant=.167},
+      SlantedFeatures={FakeSlant=.167},BoldSlantedFeatures={FakeSlant=.167},
+    #5]{#6}
   }
 }
 \ExplSyntaxOff
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newCJKfontfamily{\songti}  {FZJSong-Z01S}[FZShuSong-Z01_GB18030]
-\newCJKfontfamily{\kaishu}  {FZJKai-Z03S}[FZKai-Z03_GB18030]
-\newCJKfontfamily{\heiti}   {FZHei-B01}[FZHei-B01_GB18030]
-\newCJKfontfamily{\fangsong}{FZFangSong-Z02}[FZFangSong-Z02_GB18030]
+\newCJKfontfamily{\songti}  {FZJSong-Z01S}{FZShuSong-Z01_GB18030}
+\newCJKfontfamily{\kaishu}  {FZJKai-Z03S}{FZKai-Z03_GB18030}
+\newCJKfontfamily{\heiti}   {FZHei-B01}{FZHei-B01_GB18030}
+\newCJKfontfamily{\fangsong}{FZFangSong-Z02}{FZFangSong-Z02_GB18030}
 \newCJKfontfamily{\lishu}   {FZLiShu-S01}
 \newCJKfontfamily{\yuanti}  {FZZhunYuan-M02}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -70,8 +77,8 @@ SlantedFont=*,SlantedFeatures={FakeSlant=.167}] {MyriadPro-SemiCn}
 \newCJKfontfamily{\fzzysong}   {FZYaSong-DB-GBK}             % 方正中雅宋
 \newCJKfontfamily{\fzfangguo}  {FZFangGuo-R-GB}              % 方正仿郭简体
 \newCJKfontfamily{\fzqiti}     {FZQiTi-S14}                  % 方正启体
-\newCJKfontfamily{\fzliukai}   {FZSuXinShiLiuKaiS-R-GB}[FZQiTi-S14]% 方正苏新诗柳楷简体
-\newCJKfontfamily{\fzcuheisong}{FZCuHeiSongS-B-GB}[FZYaSong-DB-GBK]% 方正粗黑宋简体
+\newCJKfontfamily{\fzliukai}   {FZSuXinShiLiuKaiS-R-GB}{FZQiTi-S14}% 方正苏新诗柳楷简体
+\newCJKfontfamily{\fzcuheisong}{FZCuHeiSongS-B-GB}{FZYaSong-DB-GBK}% 方正粗黑宋简体
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \csdef{xeCJK@kaiming：}{}
 \csdef{xeCJK@kaiming；}{}
@@ -79,7 +86,7 @@ SlantedFont=*,SlantedFeatures={FakeSlant=.167}] {MyriadPro-SemiCn}
 \catcode`。=\active
 \newcommand{。}{\unskip\ifmmode\rlap{．}\else ．\fi}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\DeclareRobustCommand*~{\unskip\hskip 0.2em minus 0.05em\ignorespaces}
+\newrobustcmd*~{\unskip\hskip 0.2em minus 0.05em\ignorespaces}
 \AtEndPreamble{\punctstyle{mixedwidth}}
 \CJKsetecglue{}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -91,12 +98,10 @@ SlantedFont=*,SlantedFeatures={FakeSlant=.167}] {MyriadPro-SemiCn}
 \newcommand*\Ding[1]{\DingNum{\value{#1}}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newrobustcmd\textaccent[1]{{\fontencoding{OT1}\selectfont#1}}
-\newcommand\notextaccent{\let\textaccent=\@firstofone\relax}
+\newcommand*\notextaccent{\let\textaccent=\@firstofone\relax}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\appto\mdseries{\unboldmath}
-\appto\bfseries{\boldmath}
-\robustify{\mdseries}
-\robustify{\bfseries}
+\protected\appto\mdseries{\unboldmath}
+\protected\appto\bfseries{\boldmath}
 \let\origemph\emph
 \renewcommand\CJKunderlinecolor{}
 \renewcommand\ULthickness{.8\p@}
@@ -148,5 +153,6 @@ SlantedFont=*,SlantedFeatures={FakeSlant=.167}] {MyriadPro-SemiCn}
               \parsep 2\p@ \@plus\p@ \@minus\p@
               \itemsep \parsep}}
 \endinput
+
 %%
 %% End of file `MA-FontSet.def'.

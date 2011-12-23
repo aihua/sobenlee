@@ -39,7 +39,7 @@ BoldSlantedFeatures = {FakeSlant=.167}]{MyriadPro}
   [BoldFont={FZHei-B01_GB18030},ItalicFont={FZKai-Z03_GB18030}] {FZFangSong-Z02_GB18030}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \ExplSyntaxOn
-\NewDocumentCommand\newCJKfontfamily{o m O{} m o O{}}{
+\NewDocumentCommand\newCJKfontfamily{o m O{} m O{} g}{
   \IfNoValueTF{#1}
     {\edef\@CJKfamilyName{\cs_to_str:N #2}}
     {\edef\@CJKfamilyName{#1}}
@@ -48,22 +48,22 @@ BoldSlantedFeatures = {FakeSlant=.167}]{MyriadPro}
        ItalicFeatures={FakeSlant=.167}, BoldItalicFeatures={FakeSlant=.167},
       SlantedFeatures={FakeSlant=.167},BoldSlantedFeatures={FakeSlant=.167},
     #3]{#4}
-  \edef#2{\noexpand\CJKfamily{\@CJKfamilyName}}
-  \robustify{#2}
-  \IfNoValueTF{#5}{}{
+  \newcommand*{#2}{}
+  \protected\edef#2{\noexpand\CJKfamily{\@CJKfamilyName}}
+  \IfNoValueTF{#6}{}{
     \setCJKfallbackfamilyfont{\@CJKfamilyName}[
        BoldFont=*, ItalicFont=*, SlantedFont=*,
        ItalicFeatures={FakeSlant=.167}, BoldItalicFeatures={FakeSlant=.167},
       SlantedFeatures={FakeSlant=.167},BoldSlantedFeatures={FakeSlant=.167},
-    #6]{#5}
+    #5]{#6}
   }
 }
 \ExplSyntaxOff
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newCJKfontfamily{\songti}  {FZJSong-Z01S}[FZShuSong-Z01_GB18030]
-\newCJKfontfamily{\kaishu}  {FZJKai-Z03S}[FZKai-Z03_GB18030]
-\newCJKfontfamily{\heiti}   {FZHei-B01}[FZHei-B01_GB18030]
-\newCJKfontfamily{\fangsong}{FZFangSong-Z02}[FZFangSong-Z02_GB18030]
+\newCJKfontfamily{\songti}  {FZJSong-Z01S}{FZShuSong-Z01_GB18030}
+\newCJKfontfamily{\kaishu}  {FZJKai-Z03S}{FZKai-Z03_GB18030}
+\newCJKfontfamily{\heiti}   {FZHei-B01}{FZHei-B01_GB18030}
+\newCJKfontfamily{\fangsong}{FZFangSong-Z02}{FZFangSong-Z02_GB18030}
 \newCJKfontfamily{\lishu}   {FZLiShu-S01}
 \newCJKfontfamily{\yuanti}  {FZZhunYuan-M02}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -82,8 +82,8 @@ BoldSlantedFeatures = {FakeSlant=.167}]{MyriadPro}
 \newCJKfontfamily{\fzzysong}   {FZYaSong-DB-GBK}             % 方正中雅宋
 \newCJKfontfamily{\fzfangguo}  {FZFangGuo-R-GB}              % 方正仿郭简体
 \newCJKfontfamily{\fzqiti}     {FZQiTi-S14}                  % 方正启体
-\newCJKfontfamily{\fzliukai}   {FZSuXinShiLiuKaiS-R-GB}[FZQiTi-S14]% 方正苏新诗柳楷简体
-\newCJKfontfamily{\fzcuheisong}{FZCuHeiSongS-B-GB}[FZYaSong-DB-GBK]% 方正粗黑宋简体
+\newCJKfontfamily{\fzliukai}   {FZSuXinShiLiuKaiS-R-GB}{FZQiTi-S14}% 方正苏新诗柳楷简体
+\newCJKfontfamily{\fzcuheisong}{FZCuHeiSongS-B-GB}{FZYaSong-DB-GBK}% 方正粗黑宋简体
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \csdef{xeCJK@kaiming：}{}
 \csdef{xeCJK@kaiming；}{}
@@ -93,10 +93,8 @@ BoldSlantedFeatures = {FakeSlant=.167}]{MyriadPro}
 \AtEndPreamble{\punctstyle{mixedwidth}}
 \CJKsetecglue{}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\appto\mdseries{\unboldmath}
-\appto\bfseries{\boldmath}
-\robustify{\mdseries}
-\robustify{\bfseries}
+\protected\appto\mdseries{\unboldmath}
+\protected\appto\bfseries{\boldmath}
 \let\origemph\emph
 \renewcommand\CJKunderlinecolor{}
 \renewcommand\ULthickness{.8\p@}

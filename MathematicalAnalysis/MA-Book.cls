@@ -17,7 +17,7 @@
 \RequirePackage[lucidasmallscale,math-style=iso,nofontinfo]{lucimatx}
 \RequirePackage{empheq,amsthm,thmtools,mlist,siunitx}
 \RequirePackage[uppi,comma,overparen,mathscrf,mathbb,lucida]{localint}
-\RequirePackage{needspace,chngcntr,changepage,environ,afterpage,xifthen}
+\RequirePackage{needspace,chngcntr,changepage,environ,afterpage,ifthen}
 \RequirePackage{caption,floatrow,wrapfig,labelref}
 \RequirePackage{enumitem,tabu,diagbox,enumcols}
 \RequirePackage[perpage,stable,bottom]{footmisc}

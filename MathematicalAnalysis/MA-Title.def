@@ -13,14 +13,15 @@
 \def\popstar{\global\boolfalse{push@star}}
 \def\@SM{\ifbool{push@star}{\@SMM}{}}
 
-\def\appendixname{附录}
+\CTEXoptions[today=small]
+\CTEXsetup[name=附录]{appendix}
 \def\contentsname{\ifnumequal{\c@part}{\z@}{总}{\MAB@volume}目录}
 \def\prefacename{\MAB@volume 前言}
 \title{数学分析}
 
-\CTEXoptions[today=small]
 \def\CTEX@null{〇}
 \def\@chinese@O#1{\ifnumequal{\value{#1}}{\z@}{\CTEX@null}{\chinese{#1}}}
+
 \def\CTEX@thechapter{\@chinese@O{chapter}}
 \def\CTEX@postpart{册}
 \def\CTEX@presection{\@SM\@S}
@@ -196,7 +197,7 @@
 \begingroup
  \footnotesize
  \settowidth\footnotemargin{\DingNum{1}}
- \footnotemargin=\dimexpr\footnotemargin+\labelsep\relax
+ \global\footnotemargin=\dimexpr\footnotemargin+\labelsep\relax
 \endgroup
 \renewcommand\@makefntext[1]{%
   \@setpar{\@@par
@@ -207,7 +208,7 @@
   \llap{\makebox[\footnotemargin][l]{\@thefnmark}}%
   \ignorespaces#1}
 \renewcommand*\@makefnmark{\raisebox{1ex}[\z@]{\small\@thefnmark}}
-\dimdef\footnotesep{1.2\footnotesep}
+\footnotesep=\dimexpr1.2\footnotesep\relax
 
 \newsavebox\@tempfig
 \sbox\@tempfig{%

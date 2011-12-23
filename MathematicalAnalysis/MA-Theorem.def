@@ -3,10 +3,6 @@
 %%
 \ProvidesFile{MA-Theorem.def}
 
-\newrobustcmd*\ifwidthzero[1]{%
-  \settowidth\@tempdima{#1}%
-  \ifdimequal\@tempdima\z@}
-
 \newrobustcmd*\ifcntruniqinsec[1]{%
   \edef\uniq@toggle{#1@\arabic{chapter}.\arabic{section}}%
   \ifnumgreater{\value{#1}}{\@ne}{%
@@ -17,7 +13,7 @@
   \ifcsundef\uniq@toggle}
 
 \def\declarethmheadformat#1#2{\csdef{thmt@headstyle@#1}{#2}}
-\declarethmheadformat{note}  {\ifwidthzero{\NOTE}{\NAME}{\let\thmt@space\relax\NOTE}}
+\declarethmheadformat{note}  {\ifthenelse{\equal{\NOTE}{\@empty}}{\NAME}{\let\thmt@space\relax\NOTE}}
 \declarethmheadformat{unique}{\NAME\ifcntruniqinsec{\thmt@envname}{}{\NUMBER}\NOTE}
 \declarethmheadformat{normal}{\NAME~\NUMBER\NOTE}
 

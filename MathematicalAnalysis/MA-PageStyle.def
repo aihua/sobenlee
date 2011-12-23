@@ -12,9 +12,12 @@
     \def\makeheadrule{\rule[-#1]{\linewidth}{#2}}%
   \fi}
 
-\newpagestyle{document}[\bfseries\small\fzlthei\CMRoman\notextaccent\killnewline]{%
+\newcommand*\showthepage{%
+  \bfseries\CMRoman\textcentereddot\enspace\thepage\enspace\textcentereddot}
+
+\newpagestyle{document}[\small\MyriadPro\fzlthei\killnewline]{%
   \setmarks{chapter}{section}%
-  \sethead[$\cdot$\enskip\thepage\enskip$\cdot$]
+  \sethead[\showthepage]
           []
           [\ifthechapter{\CTEXthechapter\emspace\chaptertitle}{\chaptertitle}]
           {\ifthesection{\CTEXthesection\emspace\sectiontitle}
@@ -26,7 +29,7 @@
                         }%
           }
           {}
-          {$\cdot$\enskip\thepage\enskip$\cdot$}%
+          {\showthepage}%
   \setheadrule\ruleheight}
 
 \assignpagestyle{\part}{empty}
@@ -59,16 +62,13 @@
   \noindent\vspace{-\baselineskip}\bigskip
   \hrule\medskip\par}
 
-\newcounter{appcnt}
-\renewcommand\appendix{%
-  \counterwithin*{chapter}{appcnt}%
+\let\orig@appendix\appendix
+\renewcommand*\appendix{%
   \cleardoublepage
   \if@filesw
     \immediate\write\@mainaux{\string\@writefile{toc}{\ParTocLine}}%
   \fi
-  \refstepcounter{appcnt}%
-  \gdef\thechapter{\@Alph\c@chapter}%
-  \gdef\CTEX@prechapter{\appendixname}%
+  \orig@appendix
   \gdef\CTEX@thechapter{\@empty}%
   \gdef\CTEX@postchapter{\@empty}%
   \gdef\CTEX@presection{\@empty}}
