@@ -26,30 +26,318 @@ Newton~时期的导数概念，建立在“无穷小”的基础之上。“无�
 
 \section{导数概念}
 \begin{exercise}
-\item
+\item 用定义求~$f'(0)$，其中
+\[
+  f(x)=\begin{cBdcases}
+    x^2\sin\frac1x, & n\neq0;\\
+    0, & x=0 。
+  \end{cBdcases}
+\]
+\item 用定义求~$f'(0)$，其中
+\[
+  f(x)=\begin{cBdcases}
+    \me^{-\frac1{x^2}}, & x\neq0;\\
+    0, & x=0 。
+  \end{cBdcases}
+\]
+\item 设
+\[
+  D(x)=\begin{cBdcases}
+    1, & x\in\mQ;\\
+    0, & x\in\mR\difset\mQ 。
+  \end{cBdcases}
+\]
+讨论下列函数在~$x=0$~处的连续性和可导性。
+\begin{exlistcols}[3]
+  \item $D(x)$；
+  \item $x\cdot D(x)$；
+  \item $x^2\cdot D(x)$。
+\end{exlistcols}
+\item 设~$f(x)\in C\minto ab$，在~$x_0\in\minto ab$~处可导。证明，函数
+\[
+  g(x)=\frac{f(x)-f(x_0)}{x-x_0}
+\]
+在~$x_0$~处补充定义后为连续函数，即~$g(x)\in C\minto ab$。
+\item 设~$f(x)$~是偶函数，且~$f'(0)$~存在。证明~$f'(0)=0$。
+\item 设~$f'(x_0)$~存在。证明~$f(x)$~在~$x_0$~处的\emph{对称导数}也存在，即\label{exer-4.1.6}
+\[
+  \lim_{h\to 0}\frac{f(x_0+h)-f(x_0-h)}{2h}=f'(x_0)。
+\]
+\item 设~$f(0)=0$，且~$f'(0)$~存在，令
+\[
+  x_n=f\mparenB{\frac1{n^2}}+f\mparenB{\frac2{n^2}}+\dotsb+f\mparenB{\frac n{n^2}}。
+\]
+试求~$\lim_\ntoinf x_n$。
+\item 求下列序列的极限。
+\begin{exlistcols}
+  \item $\lim_\ntoinf\mparenB{\sin\dfrac1{n^2}+\sin\dfrac2{n^2}+\dotsb+\sin\dfrac n{n^2}}$；
+  \item $\lim_\ntoinf\mparenB{1+\dfrac1{n^2}}\mparenB{1+\dfrac2{n^2}}\dotsm\mparenB{1+\dfrac n{n^2}}$。
+\end{exlistcols}
+\item 设~$P(x)$~是首一多项式，并且~$M$~是它的最大实根。证明~$P'(M)\geq0$。
+\item 设~$f(x)$~是奇函数，已知~$f'(x_0)=3$。求~$f'(-x_0)$。
 \end{exercise}
+
 \section{导数的几何意义与极限}
 \begin{exercise}
-\item
+\item 给定抛物线~$y=x^2-x+3$，求过~$\minto 25$~点的切线与法线方程。
+\item 求过点~$\minto {-1}1$~的曲线~$y=\dfrac1x$~的切线。
+\item 求抛物线~$y=x^2$~在点~$A\minto{x_0}{x_0^2}$~的切线与法线。并证明这条切线在~$x$~轴上的截距为~$\sfrac{x_0}2$。利用这个性质
+把切线与法线准确地画出来。
+\item 给定曲线~$y=x^2+5x+4$。
+\begin{exlist}
+  \item 确定~$b$，使得直线~$y=3x+b$~成为曲线的切线；
+  \item 确定~$m$，使得直线~$y=mx$~成为曲线的切线。
+\end{exlist}
+\item 设有曲线~$y=x^3$~和直线~$y=px-q$，其中~$p,q\in\mR$，且~$p>0$。
+\begin{exlist}
+  \item 给定~$p$~后，试确定~$q$，使得~$y=px-q$~是~$y=x^3$~的切线；
+  \item 利用图象求出方程~$x^3-px+1=0$~有三个实根的条件。
+\end{exlist}
+\item\begin{exlist}
+  \item 确定~$m$，使得~$y=mx$~成为曲线~$y=\ln x$~的切线；
+  \item 利用图象求出方程~$\ln x-mx=0$~有两个实根的条件。
+\end{exlist}
+\item 设~$f(x)\in C\mintc ab$。证明，两个极大值点之间必有一个极小值点；反之，两个极小值点之间必有一个极大值点。
+\item 设~$f(x)\in C\mintc ab$，且只有一个极值点。证明，如果是极大值点，必是最大值点；反之，如果是极小值点，必是最小值点。
 \end{exercise}
+
 \section{导数的四则运算}
 \begin{exercise}
-\item
+\item 求下列函数的导数。
+\begin{exlistcols}[3]
+  \item $y=3x+5\sqrt x+\dfrac 7{x^3}$；
+  \item $y=\dfrac{2-\sqrt x+3x-5x^2}{x^2}$；
+  \item $y=\dfrac{1+x^2}{1-x^2}$；
+  \item $y=\dfrac1{1+x+x^2}$；
+  \item $y=(1-x)(2-x)(3-x)$；
+  \item $y=\dfrac{1+x+x^2}{1-x+x^2}$；
+  \item $y=\dfrac x{(x-1)(x-2)}$；
+  \item $y=\dfrac1{1+\sqrt x}-\dfrac1{1-\sqrt x}$；
+  \item $y=\dfrac{1+\sqrt x}{1-\sqrt x}$；
+  \item $y=\dfrac{2-x}{(1-x)(1-x^2)}$；
+  \item $y=\dfrac1{\sqrt[3]x}+\sqrt[3]x$；
+  \item $y=\dfrac{ax+b}{cx+d}\mcond{ad\neq bc}$。
+\end{exlistcols}
+\item 求下列函数的导数。
+\begin{exlistcols}[3]
+  \item $y=x^2\cdot\sin x$；
+  \item $y=x^3\ln x-\dfrac1nx^n$；
+  \item $y=\cos x\cdot\ln x$；
+  \item $y=x\cdot\sin x\cdot\ln x$；
+  \item $y=\mparenB{x+\dfrac1x}\ln x$；
+  \item $y=\dfrac{\sin x}x$；
+  \item $y=\dfrac{\cos x+\sin x}{\cos x-\sin x}$；
+  \item $y=\cot x$；
+  \item $y=\sec x$；
+  \item $y=\csc x$；
+  \item $y=\sin 2x$；
+  \item $y=\dfrac{\cos x}{x^4}\ln\dfrac1x$。
+\end{exlistcols}
+\item 确定常数~$a,b\in\mR$，使得函数~$f(x)$~有连续的导数。
+\[
+  f(x)=\begin{cBdcases}
+    ax+b, & x>1;\\
+    x^2, & x\leq 1,
+  \end{cBdcases}
+\]
+\item 求下列极限。
+\begin{exlistcols}
+  \item $\lim_{x\to 0}\dfrac{\ln(1+x)}x$；
+  \item $\lim_\ntoinf n\mparenBB{\mparenbb{1+\dfrac1n}^{\msp p}-1}\mcond{p\in\mQ}$。
+\end{exlistcols}
+\item 利用等比数列的求和公式，求下列数列的和。
+\begin{exlistcols}
+  \item $S_n=1+2x+3x^2+\dotsb+nx^{n-1}$；
+  \item $S_n=1+2^2x+3^2x+\dotsb+n^2x^{n-1}$。
+\end{exlistcols}
+\item 证明，
+\begin{exlistcols}
+  \item $\mbinom n1+2\mbinom n2+\dotsb+n\mbinom nn=n\cdot 2^{n-1}$；
+  \item $\mbinom n1+2^2\mbinom n2+\dotsb+n^2\mbinom nn=n(n+1)2^{n-1}$。
+\end{exlistcols}
+\item 设~$f(x)$~是有理函数，证明
+\[
+  \lim_{x\to\pinf}\frac{f(x)}x=\ell\iff \lim_{x\to\pinf}f'(x)=\ell 。
+\]
+\item 在周长一定的等腰三角形中，确定腰与底的比例，使其绕底边旋转所得的旋转体的体积最大。
+\item 确定点~$\minto 0h\mcond{h>0}$~到曲线~$y=x^2$~的最短距离。
+\item 作一无盖的圆柱形茶缸，在体积~$V$~一定的情况下，确定底半径~$R$~与高~$h$~的比例，使得茶缸的侧面积最小（即用料最省）。
+\item 有半径为~$a$~的半球形杯子，杯内放一长为~$\ell\mcond{\ell>2a}$~的均匀细棒。确定细棒的平衡位置（即求细棒的重心~$A$~的
+高度的最小值）。
+\item 设函数
+\[
+  f(x)=1+x+\dfrac{x^2}{2!}+\dotsb+\dfrac{x^n}{n!}。
+\]
+\begin{exlist}
+  \item 当~$n$~为偶数时，证明~$f(x)$~在~$\mR$~上有正的最小值；
+  \item 当~$n$~为奇数时，证明~$f(x)$~有且仅有一个实根。
+\end{exlist}
 \end{exercise}
+
 \section{复合函数求导}
 \subsection{复合函数求导}
 \subsection{隐函数微分法}
 \subsection{对数微分法}
 \begin{exercise}
-\item
+\item 求下列函数的导数。
+\begin{exlistcols}
+  \item $y=(x^3-1)^3$；
+  \item $y=x(a^2+x^2)-\sqrt{a^2-x^2}$；
+  \item $y=\dfrac x{\sqrt{a^2-x^2}}$；
+  \item $y=\sqrt[\uproot{10}\leftroot{-3}3]{\dfrac{1+\cramped{x^3}}{\smash[b]{1-\cramped{x^3}}}}$；
+  \item $y=\smbsqrt{x+\sqrt{x+\sqrt x}}$；
+  \item $y=\sqrt[3]{1+\sqrt[3]x}$；
+  \item $y=\ln\ln x$；
+  \item $y=\dfrac1{2a}\ln\mabsbb{\dfrac{a+x}{a-x}}$；
+  \item $y=\ln\mparenb{x+\sqrt{a^2+x^2}}$；
+  \item $y=\ln\tan\dfrac x2$；
+  \item $y=\ln^3x^2$；
+  \item $y=\ln\sqrt{\dfrac{1+\cos x}{1-\cos x}}$；
+  \item $y=\ln\dfrac{\sqrt{1+x}-\sqrt{1-x}}{\sqrt{1+x}+\sqrt{1-x}}$；
+  \item $y=\cos^3x-\cos 3x$；
+  \item $y=\sin^nx\cdot\cos nx$；
+  \item $y=\tan x-\dfrac13\tan^3x+\dfrac15\tan^5x$；
+  \item $y=\cos\cos\sqrt x$；
+  \item $y=\dfrac{\sin^2x}{\sin x^2}$。
+\end{exlistcols}
+\item 求下列数列的和。
+\begin{exlistcols}
+  \item $\sum_{k=1}^nk\sin kx$；
+  \item $\sum_{k=1}^nk\cos kx$。
+\end{exlistcols}
+\item 在~$x=0$~点附近~$f'(x)$~存在。
+\begin{exlist}
+  \item 若~$\mabsb{f(x)}\leq\mabs{\sin x}$，证明~$\mabsb{f'(0)}\leq 1$；
+  \item 设~$f(x)=a_1\sin x+a_2\sin 2x+\dotsb+a_n\sin nx$，并且~$\mabsb{f(x)}\leq\mabs{\sin x}$。证明，
+  \[
+    \mabsb{a_1+2a_2+\dotsb+na_n}\leq 1。
+  \]
+\end{exlist}
+\item 确定常数，使得下列函数处处可导。
+\begin{exlistcols}
+  \item $f(x)=\begin{cBdcases}
+    x^\alpha\sin\dfrac1x, & x>0;\\
+    0, & x\leq 0;
+  \end{cBdcases}\mcond{\alpha~\text{为常数}}$
+  \item $g(x)=\begin{Bdcases}
+    x+c,& x\geq 0;\\
+    \ln(1+x), &x<0 。
+  \end{Bdcases}\mcond{c~\text{为常数}}$
+  \item 求~$f'(0)$~与求~$\lim_{x\to0}f'(x)$~是否是同一回事？
+\end{exlistcols}
+\item 讨论下列函数的可导性，在可导点处求其导数。
+\begin{exlistcols}
+  \item $y=\mabsb{(x-1)(x-2)^2(x-3)}$；
+  \item $y=\begin{Bdcases}
+    \frac14(x-1)(x+2)^2, & \mabs x\leq 1;\\
+    \mabs x-1, & \mabs x>0 。
+  \end{Bdcases}$
+\end{exlistcols}
+\item 设~$f(x)$~在~$\mR$~上可导。证明，
+\begin{exlistcols}
+  \item 若~$f(x)$~为奇函数，则~$f'(x)$~为偶函数；
+  \item 若~$f(x)$~为周期函数，则~$f'(x)$~也是周期函数。
+\end{exlistcols}
+\item 设在~$x=1$~处，
+\[
+  \frac{\dif}{\dif x}f(x^2)=\frac{\dif}{\dif x}f^2(x) 。
+\]
+证明~$f'(1)=0$~或~$f(1)=1$。
+\item 在距海岸~$5$~千米处有一灯塔，它的灯每分钟转到一周，试求光束与岸边成~\ang{60}~角时，光束沿岸边滑动的速度。
+\item 设质点~$P$~在~$y$~轴上作等速运动，而~$A$~为~$x$~轴上一定点。证明~$AP$~的角速度与~$(AP)^2$~成反比。
+\item 给定可导函数~$f(x)>0$，证明调制函数
+\[
+  y=f(x)\sin\alpha\mcond*{\alpha>0}
+\]
+永远夹在两条振幅曲线~$y=\pm f(x)$~之间，并与之相切。
+\item 求椭圆~$\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}=1$~的内接矩形中面积最大的矩形。
+\item 把一圆形铁片剪下圆心角为为~$\alpha$~的一个扇形，并将其围成一个圆锥。
+\begin{exlistcols}
+  \item 试将这圆锥的容积~$V$~表示成~$\alpha$~的函数；
+  \item 确定~$\alpha$~的值，使得容积~$V$~最大。
+\end{exlistcols}
+\item 设~$\sqrt[3]{x^2}+\smbsqrt[3]{y^2}=\sqrt[3]{a^2}\mcond{a>0}$。求~$y'$，并证明，该曲线的切线被坐标轴所截长度为一常数。
+\item 设~$x^3+y^3-3axy=0\mcond{a>0}$。
+\begin{exlistcols}
+  \item 求~$y'$；
+  \item 若曲线有渐近线，试求出渐近线方程；
+  \item 求出与渐近线平行的切线。
+\end{exlistcols}
+\item 求椭圆~$\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}=1$~在第一象限中的切线，使它被坐标轴所截的线段最短。
+\item 确定常数~$\lambda$，使得曲线~$\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}=1$~与~$xy=\lambda$~相切，并求出切线方程。
+\item 用对数微分法求下列函数的导数。
+\begin{exlistcols}[3]
+  \item $y=x^x\mcond{x>0}$；
+  \item $y=x^{\tan x}\mcond{x>0}$；
+  \item $y=x^{\ln x}\mcond{x>0}$；
+  \item $y=\me^{\sqrt x}\mcond{x>0}$；
+  \item $y=\me^{-\frac1{x^2}}\mcond{x\neq0}$；
+  \item $y=a^{\sin x}\mcond{a>0}$；
+  \item $y=(1+x)^{\frac1x}\mcond{x>0}$；
+  \item $y=x^{x^x}\mcond{x>0}$。
+\end{exlistcols}
 \end{exercise}
+
 \section{反函数与参数式求导}
 \subsection{反函数求导}
 \subsection{参数式求导}
 \subsection{极坐标式求导}
 \begin{exercise}
-\item
+\item 求下列函数的导数。
+\begin{exlistcols}
+  \item $y=\me^{\sqrt x}\mcond{x>0}$；
+  \item $y=\me^{-\frac1{x^2}}\mcond{x\neq0}$；
+  \item $y=\dfrac{\me^x-\me^{-x}}{\me^x+\me^{-x}}$；
+  \item $y=\arcsin\sqrt{1-x^2}$；
+  \item $y=\arcsin\dfrac1x$；
+  \item $y=\arccos\mparen{\sin x}$；
+  \item $y=\me^{ax}\mparen{\cos bx+\sin bx}$；
+  \item $y=x\cdot\arctan x-\dfrac12\ln(1+x^2)$；
+  \item $y=\arctan\dfrac{\sqrt{1-x^2}-1}x+\arctan\dfrac{2x}{1-x^2}$；
+  \item $y=\arctan\mparenbb{\sqrt{\dfrac{a-b}{\smash[b]{a+b}}}\tan\dfrac x2}\mcond{a>b>0}$；
+  \item $y=\arctan\mparen{\tan^2x}$；
+  \item $y=\mparenbb{\dfrac ab}^{\msp x}\cdot\mparenbb{\dfrac bx}^{\msp a}\cdot\mparenbb{\dfrac xa}^{\msp b}\mcond{a,b>0}$；
+  \item $y=x^{a^a}+a^{x^a}+a^{a^x}$；
+  \item $y=\me^{-x^2}(x^2-2x+2)$；
+  \item $y=\ln\mparenB{\arccos\dfrac1{\sqrt x}}$；
+  \item $y=\ln\mparenb{\me^x+\sqrt{1+\me^{2x}}}$；
+  \item $y=\dfrac x2\sqrt{a^2-x^2}+\dfrac{a^2}2\arcsin\dfrac xa\mcond{a>0}$；
+  \item $y=\dfrac x2\sqrt{a^2+x^2}+\dfrac{a^2}2\ln\mabsb{x+\sqrt{a^2+x^2}}\mcond{a>0}$；
+  \item $y=\dfrac16\ln\dfrac{(x+1)^2}{x^2-x+1}+\dfrac1{\sqrt3}\arctan\dfrac{2x-1}{\sqrt 3}$；
+  \item $y=\dfrac1{4\sqrt2}\ln\dfrac{x^2+\sqrt2x+1}{x^2-\sqrt2x+1}-\dfrac1{2\sqrt2}\arctan\dfrac{\sqrt2\,x}{x^2-1}$。
+\end{exlistcols}
+\item 确定曲线~$y=\me^{-x}$~的切线，使得它与两个正半轴所围成的三角形面积最大。
+\item 墙上有一幅画高~$a$~尺，底边距观察者眼睛高~$b$~尺，当观察者离墙多远时，观察画的视角最大。
+\item 当~$a,b>0$~时，确定下列方程有两个不同正实根的条件。
+\begin{exlistcols}
+  \item $\me^{bx}=ax^2$；
+  \item $\me^{bx^2}=ax^2$。
+\end{exlistcols}
+\item 证明
+\[
+  \lim_{x\to a}\frac{f(x)-b}{x-a}=A\iff \lim_{x\to a}\frac{\me^{f(x)}-\me^b}{x-a}=\me^b A 。
+\]
+\item 星形线的参数方程为
+\[
+  \biggl\{\begin{aligned}
+  x&=a\cos^3t;\\
+  y&=a\sin^3t,
+  \end{aligned}
+\]
+其中~$a>0$，而~$t\in\minto 0{2\pi}$。试求~$y'(x)$，并证明曲线的切线被坐标轴所截长度为一常数。
+\item 曳物线的参数方程为
+\[
+  \Biggl\{\begin{aligned}
+  x&=a\mparenB{\ln\tan\dfrac t2+\cos t};\\
+  y&=a\sin t,
+  \end{aligned}
+\]
+其中~$a>0$，而~$t\in\minto 0\pi$。试求~$y'(x)$，并证明切线上自切点至~$x$~轴交点的切线段为一定长。
+\item 证明，圆~$r=2a\sin\theta\mcond{a>0}$~的向径与切线间的夹角等于向径的极角。
+\item 证明，心脏线~$r=a(1-\cos\theta)\mcond{a>0}$~的向径与切线间的夹角等于向径极角的一半。
+\item 证明，双纽线~$r^2=a^2\cos2\theta$~的向径与切线间的夹角等于两倍向径的极角与~$\sfrac\pi2$~的和。
 \end{exercise}
+
 \section{微\emspace 分}
 \subsection{微分定义}
 \subsection{微分与导数}
@@ -57,18 +345,202 @@ Newton~时期的导数概念，建立在“无穷小”的基础之上。“无�
 \subsection{一阶微分形式的不变形}
 \subsection{微分的应用}
 \begin{exercise}
-\item
+\item 用一阶微分不变性求下列函数的微分。
+\begin{exlistcols}
+  \item $y=\ln\mabsbb{\tan\mparenB{\dfrac x2+\dfrac\pi4}}$；
+  \item $y=\arctan\me^x$；
+  \item $y=x^{a^x}\mcond{a>0}$；
+  \item $y=\me^{\sin x^2}$。
+\end{exlistcols}
+\item 设~$u,v$~是~$x$~的可微函数，求下列函数的微分。
+\begin{exlistcols}
+  \item $y=\arctan\frac uv$；
+  \item $y=\ln\sqrt{u^2+v^2}$；
+  \item $y=\ln\sin(u+v)$；
+  \item $y=\dfrac1{\sqrt{u^2+v^2}}$。
+\end{exlistcols}
+\item 填空。
+\begin{exlistcols}
+  \item $2\me^{\sin^2x}\sin x\cos x\dif x=\dif(\qquad)$；
+  \item $\dfrac{\dif x}{a^2+x^2}=\dif(\qquad)$；
+  \item $\dfrac{\ln x}x\me^{\ln^2x}\dif x=\dif(\qquad)$；
+  \item $\dfrac x{\sqrt{1-x^2}}\dif x=\dif(\qquad)$；
+  \item $2x\me^{x^2}\cos\me^{x^2}\dif x=\dif(\qquad)$；
+  \item $\dfrac{\me^x}{1+\me^x}\dif x=\dif(\qquad)$；
+  \item $\dfrac{\me^x}{1+\me^{2x}}\dif x=\dif(\qquad)$。
+\end{exlistcols}
+\item 为使计算球体体积的相对误差准确到~$1\%$，度量半径~$R$~时所允许的相对误差应如何？
+\item 求下列近似值。
+\begin{exlistcols}[4]
+  \item $\sqrt{120}$；
+  \item $\sqrt[4]{80}$；
+  \item $\sin\ang{29}$；
+  \item $\arctan 1.05$。
+\end{exlistcols}
+\item 设~$f(x)$~在~$x_0$~点可导，而~$\mbrace{\alpha_n}$~与~$\mbrace{\beta_n}$~为趋于零的正数序列。证明
+\[
+  \lim_\ntoinf\dfrac{f(x_0+\alpha_n)-f(x_0-\beta_n)}{\alpha_n+\beta_n}=f'(x_0)。
+\]
 \end{exercise}
+
 \section{高阶导数与高阶微分}
 \subsection{高阶导数}
 \subsection{Leibniz~公式}
 \subsection{其它函数关系的高阶导数}
 \subsection{高阶微分}
 \begin{exercise}
-\item
+\item 设~$f''(1)=0$，而~$f'(1)=1$。证明，在~$x=1$~点~$\dfrac{\dif}{\dif x}f(x^2)=\dfrac{\dif^2}{\dif x^2}f^2(x)$。
+\item 设~$y_1=\arcsin x$~而~$y_2=\arccos x$。证明~$y_1,y_2$~满足方程
+\[
+  (1-x^2)y''-xy'=0 。
+\]
+\item 设~$y=\mparenb{x+\sqrt{1+x^2}}^m$。证明，$(1+x^2)y''+xy'=m^2y$。
+\item 证明，Chebyshev~多项式
+\[
+T_n(x)=\dfrac1{2^{n-1}}\cos(n\arccos x)
+\]
+满足方程
+\[
+  (1-x^2)T_n''(x)-xT_n'(x)+n^2T_n(x)=0 。
+\]
+\item 求下列隐函数的二阶导数~$y''$，其中~$a>0$。
+\begin{exlistcols}
+  \item $\sqrt[3]{x^2}+\smbsqrt[3]{y^2}=\sqrt[3]{a^2}$；
+  \item $x^3+y^3-3axy=0$。
+\end{exlistcols}
+\item 求下列参数式的二阶导数~$y''$，其中~$a>0$。
+\begin{exlistcols}
+\item $\Biggl\{\begin{aligned}
+  x&=a\cos^3t;\\
+  y&=a\sin^3t;
+  \end{aligned}$
+\item $\Biggl\{\begin{aligned}
+  x&=a\mparenB{\ln\tan\dfrac t2+\cos t};\\
+  y&=a\sin t 。
+  \end{aligned}$
+\end{exlistcols}
+\item 设~$y=y(x)$~存在反函数，并且满足函数方程
+\[
+  \dfrac{\dif^2y}{\dif x^2}+\mparenB{\dfrac{\dif y}{\dif x}}^3=0 。
+\]
+证明，反函数~$x=x(y)$~满足~$\dfrac{\dif^2y}{\dif x^2}=1$，并由此求出一个~$y=y(x)$。
+\item 求下列函数的高阶导数~$y^{(n)}$。
+\begin{exlistcols}[3]
+  \item $y=\dfrac1{1-x^2}$；
+  \item $y=\dfrac{1+x}{\sqrt[3]{1-x}}$；
+  \item $y=\dfrac{x^n}{1-x}$；
+  \item $y=\sin^2x$；
+  \item $y=\sin^3x$；
+  \item $y=\me^x\sin x$；
+  \item $y=\dfrac{x^n}{x^2-1}$；
+  \item $y=\me^x(\sin x+\cos x)$。
+\end{exlistcols}
+\item%% 证明，
+\begin{exlist}\FixExHead
+  \item 若~$y=x^{n-1}\ln x$，则~$y^{(n)}=\dfrac{(n-1)!}x$；
+  \item 若~$y=\dfrac{ax+b}{cx+d}$，则~$y^{(n)}=(-1)^n\dfrac{n!c^{n-1}}{(cx+d)^{n+1}}(bc-ad)$。
+\end{exlist}
+\item 用数学归纳法证明，若~$y=x^{n-1}\me^{\frac1x}$，则~$y^{(n)}=\dfrac{(-1)^n}{x^{n+1}}\me^{\frac1x}$。
+\item 设~$y=\arctan x$。证明
+\begin{exlist}
+  \item $y^{(n)}=\dfrac{P_{n-1}(x)}{(1+x^2)^n}$，其中~$P_{n-1}(x)$~为~$n-1$~次多项式；
+  \item $P_{n-1}(x)$~的最高次项是~$(-1)^{n-1}n!\,x^{n-1}$。
+\end{exlist}
+\item 给定函数\mcond{n\in\mN}
+\[
+  f(x)=\begin{cBdcases}
+    x^n\sin\mparenb{\ln\mabs x}, & x\neq0;\\
+    0, & x=0 。
+  \end{cBdcases}
+\]
+证明，$f(x)$~在~$x=0$~点有直到~$n-1$~阶的导数，但是没有~$n$~阶导数。
+\item 设~$y=\arcsin^2x$。证明，
+\begin{exlistcols}
+  \item $(1-x^2)y''-xy'=2$；
+  \item $(1-x^2)y^{(n+2)}-(2n+1)xy^{(n+1)}-n^2y^{(n)}=0\mcond{n\geq 1}$；
+  \item $y^{(n+2)}(0)=n^2y^{(n)}(0)\mcond{n\geq 1}$；
+  \item 求~$y^{(n)}(0)$。
+\end{exlistcols}
+\item 设~$y=\dfrac1{\sqrt{1-x^2}}\arcsin x$。证明，
+\begin{exlistcols}
+  \item $(1-x^2)y'-xy-1=0$；
+  \item $(1-x^2)y^{(n+1)}-(2n+1)xy^{(n)}-n^2y^{(n-1)}=0\mcond{n\geq 1}$；
+  \item 求~$y^{(n)}(0)$。
+\end{exlistcols}
+\item 证明~Legendre~多项式
+\[
+  P_n(x)=\dfrac1{2^nn!}\dfrac{\dif^n}{\dif x^n}(x^2-1)^n
+\]
+满足方程
+\[
+  (1-x^2)P_n''(x)-2xP_n'(x)+n(n+1)P_n(x)=0 。
+\]
+\item 证明~Chebyshev-Laguerre~多项式
+\[
+  y=\me^x\dfrac{\dif^n}{\dif x^n}\mparenb{x^n\me^{-x}}
+\]
+满足方程
+\[
+  xy''-(x-1)y'+ny=0 。
+\]
+\item 证明~Chebyshev-Hermite~多项式
+\[
+  y=(-1)^n\dfrac1{n!}\me^{\frac{x^2}2}\dfrac{\dif^n}{\dif x^n}\mparenb{\me^{-\frac{x^2}2}}
+\]
+满足方程
+\[
+  y''-xy'+ny=0 。
+\]
 \end{exercise}
+
 \begin{exercise*}
-\item
+\item 设~$y=\dfrac{x^n}{(x+1)^2(x+2)^2}$。求~$y^{(n)}$。
+\item 设~$y=\dfrac1{\sqrt{1+x^2}}$ 。证明，
+\begin{exlistcols}
+  \item $y^{(n)}=\dfrac{P_n(x)}{(1+x^2)^{n+\sfrac12}}$，其中~$P_n(x)$~为~$n$~次多项式；
+  \item $P_{n+1}(x)=(1+x^2)P_n'-(2n+1)xP_n$；
+  \item $P_n'=-n^2P_{n-1}$。
+\end{exlistcols}
+\item 设~$y=\me^{\sqrt x}$。证明，
+\begin{exlistcols}
+  \item $4xy'+2y'-y=0$；
+  \item $4xy^{(n+1)}+(4n-2)y^{(n)}-y^{(n-1)}=0$；
+  \item $y=\dfrac{\dif^n}{\dif x^n}\mparenB{(4x)^{n+\frac12}\dfrac{\dif^{n+1}}{\dif x^{n+1}}y}$。
+\end{exlistcols}
+\item 证明，在~$\mR$~上不存在可微函数~$f(x)$~满足~$f\mparenb{f(x)}=-x^3+x^2+1$。
+\item 证明，在~$\mR$~上不存在可微函数~$f(x)$~满足~$f\mparenb{f(x)}=x^2-3x+3$。
+\item 用函数变换化简方程。
+\begin{exlistcols}
+  \item $y''+\dfrac1xy'+\mparenB{1-\dfrac1{4x^2}}y=0$，令~$y=\dfrac3{\sqrt x}$；
+  \item $y''=1+\dfrac{2(1+y)}{1+y^2}\mparenB{\dfrac{\dif y}{\dif x}}^2$，令~$y=\tan z$。
+\end{exlistcols}
+\item 用自变量变换化简方程。
+\begin{exlistcols}
+  \item $(1-x^2)y''-xy'+a^2y=0$，令~$x=\sin t$；
+  \item $x^4y''+a^2y=0$，令~$x=\dfrac1t$；
+  \item $y''+\dfrac{2x}{1+x^2}y'+\dfrac y{(1+x^2)^2}=0$，令~$x=\tan t$。
+\end{exlistcols}
+\item 证明下列等式，其中~$x\in\mintc 01$。
+\begin{exlistcols}
+  \item $\sum_{k=0}^nk\mbinom nkx^k(1-x)^{n-k}=nx$；
+  \item $\sum_{k=0}^nk(k-1)\mbinom nkx^k(1-x)^{n-k}=n(n-1)x^2$；
+  \item $\sum_{k=0}^n(k-nx)^2\mbinom nkx^k(1-x)^{n-k}=nx(1-x)$。
+\end{exlistcols}
+\item 设~$f(x)$~在~$x=0$~点连续，而~$f(0)=0$，而且
+\[
+  \lim_{x\to0}\dfrac{f(2x)-f(x)}x=m 。
+\]
+证明~$f'(0)=m$。
+\item 在平面上动点~$P$~的位置可以用~$P$~点分别到两个固定点~$O_1$~与~$O_2$~的距离~$r_1$~与~$r_2$~来决定，这
+时~$(r_1,r_2)$~叫点~$P$~的双距坐标。
+\begin{exlist}
+  \item 平面上的曲线~$AB$，可以用~$r_2$~是~$r_2$~的某个函数来给出，令~$\theta_1$~表示~$AB$~上点~$P$~对~$O_1$~的切径
+  角（向径~$O_1P$~与切线之间的夹角），而~$\theta_2$~表示~$P$~对~$O_2$~的切径角。证明
+  \[
+    \dfrac{\dif r_2}{\dif r_1}=\dfrac{\cos\theta_2}{\cos\theta_1};
+  \]
+  \item 接上题，切径角相等时，$AB$~是何种曲线。
+\end{exlist}
 \end{exercise*}
 
 

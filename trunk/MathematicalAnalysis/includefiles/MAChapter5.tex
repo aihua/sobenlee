@@ -6,46 +6,672 @@
 \chapter{利用导数研究函数}\label{ch:5}
 \section{微分中值定理}
 \begin{exercise}
-\item
+\item 设~$f(x)=x^m(1-x)^n$，且~$m,n\in\mN$，而~$x\in\mintc 01$。证明，存在~$\xi\in\minto 01$，%
+使得~$\dfrac mn=\dfrac\xi{1-\xi}$。
+\item 证明，方程~$4ax^3+3bx^2+2cx=a+b+c$~在~$\minto 01$~间至少有一个根。
+\item 设
+\[
+  \dfrac{a_0}{n+1}+\dfrac{a_1}n+\dotsb+a_{n-1}x+a_n=0 。
+\]
+证明，方程~$a_0x^n+a_1x^{n-1}+\dotsb+a_{n-1}x+a_n=0$~在~$\minto 01$~间至少有一个根。
+\item 证明，方程~$\me^x=ax^2+bx+c$~的根不超过三个。
+\item 若~$f(x)\in C\mintc ab$，在~$\minto ab$~上~$n$~次可导，且在~$\mintc ab$~上有~$n+1$~个零点（计其重数）。证明，$f^{(n)}(x)$~
+在~$\mintc ab$~上至少有一个零点。
+\item 设~$f(x)=a_nx^n+a_{n-1}x^{n-1}+\dotsb+a_1x+a_0$~有~$n+1$~个零点，则~$f(x)\equiv0$。
+\item 设~$f(x)$~在~$\minto a\pinf$~上可导，并且
+\[
+\lim_{x\to a-0}f(x)=\lim_{x\to\minf}f(x)=A 。
+\]
+证明，存在~$\xi\in\minto a\pinf$，使得~$f'(\xi)=0$。
+\item 设~$f(x)$~在~$\mR$~上可导。证明~$f(x)$~的两个零点之间一定有~$f(x)+f'(x)$~的零点。
+\item 证明~Legendre~多项式
+\[
+  P_n(x)=\dfrac1{2^nn!}\dfrac{\dif^n}{\dif x^n}(x^2-1)^n
+\]
+在~$\mintc{-1}1$~内有~$n$~个零点。
+\item 证明~Chebyshev-Laguerre~多项式
+\[
+  L_n(x)=\me^x\dfrac{\dif^n}{\dif x^n}\mparenb{x^n\me^{-x}}
+\]
+有~$n$~个不同的正零点。
+\item 证明~Chebyshev-Hermite~多项式
+\[
+  H_n(x)=(-1)^n\dfrac1{n!}\me^{\frac{x^2}2}\dfrac{\dif^n}{\dif x^n}\mparenb{\me^{-\frac{x^2}2}}
+\]
+有~$n$~个不同零点。
+\item 证明，
+\begin{exlistcols}
+  \item $\mabs{\sin b-\sin a}\leq\mabs{b-a}$；
+  \item $\mabs{\arctan b-\arctan a}\leq\mabs{b-a}$。
+\end{exlistcols}
+\item 设~$\lim_{x\to+\infty}f'(x)=a$。证明，对任意~$T>0$，有
+\[
+  \lim_{x\to+\infty}\mparenb{f(x+T)-f(x)}=Ta 。
+\]
+\item 设~$f(x)$~在~$\minto ab$~上连续，除~$x_0$~点外~$f'(x)$~都存在，并且~$\lim_{x\to x_0}f'(x)=A$。%
+证明~$f'(x_0)$~存在，并且~$f'(x_0)=A$。
+\item 设~$f(x)$~在~$\minto ab$~上可导，且~$f'(x)$~单调。证明~$f'(x)\in C\minto ab$。
+\item 设~$f^{(n)}(x)$~在~$\minto{-r}r$~上存在，且~$\lim_{x\to 0}f^{(n)}(x)=\ell$。证明~$f^{(n)}(0)=\ell$。
+\item 设~$h>0$，并且~$f'(x)$~在~$\minto{a-h}{a+h}$~中存在。证明，
+\begin{exlist}
+  \item $\dfrac{f(a+h)-f(a-h)}h=f'(a+\theta h)+f'(a-\theta h)$，其中~$\theta\in\minto 01$；
+  \item $\dfrac{f(a+h)+f(a-h)-2f(a)}h=f'(a+\theta h)-f'(a-\theta h)$，其中~$\theta\in\minto 01$。
+\end{exlist}
+\item 设~$a=-1$，且~$b>1$，而~$f(x)=\mabs x^{-1}$。
+\begin{exlist}
+  \item 证明~$f(x)$~在~$\mintc ab$~上不满足~Lagrange~中值定理的条件；
+  \item 若~$b>\sqrt 2+1$，证明，存在~$\xi\in\minto ab$，使得
+  \[
+    f(b)-f(a)=f'(\xi)(b-a)。
+  \]
+\end{exlist}
+\item 设
+\[
+  f(x)=\begin{cBdcases}
+    x^2\sin\frac1x, & x\neq0;\\
+    0, & x=0 。
+  \end{cBdcases}
+\]
+在~$\mintc 0x$~上应用~Lagrange~中值定理，得
+\[
+  x^2\sin\frac1x=x\mparenB{2\xi\sin\frac1\xi-\cos\frac1\xi},
+\]
+其中~$\xi\in\minto 0x$，由此即得
+\[
+  \cos\frac1\xi=2\xi\sin\frac1\xi-x\sin\frac1x 。
+\]
+当~$x\to0$~时，有~$\xi\to0$，所以由上式得到~$\lim_{\xi\to0}\cos\dfrac1\xi=0$。但显然~$\lim_{\xi\to0}\cos\dfrac1\xi$~不存在。请解释
+这个矛盾。
+\item 设~$f(x)$~在~$\minto a\pinf$~上可导，且~$f'(x)$~有界。证明~$f(x)$~在~$\minto a\pinf$~上一致连续。
+\item 证明~$f(x)=\sqrt x\,\ln x$~在~$\minto 0\pinf$~上一致连续。
+\item 设~$f(x)$~在~$\minto a\pinf$~上可导，且~$\lim_{x\to\pinf}f'(x)=\pinf$。证明~$f(x)$~在~$\minto a\pinf$~上不一致连续。
+\item 证明~$f(x)=x\ln x$~在~$\minto 0\pinf$~上不一致连续。
+\item 设~$f(x)\in C\mintc ab$。证明~$f(x)$~在~$\mintc ab$~上满足~Lipschitz~条件
+\[
+  \mabsb{f(x)-f(y)}\leq k\mabs{x-y}\mcond{k~\text{为常数}}
+\]
+当且仅当~$\me^{f(x)}$~在~$\mintc ab$~上满足~Lipschitz~条件
+\[
+  \mabsb{\me^{f(x)}-\me^{f(y)}}\leq k'\mabs{x-y}\mcond{k'~\text{为常数}} 。
+\]
+\item （Darboux~定理）设~$f(x)\in C^{(1)}\mintc ab$。若~$f'(a)<f'(b)$，证明对任意~$\eta$，若~$\eta$~满足
+\[
+  f'(a)<\eta<f'(b),
+\]
+则存在~$\xi\in\minto ab$，使得~$f'(\xi)=\eta$。
+\item 设~$f(x),g(x)$~在~$\mintc ab$~上连续，在~$\minto ab$~上可微。作函数
+\[
+  D(x)\coloneq\begin{vmatrix}
+  f(x)&g(x)&1\\
+  f(a)&g(a)&1\\
+  f(b)&g(b)&1
+  \end{vmatrix} 。
+\]
+\begin{exlist}
+  \item 解释函数~$D(x)$~的几何意义；
+  \item 对~$D(x)$~应用~Rolle~中值定理会得出什么结论。
+\end{exlist}
+\item 设~$f(x)$~在~$\mintc ab$~上连续，在~$\minto ab$~上可微。证明，存在~$\xi\in\minto ab$，使得
+\[
+  2\xi\mparenb{f(b)-f(a)}=(b^2-a^2)f'(\xi) 。
+\]
+\item 设~$f(x)$~在~$\mintc ab\mcond{b>a>0}$~上连续，在~$\minto ab$~上可微。证明，存在~$\xi\in\minto ab$，使得
+\[
+  f(b)-f(a)=\xi\ln\dfrac baf'(\xi) 。
+\]
+\item 设~$f(x)$~在~$\mintc ab\mcond{ab>0}$~上连续，在~$\minto ab$~上可微。证明，存在~$\xi\in\minto ab$，使得
+\[
+  \frac1{b-a}\begin{vmatrix}
+    a&b \\
+    f(a)&f(b)
+  \end{vmatrix}=f(\xi)-\xi f'(\xi) 。
+\]
+\item 设~$f(x),g(x)$~在~$\mR$~上可微，它们在~$-\infty$~和~$+\infty$~都分别存在有穷极限，且~$g'(x)\neq0$。%
+证明，存在~$\xi\in\mR$，使得
+\[
+  \frac{f(+\infty)-f(-\infty)}{g(+\infty)-g(-\infty)}=\frac{f'(\xi)}{g'(\xi)}。
+\]
+\item 设~$f(x)$~在~$\mintoc 0a$~上可微，并且~$\lim_{x\to0+0}\sqrt x\,f'(x)$~存在。证明~$f(x)$~在~$\mintoc 0a$~上一致连续。
 \end{exercise}
-\section{L'H\^opital~法则}
+
+\section{L'H\textaccent{\^o}pital~法则}
 \subsection(0/0 型不定式){$\dfrac 00$~型不定式}
 \subsection(∞/∞ 型不定式){$\dfrac\infty\infty$~型不定式}
 \subsection{其它类型不定式}
 \begin{exercise}
-\item
+\item 求下列极限。
+\begin{exlistcols}
+  \item $\lim_{x\to0}\dfrac{1-\cos x}{x^2}$；
+  \item $\lim_{x\to\pi}\dfrac{\tan nx}{\tan mx}\mcond{n,m\in\mN}$；
+  \item $\lim_{x\to0}\dfrac{x-\ln(1+x)}{x^2}$；
+  \item $\lim_{x\to0+0}x\ln x$；
+  \item $\lim_{x\to\pinf}\dfrac{x^k}{\me^x}\mcond{k>0}$；
+  \item $\lim_{x\to0}\mparenB{\dfrac1{\sin x}-\dfrac1x}$；
+  \item $\lim_{x\to0}\mparenB{\dfrac1{\ln(1+x)}-\dfrac1x}$；
+  \item $\lim_{x\to0}x\mparenb{a^{\frac1x}-b^{\frac1x}}\mcond{a,b>0}$；
+  \item $\lim_{x\to1}\dfrac{\ln\cos{x-1}}{1-\sin\frac{\pi x}2}$；
+  \item $\lim_{x\to0}\dfrac{(1+x)^{\frac1x}-\me}x$；
+  \item $\lim_{x\to1}\dfrac{x-x^x}{1-x+\ln x}$；
+  \item $\lim_{x\to1-0}\sqrt{1-x^2}\cot\mparenB{\dfrac x2\sqrt{\dfrac{1-x}{\smash[b]{1+x}}}}$。
+\end{exlistcols}
+\item 求下列极限。
+\begin{exlistcols}[3]
+  \item $\lim_{x\to0}(\tan x)^{\sin x}$；
+  \item $\lim_{x\to0}\mparenB{\dfrac{\sin x}x}^{\frac1{x^2}}$；
+  \item $\lim_{x\to0}(\cos\pi x)^{\frac1{x^2}}$；
+  \item $\lim_{x\to0}\mparenB{\dfrac{\tan x}x}^{\frac1{x^2}}$；
+  \item $\lim_{x\to\pinf}\mparenbb{\dfrac{\ln(1+x)}x}^{\frac1x}$；
+  \item $\lim_{x\to\pinf}\mparenB{\dfrac\pi2-\arctan x}^{\frac1x}$；
+  \item $\lim_{x\to0}\mparenbb{\dfrac{(1+x)^{\frac1x}}\me}^{\frac1x}$；
+  \item $\lim_{x\to\pinf}\mparenB{\tan\dfrac{\pi x}{2x+1}}^{\frac 1x}$。
+\end{exlistcols}
+\item 求下列极限$\mcond{a,b\in\mR}$。
+\begin{exlistcols}
+  \item $\lim_{x\to0+0}\mparenbb{\dfrac{1+x^a}{1+x^b}}^{\frac1{\ln x}}$；
+  \item $\lim_{x\to\pinf}\mparenbb{\dfrac{1+x^a}{1+x^b}}^{\frac1{\ln x}}$。
+\end{exlistcols}
+\item 设~$f(x)$~二阶可导。证明，
+\[
+  \lim_{h\to0}\dfrac{f(x+2h)-2f(x+h)+f(x)}{h^2}=f''(x)。
+\]
+\item 设~$f(x)$~在~$\mintco a\pinf$~上有界，且~$f'(x)$~存在，而~$\lim_{x\to\pinf}f'(x)=b$。证明~$b=0$。
+\item 设~$f(x)$~在~$\minto a\pinf$~上可导，且
+\[
+  \lim_{x\to\pinf}\mparenb{f(x)+f'(x)}=k,
+\]
+其中~$k$~为有限数或~$\pm\infty$。证明~$\lim_{x\to\pinf}f(x)=k$。
+\item 由~Lagrange~中值定理，有~$\ln(1+x)-0=x\cdot\dfrac1{1+\theta x}\mcond{0<\theta<1}$。证明~$\lim_{x\to0}\theta=\dfrac12$。
+\item 由~Lagrange~中值定理，有~$\me^x-1=x\me^{\theta x}\mcond{0<\theta<1}$。证明~$\lim_{x\to0}\theta=\dfrac12$。
+\item\begin{exlist}
+  \item 证明~$\lim_{x\to0}\mparenB{\dfrac1{\sin^2x}-\dfrac1{x^2}}=\dfrac13$；
+  \item 由~Lagrange~中值定理，有
+  \[
+    \arcsin x-0=x\cdot\dfrac1{\sqrt{1-\theta^2x^2}}\mcond*{0<\theta<1}。
+  \]
+  证明~$\lim_{x\to0}\theta=\dfrac1{\sqrt 3}$。
+\end{exlist}
 \end{exercise}
+
 \section{Taylor~公式}
 \subsection{Peano~余项的~Taylor~公式}
 \subsection{Lagrange~余项的~Taylor~公式}
 \subsection{应用}
 \begin{exercise}
-\item
+\item 写出下列函数在~$x=0$~的带有~Peano~余项的~Taylor~展式。
+\begin{exlistcols}[3]
+  \item $\me^{2x}$；
+  \item $\cos x^2$；
+  \item $\ln(1-x)$；
+  \item $\dfrac1{(1+x)^2}$；
+  \item $\dfrac{x^3+2x+1}{x-1}$；
+  \item $\sin^3x$。
+\end{exlistcols}
+\item 写出下列函数在~$x=0$~的~Taylor~公式至所指的阶数。
+\begin{exlistcols}[3]
+  \item $1-x+x^2\mcond{x^3}$；
+  \item $\me^x\cos x\mcond{x^4}$；
+  \item $\dfrac x{\sin x}\mcond{x^4}$；
+  \item $\ln(\cos x+\sin x)\mcond{x^4}$；
+  \item $\dfrac x{2x^2+x-1}\mcond{x^3}$；
+  \item $\dfrac{1+x+x^2}{1-x+x^2}\mcond{x^4}$；
+  \item $\ln(1+x+x^2+x^3)\mcond{x^6}$；
+  \item $\ln\dfrac{1+x}{1-2x}\mcond{x^n}$。
+\end{exlistcols}
+\item 在~$x=0$~处将下列函数展开到~$x^4$。
+\begin{exlistcols}
+  \item $\dfrac{x^2}{\sqrt{1-x+x^2}}$；
+  \item $\dfrac 1{\sqrt{1-x^2+x^4}}$。
+\end{exlistcols}
+\item 设~$f(x)$~在~$x_0$~点~$n$~次可导，且
+\[
+  f(x)=\sum_{k=0}^na_k(x-x_0)^k+o\mparenb{(x-x_0)^n} 。
+\]
+证明，
+\[
+  f'(x)=\sum_{k=0}^{n-1}(k+1)a_{k+1}(x-x_0)^k+o\mparenb{(x-x_0)^{n-1}} 。
+\]
+\item 设~$f(x)$~在~$\mR$~上任意次可导，令~$F(x)=f(x^2)$。证明，
+\[
+  F^{(2n+1)}(0)=0,\qquad
+  \frac{F^{(2n)}(0)}{(2n)!}=\frac{f^{(n)}(0)}{n!}。
+\]
+\item 确定常数~$a,b$，使得~$x\to0$~时，
+\begin{exlist}
+  \item $f(x)=(a+b\cos x)\sin x-x$~为~$x$~的~$5$~阶无穷小；
+  \item $f(x)=\me^x-\dfrac{1+ax}{1+bx}$~为~$x$~的~$3$~阶无穷小。
+\end{exlist}
+\item 求下列极限。
+\begin{exlistcols}
+  \item $\lim_{x\to0}\mparenB{\dfrac1x-\dfrac1{\sin x}}$；
+  \item $\lim_{x\to0}\dfrac{\me^{x^3}-1-x^3}{\sin^62x}$；
+  \item $\lim_{x\to\pinf}\mparenb{\sqrt[3]{x^3+3x}-\sqrt{x^2-2x}}$；
+  \item $\lim_\ntoinf\mparenB{n+\dfrac12}\ln\mparenB{1+\dfrac1n}$。
+\end{exlistcols}
+\item 求下列极限。
+\begin{exlistcols}
+  \item $\lim_\ntoinf n^2\ln\mparenB{n\sin\dfrac1n}$；
+  \item $\lim_\ntoinf(-1)^nn\sin\mparenb{\pi\sqrt{n^2+2}}$。
+\end{exlistcols}
+\item 设~$f(x)$~在原点的邻域二阶可导，且
+\[
+  \lim_{x\to0}\mparenbb{\dfrac{\sin 3x}{x^3}+\dfrac{f(x)}{x^2}}=0 。
+\]
+\begin{exlistcols}
+  \item 求~$f(0),f'(0),f''(0)$；
+  \item 求~$\lim_{x\to0}\mparenbb{\dfrac 3{x^2}+\dfrac{f(x)}{x^2}}$。
+\end{exlistcols}
+\item 设~$f(x)$~在原点的邻域二阶可导，且
+\[
+  \lim_{x\to0}\mparenbb{1+x+\dfrac{f(x)}x}^{\frac1x}=\me^3 。
+\]
+\begin{exlistcols}
+  \item 求~$f(0),f'(0),f''(0)$；
+  \item 求~$\lim_{x\to0}\mparenbb{1+\dfrac{f(x)}x}^{\frac1x}$。
+\end{exlistcols}
+\item 设~$f(x)$~在~$U(a;\delta)$~上二次可微，且~$f''(a)\neq0$。由~Lagrange~中值定理，
+\[
+  f(a+h)-f(a)=f'(a+\theta h)\mcond[\enspace]{0<\theta<1,-\delta<h<\delta}。
+\]
+证明~$\lim_{h\to0}\theta=\dfrac12$。
+\item 设~$f(x)$~在~$U(a;\delta)$~上有~$n-1$~阶导数，且~$f^{(n)}(a)\neq0$，而~$f''(a)=f'''(a)=\dotsb=f^{(n-1)}(a)=0$。%
+由~Lagrange~中值定理，
+\[
+  f(a+h)-f(a)=f'(a+\theta h)\mcond[\enspace]{0<\theta<1,-\delta<h<\delta}。
+\]
+证明~$\lim_{h\to0}\theta=\dfrac1{\sqrt[n-1]n}$。
+\item\begin{exlist}
+\item 把多项式~$P(x)=1+3x+5x^2-2x^3$~表示成以~$x+1$~为文字的多项式；
+\item 把多项式~$P(x)=5+3x-2x^2+x^3$~表示成以~$x-1$~为文字的多项式。
+\end{exlist}
+\item 设~$P(x)$~为一~$n$~次多项式。
+\begin{exlist}
+  \item 若~$P(a),P'(a),\dotsc,P^{(n)}(a)$~皆为正数，证明~$P(x)$~在~$\minto a\pinf$~上无根；
+  \item 若~$P(a),P'(a),\dotsc,P^{(n)}(a)$~正负号相间，证明~$P(x)$~在~$\minto a\pinf$~上无根。
+\end{exlist}
+\item 设多项式~$P(x)=a_nx^n+a_{n-1}x^{n-1}+\dotsb+a_1x+a_0$。证明~$x=a$~是~$P(x)=0$~的~$k$~重根当且
+仅当~$P^{(i)}(a)=0\mcond{i=0,1,\dotsc,k-1}$，但~$P^{(k)}(a)\neq0$。
+\item 设~$a,b,n$~为正整数。令
+\[
+  f(x)=\dfrac{x^n(a-bx)^n}{n!} 。
+\]
+%%证明，
+\begin{exlist}\FixExHead
+  \item $f\mparenB{\dfrac ab-x}=f(x)$；
+  \item $f^{(k)}(x)\mcond{0\leq k\leq 2n}$~当~$x=0$~与~$x=\dfrac ab$~时取值为整数。
+\end{exlist}
+\item 设~Legendre~多项式
+\[
+  P_n(x)=\dfrac1{2^nn!}\dfrac{\dif^n}{\dif x^n}(x^2-1)^n 。
+\]
+证明，
+\begin{exlistcols}[2]
+  \item $P_n(1)=1$；
+  \item $P_n(-1)=(-1)^n$；
+  \item $P_{2n-1}(0)=0$；
+  \item $P_{2n}(0)=\dfrac{(-1)^n(2n)!}{2^{2n}(n!)^2}$。
+\end{exlistcols}
+\item 设~$f(x)=\me^{x^2}$。
+\begin{exlist}
+  \item 证明~$f^{(n)}(x)=P_n(x)\me^{x^2}$，其中~$P_n(x)$~为~$n$~次多项式，满足~$P_0(x)=1$，$P_1(x)=2x$，而
+  \[
+    P_{n+1}(x)=2xP_n(x)+2nP_{n-1}(x);
+  \]
+  \item 求~$f^{(n)}(0)$~的值。
+\end{exlist}
+\item 用~Taylor~公式证明，
+\begin{exlistcols}
+  \item $0<x-\ln(1+x)<\dfrac{x^2}2\mcond{0<x\leq 1}$；
+  \item $\lim_\ntoinf\sum_{k=1}^n\mparenbb{\dfrac1k-\ln\mparenB{1+\dfrac1k}}$~存在。
+\end{exlistcols}
+\item 证明，对任意~$x\in\mR$，有~$\mabsb{\me^x-1-x}\leq\dfrac{x^2}2\me^{\mabs x}$。
+\item%% 证明，
+\begin{exlist}\FixExHead
+  \item $\me=1+1+\dfrac1{2!}+\dotsb+\dfrac1{n!}+\dfrac{\me^\theta}{(n+1)!}\mcond{0<\theta<1}$；
+  \item $\me$~是无理数。
+\end{exlist}
+\item 设~$f(x)$~在~$\mintc ab$~上有二阶导数，且~$f'(a)=f'(b)=0$。证明存在~$\xi\in\minto ab$，使得
+\[
+  \mabsb{f''(\xi)}\geq\dfrac4{(b-a)^2}\mabsb{f(b)-f(a)}。
+\]
+\item 设~$f(x)$~在~$\mintc ab$~上二阶连续可微，且~$f(a)=f(b)=0$。证明，
+\begin{exlist}
+  \item \[\max_{x\in\mintc ab}\mbraceb{\mabsb{f(x)}}\leq\dfrac18(b-a)^2\max_{x\in\mintc ab}\mbraceb{\mabsb{f''(x)}};\]
+  \item \[\max_{x\in\mintc ab}\mbraceb{\mabsb{f'(x)}}\leq\dfrac12(b-a)\max_{x\in\mintc ab}\mbraceb{\mabsb{f''(x)}} 。\]
+\end{exlist}
+\item 设~$f(x)$~在~$\mR$~上二阶可微，且对任意~$x\in\mR$，有~$\mabsb{f(x)}\leq M_0$~与~$\mabsb{f''(x)}\leq M_2$。
+\begin{exlistcols}
+  \item 写出~$f(x+h)$~与~$f(x-h)$~的~Taylor~展式；
+  \item 证明，对任意~$h>0$，有~$\mabsb{f'(x)}\leq\dfrac{M_0}h+\dfrac h2M_2$；
+  \item 求~$\dfrac{M_0}h+\dfrac h2M_2$~在~$\minto 0\pinf$~上的最小值；
+  \item 证明~$\mabsb{f'(x)}\leq\smbsqrt{2M_0M_2}$。
+\end{exlistcols}
+\item 设~$f(x)$~在~$\minto 0\pinf$~上二阶可微，且对任意~$x\in\minto 0\pinf$，%
+有~$\mabsb{f(x)}\leq M_0$~与~$\mabsb{f''(x)}\leq M_2$。证明~$\mabsb{f'(x)}\leq2\smbsqrt{M_0M_2}\mcond[\enspace]{x>0}$。
+\item 设~$f(x)$~在~$\minto 0\pinf$~上三阶可微，且对任意~$x\in\minto 0\pinf$，有~$\mabsb{f(x)}\leq M_0<\pinf$~与
+~$\mabsb{f'''(x)}\leq M_3<\pinf$。证明~$f'(x)$~与~$f''(x)$~在~$\minto 0\pinf$~上有界。
 \end{exercise}
+
 \section{函数的升降与极值}
 \subsection{函数的升降}
 \subsection{极值}
 \subsection{函数在一点的升降}
 \begin{exercise}
-\item
+\item 证明，对任意~$x\in\mintc{-1}1$，有
+\[
+  \arcsin x+\arccos x\equiv\frac\pi2 。
+\]
+\item 若~$f(x)$~在~$\mintc ab$~上定义，并且对任意~$x,y\in\mintc ab$，有
+\[
+  \mabsb{f(x)-f(y)}\leq k\mabs{x-y}^2,
+\]
+其中~$k$~为常数。证明~$f(x)$~为常值函数。
+\item 已知~$f(1)=1$。
+\begin{exlist}
+  \item 若~$f(x)$~满足方程~$xf'(x)+f(x)\equiv0$，求~$f(2)$；
+  \item 若~$f(x)$~满足方程~$xf'(x)-f(x)\equiv0$，求~$f(2)$。
+\end{exlist}
+\item 设~$f(x),g(x)$~在~$\minto ab$~上可微，而~$g(x)\neq0$，并且
+\[
+  \begin{vmatrix}
+    f(x)  & g(x) \\
+    f'(x) & g'(x)
+  \end{vmatrix}\equiv 0 。
+\]
+证明，存在常数~$C$，使得~$f(x)\equiv Cg(x)$。
+\item 证明下列不等式。
+\begin{exlistcols}
+  \item $\sin x>\dfrac2\pi x\mcond{0<x<\sfrac\pi2}$；
+  \item $\cos x>1-\dfrac{x^2}2\mcond{x\neq0}$；
+  \item $\me^x>1+x\mcond{x\neq0}$；
+  \item $\me^{-x^2}<\dfrac1{1+x^2}\mcond{x\neq0}$；
+  \item $\dfrac{1-x}{1+x}\leq\me^{-2x}\mcond{)\leq x\leq 1}$。
+\end{exlistcols}
+\item 证明下列不等式。
+\begin{exlistcols}
+  \item $\ln x>\dfrac{2(x-1)}{x+1}\mcond{x>1}$；
+  \item $\sin x+\cos x>1+x-x^2\mcond{x>0}$；
+  \item $\ln(1+x)\geq\dfrac{\arctan x}{1+x}\mcond{x\geq0}$。
+\end{exlistcols}
+\item\begin{exlist}
+  \item 证明~$f(x)=\dfrac{\sin x}x$~在~$\minto 0\pi$~上单调下降；
+  \item 证明，圆内接正多边形的面积随边数的增加而增加。
+\end{exlist}
+\item 证明，
+\begin{exlistcols}
+  \item $\mparenB{1+\dfrac1x}^x$~在~$x>0$~上单调上升；
+  \item $\mparenB{1+\dfrac1x}^{1+x}$~在~$x>0$~上单调下降；
+  \item $\mparenB{1+\dfrac1x}^x<\me<\mparenB{1+\dfrac1x}^{1+x}\mcond{x>0}$。
+\end{exlistcols}
+\item 设~$f(x),g(x)$~在~$\mR$~上连续可微，并且
+\[
+  \begin{vmatrix}
+    f(x)  & g(x) \\
+    f'(x) & g'(x)
+  \end{vmatrix}>0 。
+\]
+证明，在~$f(x)$~的两个零点之间一定有~$g(x)$~的零点。
+\item 设~$f(x)$~在~$\mR$~上可微，且~$f(x)+f'(x)>0$。证明~$f(x)$~在~$\mR$~上至多有一个零点。
+\item\begin{exlist}
+  \item 求函数~$f(x)=ax-\ln x$~在~$x>0$~上的极值；
+  \item 确定方程~$ax=\ln x$~有两个正实根的条件。
+\end{exlist}
+\item\begin{exlist}
+  \item 求方程~$f(x)=x^3-px+q\mcond{p>0}$~的极值点与极值；
+  \item 确定方程~$x^3-px+q=0$~有三个实根的条件。
+\end{exlist}
+\item 设函数~$f(x)$~在~$\minto ab$~上二次可导，且~$f''(\xi)\neq0$。证明，在~$\minto ab$~内可找出两点~$x_1,x_2$，使得
+\[
+  \frac{f(x_2)-f(x_1)}{x_2-x_1}=f'(\xi)。
+\]
+\item 求下列函数的最大值。
+\begin{exlistcols}
+  \item $f(x)=x^2\sqrt{a^2-x^2}\mcond{0\leq x\leq a}$；
+  \item $f(x)=x^n(1-x)^m\mcond{0\leq x\leq 1,~n,m\in\mN}$；
+  \item $f(x)=x^2\me^{-nx}\mcond{x\geq0,~n\in\mN}$；
+  \item $f(x)=x^\alpha\ln\dfrac1x\mcond{x>0,~\alpha>0}$。
+\end{exlistcols}
+\item 设~$y(x)$~在~$\mintc ab$~上二次可导，并对任意~$x\in\minto ab$，满足（其中~$c(x)<0$）
+\[
+  y''(x)+b(x)y'(x)+c(x)y(x)\equiv 0 。
+\]
+\begin{exlist}
+  \item 证明~$y(x)$~不能在~$\minto ab$~内部达到正最大值或负最小值；
+  \item 又设~$y(a)=y(b)=0$，证明~$y(x)\equiv0$。
+\end{exlist}
+\item 设~$u>\me$，证明方程~$x\ln x=u$~的根~$x(u)$~满足，
+\begin{exlistcols}
+  \item $x(u)\sim\dfrac u{\ln u}\mcond{u\to\pinf}$；
+  \item 求~$f(x)=\dfrac{\ln x}x$~在~$x>1$~上的最大值；
+  \item $\dfrac u{\ln u}<x(u)\leq\mparenB{1+\dfrac1\me}\dfrac u{\ln u}$。
+\end{exlistcols}
+\item 设炮口的仰角为~$\alpha$，炮弹的初速度为~$v_0\si{m/s}$，炮口取作原点，发炮时间取作~$t=0$，不计空气阻力时，炮弹的运动方程为
+\[
+  \Biggl\{\begin{aligned}
+    x&=tv_0\cos\alpha;\\
+    y&=tv_0\sin\alpha-\dfrac12gt^2 。
+  \end{aligned}
+\]
+若初速度~$v_0$~不变，确定炮口的仰角~$\alpha$，使得炮弹射程最远。
+\item 某村计划修建一条断面面积为~$4$~平方米的提醒渠道，侧面的坡度为~$\dfrac34$~（即底边与斜高间的夹角~$\theta$~满
+足~$\tan\theta=\sfrac34$），底边~$b$~与斜高~$\ell$~为多长时湿周最小。（所谓湿周，就是过流断面上流体与固体壁面接触的
+周界线；根据经验，湿周最小时渠道过水能力最大）
+\item 给定曲线（其中~$a>0$）
+\[
+  \biggl\{\begin{aligned}
+    x&= a\cos^4t; \\
+    y&= a\sin^4t,
+  \end{aligned}\quad 0\leq t\leq\dfrac\pi2 。
+\]
+\begin{exlist}
+  \item 确定曲线上一点，使得该点的切线被坐标轴所截的长度~$AB$~最短；
+  \item 求出~$AB$~的最短长度。
+\end{exlist}
+\item 设
+\[
+  f(x)=\begin{cBdcases}
+    x+2x^2\sin\frac1x, & x\neq0;\\
+    0, & x=0 。
+  \end{cBdcases}
+\]
+证明~$f'(0)>0$，但~$f(x)$~在~$U(0;\delta)$~内（无论多么小的~$\delta$）不单调上升。
+\item 设
+\[
+  f(x)=\begin{cBdcases}
+    2-x^2\mparenB{2+\sin\frac1x}, & x\neq0;\\
+    2, & x=0 。
+  \end{cBdcases}
+\]
+%%证明，
+\begin{exlist}\FixExHead
+  \item $x=0$~是~$f(x)$~的极大值点；
+  \item 在~$x=0$~的任意小领域内，函数~$f(x)$~在~$x=0$~的右侧不单调下降，而在~$x=0$~的左侧不单调上升。
+\end{exlist}
 \end{exercise}
+
 \section{函数的凹凸与拐点}
 \subsection{函数的凹凸性}
 \subsection{应用}
 \subsection{拐点}
 \begin{exercise}
-\item
+\item 证明~$\sqrt{a+bx^2}\mcond{a,b>0}$~为凸函数。
+\item 证明，不存在三次或三次以上的奇数次多项式是凸函数。
+\item 证明，次数大于~$1$~的凸多项式一定是严格凸的。
+\item 确定四次多项式是凸函数的条件。
+\item 设~$f(x),g(x)$~是~$\minto ab$~上的凸函数。证明~$\max_{x\in\minto ab}\mrangeb{f(x)}{g(x)}$~也是~$\minto ab$~上的凸函数。
+\item 设~$f(x)$~是~$\minto ab$~上的凸函数，而~$g(x)$~是~$\minto cd$~上单调上升的凸函数，并且~$f(x)$~的值域包含在~$\minto cd$~内。%
+证明~$g\mparenb{f(x)}$~是~$\minto ab$~上的凸函数。
+\item 设~$f(x)$~在~$\minto ab$~上定义并且取正值，并且~$-f(x)$~是凸函数。证明~$\dfrac1{f(x)}$~也是凸函数。
+\item 设~$f(x)$~是凸函数，且二阶可导。证明~$\me^{f(x)}$~也是凸函数。
+\item 设~$f(x)>0$，并在~$f''(x)$~存在。证明~$\ln f(x)$~是凸函数当且仅当
+\[
+  \begin{vmatrix}
+    f(x)  & f'(x) \\
+    f'(x) & f''(x)
+  \end{vmatrix}\geq0 。
+\]
+\item%%% 证明，
+\begin{exlist}\FixExHead
+  \item $\mabs a^p+\mabs b^p\geq 2^{1-p}\mparenb{\mabs a+\mabs b}^p\mcond{p>1}$；
+  \item $\mabs a^p+\mabs b^p\leq 2^{1-p}\mparenb{\mabs a+\mabs b}^p\mcond{0<p<1}$。
+\end{exlist}
+\item 设~$b\geq a$。证明
+\[
+  2\arctan\dfrac{b-a}2\geq\arctan b-\arctan a 。
+\]
+\item 设~$f(x)$~在~$\mintc 0a$~上二阶可导，且~$f(0)=0$，而~$f''(x)<0$。证明~$\dfrac{f(x)}x$~严格单调下降。
+\item 设~$f(x)$~在~$\mR$~上可微。证明~$f'(x)$~单调上升当且仅当对任意~$h>0$，函数~$f(x+h)-f(x)$~也是单调上升的。
+\item 设~$f(x)$~在~$\minto ab$~上~$n\mcond{n\geq2}$~阶可微，并且存在~$x_0\in\minto ab$，使得
+\[
+  f'(x_0)=f''(x_0)=\dotsb=f^{(n-1)}(x_0)=0 。
+\]
+对任意~$x\in\minto ab$，有~$f^{(n)}(x)>0$。证明
+\begin{exlist}
+  \item $n$~为奇数时，$f(x)$~在~$\minto ab$~上严格单调上升；
+  \item $n$~为偶数时，$f(x)$~在~$\minto ab$~上为严格凸函数。
+\end{exlist}
+\item 设~$n\geq2$，而~$r>0$，并且~$f^{(n)}(x)$~在~$\mintc{a-r}{a+r}$~上连续。已知~$f^{(k)}(a)=0\mcond{1\leq k\leq n-1}$，%
+而~$f^{(n)}(a)\neq0$。证明，
+\begin{exlistcols}
+  \item $n$~为偶数时，$a$~是极值点；
+  \item $n$~为奇数时，$a$~是拐点。
+\end{exlistcols}
+\item 设~$f(x)$~是~$\minto ab$~上的凸函数。证明，
+\begin{exlistcols}
+  \item 对任意~$x_0\in\minto ab$，$f_+'(x_0)$~与~$f_-'(x_0)$~存在，从而~$f(x)$~在~$x_0$~点连续；
+  \item $f_-'(x_0)\leq f_+'(x_0)$；
+  \item $f_-'(x)$~与~$f_+'(x)$~在~$\minto ab$~上单调上升。
+\end{exlistcols}
+\item 设~$f(x)$~放在~$\minto ab$~上时凸的。证明，对任意~$x_0\in\minto ab$，存在~$m\in\mintcb{f_-'(x_0)}{f_+'(x_0)}$，使
+得~$f(x)\geq f(x_0)+m(x-x_0)$。
+\item 设~$f(x)$~在~$\minto ab$~上定义，并且对任意~$x_0\in\minto ab$，存在~$m$，使得~$f(x)\geq f(x_0)+m(x-x_0)$。证
+明~$f(x)$~是凸函数。
+\item 设~$f(x)$~在~$\mintc ab$~是凸函数，而~$f_+'(a),f_-'(a)$~存在且有限。证明~$f(x)$~满足~Lipschitz~条件，即存在
+常数~$k$，使得对任意~$x,y\in\mintc ab$，有
+\[
+  \mabsb{f(x)-f(y)}\leq k\mabs{x-y}。
+\]
+\item 证明~$1+x^2\leq 2^x\mcond{0\leq x\leq 1}$。
 \end{exercise}
+
 \section{函数作图}
 \begin{exercise}
-\item
+\item 作下列函数的图象。
+\begin{exlistcols}[4]
+  \item $y=\dfrac{(x-1)^3}{(x+1)^3}$；
+  \item $y=\dfrac{x^4}{(1+x)^3}$；
+  \item $y=\dfrac{x^3}{2(x-1)^2}$；
+  \item $y=\dfrac{x+1}{x^2+1}$。
+\end{exlistcols}
+\item 作下列函数的图象。
+\begin{exlistcols}
+  \item $y=(1+x^2)\me^{-x^2}$；
+  \item $y=x^{\frac23}\me^{-x}$。
+\end{exlistcols}
+\item 作下列函数的图象。
+\begin{exlistcols}
+  \item $y=\sin^3x+\cos^3x\mcond{0\leq x\leq 2\pi}$；
+  \item $y=\sin x+\dfrac{\sin2x}2+\dfrac{\sin3x}3\mcond{0\leq x\leq \pi}$。
+\end{exlistcols}
+\item\begin{exlist}
+  \item 作~$y=\dfrac{\ln x}x$~的图象；
+  \item 设~$\me^{bx}=ax^2\mcond{a,b>0}$。令~$t=\sqrt a\,x$，证明~$\dfrac{\ln t}t=\dfrac b{2\sqrt a}$。
+  \item 确定方程~$\me^{bx}=ax^2\mcond{a,b>0}$~有两个正实根的条件。
+\end{exlist}
+\item 作~$y=x^3-x^2-x+1$~的图象，并取定~$k$~的值，使得方程~$x^3-x^2-x+k=0$~有三个实根。
+\item 确定方程~$\dfrac1{\sin x}+\dfrac{3\sqrt 3}{\cos x}=\lambda$~在区间~$\mintc 0{2\pi}$~上的实根个数，这里~$\lambda$~为常数。
 \end{exercise}
+
 \section{方程求根}
 \begin{exercise}
-\item
+\item 用切线法求方程~$x^3-2=0$~的正根。已知~$x_1=1$，迭代~$6$~次计算到~$x_6$。
+\item 用切线法求~$\sqrt 3$~与~$\sqrt 5$~（计算到~$x_n$~与~$x_{n+1}$~小数后第~$4$~位相同为止）。
+\item 设~$f(x)$~在~$x_0$~点的邻域~$U(x_0;\delta)$~上一阶可微，而~$f(x_0)=0$，并且
+\[
+  q\coloneq\sup_{x\in U(x_0;\delta)}\mbraceb{\mabs{1-\alpha f'(x)}}<1,
+\]
+这里~$\alpha$~为常数。证明，若取~$x_1\in U(x_0;\delta)$，则由公式~$x_{n+1}=x_n-\alpha f(x_n)$~得到的
+序列~$\mbrace{x_n}$~收敛于~$x_0$。
 \end{exercise}
+
+
 \begin{exercise*}
-\item
+\item 设~$f(x)$~在~$\minto a\pinf$~上二阶可微，并且~$\lim_{x\to a+0}f(x)=\lim_{x\to\pinf}f(x)=0$。证明，
+\begin{exlistcols}
+  \item 存在~$x\to\pinf\mcond{\ntoinf}$，使得~$\lim_\ntoinf f'(x_n)=0$；
+  \item 存在~$\zeta\in\minto a\pinf$，使得~$f''(\zeta)=0$。
+\end{exlistcols}
+\item 设~$f_0(x)\equiv1$，而~$f_{k+1}(x)=xf_k(x)-f_k'(x)$。证明，
+\begin{exlistcols}
+  \item $f_n(x)$~是首一~$n$~次多项式；
+  \item $f_n(x)$~有~$n$~个不同实根。
+\end{exlistcols}
+\item 设~$f(x)$~在~$\minto 0\pinf$~上可导。证明，$f'(x)$~单调上升当且仅当~$f(x)-xf'(x)$~单调下降。
+\item 设~$f(x)$~在~$\mintc ab$~上连续，在~$\minto ab$~上可导，并且~$f(x)$~不是线性函数。证明，存在~$\xi\in\minto ab$，使得
+\[
+  \mabsb{f'(\xi)}>\mabsbb{\frac{f(b)-f(a)}{b-a}}。
+\]
+\item 设~$f(x)$~在~$\mR$~上可微，并且对任意~$x,h\in\mR$，有
+\[
+  f(x+h)-f(x)=hf'\mparenB{x+\frac12h} 。
+\]
+证明，
+\begin{exlistcols}
+  \item $f(x)$~任意次可微；
+  \item $f(x)$~是不超过二次的多项式。
+\end{exlistcols}
+\item 设~$f(x)$~在~$\minto ab$~内无穷次可微，对任意~$x\in\minto ab$，有~$f^{(n)}(x)>0\mcond{n=1,2,\dotsc}$，并
+且~$\mabsb{f(x)}\leq M$。证明，对任意~$x\in\minto ab$~和~$r>0$，只要~$x+r\in\minto ab$，对任意~$n=1,2,\dotsc$，便有
+\[
+  f^{(n)}(x)\leq\dfrac{2Mn!}{r^n}。
+\]
+\item 设~$f(x)$~在~$\minto ab$~内无穷次可微，且~$f^{(n)}(x)>0$~对任意~$x\in\minto ab$~和~$n=1,2,\dotsc$~成立。证明，对
+任意~$x_0\in\minto ab$，存在~$r>0$，使得对任意~$x\in U(x_0;r)$，有
+\[
+  f(x)=f(x_0)+\lim_\ntoinf\sum_{k=1}^n\dfrac{(x-x_0)^k}{k!}f^{(k)}(x_0)。
+\]
+\item 设~$x\in\mintc 02$~时，有~$\mabsb{f(x)}\leq1$~和~$\mabsb{f''(x)}\leq1$。证明~$\mabsb{f'(x)}\leq 2\mcond{0\leq x\leq 2}$。
+\item 设~$f(x)$~在~$\mR$~上~$n$~次可微，且
+\[
+  \mabsb{f(x)}\leq M_0,\qquad \mabsb{f^{(n)}(x)}\leq M_n,
+\]
+这里~$M_0,M_n$~均为常数。证明，
+\begin{exlistcols}
+  \item $f'(x),\dotsc,f^{(n-1)}(x)$~在~$\mR$~上有界；
+  \item $\mabsb{f^{(k)}(x)}\leq 2^{k(n-k)/2}M_0^{1-k/n}M_n^{k/n}\mcond{0\leq k\leq n}$。
+\end{exlistcols}
+\item 设
+\[
+  P_n(x)=1+x+\dfrac{x^2}{2!}+\dotsb+\dfrac{x^n}{n!},
+\]
+而~$x_m$~是~$P_{2m+1}(x)=0$~的实根。证明~$x_m<0$，并且~$\lim_{m\to\infty}x_m=\minf$。
+\item 设~$f(x)$~在~$\minto 0\pinf$~上为可微的凸函数，并且
+\[
+  f(x)=x^2+x^2\cdot\e(x),\quad\lim_{x\to\pinf}\e(x)=0 。
+\]
+%%证明，
+\begin{exlist}\FixExHead
+  \item 对任意~$0<h<\dfrac x2$，有
+  \[
+    \dfrac{f(x)-f(x-h)}h\leq f'(x)\leq\dfrac{f(x+h)-f(x)}h;
+  \]
+  \item 对任意~$\eta>0$，当~$x$~充分大时，对任意~$0<h<\dfrac x2$，有
+  \[
+    2x-h-\dfrac\eta hx^2\leq f'(x)\leq 2x+h+\dfrac\eta hx^2;
+  \]
+  \item $\lim_{x\to\pinf}\dfrac{f'(x)}{2x}=1$；
+  \item 若~$f(x)$~非可微凸函数，讨论~$\lim_{x\to\pinf}\dfrac{f(x)}{x^2}=1$~是否蕴涵~$\lim_{x\to\pinf}\dfrac{f'(x)}{2x}=1$。
+\end{exlist}
+\item 给定方程~$x^n+x=1\mcond{n\in\mN}$。证明，
+\begin{exlistcols}
+  \item 在~$x>0$~上方程有唯一解~$x_n$；
+  \item $\lim_\ntoinf x_n=1$；
+  \item $1-x_n\sim\dfrac{\ln n}n\mcond{\ntoinf}$。
+\end{exlistcols}
+\item 证明函数
+\[
+  \frac1{2^x}+\frac1{2^{\sfrac1x}}
+\]
+在~$\minto 0\pinf$~上的最大值为~$1$。
 \end{exercise*}
 
 

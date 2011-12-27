@@ -4,7 +4,9 @@
 
 
 \chapter{场\emspace 论}\label{ch:23}
+
 \section{场的表示法}
+
 \section{方向场的通量、散度和~Gauss~公式}
 \subsection{通量和散度概念}
 \subsection{散度的计算}
@@ -12,15 +14,228 @@
 \subsection{Green~公式和~Gauss~公式的关系}
 \subsection{Gauss~公式的应用与例子}
 \begin{exercise}
-\item
+\item\label{exer-23.2.1}求下列向量场通过曲面~$S$~的通量。
+\begin{exlist}
+  \item\label{exer-23.2.1-1}$\mvec F=y\mvec i+zx\mvec j+xy\mvec k$，其中~$\Omega=\mintc{-1}1\times\mintc{-1}1\times\mintc{-1}1$，%
+  而~$S$~为~$\Omega$~的表面，外侧；
+  \item $\mvec F=x\mvec i+y\mvec j+z\mvec k$，其中~$S=\mathsetb{(x,y,z)}{x,y\geq0,~x+y+z=1}$，下侧；
+  \item $\mvec F=x^2\mvec i+y^2\mvec j+z^2\mvec k$，其中~$S\colon x^2+y^2+z^2=a^2$，$z\geq0$，下侧。
+\end{exlist}
+\item 利用~Gauss~公式计算下列曲面积分。
+\begin{exlist}
+  \item 设~$P=x-y^2+z^2$，$Q=y-z^2+x^2$，$R=z-x^2+y^2$，而~$S\colon(x-a)^2+(y-b)^2+(z-c)^2=R^2$，外侧，
+  \[
+    \oiint_SP\dif y\dif z+Q\dif z\dif x+R\dif x\dif y;
+  \]
+  \item \ref{exer-23.2.1}~之~\ref{exer-23.2.1-1}~给出的曲面积分；
+  \item 设~$P=y^3+z^2-x$，$Q=z^3+x^2-y$，$R=x^2+y^2-z$，而~$S\colon\mabsb{x-y+z}+\mabsb{y-x+z}+\mabsb{z-x+y}=1$，内侧，
+  \[
+    \oiint_SP\dif y\dif z+Q\dif z\dif x+R\dif x\dif y;
+  \]
+  \item 设~$S$~为圆锥体~$x^2+y^2\leq z^2\mcond{0\leq z\leq h}$~的边界面，外侧，而~$\cos\alpha,\cos\beta,\cos\gamma$~是~$S$~的
+  外法向~$\mvec n$~的方向余弦，
+  \[
+    \oiint_S\mparenb{x^2\cos\alpha+y^2\cos\beta+z^2\cos\gamma}\dif S 。
+  \]
+\end{exlist}
+\item 计算~Gauss~积分
+\[
+  I(x,y,z)=\oiint_S\frac{\cos\minp{\mvec r}{\mvec n}}{r^2}\dif S,
+\]
+其中~$S$~为简单封闭光滑曲面，所包含的体积为~$V$，$\mvec n$~为曲面~$S$~上在点~$(\xi,\eta,\zeta)$~的外法向，
+\[
+  \mvec r=(\xi-x)\mvec i+(\eta-y)\mvec j+(\zeta-z)\mvec k,
+\]
+$r=\mabs{\mvec r}$。对下列两种情况进行讨论。
+\begin{exlistcols}
+  \item 曲面~$S$~包围的区域不含~$(x,y,z)$~点；
+  \item 曲面~$S$~包围的区域含~$(x,y,z)$~点。
+\end{exlistcols}
+\item 证明
+\[
+  \iiint_V\frac{\dif\xi\dif\eta\dif\zeta}r=\frac12\oiint_S\cos\minp{\mvec r}{\mvec n}\dif S,
+\]
+其中~$S$~是包围立体~$V$~的分块光滑的封闭曲面，$\mvec n$~为~$S$~上的点~$(\xi,\eta,\zeta)$~处的外法向，
+\[
+  \mvec r=(\xi-x)\mvec i+(\eta-y)\mvec j+(\zeta-z)\mvec k,
+\]
+$r=\mabs{\mvec r}$。对下列两种情况进行讨论。
+\begin{exlist}
+  \item $V$~中不含~$(x,y,z)$~点；
+  \item $V$~中含~$(x,y,z)$~点，此时令
+  \[
+    \iiint_V\frac{\dif\xi\dif\eta\dif\zeta}r=\lim_{\e\to0+0}\iiint_{V_\e}\frac{\dif\xi\dif\eta\dif\zeta}r,
+  \]
+  其中~$V_\e$~是以~$(x,y,z)$~为中心，充分小的~$\e>0$~为半径的球。
+\end{exlist}
+\item 计算下列曲面积分。
+\begin{exlist}
+  \item 设~$S\colon\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}+\dfrac{z^2}{c^2}=1\mcond{z\geq0}$，下侧，
+  \[
+    \iint_S\mparenb{x^2-y^2}\dif y\dif z+\mparenb{y^2-z^2}\dif z\dif x+2z(y-x)\dif x\dif y;
+  \]
+  \item 设~$S$~是由平面~$x+y+z=1$，$x=0$，$y=0$~和~$z=0$~围成的立体~$\Omega$~的表面，外侧，
+  \[
+    \oiint_S\mparen{x+\cos y}\dif y\dif z+\mparen{y+\cos z}\dif z\dif x+(z+\cos x)\dif x\dif y;
+  \]
+  \item 设~$\mvec F=x^3\mvec i+y^3\mvec j+z^3\mvec k$，而~$S\colon x^2+y^2+z^2=a^2$，$z\geq0$，上侧，$\mvec n$~是~$S$~的外法向，%
+  ~$\iint_S\mvec F\cdot\mvec n\dif S$；
+  \item 设~$S\colon\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}+\dfrac{z^2}{c^2}=1\mcond{x\geq0}$，后侧，
+  \[
+    \iint_S\mparenbb{\frac{x^3}{a^2}+yz}\dif y\dif z+\mparenbb{\frac{y^3}{b^2}+z^3x^2}\dif z\dif x+
+    \mparenbb{\frac{z^3}c+x^3y^3}\dif x\dif y 。
+  \]
+\end{exlist}
+\item\begin{exlist}
+  \item 计算~$\mdiv\grad u$，其中~$u(x,u,z)\in C^{(2)}$；
+  \item 计算~$\mdiv\grad f(r)$，其中~$r=\smbsqrt{x^2+y^2+z^2}$，且~$f(r)\in C^{(2)}$；并
+  考虑对什么样的函数~$f(r)$，有~$\mdiv\grad f(r)=0$。
+\end{exlist}
+\item 设~$\mvec c$~是常向量。证明，
+\begin{exlist}
+  \item $\mdiv\mparen{u\mvec c}=\mvec c\cdot\grad u$；
+  \item $\mdiv\mparenb{f(r)\mvec c}=\dfrac{f'(r)}r\mparen{\mvec c\cdot\mvec r}$，其中
+  ~$f\in C^{(1)}$，而~$r=\smbsqrt{x^2+y^2+z^2}$。
+\end{exlist}
+\item 求引力场~$\mvec F=\dfrac k{r^3}\mvec r$~的散度，其中~$k$~为常数，而~$\mvec r=x\mvec i+y\mvec j+z\mvec k$。
+\item 设有一数量场~$F(x,y,z)$~在~$\mR{3}$~上除了原点外连续可微，其等值面是以原点为球心的球面。又设数量场的梯度场
+~$\grad F(x,y,z)$~的梯度恒为零。证明此数量场与~$\dfrac {C_1}r$~仅差一个常数，其中
+~$r=\smbsqrt{x^2+y^2+z^2}$，而~$C_1$~为某固定常数。
+\item 设有~$C^{(1)}$~场~$\mvec F=P\mvec i+Q\mvec j+R\mvec k\mcond{x^2+y^2+z^2\neq0}$。在球面~$x^2+y^2+z^2=t^2$~上~$\mvec F$~的长度
+保持一固定值，且~$\mvec F$~的方向与矢径~$\mvec r=x\mvec i+y\mvec j+z\mvec k$~相同，而且~$\mvec F$~的散度恒为零。证明此向量场为
+~$\mvec F=\dfrac K{r^3}\mvec r$，其中~$K$~为常数，而~$r=\mabs{\mvec r}$。
+\item 物体以一恒定角速度~$\omega$~依逆时针方向绕~$z$~轴旋转。在任一固定时刻，空间的点~$M(x,y,z)$~有速度向量~$\mvec v$~与其对应。%
+求此速度场的散度。
+\item 求流体速度场~$\mvec v=x^3\mvec i+y^2\mvec j+z^3\mvec k$~穿过曲面~$S=\mathsetb{(x,y,z)}{x^2+y^3+z^2=R^2,~x,y,z\geq0}$~
+向外的流量。
+\item 求电场~$\mvec F=y^2z^2\mvec i+z^2x^2\mvec j+x^2y^2\mvec k$~通过~$S$~的电通量，其中，
+\begin{exlist}
+  \item\label{exer-23.2.13}$S$~是圆柱体~$x^2+y^2=a^2\mcond{0\leq z\leq h}$~的表面；
+  \item $S$~是~\ref{exer-23.2.13}~的圆柱体的侧表面。
+\end{exlist}
+\item 求电场~$\mvec E=\dfrac K{r^3}\mvec r$~穿过围绕坐标原点的任一内部光滑的简单封闭曲面的电通量。
+\item 设~$G$~是~$\mR{3}$~上的开区域，而~$u(x,y,z)\in C^{(2)}(G)$。证明~$u(x,y,z)$~在~$G$~上调和当且仅当对~$G$~上任一简单逐块光滑
+曲面~$S$，都有~$\oiint_S\pdiff u{{\mvec n}}\dif S=0$，其中~$\mvec n$~为~$S$~的外法线。
+\item 设~$u(x,y,z)$~和~$v(x,y,z)$~有二阶连续偏导数，在一个有界闭区域~$\Omega$~上调和，且~$\bound\Omega$~为分块光滑曲面。证明，若
+在~$\bound\Omega$~上有~$u(x,y,z)=v(x,y,z)$，则在~$\Omega$~上有~$u(x,y,z)\equiv v(x,y,z)$。
+\item 设~$u(x,y,z)$~在由分块光滑曲面~$S$~围成的有界闭区域~$\Omega$~上调和。
+\begin{exlist}
+  \item 设~$M(x,y,z)$~是~$\interior\Omega$~上任一点，而~$S_\rho$~是以~$M$~为中心，$\rho$~为半径的球面，且
+  ~$S_\rho\subset\interior\Omega$。证明
+  \[
+    \oiint_S\mparenbb{\frac1r\pdiff u{{\mvec n}}-u\pdiff{}{{\mvec n}}\mparenB{\frac1r}}\dif S=-
+    \oiint_{S_\rho}\mparenbb{\frac1r\pdiff u{{\mvec n}}-u\pdiff{}{{\mvec n}}\mparenB{\frac1r}}\dif S,
+  \]
+  其中~$\mvec n$~是外法向，而~$\mvec r=(\xi-x)\mvec i+(\eta-y)\mvec j+(\zeta-z)\mvec k$，$r=\mabs{\mvec r}$，%
+  $(\xi,\eta,\zeta)$~是曲面上的一个动点；
+  \item 设~$S_R$~是以~$(x,y,z)$~为球心，$R$~为半径的球，且~$S_R\subset\interior\Omega$，证明
+  \[
+    u(x,y,z)=\frac1{2\pi R^2}\oiint_{S_R}u(\xi,\eta,\zeta)\dif S;
+  \]
+  \item 证明除非~$u(x,u,z)$~恒为常数，否则~$u(x,y,z)$~不能在~$\interior\Omega$~上取到最大值和最小值。
+\end{exlist}
+\item 设~$x=r\cos\phi\cos\theta$，$y=r\sin\phi\cos\theta$，$z=r\cos\theta$，而
+\[
+  \Omega=\mathsetb{(r,\phi,\theta)}{r_1\leq r\leq r_2,~\phi_1\leq\phi\leq\phi_2,~\theta_1\leq\theta\leq\theta_2},
+\]
+$\mvec n$~为~$\bound\Omega$~的外法向。又设~$u(x,y,z)\in C^{(2)}(\Omega)$。证明，
+\begin{exlist}
+  \item 对于~$i=1,2$，证明，
+  \begin{exlist}
+    \item 在曲面~$r=r_i$~上，有
+    \[
+      \mparen{\grad u}\cdot\mvec n=(-1)^i\pdiff ur;
+    \]
+    \item 在曲面~$\phi=\phi_i$~上，有
+    \[
+      \mparen{\grad u}\cdot\mvec n=\dfrac{(-1)^i}{r\sin\theta}\pdiff u\phi;
+    \]
+    \item 在曲面~$\theta=\theta_i$~上，有
+    \[
+      \mparen{\grad u}\cdot\mvec n=\dfrac{(-1)^i}r\pdiff u\theta;
+    \]
+  \end{exlist}
+  \item 利用~Green~第一公式证明~Laplace~算子~$\Delta u$~在球坐标系下的表达式：
+  \[
+    \Delta u=\frac1{r^2\sin\theta}\mparenbb{\pdiff{}r\mparenB{r^2\sin\theta\pdiff ur}+
+    \pdiff{}\theta\mparenB{\sin\theta\pdiff u\theta}+\pdiff{}\phi\mparenB{\frac1{\sin\theta}\pdiff u\phi}}。
+  \]
+\end{exlist}
 \end{exercise}
+
 \section{向量场的环量和旋度}
 \subsection{向量场的环量与方向旋量}
 \subsection{方向旋量的存在和计算、旋度概念}
 \subsection{Stokes~公式}
 \begin{exercise}
-\item
+\item 求下列向量场的旋度。
+\begin{exlistcols}
+  \item $\mvec F=2xy\mvec i+\me^z\sin y\mvec j+\mparenb{x^2+y^2+z^2}\mvec k$；
+  \item $\mvec F=v\grad u$，其中~$u,v\in C^{(1)}\mparenb{\mR{3}}$。
+\end{exlistcols}
+\item 证明，
+\begin{exlistcols}
+  \item $\mrot\mparen{\mvec F+\mvec G}=\mrot\mvec F+\mrot\mvec G$；
+  \item $\mrot\mparen{v\mvec F}=u\mparen{\mrot\mvec F}+\mparen{\grad u}\times\mvec F$；
+  \item $\mdiv\mparen{\mvec F\times\mvec G}=\mvec G\cdot\mparen{\mrot\mvec F}-\mvec F\cdot\mparen{\mrot\mvec G}$。
+\end{exlistcols}
+\item 如果~$\mvec F$~的旋度~$\mrot\mvec F$~在~$\Omega$~上恒为零向量，则称~$\mvec F$~是~$\Omega$~上的\emph{无旋场}。证明
+下列向量场~$\mvec F$~是无旋场。
+\begin{exlistcols}
+  \item\label{exer-23.3.3-1}$\mvec F=\mvec r=(x-x_0)\mvec i+(y-y_0)\mvec j+(z-z_0)\mvec k$；
+  \item $\mvec F=f(r)\mvec r$，其中~$\mvec r$~同~\ref{exer-23.3.3-1}，$r=\mabs{\mvec r}$；
+  \item $\mvec F=\grad u$，其中~$u\in C^{(1)}\mparenb{\mR{3}}$.
+\end{exlistcols}
+\item 如果~$\mvec F$~的散度~$\mdiv\mvec F$~在~$\Omega$~上恒为零，则称~$\mvec F$~是~$\Omega$~上的\emph{无源场}。证明
+下列向量场~$\mvec F$~是无源场。
+\begin{exlistcols}
+  \item $\mvec F=\mrot\mvec G$；
+  \item $\mvec F=\mvec F_1\times\mvec F_2$，其中~$\mvec F_1$~与~$\mvec F_2$~都是无旋场；
+  \item\label{exer-23.3.4-3}$\mvec F=\grad\dfrac1r$，其中~$r=(x-x_0)\mvec i+(y-y_0)\mvec j+(z-z_0)\mvec k$，%
+  而~$r=\mabs{\mvec r}$；
+  \item $\mvec F=\grad u$，其中~$u$~是调和函数；
+  \item $\mvec F=\grad\ln r$，其中~$r$~同~\ref{exer-23.3.4-3}；
+  \item $\mvec F=\dfrac K{r^3}\mvec r$，其中~$\mvec r$~同~\ref{exer-23.3.4-3}。
+\end{exlistcols}
+\item 求向量场~$\mvec F=-y\mvec i+x\mvec j+z\mvec k$~沿下列曲线~$C$~的环量。
+\begin{exlist}
+  \item $C$~为~$xy$~平面上圆周~$x^2+y^2=R^2$，$z=0$，逆时针方向；
+  \item $C$~为~$xy$~平面上圆周~$(x-2)^2+y^2=R^2$，$z=0$，逆时针方向；
+  \item $C$~为~$xy$~平面上任一条分段光滑的简单闭曲线，它围成的平面区域~$\Omega$~的面积为~$S$。%
+  证明~$\mvec F$~沿~$C$~的环量为~$2S$；
+  \item 设有一平面~$\Pi\colon ax+by+cz=d\mcond{c\neq0}$，取~$\Pi$~为上侧。$\Pi$~上有一分段光滑的简单闭曲线~$C$，按定测取正定向。%
+  $C$~围成的平面区域的面积为~$V$。确定~$\mvec F$~沿~$C$~的环量。
+\end{exlist}
+\item 分别求向量场~$\mvec F=\grad\arctan\dfrac yx$~沿曲线~$C$~的环量：
+\begin{exlistcols}[3]
+  \item $C$~不环绕~$z$~轴；
+  \item $C$~环绕~$z$~轴一圈；
+  \item $C$~环绕~$z$~轴~$n$~圈。
+\end{exlistcols}
+\item 应用~Stokes~公式，计算下列曲线积分。
+\begin{exlist}
+  \item 设~$C$~为圆周~$x^2+y^2+z^2=R^2$，$x+y+z=0$，若从~$x$~轴正向开去，这圆周取逆时针方向，
+  \[
+    \oint_Cay\dif x+bz\dif y+cx\dif z;
+  \]
+  \item 设~$C$~为~$x^2+y^2=R^2$~与~$\dfrac x\ell+\dfrac zh=1\mcond{\ell,h>0}$~的交线，从~$x$~轴正向开去，$C$~取顺时针方向，
+  \[
+    \oint_C\mparen{ay-bz}\dif x+\mparen{bz-cx}\dif y+\mparen{cx-ay}\dif z;
+  \]
+  \item 设~$C$~为椭圆~$\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}=1$，$z=0$，从~$z$~轴正向看去，$C$~取顺指针方向，而~$n\in\mN$，
+  \[
+    \oint_C nx^{n-1}\dif x+\me^{ny}\dif y+\cos nz\dif z;
+  \]
+  \item 设~$C$~为曲线~$x^2+y^2+z^2=2Rx$，$x^2+y^2=2rx\mcond{0<r<R,z>0}$，此曲线时如下行进的：由它所包围的球~$x^2+y^2+z^2=2Rx$~
+  外表面上的最小区域保持在左方，
+  \[
+    \oint_C\mparenb{y^2+z^2}\dif x+\mparenb{z^2+x^2}\dif y+\mparenb{x^2+y^2}\dif z 。
+  \]
+\end{exlist}
+\item 设~$\Omega=\mintc{a_1}{b_1}\times\mintc{a_2}{b_2}\times\mintc{a_3}{b_3}\subset\mR{3}$。证明在
+~$\Omega$~上~$\mvec F=\mrot\mvec G$~当且仅当~$\mdiv\mvec F=0$。
 \end{exercise}
+
 \section{保守场与势函数}
 \subsection{保守场概念}
 \subsection{保守场的势函数}
@@ -28,10 +243,102 @@
 \subsection{平面向量场情形的说明}
 \subsection{保守场的势函数的求法}
 \begin{exercise}
-\item
+\item 判别下列场是否是保守场，或对什么区域来说是保守场。
+\begin{exlistcols}
+  \item $\mvec F=\phi(x)\mvec i+\psi(y)\mvec j+\chi(z)\mvec k$，其中~$\phi,\psi,\chi\in C\mparen{\mR}$；
+  \item $\mvec F=\dfrac1{r^3}\mparenb{x\mvec i+y\mvec j+z\mvec k}$，其中~$r=\smbsqrt{x^2+y^2+z^2}$；
+  \item $\mvec F=f(x+y+z)\mparen{\mvec i+\mvec j+\mvec k}$，其中~$f\in C\mparen{\mR}$；
+  \item $\mvec F=f\mparenb{x^2+y^2+z^2}\mparen{\mvec i+\mvec j+\mvec k}$，其中~$f\in C\mparen{\mR}$；
+  \item $\mvec F=\dfrac1{1+x^2y^3z^2}\mparenb{yz\mvec i+zx\mvec j+xy\mvec k}$；
+  \item $\mvec F=\dfrac1{x^2+y^2}\mparen{y\mvec i-x\mvec j}$。
+\end{exlistcols}
+\item 验证下列场为保守场，并求曲线积分。
+\begin{exlist}
+  \item $\mvec F=\mparenb{x^2-2yz}\mvec i+\mparenb{y^2-2xz}\mvec j+\mparenb{z^2-2xy}\mvec k$，计算
+  ~$\int_{(0,0,0)}^{(1,1,1)}\mvec F\cdot\dif\mvec\ell$；
+  \item $\mvec F=\mparenb{yz\me^{xyz}+2x}\mvec i+\mparenb{zx\me^{xyz}+3y^2}\mvec j+\mparenb{xy\me^{xyz}+4z^3}\mvec k$，%
+  计算~$\int_{(0,0,0)}^{(x,y,z)}\mvec F\cdot\dif\mvec\ell$；
+  \item $\mvec F=\mparenb{2x\sin(x+y+z)+x^2\cos(x+y+z)}\mvec i+x^2\cos(x+y+z)(\mvec j+\mvec k)$，计算
+  ~$\int_{(1,2,3)}^{(x,y,z)}\mvec F\cdot\dif\mvec\ell$。
+\end{exlist}
+\item 求下列微分式的原函数~$u$。
+\begin{exlist}
+  \item $\dif u=\dfrac{3x}{y^2}\dif x+\dfrac{y^2-2x^2}{y^3}\dif y$；
+  \item $\dif u=\mparenb{x^2y^3+3x^2y}\dif x+\mparenb{x^3y^2+x^3}\dif y$；
+  \item $\dif u=\mparenb{\me^x\sin y+2xy^2}\dif x+\mparenb{\me^x\cos y+2x^2y}$；
+  \item $\dif u=\mparenBB{\dfrac x{\mparenb{x^2-y^2}^2}-\dfrac1x+2x^2}\dif x
+  +\mparenBB{\dfrac1y-\dfrac y{\mparenb{x^2-y^2}^2}+3y^2}\dif y+5z^3\dif z$；
+  \item $\dif u=\mparenb{4x^3y^3-3y^2+5}\dif x+\mparenb{3x^4y^2-6xy-4}\dif y$。
+\end{exlist}
+\item 对下列各微分式判定其原函数是否存在，若存在，求出其原函数。
+\begin{exlistcols}
+  \item $\mparen{10xy-8y}\dif x+\mparenb{5x^2-8x+3}\dif y$；
+  \item $\mparenb{4x^3y^3-2y^2}\dif x+\mparenb{3x^4y^2-2xy}\dif y$；
+  \item $\mparenb{(x+y+1)\me^x-\me^y}\dif x+\mparenb{\me^x-(x+y+1)\me^y}\dif y$。
+\end{exlistcols}
+\item 确定函数~$F(x,y)$~应满足的条件，使微分式~$F(x,y)\mparenb{x\dif x+y\dif y}$~是全微分。
 \end{exercise}
+
 \begin{exercise*}
-\item
+\item 设~$\mR{3}$~空间有一变换~$T\colon x_i=x_i(p_1,p_2,p_3)$，$i=1,2,3$。记之为~$\mvec x=T(\mvec p)$。又设
+~$\pdiff{\mvec x}{{p_1}}$，$\pdiff{\mvec x}{{p_2}}$~与~$\pdiff{\mvec x}{{p_3}}$~两两互相垂直。
+\begin{exlist}
+  \item 证明~$\pdiff{(x_1,x_2,x_3)}{{(p_1,p_2,p_3)}}=\sqrt{e_1e_2e_3}$，其中~$e_i=\mnormbb{\pdiff{\mvec x}{{p_i}}}^2$；
+  \item 证明~$\pdiff{p_i}{{x_k}}=\dfrac1{e_i}\pdiff{x_k}{{p_i}}$；
+  \item 利用~Green~第一公式和~Gauss~公式，导出~$p_1p_2p_3$~坐标系下~Laplace~算子~$\Delta u$~的表达式
+  \[
+    \Delta u=\txts\dfrac1{\smbsqrt{e_1e_2e_3}}\mparenBB{
+    \pdiff{}{{p_1}}\mparenbb{\sqrt{\dfrac{e_2e_3}{\smash[b]{e_1}}}}\pdiff{}{{p_1}}+
+    \pdiff{}{{p_2}}\mparenbb{\sqrt{\dfrac{e_3e_1}{\smash[b]{e_2}}}}\pdiff{}{{p_2}}+
+    \pdiff{}{{p_3}}\mparenbb{\sqrt{\dfrac{e_1e_2}{\smash[b]{e_3}}}}\pdiff{}{{p_3}}}
+  \]
+\end{exlist}
+\item 设~$S$~是以椭球面~$\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}+\dfrac{z^2}{c^2}=1$。令~$p$~为椭球中心到~$S$~上一点~$P(x,y,z)$~的
+切平面的距离。证明，
+\begin{exlist}
+  \item $\oiint_Sp\dif S=4\pi abc$；
+  \item $\oiint_S\dfrac1p\dif S=\dfrac{4\pi}{3abc}\mparenb{b^2c^2+c^2a^2+a^2b^2}$。
+\end{exlist}
+\item 设~$S$~是光滑曲面，边界为~$\Gamma$。令
+\[
+  F(a,b,c)=\iint_S\frac{(a-x)\dif y\dif z+(b-y)\dif z\dif x+(c-z)\dif x\dif y}{r^2},
+\]
+其中~$r^2=(a-x)^2+(b-y)^2+(c-z)^2$。证明~$F(a,b,c)$~的偏导数存在，且满足下述表达式，
+\begin{exlistcols}
+  \item $\pdiff Fa=\oint_\Gamma\dfrac{(z-c)\dif y-(y-b)\dif z}{r^3}$；
+  \item $\pdiff Fb=\oint_\Gamma\dfrac{(x-a)\dif z-(z-c)\dif x}{r^3}$；
+  \item $\pdiff Fc=\oint_\Gamma\dfrac{(y-b)\dif x-(x-a)\dif y}{r^3}$。
+\end{exlistcols}
+\item 设~$f(x,y)\in C^{(2)}$。如果~$\pdiff f{x2}\cdot\pdiff f{y2}-\mparenbb{\pdiff f{xy}}^{\msp2}\neq0$，证明变换
+\[
+  u=\pdiff{f(x,y)}x,\quad  v=\pdiff{f(x,y)}y,\quad
+  w=-z+x\pdiff{f(x,y)}x+y\pdiff{f(x,y)}y
+\]
+有逆变换，它的形式为
+\[
+  x=\pdiff{g(u,v)}u,\quad y=\pdiff{g(u,v)}v,\quad
+  z=-w+u\pdiff{g(u,v)}u+v\pdiff{g(u,v)}v 。
+\]
+\item 求一向量场~$\mvec F$，使~$\mvec F$~的旋度为引力场~$\mvec G$：
+\[
+  \txts\mvec G=\dfrac1{r^3}\mparenb{x\mvec i+y\mvec j+z\mvec k}\mcond*{r=\smbsqrt{x^2+y^2+z^2}}。
+\]
+\item 设~$f_1,f_2,f_3$~是~$x_0,x_1,x_2$~和~$x_3$~的函数，有二阶连续偏导数。令~$\mvec f=\trans{\mparenb{f_1,f_2,f_3}}$，而
+~$\mvec x=\mparenb{x_0,x_1,x_2,x_3}$，则有向量函数表达式~$\funcvec*f{x}$。记~$\Dif\funcvec*f{x}$~中去掉第~$j$~列得到的
+矩阵为~$D_j$。
+\begin{exlist}
+  \item 证明~$\sum_{j=0}^3(-1)^j\pdiff{}{{x_j}}\mparenb{\det D_j}=0$；
+  \item 设~$B=\mathsetb{(x_1,x_2,x_3)}{x_1^2+x_2^2+x_3^2\leq 1}$。令
+  \[
+    F(x_0)\coloneq\iiint_B\mparenb{\det D_0}\dif x_1\dif x_2\dif x_3 。
+  \]
+  证明~$F(x_0)$~可微，而且有
+  \[
+    F'(x_0)=\sum_{j=1}^3(-1)^{j+1}\oint_{\bound B^+}x_j\mparenb{\det D_j}\dif S,
+  \]
+  其中~$\bound B^+$~表示取~$\bound B$~的外法线方向；
+  \item 如果~$\det D_j\mcond{j=1,2,3}$~在~$\bound B$~上恒为零，证明~$F(x_0)$~恒为常数。
+\end{exlist}
 \end{exercise*}
 
 

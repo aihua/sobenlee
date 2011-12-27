@@ -4,17 +4,192 @@
 
 
 \chapter{幂级数}\label{ch:13}
+
 \section{幂级数的收敛半径与收敛区间}
 \begin{exercise}
-\item
+\item 确定下列幂级数的收敛半径，并讨论收敛区间端点的敛散性。
+\begin{exlistcols}
+  \item $\sum_{n=0}^\sinf\dfrac{x^n}{3^{\sqrt n}}$；
+  \item $\sum_{n=1}^\sinf\dfrac{(2n)!!}{(2n+1)!!}x^n$；
+  \item $\sum_{n=1}^\sinf\dfrac{(-1)^n}{n\sqrt[n]n}x^n$；
+  \item $\sum_{n=1}^\sinf\mparenbb{1+\dfrac1n}^{\msp -n^2}x^n$；
+  \item $\sum_{n=1}^\sinf\mparenbb{1+\dfrac1n}^{\msp n^2}x^{2n}$；
+  \item $\sum_{n=1}^\sinf\mparenbb{\dfrac{a^n}n+\dfrac{b^n}n}x^n\mcond{a,b>0}$；
+  \item $\sum_{n=1}^\sinf\mparenbb{1+2\cos\dfrac n4\pi}^{\msp n}x^n$；
+  \item $\sum_{n=1}^\sinf\mparenbb{1+2\cos\dfrac n4\pi}^{\msp n}\dfrac{(x+1)^n}{\ln n}$；
+  \item $\sum_{n=1}^\sinf\dfrac{x^n}{5^n+7^n}$；
+  \item $\sum_{n=1}^\sinf\dfrac{x^n}{n^p}$；
+  \item $\sum_{n=1}^\sinf nx^n$；
+  \item $\sum_{n=1}^\sinf\dfrac{x^n}{n(n+1)}$；
+  \item $\sum_{n=1}^\sinf\dfrac{4^n+(-3)^n}n(x+1)^n$；
+  \item $\sum_{n=1}^\sinf\dfrac{(n!)^n}{(2n)!}x^n$；
+  \item $\sum_{n=1}^\sinf a^{n^2}x^n\mcond{0<a<1}$；
+  \item $\sum_{n=1}^\sinf\mparenB{1+\dfrac12+\dotsb+\dfrac1n}x^n$；
+  \item $\sum_{n=1}^\sinf\dfrac{3^{-\sqrt n}}{\sqrt{n^2+1}}x^n$；
+  \item $\sum_{n=1}^\sinf\dfrac{x^{n^2}}{2^n}$。
+\end{exlistcols}
+\item 设幂级数~$\sum_{n=0}^\sinf a_nx^n$~的收敛半径为~$R$，且在~$\minto{-R}R$~上一致收敛。证明~$\sum_{n=0}^\sinf a_nx^n$~在
+~$\mintc{-R}R$~上一致收敛。
+\item 设~$f(x)=\sum_{n=0}^\sinf a_nx^n$~的收敛半径为~$R>0$。求~$F(x)=\dfrac{f(x)}{1-x}$~的幂级数展开式，并证明新幂级数的收敛半径
+不会比~$R$~大。
+\item 给定数列~$\mbrace{a_n}$，已知~$\limsup_\ntoinf\sqrt[n]{\mabs{a_n}}=1$。令~$S_n=\sum_{k=1}^na_k$，证明
+~$\limsup_\ntoinf\sqrt[n]{\mabs{S_n}}=1$。
+\item 设~$\mabsbb{\sum_{k=0}^na_kx_0^k}\leq M\mcond{n=0,1,\dotsc;x_0>0}$。证明，当~$x\in\minto 0{x_0}$~时，有
+\begin{exlistcols}
+  \item $\sum_{n=0}^\sinf a_nx^n$~收敛；
+  \item $\mabsbb{\sum_{n=0}^\sinf a_nx^n}\leq M$。
+\end{exlistcols}
+\item 设~$a_n\geq0$，而~$\sum_{n=0}^\sinf a_nx^n$~的收敛半径为~$1$，和函数为~$f(x)$。若~$\sum_{n=0}^\sinf a_n$~发散，%
+证明~$\lim_{x\to1}f(x)=\pinf$。
+\item 两个收敛半径相等的幂级数，讨论它们经过相加和相乘后得到的幂级数的收敛半径。
 \end{exercise}
+
 \section{幂级数的性质}
 \begin{exercise}
-\item
+\item 设~$f(x)=\sum_{n=1}^\sinf\dfrac{x^n}{n^2\ln(1+n)}$。证明，
+\begin{exlistcols}
+  \item $f(x)\in C\mintc{-1}1$，而~$f'(x)\in C\minto{-1}1$；
+  \item $f(x)$~在~$x=-1$~点可微；
+  \item $\lim_{x\to1-0}f'(x)=\pinf$；
+  \item $f(x)$~在~$x=1$~点不可微。
+\end{exlistcols}
+\item 给定零阶~Bessel~函数\label{exer-Bessel0}
+\[
+  y=J_0(x)=1+\sum_{n=1}^\sinf(-1)^n\frac{x^{2n}}{(n!)^22^{2n}}。
+\]
+证明，它在~$\mR$~上满足方程
+\[
+  xy''+y'+xy=0。
+\]
+\item 用逐项微分或逐项积分求下列级数的和。
+\begin{exlistcols}[3]
+  \item $\sum_{n=1}^\sinf\dfrac{x^n}n$；
+  \item $\sum_{n=1}^\sinf nx^n$；
+  \item $\sum_{n=1}^\sinf n(n+1)x^n$；
+  \item $\sum_{n=1}^\sinf\dfrac{(-1)^{n-1}}{n(2n-1)}x^{2n}$；
+  \item $\sum_{n=1}^\sinf\dfrac{n^2+1}{n!\,2^n}x^n$；
+  \item $\sum_{n=1}^\sinf\dfrac{(-1)^nn^3}{(n+1)!}x^n$；
+  \item $\sum_{n=1}^\sinf\dfrac{x^{4n+1}}{4n+1}$；
+  \item $\sum_{n=1}^\sinf(2^{n+1}-1)x^n$；
+  \item $\sum_{n=1}^\sinf n^2x^{n-1}$；
+  \item $\sum_{n=1}^\sinf\dfrac{(2n+1)^2}{n!}x^{2n+1}$；
+  \item $\sum_{n=1}^\sinf\dfrac{2k-1}{2^k}$；
+  \item $\sum_{n=1}^\sinf\dfrac1{n(2n+1)}$；
+  \item $\sum_{n=1}^\sinf\dfrac{(-1)^n(2n^2+1)}{(2n+1)!}x^{2n+1}$。
+\end{exlistcols}
+\item 证明，
+\begin{exlistcols}
+  \item $\dfrac\pi4=\sum_{n=1}^\sinf\dfrac{(-1)^{n-1}}{2n-1}$；
+  \item $\dfrac{\pi^2}{16}=\sum_{n=0}^\sinf\dfrac{(-1)^n}{n+1}\mparenB{1+\dfrac13+\dotsb+\dfrac1{2n+1}}$。
+\end{exlistcols}
+\item 设~$f(x)=\sum_{n=0}^\sinf a_nx^n$~的收敛半径为~$R=\pinf$。令~$f_n(x)\coloneq\sum_{k=0}^na_kx^k$。%
+证明~$f\mparenb{f_n(x)}$~在~$\mintc ab$~上一致收敛于~$f\mparenb{f(x)}$。
 \end{exercise}
+
 \section{初等函数的~Taylor~级数展开}
 \begin{exercise}
-\item
+\item 将下列函数展开为~Maclaurin~级数。
+\begin{exlistcols}[4]
+  \item $\dfrac1{a-x}\mcond{a\neq0}$；
+  \item $\dfrac1{(1+x)^2}$；
+  \item $\dfrac1{(1+x)^3}$；
+  \item $\dfrac{x^2}{x^2-3x+1}$；
+  \item $\sinh x$；
+  \item $\cosh x$；
+  \item $\cos^2x$；
+  \item $\sin^2x$；
+  \item $\dfrac x{(1-x)(1-x^2)}$；
+  \item $\dfrac x{\sqrt{1-3x}}$；
+  \item $\ln\mparenb{1+x+x^2}$；
+  \item $\arcsin x$。
+\end{exlistcols}
+\item 将下列函数在指定点附近展开为幂级数。
+\begin{exlistcols}[3]
+  \item $\dfrac1{a-x}$，~$x=b\neq a$；
+  \item $\dfrac{x^2}{x^2-3x+1}$，~$x=2$；
+  \item $\dfrac1{1-x-x^2}$，~$x=2$；
+  \item $(1+x)\me^{-x}$，~$x=0$；
+  \item $\ln\dfrac1{2+2x+x^2}$，~$x=-1$；
+  \item $\ln^2(1-x)$，~$x=0$；
+  \item $\arctan\dfrac{2x}{1-x^2}$，~$x=0$。
+\end{exlistcols}
+\item 设~$x>0$。证明，
+\[
+  \ln x=2\mparenBB{\frac{x-1}{x+1}+\frac13\mparenbb{\dfrac{x-1}{x+1}}^{\msp 3}
+   +\frac15\mparenbb{\dfrac{x-1}{x+1}}^{\msp 5}+\dotsb} 。
+\]
+\item 利用基本初等函数的展式，求下列函数的幂级数，并指明收敛区间。
+\begin{exlistcols}
+  \item $(1+x^2)^{-\frac32}$；
+  \item $\ln\mparenb{1+x+x^2+x^3}$；
+  \item $\dfrac1{1-3x+2x^2}$；
+  \item $x\arctan x-\ln\sqrt{1+x^2}$。
+\end{exlistcols}
+\item 利用逐项求导或逐项积分证明下列函数展式成立。
+\begin{exlist}
+  \item $\ln\mparenb{x+\sqrt{1+x^2}}=x+\sum_{n=1}^\sinf(-1)^n\dfrac{(2n-1)!!}{(2n)!!}\dfrac{x^{2n+1}}{2n+1}$，~$\mabs x\leq 1$；
+  \item $\arctan\dfrac{2x}{2-x^2}=\sum_{n=0}^\sinf(-1)^{\mfloor{\frac n2}}\dfrac{x^{2n+1}}{2^n(2^n+1)}$，~$\mabs x\leq\sqrt 2$。
+\end{exlist}
+\item 通过求幂级数的系数证明下列展式成立。
+\begin{exlist}
+  \item $\dfrac{\arcsin x}{\sqrt{1-x^2}}=\sum_{n=0}^\sinf\dfrac{(2n)!!}{(2n+1)!!}x^{2n+1}$，~$x\in\mintc{-1}1$；
+  \item $\dfrac{\ln\mparenb{x+\sqrt{1+x^2}}}{\sqrt{1+x^2}}=\sum_{n=0}^\sinf(-1)^n\dfrac{(2n)!!}{(2n+1)!!}x^{2n+1}$，
+  ~$x\in\mintoc{-1}1$。
+\end{exlist}
+\item 证明下列展式成立。
+\begin{exlist}
+  \item $\arcsin^2x=\sum_{n=0}^\sinf\dfrac{(2n)!!}{(2n+1)!!}\dfrac{x^{2n+2}}{n+1}$，~$x\in\mintc{-1}1$；
+  \item $\ln^2\mparenb{x+\sqrt{1+x^2}}=\sum_{n=0}^\sinf(-1)^n\dfrac{(2n)!!}{(2n+1)!!}\dfrac{x^{2n+2}}{n+1}$，~$x\in\mintc{-1}1$。
+\end{exlist}
+\item 通过幂级数相乘求下列函数的展开式。
+\begin{exlistcols}
+  \item $\dfrac{\ln(1+x)}{1+x}$；
+  \item $\arctan^2x$。
+\end{exlistcols}
+\item\begin{exlist}\FixExHead
+  \item 下述函数项级数在~$\mintc 0{\sfrac\pi2}$~上一致收敛于~$x$，
+  \[
+    \sin x+\sum_{n=1}^\sinf\frac{(2n-1)!!}{(2n)!!}\frac{\sin^{2n+1}x}{2n+1}=x;
+  \]
+  \item $\sum_{n=1}^\sinf\dfrac1{(2n-1)^2}=\dfrac{\pi^2}8$。
+\end{exlist}
+\item\begin{exlist}\FixExHead
+  \item 下述函数项级数在~$\mintc 0{\sfrac\pi2}$~上一致收敛于~$x^2$，
+  \[
+    \sum_{n=0}^\sinf\frac{(2n)!!}{(2n+1)!!}\frac{\sin^{2n+1}x}{n+1}=x^2;
+  \]
+  \item $\sum_{n=1}^\sinf\dfrac1{n^2}=\dfrac{\pi^2}6$。
+\end{exlist}
+\item 证明，
+\[
+  \frac2\pi\int_0^{\frac\pi2}\cos(x\sin\theta)\dif\theta=J_0(x),
+\]
+其中~$J_0$~为零阶~Bessel~函数（参看\ref{exer-Bessel0}）。
+\item 设在~$x\in\mintc{-a}a$~上有~$\mabsb{f^{(k)}(x)}\leq M\mcond{k=0,1,\dotsc}$。证明，
+\begin{exlist}
+  \item $f(x)$~可以在~$\minto{-a}a$~上展成幂级数；
+  \item $f(x)$~可以延拓到~$\mR$，其中~$\mR$~上无穷次可微。
+\end{exlist}
+\item 用待定系数法，求下列关于~$x$~的函数的幂级数展开式。
+\begin{exlistcols}
+  \item $\dfrac{x\cos\theta-x^2}{1-2x\cos\theta+x^2}$，~$x\in\minto{-1}1$；
+  \item $\dfrac{\sin\theta}{1-2x\cos\theta+x^2}$，~$x\in\minto{-1}1$。
+\end{exlistcols}
+\item 求下列关于~$x$~的函数的幂级数展开式。
+\begin{exlistcols}
+  \item $\arctan\dfrac{x\sin\theta}{1-x\cos\theta}$，~$x\in\minto{-1}1$；
+  \item $\ln\mparenb{1-2x\cos\theta+x^2}$，~$x\in\minto{-1}1$。
+\end{exlistcols}
+\item 利用~Abel~定理，求下列级数的和。
+\begin{exlistcols}
+  \item $\sum_{n=1}^\sinf\dfrac{\cos n\theta}n$，~$\theta\in\minto0{2\pi}$；
+  \item $\sum_{n=1}^\sinf\dfrac{\sin n\theta}n$，~$\theta\in\minto0{2\pi}$。
+\end{exlistcols}
+\item 求下列定积分。
+\begin{exlist}
+  \item $\int_0^{2\pi}\ln\mparenb{1-2r\cos\theta+r^2}\dif\theta$，~$0<r<1$~或~$r>1$；
+  \item $\int_0^{2\pi}\dfrac{1-r^2}{1-2r\cos\theta+r^2}\dif\theta$。
+\end{exlist}
 \end{exercise}
 
 \pushstar
@@ -22,15 +197,71 @@
 \popstar
 
 \begin{exercise}
-\item
+\item 用~Stirling~公式判别下列级数的敛散性。
+\begin{exlistcols}
+  \item $\sum_{n=1}^\sinf(n!)^{-\frac1n}$；
+  \item $\sum_{n=1}^\sinf\dfrac{n!\,\me^n}{n^{n+p}}$。
+\end{exlistcols}
 \end{exercise}
+
 \section{幂级数的应用}
 \subsection{近似计算}
 \subsection{定积分的计算}
 \subsection{微分方程的幂级数解法}
+
 \section{用多项式一致逼近闭区间上的连续函数}
+
 \begin{exercise*}
-\item
+\item 求幂级数
+\[
+  \sum_{n=1}^\sinf\mparenbb{1+2\cos\dfrac n4\pi}^{\msp n}\dfrac{x^n}n
+\]
+的收敛半径，并讨论端点的敛散性。
+\item 其函数项级数~$\sum_{n=0}^\sinf\mparenb{x(1+x)}^{3n}$~的收敛域；若把每项展开为~$3^n+1$~项，从而使级数成为幂级数时，求此
+幂级数的收敛半径。
+\item 给定数列~$\mbrace{a_n}$，对应有级数~$\sum_{n=1}^\sinf\dfrac{a_n}{n^x}$。证明，
+\begin{exlist}
+  \item 若级数在~$x_1$~点收敛，则~$x>x_1$~时也收敛；
+  \item 若级数在~$x_1$~点发散，则~$x<x_1$~时也发散。
+  \item 存在~$C$~（$C$~可以为无穷），使得级数当~$x>C$~时收敛，而当~$x<C$~时发散，这时~$C$~称为收敛指标；
+  \item 级数在~$x\in\mintco{C+\e}\pinf\mcond{\e>0}$~上一致收敛；
+  \item 级数在~$x\in\mintco{C+1+\e}\pinf\mcond{\e>0}$~上绝对一致收敛。
+\end{exlist}
+\item 给定数列~$\mbrace{a_n}$，对应有级数~$\sum_{n=1}^\sinf a_n\me^{-nx}$。证明，
+\begin{exlist}
+  \item 若级数在~$x_1$~点收敛，则~$x>x_1$~时也收敛；
+  \item 若级数在~$x_1$~点发散，则~$x<x_1$~时也发散。
+  \item 存在收敛指标~$C$~（$C$~可以为无穷），使得级数当~$x>C$~时收敛，而当~$x<C$~时发散；
+  \item 级数在~$x\in\mintco{C+\e}\pinf\mcond{\e>0}$~上绝对一致收敛。
+\end{exlist}
+\item 证明，
+\[
+  f(x)=\sum_{n=1}^\sinf(-1)^{n-1}\frac1{n^x}\begin{Bdcases}
+    \geq\ln^x2, & x\in\mintco1\pinf;\\
+    \leq\ln^x2, & x\in\mintoc01 。
+  \end{Bdcases}
+\]
+\item\begin{exlist}
+  \item\label{exer-13-6-1}设
+  \[
+    f(x)=\sum_{n=0}^\sinf\frac1{n!}\frac{a^n}{1+x^2a^{2n}}\mcond*{a>1}。
+  \]
+  证明~$f(x)$~在~$\mR$~上任意次可微；
+  \item 设~$g(x),h(x)$~在~$\mR$~上任意次可微，且~$g(x)=h(x^2)$。证明
+  \[
+    \frac{g^{(2n)}(0)}{(2n)!}=\frac{h^{(n)}(0)}{n!};
+  \]
+  \item 证明~\ref{exer-13-6-1}~中函数~$f(x)$~的~Taylor~级数，除~$x=0$~外处处发散（即收敛半径为~$0$）。
+\end{exlist}
+\item 设~$a\in\minto{-1}1$，且
+\[
+  \frac{v_n}{v_{n-1}}=a\txts\sqrt{\dfrac{n-1}{n+1}}\dps\mcond*{n=2,3,\dotsc}。
+\]
+对于~$c>0$，令~$x_{n+1}=x_n+cv_n^2\mcond{n=1,2,\dotsc}$。求极限~$\lim_\ntoinf x_n$。
+\item 利用~Taylor~公式证明，
+\[
+  \sum_{k=1}^\sinf\frac1{k(k+1)\dotsm(k+m)}=\frac1{m!\,m}。
+\]
 \end{exercise*}
 
 

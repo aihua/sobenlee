@@ -4,38 +4,494 @@
 
 
 \chapter{多元向量函数微分学}\label{ch:17}
+
 \section{线性变换}
 \begin{exercise}
-\item
+\item 对任意~$n\times m$~矩阵~$A$，定义
+\[
+  \mnorm A\coloneq\max\mathsetb{\mabs{A\mvec x}}{\mvec x\in\mR{m},\mabs{\mvec x}=1}。
+\]
+%%证明，
+\begin{exlist}\FixExHead
+  \item $\mnorm A\geq0$，且~$\mnorm A=0$~当且仅当~$A$~为零矩阵；
+\begin{exlistcols*}
+  \item $\mnorm{\alpha A}=\mabs\alpha\mnorm A\mcond{\alpha\in\mR}$；
+  \item $\mnorm{A+B}\leq\mnorm A+\mnorm B$。
+\end{exlistcols*}
+\end{exlist}
+\item 设~$A=\mparen{a_{ij}}$~是~$n\times m$~矩阵。证明，
+\[
+  \mabsb{a_{ij}}\leq\mnorm A\leq\mparenBB{\sum_{i=1}^n\mparenbb{\sum_{j=1}^n\mabsb{a_{ij}}}^{\msp2}}^{\msp\frac12}。
+\]
+\item 设有~$n\times m$~矩阵列~$A_k=\mparenb{a_{ij}^{(k)}}$~及矩阵~$A=\mparen{a_{ij}}$。证明~$\lim_{k\to\infty}A_k=A$，即
+~$\lim_{k\to\infty}\mnorm{A_k-A}=0$~当且仅当对任意~$i=1,\dotsc,n$~与~$j=1,\dotsc,m$，有~$\lim_{k\to\infty}a_{ij}^{(k)}=a_{ij}$。
+\item 设有矩阵函数~$\vecfunc A{x}=\mparenb{\vecfunc{a_{ij}}{x}}$。证明~$\vecfunc A{x}$~在~$x_0$~连续，即
+~$\lim_{\mvec x\to\mvec x_0}\mnormb{\vecfunc A{x}-\vecfunc A{x_0}}=0$~当且仅当~$\vecfunc A{x}$~的每个元素~$\vecfunc{a_{ij}}{x}$~在
+~$\mvec x_0$~连续，这里~$\vecfunc{a_{ij}}{x}$~为~$m$~元数值函数。
 \end{exercise}
+
 \section{向量函数的可微性与导数}
 \subsection{向量函数的可微性概念}
 \subsection{可微性与连续性及偏导数存在性的关系}
 \subsection{微分法则}
 \subsection{实自变量的向量函数的高阶导数与数值函数的二阶导数}
 \begin{exercise}
-\item
+\item 对下列向量函数，求~$\Dif\mvec f(x,y)$。
+\begin{exlistcols}
+  \item $\funcvec f{x,y}=\matr M{x^2-2y;x^2-2xy;3x^2y-2y}$；
+  \item $\funcvec f{x,y}=\matr M{\ln\mparenb{x^2+y^2};\arctan\dfrac yx}$；
+  \item $\funcvec f{x,y}=\me^{x+2y}\mvec i+\sin(y+2x)\mvec j$。
+\end{exlistcols}
+\item 对下列函数~$\funcvec f{x,y,z}$，求~$\Dif\funcvec f{x,y,z}$。
+\begin{exlistcols}
+  \item $\funcvec f{x,y,z}=\mparenb{x+2y^2+3z^2}\mvec i+\mparenb{2y-x^2}\mvec j$；
+  \item $\funcvec f{x,y,z}=xy^2z^2\mvec i+z^2\sin y\mvec j+x^2\me^y\mvec k$。
+\end{exlistcols}
+\item 设~$\funcvec* f{x}$~在~$\mvec x_0$~可微。证明，任意给定~$\e>0$，存在~$\delta>0$，使得当
+~$\mvec x\in U\mparen{\mvec x_0;\delta}$~时，有
+\[
+  \mabsb{\funcvec* f{x}-\funcvec* f{x_0}}\leq \mparenb{\mnorm{\Dif\funcvec* f{x_0}}+\e}\mabs{\mvec x-\mvec x_0}。
+\]
+\item 设~$\mvec x\in\mR{m}$，且~$\funcvec* f{x},\funcvec* g{x}\in\mR{n}$~在~$\mvec x_0$~点可微。按定义证明
+~$\funcvec* f{x}+\funcvec* g{x}$~与~$\funcvec* f{x}\cdot\funcvec* g{x}$~在~$\mvec x_0$~点可微，并求出它们的导数。
+\item 设~$\Omega\subset\mR{m}$~是开区域，且~$\funcvec* f{x}$~在~$\Omega$~可微，而~$\Dif\funcvec* f{x}$~在~$\Omega$~
+内为常数矩阵~$A$。证明
+\[
+  \funcvec* f{x}=A\mvec x+\mvec x_0,
+\]
+其中~$\mvec x_0$~为某常向量。
+\item 证明数值函数
+\[
+  f\mparenb{\mvec x{1,2,:,m}}=a_1x^1+a_2x^2+\dotsb+a_mx^m+b
+\]
+当且仅当它的~Hessian~矩阵恒为零矩阵。
+\item 设~$\map{\funcvec f}{\mR{3}}{\mR{3}}$~是可微向量函数。
+\begin{exlist}
+  \item 设~$\Dif\funcvec f{x,y,z}=\diag\mparenb{1,1,1}$，求~$\funcvec f{x,y,z}$；
+  \item 设~$\Dif\funcvec f{x,y,z}=\diag\mparenb{p(x),q(y),r(z)}$，求~$\funcvec f{x,y,z}$。
+\end{exlist}
+\item 设~$\funcvec*f{x}$~在~$\Omega$~可微，且对任意~$\mvec x\in\Omega$，有~$\det\Dif\funcvec*f{x}\neq0$。给定
+~$\mvec y\nin\funcvec f{\Omega}$，记~$\vecfunc\psi{x}\coloneq\mabsb{\mvec y-\funcvec*f{x}}^2$。证明，对任意
+~$\mvec x\in\Omega$，有~$\Dif\vecfunc\psi{x}\neq0$。
+\item 设~$\mvec x\in\mR{m}$，且~$\funcvec*f{x}\in\mR{m}$，且~$\Omega\subset\mR{m}$~是开区域。
+\begin{exlist}
+  \item 若~$\mvec x_0\in\Omega$，$\funcvec* f{x_0}=0$，而~$\funcvec*f{x}$~在~$\mvec x$~可微，且~$\det\Dif\funcvec*f{x_0}\neq0$。%
+  证明~$\mvec x=\mvec x_0$~是~$\funcvec* f{x}$~的孤立零点，即存在~$\delta>0$，当
+  ~$\mvec x\in U(\mvec x_0;\delta)\difset\mbrace{\mvec x_0}$~时~$\vecfunc f{x}\neq0$；
+  \item 若~$\funcvec* f{x}$~在~$\Omega$~上可微，且对任意~$\mvec x\in\Omega$，有~$\det\Dif\funcvec*f{x}\neq0$，而
+  ~$\Omega_0\subset\Omega$~是有界闭域。证明，对任意~$\mvec p\in\mR{m}$，在~$\Omega_0$~上至多有有限个点
+  ~$\mvec {\bm x}{1,2,:,k}$，使得~$\funcvec* f{x_i}=\mvec p\mcond{i=1,2,\dotsc,k}$。
+\end{exlist}
+\item 设~$\vecfunc f{x}=\minpb{A\mvec x-b}{A\mvec x-b}$，其中~$\minp\cdot\cdot$~是内积，$A$~是
+~$n\times m$~矩阵，而~$\mvec x\in\mR{m}$，$\mvec b\in\mR{n}$。又设~$\det\trans AA\neq0$。求满足~$\Dif\vecfunc f{x}=0$~的
+~$\mvec x$~的值。
+\item 设~$\funcvec f{t},\funcvec g{t}\in\mR{3}$~均可微，$t$~为实数。证明，
+\[
+  \diff{\mparenb{\funcvec f{t}\times\funcvec g{t}}}t=\diff{\funcvec f{t}}t\times\funcvec g{t}
+  +\funcvec f{t}\times\diff{\funcvec g{t}}t 。
+\]
+\item 设~$xy$~平面上有一单位向量~$\mvec r_0(t)$，绕原点逆时针方向旋转，$t$~时刻的角速度为~$\theta(t)$。记
+\[
+  \mvec\tau(t)\coloneq\diff{\mvec r_0(t)}t 。
+\]
+证明~$\mvec\tau\perp\mvec r_0$，且~$\mabsb{\mvec\tau(t)}=\dot{\theta}(t)$。
+\item\begin{exlist}
+  \item 设~$x=r\cos\theta$，$y=r\sin\theta$，求~$\pdiff{(x,y)}{{(r,\theta)}}$；
+  \item 设~$x=r\sin\phi\cos\theta$，$y=r\sin\phi\sin\theta$，$z=\rho\cos\phi$，求~$\pdiff{(x,y,z)}{{(r,\theta,\phi)}}$；
+  \item 设~$u=\dfrac x{r^2}$，$v=\dfrac y{r^2}$，$w=\dfrac z{r^2}$，而~$r^2=x^2+y^2+z^2$，求~$\pdiff{(u,v,w)}{{(x,y,z)}}$；
+  \item 设对任意~$i=1,2,\dotsc,n$，$f_i,\phi_i$~连续可微，且
+  \[
+    F_i\mparenb{\mvec x{1,2,:,n}}=f_i\mparenb{\phi_1(x_1),\phi_2(x_2),\dotsc,\phi_n(x_n)},
+  \]
+  求~$\pdiff{(\mvec F{1,2,:,n})}{{(\mvec x{1,2,:,n})}}$。
+\end{exlist}
+\item 求下列向量函数的导数（矩阵写法）。
+\begin{exlist}
+  \item $\funcvec f{x,y,z}=\mvec g\mparenB{x^2-y^2,xy,\dfrac zx}$，而~$\mvec g\in C^{(1)}$，求~$\Dif\funcvec f{x,y,z}$；
+  \item $\funcvec f{x,y,z}=\funcvec g{x,u,v}$，而~$u=p(x,y)$，$v=h(y,z)$，且~$\mvec g,p,h\in C^{(1)}$，求
+  ~$\Dif\funcvec f{3,-2,1}$；
+  \item $\funcvec f{x,y}=\matrB M{\phi(x+y);\phi(x-y)}$，而
+  ~$\funcvec F{s,t}=\funcvec f{\me^t,\me^{-s}}$，且~$\phi\in C^{(1)}$，%
+  求~$\Dif\funcvec F{s,t}$。
+\end{exlist}
+\item 试用链锁法则证明向量内积的求导公式，即
+\[
+  \Dif\mparenb{\funcvec*f{x}\cdot\funcvec*g{x}}=\trans{\mvec f}(\mvec x)\Dif\funcvec g{x}
+  +\trans{\mvec g}(\mvec x)\Dif\funcvec f{x}。
+\]
+\item 设~$u=u(x,y,z)$，$v=v(x,y,z)$，$x=x(s,t)$，$y=y(s,t)$，$z=z(s,t)$，均属于~$C^{(1)}$。证明，
+\[
+  \pdiff{(u,v)}{{(s,t)}}=\pdiff{(u,v)}{{(x,y)}}\pdiff{(x,y)}{{(s,t)}}+
+  \pdiff{(u,v)}{{(y,z)}}\pdiff{(y,z)}{{(s,t)}}+\pdiff{(u,v)}{{(z,x)}}\pdiff{(z,x)}{{(s,t)}}。
+\]
+\item 设~$\mvec x\in\mR{m}$，而~$\vecfunc f{x}\in C^{(2)}\mintob{U(\mvec x_0)}{\mR}$，且~$\Dif\vecfunc f{x_0}=0$，但
+~$\det H_f(\mvec x_0)\neq0$。证明，存在~$\mvec x_0$~的某邻域~$U(\mvec x_0;\delta)$，使得当
+~$\mvec x\in U^\circ(\mvec x_0;\delta)$~时，有~$\Dif\vecfunc f{x}\neq0$。
+\item 设~$A=\mparenb{a_{ij}}$~是~$n$~阶正交方阵，且~$\vecfunc f{y}\in C^{(2)}\mintob{\mR{n}}{\mR}$，而
+~$\vecfunc F{x}=f(A\mvec x)$。
+\begin{exlistcols}
+  \item $\sum_{i=1}^n\mparenbb{\pdiff f{{y_i}}}^{\msp2}=\sum_{i=1}^n\mparenbb{\pdiff F{{x_i}}}^{\msp2}$；
+  \item $\sum_{i=1}^n\dfrac{\pdif^2f}{\pdif y_i^2}=\sum_{i=1}^n\dfrac{\pdif^2f}{\pdif x_i^2}$。
+\end{exlistcols}
 \end{exercise}
+
 \section{反函数及其微分法}
 \subsection{反函数的存在性与函数的~Jacobi~行列式}
 \subsection{反函数的局部存在性与可微性定理}
 \subsection{反函数微分法}
 \begin{exercise}
-\item
+\item 对下列函数~$\funcvec f{x,y}$，当~$\minto xy\in\Omega\subset\mR{2}$~时是否有~$\det\Dif\funcvec f{x,y}\neq0$？求出
+~$\funcvec f{\Omega}$，若~$\funcvec f{x,y}$~是单叶的，再求出~$\mvec f^{-1}(x,y)$。
+\begin{exlistcols}
+  \item $\funcvec f{x,y}=\matrB M{x+2y; x-y}$，$\Omega=\mR{2}$；
+  \item $\funcvec f{x,y}=\matrB M{x^2-x-2; 3y}$，$\Omega=\mR{2}$；
+  \item $\funcvec f{x,y}=\matrB M{x^2-y^2; xy}$，$\Omega=\mR{2}\difset\mbraceb{(0,0)}$；
+  \item $\funcvec f{x,y}=\matr M{\ln(xy);\dfrac1{x^2+y^2}}$，$\Omega=\mathsetb{(x,y)}{0<y<x}$。
+\end{exlistcols}
+\item 设
+\[
+  \funcvec f{x,y}=\matrB M{\me^x\cos y;\me^x\sin y}。
+\]
+\begin{exlist}
+  \item 证明，当~$\minto xy\in\mR{2}$~时~$\det\Dif\funcvec f{x,y}\neq0$，但~$\funcvec f{x,y}$~不是单叶函数；
+  \item 记~$\Omega=\mathsetb{(x,y)}{0<y<2x}$，证明~$\funcvec f{x,y}$~在~$\Omega$~上时单叶的，并求出它的反函数。
+\end{exlist}
+\item 设
+\[
+  f(x)=\begin{cBdcases}
+    x+2x^2\sin\dfrac1x , & x\neq0;\\
+    0, & x=0 。
+  \end{cBdcases}
+\]
+\begin{exlistcols}
+  \item 证明~$f'(0)=0$，且~$f'(x)$~在~$\minto{-1}1$~上有界；
+  \item 证明~$f(x)$~在原点的任意邻域不是单叶函数；
+  \item 说明此例与反函数定理是否矛盾。
+\end{exlistcols}
+\item 设~$\funcvec f{x,y}=\matrB M{x^3;y^3}$。
+\begin{exlistcols}
+  \item 求~$\mvec f^{-1}\minto xy$；
+  \item 是否有~$\det\Dif\funcvec f{x,y}\neq0$，而~$\mvec f^{-1}\minto xy$~是否处处可微。
+\end{exlistcols}
+\item 设区域~$\Omega\subset\mR{m}$，而~$\vecfunc f{x}$~是~$\Omega$~上的单叶连续函数。$\Gamma\colon x=x(t)$，$t\in\mintc ab$~是
+~$\Omega$~上的简单曲线。证明~$\Gamma$~的象~$f(\Gamma)$~也是简单曲线。
+\item 设~$\Omega\subset\mR{m}$，且~$\funcvec*f{x}\in\mR{m}$~满足对任意~$\mvec x,\mvec z\in\Omega$，有
+\[
+  \mabsb{\funcvec*f{x}-\funcvec*f{z}}\geq\alpha\mabs{\mvec x-\mvec z},
+\]
+其中~$\alpha>0$~为常数。证明，存在~$\mvec f^{-1}(\mvec x)$~且在~$\mvec f(\Omega)$~上连续。
+\item 设~$\closure\Omega\subset\mR{m}$~是有界闭区域，而~$\funcvec f{x}\in C\mintob{\closure\Omega}{\mR{m}}$~且是单叶的。%
+证明~$\mvec f^{-1}(\mvec x)$~在~$\funcvec f{\closure\Omega}$~上连续。
+\item 证明~$\matrB M{u;v}=\funcvec f{x,y}$~在~$\Omega\subset\mR{2}$~上是单叶的，求出~$\mvec f^{-1}(x,y)$，%
+$\det\Dif\funcvec f{x,y}$~与~$\det\Dif\mvec f^{-1}(x,y)$，并分别在~$xy$~平面和~$uv$~平面上画出~$\Omega$~和
+~$\funcvec f{\Omega}$。其中~$u,v$~分别如下。
+\begin{exlist}
+  \item $\Biggl\lbrace\begin{aligned}
+    u & = \hphantom{-}x\cos\theta+y\sin\theta;\\
+    v & = -x\sin\theta+y\cos\theta,
+  \end{aligned}$\enspace$\Omega=\mathsetb{(x,y)}{x^2+y^2\leq1}$；
+  \item $\Biggl\lbrace\begin{aligned}
+    u & = \dfrac{y^2}x;\\
+    v & = \dfrac yx,\end{aligned}$\enspace$\Omega$~是由抛物线~$y^2=x$，$y^2=4x$~和直线~$y=x$，$y=2x$~围成的区域。
+\end{exlist}
+\item 对下列函数求出单叶性区域，并计算~$\pdiff{(u,v)}{{(x,y)}}$~与~$\pdiff{(x,y)}{{(u,v)}}$。
+\begin{exlistcols}
+  \item $u=xy$，~$v=\dfrac xy$；
+  \item $u=\dfrac x{x^2+y^2}$，~$v=\dfrac y{x^2+y^2}$；
+  \item $u=x^2+y^2$，~$v=2xy$。
+\end{exlistcols}
+\item\begin{exlist}
+  \item 设~$u=x\cos\dfrac yx$，而~$v=x\sin\dfrac yx$，求~$\pdiff xu$，$\pdiff xv$，$\pdiff yu$~与~$\pdiff yv$；
+  \item 设~$u=\me^x+x\sin y$，而~$v=\me^x-x\cos y$，求~$\pdiff xu$，$\pdiff xv$，$\pdiff yu$~与~$\pdiff yv$。
+\end{exlist}
+\item 设~$\Omega\subset\mR{m}$~是开凸集，而~$\funcvec*f{x}\in\mR{m}$，且~$\funcvec* f{x}$~在~$\Omega$~上可微，%
+$\Dif\funcvec*f{x}$~在~$\Omega$~上时正定矩阵。证明~$\funcvec*f{x}$~是~$\Omega$~上的单叶函数。
+\item 证明函数
+\[
+  \Biggl\lbrace\begin{aligned}
+    u&=x^2-y^2;\\
+    v&=\dfrac12\ln(x+y)
+  \end{aligned}
+\]
+在区域~$\Omega=\mathsetb{(x,y)}{x>0,x+y>0}$~上是单叶的。
+\item 设~$\Omega\subset\mR{m}$~是开区域，而~$\funcvec*f{x}$~是~$\Omega$~上的单叶函数，且
+~$\funcvec*f{x}\in C^{(1)}\minto{\Omega}{\mR{m}}$，$\det\Dif\funcvec*f{x}\neq0\mcond{\mvec x\in\Omega}$。证明
+~$\funcvec f{\Omega}$~是开区域。
 \end{exercise}
+
 \section{由方程组确定的隐函数及其微分法}
 \subsection{隐函数的局部存在性与可微性}
 \subsection{隐函数微分法}
+\begin{exercise}
+\item 试由方程式的隐函数存在定义证明方程组
+\[
+  \Biggl\lbrace\begin{aligned}
+  F_1(x,y,z)=&0;\\F_2(x,y,z)=&0
+  \end{aligned}
+\]
+的隐函数存在定理。
+\item 证明，能把方程组
+\[
+\systeme[xyzu]{
+3x+y-z+u^2=0\rlap{，},
+x-y+2z+u=0\rlap{，},
+2x+2y-3z+2u=0
+}
+\]
+中~$x,y,u$~用~$z$~表出，$x,z,y$~能用~$y$~表出，$y,z,u$~能用~$x$~表出，当不能把~$x,y,z$~用~$u$~表出。
+\item 由下列方程组求~$\diff yx$，$\diff zx$~和~$\diff y{x2}$，$\diff z{x2}$。
+\begin{exlistcols}
+  \item \systeme{x+y+z=0\rlap{，},x^2+y^2+z^2=1;}
+  \item \systeme{x^3+y^3+z^3=3xyz\rlap{，},x+y+z=a。}
+\end{exlistcols}
+\item 由下列方程组求出~$\pdiff ux$，$\pdiff uy$，$\pdiff vx$~与~$\pdiff vy$。
+\begin{exlistcols}[3]
+  \item $\Biggl\lbrace\begin{aligned} xu-yv &=0,\\ yu-xv &=1;\end{aligned}$
+  \item $\Biggl\lbrace\begin{aligned} x+y &=u+v,\\ \dfrac xy &=\dfrac{\sin u}{\sin v};\end{aligned}$
+  \item $\Biggl\lbrace\begin{aligned} u^2-v &=3x+y,\\ u-2v^2 &=x-2y。\end{aligned}$
+\end{exlistcols}
+\item 设
+\[
+  \left\lbrace\begin{aligned}
+    x&=\cos\phi\cos\psi,\\
+    y&=\cos\phi\sin\psi,\\
+    z&=\sin\phi 。
+  \end{aligned}
+  \right.
+\]
+求~$\pdiff z{x2}$。
+\item 求由方程组
+\[
+  x=u\cos v,\quad y=u\sin v,\quad z=v
+\]
+确定的函数~$z=z(x,y)$~的所有二阶偏导数。
+\item 求由下列方程组所确定的函数~$u=u(x,y)$~的所有二阶偏导数。
+\begin{exlistcols}
+  \item $u=yz+zx+xy$，~$x^2+y^2+z^2=1$；
+  \item $u=xyz$，~$x^2+y^2+z^2=1$。
+\end{exlistcols}
+\item 设
+\[
+  \Biggl\lbrace\begin{aligned}
+  &u=f\mparenb{x-ut,y-ut,z-ut},\\
+  &g(x,y,z)=0 。\end{aligned}
+\]
+求~$\pdiff ux$~与~$\pdiff uy$。并判断这时~$t$~是自变量还是因变量。
+\item 设
+\[
+  \left\lbrace
+  \begin{matrix*}[l]
+    u=f(x,y,z,t),\\
+    \begin{aligned}
+      g(y,z,t)&=0,\\
+      h(z,t)&=0 。
+    \end{aligned}
+  \end{matrix*}
+  \right.
+\]
+确定在什么条件下~$u$~是~$x,y$~的函数。并求~$\pdiff ux$~和~$\pdiff uy$。
+\item 设函数~$u=u(x)$~由方程组
+\[
+  u=f(x,y,z),\quad g(x,y,z)=0,\quad h(x,y,z)=0
+\]
+定义。求~$\diff ux$~与~$\diff u{x2}$。
+item 设~$z=z(x,y)$~满足方程组
+\[
+  f(x,y,z,t)=0,\quad g(x,y,z,t)=0 。
+\]
+求~$\dif z$。
+\item\label{exer-17-1-12}%
+设~$\mvec x\in\mR{m}$，$\mvec y\in\mR{n}$，且~$\funcvec*F{x,y}\in\mR{n}$。又设~$\funcvec*F{x,y}\in C^{(1)}$，且
+~$\det\Dif_{\mvec y}\funcvec*F{x,y}\neq0$。由方程组
+\[
+  \funcvec*F{x,y}=0
+\]
+确定隐函数~$\mvec y=\funcvec*y{x}=\mparenb{y_1(\mvec x),\dotsc,y_n(\mvec x)}$。
+\begin{exlist}
+  \item 证明
+  \[
+    \Dif\funcvec*y{x}=-\mparenb{\Dif_{\mvec y}\funcvec*F{x,y}}^{-1}\Dif_{\mvec x}\funcvec*F{x,y};
+  \]
+  \item\label{exer-17-1-12-ii}若~$n=m$，证明，
+  \[
+    \pdiff{(\mvec y{1,:,n})}{{(\mvec x{1,:,n})}}=(-1)^n
+    \pdiff{(\mvec F{1,:,n})}{{(\mvec x{1,:,n})}}\mathord{\bigg/}\pdiff{(\mvec F{1,:,n})}{{(\mvec y{1,:,n})}} 。
+  \]
+\end{exlist}
+\item 设
+\[\left\lbrace
+\begin{aligned}
+    x_1 &=r\cos\theta_1,\\
+    x_2 &=r\sin\theta_1\cos\theta_2,\\
+    x_3 &=r\sin\theta_1\cos\theta_2\cos\theta_3,\\
+        &\shortvdotswithin{=}
+ x_{m-1}&=r\sin\theta_1\sin\theta_2\dotsm\sin\theta_{m-2}\cos\theta_{m-1},\\
+     x_m&=r\sin\theta_1\sin\theta_2\dotsm\sin\theta_{m-2}\sin\theta_{m-1}。
+\end{aligned}\right.
+\]
+\begin{exlist}
+\item 证明，
+\[\left\lbrace
+\begin{aligned}
+    F_1 &=r^2-\mparenb{x_1^2+x_2^2+\dotsb+x_m^2}=0,\\
+    F_2 &=r^2\sin^2\theta_1-\mparenb{x_2^2+\dotsb+x_m^2}=0,\\
+    F_3 &=r^2\sin^2\theta_1\sin^2\theta_2-\mparenb{x_3^2+\dotsb+x_m^2}=0,\\
+        &\shortvdotswithin{=}
+     F_m&=r^2\sin^2\theta_1\sin^2\theta_2\dotsm\sin^2\theta_{m-1}-x_m^2=0;
+\end{aligned}\right.
+\]
+\item 利用\ref{exer-17-1-12}~之~\ref{exer-17-1-12-ii}~求~$\pdiff{(\mvec x{1,2,:,m})}{{(r,\mvec\theta{1,:,m-1})}}$。
+\end{exlist}
+\item 设~$\vecfunc \phi{x,y}=\phi\mparenb{\mvec x{1,:,m},\mvec y{1,:,m}}$~是~$2m$~元数值函数。且~$\vecfunc\phi{x,y}\in C^{(2)}$，%
+关于~$\mvec x{1,:,m}$~是二次齐次函数，即
+\[
+  \phi\minto{t\mvec x}{\mvec y}=t^2\vecfunc\phi{x,y}。
+\]
+$\phi$~作为~$\mvec x$~的函数，其~Hessian~矩阵为
+\[
+  H=\begin{pmatrix}
+    \dfrac{\pdif^2\phi}{\pdif x_1^2} & \cdots & \dfrac{\pdif^2\phi}{\pdif x_1\pdif x_m}\\
+    \vdots &\ddots & \vdots\\
+    \dfrac{\pdif^2\phi}{\pdif x_m\pdif x_1} & \cdots & \dfrac{\pdif^2\phi}{\pdif x_m^2}
+  \end{pmatrix}。
+\]
+\begin{exlist}
+  \item 证明~$\Dif_{\mvec x}\phi=\trans{\mvec x}H$；
+  \item 设~$\det H\neq0$，作自变量替换
+  \[
+    \mvec\xi=\matr M{\xi_1;\vdots;\xi_m}=\matr M{\pdiff\phi{{x_1}};\vdots;\pdiff\phi{{x_m}}}。
+  \]
+  证明，函数~$\vecfunc \phi{x,y}$~变成~$\vecfunc \psi{\xi,y}$；
+  \item 证明，$\trans{\mparenb{\Dif_{\mvec\xi}\psi}}=\mvec x$。
+\end{exlist}
+\end{exercise}
 
 \pushstar
 \section{函数相关性}
 \popstar
 
 \begin{exercise}
-\item
+\item 设~$f(x)$~在区间~$\minto ab$~上导数不为零。证明~$\minto ab$~上任意函数~$y=\phi(x)$~都可以用~$f(x)$~表示。
+\item 设~$f(x,y,z)=x^2+y^2+z^2$，而~$g(x,y,z)=x+y+z$。问在任意区域上，它们是否可以相互表示。
+\item 给定~$C^{(1)}$~函数组
+\[
+  u=f_1(x,y),\quad v=f_2(x,y),\quad w=f_3(x,y),
+\]
+并设在开区域~$\Omega$~上~$\pdiff{(f_1,f_2)}{{(x,y)}}\neq0$。
+\begin{exlist}
+  \item 对任意~$M\in\Omega$，是否存在~$M$~的一个邻域~$U(M)$，使得在此邻域上有
+  \[
+    f_3(x,y)=\Phi\mintob{f_1(x,y)}{f_2(x,y)};
+  \]
+  \item 在整个区域上是否有~$f_2(x,y)=\Psi\mintob{f_1(x,y)}{f_2(x,y)}$。
+\end{exlist}
+\item 对下列函数组证明~$\pdiff{(f,g)}{{(f,g)}}=0$，并求~$\phi$~使得~$f=\phi(g)$。
+\begin{exlistcols}
+  \item $f=\sin\mparenb{x^2+y^2}$，~$g=\cos\mparenb{x^2+y^2}$；
+  \item $f=\ln y-\ln x$，~$g=\dfrac{xy}{x^2+y^2}$；
+  \item $f=x^2-2xy+y^2-3x+3y+1$，~$g=\me^{x-y}$。
+\end{exlistcols}
+\item 讨论下列函数的相关性。
+\begin{exlistcols}\setlength\jot{1ex}%
+  \item $\left\lbrace\begin{aligned}
+    u&=\dfrac{x-y}{x-z},\\
+    v&=\dfrac{y-z}{y-x},\\
+    w&=\dfrac{z-x}{z-y};
+  \end{aligned}\right.$
+  \item $\left\lbrace\begin{aligned}
+    u&=\dfrac x{1-x-y-z},\\
+    v&=\dfrac y{1-x-y-z},\\
+    w&=\dfrac z{1-x-y-z}。
+  \end{aligned}\right.$
+\end{exlistcols}
+\item 设一元函数组
+\[
+  \phi_1(x),\enspace\phi_2(x),\enspace\dotsc,\enspace \phi_n(x)
+\]
+在区间~$\minto ab$~上线性无关。证明~Wronskian~行列式
+\[
+  W(x)=\begin{vmatrix}
+    \phi_1(x) & \phi_2(x) & \cdots & \phi_n(x) \\
+    \phi'_1(x) & \phi'_2(x) & \cdots & \phi'_n(x) \\
+    \vdots & \vdots & \ddots & \vdots \\
+    \phi_1^{(n-1)}(x) & \phi_2^{(n-1)}(x) &  \cdots & \phi_n^{(n-1)}(x)
+  \end{vmatrix}\equiv0\mcond*{x\in\minto ab}。
+\]
+\item 设
+\[
+  \phi_1(x)=\begin{cBdcases}
+    x^2, & x>0 ;\\ 0, & x\leq 0,
+  \end{cBdcases}\qquad
+  \phi_2(x)=\begin{cBdcases}
+    0, & x>0 ;\\ x^2, & x\leq 0。
+  \end{cBdcases}
+\]
+\begin{exlist}
+  \item 求
+  \[
+    W(x)=\begin{vmatrix}
+      \phi_1(x) & \phi_2(x)\\ \phi_1'(x) & \phi_2'(x)
+    \end{vmatrix};
+  \]
+  \item 说明~$\phi_1(x)$~与~$\phi_2(x)$~在~$\mR$~上是否线性相关。
+  \item 这个例子说明了什么。
+\end{exlist}
+\item 设~$u=f(x,y)$~与~$v=g(x,y)$~在开区域~$\Omega$~上有连续的偏导数，满足
+\[
+  F(u,v)=F\mintob{f(x,y)}{g(x,y)}=0,
+\]
+其中~$F\in C^{(1)}$，在任意点的邻域不恒为零。证明，
+\[
+  \pdiff{(u,v)}{{(x,y)}}=0\mcond*{\minto xy\in\Omega}。
+\]
+
 \end{exercise}
+
 \begin{exercise*}
-\item
+\item 设~$A$~是~$m$~阶方阵，而~$I$~为~$m$~阶单位矩阵，考察矩阵序列
+\[
+  T_n=I=A+\frac{A^2}{2!}+\dotsb+\frac{A^n}{n!} 。
+\]
+\begin{exlist}\FixExHead
+  \item 任给~$\e>0$，存在~$N$，当~$n>N$~时，对任意~$p\in\mN$，有~$\mnormb{T_{n+p}-T_n}<\e$；
+  \item 当~$\ntoinf$~时，$T_n$~收敛于某矩阵，记为~$\me^A$。
+\end{exlist}
+\item 设~$\Omega\subset\mR{m}$~是开区域，而~$\funcvec*f{x}\in C^{(1)}\mintob{\Omega}{\mR{m}}$，且~$\det\Dif\funcvec*f{x}\neq0$，%
+$\mvec x\in\Omega$。证明~$\funcvec f{\Omega}$~是开区域。
+\item 设~$\Omega\subset\mR{2}$~是有界开区域，$\Omega\to\mR{2}$~的函数
+\[
+  \funcvec T{x,y}=\matrB M{f\minto xy;g\minto xy}
+\]
+满足~$\funcvec T\in C^{(1)}(\Omega)$，且对任意~$\minto xy\in\Omega$，有~$\det\Dif\funcvec T{x,y}\neq0$。
+\begin{exlist}
+  \item 若~$G\subset\Omega$~是闭区域，且~$\funcvec T{x,y}$~是~$\Omega$~上的单叶函数，证明~$\funcvec T{\Omega}$~也是闭区域，并且
+  ~$\funcvec T{\bound G}=\bound{\funcvec T{G}}$；
+  \item 若~$\funcvec T$~是~$\Omega$~上的单叶函数，且~$\funcvec T$~在~$\closure\Omega$~上连续，讨论
+  ~$\funcvec T{\closure\Omega}$~是否是闭区域，是否有~$\funcvec T{\bound{\closure G}}=\bound{\funcvec T{\closure G}}$。
+\end{exlist}
+\item 设~$\mvec x_0\in\mR{3}$，而~$U_0$~是~$\mvec x_0$~的一个邻域，函数
+\[
+  \funcvec u\minto t{\mvec x}\in C^{(1)}\mintob{\mintc0{T_0+\e_0}\times U_0}{\mR{3}},
+\]
+其中~$\e_0>0$。若~$\funcvec u\minto{T_0}{\mvec x_0}=\mvec z_0$，$\Pi$~是过~$\mvec z_0$~且以~$\mvec n$~为法向量的平面，同时
+\[
+  \pdiff{\funcvec u\minto{T_0}{\mvec x_0}}t\cdot\mvec n\neq0 。
+\]
+证明，存在~$\mvec x_0$~的某邻域~$U_1\subset U_0$~和唯一函数~$\vecfunc T{x}$，使得~$\vecfunc T{x}\in C^{(1)}\minto{U_1}{\mR}$，%
+而~$\vecfunc T{x_0}=T_0$，且~$\funcvec u\mintob{\vecfunc T{x}}{\mvec x}\in\Pi$，其中~$\mvec x\in U_1$。
+\item 今有四个变量的方程组
+\[
+  B\mvec x-\lambda\mvec x+\funcvec N\mintob{\trans{\mvec x}}\lambda=0,
+\]
+其中~$\mvec x=\trans{\mparenb{x_1,x_2,x_3}}$，$B$~是~$3$~阶方阵，$\lambda\in\mR$，而~$\funcvec N\in C^{(2)}$，并且
+\[
+  \funcvec N{0,\lambda}=\Dif_{\mvec x}\funcvec N{0,\lambda}=0 。
+\]
+若~$\lambda_0$~是~$B$~的单特征值，试问能否在~$\minto{\mvec x}\lambda=\minto0{\lambda_0}$~邻域从方程中解出三个连续可微的一元函数。
+\item 设~$u=f(x,y)$~与~$v=g(x,y)$~在区域~$\Omega$~上有连续偏导数。证明~$u,v$~满足一元函数关系~$u=\phi(v)$~当且仅当
+\[
+  \pdiff{(u,v)}{{(x,y)}}\equiv 0。
+\]
 \end{exercise*}
 
 

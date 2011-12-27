@@ -4,10 +4,83 @@
 
 
 \chapter{含参变量的积分}\label{ch:19}
+
 \section{含参变量的定积分}
 \begin{exercise}
-\item
+\item 设~$\closure D$~是~$\mR{m}$~上的有界闭区域，而~$E=\closure D\times\minto\alpha\beta$，且~$f(x,t)\in C(E)$，令
+\[
+  I(x)=\int_\alpha^\beta f(x,t)\dif t 。
+\]
+证明~$I(x)\in C(E)$。
+\item 设~$f(x)$~在~$\minto ab$~上可积，且~$\phi\minto xy\in C^{(k)}(D)$，其中~$D=\mintc ab\times\minto\alpha\beta$，又设
+\[
+  g(y)=\int_a^bf(x)\phi(x,y)\dif x 。
+\]
+证明~$g(y)\in C^{(k)}\minto\alpha\beta$，且对任意~$n=1,2,\dotsc,k$，有
+\[
+  g^{(n)}(y)=\int_a^bf(x)\dfrac{\pdif^n\phi(x,y)}{\pdif y^n}\dif x 。
+\]
+\item 求下列极限。
+\begin{exlistcols}[3]
+  \item $\lim_{x\to0}\int_{-1}^1\txts\smbsqrt{x^2+y^2}\dif y$；
+  \item $\lim_{x\to0}\int_0^2y^2\cos xy\dif y$；
+  \item $\lim_{\alpha\to0}\int_\alpha^{1+\alpha}\dfrac{\dif x}{1+x^2+\alpha^2}$。
+\end{exlistcols}
+\item 设~$f(x)$~为连续函数，且
+\[
+  F(x)=\frac1{h^2}\int_0^h\mparenbb{\int_0^hf(x+\xi+\eta)\dif\eta}\dif\xi 。
+\]
+求~$F''(x)$。
+\item 设~$f(x)$~连续，且~$F(x)=\int_0^xf(t)(x-t)^{n-1}\dif t$。求~$F^{(n)}(x)$。
+\item 设~$f(x)\in C^{(2)}(\mR)$，而~$F(x)\in C^{(1)}(\mR)$，且
+\[
+  u=\frac12\mparenb{f(x+at)+f(x-at)}+\frac1{2a}\int_{x-at}^{x+at}F(y)\dif y 。
+\]
+证明，当~$x\in\mR$~且~$t\geq0$~时，~$u(x,t)$，$u_{tt}''(x,t)$~与~$u_{xx}''(x,t)$~连续且满足
+\[
+  \pdiff u{t2}=a^2\pdiff u{x2},\quad u(x,0)=f(x),\quad \pdiff{u(x,0)}t=F(x) 。
+\]
+\item 求~$F'(x)$。
+\begin{exlistcols}
+  \item $F(x)=\int_{\sin x}^{\cos x}\me^{x\smbsqrt{1-y^2}}\dif y$；
+  \item $F(x)=\int_{a+x}^{b+x}\dfrac{\sin xy}y\dif y$；
+  \item $F(x)=\int_0^x\mparenbb{\int_{t^2}^{x^2}f(t,s)\dif s}\dif t$。
+\end{exlistcols}
+\item 设~$f(x)$~是以~$2\pi$~为周期的连续函数，而~$a_n,b_n$~为其~Fourier~系数，$A_n,B_n$~是\emph{卷积}函数
+\[
+  F(x)=\frac1\pi\int_{-\pi}^\pi f(t)f(x+t)\dif t
+\]
+的~Fourier~系数。证明，
+\[
+  A_0=a_0^2,\quad A_n=a_n^2+b_n^2,\quad B_n=0 。
+\]
+\item 设
+\[
+  F(x)=\int_0^{2\pi}\me^{x\cos t}\cos\mparen{x\sin\theta}\dif\theta 。
+\]
+证明~$F(x)\equiv2\pi$。
+\item 设~$F(y)=\int_0^1\txts\ln\smbsqrt{x^2+y^2}\dif x$。问是否成立~
+$F'(0)=\int_0^1\pdiff{}y\txts\ln\smbsqrt{x^2+y^2}\mrest[\biggr]{y=0}\!\dif x$。
+\item 证明，
+\[
+  \int_0^1\dif x\int_0^1\frac{x^2-y^2}{\mparenb{x^2+y^2}^2}\dif y\neq
+  \int_0^1\dif y\int_0^1\frac{x^2-y^2}{\mparenb{x^2+y^2}^2}\dif x 。
+\]
+\item 设~$f(x,t)\in C^{(n)}\mcond{n\geq1}$，且
+\[
+  g(r,\theta)=\begin{dcases}
+    \dfrac1r\mparenb{f(r\cos\theta,r\sin\theta)-f(0,0)}, &  r\neq0;\\[1ex]
+    \pdiff{f(0,0)}x\cos\theta+\pdiff{f(0,0)}x\sin\theta, &  r=0 。
+  \end{dcases}
+\]
+证明~$g(r,\theta)\in C^{(n-1)}$。
+\item 设~$U$~是~$\mR{m}$~中原点的一个邻域，且~$\vecfunc g{x}\in C^{(2)}(U)$，且~$g(0)=0$。证明，
+\[
+\vecfunc g{x}=\sum_{i=1}^m x_i\vecfunc{f_i}{x},
+\]
+其中~$\vecfunc{f_i}{x}\in C^{(1)}(U)$，且~$f_i(0)=\pdiff{g(0)}{{x_i}}$。
 \end{exercise}
+
 \section{极限函数的性质}
 \subsection{一致收敛性}
 \subsection{极限函数的性质}
@@ -16,17 +89,247 @@
 \subsection{积分的一致收敛性}
 \subsection{含参变量的无穷积分的性质}
 \begin{exercise}
-\item
+\item 求出下列函数的定义域。
+\begin{exlistcols}[3]
+  \item $F(x)=\int_0^\pinf\dfrac{\me^{-xy}}{1+y^2}\dif y$；
+  \item $F(x,y)=\int_0^\pinf\dfrac{\sin t^y}{t^x}\dif t$；
+  \item $F(x)=\int_0^2\dfrac{\dif t}{\mabs{\ln t}^x}$。
+\end{exlistcols}
+\item 证明下列积分在所给定的区间上一致收敛。
+\begin{exlistcols}
+  \item $\int_1^\pinf\dfrac{\cos xy}{x^2+y^2}\dif y$，~$x\geq a>0$；
+  \item $\int_1^\pinf x^\alpha\me^{-x}\dif x$，~$a\leq\alpha\leq b$；
+  \item $\int_1^\pinf\me^{-\alpha x}\dfrac{\cos x}{x^p}\dif x$，~$p>0$~且~$\alpha\geq0$；
+  \item $\int_0^\pinf\dfrac{\sin x^2}{1+x^p}\dif x$，~$p\geq0$；
+  \item $\int_0^\pinf\dfrac{\sin x}x\me^{-\alpha x}\dif x$，~$\alpha\geq0$。
+\end{exlistcols}
+\item 设~$t>0$~时~$f(t)$~连续，$\int_0^\pinf t^\lambda f(t)\dif t$~当~$\lambda=a$~与~$\lambda=b$~时皆收敛，且~$a<b$。证明
+~$\int_0^\pinf t^\lambda f(t)\dif t$~关于~$\lambda$~在~$\mintc ab$~上一致收敛。
+\item 叙述~$\int_a^\pinf f(x,y)\dif y$~对~$x\in X$~的不一致收敛原理。
+\item 设~$\int_0^\pinf f(x,y)\dif y$~对~$x\in X$~收敛。设有~$X$~中的聚点~$x_0$，对任意~$A>0$，有极限
+\[
+  \lim_{X\owns x\to x_0}\int_A^\pinf f(x,y)\dif y=\ell(A)
+\]
+存在。且集合~$\mbraceb{\mabs{\ell(A)}}$~有正的下界。证明~$\int_0^\pinf f(x,y)\dif y$~对~$x\in X$~不一致收敛。
+\item 证明下列积分在所给定区间上不一致收敛。
+\begin{exlistcols}
+  \item $\int_0^\pinf\dfrac{\sqrt\alpha}{\me^{\alpha x^2}}\dif x$，~$0\leq\alpha<\pinf$；
+  \item $\int_0^1\dfrac1{x^n}\sin\dfrac1x\dif x$，~$0<n<2$；
+  \item $\int_0^\pinf\dfrac{\sin y}{\me^{x^2(1+y^2)}}\dif y$，~$0<x<\pinf$。
+\end{exlistcols}
+\item 讨论下列积分在指定区间上的一致收敛性。
+\begin{exlist}
+  \item $\int_\minf^\pinf\me^{-(x-a)^2}\dif x$，\quad\DingNum{1}\enspace$a<\alpha<b$；\quad\DingNum{2}\enspace$\alpha\in\mR$；
+  \item $\int_0^1x^{p-1}\ln^2x\dif x$，\quad\DingNum{1}\enspace$p\geq p_0>0$；\quad\DingNum{2}\enspace$p>0$；
+  \item $\int_0^\pinf\dfrac{\sin\alpha x}x\dif x$，\quad\DingNum{1}\enspace$\alpha\in\mintc ab$，且~
+  $0\nin\mintc ab$；\quad\DingNum{2}\enspace$\alpha\in\mintc ab$，且~$0\in\mintc ab$；
+  \item $\int_0^1\dfrac{\sin\alpha x}{\sqrt{\mabs{x-\alpha}}}\dif x$，~$0\leq\alpha\leq1$。
+\end{exlist}
+\item 讨论下列函数在指定区间上的连续性。
+\begin{exlistcols}
+  \item $F(x)=\int_0^\pinf\dfrac x{x^2+y^2}\dif y$，~$x\in\mR$；
+  \item $F(x)=\int_0^\pi\dfrac{\sin y}{y^x(\pi-y)^{2-x}}\dif y$，~$x\in\minto02$；
+  \item $F(x)=\int_0^\pinf\dfrac{y^2}{1+y^x}\dif y$，~$y>3$。
+\end{exlistcols}
+\item 设对任意~$\beta>\alpha$，且对~$y\in\mintc\alpha\beta$~一致地成立
+\[
+  \lim_{x\to x_0}f(x,y)=f(x_0,y),
+\]
+其中~$x_0\in\mintc ab$。又对任意~$x\in\mintc ab$~与~$y\geq\alpha$，有
+\[
+  \mabsb{f(x,y)}\leq F(y),\quad\int_\alpha^\pinf F(y)\dif y 。
+\]
+按极限定义证明
+\[
+  \lim_{\substack{x\to x_0\\ x\in[a,b]}}\int_\alpha^\pinf f(x,y)\dif y=\int_\alpha^\pinf f(x_0,y)\dif y 。
+\]
+\item 设~$f(x)$~在~$\mintco0\pinf$~上可积，且除~$\pinf$~外只有~$x=0$~为瑕点。证明
+\[
+  \lim_{\alpha\to0}\int_0^\pinf\me^{-\alpha x}f(x)\dif x=\int_0^\pinf f(x)\dif x 。
+\]
+\item 设~$f(x,y)>0$，又设对一切有限值~$b>a$~与~$\beta>\alpha$，有
+\[\begin{aligned}
+  \int_a^b\dif x\int_\alpha^\pinf f(x,y)\dif y     &=\int_\alpha^\pinf\dif y\int_a^b f(x,y)\dif x,\\[.5ex]
+  \int_\alpha^\beta\dif y\int_a^\pinf f(x,y)\dif x &=\int_a^\pinf\dif x\int_\alpha^\beta f(x,y)\dif y 。
+\end{aligned}\]
+证明等式
+\[
+  \int_a^\pinf\dif x\int_\alpha^\pinf f(x,y)\dif y=\int_\alpha^\pinf\dif y\int_a^\pinf f(x,y)\dif x
+\]
+在任意一边的积分收敛时成立。
+\item 设~$\int_\minf^\pinf \mabsb{f(x)}\dif x$~存在。证明~$F(u)=\int_\minf^\pinf f(x)\cos ux\dif x$~在~$u\in\mR$~上有界
+且一致连续。
+\item 设~$\delta>0$，取定~$x_0\in\mR$。当~$x\in U(x_0;\delta)$~时，$f(x,y)$~满足
+\begin{exlistcols}
+  \item $\diff{}x\int_\alpha^\beta f(x,y)\dif y=\int_\alpha^\beta\pdiff{f(x,y)}x\dif y$~对一切~$\beta>\alpha$~成立；
+  \item $\int_\alpha^\pinf f(x_0,y)\dif y$~收敛；
+  \item $\int_\alpha^\pinf\pdiff{f(x,y)}x\dif y$~一致收敛。
+\end{exlistcols}
+证明，当~$x\in U(x_0;\delta)$~时，有
+\[
+  \diff{}x\int_\alpha^\pinf f(x,y)\dif y=\int_\alpha^\pinf\pdiff{f(x,y)}x\dif y 。
+\]
 \end{exercise}
+
 \section{计算含参变量积分的几个例子}
-\section{Euler~积分——~$\Beta$~函数与~$\Gamma$~函数}
-\subsection{$\Beta$~函数}
-\subsection{$\Gamma$~函数}
 \begin{exercise}
-\item
+\item 利用已知积分值
+\[
+  \int_0^\pinf\dfrac{\sin }x=\frac\pi2,\quad \int_0^\pinf\me^{-x^2}\dif x=\frac{\sqrt\pi}2
+\]
+与积分运算法则计算下列积分。
+\begin{exlistcols}
+  \item $\int_0^\pinf\dif x$；
+  \item $\dfrac2\pi\int_0^\pinf\dfrac{\sin y\cos yx}y\dif x$；
+  \item $\int_0^\pinf\dfrac{\sin^4x}{x^2}\dif x$；
+  \item $\int_0^\pinf x^2\me^{-\alpha x^2}\mcond{\alpha>0}\dif x$；
+  \item $\int_0^\pinf\me^{-(ax^2+bx+c)}\dif x\mcond{a>0}\dif x$；
+  \item $\int_0^\pinf\me^{-x^2-\frac{a^2}{x^2}}\dif x\mcond{a>0}\dif x$。
+\end{exlistcols}
+\item 利用对参数的微分法计算下列积分，其中~$\alpha,\beta>0$，而~$n\in\mN$。
+\begin{exlistcols}
+  \item $I_n(\alpha)=\int_0^\pinf\dfrac{\dif x}{(x^2+\alpha^2)^{n+1}}$；
+  \item $\int_0^\pinf\dfrac{\me^{-\alpha x^2}-\me^{-\beta x^2}}x\dif x$；
+  \item $\int_0^\pinf\dfrac{\me^{-\alpha x}-\me^{-\beta x}}x\sin mx\dif x$；
+  \item $\int_0^\pinf x\me^{-\alpha x^2}\sin bx\dif x$。
+\end{exlistcols}
+\item 利用对参数的积分法计算下列积分，其中~$\alpha,\beta>0$。
+\begin{exlistcols}
+  \item $\int_0^\pinf\dfrac{\me^{-\alpha x}-\me^{-\beta x}}x\sin mx\dif x$；
+  \item $\int_0^\pinf\dfrac{\me^{-\alpha x^2}-\me^{-\beta x^2}}x\dif x$。
+\end{exlistcols}
+\item 从已知积分出发利用对参数的微分法求下列积分，其中~$\alpha>0$，而~$n\in\mN$。
+\begin{exlistcols}
+  \item $\int_0^\pinf\me^{-\alpha x^2}x^{2n}\dif x$；
+  \item $\int_0^1x^{\alpha-1}\ln^nx\dif x$。
+\end{exlistcols}
+\item 从等式
+\[
+  \frac1{\alpha^2+x^2}=\int_0^\pinf\me^{-t(x^2+\alpha^2)}\dif t
+\]
+出发，计算下列积分，其中~$\alpha>0$。
+\begin{exlistcols}
+  \item $\int_0^\pinf\dfrac{\cos\beta x}{x^2+\alpha^2}\dif x$；
+  \item $\int_0^\pinf\dfrac{x\sin\beta x}{x^2+\alpha^2}\dif x$。
+\end{exlistcols}
+\item 求下列积分。
+\begin{exlistcols}
+  \item $\int_0^\pi\ln\mparenb{1-2a\cos x+a^2}\dif x$；
+  \item $\int_0^{\frac\pi2}\ln\mparenb{a^2-\sin^2x}\dif x\mcond{a>1}$；
+  \item $\int_0^\pinf\mparenbb{\dfrac{\sin\alpha x}x}^{\msp2}$；
+  \item $\int_0^\pinf\dfrac{\arctan\alpha x}{x(1+x^2)}\dif x\mcond{\alpha\geq0}$；
+  \item $\int_0^\pinf\dfrac{\sin\alpha x}xJ_0(x)\dif x$，其中
+  ~$J_0(x)=\dfrac2\pi\int_0^{\frac\pi2}\cos\mparen{x\sin\theta}\dif\theta$。
+\end{exlistcols}
+\item 求下列积分。
+\begin{exlistcols}
+  \item $\int_0^\pinf\dfrac{1-\me^{-t}}t\cos t\dif t$；
+  \item $\int_0^\pinf\dfrac{\ln(1+x^2)}{1+x^2}\dif x$。
+\end{exlistcols}
 \end{exercise}
+
+\section(Euler 积分—— B 函数与 Γ 函数){Euler~积分——~$\BetaF$~函数与~$\GammaF$~函数}
+\subsection(B 函数){$\BetaF$~函数}
+\subsection(Γ 函数){$\GammaF$~函数}
+\begin{exercise}
+\item 求下列积分的存在域，并用~Euler~积分表示。
+\begin{exlistcols}[3]
+  \item $\int_0^\pinf\dfrac{x^{m-1}}{2+x^n}\dif x$；
+  \item $\int_0^1\dfrac{\dif x}{\sqrt[n]{1-x^m}}$；
+  \item $\int_0^{\frac\pi2}\sin^mx\cos^nx\dif x$；
+  \item $\int_0^{\frac\pi2}\tan^nx\dif x$；
+  \item $\int_0^1\mparenbb{\ln\dfrac1x}^{\msp p}\dif x$；
+  \item $\int_0^1x^m\mparenbb{\ln\dfrac1x}^{\msp n-1}\dif x$；
+  \item $\int_0^\pinf x^p\me^{-\alpha x}\ln x\dif x\mcond{\alpha>0}$。
+\end{exlistcols}
+\item 利用~Euler~积分计算下列积分，其中~$n\in\mR$，而~$a>0$。
+\begin{exlistcols}[3]
+  \item $\int_0^1\dfrac{\dif x}{\sqrt{1-\sqrt[4]x}}\dif x$；
+  \item $\int_0^1\txts\smbsqrt{x-x^2}\dif x$；
+  \item $\int_0^1\txts\sqrt{x^3(1-\sqrt x)}\dif x$；
+  \item $\int_0^a\txts x^2\sqrt{a^x-x^2}\dif x$；
+  \item $\int_0^1\dfrac{x^n}{\sqrt{1-x^2}}\dif x$；
+  \item $\int_0^{\frac\pi2}\sin^6x\cos^4x\dif x$；
+  \item $\int_0^\pinf\dfrac{\dif x}{1+x^4}$；
+  \item $\int_0^\pinf x^{2n}\me^{-x^2}\dif x$；
+  \item $\int_0^\pi\dfrac{\dif x}{\sqrt{3-\cos x}}$。
+\end{exlistcols}
+\item 证明，
+\begin{exlistcols}
+  \item $\int_0^\pinf\me^{-x^n}\dif x=\dfrac1n\GammaF\mparenB{\dfrac1n}\mcond{n\in\mN}$；
+  \item $\lim_\ntoinf\int_0^\pinf\me^{-x^n}\dif x=1$。
+\end{exlistcols}
+\item 设~$p,q>-1$，证明
+\[
+  \int_{-1}^1(1+x)^p(1-x)^q\dif x=2^{p+q+1}\BetaF(p+1,q+1) 。
+\]
+\item 证明
+\[
+  \int_0^{\frac\pi2}\sin^\alpha x\dif x=\int_0^{\frac\pi2}\cos^\alpha x\dif x
+  =\dfrac12\BetaF\mintoB{\frac12}{\frac{\alpha+1}2},
+\]
+其中~$\alpha>0$。并由此计算~$\alpha$~为正整数时的积分值。
+\end{exercise}
+
 \begin{exercise*}
-\item
+\item 设~$\vecfunc f{x}\in C^{(\infty)}$，$\mvec x\in\mR{m}$。证明，
+\[
+  \vecfunc f{x}=\Dif\vecfunc f{a}\cdot(\mvec x-\mvec a)+\sum_{i,j=1}^m\vecfunc{g_{ij}}{x}\mparen{x_i-a_i}\mparen{x_j-a_j},
+\]
+其中~$g_{ij}\in C^{(\infty)}$，而~$\mvec x=\mparen{\mvec x{1,:,m}}$，$\mvec a=\mparen{\mvec a{1,:,m}}$。
+\item 设~$u(x,t)\in C^{(2)}\mparenb{\mintc0\ell\times\mintco0\pinf}$，且
+\begin{exlistcols}
+  \item 在~$\minto0\ell\times\minto0\pinf$~上，有~$u_{tt}''=a^2u_{xx}''$；
+  \item $u(0,t)=u(\ell,t)=0$。
+\end{exlistcols}
+证明，当~$t\geq0$~时，
+\[
+  E(t)=\frac12\int_0^t\mparenB{\mparenb{u_t'}^2+a^2\mparenb{u_x'}^2}\dif x
+\]
+为常数。
+\item 设~$f(x)\in C^{(p)}(\mR)$，且满足
+\[
+  f(a)=f'(a)=\dotsb=f^{(q-1)}(a)=0\mcond*{1\leq q\leq p-1}。
+\]
+定义
+\[
+  g(x)=\begin{cdcases}
+    \dfrac{f(x)}{(x-a)^p},  & x\neq a;\\[1ex]
+    \dfrac 1{q!}f^{(q)}(a), & x=a 。
+  \end{cdcases}
+\]
+证明~$g(x)\in C^{(p-q)}(\mR)$。
+\item 设~$f(x)\in C\mintc{-1}1$。证明，
+\[
+  \lim_{h\to0}\int_{-1}^1\frac h{h^2+x^2}f(x)\dif x=\pi f(0) 。
+\]
+\item 设~$f(x)$~在~$\mR$~上连续且有界，令
+\[
+  u(x,y)\coloneq\frac1\pi\int_\minf^\pinf\frac{f(\xi)}{(x-\xi)^2+y^2}\dif\xi 。
+\]
+%证明，
+\begin{exlist}\FixExHead
+  \item $u(x,y)$~在~$\mR\times\minto0\pinf$~上连续；
+  \item 在~$\mR\times\minto0\pinf$~上~$u_{xx}''$~与~$u_{yy}''$~都连续且满足~$u_{xx}''+u_{yy}''=0$；
+  \item $\dfrac1\pi\int_\minf^\pinf\frac y{(x-\xi)^2+y^2}\dif\xi=1$；
+  \item $\lim_{\substack{x\to x_0\\ y\to0+0}}u(x,y)=f(x_0)$，其中~$x_0\in\mR$。
+\end{exlist}
+\item 设~$\phi(x)$~在~$\mR$~上连续且有界，且~$a>0$，令
+\[
+  u(x,t)\coloneq\frac1{2a\sqrt{\pi t}}\int_\minf^\pinf\phi(\xi)\exp\mbracebb{-\frac{(x-\xi)^2}{4a^2t}}\dif\xi 。
+\]
+%证明，
+\begin{exlist}\FixExHead
+  \item 在~$\mR\times\minto0\pinf$~上，~$u(x,t)$~有界且任意次可微；
+  \item 在~$\mR\times\minto0\pinf$~上，~$u_t'=a^2u_{xx}''$；
+  \item 在~$\mR\times\minto0\pinf$~上，
+  \[
+    u(x,t)=\frac1{\sqrt\pi}\int_\minf^\pinf\txts\phi\mparenb{x+2a\sqrt t\eta}\me^{-\eta^2}\dif\eta;
+  \]
+  \item $\lim_{\substack{x\to x_0\\ t\to0+0}}u(x,t)=\phi(x_0)$，其中~$x_0\in\mR$；
+  \item 若~$\lim_{x\to\infty}\phi(x)=0$，则~$\lim_{x\to\infty}u(x,t)=0$，$t\in\minto0\pinf$；
+  \item 若~$\phi'(x)$~连续且有界，则~$\lim_{\substack{x\to x_0\\ t\to0+0}}\pdiff ut=\phi'(x_0)$，其中~$x_0\in\mR$。
+\end{exlist}
 \end{exercise*}
 
 

@@ -61,7 +61,7 @@
 \]
 反之，$a$~不是~$A$~的元素，记作
 \[
-  a\notin A\quad\text{或}\quad a\notinslant A 。
+  a\nin A\quad\text{或}\quad a\notin A 。
 \]
 
 \subsection{集合表示法}
@@ -162,20 +162,20 @@ A\cap B &=B\cap A;                     \tag*{（交换律）}\\*
 \end{align*}
 并且，若~$A\subset B$，则~$A\cap B=A$。
 
-给定集合~$A,B$，两集合的\emph{差}记为~$A-B$~或~$A\backslash B$，它是在~$A$~内而不在~$B$~内的元素组成的集
+给定集合~$A,B$，两集合的\emph{差}记为~$A\difset B$~或~$A-B$，它是在~$A$~内而不在~$B$~内的元素组成的集
 合（见\ref{fig:sec0-3}），定义为
 \[
-  A-B=\mathsetb x{x\in A,x\notin B}。
+  A-B=\mathsetb x{x\in A,x\nin B}。
 \]
 显然有
 \[
-  A-A=\eset;\enspace A-\eset=A;\enspace\eset-A=\eset;\enspace A-B=A-(A\cap B)。
+  A\difset A=\eset;\enspace A\difset\eset=A;\enspace\eset\difset A=\eset;\enspace A\difset B=A\difset(A\cap B)。
 \]
 
 假设我们所考察的集合都是更大集合~$X$~（如实数集）的子集，这时我们把~$A$~对~$X$~的差集称为~$A$~的\emph{补集}，记
 为~$\mcset A$，即
 \[
-  \mcset A\coloneq X-A。
+  \mcset A\coloneq X\difset A。
 \]
 
 \begin{quiz}
@@ -190,10 +190,10 @@ A\cap B &=B\cap A;                     \tag*{（交换律）}\\*
 
 设~$x$~是实数，$x$~的\emph{绝对值}为一非负实数，记为~$\mabs x$，定义为：
 \[
-  \mabs x=\begin{rbdcases}
+  \mabs x=\begin{rBdcases}
     x, & x\geq 0;\\
    -x, & x<0。
-  \end{rbdcases}
+  \end{rBdcases}
 \]
 例如~$\mabs{3.5}=3.5$，而~$\mabs{-3.5}=3.5$。
 
@@ -231,7 +231,7 @@ A\cap B &=B\cap A;                     \tag*{（交换律）}\\*
 \begin{corollary}
 对任意~$a_1,a_2,\dotsc,a_n\in\mR$，有
 \[
-  \mabsB{\sum_{k=1}^na_k}\leq\sum_{k=1}^n\mabs{a_k}。
+  \mabsbb{\sum_{k=1}^na_k}\leq\sum_{k=1}^n\mabs{a_k}。
 \]
 \end{corollary}
 \begin{corollary}
@@ -275,35 +275,34 @@ A\cap B &=B\cap A;                     \tag*{（交换律）}\\*
 \begin{exercise*}
 \item 用数学归纳法证明下列各题。
   \begin{exlist}
-  \item $\frac 1{1\cdot 2}+\frac 1{2\cdot3}+\dotsb+\frac1{n(n+1)}=1-\frac1{n+1}$；
+  \item $\dfrac 1{1\cdot 2}+\dfrac 1{2\cdot3}+\dotsb+\dfrac1{n(n+1)}=1-\dfrac1{n+1}$；
   \item $1^2+2^2+\dotsb+n^2=\dfrac 16n(n+1)(2n+1)$；
   \item $\mabs{\sin nx}\leq n\mabs{\sin x}$；
-  \item $\cos\alpha\cdot\cos2\alpha\cdot\dotsm\cdot\cos 2^n\alpha=\dfrac{\sin 2^{n+1}\alpha}{2^{n+1}\sin\alpha}$，
+  \item $\cos\alpha\cdot\cos2\alpha\dotsm\cos 2^n\alpha=\dfrac{\sin 2^{n+1}\alpha}{2^{n+1}\sin\alpha}$，
         其中~$\alpha\neq k\pi$，~$k$~为整数。
 \end{exlist}
 \item 证明，如果论断
 \[
-  1+2+\dotsb+n=\frac 12\mparenB{n+\frac12}^2
+  1+2+\dotsb+n=\frac 12\mparenbb{n+\frac12}^{\msp 2}
 \]
 对~$n=k$~是成立的，则这个论断对~$n=k+1$~也是成立的。解释这个论断不是对任意~$n$~成立。
 \item 设~$x>-1$，且~$x\neq0$，$n\geq 2$，证明，
 \[
   (1+x)^n>1+nx。
 \]
-\item 证明，
-  \begin{exlist}
+\item\begin{exlist}\FixExHead
     \item 对于~$n\geq 2$，有
     \[
-      \mparenB{1+\frac 1{n-1}}^n>\mparenB{1+\frac1n}^{n+1};
-    \]    
+      \mparenbb{1+\frac 1{n-1}}^n>\mparenbb{1+\frac1n}^{\msp n+1};
+    \]
     \item 对于~$n\geq 2$，有
     \[
-      \mparenB{1+\frac 1{n-1}}^{n-1}<\mparenB{1+\frac1n}^n;
-    \]    
+      \mparenbb{1+\frac 1{n-1}}^{n-1}<\mparenbb{1+\frac1n}^{\msp n};
+    \]
     \item 对于~$n\geq 1$，有
     \[
-      \mparenB{1+\frac 1n}^n<4 。
-    \]    
+      \mparenbb{1+\frac 1n}^{\msp n}<4 。
+    \]
   \end{exlist}
 \item 设~$n\geq 1$，证明，
 \[
@@ -315,14 +314,14 @@ A\cap B &=B\cap A;                     \tag*{（交换律）}\\*
 \]
 \item 证明，
 \[
-  \mabsB{\sum_{k=1}^na_k}\geq\mabs{a_1}-\sum_{k=2}^n\mabs{a_k}。
+  \mabsbb{\sum_{k=1}^na_k}\geq\mabs{a_1}-\sum_{k=2}^n\mabs{a_k}。
 \]
 \item 解下列不等式。
 \begin{exlistcols}[3]
   \item $\mabs{x-1}<3$；
   \item $\mabs{3-2x}<1$；
   \item $\mabs{1+2x}\leq 1$；
-  \item $\mabsB{5-\dfrac 1x}<1$；
+  \item $\mabsbb{5-\dfrac 1x}<1$；
   \item $\mabs{x-1}>2$；
   \item $\mabs{x+2}>5$；
   \item $\mabs{x^2-2}\leq 1$；
@@ -330,7 +329,7 @@ A\cap B &=B\cap A;                     \tag*{（交换律）}\\*
 \end{exlistcols}
 \item 设~$a<c<b$，证明，
 \[
-  \mabs c\leq\max\mrange{\mabs a}{\mabs b}。
+  \mabs c\leq\max\mrangeb{\mabs a}{\mabs b}。
 \]
 \item 证明，
 \[
@@ -344,7 +343,7 @@ A\cap B &=B\cap A;                     \tag*{（交换律）}\\*
 并解释其几何意义。
 \item 证明，
 \[
-  \mabs{a+b}^p\leq2^p\max\mrange{\mabs a^p}{\mabs b^p}\mcond*{p>0}。
+  \mabs{a+b}^p\leq2^p\max\mrangeb{\mabs a^p}{\mabs b^p}\mcond*{p>0}。
 \]
 \item 设~$a,b>0$，证明，
 \begin{exlistcols}
@@ -357,9 +356,9 @@ A\cap B &=B\cap A;                     \tag*{（交换律）}\\*
 \]
 \item 证明，
 \[
-  \frac1{4n}<\mparenbb{\frac{1\cdot 3\cdot 5\cdot\dotsm\cdot(2n-1)}{2\cdot 4\cdot 6\cdot\dotsm\cdot(2n)}}^2<\frac1{2n}。
+  \frac1{4n}<\mparenbb{\frac{1\cdot 3\cdot 5\dotsm(2n-1)}{2\cdot 4\cdot 6\dotsm(2n)}}^{\msp 2}<\frac1{2n}。
 \]
-\item 令~$\dps A_n=\prod_{k=1}^n(1+a_k)$，$\dps B_n=\prod_{k=1}^n\mparenb{1+\mabs{a_k}}$，证明，
+\item 令~$A_n=\prod_{k=1}^n(1+a_k)$，$B_n=\prod_{k=1}^n\mparenb{1+\mabs{a_k}}$，证明，
 \[
   \mabs{A_n-1}\leq B_n-1。
 \]

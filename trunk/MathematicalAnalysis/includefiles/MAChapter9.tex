@@ -7,6 +7,7 @@
 \section{实数定义}
 \subsection{为什么要定义实数}
 \subsection{实数的定义}
+
 \section{实数空间}
 \subsection{实数的计算}
 \subsection{实数集是域}
@@ -15,45 +16,392 @@
 \subsection{实数的表示}
 \subsection{实数集的公理系统}
 \begin{exercise}
-\item
+\item 证明，对任意~$n\in\mN$，$\sqrt{n(n+1)}$~不能是整数。
+\item 证明，对任意~$n\in\mN$，$\sqrt{n(n+2)}$~是无理数。
+\item 设~$m,n$~是奇整数。证明方程~$x^2+2mx+2n=0$~没有有理数根。
+\begin{exlistcols*}
+\item 证明~$\cos\ang{10}$~是无理数。
+\item 证明~$\log_{10}2$~是无理数。
+\end{exlistcols*}
+\item 设~$\lim_\ntoinf\dfrac{a_1+a_2+\dotsb+a_n}{n}=a$。证明~$\lim_\ntoinf\dfrac{a_n}n=0$。
+\item 设~$\lim_\ntoinf x_n=a$~（$a$~可为有限或无限）。证明~$\lim_\ntoinf\dfrac{a_1+a_2+\dotsb+a_n}{n}=a$。
+\item 设~$\lim_\ntoinf\mparenb{a_{n+1}-a_n}=a$。证明~$\lim_\ntoinf\dfrac{a_n}n=a$。
+\item 设~$\lim_\ntoinf x_n=a$，且~$x_n>0\mcond{n=1,2,\dotsc}$。证明，调和平均序列
+\[
+  y_n=\frac n{\dfrac1{x_1}+\dfrac1{x_2}+\dotsb+\dfrac1{x_n}}\to a\mcond*{\ntoinf}。
+\]
+\item 设~$\lim_\ntoinf a_n=a$，且~$a_n>0\mcond{n=1,2,\dotsc}$。证明~$\lim_\ntoinf\sqrt[n]{a_1a_2\dotsm a_n}=a$。
+\item 设数列~$\mbrace{x_n}$~与~$\mbrace{y_n}$~满足下列条件，
+\begin{exlistcols}[3]
+  \item $\mbrace{y_n}$~严格递增；
+  \item $\lim_\ntoinf y_n=\pinf$；
+  \item $\lim_\ntoinf\dfrac{x_{n+1}-x_n}{y_{n+1}-y_n}=a$。
+\end{exlistcols}
+证明~$\lim_\ntoinf\dfrac{x_n}{y_n}=a$。
+\item 证明，
+\[
+  \lim_\ntoinf\frac{1+\dfrac12+\dotsb+\dfrac1n}{\ln n}=1 。
+\]
+\item 证明，
+\[
+  \lim_\ntoinf\frac{1+\sqrt2+\dotsb+\sqrt n}{\dfrac23\sqrt{n^3}}=1 。
+\]
+\item 设对任意~$n=1,2,\dotsc$，有~$a_n,b_n>0$，且~$a_n\sim b_n$。令~$A_n=\sum_{k=1}^na_k$，而~$B_n=\sum_{k=1}^nb_k$。证明，如
+果~$\lim_\ntoinf B_n=\pinf$，则~$A_n\sim B_n$。
 \end{exercise}
+
 \section{确界存在原理与区间套定理}
 \subsection{确界存在原理}
 \subsection{区间套定理}
 \begin{exercise}
-\item
+\item 设~$f(x)$~在~$\mintc ab$~上连续，且~$f(a)<0$，而~$f(b)>0$。证明，存在~$\xi\in\minto ab$，使得~$f(\xi)=0$~且~$f(x)>0$，%
+$x\in\mintoc \xi b$。
+\item 设~$f(x)$~是~$\mintc ab$~上的连续函数，其最大值和最小值分别为~$M$~和~$m$，且~$m<M$。证明，必存在区间~$\mintc\alpha\beta$，满
+足条件
+\begin{exlist}
+  \item $f(\alpha)=M$，$f(\beta)=m$~或~$f(\alpha)=m$，$f(\beta)=M$；
+  \item $m<f(x)<M$，$x\in\minto\alpha\beta$。
+\end{exlist}
+\item 设~$f(x)$~在~$\mintc ab$~上连续，且在~$\mintco ab$~上右导数存在。证明，
+\begin{exlist}
+  \item 若~$f(b)>f(a)$，则存在~$\xi\in\mintco ab$，使得~$f_+'(\xi)\geq\dfrac{f(b)-f(a)}{2(b-a)}$；
+  \item 若~$f(b)<f(a)$，则存在~$\xi\in\mintco ab$，使得~$f_+'(\xi)\leq\dfrac{f(b)-f(a)}{2(b-a)}$。
+\end{exlist}
+\item 设~$f(x)$~在~$\mintc ab$~上连续，在~$\mintco ab$~上右导数存在。证明，
+\begin{exlistcols}
+  \item 若~$f_+'(x)\geq0$，则~$f(x)$~递增；
+  \item 若~$f_+'(x)\leq0$，则~$f(x)$~递减；
+  \item 若~$f_+'(x)\equiv0$，则~$f(x)$~为一常数。
+\end{exlistcols}
+\item 设~$f(x)$~在~$\mintc ab$~上连续，但不为常数。证明，存在~$\xi\in\minto ab$，使得~$f(x)$~在~$\xi$~点不取极值。
+\item 设~$f(x)$~在~$\minto ab$~上不为常数。证明，存在~$\xi\in\minto ab$~及~$k>0$，使得对任意~$\delta>0$，%
+在~$\minto{\xi-\delta}{\xi+\delta}\cap\minto ab$~上总存在两点~$x',x''$，使得
+\[
+  \mabsbb{\dfrac{f(x')-f(x'')}{x'-x''}}\geq k 。
+\]
+\item 设~$f(x)\in C\mintco0\pinf$，且有界；任意~$a\in\mR$，方程~$f(x)=a$~在~$\mintco0\pinf$~上只有有限个根或无根。证明
+极限~$\lim_{x\to\pinf}f(x)$~存在。
+\item 设~$f(x)\in R\mintc ab$。证明，
+\begin{exlist}
+  \item 存在区间序列~$\mintc{a_n}{b_n}$，$n=1,2,\dotsc$，使得
+  \[
+    \mintc{a_{n+1}}{b_{n+1}}\subset\minto{a_n}{b_n}\subset\minto ab,
+  \]
+  且~$\omega_f\mparenb{\mintc{a_n}{b_n}}<\dfrac1n$；
+  \item 存在~$c\in\bigcap\limits_{n=1}^\infty\mintc{a_n}{b_n}$，使得~$f(x)$~在~$c$~点连续；
+  \item $f(x)$~在~$\mintc ab$~上有无穷多个连续点。
+\end{exlist}
+\item 设有按大小排列的~$m$~个点，
+\[
+  a_1^{(1)}\leq a_2^{(1)}\leq\dotsb\leq a_m^{(1)};
+\]
+用~$\dfrac{a_1^{(1)}+a_m^{(1)}}2$~代替~$a_1^{(1)}$~和~$a_m^{(1)}$，然后再按大小排列，得
+\[
+  a_1^{(2)}\leq a_2^{(2)}\leq\dotsb\leq a_m^{(2)};
+\]
+再用~$\dfrac{a_1^{(2)}+a_m^{(2)}}2$~代替~$a_1^{(2)}$~和~$a_m^{(2)}$，然后再按大小排列，得
+\[
+  a_1^{(3)}\leq a_2^{(3)}\leq\dotsb\leq a_m^{(3)};
+\]
+依次下次，我们得~$m$~个点列~$\mbraceb{a_1^{(n)}},\dotsc,\mbraceb{a_m^{(n)}}$。证明，对于~$j=1,2,\dotsc,m$，
+\[
+  \lim_\ntoinf a_j^{(n)}=\frac{a_1^{(1)}+a_2^{(1)}+\dotsb+a_m^{(1)}}m 。
+\]
 \end{exercise}
+
 \section{紧性定理}
 \subsection{有限覆盖定理}
 \subsection{聚点原理}
 \subsection{子序列与~Bolzano~定理}
 \begin{exercise}
-\item
+\item 证明，序列~$\mbrace{a_n}$~有界当且仅当~$\mbrace{a_n}$~的任何子序列~$\mbrace{a_{n_k}\!}$~都有收敛的子序列。
+\item 假设序列~$\mbrace{a_n}$~的任意子列~$\mbrace{a_{n_k}\!}$~都存在以~$a$~为极限的子序列。证明，序
+列~$\mbrace{a_n}$~也以~$a$~为极限。
+\item 设~$\mbrace{a_n}$~为有界序列，且任一收敛的子序列都有相同的极限值~$a$。证明~$\mbrace{a_n}$~也以~$a$~为极限。
+\item 设~$f(x)$~在~$\mintc ab$~上无界。证明，存在~$c\in\mintc ab$，对任意~$\delta>0$，函数~$f(x)$~在
+~$\minto{c-\delta}{c+\delta}\cap\mintc ab$~上无界。
+\item 设~$f(x)$~在~$\mintc ab$~上定义，且在每一点处函数的极限存在。证明~$f(x)$~在~$\mintc ab$~上有界。
+\item 设~$f(x)$~是~$\minto ab$~上的凸函数，且有上界。证明极限~$\lim_{x\to a+0}f(x)$~与~$\lim_{x\to b-0}f(x)$~存在。
+\item 设~$f(x)$~在~$\mintc ab$~上只有第一类间断点，定义
+\[
+  \omega(x)=\mabsb{f(x+0)-f(x-0)} 。
+\]
+证明，对任意~$\e>0$，满足~$\omega(x)\geq\e$~的点~$x$~只有有限多个。
 \end{exercise}
+
 \section{完备性定理}
 \subsection{序列极限的~Cauchy~准则}
 \subsection{函数极限的~Cauchy~准则}
 \begin{exercise}
-\item
+\item 证明序列~$\mbrace{\tan n}$~的极限不存在。
+\item\begin{exlist}
+  \item 证明序列~$\mbrace{x_n}$~的极限不存在，其中
+  \[
+    x_n=1+\frac1{\sqrt2}+\dotsb+\frac1{\sqrt n};
+  \]
+  \item 指出下述推理中的错误。
+  \begin{exproof}
+    对任意~$\e>0$~和任意~$p\in\mN$，因为~$\dfrac1{\sqrt n}$~单调下降趋于~$0$，所以存在~$N$，当~$n>N$~时，%
+    有~$\dfrac1{\sqrt n}<\dfrac\e p$，于是
+    \[
+      \mabsb{x_{n+p}-x_n}=\frac1{\sqrt{n+p}}+\dotsb+\frac1{\sqrt{n+1}}<\frac p{\sqrt n}<p\cdot\frac\e p=\e 。
+    \]
+    由~Cauchy~收敛原理，可知序列~$\mbrace{x_n}$~收敛。
+  \end{exproof}
+\end{exlist}
+\item 设~$x_n=\int_1^n\dfrac{\sin x}x\dif x$。证明~$\lim_\ntoinf x_n$~存在。
+\item 证明~$f(x)$~在~$\minto ab$~上一致连续当且仅当~$\lim_{x\to a+0}f(x)$~与~$\lim_{x\to b-0}f(x)$~存在。
+\item 设~$f(x)$~在~$\minto ab$~内可导，且~$\lim_{x\to a+0}f'(x)$~与~$\lim_{x\to b-0}f'(x)$~存在。证明，
+\begin{exlist}
+  \item $\lim_{x\to a+0}f(x)$~与~$\lim_{x\to b-0}f(x)$~存在；
+  \item 可以对~$f(x)$~在~$a,b$~点补充定义后，使得~$f'(a)$~与~$f'(b)$~存在。
+\end{exlist}
+\item 设~$f(x),g(x)$~在~$\minto a\pinf$~上可导，且~$\mabsb{g'(x)}<f'(x)$。证明，若~$\lim_{x\to\pinf}f(x)$~存在，%
+则~$\lim_{x\to\pinf}g(x)$~存在。
+\item 设~$f(x)$~在~$\minto a\pinf$~上可导，且~$\mabsb{f'(x)}$~单调下降，而~$\lim_{x\to\pinf}f(x)$~存在。%
+证明~$\lim_{x\to\pinf}xf'(x)=0$。
 \end{exercise}
+
 \section{连续函数性质证明}
 \begin{exercise}
-\item
+\item 设~$f(x)$~在~$\mintc ab$~上连续，并且有唯一的极大值点~$x_0$；又设~$x_n\in\mintc ab$，使
+得~$\lim_\ntoinf f(x_n)=f(x_0)$。证明~$\lim_\ntoinf x_n=x_0$。
+\item 设~$f(x)$~在~$\mintc ab$~上可微，又设
+\begin{exlistcols}
+  \item $\min_{x\in\mintc ab}\mbraceb{f(x)}<p<\max_{x\in\mintc ab}\mbraceb{f(x)}$；
+  \item 如果~$f(x)=p$，则有~$f'(x)\neq0$。
+\end{exlistcols}
+证明方程~$f(x)=p$~的根只有有限多个。
+\item 设~$f(x)$~在~$\minto ab$~上连续，且无极大值点，又~$x_n\in\minto ab$~满足
+\[
+  \lim_\ntoinf f(x_n)=\inf_{x\in\minto ab}\mbraceb{f(x)}。
+\]
+证明极限~$\lim_\ntoinf x_n$~存在。
+\item 设~$f(x)$~在~$\minto ab$~上连续，且无极大值点。证明~$f(x)$~只存在下列两种情况：
+\begin{exlist}
+  \item $f(x)$~在~$\minto ab$~上单调；
+  \item 存在~$x_0\in\minto ab$，使得~$f(x)$~在~$\minto a{x_0}$~上递减，在~$\minto{x_0}b$~上递增，且~$x_0$~为~$f(x)$~的最小值。
+\end{exlist}
+\item 设~$f(x)$~是~$\minto ab$~上的连续函数，它仅有有限个极值点~$x_1<x_2<\dotsb<x_n$。证明~$f(x)$~是波浪形的（即~$f(x)$~分别在区
+间~$\minto a{x_1}$，$\minto{x_1}{x_2}$，$\dotsc$，$\minto{x_{n-1}}{x_n}$，$\minto{x_n}b$~上单调，且单调递增与单调递减是相间的）。
+\item 设~$f(x)\in C\mintc 0{2a}$~而且~$f(0)=f(2a)$。证明，存在~$x\in\mintc 0a$，使得~$f(x)=f(x+a)$。
+\item 设~$f(x)$~在~$\mintc ab$~上连续，且取值为整数。证明~$f(x)$~在~$\mintc ab$~上恒为常数。
+\item 设~$f(x)$~在~$\mintc ab$~上定义，并且对任意~$x_0\in\mintc ab$~和任意~$\e>0$，存在~$\delta>0$，使得当
+~$\mabs{x-x_0}<\delta$~时，有
+\[
+  f(x)<f(x_0)+\e,
+\]
+则称~$f(x)$~在~$x_0$~点\emph{上半连续}；若在每一点上半连续，则称~$f(x)$~在~$\mintc ab$~上是上半连续的。证明~$\mintc ab$~上的
+上半连续函数~$f(x)$~必达到它的上确界。
 \end{exercise}
+
 \section{压缩映射原理}
 \begin{exercise}
-\item
+\item 设~$f(x)$~在~$\mR$~上可微，且~$\mabsb{f'(x)}\leq k<1$。任意取定~$x_0\in\mR$，令~$x_{n+1}=f(x_n)$。证明，
+\begin{exlistcols}
+  \item 极限~$\lim_\ntoinf x_n$~存在；\label{exer-9.7.1-1}
+  \item \ref{exer-9.7.1-1}~的极限值为方程~$x=f(x)$~的唯一实根。
+\end{exlistcols}
+\item 设函数~$f(x)$~在~$\mintc ab$~上连续，单调上升，且对任意~$x\in\mintc ab$，有~$a<f(x)<b$。证明，若任意取定~$x_0\in\mintc ab$，%
+令~$x_{n+1}=f(x_n)$，则~$\mbrace{x_n}$~收敛，并且其极限是方程~$x=f(x)$~的根。
+\item 设~$f(x)$~在~$\mR$~上严格单调下降，且满足
+\[
+  \mabsb{f(x)-f(y)}<\mabs{x-y}\mcond*{x\neq y} 。
+\]
+证明，任给初值~$x_0$，令~$f_{n+1}=f(x_n)$，则~$\mbrace{x_n}$~收敛，并且其极限是方程~$x=f(x)$~的根。
+\item 设~$f(x)$~在~$\mintc ab$~上满足
+\begin{exlist}
+  \item 对任意~$x,y\in\mintc ab$~与~$0<k<1$，有~$\mabsb{f(x)-f(y)}\leq k\mabs{x-y}$；
+  \item $f(x)$~的值域包含在~$\mintc ab$~内，任意取定~$x_0\in\mintc ab$，令~$x_{n+1}=f(x_n)$。
+\end{exlist}
+%%证明，
+\begin{exlist}\FixExHead
+  \item 极限~$\lim_\ntoinf x_n$~存在；\label{exer-9.7.4-1}
+  \item 方程~$x=f(x)$~在~$\mintc ab$~上有唯一解，这个解就是~\ref{exer-9.7.4-1}~的极限值。
+\end{exlist}
+\item 设方程~$x^3-x^2-1=0$。
+\begin{exlist}
+  \item 证明，方程在~$\mintc{\sqrt 2}{1.5}$~上有且只有一个根；
+  \item 对任意~$x_0\in\mintc{\sqrt 2}{1.5}$，由所设方程的一种等价形式~$x^3=1+x^2$，想到采用迭代形式\label{exer-9.7.5-2}
+  \[
+    \txts x_{n+1}=\sqrt[3]{1+x_n^2} 。
+  \]
+  证明~$\mbrace{x_n}$~收敛到方程的根；
+  \item 对任意~$x_0\in\mintc{\sqrt 2}{1.5}$，由所设方程的另一种等价形式~$x=1+\dfrac1{x^2}$，想到采用迭代形式\label{exer-9.7.5-3}
+  \[
+    x_{n+1}=1+\frac1{x_n^2} 。
+  \]
+  证明~$\mbrace{x_n}$~收敛到方程的根；
+  \item 设初值都从~$x_0=1.5$~出发，比较~\ref{exer-9.7.5-2}~与~\ref{exer-9.7.5-3}~这两种迭代过程的收敛速度。收敛速度用
+  \[
+    \frac{\mabs{x_{n+1}-\xi}}{\mabs{x_n-\xi}}
+  \]
+  的大小来衡量，其中~$\xi$~表示方程的根。
+\end{exlist}
 \end{exercise}
+
 \section{上极限与下极限}
 \subsection{序列的上、下极限的定义}
 \subsection{上、下极限的性质}
 \subsection{上、下极限的等价形式}
 \subsection{函数的上、下极限}
 \begin{exercise}
-\item
+\item 分别求下列数列的上、下极限。
+\begin{exlistcols}[3]
+  \item $S_n=(-1)^n$；
+  \item $S_n=\dfrac{n+1}n\mparenb{1+(-1)^n}$；
+  \item $S_n=\sin\dfrac n2\pi+n\cos\dfrac n2\pi$。
+\end{exlistcols}
+\item 分别求下列函数的上、下极限。
+\begin{exlistcols}
+  \item $f(x)=x\sin x\sin\dfrac1x$；
+  \item $f(x)=\mparenbb{1+\dfrac1x}^{\msp[3] x\cos x}$。
+\end{exlistcols}
+\item 设~$x_n>0$，并且
+\[
+  \limsup_\ntoinf x_n\cdot\limsup_\ntoinf\frac1{x_n}=1 。
+\]
+证明极限~$\lim_\ntoinf x_n$~存在。
+\item 设~$x_1>0$，而~$x_{n+1}=1+\dfrac1{x_n}\mcond{n=1,2,\dotsc}$。证明，
+\begin{exlistcols}
+  \item $1\leq\liminf_\ntoinf x_n\leq\limsup_\ntoinf x_n\leq2$；
+  \item 极限~$\lim_\ntoinf x_n$~存在，并求出此极限值。
+\end{exlistcols}
+\item 已知~Fibonacci~数列~$F_n$~用如下递推方式定义，
+\[
+  F_0=1,\enspace F_1=1,\enspace F_{n+1}=F_n+F_{n-1}\mcond{n=1,2,\dotsc} 。
+\]
+证明
+\[
+  \lim_\ntoinf\frac{F_n}{F_{n-1}}=\frac{\sqrt 5-1}2\approx\num{.618}。
+\]
+\item 设两序列~$\mbrace{a_n}$~与~$\mbrace{b_n}$~满足
+\[
+  a_n=b_n-qa_{n-1}\mcond*{0<q<1}。
+\]
+证明~$\lim_\ntoinf b_n$~存在当且仅当~$\lim_\ntoinf a_n$~存在。
+\item 设~$b_n=\sum_{k=0}^n\dfrac1{\mbinom nk}$。证明，
+\begin{exlistcols}
+  \item $b_n=\dfrac{n+1}{2n}b_{n-1}+1$；
+  \item $\lim_\ntoinf b_n=2$。
+\end{exlistcols}
+\item 设序列~$\mbrace{a_n}$~有界，并满足~$\lim_\ntoinf(a_{2n}+2a_n)=0$。证明~$\lim_\ntoinf a_n=0$。
+\item 设序列~$\mbrace{v_n}$~有界，并满足~$\lim_\ntoinf\mparenB{v_n+\dfrac12 v_{2n}}=1$。证明~$\lim_\ntoinf v_n=\dfrac23$。
+\item 设序列~$u_n=O\mparenB{\dfrac1n}$，并满足~$\lim_\ntoinf n(u_n+u_{2n})=1$。证明~$\lim_\ntoinf nu_n$~存在，并求其值。
+\item 设~$y_n>0$。证明，
+\begin{exlistcols}
+  \item $\limsup_\ntoinf y_n=b$~当且仅当~$\limsup_\ntoinf y_n^2=b^2$；
+  \item $\liminf_\ntoinf y_n=a$~当且仅当~$\liminf_\ntoinf y_n^2=a^2$。
+\end{exlistcols}
+\item 设序列~$\mbrace{x_n}$~与~$\mbrace{y_n}$~满足
+\[
+  y_n=\sqrt{x_n+\smbsqrt{x_{n-1}+\dotsb+\smbsqrt{x_1}}}=\smbsqrt{x_n+y_{n-1}},
+\]
+其中~$n=1,2,\dotsc$，$x_n>0$，而~$y_0=0$。证明~$\lim_\ntoinf x_n$~存在当且仅当~$\lim_\ntoinf y_n$~存在。
+\item 证明~$\limsup_\ntoinf\sqrt[n]{S_n}\leq1\mcond{S_n\geq0}$~当且仅当~$\lim_\ntoinf\dfrac{S_n}{\ell^n}=0$，其中~$\ell$~为
+任一大于~$1$~的数。
+\item 设~$0\leq x_{n+m}\leq x_n\cdot x_m\mcond{n,m\in\mN}$。证明序列~$\mbraceb{\sqrt[n]{x_n}}$~极限存在。
+\item 设~$f(x)\in C\minto a\pinf$，且
+\[
+  \limsup_\ntoinf f(x)=A,\enspace \liminf_\ntoinf f(x)=B,\enspace B<\eta<A 。
+\]
+证明存在~$x_n\to\pinf$，使得~$\lim_\ntoinf f(x_n)=\eta$。
+\item 设函数在~$\mintco a\pinf$~上连续并且有界。证明，对任给的实数~$T>0$，存在~$x_n\to\pinf$，使得
+\[
+  \lim_\ntoinf\mparenb{f(x_n+T)-f(x_n)}=0 。
+\]
+\item 设正数序列~$\mbrace{x_n}$~满足
+\[
+  x_{n+1}\leq\frac{x_n+x_{n-1}}2\mcond*{n=2,3,4,\dotsc} 。
+\]
+证明极限~$\lim_\ntoinf x_n$~存在。
 \end{exercise}
+
 \begin{exercise*}
-\item
+\item 设~$f(x)\in C\mintc ab$。证明
+\[
+  \lim_{p\to\pinf}\mparenbb{\int_a^b\mabsb{f(x)}^p\dif x}^{\frac1p}=\max_{x\in\mintc ab}\mbraceb{\mabsb{f(x)}}。
+\]
+\item 设~$0<x_0<1$，且~$x_{n+1}=x_n-x_n^2$。证明~$\lim_\ntoinf nx_n=1$。
+\item 设~$f(x)$~在~$\mintc ab$~上定义，且对任意~$x,y\in\mintc ab$，当~$x\neq y$~时，有
+\[
+  \mabsb{f(x)-f(y)}<\mabs{x-y};
+\]
+还假定
+\[
+  a\leq\min_{x\in\mintc ab}\mbraceb{f(x)}\leq\max_{x\in\mintc ab}\mbraceb{f(x)}\leq b 。
+\]
+任意给定~$x_0\in\mintc ab$，令~$x_{n+1}=f(x_n)$。证明，
+\begin{exlist}
+  \item 存在~$\xi\in\mintc ab$，使得~$f(\xi)=\xi$，并且此~$\xi$~是唯一的；
+  \item $\lim_\ntoinf x_n=\xi$。
+\end{exlist}
+\item 设~$f(x)\in C\mintco0\pinf$，且对任意~$x_1,x_2\in\mintco0\pinf$，有
+\[
+  0\leq f(x_1+x_2)\leq f(x_1)+f(x_2)。
+\]
+证明
+\[
+  \lim_{x\to\pinf}\dfrac{f(x)}x=\inf_{x\geq0}\mbracebb{\frac{f(x)}x}。
+\]
+\item 设~$\mbrace{a_n}$~对任意的正整数~$n,m\geq1$，有
+\[
+  a_m+a_n-1\leq a_{m+n}\leq a_m+a_n+1 。
+\]
+%%证明，
+\begin{exlist}\FixExHead
+  \item 极限~$\lim_\ntoinf\dfrac{a_n}n$~存在；
+  \item 若~$\lim_\ntoinf\dfrac{a_n}n=q$，则~$nq-1\leq a_n\leq nq+1$。
+\end{exlist}
+\item 设序列~$\mbrace{x_n}$~有界，且~$\lim_\ntoinf(x_{n+1}-x_n)=0$。令
+\[
+  \ell\coloneq\liminf_\ntoinf x_n,\qquad L\coloneq\limsup_\ntoinf x_n 。
+\]
+证明，对任意~$\xi\in\mintc\ell L$，存在~$\mbrace{x_{n_k}\!}$，使得~$\lim_{k\to\infty}x_{n_k}=\xi$。
+\item\begin{exlist}
+  \item 设~$0<q<1$。证明，存在~$r\in\minto q1$，使得~$n$~充分大时有
+  \[
+    1+\frac qn<\mparenbb{1+\frac1n}^{\msp r};
+  \]
+  \item 设~$a_n>0$。证明
+  \[
+    \limsup_\ntoinf n\mparenB{\frac{1+a_{n+1}}{a_n}-1}\geq 1。
+  \]
+\end{exlist}
+\item 设~$u_0>0$，而~$u_{n+1}=\smbsqrt{1+u_n^2}$，$S_n=\sum_{k=0}^n\dfrac1{u_k}$。证明，
+\begin{exlistcols}
+  \item $\lim_\ntoinf S_n=\pinf$；
+  \item $S_n\sim 2\sqrt n\mcond{\ntoinf}$。
+\end{exlistcols}
+\item 设~$x_0>0$，而~$x_{n+1}=x_n+\dfrac1{x_n}$。证明，
+\[
+  \lim_\ntoinf\mparenb{x_n-\txts\smbsqrt{x_0^2+2n}}=0。
+\]
+\item 设~$x_{n+1}=x_n(1-qx_n)$，其中~$0<q<1$，且~$0<x_1<\dfrac1q$。证明~$\lim_\ntoinf nx_n=\dfrac1q$。
+\item 设~$0<x_0<\dfrac\pi2$，且~$x_{n+1}=\sin x_n$。证明~$\lim_\ntoinf \sqrt n\,x_n=\sqrt 3$。
+\item 设~$f(x)$~在~$\minto 0\pinf$~上可微，且~$f'(x)$~递增，同时~$\lim_{x\to\pinf}\dfrac{f(x)}{x^p}=1$。
+\begin{exlist}
+  \item 证明，当~$h>0$~时，
+  \[
+    f(x)-f(x-h)\leq hf'(x)\leq f(x+h)-f(x);
+  \]
+  \item 取~$h=\delta x\mcond{0<\delta<1}$，证明~$\lim_{x\to\pinf}\dfrac{f'(x)}{px^{p-1}}=1$。
+\end{exlist}
+\item\begin{exlist}
+  \item 设~$q$~为正有理数，而~$n$~为任一自然数，可分解为
+  \[
+    n=m_nq+r_n,
+  \]
+  其中~$m_n$~为自然数或零，而~$0<r_n<q$。证明，存在自然数子列~$\mbrace{n_k}$，使得
+  \[
+    n_k=\mbar m_kq+\mbar r_k,
+  \]
+  其中~$\lim_{k\to\infty}\mbar r_k=0$。
+  \item 证明，单位圆~$x^2+y^2=1$~上每一点都是复数列~$\mbrace{\me^{\mi n}}$~的聚点；
+  \item 证明，区间~$\mintc{-1}1$~的每一点都是数列~$\mbrace{\sin n}$~的聚点。
+\end{exlist}
+\item 设~$f(x)$~在~$\mintc ab$~上连续，且~$f(a)<f(b)$。函数~$f(x)$~在区间内每一点对称导数（参看\ref{exer-4.1.6}）存在。证明，存
+在~$\xi\in\minto ab$，使得对称导数~$f'(\xi)>0$。
 \end{exercise*}
 
 

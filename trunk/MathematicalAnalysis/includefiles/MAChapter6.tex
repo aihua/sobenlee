@@ -6,39 +6,301 @@
 \chapter{不定积分}\label{ch:6}
 \section{不定积分概念}
 \begin{exercise}
-\item
+\item 确定~$x^3$~的一个原函数~$F(x)$，并满足~$F(1)=1$。
+\item 已知~$f(x)$~满足给定的关系式，试确定~$f(x)$。
+\begin{exlistcols}
+  \item $xf'(x)=1\mcond{x>0}$；
+  \item $\dfrac{f'(x)}x=1\mcond{x>0}$；
+  \item $f(x)f'(x)=1\mcond{x>0}$；
+  \item $\dfrac{f'(x)}{f(x)}=1\mcond{x>0}$。
+\end{exlistcols}
+\item 对曲线上任意一点~$P$，过~$P$~点作该曲线的切线。若切线与~$OP$~联线所夹的角为一常角~$\beta$，试确定该曲线。
 \end{exercise}
+
 \section{积分表与线性性质}
 \begin{exercise}
-\item
+\item 求下列不定积分。
+\begin{exlistcols}
+  \item $\int x^2\sqrt x\dif x$；
+  \item $\int \dfrac{2x^2}{\sqrt x}\dif x$；
+  \item $\int \mparenB{\sqrt x+\dfrac2{\sqrt[3]x}-\dfrac4{\sqrt{x^3}}}\dif x$；
+  \item $\int (x^2+1)^2\dif x$；
+  \item $\int (\sqrt x-1)(\sqrt x+1)\dif x$；
+  \item $\int \dfrac{x+1}{\sqrt x}\dif x$；
+  \item $\int \mparenbb{\dfrac{1-x}x}^{\msp2}\dif x$；
+  \item $\int \me^x\mparenB{1-\dfrac{\me^{-x}}{\sqrt x}}\dif x$；
+  \item $\int \dfrac{\me^{3x}+1}{\me^x+1}\dif x$；
+  \item $\int (2^x+3^x)^2\dif x$；
+  \item $\int \smbsqrt{x\sqrt x}\dif x$；
+  \item $\int \txts\mparenB{\sqrt{\dfrac{1+x}{1-x}}+\sqrt{\dfrac{1-x}{1+x}}}\dif x$；
+  \item $\int \dfrac{3x^2}{1+x^2}\dif x$；
+  \item $\int \dfrac{\dif x}{x^4(1+x^2)}$。
+\end{exlistcols}
+\item 求下列不定积分。
+\begin{exlistcols}[3]
+  \item $\int (5\sin x-3\cos x)\dif x$；
+  \item $\int \dfrac{2+\sin^2x}{\cos^2x}\dif x$；
+  \item $\int \tan^2x\dif x$；
+  \item $\int \dfrac{\cos 2x}{\cos^2x\cdot\sin^2x}\dif x$；
+  \item $\int \dfrac{\dif x}{\cos^2x\cdot\sin^2x}$；
+  \item $\int \sqrt{1-\sin 2x}\dif x$。
+\end{exlistcols}
 \end{exercise}
 \section{换元法}
 \subsection{第一换元法}
 \subsection{第二换元法}
 \begin{exercise}
-\item
+\item 用线性代换计算下列不定积分。
+\begin{exlistcols}[3]
+  \item $\int \me^{-\frac x2}\dif x$；
+  \item $\int \sin\dfrac x2\dif x$；
+  \item $\int \cos\alpha x\dif x$；
+  \item $\int \dfrac{\dif x}{\sin^2\alpha x}$；
+  \item $\int \dfrac{\dif x}{\cos^27x}$；
+  \item $\int \dfrac{\dif x}{3x-4}$；
+  \item $\int \dfrac x{1-x}\dif x$；
+  \item $\int \dfrac{\dif x}{\sqrt{x+1}-\sqrt{x-1}}$；
+  \item $\int \sqrt[3]{1-3x}\dif x$；
+  \item $\int x\sqrt[3]{1-3x}\dif x$；
+  \item $\int \dfrac{\dif x}{2+3x^2}$；
+  \item $\int \dfrac{\dif x}{2-3x^2}$；
+  \item $\int \dfrac{\dif x}{\sqrt{2-3x^2}}$；
+  \item $\int \dfrac{\dif x}{\sqrt{x(1-x)}}$；
+  \item $\int \dfrac{\dif x}{1+\cos x}$；
+  \item $\int \dfrac{\dif x}{1+\sin x}$。
+\end{exlistcols}
+\item 用适当代换求下列不定积分。
+\begin{exlistcols}[3]
+  \item $\int x(1+x^2)^5\dif x$；
+  \item $\int \dfrac x{1+x^2}\dif x$；
+  \item $\int x^2\sqrt{1+x^3}\dif x$；
+  \item $\int \dfrac x{1-x^2}\dif x$；
+  \item $\int x\me^{-x^2}\dif x$；
+  \item $\int \dfrac x{4+x^4}\dif x$；
+  \item $\int \dfrac{\me^x}{1+\me^x}\dif x$；
+  \item $\int \dfrac{\dif x}{1+\me^x}$；
+  \item $\int \dfrac{\me^x}{\sqrt{1-\me^{2x}}}\dif x$；
+  \item $\int 3^x\me^x\dif x$；
+  \item $\int \dfrac{(a^x-b^x)^2}{a^x\cdot b^x}\dif x$；
+  \item $\int \dfrac{\ln^2x}x\dif x$；
+  \item $\int \sin\dfrac1x\cdot\dfrac{\dif x}{x^2}$；
+  \item $\int \dfrac{\dif x}{\sqrt x\,(1+x)}$；
+  \item $\int \dfrac{\dif x}{\sqrt x\cdot\smbsqrt{1+\sqrt x}}$；
+  \item $\int \dfrac{\dif x}{x\sqrt{x^2-1}}$；
+  \item $\int \dfrac{\arctan x}{1+x^2}\dif x$；
+  \item $\int \dfrac{\arcsin^2x}{\sqrt{1-x^2}}\dif x$。
+\end{exlistcols}
+\item 求下列三角函数的不定积分。
+\begin{exlistcols}[3]
+  \item $\int \cos2x\cdot\sin4x\dif x$；
+  \item $\int \sin x\cdot\sin3x\dif x$；
+  \item $\int \cos4x\cdot\cos7x\dif x$；
+  \item $\int \sin\dfrac x4\cdot\cos\dfrac34x\dif x$；
+  \item $\int \cos^2\omega x\dif x$；
+  \item $\int \sin^2x\cos^2x\dif x$；
+  \item $\int \dfrac{\sin^3x}{\sqrt[3]{\cos^4x}}\dif x$；
+  \item $\int \dfrac{\sin2x}{\sqrt{1+\sin^2x}}\dif x$；
+  \item $\int \dfrac{\cos2x}{\sin x\cos x}\dif x$；
+  \item $\int \dfrac{\sin x\cos x}{\sqrt{a^2\sin^2x+b^2\cos^2x}}\dif x$。
+\end{exlistcols}
+\item 求下列有理函数的不定积分。
+\begin{exlistcols}
+  \item $\int \dfrac{x+1}{1-x}\dif x$；
+  \item $\int \dfrac{-x^2+2x-5}{x-1}\dif x$；
+  \item $\int \dfrac{x^3}{3+x}\dif x$；
+  \item $\int \dfrac{5-4x}{3x-2}\dif x$；
+  \item $\int \dfrac{6x^4-5x^3+4x^2+1}{(x-2)^4}\dif x$；
+  \item $\int \dfrac{1+x^2}{(1-x)^2}\dif x$。
+\end{exlistcols}
+\item 用适当代换求下列不定积分$\mcond{a>0}$。
+\begin{exlistcols}[3]
+  \item $\int \dfrac{\sqrt{a^2-x^2}}x\dif x$；
+  \item $\int x^2\sqrt{4-x^2}\dif x$；
+  \item $\int \dfrac{\dif x}{x^2\sqrt{1+x^2}}$；
+  \item $\int \dfrac{\sqrt{x^2-a^2}}x\dif x$；
+  \item $\int \dfrac{\dif x}{\sqrt{(a^2+x^2)^3}}$；
+  \item $\int \dfrac x{1+\sqrt x}\dif x$。
+\end{exlistcols}
+\item 求下列不定积分$\mcond{a,b>0}$。
+\begin{exlistcols}[3]
+  \item $\int \sqrt{\dfrac{a+x}{\smash[b]{a-x}}}\dif x$；
+  \item $\int \sqrt{\dfrac{x-a}{\smash[b]{x+a}}}\dif x$；
+  \item $\int \dfrac{\dif x}{\sqrt{(x-a)(b-x)}}$；
+  \item $\int \dfrac{\dif x}{\sqrt{(x+a)(x+b)}}$；
+  \item $\int \dfrac{\dif x}{\sqrt{3x^2-2}}$；
+  \item $\int \dfrac{\dif x}{x\sqrt{x^2+1}}$；
+  \item $\int \dfrac{\dif x}{\sqrt{1+x+x^2}}$；
+  \item $\int \dfrac{x+3}{4x^2+4x+3}\dif x$；
+  \item $\int \dfrac{\dif x}{\sqrt{1+\sin^2x}}$；
+  \item $\int \dfrac{\dif x}{\sqrt{1-\sin^4x}}$。
+\end{exlistcols}
 \end{exercise}
 \section{分部积分法}
 \begin{exercise}
-\item
+\item 求下列不定积分。
+\begin{exlistcols}[3]
+  \item $\int \ln(1+x^2)\dif x$；
+  \item $\int x^\alpha\ln x\dif x\mcond{\alpha\neq-1}$；
+  \item $\int \sqrt x\,\ln^2x\dif x$；
+  \item $\int x\me^{-3x}\dif x$；
+  \item $\int x^2\me^{-2x}\dif x$；
+  \item $\int x\cos nx\dif x$；
+  \item $\int x^2\sin2x\dif x$；
+  \item $\int x\arctan x\dif x$；
+  \item $\int \ln\mparenb{x+\sqrt{1+x^2}}\dif x$；
+  \item $\int \dfrac{\arcsin x}{x^2}\dif x$；
+  \item $\int \dfrac x{\cos^2x}\dif x$；
+  \item $\int \dfrac {x\me^x}{(1+x)^2}\dif x$。
+\end{exlistcols}
+\item 求下列不定积分。
+\begin{exlistcols}
+  \item $\int\dfrac{\me^{\arctan x}}{(1+x^2)^{\sfrac32}}\dif x$；
+  \item $\int\arcsin\sqrt{\dfrac x{\smash[b]{1+x}}}\dif x$。
+\end{exlistcols}
+\item 求下列不定积分。
+\begin{exlistcols}
+  \item $\int\sqrt{a^2-x^2}\dif x$；
+  \item $\int\sqrt{a^2+x^2}\dif x$。
+\end{exlistcols}
+\item 求下列不定积分。
+\begin{exlistcols}[4]
+  \item $\int\sin(\ln x)\dif x$；
+  \item $\int\cos(\ln x)\dif x$；
+  \item $\int x\me^x\cos x\dif x$；
+  \item $\int x\me^x\sin x\dif x$。
+\end{exlistcols}
+\item 建立递推公式求下列不定积分。
+\begin{exlistcols}
+  \item $I_n=\int\sin^nx\dif x$；
+  \item $I_n=\int x^n\me^{-x}\dif x$；
+  \item $I_n=\int\dfrac{x^n}{\sqrt{1-x^2}}\dif x$；
+  \item $I_n=\int x^m\ln^nx\dif x\mcond{m~\text{为常数}}$。
+\end{exlistcols}
 \end{exercise}
-\section{有理函数的积分}
+
+\section{有理函数的不定积分}
 \begin{exercise}
-\item
+\item 求下列不定积分。
+\begin{exlistcols}[3]
+  \item $\int\dfrac{2x+3}{(x-2)(x+5)}\dif x$；
+  \item $\int\dfrac{x^{10}}{x^2+x-2}\dif x$；
+  \item $\int\dfrac{\dif x}{(x+1)^2(x-1)}$；
+  \item $\int\dfrac{2x-3}{x^2+2x+1}{}\dif x$；
+  \item $\int\dfrac{\dif x}{x^2+4x+2}$；
+  \item $\int\dfrac{\dif x}{8-2x-x^2}$；
+  \item $\int\dfrac{x^3}{x^4+5x^2+4}\dif x$；
+  \item $\int\dfrac{x+1}{x^3+2x^2-x-2}\dif x$。
+\end{exlistcols}
+\item 求下列不定积分。
+\begin{exlistcols}[3]
+  \item $\int\dfrac{\dif x}{x^2+4x+12}$；
+  \item $\int\dfrac{2x^3+3x-2}{1+x^2}\dif x$；
+  \item $\int\dfrac{x^4}{x^4+5x^2+4}\dif x$；
+  \item $\int\dfrac{\dif x}{(x+1)(x^2+1)}$；
+  \item $\int\dfrac{\dif x}{x^4-1}$；
+  \item $\int\dfrac{\dif x}{x^4+x^2+1}$。
+\end{exlistcols}
+\item\begin{exlist}
+  \item 利用代换~$t=\dfrac{x+a}{x+b}$~求下述不定积分$\mcond{m,n\in\mN}$，
+  \[
+    \int\frac{\dif x}{(x+a)^m(x+b)^n};
+  \]
+  \item 求不定积分~$\int\dfrac{\dif x}{(x-2)^2(x+3)^3}$。
+\end{exlist}
 \end{exercise}
-\section{三角函数有理式的积分}
+\section{三角函数有理式的不定积分}
 \begin{exercise}
-\item
+\item 求下列不定积分。
+\begin{exlistcols}[3]
+  \item $\int\tan x\cdot\sin^2x\dif x$；
+  \item $\int\cos x\cdot\sin^2x\dif x$；
+  \item $\int\dfrac{\cos x}{1+\sin x}\dif x$；
+  \item $\int\tan^3x\dif x$；
+  \item $\int\sin^5x\dif x$；
+  \item $\int\cos^4x\cdot\sin^3x\dif x$；
+  \item $\int\dfrac{\sin^3x}{1+\cos^2x}\dif x$；
+  \item $\int\dfrac{\dif x}{\sin^2x\cos x}$；
+  \item $\int\dfrac{\sin 2x}{1+\cos^2x}\dif x$；
+  \item $\int\dfrac{\cos 2x}{\sin^2x\cdot\cos^2x}\dif x$。
+\end{exlistcols}
+\item 求下列不定积分。
+\begin{exlistcols}
+  \item $\int\tan^3x\cdot\sec^2x\dif x$；
+  \item $\int\sec^4x\dif x$；
+  \item $\int\dfrac{\sin 2x}{\cos^4x+\sin^4x}\dif x$；
+  \item $\int\dfrac{\sin^2x}{1+\cos^2x}\dif x$；
+  \item $\int\dfrac{\dif x}{2\sin^2x+3\cos^2x}$；
+  \item $\int\dfrac{\dif x}{2\cos^2x+\sin x\cos x+\sin^2x}$。
+\end{exlistcols}
+\item 求下列不定积分。
+\begin{exlistcols}
+  \item $\int\dfrac{\dif x}{(1+\cos x)^2}$；
+  \item $\int\dfrac{\dif x}{1+\cos x}$；
+  \item $\int\dfrac{\dif\theta}{2\sin\theta-\cos\theta}$；
+  \item $\int\dfrac{\dif\theta}{1+r^2-2r\cos\theta}\mcond{0<r<1}$。
+\end{exlistcols}
+\item\begin{exlist}
+  \item 求下列不定积分。
+  \begin{exlistcols}[label=\Ding*]
+    \item $\int\dfrac{\sin x}{a\sin x+b\cos x}\dif x$；
+    \item $\int\dfrac{\cos x}{a\sin x+b\cos x}\dif x$。
+  \end{exlistcols}
+  \item 求不定积分~$\int\dfrac{\cos x}{\sin x+2\cos x}\dif x$。
+\end{exlist}
+\item 建立递推公式求下列不定积分。
+\begin{exlistcols}
+  \item $I_n=\int\cos^nx\dif x$；
+  \item $I_n=\int\dfrac{\sin nx}{\sin x}\dif x$。
+\end{exlistcols}
 \end{exercise}
-\section{无理函数的积分}
-\subsection(m 次根号积分){$\dps\int R\mparenbb{x,\kern-1ex\LEFTROOT{-5}\UPROOT{12}\SQRT[m]{\frac{ax+b}{\smash[b]{cx+d}}}\enspace}\diff x$~型积分}
-\subsection{二项式微分式积分}
-\subsection(二次根号积分){$\dps\int R\mparenb{x,\sqrt{ax^2+bx+c}}\diff x$~型积分}
+
+\section{无理函数的不定积分}
+\subsection(m 次根号积分)
+  [$\int R\txts\mparenbb{x,\sqrt[\uproot{10}\leftroot{-3}m]{\dfrac{ax+b}{\smash[b]{cx+d}}}}\dif x$~型不定积分]
+  {$\int R\txts\mparenbb{x,\sqrt[\uproot{8}m]{\dfrac{ax+b}{\smash[b]{cx+d}}}}\dif x$~型不定积分}
+\subsection{二项式微分式的不定积分}
+\subsection(二次根号积分){$\int R\txts\mparenb{x,\sqrt{ax^2+bx+c}}\dif x$~型不定积分}
 \begin{exercise}
-\item
+\item 求下列不定积分。
+\begin{exlistcols}
+  \item $\int\dfrac{\sqrt x}{\sqrt[4]{x^3}+1}\dif x$；
+  \item $\int\sqrt{\dfrac{2+3x}{\smash[b]{x-3}}}\dif x$；
+  \item $\int\dfrac{\dif x}{\sqrt[3]{(x+1)^2(x-1)^4}}$；
+  \item $\int\dfrac{\dif x}{1+\sqrt x+\sqrt{x+1}}$。
+\end{exlistcols}
+\item 求下列不定积分。
+\begin{exlistcols}
+  \item $\int\dfrac x{\smbsqrt{1+\sqrt[3]{x^2}}}\dif x$；
+  \item $\int\sqrt{x+\dfrac1x}\dif x$。
+\end{exlistcols}
+\item 求下列不定积分。
+\begin{exlistcols}
+  \item $\int x\sqrt{x^2-2x+2}\dif x$；
+  \item $\int\dfrac{\dif x}{x\sqrt{x^2+2x+2}}$；
+  \item $\int\dfrac{\sqrt{x^2+2x+2}}x\dif x$；
+  \item $\int\dfrac{\dif x}{(x+1)\sqrt{x^2+4x+5}}$。
+\end{exlistcols}
+\item 求下列不定积分。
+\begin{exlistcols}
+  \item $\int\dfrac{\dif x}{x+\sqrt{x^2+x+1}}$；
+  \item $\int\dfrac{\dif x}{1+\sqrt{1-2x-x^2}}$。
+\end{exlistcols}
 \end{exercise}
+
+
 \begin{exercise*}
-\item
+\item 求下列不定积分。
+\begin{exlistcols}
+  \item $\int\txts\sqrt{\dfrac{1-x}{1+x}}\dfrac{\dif x}{x^2}$；
+  \item $\int\dfrac{\dif x}{(1+x^n)\sqrt[n]{1+x^n}}$；
+  \item $\int\dfrac{\sqrt{1-x^2}}{1+x^2}\dif x$；
+  \item $\int\dfrac{\sqrt{x^2-1}}{1+x^2}\dif x$；
+  \item $\int\sqrt{\,\tan x}\dif x$；
+  \item $\int\dfrac{\dif x}{1-\cos^4x}$；
+  \item $\int\mparenbb{1-\dfrac2x}^{\msp 2}\me^x\dif x$；
+  \item $\int\dfrac{x\me^x}{(1+x)^2}\dif x$。
+\end{exlistcols}
+\item 对曲线上任意一点~$P$，过~$P$~点作曲线的切线，若线段~$OP$~在切线上的投影之长为一常量，试确定该曲线。
 \end{exercise*}
 
 

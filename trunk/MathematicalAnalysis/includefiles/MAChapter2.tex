@@ -151,9 +151,9 @@ a\approx x_n&=\sum_{i=0}^{n-1}\mparenB{\frac in}^2\cdot\frac1n
 \begin{proof}
 对于任意~$\e>0$，则
 \[
-  \mabsB{\frac1n}=\frac1n<\e\impliedby n>\frac1\e。
+  \mabsbb{\frac1n}=\frac1n<\e\impliedby n>\frac1\e。
 \]
-因此，取~$N=\mfloorB{\dfrac1\e}$，则当~$n>N$~时，就有~$\mabsB{\dfrac1n}<\e$，即
+因此，取~$N=\mfloorbb{\dfrac1\e}$，则当~$n>N$~时，就有~$\mabsbb{\dfrac1n}<\e$，即
 \[
   \lim_\ntoinf\frac1n=0。\qedhere
 \]
@@ -169,7 +169,7 @@ a\approx x_n&=\sum_{i=0}^{n-1}\mparenB{\frac in}^2\cdot\frac1n
 \[
   \mabs{q^n}=q^n<\e\impliedby n\ln q<\ln\e\impliedby n>\frac{\ln\e}{\ln q}。
 \]
-因此，取~$N=\mfloorB{\dfrac{\ln\e}{\ln q}}$，则当~$n>N$~时，就有~$\mabs{q^n}<\e$，即
+因此，取~$N=\mfloorbb{\dfrac{\ln\e}{\ln q}}$，则当~$n>N$~时，就有~$\mabs{q^n}<\e$，即
 \[
   \lim_\ntoinf q^n=0。\qedhere
 \]
@@ -186,9 +186,9 @@ a\approx x_n&=\sum_{i=0}^{n-1}\mparenB{\frac in}^2\cdot\frac1n
 \]
 所以对于任意~$\e>0$，有
 \[
-  \mabsB{\frac{a^n}{n!}}=\frac{a^n}{n!}<\e\impliedby \frac{ca}n<\e\impliedby n>\frac{ca}\e。
+  \mabsbb{\frac{a^n}{n!}}=\frac{a^n}{n!}<\e\impliedby \frac{ca}n<\e\impliedby n>\frac{ca}\e。
 \]
-取~$N=\mfloorB{\dfrac{ca}\e}$，则当~$n>N$~时，就有~$\mabsB{\frac{a^n}{n!}}<\e$，即
+取~$N=\mfloorbb{\dfrac{ca}\e}$，则当~$n>N$~时，就有~$\mabsbb{\dfrac{a^n}{n!}}<\e$，即
 \[
   \lim_\ntoinf\dfrac{a^n}{n!}\mcond*{a>1}。\qedhere
 \]
@@ -208,11 +208,11 @@ a\approx x_n&=\sum_{i=0}^{n-1}\mparenB{\frac in}^2\cdot\frac1n
 \begin{proof*}
 对于任意~$\e>0$，有
 \begin{align*}
-\mabs{\sqrt[n]a-1}=\sqrt[n]a-1<\e
+\mabsb{\sqrt[n]a-1}=\sqrt[n]a-1<\e
 &\impliedby\sqrt[n]a<1+\e\impliedby\frac1n\ln a<\ln(1+\e)\\
 &\impliedby n>\frac{\ln a}{\ln(1+\e)}。
 \end{align*}
-因此取~$N=\mfloorB{\dfrac{\ln a}{\ln(1+\e)}}$，则当~$n>N$~时，就有~$\mabs{\sqrt[n]a-1}<\e$，即
+因此取~$N=\mfloorbb{\dfrac{\ln a}{\ln(1+\e)}}$，则当~$n>N$~时，就有~$\mabs{\sqrt[n]a-1}<\e$，即
 \[
   \lim_\ntoinf\sqrt[n]a=1\mcond*{a>1}。\qedhere
 \]
@@ -230,7 +230,7 @@ a\approx x_n&=\sum_{i=0}^{n-1}\mparenB{\frac in}^2\cdot\frac1n
 \[
   \mabs{\sqrt[n]a-1}=h_n<\e\impliedby \frac an<\e。
 \]
-取~$N=\mfloorB{\dfrac an}$，则当~$n>N$~时，就有~$\mabs{\sqrt[n]a-1}<\e$。
+取~$N=\mfloorbb{\dfrac an}$，则当~$n>N$~时，就有~$\mabs{\sqrt[n]a-1}<\e$。
 \end{proof*}
 
 \begin{exercise}
@@ -286,7 +286,7 @@ a\approx x_n&=\sum_{i=0}^{n-1}\mparenB{\frac in}^2\cdot\frac1n
   \sqrt[n]n<1+\e\impliedby\frac1n\ln n<\ln(1+\e)\impliedby
   \frac1n<\frac{\ln(1+\e)}{\ln n}\leq\frac{\ln(1+\e)}{\ln 2}。
 \]
-取~$N=\mfloorB{\dfrac{\ln 2}{\ln(1+\e)}}$，则当~$n>N$~时，有
+取~$N=\mfloorbb{\dfrac{\ln 2}{\ln(1+\e)}}$，则当~$n>N$~时，有
 \[
   1-\e<1<\sqrt[n]n<1+\e,
 \]
@@ -384,10 +384,11 @@ a\approx x_n&=\sum_{i=0}^{n-1}\mparenB{\frac in}^2\cdot\frac1n
 \]
 \item 要使得~$n>N$~时，$\mabs{x_n\cdot y_n-ab}<\e$，常用的方法是插入一项，这项的两个因子，一个因子与第一项的
 因子相同，另一个因子与第二项的因子相同。这样的话，
-\[
-  \mabs{x_n\cdot y_n-ab}=\mabs{x_n\cdot y_n-y_n\cdot a+y_n\cdot a-ab}
-  \leq\mabs{y_n}\cdot\mabs{x_n-a}+\mabs a\cdot\mabs{y_n-b},
-\]
+\begin{align*}
+\mabs{x_n\cdot y_n-ab}
+&=\mabs{x_n\cdot y_n-y_n\cdot a+y_n\cdot a-ab}\\
+&\leq\mabs{y_n}\cdot\mabs{x_n-a}+\mabs a\cdot\mabs{y_n-b},
+\end{align*}
 所以要使结论成立，只要~$n>N$~时，利用~$\mbrace{y_n}$~有界证明
 \[
   \mabs{y_n}\cdot\mabs{x_n-a}<\frac\e2,\quad \mabs a\cdot\mabs{y_n-b}<\frac\e2
@@ -419,7 +420,7 @@ a\approx x_n&=\sum_{i=0}^{n-1}\mparenB{\frac in}^2\cdot\frac1n
 \]
 \item 由~\ref{thm:sec2.2-3-item-2}~可知，只要证明~$\lim_\ntoinf\dfrac1{y_n}=\lim_\ntoinf\dfrac1b$~即可。要使~$n>N$~时
 \[
-  \mabsB{\frac1{y_n}-\frac1b}=\mabsB{\frac{y_n-b}{y_n\cdot b}}<\e,
+  \mabsbb{\frac1{y_n}-\frac1b}=\mabsbb{\frac{y_n-b}{y_n\cdot b}}<\e,
 \]
 就要先估计~$\mbrace{y_n}$~的下界。为此，对于~$\dfrac{\mabs b}2>0$，由~$\lim_\ntoinf y_n=b$，存在~$N_1$，使得当~$n>N_1$~时，有
 \[
@@ -432,7 +433,7 @@ a\approx x_n&=\sum_{i=0}^{n-1}\mparenB{\frac in}^2\cdot\frac1n
 \]
 取~$N=\max\mbrace{N_1,N_2}$，则当~$n>N$~时，就有
 \[
-  \mabsB{\frac 1{y_n}-\frac 1b}=\mabsB{\frac{y_n-b}{y_n\cdot b}}\leq\frac{2\mabs{y_n-b}}{\mabs b^2}
+  \mabsbb{\frac 1{y_n}-\frac 1b}=\mabsbb{\frac{y_n-b}{y_n\cdot b}}\leq\frac{2\mabs{y_n-b}}{\mabs b^2}
   <\frac2{\mabs b^2}\cdot\frac{\mabs b^2}2\e=\e,
 \]
 即
@@ -477,12 +478,12 @@ a\approx x_n&=\sum_{i=0}^{n-1}\mparenB{\frac in}^2\cdot\frac1n
 \end{align*}
 \end{solution}
 
-\begin{quiz*}
+\begin{quiz}
 \begin{thmenumlist}
 \item 判断并说明下面推导是否正确。
 \begin{align*}
-\lim_\ntoinf\mparenB{1+\frac1n}^n
-&=\lim_\ntoinf\mparenB{1+\frac1n}\cdot\lim_\ntoinf\mparenB{1+\frac1n}\cdot\dotsm\cdot
+\lim_\ntoinf\mparenbb{1+\frac1n}^{\msp n}
+&=\lim_\ntoinf\mparenB{1+\frac1n}\cdot\lim_\ntoinf\mparenB{1+\frac1n}\dotsm
   \lim_\ntoinf\mparenB{1+\frac1n}\\
 &=1\times1\times\dotsm\times1=1;
 \end{align*}
@@ -492,7 +493,7 @@ a\approx x_n&=\sum_{i=0}^{n-1}\mparenB{\frac in}^2\cdot\frac1n
 \]
 判断并说明上述推导的正确性。
 \end{thmenumlist}
-\end{quiz*}
+\end{quiz}
 
 \begin{theorem}\label{thm:sec2.2-4}
 给定序列~$\mbrace{x_n}$~和~$\mbrace{y_n}$，若~$x_n\leq y_n\mcond{n\geq1}$，且
@@ -521,7 +522,7 @@ a\approx x_n&=\sum_{i=0}^{n-1}\mparenB{\frac in}^2\cdot\frac1n
 这与条件矛盾（见\ref{fig:sec2.1-3}）。所以~$a\leq b$。
 \end{proof}
 
-\thisfloatsetup{rowprecode=wrapfig}
+\fixwrapfloatsep
 \begin{wrapfigure}[10]{O}{0mm}
 \somefigure
 \caption{}\label{fig:sec2.1-3}
@@ -578,14 +579,14 @@ x_n\leq z_n\leq y_n\mcond*{n\geq1},
 \]
 \end{proof}
 
-\begin{quiz*}\begin{thmenumlist}
+\begin{quiz}\begin{thmenumlist}
 \item 在\ref{thm:sec2.2-4}~中若将条件改为~$x_n<y_n$，结论能否改为~$a<b$？
 \item 考虑能否利用\ref{thm:sec2.2-4}~直接得到\ref{thm:sec2.2-5}，即
 \[
   a=\lim_\ntoinf x_n\leq\lim_\ntoinf z_n\leq\lim_\ntoinf y_n=a。
 \]
 \end{thmenumlist}
-\end{quiz*}
+\end{quiz}
 
 作为序列极限的特殊情形，我们引入无穷小量的概念及其运算。
 
@@ -595,8 +596,8 @@ x_n\leq z_n\leq y_n\mcond*{n\geq1},
 
 若变量以序列形式表示，若序列极限为零，则称序列就叫作无穷小量。例如
 \[
-  \mbraceB{\frac1n},\quad \mbrace{q^n}\mcond{0<q<1},\quad
-  \mbraceB{\frac{a^n}{n!}}\mcond{a>0}
+  \mbracebb{\frac1n},\quad \mbrace{q^n}\mcond{0<q<1},\quad
+  \mbracebb{\frac{a^n}{n!}}\mcond{a>0}
 \]
 都是无穷小量。所以无穷小量不是很小的量，而是极限值为零的变量。
 
@@ -679,17 +680,17 @@ x_n\leq z_n\leq y_n\mcond*{n\geq1},
   \item $\lim_\ntoinf\min\mbrace{x_n,y_n}=\min\mbrace{a,b}$。
 \end{exlistcols}
 \item 证明序列~$\mbrace{\cos n}$~的极限不存在。
-\item 证明序列~$\mbrace{\tan n}$~与~$\mbrace{\sfrac1{\tan n}}$~的极限不存在。
+\item 证明序列~$\mbrace{\tan n}$~与~$\mbrace{\cot n}$~的极限不存在。
 \item 求下列极限。
 \begin{exlistcols}
   \item $\lim_\ntoinf\dfrac{\sin n}{\sqrt[3]{1-n^2}}$；
   \item $\lim_\ntoinf\sqrt[n]{n\cdot\ln n}$；
-  \item $\lim_\ntoinf\mparenbb{\dfrac{1\cdot3\cdot5\cdot\dotsm\cdot(2n-1)}{2\cdot4\cdot6\cdot\dotsm\cdot(2n)}}^{\frac1n}$；
-  \item $\lim_\ntoinf\dfrac{1\cdot3\cdot5\cdot\dotsm\cdot(2n-1)}{2\cdot4\cdot6\cdot\dotsm\cdot(2n)}$；
+  \item $\lim_\ntoinf\mparenbb{\dfrac{1\cdot3\cdot5\dotsm(2n-1)}{2\cdot4\cdot6\dotsm(2n)}}^{\msp\frac1n}$；
+  \item $\lim_\ntoinf\dfrac{1\cdot3\cdot5\dotsm(2n-1)}{2\cdot4\cdot6\dotsm(2n)}$；
   \item $\lim_\ntoinf\dfrac1{\sqrt[n]{n!}}$。
 \end{exlistcols}
 \item 若~$\mabs{x_{n+1}}\leq k\mabs{x_n}\mcond{0<k<1}$~对任意~$n$~成立。证明~$\lim_\ntoinf x_n=0$。
-\item 设~$f(x)=\frac{x+2}{x+1}$，而~$x_0=1$，$x_{n+1}=f(x_n)\mcond{n\geq0}$。证明~$\lim_\ntoinf x_n=\sqrt2$。
+\item 设~$f(x)=\dfrac{x+2}{x+1}$，而~$x_0=1$，$x_{n+1}=f(x_n)\mcond{n\geq0}$。证明~$\lim_\ntoinf x_n=\sqrt2$。
 \item 设~$x_1=1$，而~$x_{n+1}=\sqrt{2+x_n}\mcond{n\geq1}$。求~$\lim_\ntoinf x_n$。
 \item 设~$x_0=1$，而~$x_{n+1}=1+\dfrac1{x_n}\mcond{n\geq0}$。求~$\lim_\ntoinf x_n$。
 \item\begin{exlist}
@@ -797,17 +798,17 @@ $M$~是集合~$E$~的上确界当且仅当
 \begin{example}
 设~$f(x),g(x)$~是定义在~$X=[a,b]$~上的有界函数，证明
 \[
-  \sup_{x\in X}\mbraceb{f(x)+g(x)}\geq\sup_{x\in X}\mbrace{f(x)}+\sup_{x\in X}\mbrace{g(x)}。
+  \sup_{x\in X}\mbraceb{f(x)+g(x)}\geq\sup_{x\in X}\mbraceb{f(x)}+\sup_{x\in X}\mbraceb{g(x)}。
 \]
 \end{example}
 \begin{proof}
 有上确界定义中的~\ref{def:sec2.3-1-item-2}~及下确界定义中的~\ref{def:sec2.3-2-item-1}，对任意~$\e>0$，存在~$x'\in X$，使得
 \[
-  f(x')>\sup_{x\in X}\mbrace{f(x)}-\e,\quad g(x')\geq\inf_{x\in X}\mbrace{g(x)}。
+  f(x')>\sup_{x\in X}\mbraceb{f(x)}-\e,\quad g(x')\geq\inf_{x\in X}\mbraceb{g(x)}。
 \]
 相加得到
 \[
-  f(x')+g(x')\geq\sup_{x\in X}\mbrace{f(x)}+\inf_{x\in X}\mbrace{g(x)}-\e 。
+  f(x')+g(x')\geq\sup_{x\in X}\mbraceb{f(x)}+\inf_{x\in X}\mbraceb{g(x)}-\e 。
 \]
 再由上确界定义中的~\ref{def:sec2.3-1-item-1}
 \[
@@ -815,7 +816,7 @@ $M$~是集合~$E$~的上确界当且仅当
 \]
 所以
 \[
-  \sup_{x\in X}\mbraceb{f(x)+g(x)}\geq\sup_{x\in X}\mbrace{f(x)}+\inf_{x\in X}\mbrace{g(x)}-\e 。
+  \sup_{x\in X}\mbraceb{f(x)+g(x)}\geq\sup_{x\in X}\mbraceb{f(x)}+\inf_{x\in X}\mbraceb{g(x)}-\e 。
 \]
 又由于上、下确界是确定的数和~$\e$~的任意性，令~$\e\to0$，就得到结论。
 \end{proof}
@@ -831,11 +832,11 @@ $M$~是集合~$E$~的上确界当且仅当
 
 若序列~$\mbrace{x_n}$~满足
 \[
-  x_1\leq x_2\leq\cdots\leq x_n\leq\cdots,
+  x_1\leq x_2\leq\dotsb\leq x_n\leq\dotsb,
 \]
 则称~$\mbrace{x_n}$~是\emph{单调上升}的；若满足
 \[
-  x_1\geq x_2\geq\cdots\geq x_n\geq\cdots,
+  x_1\geq x_2\geq\dotsb\geq x_n\geq\dotsb,
 \]
 则称~$\mbrace{x_n}$~是\emph{单调下降}的。
 
@@ -845,14 +846,14 @@ $M$~是集合~$E$~的上确界当且仅当
 \begin{proof}
 已知序列单调上升，即
 \[
-  x_1\leq x_2\leq\cdots\leq x_n\leq\cdots,
+  x_1\leq x_2\leq\dotsb\leq x_n\leq\dotsb,
 \]
 且有上界，即存在~$M$，使得
 \[
   x_n\leq M\mcond*{n=1,2,\dotsc}。
 \]
 
-现在考虑集合~$\mathset{x_n}{n\in\mN}$，它是一个非空的、有上界集合，由\ref{thm:sec2.3-2}~可知集合~$\mathset{x_n}{n\in\mN}$~有
+现在考虑集合~$\mathsetb{x_n}{n\in\mN}$，它是一个非空的、有上界集合，由\ref{thm:sec2.3-2}~可知集合~$\mathsetb{x_n}{n\in\mN}$~有
 上确界，记为
 \[
   a\coloneq\sup_{n\in\mN}\mbrace{x_n}。
@@ -893,13 +894,13 @@ $M$~是集合~$E$~的上确界当且仅当
 \end{proof}
 
 \begin{example}\label{ex:sec2.3-3}
-证明极限~$\lim_\ntoinf\mparenB{1+\dfrac1n}^n$~存在。
+证明极限~$\lim_\ntoinf\mparenbb{1+\dfrac1n}^{\msp n}$~存在。
 \end{example}
 \begin{proof}
 先证明序列单调上升。事实上
 \begin{spreadlines}{3pt}
 \begin{align*}
-x_n&=\mparenB{1+\frac1n}^n\\
+x_n&=\mparenbb{1+\frac1n}^{\msp n}\\
 &=1+1\frac{n(n-1)}{2!}\frac1{n^2}+\frac{n(n-1)(n-2)}{3!}\frac1{n^3}+\dotsb+
   \frac{n(n-1)\dotsm\mparenb{n-(n-1)}}{n!}\frac1{n^n}\\
 &=1+1+\frac1{2!}\mparenB{1-\frac1n}+\frac1{3!}\mparenB{1-\frac1n}\mparenB{1-\frac2n}+\dotsb+
@@ -907,7 +908,7 @@ x_n&=\mparenB{1+\frac1n}^n\\
 \end{align*}
 并且
 \begin{align*}
-x_{n+1}&=\mparenB{1+\frac1{n+1}}^{n+1}\\
+x_{n+1}&=\mparenbb{1+\frac1{n+1}}^{\msp n+1}\\
 &=1\!\begin{lgathered}[t]
   {}+1+\frac1{2!}\mparenB{1-\frac1{n+1}}+\frac1{3!}\mparenB{1-\frac1{n+1}}\mparenB{1-\frac2{n+1}}+\dotsb\\
   {}+\frac1{n!}\mparenB{1-\frac1{n+1}}\dotsm\mparenB{1-\frac{n-1}{n+1}}
@@ -927,7 +928,7 @@ x_n
 \end{spreadlines}
 由\ref{thm:sec2.3-3}~可知序列极限存在，其值记为~$\me$，它是一个无理数。即
 \[
-  \me\coloneq\lim_\ntoinf\mparenB{1+\frac1n}^n=\num{2.718281828459}\dotsc 。\qedhere
+  \me\coloneq\lim_\ntoinf\mparenbb{1+\frac1n}^{\msp n}=\num{2.718281828459}\dotsc 。\qedhere
 \]
 \end{proof}
 
@@ -936,50 +937,50 @@ x_n
 \begin{exercise}
 \item 确定下列集合的上、下确界。
 \begin{exlistcols}
-  \item $E=\mathsetB{\mparenb{1+(-1)^n\dfrac{n+1}n}}{n\in\mN}$；
-  \item $E=\mathsetB{\dfrac mn}{0<m<n,~m,n\in\mN}$；
-  \item $E=\mathsetB{\dfrac{n-1}{n+1}\cos\dfrac{2n}3\pi}{n\in\mN}$；
+  \item $E=\mathsetbb{1+(-1)^n\dfrac{n+1}n}{n\in\mN}$；
+  \item $E=\mathsetbb{\dfrac mn}{0<m<n,~m,n\in\mN}$；
+  \item $E=\mathsetbb{\dfrac{n-1}{n+1}\cos\dfrac{2n}3\pi}{n\in\mN}$；
   \item $E=\mathsetb{\!\sqrt[n]{1+2^{n(-1)^n}}}{n\in\mN}$；
   \item $E=\mathsetB{x-\mfloor x}{x\in\mR}$。
 \end{exlistcols}
 \item 设~$f(x),g(x)$~在~$D$~上定义，且对任意~$x\in D$，有~$f(x)\leq g(x)$。证明
 \begin{exlistcols}
-  \item $\sup_{x\in D}\mbrace{f(x)}\leq\sup_{x\in D}\mbrace{g(x)}$；
-  \item $\inf_{x\in D}\mbrace{f(x)}\leq\inf_{x\in D}\mbrace{g(x)}$。
+  \item $\sup_{x\in D}\mbraceb{f(x)}\leq\sup_{x\in D}\mbraceb{g(x)}$；
+  \item $\inf_{x\in D}\mbraceb{f(x)}\leq\inf_{x\in D}\mbraceb{g(x)}$。
 \end{exlistcols}
 \item 设~$f(x)$~在~$D$~上定义。证明
 \begin{exlistcols}
-  \item $\sup_{x\in D}\mbrace{-f(x)}=-\inf_{x\in D}\mbrace{f(x)}$；
-  \item $\inf_{x\in D}\mbrace{-f(x)}=-\sup_{x\in D}\mbrace{f(x)}$。
+  \item $\sup_{x\in D}\mbrace{-f(x)}=-\inf_{x\in D}\mbraceb{f(x)}$；
+  \item $\inf_{x\in D}\mbrace{-f(x)}=-\sup_{x\in D}\mbraceb{f(x)}$。
 \end{exlistcols}
 \item 设~$f(x),g(x)$~在~$D$~上有界。证明
 \begin{align*}
-   \inf_{x\in D}\mbrace{f(x)}+\inf_{x\in D}\mbrace{g(x)}
-  &\leq\inf_{x\in D}\mbrace{f(x)+g(x)}\leq\inf_{x\in D}\mbrace{f(x)}+\sup_{x\in D}\mbrace{g(x)}\\
-  &\leq\sup_{x\in D}\mbrace{f(x)+g(x)}\leq\sup_{x\in D}\mbrace{f(x)}+\sup_{x\in D}\mbrace{g(x)}。
+   \inf_{x\in D}\mbraceb{f(x)}+\inf_{x\in D}\mbraceb{g(x)}
+  &\leq\inf_{x\in D}\mbrace{f(x)+g(x)}\leq\inf_{x\in D}\mbraceb{f(x)}+\sup_{x\in D}\mbraceb{g(x)}\\
+  &\leq\sup_{x\in D}\mbrace{f(x)+g(x)}\leq\sup_{x\in D}\mbraceb{f(x)}+\sup_{x\in D}\mbraceb{g(x)}。
 \end{align*}
 \item 设~$f(x),g(x)$~在~$D$~上有界且大于~$0$。证明
 \begin{align*}
-   \inf_{x\in D}\mbrace{f(x)}\cdot\inf_{x\in D}\mbrace{g(x)}
-  &\leq\inf_{x\in D}\mbrace{f(x)\cdot g(x)}\leq\inf_{x\in D}\mbrace{f(x)}\cdot\sup_{x\in D}\mbrace{g(x)}\\
-  &\leq\sup_{x\in D}\mbrace{f(x)\cdot g(x)}\leq\sup_{x\in D}\mbrace{f(x)}\cdot\sup_{x\in D}\mbrace{g(x)}。
+   \inf_{x\in D}\mbraceb{f(x)}\cdot\inf_{x\in D}\mbraceb{g(x)}
+  &\leq\inf_{x\in D}\mbrace{f(x)\cdot g(x)}\leq\inf_{x\in D}\mbraceb{f(x)}\cdot\sup_{x\in D}\mbraceb{g(x)}\\
+  &\leq\sup_{x\in D}\mbrace{f(x)\cdot g(x)}\leq\sup_{x\in D}\mbraceb{f(x)}\cdot\sup_{x\in D}\mbraceb{g(x)}。
 \end{align*}
 \item 求下列序列的极限。
 \begin{exlistcols}
-  \item $\sqrt2$，$\smsqrt{2\sqrt2}$，$\sqrt{2\smsqrt{2\sqrt2}}$，\ldots ；
-  \item $\sqrt2$，$\smsqrt{2+\sqrt2}$，$\sqrt{2+\smsqrt{2+\sqrt2}}$，\ldots 。
+  \item $\sqrt2$，$\sqrt{2\sqrt2}$，$\smbsqrt{2\sqrt{2\sqrt2}}$，\ldots ；
+  \item $\sqrt2$，$\sqrt{2+\sqrt2}$，$\smbsqrt{2+\sqrt{2+\sqrt2}}$，\ldots 。
 \end{exlistcols}
 \item 利用单调有界定理，证明~$\lim_\ntoinf\sqrt[n]n=1$。
 \item 设~$0<a_1<b_1$，对~$n=1,2,\dotsc$，令
 \[
-  a_{n+1}=\sqrt{a_n\cdot b_n},\quad b_{n+1}=\frac{a_n+b_n}2。
+  a_{n+1}=\txts\smbsqrt{a_n\cdot b_n},\quad b_{n+1}=\dfrac{a_n+b_n}2。
 \]
 证明序列~$\mbrace{a_n},\mbrace{b_n}$~极限存在且相等。
 \item 设~$0<a_1<b_1<c_1$，对~$n=1,2,\dotsc$，令
 \[
   a_{n+1}=\frac1{\dfrac1{a_n}+\dfrac1{b_n}+\dfrac1{c_n}},\quad
-  b_{n+1}=\sqrt[3]{a_n\cdot b_n\cdot c_n},\quad
-  c_{n+1}=\frac{a_n+b_n+c_n}3。
+  b_{n+1}=\txts\smbsqrt[3]{a_n\cdot b_n\cdot c_n},\quad
+  c_{n+1}=\dfrac{a_n+b_n+c_n}3。
 \]
 证明序列~$\mbrace{a_n},\mbrace{b_n},\mbrace{c_n}$~极限存在且相等。
 \item 证明，
@@ -1042,7 +1043,7 @@ s=\dfrac12gt^2
 \begin{definition}\label{def:sec2.4-1}
 设~$f(x)$~在~$U_0(x_0)$~上定义，如果对任意~$\e>0$，存在~$\delta>0$，使得当~$0<\mabs{x-x_0}<\delta$~时，有
 \[
-  \mabs{f(x)-A}<\e,
+  \mabsb{f(x)-A}<\e,
 \]
 则称~$x$~趋向于~$x_0$~时，\emph{函数~$f(x)$~的极限}为~$A$，记作~$f(x)\to A\mcond{x\to x_0}$，或
 \[
@@ -1051,7 +1052,7 @@ s=\dfrac12gt^2
 \end{definition}
 
 
-%\thisfloatsetup{rowprecode=wrapfig}
+%\fixwrapfloatsep
 \begin{wrapfigure}{O}{0mm}
 \somefigure
 \caption{}\label{fig:sec2.4-1}
@@ -1066,11 +1067,11 @@ s=\dfrac12gt^2
 \begin{proof}
 对任意~$\e>0$，有
 \[
-  \mabsB{\frac{x^2-1}{x-1}-2}<\e\impliedby\mabs{x+1-2}=\mabs{x-1}<\e,
+  \mabsbb{\frac{x^2-1}{x-1}-2}<\e\impliedby\mabs{x+1-2}=\mabs{x-1}<\e,
 \]
 取~$\delta=\e$，则当~$0<\mabs{x-1}<\delta$~时，就有
 \[
-  \mabsB{\frac{x^2-1}{x-1}-2}<\e,
+  \mabsbb{\frac{x^2-1}{x-1}-2}<\e,
 \]
 即
 \[
@@ -1084,7 +1085,7 @@ s=\dfrac12gt^2
 \begin{proof}
 对任意~$\e>0$，有
 \[
-  \mabsb{\sqrt x-\sqrt a}<\e\impliedby\mabsB{\frac{x-a}{\sqrt x+\sqrt a}}\leq\frac1{\sqrt a}\mabs{x-a}<\e 。
+  \mabsb{\sqrt x-\sqrt a}<\e\impliedby\mabsbb{\frac{x-a}{\sqrt x+\sqrt a}}\leq\frac1{\sqrt a}\mabs{x-a}<\e 。
 \]
 取~$\delta=\sqrt a\,\e$，则当~$0<\mabs{x-a}<\delta$~时，就有
 \[
@@ -1112,16 +1113,16 @@ s=\dfrac12gt^2
 
 那么对任意~$\e>0$，有
 \[
-  \mabsB{\frac1x-\frac1a}<\e\impliedby
-  \mabsB{\frac{x-a}{xa}}\leq\frac{2\mabs{x-a}}{\mabs a^2}<\e 。
+  \mabsbb{\frac1x-\frac1a}<\e\impliedby
+  \mabsbb{\frac{x-a}{xa}}\leq\frac{2\mabs{x-a}}{\mabs a^2}<\e 。
 \]
 取
 \[
-  \delta=\min\mbraceB{\frac{\mabs a}2,~\frac{\mabs a^2}2\e},
+  \delta=\min\mbracebb{\frac{\mabs a}2,~\frac{\mabs a^2}2\e},
 \]
 则当~$0<\mabs{x-a}<\delta$~时，就有
 \[
-  \mabsB{\frac1x-\frac1a}<\e,
+  \mabsbb{\frac1x-\frac1a}<\e,
 \]
 即
 \[
@@ -1145,7 +1146,7 @@ s=\dfrac12gt^2
 \begin{proof}
 取~$\e_0=1$，由条件，存在~$\delta>0$，当~$0<\mabs{x-x_0}<\delta$~时，有
 \[
-  \mabs{f(x)-A}<1\implies\mabs{f(x)}<\mabs A+1 。
+  \mabsb{f(x)-A}<1\implies\mabsb{f(x)}<\mabs A+1 。
 \]
 这说明函数在~$U_0(x_0;\delta)$~上有界，界为~$\mabs A+1$。
 \end{proof}
@@ -1170,18 +1171,18 @@ s=\dfrac12gt^2
 
 事实上，取~$\e_0=\dfrac{\mabs B}2>0$，由~$\lim_{x\to x_0}g(x)=B$，存在~$\delta_1$，当~$0<\mabs{x-x_0}<\delta_1$~时，有
 \[
-  \mabsb{\mabs{g(x)}-\mabs B}\leq\mabs{g(x)-B}<\frac{\mabs B}2\implies
-  \mabs{g(x)}\geq\mabs B-\frac{\mabs B}2=\frac{\mabs B}2。
+  \mabsB{\mabsb{g(x)}-\mabs B}\leq\mabsb{g(x)-B}<\frac{\mabs B}2\implies
+  \mabsb{g(x)}\geq\mabs B-\frac{\mabs B}2=\frac{\mabs B}2。
 \]
 
 对任意~$\e>0$，同样由~$\lim_{x\to x_0}g(x)=B$，存在~$\delta_2$，当~$0<\mabs{x-x_0}<\delta_2$~时，有
 \[
-  \mabs{g(x)-B}<\frac{\mabs B^2}2\e 。
+  \mabsb{g(x)-B}<\frac{\mabs B^2}2\e 。
 \]
 令~$\delta=\min\mbrace{\delta_1,\delta_2}>0$，所以当~$0<\mabs{x-x_0}<\delta$~时，就有
 \[
-  \mabsB{\frac1{g(x)}-\frac1B}=\frac{\mabs{g(x)-B}}{g(x)\cdot B}\leq
-  \frac2{\mabs B^2}\mabs{g(x)-B}<\frac2{\mabs B^2}\cdot\frac{\mabs B^2}2\e=\e 。
+  \mabsbb{\frac1{g(x)}-\frac1B}=\frac{\mabsb{g(x)-B}}{g(x)\cdot B}\leq
+  \frac2{\mabs B^2}\mabsb{g(x)-B}<\frac2{\mabs B^2}\cdot\frac{\mabs B^2}2\e=\e 。
 \]
 即
 \[
@@ -1210,11 +1211,11 @@ s=\dfrac12gt^2
 \begin{exercise}
 \item 判断并说明函数极限定义与下列形式是否等价。
 \begin{exlist}
-  \item 对任意~$\dfrac1{2^n}$，都存在~$\delta>0$，当~$0<\mabs{x-a}<\delta$~时，有~$\mabs{f(x)-A}<\dfrac1{2^n}$；
-  \item 对任意~$\e>0$，都存在~$\dfrac1n>0$，当~$0<\mabs{x-a}<\dfrac1n$~时，有~$\mabs{f(x)-A}<\e$；
-  \item 对任意~$\e>0$，都存在~$\delta>0$，当~$0<\mabs{x-a}<\delta$~时，有~$\mabs{f(x)-A}<\e^2$；
-  \item 对任意~$\e>0$，都存在~$\delta>0$，当~$0<\mabs{x-a}<\e\cdot\delta$~时，有~$\mabs{f(x)-A}<\e^2$；
-  \item 对任意~$\e>0$，都存在~$\delta>0$，当~$0<\mabs{x-a}<\delta$~时，有~$\mabs{f(x)-A}<\e\cdot\delta$。
+  \item 对任意~$\dfrac1{2^n}$，都存在~$\delta>0$，当~$0<\mabs{x-a}<\delta$~时，有~$\mabsb{f(x)-A}<\dfrac1{2^n}$；
+  \item 对任意~$\e>0$，都存在~$\dfrac1n>0$，当~$0<\mabs{x-a}<\dfrac1n$~时，有~$\mabsb{f(x)-A}<\e$；
+  \item 对任意~$\e>0$，都存在~$\delta>0$，当~$0<\mabs{x-a}<\delta$~时，有~$\mabsb{f(x)-A}<\e^2$；
+  \item 对任意~$\e>0$，都存在~$\delta>0$，当~$0<\mabs{x-a}<\e\cdot\delta$~时，有~$\mabsb{f(x)-A}<\e^2$；
+  \item 对任意~$\e>0$，都存在~$\delta>0$，当~$0<\mabs{x-a}<\delta$~时，有~$\mabsb{f(x)-A}<\e\cdot\delta$。
 \end{exlist}
 \item 用~$\e-\delta$~方法验证下列各题。
 \begin{exlistcols}[3]
@@ -1226,11 +1227,11 @@ s=\dfrac12gt^2
 \end{exlistcols}
 \item 设~$\lim_{x\to a}f(x)=A$，用~$\e-\delta$~方法验证下列各题。
 \begin{exlistcols}
-  \item $\lim_{x\to a}\mabs{f(x)}=\mabs A$；
+  \item $\lim_{x\to a}\mabsb{f(x)}=\mabs A$；
   \item $\lim_{x\to a}f^2(x)=A^2$；
-  \item $\lim_{x\to a}\sqrt{f(x)}=\sqrt A\mcond{A>0}$；
-  \item $\lim_{x\to a}\sqrt[3]{f(x)}=\sqrt[3]A$；
-  \item $\lim_{x\to a}\dfrac1{\sqrt{f(x)}}=\dfrac1{\sqrt A}\mcond{A>0}$。
+  \item $\lim_{x\to a}\smbsqrt{f(x)}=\sqrt A\mcond{A>0}$；
+  \item $\lim_{x\to a}\smbsqrt[3]{f(x)}=\sqrt[3]A$；
+  \item $\lim_{x\to a}\dfrac1{\smbsqrt{f(x)}}=\dfrac1{\sqrt A}\mcond{A>0}$。
 \end{exlistcols}
 \item 求下列极限。
 \begin{exlistcols}
@@ -1248,7 +1249,7 @@ s=\dfrac12gt^2
 
 求曲线的渐近线时，遇到自变量趋于无穷时的极限。
 
-\thisfloatsetup{rowprecode=wrapfig}
+\fixwrapfloatsep
 \begin{wrapfigure}[8]{O}{0mm}
 \somefigure
 \caption{}\label{fig:sec2.5-1}
@@ -1259,11 +1260,11 @@ s=\dfrac12gt^2
 
 曲线上的点~$\mparenb{x,f(x)}$~到直线~$y=kx+b$~的距离为
 \[
-  \frac{\mabs{f(x)-kx-b}}{1+k^3},
+  \frac{\mabsb{f(x)-kx-b}}{1+k^3},
 \]
 所以直线是曲线的斜渐近线当且仅当
 \[
-  \lim_{\substack{x\to+\infty\\(x\to-\infty)}}\frac{\mabs{f(x)-kx-b}}{1+k^3}=0
+  \lim_{\substack{x\to+\infty\\(x\to-\infty)}}\frac{\mabsb{f(x)-kx-b}}{1+k^3}=0
   \quad\text{或}\quad
   \lim_{\substack{x\to+\infty\\(x\to-\infty)}}\mparenb{f(x)-kx-b}=0 。
 \]
@@ -1301,7 +1302,7 @@ s=\dfrac12gt^2
 \begin{definition}
 设~$f(x)$~在~$U^+(\infty)$~上定义，如果存在~$A$，使得对任意~$\e>0$，存在~$X$，当~$x>X$~（自然要求~$X\in U^+(\infty)$）时，有
 \[
-  \mabs{f(x)-A}<\e,
+  \mabsb{f(x)-A}<\e,
 \]
 则称~$x\to+\infty$~时，\emph{函数~$f(x)$~的极限为~$A$}，记作~$f(x)\to A\mcond{x\to+\infty}$，或
 \[
@@ -1313,12 +1314,12 @@ s=\dfrac12gt^2
 \item 设~$f(x)$~在~$U^-(\infty)$~上定义，式子~$\lim_{x\to-\infty}f(x)=A$~的定义为：对任意~$\e>0$，存在~$X$，使得
 当~$x<X$~时，有
 \[
-  \mabs{f(x)-A}<\e 。
+  \mabsb{f(x)-A}<\e 。
 \]
 \item 设~$f(x)$~在~$U(\infty)$~上定义，式子~$\lim_{x\to\infty}f(x)=A$~的定义为：对任意~$\e>0$，存在~$X>0$，使得
 当~$\mabs x<X$~时，有
 \[
-  \mabs{f(x)-A}<\e 。
+  \mabsb{f(x)-A}<\e 。
 \]
 \end{enumlist}
 
@@ -1330,14 +1331,14 @@ s=\dfrac12gt^2
 \begin{proof}
 对任意~$\e>0$，有
 \[
-  \mabsB{\sqrt{1+\dfrac1{x^2}}-1}<\e\impliedby
-  \mabsB{\frac{\sfrac1{x^2}}{\sqrt{1+\sfrac1{x^2}}+1}}\leq
-  \mabsB{\frac1{x^2}}<\e\impliedby
+  \mabsbb{\sqrt{1+\dfrac1{x^2}}-1}<\e\impliedby
+  \mabsbb{\frac{\sfrac1{x^2}}{\sqrt{1+\sfrac1{x^2}}+1}}\leq
+  \mabsbb{\frac1{x^2}}<\e\impliedby
   x^2>\frac1\e 。
 \]
 取~$X=\dfrac1{\sqrt\e}$，则当~$\mabs x>X$~时，就有
 \[
-  \mabsB{\sqrt{1+\dfrac1{x^2}}-1}<\e 。\qedhere
+  \mabsbb{\sqrt{1+\dfrac1{x^2}}-1}<\e 。\qedhere
 \]
 \end{proof}
 
@@ -1375,7 +1376,7 @@ s=\dfrac12gt^2
 
 \subsection{无穷大量}
 
-%\thisfloatsetup{rowprecode=wrapfig}
+%\fixwrapfloatsep
 \begin{wrapfigure}{O}{0mm}
 \somefigure
 \caption{}\label{fig:sec2.5-2}
@@ -1402,7 +1403,7 @@ s=\dfrac12gt^2
 \]
 \item 记号~$\lim_{x\to x_0}f(x)=\infty$~的定义为：对任意~$M>0$，存在~$\delta>0$，使得当~$0<\mabs{x-x_0}<\delta$~时，有
 \[
-  \mabs{f(x)}<M 。
+  \mabsb{f(x)}<M 。
 \]
 \end{enumlist}
 
@@ -1423,7 +1424,7 @@ s=\dfrac12gt^2
 \begin{proof}
 对任意~$M>0$，取~$\delta=\dfrac1M>0$，当~$0<\mabs x<\delta$~时，有
 \[
-  \mabsB{\frac1x}>\frac1\delta=M,
+  \mabsbb{\frac1x}>\frac1\delta=M,
 \]
 即
 \[
@@ -1439,7 +1440,7 @@ s=\dfrac12gt^2
 \[
   \mabs{q^n}>M\impliedby n\ln\mabs q>\ln M 。
 \]
-取~$N=\mfloorB{\frac{\ln M}{\ln\mabs q}}$，则当~$n>N$~时，就有~$\mabs{q^n}>M$，即
+取~$N=\mfloorbb{\dfrac{\ln M}{\ln\mabs q}}$，则当~$n>N$~时，就有~$\mabs{q^n}>M$，即
 \[
   \lim_\ntoinf q^n=\infty\mcond*{\mabs q>1}。\qedhere
 \]
@@ -1451,12 +1452,12 @@ s=\dfrac12gt^2
 
 若变量不取零值，显然变量为无穷大量当且仅当它的倒数为无穷小量。
 
-\begin{quiz*}
+\begin{quiz}
 \begin{thmenumlist}
   \item 无界变量是否是无穷大量；
   \item \ref{def:sec2.5-2}~中“任意~$M>0$”，是否可改为“任意~$M$”。
 \end{thmenumlist}
-\end{quiz*}
+\end{quiz}
 
 \subsection{单侧极限}
 
@@ -1469,7 +1470,7 @@ s=\dfrac12gt^2
 \begin{definition}\label{def:sec2.5-4}
 设~$f(x)$~在~$U_0^+(x_0)$~上定义。若存在~$A$，使得对任意~$\e>0$，存在~$\delta>0$，当~$0<x-x_0<\delta$~时，有
 \[
-  \mabs{f(x)-A}<\e,
+  \mabsb{f(x)-A}<\e,
 \]
 则称~$f(x)$~在~$x_0$~点的\emph{右极限}存在，记作
 \[
@@ -1479,7 +1480,7 @@ s=\dfrac12gt^2
 
 设~$f(x)$~在~$U_0^-(x_0)$~上定义。若存在~$B$，使得对任意~$\e>0$，存在~$\delta>0$，当~$0<x_0-x<\delta$~时，有
 \[
-  \mabs{f(x)-B}<\e,
+  \mabsb{f(x)-B}<\e,
 \]
 则称~$f(x)$~在~$x_0$~点的\emph{左极限}存在，记作
 \[
@@ -1500,7 +1501,7 @@ s=\dfrac12gt^2
 函数在~$x_0$~点极限存在当且仅当函数在~$x-0$~点的左、右极限存在且相等。
 \end{theorem}
 
-\begin{quiz*}
+\begin{quiz}
 \begin{thmenumlist}
 \item 讨论\ref{thm:sec2.5-1}~中极限存在是否可改为广义极限存在，给出\ref{thm:sec2.4-1}~的证明；
 \item 函数极限定义中，自变量有~$6$~种变化方式，函数有~$4$~种变化方式，共有~$24$~种组合。\ref{tab:sec2.5-1}~中
@@ -1521,7 +1522,7 @@ s=\dfrac12gt^2
 \end{table}
 \item 对于单侧极限，分别讨论极限的唯一性、局部有界性、四则运算和极限不等式是否成立。
 \end{thmenumlist}
-\end{quiz*}
+\end{quiz}
 
 \subsection{极限存在性}
 
@@ -1533,14 +1534,14 @@ s=\dfrac12gt^2
 \begin{theorem}
 设~$f(x)$~在~$U_0^-(x_0)$~上定义，且~$f(x)$~单调上升，则
 \[
-  \lim_{x\to x_0-0}f(x)=\sup_{x\in U_0^-(x_0)}\mbrace{f(x)} 。
+  \lim_{x\to x_0-0}f(x)=\sup_{x\in U_0^-(x_0)}\mbraceb{f(x)} 。
 \]
 \end{theorem}
 \begin{proof}
 考虑集合
 \[
   \mathsetb{f(x)}{x\in U_0^-(x_0)}\quad\text{和}\quad
-  A=\sup_{x\in U_0^-(x_0)}\mbrace{f(x)}。
+  A=\sup_{x\in U_0^-(x_0)}\mbraceb{f(x)}。
 \]
 
 分两种情形讨论。
@@ -1558,11 +1559,11 @@ s=\dfrac12gt^2
 \]
 再结合上确界定义，有
 \[
-  A+\e>f(x)>A-\e\implies\mabs{f(x)-A}<\e,
+  A+\e>f(x)>A-\e\implies\mabsb{f(x)-A}<\e,
 \]
 即
 \[
-  \lim_{x\to x_0-0}f(x)=A=\sup_{x\in U_0^-(x_0)}\mbrace{f(x)} 。
+  \lim_{x\to x_0-0}f(x)=A=\sup_{x\in U_0^-(x_0)}\mbraceb{f(x)} 。
 \]
 \item $A=+\infty$~的情形（见\ref{fig:sec2.5-3}）
 
@@ -1576,12 +1577,12 @@ s=\dfrac12gt^2
 \]
 即
 \[
-  \lim_{x\to x_0-0}f(x)=+\infty=\sup_{x\in U_0^-(x_0)}\mbrace{f(x)} 。\qedhere
+  \lim_{x\to x_0-0}f(x)=+\infty=\sup_{x\in U_0^-(x_0)}\mbraceb{f(x)} 。\qedhere
 \]
 \end{enumlist}
 \end{proof}
 
-%\thisfloatsetup{rowprecode=wrapfig}
+%\fixwrapfloatsep
 \begin{wrapfigure}{O}{0mm}
 \somefigure
 \caption{}\label{fig:sec2.5-3}
@@ -1589,16 +1590,16 @@ s=\dfrac12gt^2
 
 同样，若~$f(x)$~在~$U_0^-(x_0)$~上单调下降，则有
 \[
-  \lim_{x\to x_0-0}f(x)=\inf_{x\in U_0^-(x_0)}\mbrace{f(x)} 。
+  \lim_{x\to x_0-0}f(x)=\inf_{x\in U_0^-(x_0)}\mbraceb{f(x)} 。
 \]
 
 若~$f(x)$~在~$U_0^+(x_0)$~上定义，且~$x\to x_0+0$~时，函数单调上升（作为自变量由小变大变化趋势来看，函数是单调下降的），则有
 \[
-  \lim_{x\to x_0+0}f(x)=\sup_{x\in U_0^+(x_0)}\mbrace{f(x)};
+  \lim_{x\to x_0+0}f(x)=\sup_{x\in U_0^+(x_0)}\mbraceb{f(x)};
 \]
 若当~$x\to x_0+0$~时，函数单调下降，则有
 \[
-  \lim_{x\to x_0+0}f(x)=\inf_{x\in U_0^+(x_0)}\mbrace{f(x)}。
+  \lim_{x\to x_0+0}f(x)=\inf_{x\in U_0^+(x_0)}\mbraceb{f(x)}。
 \]
 
 
@@ -1648,19 +1649,19 @@ $t=g(x)$~在~$U_0(x_0)$~上定义。当~$x\in U_0(x_0)$~时，$t=g(x)\in U_0(t_0
 \begin{proof}
 对任意~$\e>0$，由~$\lim_{t\to t_0}f(t)=A$，存在~$\eta>0$，当~$0<\mabs{t-t_0}<\eta$~时，有
 \[
-  \mabs{f(t)-A}<\e 。
+  \mabsb{f(t)-A}<\e 。
 \]
 对任意~$\eta>0$，由~$\lim_{x\to x_0}g(x)=t_0$，存在~$\delta>0$，当~$0<\mabs{x-x_0}<\delta$~时，有
 \[
-  \mabs{g(x)-t_0}<\eta 。
+  \mabsb{g(x)-t_0}<\eta 。
 \]
 根据~$x\in U_0(x_0)$~时~$g(x)=t\in U_0(t_0)$，所以上式可写成
 \[
-  0<\mabs{g(x)-t_0}=\mabs{t-t_0}<\eta,
+  0<\mabsb{g(x)-t_0}=\mabs{t-t_0}<\eta,
 \]
 这样当~$0<\mabs{x-x_0}<\delta$~时，就有
 \[
-  \mabs{f(t)-A}=\mabsb{f\mparenb{g(x)}-A}<\e,
+  \mabsb{f(t)-A}=\mabsb{f\mparenb{g(x)}-A}<\e,
 \]
 即
 \[
@@ -1671,19 +1672,19 @@ $t=g(x)$~在~$U_0(x_0)$~上定义。当~$x\in U_0(x_0)$~时，$t=g(x)\in U_0(t_0
 定理只对自变量、中间变量、因变量趋于有限情形加以证明，事实上每个量都可以趋于有限或无穷，组合以后共有~$8$~种可能。若
 考虑单侧极限，组合情形就更多，每种组合的复合函数求极限形式，以后都可以应用。
 
-\begin{quiz*}
+\begin{quiz}
 若~$f(t)$~在邻域~$U(t_0)$~上定义，讨论关于函数~$g(x)$~的条件能否改为：当~$x\in U_0(x_0)$~时，$g(x)\in U(t_0)$。
-\end{quiz*}
+\end{quiz}
 
 \begin{exercise}
 \item 求下列极限。
 \begin{exlistcols}
-  \item $\lim_{x\to+\infty}\mparenB{\sqrt{x+\smsqrt{x+\sqrt x}}-x}$；
+  \item $\lim_{x\to+\infty}\mparenB{\smbsqrt{x+\sqrt{x+\sqrt x}}-x}$；
   \item $\lim_{x\to-\infty}\mparenb{\sqrt{x^2+x}-x}$。
 \end{exlistcols}
 \item 求下列极限。
 \begin{exlistcols}[4]
-  \item $\lim_{x\to0+0}x\mfloorB{\dfrac1x}$；
+  \item $\lim_{x\to0+0}x\mfloorbb{\dfrac1x}$；
   \item $\lim_{x\to2+0}\dfrac{\mfloor x^2-4}{x^2-4}$；
   \item $\lim_{x\to2-0}\dfrac{\mfloor x^2-4}{x^2-4}$；
   \item $\lim_{x\to1+0}\dfrac{\mfloor{4x}}{1+x}$。
@@ -1721,20 +1722,20 @@ $t=g(x)$~在~$U_0(x_0)$~上定义。当~$x\in U_0(x_0)$~时，$t=g(x)\in U_0(t_0
 \end{exlist}
 \item 设~$f(x)$~是~$\mR$~上的周期函数，且~$\lim_{x\to+\infty}f(x)=0$，证明~$f(x)\equiv 0$。
 \item 设~$f(x)$~在~$(0,+\infty)$~上满足函数方程~$f(2x)=f(x)$，及~$\lim_{x\to+\infty}f(x)=\ell$。证明~$f(x)\equiv\ell$。
-\item 设~$\lim_{x\to+\infty}f(x)=A$。证明，对任意~$\e>0$，存在~$X$，使得当~$x_1,x_2>X$~时，有~$\mabs{f(x_1)-f(x_2)}<\e$。%
+\item 设~$\lim_{x\to+\infty}f(x)=A$。证明，对任意~$\e>0$，存在~$X$，使得当~$x_1,x_2>X$~时，有~$\mabsb{f(x_1)-f(x_2)}<\e$。%
 判断下面证法的正确性。
 \begin{exproof}
 对任意~$\e>0$，由~$\lim_{x\to+\infty}f(x)=A$，存在~$X_1$，当~$x_1>X_1$~时，有
 \[
-  \mabs{f(x_1)-A}<\frac\e2。
+  \mabsb{f(x_1)-A}<\frac\e2。
 \]
 又由~$\lim_{x\to+\infty}f(x)=A$，存在~$X_2$，当~$x_2>X_2$~时，有
 \[
-  \mabs{f(x_2)-A}<\frac\e2。
+  \mabsb{f(x_2)-A}<\frac\e2。
 \]
 取~$X=\max\mbrace{X_1,X_2}$，则当~$x_1,x_2>X$~时，就有
 \[
-  \mabs{f(x_1)-f(x_2)}\leq\mabs{f(x_1)-A}+\mabs{f(x_2)-A}<\frac\e2+\frac\e2=\e 。\qedhere
+  \mabsb{f(x_1)-f(x_2)}\leq\mabsb{f(x_1)-A}+\mabsb{f(x_2)-A}<\frac\e2+\frac\e2=\e 。\qedhere
 \]
 \end{exproof}
 \end{exercise}
@@ -1742,7 +1743,7 @@ $t=g(x)$~在~$U_0(x_0)$~上定义。当~$x\in U_0(x_0)$~时，$t=g(x)\in U_0(t_0
 
 \section{两个重要极限}
 
-\thisfloatsetup{rowprecode=wrapfig}
+\fixwrapfloatsep
 \begin{wrapfigure}{O}{0mm}
 \somefigure
 \caption{}\label{fig:sec2.6-1}
@@ -1772,7 +1773,7 @@ $t=g(x)$~在~$U_0(x_0)$~上定义。当~$x\in U_0(x_0)$~时，$t=g(x)\in U_0(t_0
 即当圆心角趋于零时，对应的弧长与弦长之比趋于~$1$。
 
 \begin{proof}
-设~$0<x<\frac\pi2$，显然有面积关系
+设~$0<x<\dfrac\pi2$，显然有面积关系
 \[
   S_{\triangle OAB}<S_{\marc{OAB}}<S_{\triangle OAD}  A,
 \]
@@ -1818,7 +1819,7 @@ $t=g(x)$~在~$U_0(x_0)$~上定义。当~$x\in U_0(x_0)$~时，$t=g(x)\in U_0(t_0
 
 \begin{theorem}
 \[
-  \lim_{x\to\infty}\mparenB{1+\frac1x}^x=\me 。
+  \lim_{x\to\infty}\mparenbb{1+\frac1x}^x=\me 。
 \]
 \end{theorem}
 \begin{proof}
@@ -1828,35 +1829,35 @@ $t=g(x)$~在~$U_0(x_0)$~上定义。当~$x\in U_0(x_0)$~时，$t=g(x)\in U_0(t_0
 \]
 利用幂函数的递增性，可得
 \[
-  \mparenB{1+\frac1{\mfloor x+1}}^x\leq\mparenB{1+\frac1x}^x\leq\mparenB{1+\frac1{\mfloor x}}^x;
+  \mparenbb{1+\frac1{\mfloor x+1}}^x\leq\mparenbb{1+\frac1x}^x\leq\mparenbb{1+\frac1{\mfloor x}}^x;
 \]
 再由指数函数（底数大于~$1$）的递增性，可得
 \[
-  \mparenB{1+\frac1{\mfloor x+1}}^{\mfloor x}\leq\mparenB{1+\frac1x}^x\leq
-  \mparenB{1+\frac1{\mfloor x}}^{\mfloor x+1} 。
+  \mparenbb{1+\frac1{\mfloor x+1}}^{\mfloor x}\leq\mparenbb{1+\frac1x}^x\leq
+  \mparenbb{1+\frac1{\mfloor x}}^{\mfloor x+1} 。
 \]
-利用~$\lim_\ntoinf\mparenB{1+\frac1n}^n=\me$，可知
+利用~$\lim_\ntoinf\mparenbb{1+\dfrac1n}^n=\me$，可知
 \begin{align*}
-\lim_{x\to+\infty}\mparenB{1+\frac1{\mfloor x}}^{\mfloor x+1}
-&=\lim_{x\to+\infty}\mparenB{1+\frac1{\mfloor x}}^{\mfloor x}\mparenB{1+\frac1{\mfloor x}}=\me\\[2pt]
-\lim_{x\to+\infty}\mparenB{1+\frac1{\mfloor x+1}}^{\mfloor x}
-&=\lim_{x\to+\infty}\mparenB{1+\frac1{\mfloor x+1}}^{\mfloor x+1}\mparenB{1+\frac1{\mfloor x+1}}^{-1}=\me,
+\lim_{x\to+\infty}\mparenbb{1+\frac1{\mfloor x}}^{\mfloor x+1}
+&=\lim_{x\to+\infty}\mparenbb{1+\frac1{\mfloor x}}^{\mfloor x}\mparenB{1+\frac1{\mfloor x}}=\me\\[2pt]
+\lim_{x\to+\infty}\mparenbb{1+\frac1{\mfloor x+1}}^{\mfloor x}
+&=\lim_{x\to+\infty}\mparenbb{1+\frac1{\mfloor x+1}}^{\mfloor x+1}\mparenbb{1+\frac1{\mfloor x+1}}^{-1}=\me,
 \end{align*}
 所以
 \[
-  \lim_{x\to+\infty}\mparenB{1+\frac1x}^x=\me 。
+  \lim_{x\to+\infty}\mparenbb{1+\frac1x}^x=\me 。
 \]
 
 再证~$x\to-\infty$~的情形。为此，令~$x=-y$，则~$y\to+\infty$。所以
 \begin{align*}
-\lim_{x\to-\infty}\mparenB{1+\frac1x}^x
-&=\lim_{y\to+\infty}\mparenB{1-\frac1y}^{-y}=\lim_{y\to+\infty}\mparenB{\frac y{y-1}}^y\\[2pt]
-&=\lim_{y\to+\infty}\mparenB{1+\frac1{y-1}}^{y-1}\mparenB{1+\frac1{y-1}}=\me 。
+\lim_{x\to-\infty}\mparenbb{1+\frac1x}^x
+&=\lim_{y\to+\infty}\mparenbb{1-\frac1y}^{-y}=\lim_{y\to+\infty}\mparenbb{\frac y{y-1}}^y\\[2pt]
+&=\lim_{y\to+\infty}\mparenbb{1+\frac1{y-1}}^{y-1}\mparenB{1+\frac1{y-1}}=\me 。
 \end{align*}
 
 最后由单侧极限与极限的关系，得到
 \[
-  \lim_{x\to\infty}\mparenB{1+\frac1x}^x=\me 。\qedhere
+  \lim_{x\to\infty}\mparenbb{1+\frac1x}^x=\me 。\qedhere
 \]
 \end{proof}
 
@@ -1868,7 +1869,7 @@ $t=g(x)$~在~$U_0(x_0)$~上定义。当~$x\in U_0(x_0)$~时，$t=g(x)\in U_0(t_0
 \begin{proof}
 令~$t=\dfrac1x$，则
 \[
-\lim_{t\to0}(1+t)^{\frac1t}=\lim_{x\to\infty}\mparenB{1+\frac1x}^x=\me 。\qedhere
+\lim_{t\to0}(1+t)^{\frac1t}=\lim_{x\to\infty}\mparenbb{1+\frac1x}^x=\me 。\qedhere
 \]
 \end{proof}
 
@@ -1880,7 +1881,7 @@ $t=g(x)$~在~$U_0(x_0)$~上定义。当~$x\in U_0(x_0)$~时，$t=g(x)\in U_0(t_0
   \item $\lim_{x\to0}\dfrac{\cos5x-\cos3x}{x^2}$；
   \item $\lim_{x\to\pi}\dfrac{\sin mx}{\sin nx}\mcond{m,n\in\mZ}$；
   \item $\lim_{x\to\sfrac\pi4}\dfrac{\tan x-1}{x-\sfrac\pi4}$；
-  \item $\lim_{x\to0}\dfrac{\cos(n\arccos x)}x\mcond{x~\text{为奇数}}$；
+  \item $\lim_{x\to0}\dfrac{\cos(n\arccos x)}x\mcond{n~\text{为奇数}}$；
   \item $\lim_\ntoinf\mparenb{\cos\sqrt{n+1}-\cos\sqrt n}$；
   \item $\lim_\ntoinf\sin\mparenb{\pi\sqrt{n^2+1}}$。
 \end{exlistcols}
@@ -1888,13 +1889,13 @@ $t=g(x)$~在~$U_0(x_0)$~上定义。当~$x\in U_0(x_0)$~时，$t=g(x)\in U_0(t_0
 \item 求下列极限。
 \begin{exlistcols}
   \item $\lim_{x\to0}\sqrt[x]{1-2x}$；
-  \item $\lim_{x\to\infty}\mparenB{1+\dfrac2x}^{-x}$；
-  \item $\lim_{x\to\infty}\mparenB{\frac{x^2-1}{x^2+1}}^{x^2}$；
-  \item $\lim_{x\to+\infty}\mparenB{\cos\dfrac ax}^{x^2}\mcond{a\neq0}$；
+  \item $\lim_{x\to\infty}\mparenbb{1+\dfrac2x}^{\msp -x}$；
+  \item $\lim_{x\to\infty}\mparenbb{\dfrac{x^2-1}{x^2+1}}^{\msp x^2}$；
+  \item $\lim_{x\to+\infty}\mparenbb{\cos\dfrac ax}^{\msp x^2}\mcond{a\neq0}$；
   \item $\lim_{x\to\sfrac\pi2}(\sin x)^{\tan x}$；
-  \item $\lim_{x\to\infty}\mparenB{\sin\dfrac1x+\cos\dfrac1x}^x$；
-  \item $\lim_\ntoinf\mparenB{\dfrac{n+x}{n-1}}^n$；
-  \item $\lim_\ntoinf\mparenB{\dfrac{n+\ln n}{n-\ln n}}^{\frac n{\ln n}}$。
+  \item $\lim_{x\to\infty}\mparenbb{\sin\dfrac1x+\cos\dfrac1x}^{\msp x}$；
+  \item $\lim_\ntoinf\mparenbb{\dfrac{n+x}{n-1}}^{\msp n}$；
+  \item $\lim_\ntoinf\mparenbb{\dfrac{n+\ln n}{n-\ln n}}^{\msp\frac n{\ln n}}$。
 \end{exlistcols}
 \end{exercise}
 
@@ -1955,7 +1956,7 @@ $t=g(x)$~在~$U_0(x_0)$~上定义。当~$x\in U_0(x_0)$~时，$t=g(x)\in U_0(t_0
 当~$f(x),g(x)$~是无穷小（大）量时，称为~$f(x)$~是~$g(x)$~的\emph{高（低）阶无穷小（大）量}；
 \item 如果
 \[
-  \mabs{f(x)}\leq M\mabs{g(x)}\mcond*{x\in U_0(x_0)},
+  \mabsb{f(x)}\leq M\mabsb{g(x)}\mcond*{x\in U_0(x_0)},
 \]
 则记作
 \[
@@ -2046,7 +2047,7 @@ O\mparenb{o\mparenb{g(x)}}&=o\mparenb{g(x)}\mcond*{x\to x_0} 。
 \]
 \item~$\alpha(x)=O\mparenb{g_1(x)}$，$\beta(x)=o\mparenb{g_2(x)}$，即已知~$x\in U_0(x_0)$，
 \[
-  \mabsB{\frac{\alpha(x)}{g_1(x)}}\leq M,\quad\lim_{x\to x_0}\frac{\beta(x)}{g_2(x)}=0,
+  \mabsbb{\frac{\alpha(x)}{g_1(x)}}\leq M,\quad\lim_{x\to x_0}\frac{\beta(x)}{g_2(x)}=0,
 \]
 要证
 \[
@@ -2055,7 +2056,7 @@ O\mparenb{o\mparenb{g(x)}}&=o\mparenb{g(x)}\mcond*{x\to x_0} 。
 根据\ref{cor:sec2.2-1}~之~\ref{cor:sec2.2-1-item-2}，上式显然是成立的。
 \item 只证第一式。令~$\alpha(x)=O\mparenb{g(x)}$，$\beta(x)=o\mparenb{\alpha(x)}$，即
 \[
-  \mabsB{\frac{\alpha(x)}{g(x)}}\leq M,\quad
+  \mabsbb{\frac{\alpha(x)}{g(x)}}\leq M,\quad
   \lim_{x\to x_0}\frac{\beta(x)}{\alpha(x)}=0。
 \]
 要证
@@ -2112,12 +2113,12 @@ o\mparenb{g(x)}=o\mparenb{g(x)}\pm o\mparenb{g(x)},
   \item $\ln(1+x)$；
   \item $\me^x-1$；
   \item $\sqrt[n]{1+x}-1$；
-  \item $\sqrt{x+\smsqrt{x+\sqrt x}}$。
+  \item $\smbsqrt{x+\sqrt{x+\sqrt x}}$。
 \end{exlistcols}
 \item 求下列量的等价无穷大量。
 \begin{exlistcols}
   \item $2x^3+3x^2-5x-6\mcond{x\to\infty}$；
-  \item $\sqrt{x+\smsqrt{x+\sqrt x}}\mcond{x\to+\infty}$；
+  \item $\smbsqrt{x+\sqrt{x+\sqrt x}}\mcond{x\to+\infty}$；
   \item $\dfrac{x+1}{x^2+3x-3}\mcond{x\to0}$；
   \item $\dfrac{\arctan x}{x^2}\mcond{x\to0}$。
 \end{exlistcols}
@@ -2177,7 +2178,7 @@ o\mparenb{g(x)}=o\mparenb{g(x)}\pm o\mparenb{g(x)},
 
 存在~$\e_0>0$，对任意~$\delta>0$，存在~$x'$，即使~$0<\mabs{x'-x_0}<\delta$，但
 \[
-  \mabs{f(x')-A}\geq\e_0 。
+  \mabsb{f(x')-A}\geq\e_0 。
 \]
 
 它的几何意义是：存在以~$y=A$~为中心线，宽为~$2\e_0$~的带子，对任一以~$x_0$~为中心，以~$\delta$~为半径的空心邻域，在该邻域内总可以
@@ -2200,7 +2201,7 @@ o\mparenb{g(x)}=o\mparenb{g(x)}\pm o\mparenb{g(x)},
 
 事实上，对任意~$\e>0$，由~\ref{eq:sec2.8-1}，存在~$\delta>0$，当~$0<\mabs{x-x_0}<\delta$~时，有
 \[
-  \mabs{f(x)-A}<\e 。
+  \mabsb{f(x)-A}<\e 。
 \]
 对于~$\delta>0$，再由~\ref{eq:sec2.8-2}，存在~$N$，当~$n>N$~时，有
 \[
@@ -2208,14 +2209,14 @@ o\mparenb{g(x)}=o\mparenb{g(x)}\pm o\mparenb{g(x)},
 \]
 因为序列在空心邻域内，所以当~$n>N$~时，有~$0<\mabs{x_n-x_0}<\delta$，也就有
 \[
-  \mabs{f(x_n)-A}<\e\implies\lim_\ntoinf f(x_n)=A 。
+  \mabsb{f(x_n)-A}<\e\implies\lim_\ntoinf f(x_n)=A 。
 \]
 
 反之，对任一位于~$U_0(x_0)$~内的序列，若满足~\ref{eq:sec2.8-2}，且有~\ref{eq:sec2.8-3}~成立，则可得~\ref{eq:sec2.8-1}~成立。%
 否则的话，假设~\ref{eq:sec2.8-1}~不成立，即~$x\to x_0$~时，函数~$f(x)$~不趋于~$A$。根据上面所述，%
 存在~$\e_0>0$，对任意~$\delta>0$，存在~$x'\in U_0(x_0)$，即使~$0<\mabs{x'-x_0}<\delta$，但
 \[
-  \mabs{f(x')-A}\geq\e_0 。
+  \mabsb{f(x')-A}\geq\e_0 。
 \]
 现在利用~$\delta$~的任意性，取定~$\delta=\dfrac1n\mcond{n=1,2,\dotsc}$，存在~$x_n\in U_0(x_0)$，使得
 \[
@@ -2223,11 +2224,11 @@ o\mparenb{g(x)}=o\mparenb{g(x)}\pm o\mparenb{g(x)},
 \]
 而
 \[
-  \mabs{f(x_n)-A}\geq\e_0 。
+  \mabsb{f(x_n)-A}\geq\e_0 。
 \]
 即找到位于~$U_0(x_0)$~内的序列~$\mbrace{x_n}$，$\lim_\ntoinf x_n=x_0$，但是
 \[
-  \mabs{f(x_n)-A}\geq\e_0,
+  \mabsb{f(x_n)-A}\geq\e_0,
 \]
 这与条件~$\lim_\ntoinf f(x_n)=A$~矛盾，所以~\ref{eq:sec2.8-1}~成立。
 
@@ -2295,7 +2296,7 @@ o\mparenb{g(x)}=o\mparenb{g(x)}\pm o\mparenb{g(x)},
 \begin{exercise*}
 \item 设~$\lim_\ntoinf x_n=a$，将序列~$\mbrace{x_n}$~的项进行重新排列后，得到新的序列~$\mbrace{x_n'}$。证明~$\lim_\ntoinf x_n'=a$。
 \item 设~$\lim_\ntoinf a_n=a$。证明~$\lim_\ntoinf\dfrac{a_1+a_2+\dotsb+a_n}n=a$。
-\item 设~$\lim_\ntoinf a_n=a\mcond{a_n>0}$。证明~$\lim_\ntoinf\sqrt[n]{a_1\cdot a_2\cdot\dotsm\cdot a_n}=a$。
+\item 设~$\lim_\ntoinf a_n=a\mcond{a_n>0}$。证明~$\lim_\ntoinf\sqrt[n]{a_1\cdot a_2\dotsm a_n}=a$。
 \item 设~$a_n>0$，且~$\lim_\ntoinf\dfrac{a_{n+1}}{a_n}=a$。证明~$\lim_\ntoinf\sqrt[n]{a_n}=a$。
 \item 证明
 \begin{exlistcols}
@@ -2331,7 +2332,7 @@ o\mparenb{g(x)}=o\mparenb{g(x)}\pm o\mparenb{g(x)},
   \item 证明
   \[
     \me=1+1+\dfrac1{2!}+\dotsb+\dfrac1{n!}+\dfrac{\theta_n}{n!\cdot n}
-    \mcond*[\enspace]{\frac n{n+1}<\theta_n<1}。
+    \mcond*{\frac n{n+1}<\theta_n<1}。
   \]
 \end{exlist}
 \item 证明~$\me$~是无理数。

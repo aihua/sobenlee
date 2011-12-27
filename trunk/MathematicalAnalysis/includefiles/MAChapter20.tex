@@ -4,55 +4,742 @@
 
 
 \chapter{重积分}\label{ch:20}
+
 \section{引\emspace 言}
+
 \section{$\mR{m}$~空间图形的~Jordan~测度}
 \subsection{$\mR{m}$~中图形的容积}
 \subsection{点集为可测图形的充要条件}
 \subsection{点集为可测图形的充分条件}
 \begin{exercise}
-\item
+\item 试求~$\mR{2}$~中点集
+\[
+  E=\mathsetb{(x,y)}{(x,y)\in\mintc01\times\mintc01,\text{且~$x$~与~$y$~至少有一个是无理数}}
+\]
+的内容积与外容积。并讨论~$E$~是否是可测图形。
+\item 设~$A,B,C$~是~$\mR{m}$~上的可测图形。证明，
+\begin{exlistcols}
+  \item $V\mparen{A\difset B}=V(A)-V(A\cap B)$；
+  \item $V(A\cup B)=V(A)+V(B)-V(A\cap B)$；
+  \item $V(\cup B\cup C)=V(A)+V(B)+V(C)-V(A\cap B)-V(A\cap C)-V(B\cap C)-V(A\cap B\cap C)$。
+\end{exlistcols}
+\item 距离说明~$\mR{m}$~中两个点集~$E_1$~和~$E_2$~都不是可测图形，但~$E_1\cup E_2$~和~$E_1\cap E_2$~都是可测图形。并讨论
+是否还可能有~$E_1\difset E_2$~也为可测图形。
+\item 设有一点集
+\[
+  D=\mathsetb{(x,y)}{\mabs x\leq 2,~\mabs y\leq 2}。
+\]
+如果把~$D$~看成~$\mR{3}$~上的点集，它的容积~$V^{(3)}(D)$~是多少；如果把~$D$~看成~$\mR{2}$~上的点集，它的容积~$V^{(2)}(D)$~又
+是多少。这是否有矛盾，试加以说明。
+\item 设~$A$~为~$\mR{m}$~上一可测图形。证明~$\interior A$~和~$\closure A$~为可测图形，而且
+~$V\mparen{\interior A}=V\mparen{\closure A}=V(A)$。
+\item 设~$\Omega$~是~$\mR{m}$~上的点集。已知~$\closure\Omega$~是可测图形，证明或反驳~$\Omega$~是可测图形。
+\item 举例说明，$\mR{m}$~中两个点集~$S_1$~和~$S_2$~都不是可测图形，但~$S_1\difset S_2$~为可测图形。
+\item 设~$A$~和~$B$~是~$\mR{m}$~上的可测图形，而且~$B$~的容积为零。证明~$V(A\cup B)=V(A\difset B)=V(A)$。
+\item 设~$A,B$~为~$\mR{m}$~上的两个可测图形，试给出~$V\mparen{A\difset B}=V(A)-V(B)$~成立的充分必要条件。
 \end{exercise}
+
 \section{在~$\mR{m}$~上的~Riemann~积分}
 \subsection{$m$~重积分定义}
 \subsection{可积的充要条件}
 \subsection{可积函数类}
 \subsection{可积函数的性质}
 \begin{exercise}
-\item
+\item 在~$\mR{2}$~的区域~$D=\mathsetb{(x,y)}{\mabs x\leq 1,~\mabs y\leq 1}$~上给定一函数
+\[
+  f(x,y)=\begin{Bdcases}
+    1, & \text{当~$x,y$~都是有理数；}\\
+    0, & \text{当~$x,y$~至少有一个是无理数 。}
+  \end{Bdcases}
+\]
+讨论~$f(x,y)$~在区域~$D$~上的可积性。
+\item 设~$\Omega$~和~$S$~是~$\mR{3}$~上的可测图形。函数
+\[
+  f(x,y,z)=\begin{Bdcases}
+    1, & (x,y,z)\in S;\\
+    0, & (x,y,z)\in\Omega\difset S 。
+  \end{Bdcases}
+\]
+讨论~$f(x,y,z)$~在~$\Omega$~上的可积性。
+\item 设函数~$\map f{A\subset\mR{m}}{\mR}$~在~$A$~上有界且可积，又设~$B\subset A$~为一可测图形。证明~$f$~的限制~$f\mrest{B}$~
+在~$B$~上可积。
+\item 在~$\mR{2}$~的点集
+\[
+  D=\mparenb{\mintc01\times\mintc01}\txts\bigcup\mparenb{\mbrace{0}\times\mintc12}
+\]
+上给定一函数
+\[
+  f(x,y)=\begin{cdcases}
+    1, & (x,y)\in\mintc01\times\mintc01;\\
+    \dfrac1{2-y} & (x,y)\in \mbrace{0}\times\minto12;\\
+    0, & (x,y)=(0,2) 。
+  \end{cdcases}
+\]
+证明，
+\begin{exlistcols}[3]
+  \item $D$~是~$\mR{2}$~上的可测图形；
+  \item $f(x,y)$~在~$D$~上无界；
+  \item $f(x,u)$~在~$D$~上可积。
+\end{exlistcols}
+\item 设开集~$A$~为~$\mR{m}$~上的可测图形，函数~$\map fA\mR$~在~$A$~上非负连续且不恒为零。证明
+\[
+  \int_Af\dif V>0 。
+\]
+如果~$A$~不是开集，上述结论是否仍成立，试举例说明。
+\item\label{exer-20.3.6}%
+设开区域~$\Omega$~是~$\mR{m}$~上的可测图形，函数~$\map f{\closure\Omega}\mR$~连续。如果对于任一可测图形~$B\subset\Omega$，都有
+\[
+  \int_Bf\dif V=0,
+\]
+证明~$f$~在~$\closure\Omega$~上恒等于零。
+\item 试举例说明\ref{exer-20.3.6}~去掉~$\Omega$~为开区域的条件是否，结论是否依然成立。
+\item 设开区域~$\Omega$~是~$\mR{m}$~上的可测图形，函数~$\map f{\closure\Omega}\mR$~连续。如果对任意一个在~$\closure\Omega$~上连续
+而且在~$\bound\Omega$~上取值为零的函数~$\eta$，都有
+\[
+  \int_\Omega f\eta\dif V=0,
+\]
+证明~$f$~在~$\closure\Omega$~上恒为零。如果去掉~$\Omega$~为开区域的条件，讨论结论是否仍成立。
+\item 设~$A,B$~为~$\mR{m}$~上的可测图形，且~$A\cap B$~的容积为零，又设~$f$~在~$A\cup B$~上可积。证明，
+\[
+  \int_{A\cup B}f\dif V=\int_Af\dif V+\int_Bf\dif V 。
+\]
+\item 设定义在可测图形~$\Omega\subset\mR{m}$~上的两个函数~$f,g$~有界可积，而且~$g$~在~$\Omega$~上非负。令，
+\[
+  m\coloneq\inf_{\mvec x\in\Omega}\mbraceb{\vecfunc f{x}},\quad
+  M\coloneq\sup_{\mvec x\in\Omega}\mbraceb{\vecfunc f{x}}。
+\]
+\begin{exlist}\FixExHead
+  \item 函数
+  \[
+    F(t)\coloneq\int_\Omega\mparenb{\vecfunc f{x}-t}\vecfunc g{x}\dif V
+  \]
+  是~$\mintc mM$~上的连续函数；
+  \item\label{exer-20.3.10-2}$F(t)$~在~$\mintc mM$~上至少有一个零点；
+  \item 利用~\ref{exer-20.3.10-2}~的结论，证明存在~$\mu\in\mintc mM$，使得
+  \[
+    \int_\Omega fg\dif V=\mu\int_\Omega g\dif V 。
+  \]
+\end{exlist}
 \end{exercise}
+
 \section{化重积分为累次积分}
 \subsection{化重积分为累次积分的公式}
 \subsection{二重积分计算}
 \subsection{三重积分计算}
 \subsection{$n$~重积分计算}
 \begin{exercise}
-\item
+\item 设一元函数~$f(x)$~和~$g(y)$~分别在~$\mintc ab$~与~$\mintc cd$~上可积。证明，二元函数~$F(x,y)\coloneq f(x)g(y)$~
+在~$D=\mintc ab\times\mintc cd$~上可积，而且
+\[
+  \iint_DF(x,y)\dif x\dif y=\int_a^bf(x)\dif x\int_c^dg(y)\dif y 。
+\]
+\item 设一元函数~$f_i(x_i)$~在~$\mintc{a_i}{b_i}$~上可积，$i=1,2,\dotsc,n$。证明，$n$~元函数
+\[
+  F(\mvec x{1,2,:,n})\coloneq \prod_{i=1}^nf_i(x_i)
+\]
+在~$\Omega=\mintc{a_1}{b_1}\times\dotsb\times\mintc{a_n}{b_n}$~上可积，且
+\[
+  \int_\Omega F\dif V=\prod_{i=1}^n\int_{a_i}^{b_i}f_i(x_i)\dif x_i 。
+\]
+\item 设~$\Omega=\mintc{a_1}{b_1}\times\dotsb\times\mintc{a_n}{b_n}$，且~$f$~在~$\Omega$~上连续。令
+~$\Omega_{\mvec x}\coloneq\mintc{a_1}{x_1}\times\dotsb\times\mintc{a_n}{x_n}$，其中~$x_i\in\mintc{a_i}{b_i}$。定义
+\[
+  \vecfunc F{x}\coloneq\int_{\Omega_{\mvec x}}f\dif V 。
+\]
+证明~$\vecfunc F{x}$~在~$\interior\Omega$~上有连续的一阶偏导数，并求出~$F_{x_i}'\mcond{i=1,\dotsc,n}$。
+\item 设在~$D=\mintc ab\times\mintc cd$~上定义的二元函数~$f(x,y)$~有二阶连续偏导数。
+\begin{exlist}
+  \item\label{exer-20.4.4-1}证明~$\iint_Df_{xy}''(x,y)\dif x\dif y=\iint_Df_{yx}''(x,y)\dif x\dif y$；
+  \item 利用~\ref{exer-20.4.4-1}~证明~$f_{xy}''(x,y)=f_{yx}''(x,y)$~在~$D$~上恒成立。
+\end{exlist}
+\item 设一元函数~$f(x)$~在~$\mintc ab$~上可积。在~$D=\mintc ab\times\mintc ab$~上定义~$F(x,y)\coloneq\mparenb{f(x)-f(y)}^2$。
+\begin{exlist}
+  \item 将重积分~$\iint_DF(x,y)\dif x\dif y$~化为累次积分；
+  \item 证明~$\mparenbb{\int_a^bf(x)\dif x}^{\msp2}\leq(b-a)\int_a^bf^2f(x)\dif x$。
+\end{exlist}
+\item 对下列区域依两种不同顺序将二重积分~$\iint_Df(x,y)\dif x\dif y$~化为累次积分。
+\begin{exlist}
+  \item $\Omega$~是以~$A_1\minto{a_1}{b_1}$，$A_2\minto{a_2}{b_2}$~和~$A_3\minto{a_3}{b_3}$~为顶点的
+  三角形，其中~$a_1<a_2$，$b_1<b_2$；
+  \item $\Omega$~是以~$A\minto00$，$B\minto10$~和~$C\minto{-1}1$~为顶点的三角形；
+  \item $\Omega$~是以~$A\minto a0$，$B\minto{2a}{2a}$，$C\minto{2a}{4a}$~和~$D\minto a{2a}$~为定点的四边形，其中~$a>0$；
+\begin{exlistcols*}
+  \item $\Omega$~是圆域~$\mparen{x-a}^2+\mparen{y-b}^2\leq R^2$；
+  \item $\Omega$~是圆域~$x^2+y^2\leq 2x$；
+\end{exlistcols*}
+  \item $\Omega$~是环域~$R_1^2\leq\mparen{x-a}^2+\mparen{y-b}^2\leq R_2^2$，其中~$R_2>R_1$；
+  \item $\Omega$~是由~$x^2+y^2=R^2$~和~$x^2+y^2=Rx$~围成的区域，其中~$R>0$；
+  \item $\Omega$~是由~$y=x^3$，$y=2x^3$，$y=1$~和~$y=2$~围成的区域；
+  \item $\Omega$~是由~$y=\sqrt[5]x$，$y=\sqrt[5]{\sfrac x3}$，$x=-1$~和~$x=1$~围成的区域。
+\end{exlist}
+\item 改变下述二重积分化为累次积分的顺序。
+\begin{exlistcols}
+  \item $\int_0^1\dif y\int_0^yf(x,y)\dif x$；
+  \item $\int_1^\me\dif x\int_0^{\ln x}f(x,y)\dif y$；
+  \item $\int_0^2\dif y\int_{y^2}^{3y}f(x,y)\dif x$；
+  \item $\int_{-1}^1\dif x\int_{-\smbsqrt{1-x^2}}^{1-x^2}f(x,y)\dif y$；
+  \item $\int_1^2\dif x\int_{\sqrt x}^2f(x,y)\dif y$；
+  \item $\int_1^2\dif x\int_{2-x}^{\sqrt{2x-a}}f(x,y)\dif y$，其中~$0<a<1$；
+  \item $\int_0^\pi\dif y\int_{\sin\frac y2}^{\sin y}f(x,y)\dif x$。
+\end{exlistcols}
+\item 证明下述~Dirichlet~公式，其中~$a>0$。
+\[
+  \int_0^a\dif x\int_0^xf(x,y)\dif y=\int_0^a\dif y\int_y^af(x,y)\dif x 。
+\]
+\item 设一元函数~$g(x)$~在~$\mintc01$~上可积。证明
+\[
+  \int_0^1\dif x\int_x^1g(t)\dif t=\int_0^1tg(t)\dif t 。
+\]
+\item 设~$m,n\in\mN$，且至少其中之一为奇数，而~$\Omega\subset\mR{2}$~是椭圆域~$\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}\leq1$。证明
+\[
+  \iint_\Omega x^my^n\dif x\dif y=0 。
+\]
+\item 设~$m,n\in\mN$，且都是偶数，而~$\Omega\subset\mR{2}$~是椭圆域~$\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}\leq1$，%
+$\Omega^\ast$~为~$\Omega$~位于第一象限的部分（包含坐标轴）。证明
+\[
+  \iint_\Omega x^my^n\dif x\dif y=4\iint_{\Omega^\ast}x^my^n\dif x\dif y 。
+\]
+\item\begin{exlist}
+  \item 设~$\Omega$~是由~$y^2=2px\mcond{p>0}$~与~$x=\dfrac p2$~围成的区域，计算~$\iint_\Omega x^my^k\dif x\dif y$，其中~$m,k>0$；
+  \item 设~$\Omega$~是由~$y=0$，$y=\sin x^2$，$x=0$~和~$x=\sqrt\pi$~围成的区域，计算~$\iint_\Omega x\dif x\dif y$；
+  \item 设~$\Omega=\mathsetb{\minto xy}{0\leq x\leq y^2,0\leq y\leq 2,x\leq 2}$，计算~$\iint_\Omega x^2y^2\dif x\dif y$；
+  \item 设~$\Omega$~是由~$y=\sqrt{1-x^2}$~与~$y=0$~围成的区域，计算~$\iint_\Omega\mparenb{x^2+3xy^2}\dif x\dif y$；
+  \item 设~$\Omega$~是由~$y=\me^x$，$y=1$，$x=0$~与~$x=1$~围成的区域，计算~$\iint_\Omega\mparen{x+y}\dif x\dif y$；
+  \item 设~$\Omega$~是以~$\minto22$，$\minto23$~和~$\minto31$~为顶点的三角形，计算~$\iint_\Omega\me^{x+y}\dif x\dif y$；
+  \item 设~$\Omega$~是以~$\minto11$，$\minto23$，$\minto31$~和~$\minto43$~为顶点的四边形，计算
+  ~$\iint_\Omega\mparenb{x^2+y^2}\dif x\dif y$；
+  \item 设~$\Omega$~是由~$y=x^2$，$y=4x$~和~$y=4$~围成的区域，计算~$\iint_\Omega\sin nx\dif x\dif y$。
+\end{exlist}
+\item 设函数~$\map f{\mintc01\times\mintc01}\mR$~定义如下，
+\[
+  f(x,y)\coloneq\begin{cBdcases}
+    1, & \text{$x=\dfrac{p_1}{q_2}$，$y=\dfrac{p_2}{q_2}$，且~$q_1\neq q_2$};\\
+    0, & \text{其它情形},
+  \end{cBdcases}
+\]
+其中~$\mgcd{p_1}{q_1}=1$，$\mgcd{p_2}{q_2}=1$。证明~$f(x,y)$~在~$\mintc01\times\mintc01$~上不可积，但两个累次积分都存在。
+\item\begin{exlist}
+  \item 设~$\Omega$~为椭球域，计算~$\iiint_\Omega \mparen{x+y+z}\dif x\dif y\dif z$；
+  \item 设~$\Omega$~是由曲面~$x^2+y^2+z^2=1$，$x=0$，$y=0$~与~$z=0$~围成的位于第一卦限上的有界区域，计算
+  ~$\iiint_\Omega x^3yz\dif x\dif y\dif z$；
+  \item 设~$\Omega$~由曲面~$z=x^2+y^2$，$z=1$~与~$z=2$~围成，计算~$\iiint_\Omega z\dif x\dif y\dif z$；
+  \item 设~$\Omega$~由曲面~$x^2=z^2+y^2$，$x=2$~与~$x=4$~围成，计算~$\iiint_\Omega\mparenb{1+x^4}\dif x\dif y\dif z$；
+  \item 设~$\Omega$~由~$z=16\mparenb{x^2+y^2}$，$z=4\mparenb{x^2+y^2}$~与~$z=64$~围成，计算
+  ~$\iiint_\Omega\mparenb{x^2+y^2}\dif x\dif y\dif z$。
+\end{exlist}
+\item 改变下列三重积分化为累次积分的顺序。
+\begin{exlistcols}
+  \item $\int_0^1\dif x\int_0^{1-x}\dif y\int_0^{x+y}f(x,y,z)\dif z$；
+  \item $\int_0^1\dif x\int_0^1\dif y\int_0^{x^2+y^2}f(x,y,z)\dif z$；
+  \item $\int_{-1}^1\dif x\int_{-\sqrt{1-x^2}}^{\sqrt{1-x^2}}\dif y\int_{\smbsqrt{x^2+y^2}}^1f(x,y,z)\dif z$；
+  \item $\int_{-b}^b\dif z\int_{-\frac ab\sqrt{b^2-z^2}}^{\frac ab\sqrt{b^2-z^2}}\dif y
+         \int_0^{\frac{y^2}{a^2}+\frac{z^2}{b^2}}f(x,y,z)\dif x$；
+  \item $\int_{-a}^a\dif x\int_{-\frac ca\sqrt{a^2-x^2}}^{\frac ca\sqrt{a^2-x^2}}\dif z
+         \int_0^{b\sqrt{1-(\sfrac xz)^2-(\sfrac zc)^2}}f(x,y,z)\dif y$；
+  \item $\int_0^1\dif y\int_{-y}^y\dif z\int_{-\smbsqrt{y^2-z^2}}^{\smbsqrt{y^2-z^2}}f(x,y,z)\dif x$。
+\end{exlistcols}
+\item 平面区域~$D$~的面积~$A$~由公式
+\[
+  A=\int_0^a\dif x\int_{a-x}^{\sqrt{a^2-x^2}}\dif y
+\]
+给出，确定~$D$~是由哪些曲线围成的。
+\item 空间一例题~$\Omega$~的体积由公式
+\[
+  V(\Omega)=\int_0^1\dif x\int_0^{\sqrt{1-x^2}}\dif y\int_{\smbsqrt{x^2+y^2}}^{2-\smbsqrt{x^2+y^2}}\dif z
+\]
+给出，确定~$\Omega$~是由哪些曲面围成的。
+\item 设~$\Omega$~是椭球域~$\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}+\dfrac{z^2}{c^2}\leq1$。证明，
+\[
+  \iiint_\Omega f(x,y,z)\dif y\dif y\dif z=\int_{-c}^c\mparenbb{\iint_{D_z}f(x,y,z)\dif x\dif y}\dif z,
+\]
+其中~$D_z$~为~$\Omega$~的横截面，即
+\[
+  D_z=\mathsetBB{\minto xy}{\frac{x^2}{a^2\mparenB{1-\dfrac{z^2}{c^2}}}+\frac{y^2}{b^2\mparenB{1-\dfrac{z^2}{c^2}}}\leq 1} 。
+\]
+\item 求下列立体~$\Omega$~的体积。
+\begin{exlist}
+  \item $\Omega$~由曲面~$z=xy$，$x+y+z=1$~和~$z=a$~围成，其中~$a>0$；
+  \item $\Omega$~由~$z=\cos x\cos y$，$z=0$，$\mabs{x+y}\leq\dfrac\pi2$~和~$\mabs{x-y}\leq\dfrac\pi2$~围成。
+\end{exlist}
+\item 设~$f(x,y,z)=F_{xyz}'''$~在~$D=\mintc ab\times\mintc cd\times\mintc hk$~上连续。求
+\[
+  I=\iiint_Df(x,y,z)\dif x\dif y\dif z 。
+\]
+并证明~$I\leq 4\mparen{M-m}$，其中~$M,m$~分别是~$F(x,y,z)$~在~$D$~上的最大值和最小值。
+\item 证明，若~$a,b>0$，则
+\begin{exlistcols}
+  \item $\lim_{T\to\pinf}\int_0^T\dif x\int_a^b\me^{-xy}\dif y=\ln\dfrac ba$；
+  \item $\int_0^\pinf\dfrac{\me^{-ax}-\me^{-bx}}x\dif x=\ln\dfrac ba$。
+\end{exlistcols}
+\item 设~$f(t)$~在~$\mintco0\pinf$~上连续可微，且~$\int_1^\pinf\dfrac{f(t)}t\dif t$~收敛。证明，若~$a,b>0$，则
+\begin{exlistcols}
+  \item $\lim_{T\to\pinf}\int_0^T\dif x\int_b^af'(xy)\dif y=f(0)\ln\dfrac ba$；
+  \item $\int_0^\pinf\dfrac{f(ax)-f(bx)}x\dif x=f(0)\ln\dfrac ba$。
+\end{exlistcols}
 \end{exercise}
+
 \section{重积分的变量替换}
 \subsection{正则变换及其性质}
 \subsection{重积分的变量替换}
 \subsection{极坐标变换}
 \subsection{二重积分的其它变换}
 \begin{exercise}
-\item
+\item 证明变换~$T\colon y_1=x_1$，$y_2=x_2+\phi_1(x_1)$，$y_3=x_3+\phi_2(x_1,x_2)$~是正则变换，其中~$\phi_1$~与~$\phi_2$~有连续
+的一阶偏导数。
+\item 已知变换~$T\colon y_1=x_1^2-x_2^2$，$y_2=2x_1x_2$。
+\begin{exlist}
+\item 判断~$T$~是否是~$\mR{2}$~上的正则变换；
+\item 证明~$T$~是区域~$\Omega=\minto0\pinf\times\minto0\pinf$~上的正则变换。
+\end{exlist}
+\item 已知变换~$T\colon u=\me^x\sin y$，$v=\me^x\sin y$。
+\begin{exlist}
+  \item 设~$D=\mintc01\times\mintc0{4\pi}$，求~$T(D)$；
+  \item\label{exer-20.5.3-2}计算~$\iint_D\mabsb{\det\Dif T(x,y)}\dif x\dif y$~和~$\iint_{T(D)}\!\!\dif u\dif v$，并判断
+  两者是否相等；
+  \item 证明~$\det\Dif T(x,y)$~在~$\mR{2}$~上恒正，并考虑~\ref{exer-20.5.3-2}~的结论的意义。
+\end{exlist}
+\item 已知变换~$T\colon x=u-\dfrac14\mparen{u+v}^2$，$y=\dfrac12\mparen{u+v}$。又设~$B$~是~$xy$~平面上由曲线
+~$x=-y^2$，$x=2y-y^2$~和~$x=2-y^2-2y$~围成的区域。
+\begin{exlistcols}
+\item 判断~$T$~是否是~$uv$~平面上的正则变换；
+\item 求~$T^{-1}(B)$；
+\item 计算~$\iint_Bx\dif x\dif y$~和~$\iint_{T^{-1}(B)}x\minto uv\mabsbb{\pdiff{\minto xy}{{\minto uv}}}\dif u\dif v$，并判断
+两者是否相等。
+\end{exlistcols}
+\item 已知变换~$T\colon\xi_i=a_{i1}x_1+\dotsb+a_{in}x_n$，其中~$i=1,\dotsc,n$，且~$\det\mparenb{a_{ij}}\neq0$。
+\begin{exlist}
+  \item 证明~$T$~是~$\mR{n}$~上的正则变换；
+  \item 设~$\Omega$~是有超平面~$a_{i1}x_1+\dotsb+a_{in}x_n=\pm h_i\mcond{h_i>0,i=1,\dotsc,n}$~围成的~$2n$~面体，求~$T(\Omega)$。
+\end{exlist}
+\item 证明，$\mR{n}$~中由~$n$~个向量~$\mvec a_1,\dotsc,\mvec a_n$~生成的平行多面体的体积为
+~$\sqrt{\mabsb{\det\mparenb{A_{ij}}}}$，其中~$A_{ij}$~为向量~$\mvec a_i$~与~$\mvec a_j$~的内积~$\minp{\mvec a_i}{\mvec a_j}$。
+\item 设~$\map {\funcvec f}{A\subset\mR{m}}{\mR{m}}$~是~$C^{(1)}$，而~$A\subset\mR{m}$~为开集。又设~$E$~是~$\interior A$~上
+容积为零的点集。证明~$\funcvec f{E}$~的容积为零。
+\item 设~$A\subset\mR{m}$~为开集，$\map{\funcvec g}A{E\subset\mR{m}}$~为~$C^{(1)}$~映射。在此假定下，$A$~上任意可测图形~$D$~的
+象~$\funcvec g{D}$~也是可测图形。如果
+\[
+  V(D)=V\mparenb{\funcvec g{D}}
+\]
+对任一可测图形~$D$~成立，则称~$\funcvec g$~是\emph{保容积映射}。假定~$\funcvec g$~是一一映射且在~$A$~上
+~$\det\Dif\funcvec g{x}\neq0$。证明~$\funcvec g$~是保容积映射当且仅当~$\mabsb{\det\Dif\funcvec g{x}}=1$~在~$A$~上恒成立。
+\item 证明变换~$x_1=u_1$，$x_2=u_1+u_2$，$\dotsc$，$x_n=u_1+u_2+\dotsb+u_n$~是保容积映射。
+\item 设~$S\subset\mR{n}$~为一可测图形，并且~$t>0$，令
+\[
+  R\coloneq\mathsetb{\mparen{\mvec {tx}{1,2,:,n}}}{\mparen{\mvec x{1,2,:,n}}\in S}。
+\]
+证明~$R$~是一可测图形，并且~$V(R)=t^nV(S)$。
+\item 作极坐标变换，计算下列积分。
+\begin{exlist}
+  \item 设~$\Omega$~由双纽线~$\mparenb{x^2+y^2}^2=a^2\mparenb{x^2-y^2}\mcond{x\geq0}$~围成，计算
+  ~$\iint_\Omega\mparenb{x^2+y^2}\dif x\dif y$；
+  \item 设~$\Omega$~由~Archimedes~螺线~$r=\theta$~和半射线~$\theta=\pi$~围成，计算~$\iint_\Omega x\dif x\dif y$；
+  \item 设~$\Omega$~由对数螺线~$r=\me^\theta$~和半射线~$\theta=0$，$\theta=\dfrac\pi2$~围成，计算~$\iint_\Omega xy\dif x\dif y$。
+\end{exlist}
+\item 对~$\iint_\Omega f(x,y)\dif x\dif y$~作极坐标变换，并用两种不同的顺序化为对~$r$~和~$\theta$~的累次积分。
+\begin{exlistcols}
+  \item $\Omega=\mintc01\times\mintc01$；
+  \item $\Omega$~由~$y=x^2$，$y=\sqrt 3x^2$~和~$x=1$~围成；
+  \item $\Omega$~由~$x^2+y^2=1$~和~$x^2+y^2-2x-2y+1=0$~围成；
+  \item $\Omega$~由~$x^2+y^2=1$，$y\geq0$~和~$y=1-x$~围成。
+\end{exlistcols}
+\item 作极坐标变换，将下列二重积分化为定积分。
+\begin{exlist}
+  \item $\iint_\Omega f\txts\mparenb{\smbsqrt{x^2+y^2}}\dif x\dif y$，其中
+  \begin{exlistcols}[label=\Ding*]
+    \item $\Omega$~为圆域~$x^2+y^2\leq1$；
+    \item $\Omega=\mathsetb{\minto xy}{\mabs y\leq\mabs x,\mabs x\leq 1}$；
+  \end{exlistcols}
+  \item $\iint_\Omega f\mparenB{\dfrac yx}\dif x\dif y$，其中~$\Omega=\mathsetb{\minto xy}{x^2+y^2\leq 4x+2y-4}$。
+\end{exlist}
+\item 利用二重积分，并作极坐标变换，求由下列曲面围成立体的体积。
+\begin{exlist}
+  \item $z=xy$，~$x^2+y^2=a^2$，~$z=0$；
+  \item $z=x^2+y^2$，~$x^2+y^2=x$，~$x^2+y^2=2x$，~$z=0$；
+  \item $x^2+y^2+z^2=a^2$，~$x^2+y^2\leq\mabs x a$，其中~$a>0$；
+  \item $x^2+y^2-z=0$，~$\mparenb{x^2+y^2}^2=a^2\mparenb{x^2-y^2}$，~$z=0$。
+\end{exlist}
+\item 利用二重积分求下列曲面围成立体的体积。
+\begin{exlist}
+  \item $\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}+\dfrac{z^2}{c^2}=1$，~$\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}=\dfrac{z^2}{c^2}\mcond{z>0}$；
+  \item $\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}=\dfrac{z^2}{c^2}$，~$\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}=\dfrac xa+\dfrac yb$，~$z=0$；
+  \item $z^2=xy$，~$x+y=a$，~$x+y=b$，其中~$0<a<b$；
+  \item $z=\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}$，~$xy=a^2$，~$xy=2a^2$，~$y=b^2x$，~$y=2b^2x$，~$z=0$，其中~$0<a<b$；
+  \item $\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}+\dfrac{z^2}{c^2}=1$，~
+  $\mparenbb{\dfrac xa}^{\msp\frac23}+\mparenbb{\dfrac xa}^{\msp\frac23}=1$，~$z=0$；
+  \item $\mparenbb{\dfrac xa}^{\msp p}+\mparenbb{\dfrac yb}^{\msp p}+\mparenbb{\dfrac zc}^{\msp p}=1$，%
+  ~$x=0$，~$y=0$，~$z=0$，其中~$p>0$；
+  \item $\mparenbb{\dfrac xa+\dfrac yb}^{\msp p}+\mparenbb{\dfrac zc}^{\msp q}=1$，~$x=1$，~$y=0$，~$z=0$，其中~$p,q>0$。
+\end{exlist}
+\item 作适当的变量替换，求下列积分，其中~$a,b\in\mR$。
+\begin{exlist}
+  \item 设~$\Omega$~为椭圆域~$\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}\leq1$，计算
+  ~$\iint_\Omega\txts\sqrt{1-\dfrac{x^2}{a^2}-\dfrac{y^2}{b^2}}\dif x\dif y$；
+  \item 设~$\Omega$~是由~$x^4+y^4=1$~围成的区域，计算~$\iint_\Omega\mparenb{x^2+y^2}\dif x\dif y$；
+  \item 设~$\Omega$~为圆域~$x^2+y^2\leq 1$，计算~$\iint_\Omega\mabsbb{\dfrac{x+y}{\sqrt2}-x^2-y^2}\dif x\dif y$；
+  \item 设~$\Omega$~是由~$a^2x^2+b^2y^2=1$~围成的区域，计算
+  ~$\iint_\Omega\mabsbb{\dfrac{ax+by}{\sqrt 2}-a^2x^2-b^2y^2}\dif x\dif y$；
+  \item 设~$\Omega$~是由~$y=4x^2$，$y=9x^2$，$x=4y^2$，$x=9y^2$~围成的区域，计算~$\iint_\Omega(x+y)\dif x\dif y$；
+  \item 设~$\Omega$~是由~$xy=2$，$xy=4$，$y=x$，$y=2x$~围成的区域，计算~$\iint_\Omega xy\dif x\dif y$。
+\end{exlist}
+\item 设~$f(x,y)$~在单位圆域~$\Omega$~上有连续的偏导数，且在边界~$\bound\Omega$~上取值为零。对任意~$\e\in\minto01$，记
+~$\Omega_\e$~为环域~$\e^2\leq x^2+y^2\leq 1$。证明
+\[
+  f(0,0)=-\lim_{\e\to0+0}\dfrac1{2\pi}\iint_{\Omega_\e}\dfrac{xf_x'+yf_y'}{x^2+y^2}\dif x\dif y 。
+\]
+\item 设积分
+\[
+  I=\iint_D\mparenB{\mparenb{f_x'}^2+\mparenb{f_y'}^2}\dif x\dif y 。
+\]
+作正则变换~$T\colon x=x(u,v)$，$y=y(u,v)$，且~$\Omega\coloneq T(D)$。若此变换满足~$x_u'=y_v'$~与~$x_v'=y_u'$，证明
+\[
+  I=\iint_\Omega\mparenB{\mparenb{f_u'}^2+\mparenb{f_v'}^2}\dif x\dif y 。
+\]
 \end{exercise}
+
 \section{重积分的变量替换（续）}
 \subsection{柱坐标变换}
 \subsection{球坐标变换}
 \subsection{三重积分的其它变换}
 \subsection{$n$~重积分的变量替换}
 \begin{exercise}
-\item
+\item 设~$\det\mparenb{a_{ij}}\neq0$，$i,j=1,2,3$，选取适当变换求下列曲面围成的立体的体积。
+\begin{exlist}
+  \item $\mparenbb{\sum_{i=1}^3a_{i1}x_i}^{\msp2}+\mparenbb{\sum_{i=1}^3a_{i2}x_i}^{\msp2}+
+         \mparenbb{\sum_{i=1}^3a_{i3}x_i}^{\msp2}=R^2$；
+  \item $\mparenbb{\sum_{i=1}^3a_{i1}x_i}^{\msp2}+\mparenbb{\sum_{i=1}^3a_{i2}x_i}^{\msp2}=
+         \mparenbb{\sum_{i=1}^3a_{i3}x_i}^{\msp2}$，~$\sum_{i=1}^3a_{i3}x_i=\pm h$。
+\end{exlist}
+\item 计算椭球~$\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}+\dfrac{z^2}{c^2}\leq 1$~的体积。
+\item 作柱坐标变换计算下列三重积分。
+\begin{exlist}
+  \item 设~$\Omega$~是由曲面~$z=x^2+y^2$，$z=4$，$z=16$~围成的立体，计算~$\iiint_\Omega\mparenb{x^2+y^2}^2\dif x\dif y\dif z$；
+  \item 设~$\Omega$~是由曲面~$x^2+y^2=9$，$x^2+y^2=16$，$z^2=x^2+y^2$，$z\geq0$~围成的立体，计算
+  ~$\iiint_\Omega\mparenb{x^2+y^2}^{\frac32}\dif x\dif y\dif z$。
+\end{exlist}
+\item 作球坐标变换计算下列三重积分。
+\begin{exlist}
+  \item 设~$\Omega$~为球体~$x^2+y^2+z^2\leq R^2$，计算~$\iiint_\Omega\mparen{x+y+z}\dif x\dif y\dif z$；
+  \item 设~$\Omega$~为球体~$x^2+y^2+z^2\leq 2z$，计算~$\iiint_\Omega\mparenb{x^2+y^2+z^2}^{\frac52}\dif x\dif y\dif z$；
+  \item 设~$\Omega$~是由~$x^2+y^2=z^2$~与~$x^2+y^2+z^2=8$~围成的立体，计算~$\iiint_\Omega x^2\dif x\dif y\dif z$。
+\end{exlist}
+\item 作适当变量替换，求下列三重积分。
+\begin{exlist}
+  \item\label{exer-20.6.5-1}设~$\Omega$~是由~$z=\dfrac1a\mparenb{x^2+y^2}$，$z=\dfrac1b\mparenb{x^2+y^2}$，$xy=c$，$xy=d$，%
+  $y=\alpha x$~与~$y=\beta x$~围成的立体，其中~$0<a<b$，$0<c<d$~而~$0<\alpha<\beta$，计算
+  ~$\iiint_\Omega x^2y^2z\dif x\dif y\dif z$；
+  \item 设~$\Omega$~同~\ref{exer-20.6.5-1}，计算~$\iiint_\Omega x^2yz\dif x\dif y\dif z$；
+  \item 设~$\Omega$~是由~$x=az^2$，$x=bz^2$，$x=\alpha y$，$x=\beta y$~以及~$x=h$~围成的立体，其中~$z,h>0$，$0<a<b$~
+  且~$0<\alpha<\beta$，计算~$\iiint_\Omega y^4\dif x\dif y\dif z$；
+  \item 设~$\Omega$~为椭球体~$\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}+\dfrac{z^2}{c^2}\leq 1$，计算
+  ~$\iiint_\Omega\exp\mbracebb{\sqrt{\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}+\dfrac{z^2}{c^2}}}\dif x\dif y\dif z$。
+\end{exlist}
+\item 设一元函数~$f(t)\in C^{(1)}\minto0\pinf$。令
+\[
+  \Omega_t\coloneq\mathsetbb{\mparen{x,y,z}}{\frac{x^2}{a^2}+\frac{y^2}{b^2}+\frac{z^2}{c^2}\leq t^2},\quad
+  F(t)\coloneq \iiint_{\Omega_t}f\mparenB{\frac{x^2}{a^2}+\frac{y^2}{b^2}+\frac{z^2}{c^2}}\dif y\dif y\dif z 。
+\]
+\begin{exlistcols}
+  \item 证明~$F(t)\in C^{(1)}\minto0\pinf$；
+  \item 确定~$F'(t)$~的表达式。
+\end{exlistcols}
+\item 设有一光滑的封闭曲面~$S$，其球坐标方程为~$\rho=f\minto\phi\psi$，其中~$\phi\in\mintc0{2\pi}$~而
+~$\psi\in\mintc{-\sfrac\pi2}{\sfrac\pi2}$。证明~$S$~围成立体之体积为
+\[
+  V=\frac13\int_0^{2\pi}\dif\phi\int_{-\frac\pi2}^{\frac\pi2}f3\minto\phi\psi\cos\psi\dif\psi,
+\]
+并求出~$f\minto\phi\psi=\sin^4\phi\cdot\sin^4\psi$~时~$V$~的值。
+\item 求函数~$f(x,y,z)$~在区域~$\Omega$~上的平均值~$\mbar f$，
+\[
+  \mbar f\coloneq\frac1{V(\Omega)}\iiint_\Omega f(x,y,z)\dif x\dif y\dif z 。
+\]
+\begin{exlist}
+  \item $f(x,y,z)=\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}+\dfrac{z^2}{c^2}$，而~$\Omega$~是由曲面
+  ~$\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}+\dfrac{z^2}{c^2}=\dfrac xa+\dfrac yb+\dfrac zc$~围成的立体；
+  \item $\Omega$~是由曲面~$\mparenbb{\dfrac xa}^{\msp p}+\mparenbb{\dfrac yb}^{\msp q}+\mparenbb{\dfrac zc}^{\msp r}=1$~围成的
+  立体位于第一卦限上的部分区域，而函数~$f(x,y,z)=x^p+y^q$，其中~$p,q,r>0$。
+\end{exlist}
+\item 在~$\mR{n}$~上求椭球~$\sum_{i=1}^n\dfrac{x_i^2}{a_i^2}\leq1$~的容积。
+\item 在~$\mR{n}$~上求曲面~$\sum_{i=1}^n\mparenbb{\sum_{j=1}^na_{ij}x_j}^{\msp2}=h^2$~围成的区域的
+容积，其中~$\det\mparenb{a_{ij}}\neq0$，且~$h>0$。
+\item 在~$\mR{n}$~上求曲面~$\sum_{j=1}^na_{ij}x_j=\pm h_i$，$i=1,\dotsc,n$~围成的区域的容积，其中
+~$\det\mparenb{a_{ij}}\neq0$，且~$h_i>0$。
+\item 证明，广义柱坐标变换~$T\colon$
+\begin{align*}
+  x_1 & = a_1r\cos\theta_1;\\
+  x_2 & = a_2r\sin\theta_1\cos\theta_2;\\*
+      & \shortvdotswithin{=}
+  x_{n-2} & = a_{n-2}r\sin\theta_1\dotsm\sin\theta_{n-3}\cos\theta_{n-2};\\
+  x_{n-1} & = a_{n-1}r\sin\theta_1\dotsm\sin\theta_{n-3}\sin\theta_{n-2};\\
+  x_n & = a_n z
+\end{align*}
+是~$G$~上的正则变换，其中众~$a_i>0$，而
+\[
+  G\coloneq\mathsetB{\mparenb{r,\theta_1,\dotsc,\theta_{n-2},z}}
+  {r>0,~\theta_i\in\minto0\pi(i=1,\dotsc,n-3),~\theta_{n-2}\in\minto0{2\pi},~z\in\mR}。
+\]
+并证明
+\[
+  \Dif T\mparenb{r,\theta_1,\dotsc,\theta_{n-2},z}=
+  \mparenbb{\prod_{i=1}^n a_i}r^{n-2}\sin^{n-3}\sin\theta_1\sin^{n-4}\theta_2\dotsm\sin\theta_{n-3}。
+\]
+\item 证明~$\mR{n}$~中的球坐标变换~$T\colon$
+\begin{align*}
+  x_1 & = r\cos\theta_1;\\
+  x_2 & = r\sin\theta_1\cos\theta_2;\\*
+      & \shortvdotswithin{=}
+  x_{n-2} & = r\sin\theta_1\dotsm\sin\theta_{n-3}\cos\theta_{n-2};\\
+  x_{n-1} & = r\sin\theta_1\dotsm\sin\theta_{n-3}\sin\theta_{n-2}\cos_{n-1};\\
+  x_n & = r\sin\theta_1\dotsm\sin\theta_{n-3}\sin\theta_{n-2}\sin_{n-1}
+\end{align*}
+是~$G$~上的正则变换，其中
+\[
+  G\coloneq\mathsetB{\mparenb{r,\theta_1,\dotsc,\theta_{n-2}}}
+  {r>0,~\theta_i\in\minto0\pi(i=1,\dotsc,n-2),~\theta_{n-1}\in\minto0{2\pi}}。
+\]
+并证明
+\[
+  \Dif T\mparenb{r,\theta_1,\dotsc,\theta_{n-1}}=
+  r^{n-1}\sin^{n-2}\sin\theta_1\sin^{n-3}\theta_2\dotsm\sin\theta_{n-2}。
+\]
+\item 利用~$\mR{n}$~中球坐标变换求半径为~$R$~的球体的容积。
 \end{exercise}
+
 \section{重积分在力学上的应用}
 \subsection{物体的重心}
 \subsection{转动惯量}
 \subsection{引力场的位势}
 \begin{exercise}
-\item
+\item 求由圆锥曲面~$z^2=x^2+y^2\mcond{z\geq0}$~和平面~$z=h$~围成的立体的形心（即~$\rho=1$~时立体的重心）。
+\item 求抛物面~$x^2+y^2=px$~和平面~$z=h$~所围成的立体的形心，其中~$p,h>0$。
+\item 求由三个坐标平面和平面~$\dfrac xz+\dfrac yb+\dfrac zc=1$~围成的立体的形心。
+\item 求半球壳~$a^2\leq x^2+y^2+z^2\leq b^2$，$z\geq0$~的形心。
+\item 求~$\mR{3}$~质量为~$m$~的均匀长方体~$S=\mintc0a\times\mintc0b\times\mintc0c$~关于~$z$~轴的转动惯量。
+\item 一物体~$\Omega$~的密度是均匀的，它关于~$x$~轴，$y$~轴和~$z$~轴的转动惯量分别记为~$I_x,I_y$~和~$I_z$。证明这三个转动惯量
+满足“三角不等式”
+\[
+  I_x+I_y> I_z,\quad I_y+I_z> I_x,\quad I_z+I_x> I_y 。
+\]
+\item 求质量均匀的圆筒~$\Omega\mathsetb{(x,y,z)}{a^x\leq x^2+y^2\leq b^2,\mabs z\leq h}$~关于~$x$~轴和~$y$~轴的转动惯量。
+\item 有一非均匀的球，球的半径为~$R$，求得密度为~$\rho(x,y,z)=\rho(r)$，其中~$r=\smbsqrt{x^2+y^2+z^2}$。$\rho(r)$~随~$r$~的增大
+而线性地减少，从球心的~$\rho_0$~减少至球面的~$\rho_1$。
+\begin{exlistcols}
+  \item 求此球的重心；
+  \item 求此球关于一直径的转动惯量。
+\end{exlistcols}
+\item 求密度均匀的椭球~$\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}+\dfrac{z^2}{c^2}\leq 1$~的转动惯量：
+\begin{exlist}
+  \item 关于~$z$~轴的；
+  \item 关于过原点而由~$x:y:z=\alpha:\beta:\gamma$~给出的任一轴，其中~$\alpha^2+\beta^2+\gamma^2=1$。
+\end{exlist}
+\item 求旋转体~$\smbsqrt{x^2+y^2}\leq f(z)\mcond{0<a\leq z\leq b}$~在原点的位势，其中函数~$f(z)$~连续，在~$\mintc ab$~上有正值。
+\item 有一半径为~$a$~的半球，球的密度为~$\rho$~（常数）。将球心置于原点并使它整个位于~$xy$~平面的上侧。证明，在点
+~$(0,0,z)\mcond{z>a}$~的位势为
+\[
+  \frac{2\pi\rho}z\mparenB{\mparenb{a^2+z^2}^{\frac32}+a^3-\frac32a^2z}-\frac23\pi\rho z^2。
+\]
 \end{exercise}
+
 \begin{exercise*}
-\item
+\item 证明~$\Omega\subset\mR{m}$~为一可测图形当且仅当对任意~$\e>0$，存在两个可测图形
+~$W_\e\supset\Omega$，$U_\e\subset\Omega$，使得
+\[
+  V\mparenb{W_\e\difset U_\e}=V(W_\e)-V(U_\e)<\e 。
+\]
+如果此条件满足，则有
+\[
+  V(\Omega)=\inf_{\e>0}\mbraceb{V(W_\e)}=\sup_{\e>0}\mbraceb{V(U_\e)}。
+\]
+\item 以~$\Omega\subset\mR{m}$~为一可测图形。设~$\mbrace{S_n}$~为开矩形的集合，若~$\bigcup_{n=1}^\sinf S_n\supset\Omega$，则称
+~$\mbrace{S_n}$~为~$\Omega$~的一个开矩形覆盖。证明，
+\[
+  V(\Omega)=\inf\mathsetbb{\sum_{i=1}^\sinf V(S_n)}{\mbraceb{S_n}\text{~为~$\Omega$~的开矩形覆盖}}。
+\]
+\item 设~$A$~为~$\mR{m}$~的可测图形，并且~$A$~可以表为~$A=\bigcup_{i=1}^\sinf A_i$，其中诸~$A_i$~都为可测图形，且
+~$\interior{A_i}\cap\interior{A_j}=\eset\mcond{i\neq j}$。证明~$V(A)=\sum_{i=1}^\sinf V\mparen{A_i}$。
+\item 设~$A$~为~$\mR{m}$~的可测图形，并且~$A$~可以表为~$A=\bigcup_{i=1}^\sinf A_i$，其中诸~$A_i$~都为可测图形，且
+~$A_{i+1}\supset A_i$。证明~$V(A)=\lim_\ntoinf V\mparen{A_n}$。
+\item 设~$\vecfunc{f_k}{x}$~在~$\mR{m}$~的可测图形~$\Omega$~上有界且可积，并且~$\vecfunc{f_k}{x}$~在~$\Omega$~
+上一致收敛到~$\vecfunc f{x}$。证明~$\vecfunc f{x}$~在~$\Omega$~上有界且可积，并且
+\[
+  \int_\Omega f\dif V=\lim_\ntoinf\int_\Omega f_n\dif V=\int_\Omega\mparenB{\lim_\ntoinf f_n}\dif V 。
+\]
+\item 证明，在球~$B\colon x^2+y^2+z^2\leq R^2$~上的积分
+\[
+  \iiint_B\frac{\dif x\dif y\dif z}{\smbsqrt{(x-a)^2+(y-b)^2+(z-c)^2}}=
+  \frac{4\pi}3\cdot\frac1{\sqrt{a^2+b^2+c^2+\theta R}},
+\]
+其中~$a^2+b^2+c^2>R^2$，而~$0<\mabs\theta<1$。
+\item 设区域~$\Omega$~是~$\mR{2}$~上一可测图形，且~$f(x,y)$~在~$\closure D$~上连续。证明，
+\[
+  \lim_{\substack{\xi\to\pinf\\ \eta\to\pinf}}
+  \iint_\Omega f(x,y)\txts\ln\mparenb{\smbsqrt{(x-\xi)^2+(y-\eta)^2}}\dif x\dif y=0
+\]
+当且仅当~$\iint_\Omega f(x,y)\dif x\dif y=0$。
+\item 设区域~$\Omega$~是~$\mR{3}$~上一可测图形，且~$f(x,y,z)$~在~$\closure \Omega$~上连续。证明，
+\[
+  \lim_{\substack{\xi\to\pinf\\ \eta\to\pinf\\ \zeta\to\pinf}}
+  \iiint_\Omega f(x,y,z)\txts\ln\mparenb{\smbsqrt{(x-\xi)^2+(y-\eta)^2+(z-\zeta)^2}}\dif x\dif y\dif z=0
+\]
+当且仅当~$\iiint_\Omega f(x,y,z)\dif x\dif y\dif z=0$。
+\item 设~$\map f{\mintc01\times\mintc01}\mR$~定义如下
+\[
+  f(x,y)\coloneq \begin{cdcases}
+    0, & x\in\mQ\cap\mintc01,~y\in\mintcob0{\sfrac12};\\
+    1, & x\in\mQ\cap\mintc01,~y\in\mintcb{\sfrac12}1;\\
+    1, & x\in(\mR\difset\mQ)\cap\mintc01,~y\in\mintcob0{\sfrac12};\\
+    0, & x\in(\mR\difset\mQ)\cap\mintc01,~y\in\mintcb{\sfrac12}1。
+  \end{cdcases}
+\]
+讨论~$f(x,y)$~的两种二次定积分存在情形。
+\item 证明~Cavaliort~原则，设~$\Omega_1,\Omega_2$~是~$\mR^3$~上的两个可测图形，而且任一平面~$z=z_0$~截出~$\Omega_1$~与~$\Omega_2$~
+的平面图形有相同的面积，则~$\Omega_1$~与~$\Omega_2$~有相同的体积。
+\item 设~$\map f{A\subset\mR{m}}\mR$~非负且可积。证明~$\mR^{m+1}$~上的点集
+\[
+  S=\mathsetb{(\mvec x,y)}{\mvec x\in A,~0\leq y\leq\vecfunc f{x}}
+\]
+是一可测图形，且容积为~$\int_A\vecfunc f{x}\dif V^{(m)}$。
+\item 求函数~$f(x,y)\sin^{2n}x\sin^{2n}y\mcond{n\geq 1}$~在区域~$D=\mintc0\pi\times\mintc0\pi$~上的平均值~$I$，
+\[
+  I\coloneq\frac1{V(D)}\iint_Df(x,y)\dif x\dif y 。
+\]
+\item 证明
+\[
+  \int_0^a\dif y\int_0^y\me^{m(a-x)}f(x)\dif x=\int_0^a(a-x)\me^{m(a-x)}f(x)\dif x 。
+\]
+\item 令~$A=\int_0^1\me^{-t^2}\dif t$，而~$B=\int_0^{\frac12}\me^{-t^2}\dif t$。证明，对于积分
+\[
+  I=2\int_{-\frac12}^{\frac12}\dif x\int_0^x\me^{-y^2}\dif y,
+\]
+存在正数~$p$~和~$q$，使得~$I=pA-qB+\me^{-1}-\me^{-\frac14}$。
+\item 证明~$f(x,y)=\sgn\mparenb{a^2x^3-y^2+2}$~在~$a^2x^2+y^2\leq 4\mcond{a>0}$~上可积，并求出积分值。
+\item 设~$f(x,y)\in C^{(1)}$，其等高线~$f(x,y)=v$~（$v$~为参数）是一简单封闭曲线，它围成的区域的面积为~$F(v)$，并设
+~$F(v)\in C^{(1)}$。令~$\Omega_{v_1v_2}$~是由曲线~$f(x,y)=v_1$~和~$f(x,y)=v_2$~围成的区域，其中~$v_1<v_2$。证明
+\[
+  \iint_{\Omega_{v_1v_2}}f(x,y)\dif x\dif y=\int_{v_1}^{v_2}vF'(v)\dif v 。
+\]
+利用此结论计算积分~$\iint_\Omega\mparenb{x^2+y^2}\dif x\dif y$，其中~$\Omega$~为环域~$a^2\leq x^2+y^2\leq b^2$。
+\item 设~$f(x,y,z)\in C^{(1)}$，其等值面~$f(x,y,z)=v$~（$v$~为参数）是一简单封闭曲面，它围成的立体体积为~$F(v)$，并设
+~$F(v)\in C^{(1)}$。令~$\Omega_{v_1v_2}$~是由曲面~$f(x,y,z)=v_1$~和~$f(x,y,z)=v_2$~围成的立体，其中~$v_1<v_2$。证明
+\[
+  \iiint_{\Omega_{v_1v_2}}f(x,y,z)\dif x\dif y\dif z=\int_{v_1}^{v_2}vF'(v)\dif v 。
+\]
+利用上述结果计算~$\Omega\colon a_1\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}+\dfrac{z^2}{c^2}\leq a_2$~上的积分
+\[
+  \iiint_\Omega\mparenB{\frac{x^2}{a^2}+\frac{y^2}{b^2}+\frac{z^2}{c^2}}\dif x\dif y\dif z 。
+\]
+\item 设~$f(x)\in C^{(2)}(\mR)$，且
+\[
+  M_0=\int_\minf^\pinf\mabsb{f(x)}\dif x<\pinf,\quad
+  M_2=\int_\minf^\pinf\mabsb{f''(x)}\dif x<\pinf 。
+\]
+证明，
+\begin{exlistcols}
+  \item $M_1=\int_\minf^\pinf\mabsb{f'(x)}\dif x<\pinf$；
+  \item $M_2^2\leq4M_0M_1$。
+\end{exlistcols}
+\item 设~$E$~是~$\mR{2}$~上的单位圆域~$x^2+y^2\leq 1$。令
+\[
+  F(h)=\iint_\Omega f\txts\mparen{\alpha x+\beta y}\dif x\dif y\mcond*{h=\smbsqrt{\alpha^2+\beta^2}>0}。
+\]
+\begin{exlist}
+  \item 证明~$F(h)=2\int_{-1}^1\txts f(h\xi)\smbsqrt{1-\xi^2}\dif\xi$；
+  \item 令~$f(u)=\cos u$，证明~$F(h)=\dfrac{2\pi}hJ_1(h)\mcond{h>0}$，其中~$J_1(h)$~为~Bessel~函数：
+  \[
+    J_1(h)\coloneq\frac{2h}\pi\int_0^1\txts\mparen{\cos h\xi}\smbsqrt{1-\xi^2}\dif\xi 。
+  \]
+\end{exlist}
+\item 设~$\Omega$~为~$\mR{3}$~上的单位球~$x^2+y^2+z^2\leq 1$。给定积分
+\[
+  F(h)=\iiint_\Omega\cos\mparenb{\alpha x+\beta y+\gamma z}\dif x\dif y\dif z
+  \mcond*{\txts h=\smbsqrt{\alpha^2+\beta^2+\gamma^2}>0}。
+\]
+证明，
+\begin{exlistcols}
+  \item $F(h)=\dfrac{4\pi}{h^2}\mparenB{\dfrac{\sin h}h-\cos h}\mcond{h>0}$；
+  \item $F(h)$~在~$\mintco0\pinf$~上连续；
+  \item $F(h)$~有无穷多个零点。
+\end{exlistcols}
+\item 设~$\Omega$~是由~$y-x=1$，$y+x=2$~和~$x=0$~围成的区域。将二重积分
+\[
+  \iint_\Omega\exp\mbracebb{\frac{y-x}{y+x}}\dif x\dif y
+\]
+化为定积分，并求出积分的近似值，误差不超过~$\num{.01}$。
+\item 设~$\Omega$~是由曲面~$x+y+z=1$，$y=0$，$z=0$~与~$z=0$~围成的区域。证明
+\[
+  \iiint_\Omega x^py^qz^r\mparen{1-x-y-z}^s\dif x\dif y\dif z=
+  \frac{\GammaF(p+1)\GammaF(q+1)\GammaF(r+1)\GammaF(s+1)}{\GammaF(p+q+r+s+4)},
+\]
+其中~$p,q,r,s>0$。
+\item 证明，由超曲面~$\sum_{i=1}^{n-1}\dfrac{x_i^2}{a_i^2}=\dfrac{x_n^2}{a_n^2}\mcond{0\leq x_n\leq a_n}$~围成的~$n$~维锥体
+的体积为
+\[
+  V=\frac{\pi^{\frac{n-1}2}}{n\GammaF\mparenB{1+\dfrac1n}}a_1a_2\dotsm a_n 。
+\]
+\item 设~$0<a<b$，且~$\mR{n}$~上的区域~$\Omega$~为
+\[
+  \Omega=\mathsetb{(\mvec x{1,:,n})}{a\leq x_1+\dotsb+x_n<b,~x_i\geq0\mcond{i=1,\dotsc,n}}。
+\]
+证明
+\[
+  \idotsint_\Omega f\mparen{x_1+\dotsb+x_n}\dif x_1\dotsm\dif x_n=
+  \int_a^b f(y)\frac{y^{n-1}}{(n-1)!}\dif y 。
+\]
+\item 设~$f(x)\in C^{(2)}$。证明二阶差分
+\[
+  f(x+2h)-2f(x+h)+f(x)=\int_0^h\dif u_2\int_0^hf''\mparen{u_1+u_2+u_3}\dif u_1 。
+\]
+\item 设~$f(t)$~连续。证明
+\[
+  \int_0^t\dif t_1\int_0^{t_1}\dif t_2\dotsi\int_0^{t_{n-1}}f(t_1)f(t_2)\dotsm f(t_n)\dif t_n=
+  \frac1{n!}\mparenBB{\int_0^tf(\tau)\dif\tau}^{\msp n}。
+\]
+\item 设~$f(\mvec x{1,2,:,n})$~是在区域~$0\leq x_i\leq x\mcond{i=1,2,\dotsc,n}$~上的连续函数。证明
+\[
+  \int_0^x\dif x_1\int_0^{x_1}\dif x_2\dotsi\int_0^{x_{n-1}}f\dif x_n=
+  \int_0^x\dif x_n\int_{x_n}^x\dif x_{n-1}\dotsi\int_{x_2}^xf\dif x_1,
+\]
+其中~$n\geq2$。
+\item 证明
+\[
+  \int_0^x\dif x_1\int_0^{x_1}\dif x_2\dotsi\int_0^{x_{n-1}}f(x_n)\dif x_n=
+  \int_0^xf(u)\frac{(x-u)^{n-1}}{(n-1)!}\dif u 。
+\]
+\item 设~$\Omega=\mathsetb{(x_1,\dotsc,x_n)}{x_1^2+\dotsb+x_n^2\leq1}$，且~$m_j\in\mN\mcond{j=1,\dotsc,n}$，令
+\[
+  I=\idotsint_\Omega\mparenbb{\prod_{j=1}^nx_j^{m_j}}\dif x_1\dotsm\dif x_n 。
+\]
+\begin{exlist}
+  \item 证明，若~$m_1,\dotsc,m_n$~中至少有一个为奇数，则~$I=0$；
+  \item 设~$m_j$~都为偶数，计算出~$I$~的值。
+\end{exlist}
+\item 设~$\Omega$~为~$\mR{n}$~上的单位球体~$x_1^2+\dotsb+x_n^2\leq 1$，令
+~$r\coloneq\mparenbb{\sum_{i=1}^nx_i^2}^{\msp\frac 12}$。将~$n$~重积分
+\[
+  \idotsint_\Omega f(r)\dif x_1\dotsm\dif x_n
+\]
+化为定积分，其中~$f(u)$~为一元连续函数。
+\item 令~$\minto{x_1}{y_1}$，$\minto{x_2}{y_2}$~和~$\minto{x_3}{y_3}$~是面积为~$A$~的三角形的三个顶点，顶点坐标的下标是按
+逆时针方向给定的。证明此三角形关于~$x$~轴的转动惯量为
+\[
+  \frac A6\mparenb{y_1^2+y_2^2+y_3^2+y_1y_2+y_2y_3+y_3y_1}。
+\]
+\item 椭球的八分之一为
+\[
+  \Omega\colon\frac{x^2}{a^2}+\frac{y^2}{b^2}+\frac{z^2}{c^2}\leq 1,\enspace x,y,z\geq0 。
+\]
+求~$\Omega$~的形心的~$x$~坐标。
+\item 椭球~$\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}+\dfrac{z^2}{c^2}\leq 1$~被平面~$\ell x+my+nz=p$~剖分为两块立体，计算这两块立体
+的体积。
+\item 证明，物体~$\Omega$~在足够远处的位势近似于将其质量集中于它的重心的已质点的位势，其误差小于某一常数除以该点到
+重心的距离的平方。
+\item 设~$O$~是~$\mR{3}$~上任一点，而~$S$~是任一物体，在所有从~$O$~出发的半射线上取一点~$P$，使得~$P$~与~$O$~点的距离为
+~$\dfrac1{\sqrt I}$，其中~$I$~表示~$S$~关于与该射线相重合的直线的转动惯量。证明这些~$P$~点作成一个椭球，称为\emph{惯量椭球}。
+\item 求椭球~$\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}+\dfrac{z^2}{c^2}\leq 1$~在点~$\mparen{\xi,\eta,\zeta}$~处的惯量椭球。
+\item 证明
+\[
+  \int_0^{\frac\pi2}\dif\phi\int_0^{\frac\pi2}\cos\mparenb{2z\sin\phi\sin\theta}\dif\theta=
+  \mparenBB{\int_0^{\frac\pi2}\cos\mparenb{z\sin\xi}\dif\xi}^{\msp2}。
+\]
 \end{exercise*}
 
 

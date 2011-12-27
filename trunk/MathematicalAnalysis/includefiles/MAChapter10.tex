@@ -4,24 +4,223 @@
 
 
 \chapter{广义积分}\label{ch:10}
+
 \section{无穷积分的概念}
 \begin{exercise}
-\item
+\item 求下列无穷积分。
+\begin{exlistcols}
+  \item $\int_0^\pinf\dfrac x{(a^2+x^2)^3}\dif x$；
+  \item $\int_0^\pinf\dfrac{\dif x}{x(1+x^2)}$；
+  \item $\int_0^\pinf\dfrac{\ln x}{(1+x)^2}\dif x$；
+  \item $\int_0^\pinf\dfrac{\dif x}{1+x^3}$；
+  \item $\int_0^\pinf\me^{-x}\cos\alpha x\dif x$；
+  \item $\int_0^\pinf\me^{-x}\sin\alpha x\dif x$；
+  \item $\int_0^\pinf\dfrac{1+x^2}{1+x^4}\dif x$；
+  \item $\int_0^\pinf\dfrac{\dif x}{1+x^4}$；
+  \item $\int_0^\pinf\dfrac{\sqrt x}{1+x^2}\dif x$；
+  \item $\int_0^\pinf\dfrac{\dif x}{(2x^2+1)\sqrt{1+x^2}}$；
+  \item $\int_0^\pinf\dfrac x{(x^2+a^2)x^{\sfrac32}}\dif x$；
+  \item $\int_0^\pinf\dfrac{\dif x}{(1+x^n)\sqrt[n]{1+x^n}}$。
+\end{exlistcols}
+\item 求下列无穷积分。
+\begin{exlistcols}
+  \item $\int_0^\pinf x^n\me^{-x}\dif x$；
+  \item $\int_0^\pinf\dfrac{\dif x}{(a^2+x^2)^n}\mcond{a>0}$；
+  \item $\int_0^\pinf\dfrac{\dif x}{(ax^2+2bx+c)^n}$，其中~$n\in\mN$，且~$ac-b^2>0$。
+\end{exlistcols}
+\item 对任意~$x\in\mintc a\pinf$，有~$f(x)\leq h(x)\leq g(x)$，并且~$\int_a^\pinf f(x)\dif x$~与~$\int_a^\pinf g(x)\dif x$~收
+敛。证明广义积分~$\int_a^\pinf h(x)\dif x$~收敛。
+\item 若~$f(x)$~在~$\mintco a\pinf$~上单调下降，且积分~$\int_a^\pinf f(x)\dif x$~收敛。证明~$\lim_{x\to\infty}xf(x)=0$。
+\item 若~$f(x)$~在~$\mintco a\pinf$~上单调下降，且~$\lim_{x\to\pinf}f(x)=0$，同时~$f'(x)$~在~$\mintco a\pinf$~上存在。证明广义积分
+~$\int_a^\pinf f(x)\dif x$~收敛当且仅当~$\int_a^\pinf xf'(x)\dif x$~收敛。
+\item 证明
+\[
+  \frac12-\frac1{2\me}<\int_0^\pinf\me^{-x^2}\dif x<1+\frac1{2\me}。
+\]
+\item 若~$f(x)$~为周期函数，并且~$\int_\minf^\pinf f(x)\dif x$~收敛。证明~$\int_0^xf(t)\dif t\eqcolon F(x)\equiv0$，$x\in\mR$。
 \end{exercise}
+
 \section{无穷积分的收敛性判别法}
 \begin{exercise}
-\item
+\item 判别下列无穷积分的敛散性。
+\begin{exlistcols}
+  \item $\int_0^\pinf\dfrac{x^2}{x^4-x^2+1}\dif x$；
+  \item $\int_1^\pinf\dfrac{\dif x}{x\sqrt[3]{1+x^2}}$；
+  \item $\int_0^\pinf x^p\me^{-x}\dif x\mcond{p\geq0}$；
+  \item $\int_1^\pinf\dfrac{\ln x}{x^p}\dif x$；
+  \item $\int_1^\pinf\dfrac{\ln^nx}{x^2}\dif x\mcond{n\in\mN}$；
+  \item $\int_0^\pinf\dfrac{\sin^2x}x\dif x$；
+  \item $\int_0^\pinf\dfrac{x^p}{1+x^q}\dif x\mcond{p,q>0}$；
+  \item $\int_0^\pinf\dfrac{\cos ax}{1+x^n}\dif x$；
+  \item $\int_0^\pinf\dfrac{\dif x}{1+x\mabs{\cos x}}$；
+  \item $\int_1^\pinf\mparenbb{\ln\mparenB{1+\dfrac1x}-\dfrac1{1+x}}\dif x$；
+  \item $\int_1^\pinf\ln\mparenB{\cos\dfrac1x+\sin\dfrac1x}\dif x$；
+  \item $\int_0^\pinf\dfrac1{x^2}\ln\mparenbb{1-\dfrac{\sin^2x}2}^{\msp -1}\dif x$；
+  \item $\int_0^\pinf\dfrac{P_n(x)}{Q_m(x)}\dif x$，其中~$P_n(x)$~与~$Q_m(x)$~分别为~$n$~次及~$m$~次多项式，且~$Q_m(x)\neq0$。
+\end{exlistcols}
+\item 讨论下列无穷积分的敛散性及绝对收敛。
+\begin{exlistcols}
+  \item $\int_0^\pinf\dfrac{\cos^2x}x\dif x$；
+  \item $\int_1^\pinf\dfrac{\cos x}x\dif x$；
+  \item $\int_0^\pinf\dfrac{\sin^2x}x\dif x$；
+  \item $\int_1^\pinf\dfrac{\cos x}{x^p}\dif x\mcond{p>0}$。
+\end{exlistcols}
+\item 设~$f(x)$~单调下降趋于零，且~$f'(x)\in C\mintco 0\pinf$。证明~$\int_0^\pinf f'(x)\sin^2x\dif x$~收敛。
+\item 设~$f(x)\in C\mintco0\pinf$，且~$\int_0^\pinf f(x)\dif x$~条件收敛。证明，无穷积分
+\[
+  \int_0^\pinf\max\mrangeb{f(x)}0\dif x,\quad
+  \int_0^\pinf\min\mrangeb{f(x)}0\dif x
+\]
+发散。
+\item 设~$\int_a^\pinf f(x)\dif x$~与~$\int_a^\pinf f'(x)\dif x$~收敛。证明~$\lim_{x\to\pinf}f(x)=0$。
+\item 设~$f(x)$~在~$\mintco a\pinf$~上非负且单调下降，又设~$\int_a^\pinf g(x)\dif x$~收敛。证明，
+\begin{exlist}
+  \item $\int_a^\pinf f(x)g(x)\dif x$~收敛；
+  \item 存在~$\xi\in\mintc a\pinf$，使得
+  \[
+    \int_a^\pinf f(x)g(x)\dif x=f(a)\int_a^\xi g(x)\dif x 。
+  \]
+\end{exlist}
 \end{exercise}
+
 \section{瑕积分的概念}
 \begin{exercise}
-\item
+\item 计算下列瑕积分。
+\begin{exlistcols}[3]
+  \item $\int_0^a\dfrac{\dif x}{\sqrt{a-x}}$；
+  \item $\int_0^ax\sqrt{\dfrac x{a-x}}\dif x$；
+  \item $\int_\alpha^\beta\dfrac{\dif x}{\sqrt{(x-\alpha)(\beta-x)}}$；
+  \item $\int_0^{\frac\pi2}\cos x\ln\sin x\dif x$；
+  \item $\int_0^1x^n\ln^nx\dif x$；
+  \item $\int_0^{\frac\pi2}\sqrt{\tan x}\dif x$；
+  \item $\int_0^1\ln x\dif x$；
+  \item $\int_0^{\frac\pi2}\dfrac{\sin x}{a^2\sin^2+b^2\cos^2x}\dif x\mcond{a,b\neq0}$。
+\end{exlistcols}
+\item 设函数~$f(x)$~在区间~$\mintoc 01$~上是单调函数，且在~$x=0$~的邻域内无界。证明，若~$\int_0^1f(x)\dif x$~收敛，则
+\[
+  \lim_\ntoinf\frac1n\sum_{k=1}^nf\mparenB{\frac kn}=\int_0^1f(x)\dif x 。
+\]
+\item 求极限~$\lim_\ntoinf\dfrac{\sqrt[n]{n!}}n$。
+\item 设~$f(x)\in C\mintco ab$，而~$\lim_{x\to b-0}f(x)=\pinf$，同时~$\int_a^bf(x)\dif x$~收敛。又设~$g(x)$~在~$\mintc ab$~上
+非负可积。证明，
+\begin{exlist}
+  \item $\int_a^bf(x)g(x)\dif x$~收敛；
+  \item 若~$\int_a^bg(x)\dif x=0$，则~$\int_a^bf(x)g(x)\dif x=0$；
+  \item 存在~$\xi\in\mintc ab$，使得
+  \[
+    \int_a^bf(x)g(x)\dif x=f(\xi)\int_a^bg(x)\dif x 。
+  \]
+\end{exlist}
+\item 证明，
+\[
+  \frac\pi{2\sqrt2}<\int_0^1\frac{\dif x}{\sqrt{1-x^4}}<\frac\pi2 。
+\]
 \end{exercise}
+
 \section{瑕积分收敛性判别法}
 \begin{exercise}
-\item
+\item 判别下列瑕积分的敛散性。
+\begin{exlistcols}[3]
+  \item $\int_0^1\dfrac{\dif x}{\ln x}$；
+  \item $\int_0^1\dfrac{\ln x}{1-x}\dif x$；
+  \item $\int_0^1\ln x\ln(1-x)\dif x$；
+  \item $\int_0^\pi\dfrac{\dif x}{\sqrt{\sin x}}$；
+  \item $\int_0^{\frac\pi2}\dfrac{\dif x}{\sin^px\cos^qx}$；
+  \item $\int_0^1x^\alpha\ln x\dif x$；
+  \item $\int_0^1\dfrac{1-\cos x}{x^m}\dif x$；
+  \item $\int_0^1\dfrac{x^{p-1}-x^{q-1}}{\ln x}\dif x$。
+\end{exlistcols}
+\item 判别下列积分的敛散性。
+\begin{exlistcols}[3]
+  \item $\int_0^\pinf\dfrac{\dif x}{\sqrt{x(x-1)(x-2)}}$；
+  \item $\int_1^\pinf\ln\mparenbb{1-\dfrac1{x^2}}^{-1}\dif x$；
+  \item $\int_0^\pinf x^{p-1}\me^{-x}\dif x$；
+  \item $\int_0^\pinf\dfrac{\arctan^qx}{x^p}\dif x$；
+  \item $\int_0^\pinf\dfrac{\ln(1+x)}{x^p}\dif x$；
+  \item $\int_0^\pinf\dfrac{\dif x}{x^p+x^q}$；
+  \item $\int_1^\pinf\dfrac{\dif x}{x^p\ln^qx}$；
+  \item $\int_0^\pinf\dfrac{x^m}{x^n+x^p}\dif x$。
+\end{exlistcols}
+\item 讨论下列积分的敛散性与绝对收敛性。
+\begin{exlistcols}
+  \item $\int_0^\pinf\dfrac{\sin^px}{1+x^q}\dif x$；
+  \item $\int_0^\pinf\dfrac{\sin^px}{x^q}\dif x$；
+  \item $\int_0^\pinf\sin x^2\dif x$；
+  \item $\int_1^\pinf\ln^px\dfrac{\sin x}x\dif x$。
+\end{exlistcols}
+\item 判别下列积分的敛散性。
+\begin{exlistcols}[3]
+  \item $\int_0^\pinf\sin x^p\dif x$；
+  \item $\int_0^\pinf\dfrac{\cos x}{x^p}\dif x$；
+  \item $\int_0^\pinf\dfrac{\sin x}x\me^{-x}\dif x$；
+  \item $\int_0^\pinf\dfrac{x-\mfloor x-\dfrac12}{x^p}\dif x$；
+  \item $\int_0^\pinf\dfrac{\sin x\cos\dfrac1x}{x^p}\dif x$；
+  \item $\int_0^\pinf\dfrac{\cos x\sin\dfrac1x}{x^p}\dif x$。
+\end{exlistcols}
+\item 设~$f(x)$~在~$\minto ab$~上连续，且~$\int_a^bf^2(x)\dif x$~收敛。证明~$\int_a^b\mabsb{f(x)}\dif x$~收敛。
 \end{exercise}
+
 \begin{exercise*}
-\item
+\item 证明，
+\[
+  \max_{s\in\mintc01}\int_0^1\mabsb{\ln\mabs{s-t}}\dif t=1=\ln 2 。
+\]
+\item 证明，
+\[
+  \int_1^\pinf\mparenbb{\frac1{\mfloor x}-\frac1x}\dif x=\lim_\ntoinf\mparenB{1+\frac12+\dotsb+\frac1n-\ln n}。
+\]
+\item 设~$f(x)$~当~$x\to\pinf$~时，单调下降地趋于零。证明下列积分同时收敛，
+\[
+  \int_0^\pinf f(x)\dif x,\quad\int_0^\pinf f(x)\sin^2x\dif x 。
+\]
+\item 设~$\int_a^\pinf f(x)\dif x$~收敛，且~$xf(x)$~在~$\mintco a\pinf$~上单调下降。证明，
+\begin{exlistcols}
+  \item $xf(x)\geq0$，$x\in\mintco a\pinf$；
+  \item $\lim_{x\to\pinf}xf(x)\cdot\ln x=0$。
+\end{exlistcols}
+\item 已知对任意的~$x\in\mR$，有
+\[
+  \lim_{p\to\pinf}\int_{x-p}^{x+p}f(t)\dif t=\phi(x)。
+\]
+证明，
+\[
+  \phi\mparenB{\frac{x_1+x_2}2}=\frac12\mparenb{\phi(x_1)+\phi(x_2)}。
+\]
+\item 设~$f(x)$~在~$\mintco 01$~上有连续的导数，且
+\[
+  \mabsb{f'(x)}\leq\frac{M}{(1-x)^{1-\alpha}}\mcond*{0<\alpha\leq 1}。
+\]
+证明，$f(x)$~在~$\mintc 01$~上满足
+\[
+  \mabsb{f(x_1)-f(x_2)}\leq\frac M\alpha\mabs{x_1-x_2}^\alpha 。
+\]
+\item 设~$\phi(x)$~连续，且~$\lim_{x\to\pinf}\phi(x)=1$。记
+\[
+  \psi(x)\coloneq\int_x^\pinf\dfrac{\phi(t)}{t^{1+\alpha}}\dif t\mcond*{\alpha>0}。
+\]
+证明，$\psi(x)\sim\dfrac C{x^\alpha}\mcond{x\to\pinf}$，并确定~$C$~的值。
+\item 设~$\phi(x)=x-\mfloor x-\dfrac12$。证明，
+\[
+  \lim_{x\to\pinf}x\int_x^\pinf\dfrac{\phi(t)}{t^2}\dif t=0 。
+\]
+\item 设~$F(x)\coloneq\int_0^x\mparenbb{\dfrac1t-\mfloorbb{\dfrac1t}}\dif t$。证明~$F'(0)=\dfrac12$。
+\item 设~$f(x)$~在~$\mintco0\pinf$~上连续，且~$f(\pinf)\coloneq\lim_{x\to\pinf}f(x)$~存在。证明，
+\[
+  \int_0^\pinf\dfrac{f(ax)-f(bx)}x\dif x=\mparenb{f(0)-f(\pinf)}\ln\frac ba\mcond*{b>a>0}。
+\]
+\item 设~$f(x)$~在~$\mintco a\pinf$~上一致连续，且~$\int_a^\pinf f(x)\dif x$~收敛。证明~$\lim_{x\to\pinf}f(x)=0$。
+\item 设
+\[
+  \rho(\xi)=\frac1\pi\frac y{(\xi-x)^2+y^2},
+\]
+其中~$\xi,x$~为任一实数，而~$y$~为正实数。证明，
+\[
+  \int_\minf^\pinf\txts\smbsqrt{\mabs{\xi-x}}\,\rho(\xi)\dif\xi=\smbsqrt{2y}。
+\]
+\item 设~$x,y>0$~且~$x\neq y$。证明，
+\[
+  \smbsqrt{xy}<\frac{x-y}{\ln x-\ln y}<\frac{x+y}2。
+\]
 \end{exercise*}
 
 

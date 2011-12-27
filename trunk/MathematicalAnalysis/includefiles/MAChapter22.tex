@@ -4,37 +4,117 @@
 
 
 \chapter{曲面积分}\label{ch:22}
+
 \section{曲面概念}
+
 \section{曲面的面积}
 \subsection{由显方程表示的曲面}
 \subsection{由参数方程表示的内部光滑曲面}
 \subsection{例\emspace 子}
-\begin{exercise}
-\item
-\end{exercise}
 \subsection{Schwarz~反例}
 \begin{exercise}
-\item
+\item 求球面包含在两条纬线和两条经线之间部分的面积。
+\item 求环面~$x=\mparen{b+\cos\psi}\cos\phi$，$y=\mparen{b+a\cos\psi}\sin\phi$，$z=a\sin\psi$，$0<a\leq b$~被两条经线
+~$\phi=\phi_1$，$\phi=\phi_2$~和两条纬线~$\psi=\psi_1$，$\psi=\psi_2$~所围成那部分的面积，并求出整个环面的面积。
+\item 求螺旋面~$x=r\cos\phi$，$y=r\sin\phi$，$z=h\phi$，$0<r<a$，$0<\phi<2\pi$~的面积。
+\item 求球面~$x^2+y^2+z^2=a^2$~包含在柱体~$y^2+z^2\leq 1$~内那部分的面积。
+\item 求曲面~$z=\smbsqrt{2xy}$~被平面~$x+y=1$，$x=1$~及~$y=1$~所截下的那部分面积。
+\item 求曲面~$x^2+y^2=\dfrac13z^2$~与~$x+y+z=2a\mcond{a>0}$~围成的立体的表面积和体积。
+\item 求椭球面~$\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}+\dfrac{z^2}{c^2}=1$~被平面~$\ell x+my+zn=p$~剖分为两个部分试用重积分
+表示这两部分之面积。
 \end{exercise}
+
 \section{第一型曲面积分}
 \subsection{第一型曲面积分定义}
 \subsection{第一型曲面积分计算}
 \subsection{例\emspace 子}
 \begin{exercise}
-\item
+\item 计算下列曲面积分。
+\begin{exlist}
+  \item $\iint_S\mparenb{x^2+y^2}\dif S$，其中~$S$~为立体~$\smbsqrt{x^2+y^2}\leq z\leq 1$~的边界面；
+  \item $\iint_S\mabsb{x^3y^2z}\dif S$，其中~$S$~为曲面~$z=x^2+y^2$~被平面~$z=1$~割下的部分；
+  \item $\iint_Sz^2\dif S$，其中~$S$~为螺旋面的一部分：$x=u\cos v$，$y=u\sin v$，$z=v$，$0<u<a$，$0<v<2\pi$；
+  \item $\oiint_S\mparenb{x^2+y^2}\dif S$，其中~$S$~为球面~$x^2+y^2+z^2=R^2$。
+\end{exlist}
+\item 证明~Poisson~公式
+\[
+  \oiint_Sf\mparenb{ax+by+cz}\dif S=2\pi\int_{-1}^1\txts f\mparenb{\xi\sqrt{a^2+b^2+c^2}}\dif\xi,
+\]
+其中~$f(u)\in C^{(1)}$，而~$S$~为球面~$x^2+y^2+z^2=1$。
+\item 求密度为常数~$\rho_0$~的球壳~$x^2+y^2+z^2=a^2\mcond{z\geq0}$~对于~$z$~轴的转动惯量
+~$I=\iint_S\mparenb{x^2+y^2}\rho_0\dif S$。
+\item 求均匀曲面~$z=\smbsqrt{x^2+y^2}$~被曲面~$x^2+y^2=ax$~所割下的部分的重心坐标。
+\item 求均匀曲面~$z=\smbsqrt{a^2-x^2-y^2}\mcond{x,y\geq0,x+y\leq a}$~的重心坐标。
+\item 求密度为常数~$\rho_0$~的截圆锥面~$x=r\cos\phi$，$y=r\sin\phi$，$z=r$，$\phi\in\mintc0{2\pi}$，$0<b\leq r\leq a$~对位于
+曲面顶点~$(0,0,0)$~的单位质点的吸引力。当~$b\to0+0$~时，结果如何。
+\item 计算~$F(t)=\iint_Sf(x,y,z)\dif S$，其中~$S$~是一平面~$x+y+z=t$，而
+\[
+  f(x,y,z)=\begin{cBdcases}
+    1-x^2-y^2-z^2, & x^2+y^2+z^2\leq 1;\\
+    0, & x^2+y^2+z^2>1 。
+  \end{cBdcases}
+\]
+并作出~$u=F(t)$~的图象。
+\item 计算~$F(x,y,z,t)=\iint_Sf(\xi,\eta,\zeta)\dif S$，其中~$S$~为曲面
+~$\mparenb{\xi-x}^2+\mparenb{\eta-y}^2+\mparenb{\zeta-z}^2=t^2$，且假定~$\smbsqrt{x^2+y^2+z^2}>a>0$，而
+\[
+  f(\xi,\eta,\zeta)=\begin{cBdcases}
+    1,& \xi^2+\eta^2+\zeta^2<a^2;\\
+    0,& \xi^2+\eta^2+\zeta^2\geq a^2 。
+  \end{cBdcases}
+\]
 \end{exercise}
+
 \section{曲面的侧}
 \begin{exercise}
-\item
+\item 下列曲面都是分块光滑的曲面。试将这些曲面分为两两之间无公共内点的光滑曲面的并，用参数式表示这些光滑块，并确定它们的
+边界定向，使与指定的~$S$~的定侧一致。
+\begin{exlist}
+  \item 顶点为~$\mparen{0,0,0}$，$\mparen{1,0,0}$，$\mparen{0,1,0}$~与~$\mparen{0,0,1}$~的棱锥体的边界面，$\mvec n$~指向外侧；
+  \item 边长是单位长的正方体的边界面~$S$，$\mvec n$~指向正方体的内部；
+  \item 球面~$S\colon x^2+y^2+z^2=1$，$z\geq0$，$\mvec n$~指向球的内部；
+  \item 锥面~$S\colon x^2+y^2-z^2=0$，$\mabs z\leq1$，$\mvec n$~指向锥体外侧；
+  \item 设~$S=S_1\cup S_2$，其中
+  \[
+  \begin{aligned}
+    S_1&=\mathsetB{(x,y,z)}{x^2+4y^2+z^2=12,~0\leq y\leq\frac12};\\
+    S_2&=\mathsetB{(x,y,z)}{x^2+3y^2+z^2=12,~-\frac12\leq y\leq0},
+  \end{aligned}
+  \]
+  $S_1$~与~$S_2$~均指外侧；
+  \item 设~$S=\mathsetb{(x,y,z)}{\mabs z=x^2+y^2,~\mabs z\leq1}$，$\mvec n$~指向~$S$~的外侧。
+\end{exlist}
 \end{exercise}
+
 \section{第二型曲面积分}
 \subsection{第二型曲面积分概念}
 \subsection{第二型曲面积分计算}
 \begin{exercise}
-\item
+\item 计算下列第二型曲面积分。
+\begin{exlist}
+  \item $\oiint_Sx^2\dif y\dif z+y^2\dif x\dif z+z^2\dif x\dif y$，其中~$S$~为球面~$x^2+y^2+z^2=R^2$，内侧；
+  \item $\oiint_Sf(x)\dif y\dif z+g(y)\dif z\dif x+h(z)\dif x\dif y$，其中~$S$~为立体
+  ~$\mintc0a\times\mintc0b\times\mintc0c$~的外表面，外侧；
+  \item $\iint_Sx\dif y\dif z+y\dif x\dif z+z\dif x\dif y$，其中~$S$~为椭球面
+  ~$\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}+\dfrac{z^2}{c^2}=1$~的上半部分，下侧；
+  \item $\iint_Sx\dif y\dif z+y\dif x\dif z+z\dif x\dif y$，其中~$S$~为球面~$\mparen{x-a}^2+\mparen{y-b}^2+\mparen{z-c}^2=R^2$~
+  的上半部分，上侧。
+\end{exlist}
 \end{exercise}
+
 \begin{exercise*}
-\item
+\item 求由方程~$\mparenb{x^2+y^2+z^2}^2=x^2-y^2$~确定的曲面的面积。
+\item 确定一向量场~$\mvec v(x,y,z)$，使流过给定顶点~$A$~的任一锥面的流量为零。
+\item 设有一光滑曲面~$S$，其柱坐标方程为~$z=z(r,\theta)$。证明~$S$~上任一光滑曲线的弧微分~$\dif s$~满足
+\[
+  \dif s^2=\mparenBB{1+\mparenbb{\pdiff zr}^{\msp2}}\dif r^2+2\pdiff zr\pdiff z\theta\dif r\dif\theta+
+  \mparenBB{r^2+\mparenbb{\pdiff z\theta}^{\msp2}}\dif\theta^2 。
+\]
+\item 设光滑曲面~$S$~是由光滑曲线~$z=z(x)$~绕~$z$~轴旋转而得到的旋转曲面。证明~$S$~上光滑曲线的弧微分~$\dif s$~满足
+\[
+  \dif s^2=f(r)\dif r^2+r^2\dif\theta^2,
+\]
+其中~$r,\theta$~为~$x,y$~平面上的极坐标，而~$f(r)=1+\mparenbb{\diff zr}^{\msp2}$。
 \end{exercise*}
 
 

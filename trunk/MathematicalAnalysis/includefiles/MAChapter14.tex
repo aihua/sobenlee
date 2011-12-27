@@ -4,38 +4,365 @@
 
 
 \chapter{Fourier~级数}\label{ch:14}
+
 \section{基本三角函数系}
 \begin{exercise}
-\item
+\item 证明下列函数系~$\mbrace{y_n(x)}$~在~$\mintc0\ell$~上正交，即
+\[
+  \int_0^\ell y_n(x)y_m(x)\dif x=0\mcond*{n\neq m},
+\]
+并求~$\int_0^\ell y_n^2(x)\dif x$。
+\begin{exlistcols}
+  \item $y_n(x)=\sin\dfrac n\ell\pi x$，~$n=1,2,3,\dotsc$；
+  \item $y_n(x)=\cos\dfrac n\ell\pi x$，~$n=0,1,2,\dotsc$；
+  \item $y_n(x)=\sin\dfrac{2n+1}{2\ell}\pi x$，~$n=0,1,2,\dotsc$；\rule{0pt}{\baselineskip}%
+  \item $y_n(x)=\cos\dfrac{2n+1}{2\ell}\pi x$，~$n=0,1,2,\dotsc$。
+\end{exlistcols}
+\item 设~$0<\lambda_1<\lambda_2<\dotsb<\lambda_n<\dotsb$~满足
+\[
+  \sigma\sin\smbsqrt{\lambda_n}\,\ell+\smbsqrt{\lambda_n}\cos\smbsqrt{\lambda_n}\,\ell=0\mcond*{\sigma>0}。
+\]
+证明~$\mbrace{y_n(x)}=\mbraceb{\sin\smbsqrt{\lambda_n}\,x}$~在~$\mintc0\ell$~上为正交系，并求
+~$\int_0^\ell y_n^2(x)\dif x$，结果用~$\sigma,\lambda_n,\ell$~表示。
+\item 证明，函数系
+\[
+  1,~\cos\frac{\pi x}\ell,~\sin\frac{\pi x}\ell,~\dotsc,~\cos\frac{n\pi x}\ell,~\sin\frac{n\pi x}\ell,~\dotsc
+\]
+在~$\mintc{-\ell}\ell$~上是正交的。
 \end{exercise}
+
 \section{周期函数的~Fourier~级数}
 \begin{exercise}
-\item
+\item 求下列周期为~$2\pi$~的函数的~Fourier~级数。\label{exer-14.2.1}
+\begin{exlistcols}
+  \item $P_n(x)=\sum_{i=1}^n\mparenb{a_i\cos ix+b_i\sin ix}$；
+  \item $f(x)=x$，~$x\in\mintco{-\pi}\pi$；
+  \item $f(x)=\me^{ax}$，~$x\in\mintco{-\pi}\pi$；
+  \item $f(x)=x^3$，~$x\in\mintco{-\pi}\pi$；
+  \item $f(x)=\cos\dfrac x2$；
+  \item $f(x)=\mabsb{\sin x}$，~$x\in\mintco{-\pi}\pi$；
+  \item $f(x)=\begin{cBdcases}
+    \me^{ax}, & x\in\mintco{-\pi}0;\\
+    0, & x\in\mintco0\pi;
+  \end{cBdcases}$
+  \item $f(x)=\cos^3x$；
+  \item $f(x)=x\cos x$，~$x\in\mintco{-\pi}\pi$；
+  \item $f(x)=\ln\mparenB{2\sin\dfrac x2}$，~$x\in\mintco{-\pi}\pi$。
+\end{exlistcols}
+\item 设~$f(x)$~以~$2\pi$~为周期，在~$\mintc{-\pi}\pi$~上绝对可积，且
+\[
+  f(x)\sim\frac{a_0}2+\sum_{n=1}^\sinf\mparenb{a_n\cos nx+b_n\sin nx},
+\]
+其中
+\[
+  a_n=\frac1\pi\int_{-\pi}^\pi f(x)\cos nx\dif x,\quad
+  b_n=\frac1\pi\int_{-\pi}^\pi f(x)\sin nx\dif x 。
+\]
+\begin{exlist}
+  \item 若~$f(x+\pi)=f(x)$，证明，
+  \begin{alignat*}{2}
+    a_{2n+1}&=0, &\quad a_{2n}&=\frac2\pi\int_0^\pi f(x)\cos2nx\dif x;\\[2pt]
+    b_{2n+1}&=0, &\quad b_{2n}&=\frac2\pi\int_0^\pi f(x)\sin2nx\dif x;
+  \end{alignat*}
+  \item 若~$f(x+\pi)=-f(x)$，证明，
+  \begin{alignat*}{2}
+    a_{2n}&=0, &\quad a_{2n+1}&=\frac2\pi\int_0^\pi f(x)\cos(2n+1)x\dif x,\\[2pt]
+    b_{2n}&=0, &\quad b_{2n+1}&=\frac2\pi\int_0^\pi f(x)\sin(2n+1)x\dif x;
+  \end{alignat*}
+  \item 若~$f(x)$~为奇函数，且~$f(x)=f(\pi-x)$，问~$f(x)$~的~Fourier~系数有何特点。
+\end{exlist}
+\item 将函数~$f(x)=\sin^4x$~展开成~Fourier~级数。
+\item 在区间~$\minto{-\pi}\pi$~上将下列函数展开成~Fourier~级数。
+\begin{exlistcols}[4]
+  \item $\sgn x$；
+  \item $\sgn\sin 2x$；
+  \item $\sgn\cos 2x$；
+  \item $\mabs x$。
+\end{exlistcols}
+\item 在区间~$\minto0{2\pi}$~上将下列函数展开成~Fourier~级数。
+\begin{exlistcols}
+  \item $\dfrac{\pi-x}2$；
+  \item $\ln\dfrac1{2\sin(\sfrac x2)}$。
+\end{exlistcols}
+\item 设~$f(x)$~为~$\minto{-\pi}\pi$~上的非负的可积函数。证明其~Fourier~系数满足~$\mabs{a_n}\leq a_0$，~$\mabs{b_n}\leq a_0$。
+\item 设~$f(x)$~为~$\minto0\pi$~上非负可积的奇函数。证明其~Fourier~系数满足~$\mabs{b_n}\leq nb_1$。
+\item 设~$f(x)$~在~$\minto0{2\pi}$~上单调递减且有界。证明其~Fourier~系数满足~$\mabs{b_n}\geq0$。
+\item 设~$f(x)$~在~$\minto0{2\pi}$~上导数~$f'(x)$~单调上升，有界。证明其~Fourier~系数满足~$a_n\geq0\mcond{n>0}$。
+\item 设~$f(x)$~有界，并在~$\minto{-\pi}\pi$~上逐段单调。证明其~Fourier~系数满足
+\[
+  a_n=O\mparenB{\frac1n},\quad
+  b_n=O\mparenB{\frac1n}\mcond*{\ntoinf}。
+\]
+\item 设~$f(x)$~上以~$2\pi$~为周期的周期函数，并满足
+\[
+  \mabsb{f(x)-f(y)}\leq L\mabs{x-y}^\alpha\mcond*{0<\alpha\leq 1}。
+\]证明其~Fourier~系数满足
+\[
+  a_n=O\mparenB{\frac1{n^\alpha}},\quad
+  b_n=O\mparenB{\frac1{n^\alpha}}\mcond*{\ntoinf}。
+\]
+\item 已知周期为~$2\pi$~的可积函数~$f(x)$~的~Fourier~系数为~$a_n\mcond{n=0,1,\dotsc}$~与~$b_n\mcond{n=1,2,\dotsc}$。%
+求经过“平移”~$h$~的函数~$f(x+h)$~（$h$~为常数）的~Fourier~系数~$\mbar a_n\mcond{n=0,1,\dotsc}$~与
+~$\mbar b_n\mcond{n=1,2,\dotsc}$。
 \end{exercise}
+
 \section{Fourier~级数的收敛性}
 \subsection{Fourier~级数的部分和}
 \subsection{Fourier~级数部分和的极限问题}
 \subsection{Fourier~级数的收敛性判别法——~Dini~判别法}
 \subsection{Fourier~级数收敛的~Dirichlet~判别法}
 \begin{exercise}
-\item
+\item 讨论\ref{exer-14.2.1}~中所有函数的~Fourier~在~$\mintc{-\pi}\pi$~上收敛到什么函数。
+\item 将函数~$f(x)=x^2$~展开成~Fourier~级数。
+\begin{exlist}
+\begin{exlistcols*}[3]
+  \item 按余弦展开；
+  \item 按正弦展开；
+  \item 在区间~$\minto0{2\pi}$~内展开；
+\end{exlistcols*}
+  \item 求下列级数的和，
+  \[
+    \sum_{n=1}^\sinf\dfrac1{n^2},\quad\sum_{n=1}^\sinf\dfrac{(-1)^{n-1}}{n^2},\quad\sum_{n=1}^\sinf\dfrac1{(2n-1)^2}。
+  \]
+\end{exlist}
+\item 已知展开式
+\[
+  x=2\sum_{n=1}^\sinf(-1)^{n-1}\frac{\sin nx}n\mcond*{x\in\minto{-\pi}\pi}。
+\]
+\begin{exlist}
+  \item 用逐项积分法求~$x^2,x^3,x^4$~在~$\minto{-\pi}\pi$~上的~Fourier~展开式；
+  \item 求级数~$\sum_{n=1}^\sinf\dfrac{(-1)^{n-1}}{n^4}$~与~$\sum_{n=1}^\sinf\dfrac1{n^4}$~的和。
+\end{exlist}
+\item 设
+\[
+  f(x)=\begin{cBdcases}
+    2\alpha-\mabs x, & \mabs x\leq2\alpha;\\
+    0, & 2\alpha\leq\mabs x\leq\pi 。
+  \end{cBdcases}
+\]
+\begin{exlistcols}
+  \item 求~$f(x)$~的~Fourier~级数；
+  \item 求~$\sum_{n=1}^\sinf\dfrac{\sin^2n}{n^2}$~与~$\sum_{n=1}^\sinf\dfrac{\cos^2n}{n^2}$~的和。
+\end{exlistcols}
+\item\begin{exlist}
+  \item 求~$f(x)=\me^x$~在~$\minto{-\pi}\pi$~上的~Fourier~展开式；
+  \item 就级数~$\sum_{n=1}^\sinf\dfrac1{1+n^2}$。
+\end{exlist}
+\item\begin{exlist}
+  \item 在~$\minto{-\pi}\pi$~上将~$f(x)=\cos\dfrac\alpha\pi x$~展开为~Fourier~级数；
+  \item 证明下列展开式，
+  \begin{exlistcols}[label=\Ding*]
+    \item $\csc x=\dfrac1x+\sum_{n=1}^\sinf(-1)^n\dfrac{2x}{x^2-n^2\pi^2}$；
+    \item $\cot x=\dfrac1x+\sum_{n=1}^\sinf\mparenB{\dfrac1{x-n\pi}+\dfrac1{x+n\pi}}$；
+    \item $\tan x=-\sum_{n=1}^\sinf\mparenBB{\mparenbb{x-\dfrac{2n-1}2\pi}^{\msp-1}+\mparenbb{x+\dfrac{2n-1}2\pi}^{\msp-1}}$。
+  \end{exlistcols}
+\end{exlist}
+\item\label{exer-TriPoly}设
+\[
+  T_n(x)\coloneq\dfrac{a_0}2+\sum_{k=1}^n\mparenb{a_k\cos kx+b_k\sin kx},
+\]
+此时，$T_n(x)$~称为~\emph{$n$~阶三角多项式}。证明，
+\[
+  T_n(x)=\frac1{2\pi}\int_{-\pi}^\pi T_n(x+t)\frac{\sin\mparen{n+\sfrac12}t}{\sin\mparen{\sfrac t2}}\dif t 。
+\]
+\item 设~$T_n(x)$~为~$n$~阶三角多项式。证明，
+\[
+  \max_{x\in\mintc{-\pi}\pi}\mbraceb{\mabsb{T_n'(x)}}\leq n^2\max_{x\in\mintc{-\pi}\pi}\mbraceb{\mabsb{T_n(x)}}。
+\]
+\item 设
+\[
+  D_r(x)=\sum_{k=1}^\sinf\dfrac{\cos\mparen{kx-\sfrac{\pi r}2}}{k^r}。
+\]
+证明~$D_r(x)$~在~$\minto0{2\pi}$~上为~$r$~次代数多项式。
+\item 设~$f(x)$~以~$2\pi$~为周期，已知其~Fourier~级数的部分和为\label{exer-14.3.10}
+\[
+  S_n(x)=\frac1\pi\int_{-\pi}^\pi f(x+t)\frac{\sin\mparen{n+\sfrac12}t}{2\sin\mparen{\sfrac t2}}\dif t,
+\]
+作~$S_n(x)$~的平均值
+\[
+  \sigma_n(x)=\frac1n\sum_{k=0}^{n-1}S_k(x) 。
+\]
+\begin{exlist}\FixExHead
+  \item
+  \[
+    \sum_{m=0}^{n-1}\sin\mparenB{m+\frac12}t=\frac{\sin^2\mparen{\sfrac{nt}2}}{\sin\mparen{\sfrac t2}};
+  \]
+  \item
+  \[
+    \sigma_n(x)=\int_{-\pi}^\pi f(x+t)F_n(t)\dif t,\quad
+    F_n(t)\coloneq\frac1{2n\pi}\mparenbb{\frac{\sin\mparen{\sfrac{nt}2}}{\sin\mparen{\sfrac t2}}}^{\msp 2};
+  \]
+  \item $F_n(t)$~有下列性质，
+  \begin{exlistcols}[label=\Ding*]
+    \item $F_n(t)\geq0$；
+    \item $\int_{-\pi}^\pi F_n(t)\dif t=1$；
+    \item 对任意~$\delta>0$，有~$\lim_\ntoinf\int_{\delta\leq\mabs t\leq\pi}F_n(t)\dif t=0$。
+  \end{exlistcols}
+\end{exlist}
+\item 设~$f(x)\in C\mintc{-\pi}\pi$，以~$2\pi$~为周期。证明~$\sigma_n(x)$~在~$\mintc{-\pi}\pi$~上一致收敛于~$f(x)$。
+\item 设~$f(x)\in C\mparen\mR$，以~$2\pi$~为周期，它的~Fourier~级数在~$x_0$~处收敛。证明~$\lim_\ntoinf S_n(x_0)=f(x_0)$。
+\item 设~$f(x)$~在~$\mintc{-\pi}\pi$~上分段连续，以~$2\pi$~为周期，且
+\[
+  f(x)\sim\frac{a_0}2+\sum_{n=1}^\sinf\mparenb{a_n\cos nx+b_n\sin nx}。
+\]
+\begin{exlist}
+  \item 证明，
+  \[
+    F(x)\coloneq\int_0^\pi\mparenB{f(t)-\frac{a_0}2}\dif t
+  \]
+  是以~$2\pi$~为周期的连续函数并且连续可微；
+  \item 求~$F(x)$~的~Fourier~展开式；
+  \item 证明，对任意区间~$\mintc ab$，都有
+  \[
+    \int_a^bf(t)\dif t=\int_a^b\frac{a_0}2\dif t+\sum_{n=1}^\sinf\int_a^b\mparenb{a_n\cos nt+b_n\sin nt}\dif t 。
+  \]
+\end{exlist}
 \end{exercise}
+
 \section{任意区间上的~Fourier~级数}
 \subsection(周期是 2l 的情形){周期是~$2\ell$~的情形}
 \subsection{非周期函数的情形}
 \subsection{函数的奇延拓与偶延拓}
 \begin{exercise}
-\item
+\item 将下列函数在指定区间上展开为~Fourier~级数。
+\begin{exlistcols}
+  \item $f(x)=x$，~$x\in\minto0\ell$；
+  \item $f(x)=x\cos x$,~$x\in\minto{-\sfrac\pi2}{\sfrac\pi2}$；
+  \item $f(x)=\begin{Bdcases}
+    A, & x\in\minto0\ell;\\
+    0, & x\in\minto\ell{2\ell},
+  \end{Bdcases}$~其中~$A$~为常数。
+\end{exlistcols}
+\item 将周期函数~$f(x)=x-\mfloor x$~展开成~Fourier~级数。
+\item 在指定区间上求下列函数的~Fourier~级数，并指出它的和函数。
+\begin{exlistcols}
+  \item $f(x)=\sin x$，~$x\in\mintc0\pi$，偶延拓；
+  \item $f(x)=\cos x$，~$x\in\mintc0\pi$，奇延拓；
+  \item $f(x)=x(\pi-x)$，~$x\in\minto0\pi$，奇延拓与偶延拓；
+  \item $f(x)=\begin{cdcases}%\LEFTRIGHT
+    1, & x\in\minto 0{\sfrac\pi2};\\
+    \frac12, & x=\frac\pi2;\\
+    \strut0, & x\in\mintoc{\sfrac\pi2}\pi,
+  \end{cdcases}$奇延拓与偶延拓。
+\end{exlistcols}
+\item 应当如何把给定在区间~$\minto 0{\sfrac\pi2}$~的可积函数延拓到区间~$\minto{-\pi}\pi$~上，使得它在~$\minto{-\pi}\pi$~上
+相应的~Fourier~级数为
+\begin{exlistcols}
+  \item $f(x)\sim\sum_{n=1}^\sinf a_n\cos\mparen{2n-1}x$；
+  \item $f(x)\sim\sum_{n=1}^\sinf b_n\sin\mparen{2n-1}x$。
+\end{exlistcols}
+\item 在区间~$\minto 0{\sfrac\pi2}$~内，分别把函数~$f(x)=x\mparenB{\dfrac\pi2-x}$~按以下方式展开。
+\begin{exlistcols}
+  \item 依角的奇数倍的余弦展开；
+  \item 依角的奇数倍的正弦展开。
+\end{exlistcols}
+
 \end{exercise}
+
 \section{Fourier~级数的平均收敛性}
 \subsection{平方平均偏差与它的最小值}
 \subsection{用三角多项式逼近函数}
 \begin{exercise}
-\item
+\item 设~$f(x)$~的~Fourier~级数在~$\mintc{-\pi}\pi$~上一致收敛于~$f(x)$。证明，
+\[
+  \frac1\pi\int_{-\pi}^\pi f^2(x)\dif x=\frac{a_0^2}2=\sum_{n=1}^\sinf\mparenb{a_n^2+b_n^2}。
+\]
+\item 设~$f(x)$~在~$\mintc{-\ell}\ell$~上平方可积。证明，
+\[
+  \frac1\ell\int_{-\ell}^\ell f^2(x)\dif x=\frac{a_0^2}2=\sum_{n=1}^\sinf\mparenb{a_n^2+b_n^2},
+\]
+其中
+\[
+  a_n=\frac1\ell\int_{-\ell}^\ell f(x)\cos\frac{n\pi x}\ell\dif x,\quad
+  b_n=\frac1\ell\int_{-\ell}^\ell f(x)\sin\frac{n\pi x}\ell\dif x 。
+\]
+\item 设~$f(x)$~在~$\mintc0\ell$~上平方可积。证明，
+\[
+  \frac2\ell\int_0^\ell f^2(x)\dif x=\frac{a_0^2}2+\sum_{n=1}^\sinf a_n^2,
+\]
+其中
+\[
+  a_n=\frac2\ell\int_0^\ell f(x)\cos\frac{n\pi x}\ell\dif x 。
+\]
 \end{exercise}
+
 \section{Fourier~级数的复数形式与频谱分析}
+
 \begin{exercise*}
-\item
+\item 设~$f(x)$~是以~$\dfrac\pi\ell\mcond{\ell\in\mN}$~为周期的周期函数。证明，当~$\dfrac k\ell$~不是整数时，有
+\[
+  \int_0^{2\pi}f(x)\cos kx\dif x=\int_0^{2\pi}f(x)\sin kx\dif x=0 。
+\]
+\item 设~$f(x)$~的~Fourier~级数的部分和为
+\[
+  S_n(x)=\frac{a_0}2+\sum_{k=1}^n\mparenb{a_k\cos kx+b_k\sin kx} 。
+\]
+定义~$f(x)$~的~\emph{Fej\textaccent{\'e}r~和}为
+\[
+  \sigma_n(x)\coloneq\frac1n\sum_{k=0}^{n-1}\frac{S_k(x)}n 。
+\]
+证明，
+\[
+  \sigma_n(x)=\frac{a_0}2+\sum_{k=1}^n\mparenB{1-\dfrac kn}\mparenb{a_k\cos kx+b_k\sin kx}。
+\]
+\item\begin{exlist}\FixExHead
+  \item  $f(x)=\dfrac{\pi-x}2\mcond{0<x<2\pi}$~的~Fej\textaccent{\'e}r~和~$\sigma_n(x)$~满足
+  \[
+    \mabs{\sigma_n(x)}\leq\dfrac\pi2\mcond*{x\in\mintc0{2\pi}};
+  \]
+  \item 对任意~$n=1,2,\dotsc$~与~$x\in\mintc0{2\pi}$，有
+  \[
+    \mabsbb{\sum_{k=1}^n\dfrac{\sin kx}k}\leq\dfrac\pi2+1 。
+  \]
+\end{exlist}
+\item 设~$f(x)$~是以~$2\pi$~为周期的可积函数。证明，
+\[
+  \sum_{n=1}^\sinf\frac{b_n}n=\frac1{2\pi}\int_0^{2\pi}f(x)(\pi-x)\dif x 。
+\]
+\item 证明，级数~$\sum_{n=1}^\sinf\dfrac{\sin nx}{\ln(n+1)}$~不可能是某个可积函数~$f(x)$~的~Fourier~级数。
+\item 设~$\alpha\in\minto01$。证明，
+\begin{exlistcols}
+  \item $\lim_{b\to1}\int_0^b\dfrac{x^{\alpha-1}}{1+x}\dif x=\sum_{n=0}^\sinf\dfrac{(-1)^n}{\alpha+n}$；
+  \item $\lim_{b\to1}\int_0^b\dfrac{x^{-\alpha}}{1+x}\dif x=\sum_{n=0}^\sinf\dfrac{(-1)^n}{\alpha-n}$；
+  \item $\int_0^1\dfrac{x^{\alpha-1}+x^\alpha}{1+x}\dif x=\dfrac\pi{\sin\alpha x}$。
+\end{exlistcols}
+\item 计算下列积分。
+\begin{exlistcols}[3]
+  \item $\int_0^\pi\ln\mparenB{2\sin\dfrac x2}\dif x$；
+  \item $\int_0^\pi\ln\mparenB{2\cos\dfrac x2}\dif x$；
+  \item $\int_0^\pi\ln\mparenB{2\tan\dfrac x2}\dif x$。
+\end{exlistcols}
+\item 设~$f(x)$~是以~$2\pi$~为周期的连续函数，且在~$\mintc{-\pi}\pi$~上逐段连续可微。证明，
+\begin{exlist}
+  \item 若~$a_n,b_n$~与~$a_n',b_n'$~分别是~$f(x)$~与~$f'(x)$~的~Fourier~系数，则
+  \[
+    a_n=-\frac{b_n'}n,\quad b_n=\frac{a_n'}n;
+  \]
+  \item 级数~$\sum_{n=1}^\sinf\mparenb{\mabs{a_n}+\mabs{b_n}}$~收敛；
+  \item $f(x)$~的~Fourier~级数绝对收敛且在~$\mR$~上一致收敛到~$f(x)$。
+\end{exlist}
+\item 设~$f(x)\in C^{(3)}\mintc0\pi$，且有~$f(0)=f(\pi)=0$~与~$f''(0)=f''(\pi)=0$。证明~$f(x)$~按正弦展开的~Fourier~级数可以
+逐项微分两次，并且级数~$\sum_{n=1}^\sinf n^2b_n^2$~收敛。
+\item 设~$T_n(x)$~是~$n$~阶三角多项式（参看\ref{exer-TriPoly}），且~$\cos(n-1)x$~项的系数为~$1$。证明，
+\[
+  \max_{x\in\mintc{-\pi}\pi}\mbraceb{\mabsb{T_n(x)}}\geq\frac\pi4 。
+\]
+\item\begin{exlist}
+  \item 证明，
+  \[
+    \cos^n\theta=\frac1{2^{n-1}}\cos n\theta+ T_{n-2}(\theta),
+  \]
+  其中~$T_{n-2}(\theta)$~为~$n-2$~阶三角多项式；
+  \item 设~$P_n(x)$~是~$n$~次代数多项式，且~$x^{n-1}$~项的系数为~$1$。令\label{exer-14-11-2}
+  \[
+    T_n(\theta)=P_n(\cos\theta)。
+  \]
+  说明~$T_n(\theta)$~为~$n$~阶三角多项式，并求出~$\cos(n-1)\theta$~项的系数；
+  \item 设~$P_n(x)$~同~\ref{exer-14-11-2}，证明，
+\[
+  \max_{x\in\mintc{-1}1}\mbraceb{\mabsb{P_n(x)}}\geq\frac\pi{2^n} 。
+\]
+\end{exlist}
 \end{exercise*}
 
 
