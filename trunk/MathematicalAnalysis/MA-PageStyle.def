@@ -15,7 +15,7 @@
 \newcommand*\showthepage{%
   \bfseries\CMRoman\textcentereddot\enspace\thepage\enspace\textcentereddot}
 
-\newpagestyle{document}[\small\MyriadPro\fzlthei\killnewline]{%
+\newpagestyle{document}[\small\MyriadPro\fzlthei\notextaccent\killnewline]{%
   \setmarks{chapter}{section}%
   \sethead[\showthepage]
           []
