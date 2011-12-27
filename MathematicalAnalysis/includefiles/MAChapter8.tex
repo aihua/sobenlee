@@ -8,30 +8,208 @@
 \subsection{直角坐标系下平面图形面积的计算}
 \subsection{极坐标系下平面图形面积的计算}
 \begin{exercise}
-\item
+\item 求下列曲线所围图形的面积。
+\begin{exlistcols}
+  \item $y=x^2$~与~$y=x+5$；
+  \item $y^2=2x$~与~$x=5$；
+  \item $y^2=1+2x-x^2$~与~$x+y=1$；
+  \item $x^2+9y^2=1$；
+  \item $y=x$~与~$y=x+\sin^2x\mcond{0\leq x\leq\pi}$。
+\end{exlistcols}
+\item 求下列用极坐标表示的曲线所围图形的面积。
+\begin{exlistcols}[3]
+  \item $r^2=a^2\cos2\phi$；
+  \item $r=a\sin3\phi$；
+  \item $r=a\cos\theta+b\mcond{b\geq a}$。
+\end{exlistcols}
+\item 求下列用参数方程表示的曲线所围图形的面积。
+\begin{exlistcols}
+  \item $\Biggl\lbrace\begin{aligned}
+    x&=2t-t^2,\\ y&=2t^2-t^3;  \end{aligned}$
+  \item $\Biggl\lbrace\begin{aligned}
+    x&=a(t-\sin t),\\ y&=a(1-\cos t)\end{aligned}\mcond{0\leq t\leq 2\pi}$~以及~$x$~轴；
+  \item $\Biggl\lbrace\begin{aligned}
+    x&=a\cos^3t,\\ y&=a\sin^3t;\end{aligned}$
+  \item $\Biggl\lbrace\begin{aligned}
+    x&=a(\cos t+t\sin t), \\ y&=a(\sin t-t\cos t)\end{aligned}\mcond{0\leq t\leq 2\pi}$。
+\end{exlistcols}
 \end{exercise}
+
 \section{由平面截面面积求体积}
 \begin{exercise}
-\item
+\item 求下列曲面所围的体积。
+\begin{exlist}
+  \item 椭球面~$\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}+\dfrac{z^2}{c^2}=1$；
+  \item 正圆台，其上下底分别为半径为~$a$~与~$b$~的圆，而其间的距离为~$h$；
+  \item 正长方台，上底的长与宽为~$a_1$~与~$b_1$，下底的长与宽为~$a_2$~与~$b_2$，而两底间的间距为~$h$；
+  \item 抛物面~$2z=x^2+y^2$~与球面~$x^2+y^2+z^2=3$~所围成的部分。
+\end{exlist}
+\item 求下列旋转体的体积。
+\begin{exlist}
+  \item 旋转抛物体，其底面积为~$S$，而高为~$H$；
+  \item 椭圆~$\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}=1$~与直线~$x=h\mcond{\mabs h<a}$~所围成部分绕~$x$~轴旋转产生的旋转体；
+  \item 双曲线~$\dfrac{y^2}{b^2}-\dfrac{x^2}{a^2}=1$~与直线~$x=\pm h$~所围成的图形绕~$x$~轴旋转产生的旋转体；
+  \item 摆线~$\Biggl\lbrace\begin{aligned}x&=a(t-\sin t),\\ y&=a(1-\cos t)\end{aligned}\mcond{0\leq t\leq 2\pi}$~绕~$x$~轴
+  旋转产生的旋转体。
+\end{exlist}
+\item 求曲线~$y=\dfrac4x$~与~$y=(x-3)^2$~所围成图形的面积，并求此图形绕~$x$~轴旋转所得旋转体的体积。
+\item 求圆柱体~$x^2+y^2=a^2$~与两平面~$z=0$~与~$z=2(x+a)$~所围部分的体积。
+\item 求曲面~$z=xy$~与平面~$z=0$，$x=a$，$y=b$~所围部分的体积\mcond{a,b>0}。
+\item 求曲面
+\[
+  \dfrac{xy^2}{a^2}+\dfrac{x^2z^2}{b^2}=x(1-x^2)\mcond*{a,b>0}
+\]
+所围部分的体积。
+\item 求下列曲线分别绕~$x$~轴与绕~$y$~轴旋转所成曲面包围的体积。
+\begin{exlistcols}
+  \item $y=\sin x$，~$y=0$，~$0\leq x\leq\pi$；
+  \item $y=b\mparenbb{\dfrac xa}^{\msp 2}$，~$y=b\mabsbb{\dfrac xa}$，~$a,b>0$。
+\end{exlistcols}
 \end{exercise}
+
 \section{平面曲线的弧长与曲率}
 \begin{exercise}
-\item
+\item 求下列曲线的弧长。
+\begin{exlistcols}
+  \item $y=x^3$，~$x\in\mintc 01$；
+  \item $y=\me^x$，~$x\in\mintc 12$；
+  \item $x=\dfrac14y^2-\dfrac12\ln y$，~$y\in\mintc 1\me$；
+  \item $x^{\frac23}+y^{\frac23}=a^{\frac23}$；
+  \item $r=a(1+\cos\theta)$，~$a>0$，~$\theta\in\mintc 02$；
+  \item $\Biggl\lbrace\begin{aligned} x&=a(\cos t+t\sin t);\\ y&=a(\sin t-t\cos t),\end{aligned}$~$a>0$，$t\in\mintc0{2\pi}$。
+\end{exlistcols}
+\item 求下列曲线的曲率及曲率半径。
+\begin{exlistcols}[3]
+  \item $y^2=2px$，$p>0$；
+  \item $\Biggl\lbrace\begin{aligned} x&=a(t-\sin t),\\ y&=a(1-\cos t); \end{aligned}$
+  \item $\Biggl\lbrace\begin{aligned} x&=a(\cos t+t\sin t),\\ y&=a(\sin t-t\cos t); \end{aligned}$
+  \item $r=a(1+\cos\theta)$；
+  \item $r^2=2a^2\cos2\theta$。
+\end{exlistcols}
+\item\begin{exlist}
+  \item 证明，用极坐标表示的曲线~$r=r(\theta)$~在~$\minto r\theta$~点的曲率为
+  \[
+    \kappa=\frac{\mabs{r^2+2r'^2-rr''}}{(r^2+r'^2)^{\sfrac32}};
+  \]
+  \item 计算~$r=a\me^{b\theta}$~的曲率。
+\end{exlist}
+\item 设曲线用参数方程~$x=x(t),y=t(t)$~给出。证明曲率中心方程（即渐屈线方程）为
+\[
+  \xi(x)=x(t)-y'(t)\frac{x'^2+y'^2}{x'y''-x''y'};\qquad
+  \eta(x)=y(t)+x'(t)\frac{x'^2+y'^2}{x'y''-x''y'}。
+\]
+\item 求抛物线~$y^2=2px\mcond{p>0}$~的渐屈线方程。
+\item\begin{exlistcols}
+  \item 求~$y=\ln x$~与~$x$~轴交点处的曲率圆方程；
+  \item 求~$y=\ln x$~的最大曲率。
+\end{exlistcols}
+\item 试曲线~$y=f(x)$~在一点~$\minto xy$~处的曲率半径为~$\rho$，曲率中心为~$\minto\xi\eta$，且~$f$~的三阶导数存在。%
+令~$g=\dfrac{1+y'^2}{y''}$。证明，
+\begin{exlistcols}
+  \item $\dfrac{\dif\xi}{\dif x}=-y'^2-y'g'$；
+  \item $\dfrac{\dif\eta}{\dif x}=y'+g'$；
+  \item $\dfrac{\dif\rho}{\dif x}=y'\smbsqrt{1+y'^2}+g'\smbsqrt{1+y'^2}$；
+  \item $\mparenbb{\dfrac{\dif\xi}{\dif x}}^{\msp2}+\mparenbb{\dfrac{\dif\eta}{\dif x}}^{\msp2}
+         =\mparenbb{\dfrac{\dif\rho}{\dif x}}^{\msp2}$，%
+  并说明此等式的几何意义。
+\end{exlistcols}
+\item 设~$y=f(x)$~与~$x$~轴在原点处一阶密切并在原点处二阶导数存在。证明，曲线~$y=f(x)$~在原点处的曲率半径
+为~$\rho=\lim_{x\to0}\dfrac{x^2}{2y}$。
 \end{exercise}
+
 \section{旋转体侧面积计算}
 \begin{exercise}
-\item
+\item 求下列曲线旋转体的表面积。
+\begin{exlistcols}
+  \item $r=a(1+\cos\theta)$，$\theta\in\mintc0{2\pi}$，绕极轴旋转；
+  \item $\Biggl\lbrace\begin{aligned} x&=a(t-\sin t);\\ y&=a(1-\cos t),\end{aligned}$~$a>0$，$t\in\mintc0{2\pi}$，绕
+  直线~$y=2a$~旋转。
+  \item $\Biggl\lbrace\begin{aligned} x&=a\cos^3t;\\ y&=a\sin^3t,\end{aligned}$~绕~$x$~轴旋转；
+  \item 椭圆~$\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}=1$~绕~$x$~轴旋转\mcond{a>b}。
+\end{exlistcols}
+\item 证明，球带的面积等于球的大圆周长与球带高的乘积。
 \end{exercise}
+
 \section{微元法}
+
 \section{定积分在物理中的应用}
 \subsection{平面曲线的质心及平面图形的质心计算}
 \subsection{转动惯量的计算}
 \subsection{引力与功的计算}
 \begin{exercise}
-\item
+\item 求下列曲线的质量（设密度为~$1$）与重心坐标。
+\begin{exlistcols}
+  \item $y=1-x^2$，~$x\in\mintc{-1}1$；
+  \item $\Biggl\lbrace\begin{aligned}x&=a(t-\sin t);\\ y&=a(1-\cos t),\end{aligned}$~$t\in\mintc0{2\pi}$，$a>0$；
+  \item $\Biggl\lbrace\begin{aligned}x&=a\cos\phi;\\ y&=a\sin\phi,\end{aligned}$~~$\mabs\phi\leq\dfrac\pi4$。
+\end{exlistcols}
+\item\begin{exlistcols}
+  \item 求半圆~$0\leq y\leq\sqrt{R^2-x^2}$~的重心；
+  \item 求半圆周~$y=\sqrt{R^2-x^2}\mcond{\mabs x\leq R}$~的重心。
+\end{exlistcols}
+\item\begin{exlistcols}
+  \item 求半球~$0\leq z\leq\smbsqrt{R^2-x^2-y^2}$~的重心；
+  \item 求半球面~$y=\smbsqrt{R^2-x^2-y^2}\mcond{x^2+y^2\leq R^2}$~的重心。
+\end{exlistcols}
+\item 求半圆~$0<h\leq y\leq h+\sqrt{R^2-x^2}$~绕~$x$~轴旋转所得旋转体的体积与侧面积。
+\item 求锥体~$\sqrt{x^2+y^2}\leq z\leq h$~的重心和绕~$z$~轴的转动惯量。
+\item 求抛物体~$x^2+y^2\leq z\leq h$~的重心和绕~$z$~轴的转动惯量。
+\item 证明，把面积~$0\leq\alpha\leq\theta\leq\beta\leq\pi$，$0\leq r\leq r(\theta)$，绕极轴旋转所成的体积等于
+\[
+  V=\frac{2\pi}3\int_\alpha^\beta r^3(\theta)\sin\theta\dif\theta 。
+\]
+\item 应用重心公式计算定积分~$\int_0^\pi\dfrac x{1+\cos^2x}\dif x$。
+\item 设~$f(x)$~在~$\mintc ab$~上单调递减，利用重心公式证明
+\[
+  \int_a^bxf(x)\dif x\leq\frac{a+b}2\int_a^bf(x)\dif x 。
+\]
+\item 判断等否存在曲边梯形~$\mathsetb{\minto xy}{0<a\leq x\leq b,0\leq y\leq f(x)}$，使它的重心~$\mbar x$~与绕~$y$~轴的转动惯量
+满足等式
+\[
+  \int_a^bx^2f(x)\dif x=\mbar x^2\cdot\int_a^bf(x)\dif x 。
+\]
+\item 有一半径~$R=3$~米的圆形溢水洞，水半满，求作用在闸门上的压力。
+\item 有一薄板~$\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}=1\mcond{a>b}$，长轴沿铅直方向一半浸入水中，求水对薄板的压力。
+\item 弹簧所受压缩的力与压缩距离~$x$~之间满足~Hooke~定理~$F=kx$~（$k$~为比例常数）。现有一弹簧由原长压缩~$6$~厘米，求所作的功。
+\item 质量为~$m$~的物体，以初速度~$v_0$~发射使其脱离地球。证明，
+\begin{exlist}
+  \item 物体脱离地球时所作的功（即引力自~$R$~到~$R'$~作功，再令~$R'\to\pinf$）为
+  \[
+    W=G\frac{Mm}R,
+  \]
+  其中~$M,R$~分别为地球的质量及半径，而~$G$~是万有引力常数；
+  \item $v_0=\smbsqrt{2gR}$；
+  \item 若~$R=\num{6370}$~千米，而~$g=\num{9.8}$~米/秒$^2$，求~$v_0$~（即第二宇宙速度）。
+\end{exlist}
+\item 油类通过油管时，中间流速大，越靠近管壁，流速越小。实验确定，流速~$v$~与该处到油管中心的距离~$r$~有关系式
+\[
+  v=k(a^2-r^2),
+\]
+其中~$k$~为比例常数，而~$a$~为油管半径。求通过油管的流量。（流量~$Q=\text{流速}~v\times\text{截面积}~S$）
+\item 有一根长为~$\ell$~的细杆，均匀带电，总电量为~$Q$。
+\begin{exlist}
+  \item 距杆一端~$a$~处有一单位正电荷，求其所受的力；
+  \item 距杆中心~$a$~处有一单位正电荷，求其所受的力。
+\end{exlist}
+\item 根据~Torricelli~定理，液体从距自由深度为~$h$~厘米的小孔流出，它的速度为~$v=c\smbsqrt{2gh}$~厘米/秒，这里~$g$~是重力加速
+度，而~$c$~为流出系数（$c=0.6$）。现有一圆柱形储油罐，直径~$20$~米，高~$20$~米，装满汽油。出口管子直径~$10$~厘米，问全部
+汽油流完，需要多少时间。
+\item 把一密度均匀的抛物形体~$x^2+y^2\leq z\leq 1$~放置在水平的桌面上。证明，抛物体的轴线与桌面的夹角为
+~$\theta=\arctan\smbsqrt{\sfrac32}$。
+\item 半径为~$1$~的球正好有一半沉入水中，球的密度为~$1$。现将球从水中取出，求所作的功。
 \end{exercise}
+
 \begin{exercise*}
-\item
+\item 设~$f(x),g(x)$~在~$\mintc ab$~上连续。证明
+\[
+  \mparenbb{\int_a^bf(x)\dif x}^{\msp 2}\mparenbb{\int_a^bg(x)\dif x}^{\msp 2}\leq
+  \mparenbb{\int_a^b\smbsqrt{f(x)+g(x)}\dif x}^{\msp 2}。
+\]
+\item 已知抛物线~$x^2=(p-4)y+a^2\mcond{p\neq4,a>0}$。确定~$p$~和~$a$~的值，使得
+\begin{exlist}
+  \item 抛物线与~$y=x+1$~相切；
+  \item 抛物线与~$x$~轴围成的图形绕~$x$~轴旋转有最大的体积。
+\end{exlist}
 \end{exercise*}
 
 

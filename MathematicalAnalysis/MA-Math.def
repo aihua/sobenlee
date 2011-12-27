@@ -30,8 +30,8 @@
 \let\AMSr@@t\r@@t
 
 \AfterEndPreamble{%
-  \forcsvlist\MAB@applimitsto{\lim,\sup,\inf,\limsup,\liminf,\max,\min}%
-  \forcsvlist\MAB@predpsto{\sum,\prod,\int,\iint,\iiint,\iiiint,\oint,\oiint,\oiiint}%
+  \forcsvlist\MAB@applimitsto{\lim,\sup,\inf,\limsup,\liminf,\max,\min,\bigcup,\bigcap}%
+  \forcsvlist\MAB@predpsto{\sum,\prod,\int,\iint,\iiint,\iiiint,\oint,\oiint,\oiiint,\idotsint}%
   \let\r@@t\AMSr@@t}
 
 \newrobustcmd*\marc[1]{\overparen{#1}}
@@ -50,10 +50,17 @@
     {\sqrt{\smash[b]{#2}}}
     {\sqrt[#1]{\smash[b]{#2}}}}
 
+\syslineskipcoeff{1}
+
 \renewmlist\matr[
    sep=&,
 sepsep=\\,
   wrap={\begin{pmatrix}}{\end{pmatrix}},
+]
+\renewmlist\matrB[
+   sep=&,
+sepsep=\\,
+  wrap={\Biggl\lparen\begin{matrix}}{\end{matrix}\Biggr\rparen},
 ]
 \newmlist\mvec[
    wrapcmd=\mlistnowrap,
@@ -69,7 +76,6 @@ wraponecmd=\mlistnowrap,
   wrapcmd=\mlistsup,
    wraponecmd,
 ]
-
 \newmset\mN{N}
 \newmset\mZ{Z}
 \newmset\mQ{Q}
@@ -79,9 +85,31 @@ wraponecmd=\mlistnowrap,
 \newmset\mP{P}
 \newmset\mF{F}
 
+\newcommand*\vecfuncelem[2]{\bm #2}
+\newcommand*\vecfuncparen[2]{#1\mparen{#2}}
+\newmlist\vecfunc[
+  headcmd=\mlisthead,
+  wrapcmd=\vecfuncparen,
+  elemcmd=\vecfuncelem,
+  wraponecmd,
+]
+\newmlist\@funcvec[
+  headcmd=\bm,
+  wrapcmd=\vecfuncparen,
+  elemcmd=\mlistelem,
+  wraponecmd,
+]
+\newmlist\@@funcvec[
+  headcmd=\bm,
+  wrapcmd=\vecfuncparen,
+  elemcmd=\vecfuncelem,
+  wraponecmd,
+]
+\newrobustcmd*\funcvec{\@ifstar{\@@funcvec}{\@funcvec}}
+
 \newrobustcmd*\mi{\mathrm i}
 \newrobustcmd*\me{\mathrm e}
-\newrobustcmd*\Beta{\mathord{B}}
+\newrobustcmd*\Beta{\mathord B}
 
 \let\slDelta\Delta
 \let\Delta\upDelta
@@ -92,6 +120,8 @@ wraponecmd=\mlistnowrap,
 \newrobustcmd*\difset[1][]{\mathord{#1\backslash}}
 \newrobustcmd*\mbinom[2]{\mathrm C_{#1}^{#2}}
 
+
+\newrobustcmd*\trans[1]{#1^{\mathrm T}}
 \newrobustcmd*\bound[1]{\partial#1}
 \newrobustcmd*\interior[1]{{#1}^\circ}
 \newrobustcmd*\closure[1]{\overline{#1}}
@@ -113,10 +143,10 @@ wraponecmd=\mlistnowrap,
 %%%    \rightarrowfill\cr}}}}
 
 \newrobustcmd*\comp{\mathchoice
-  {\mathop{\vcenter{\hbox{\small$\circ$}}}}
-  {\mathop{\vcenter{\hbox{\small$\circ$}}}}
-  {\mathop{\vcenter{\hbox{\footnotesize$\circ$}}}}
-  {\mathop{\vcenter{\hbox{\footnotesize$\circ$}}}}}
+  {\mathop{\hbox{\small$\circ$}}}
+  {\mathop{\hbox{\small$\circ$}}}
+  {\mathop{\hbox{\footnotesize$\circ$}}}
+  {\mathop{\hbox{\footnotesize$\circ$}}}}
 
 \newrobustcmd*\mrest[2][\bigr]{#1\rvert_{#2}}
 
@@ -127,6 +157,8 @@ wraponecmd=\mlistnowrap,
 \DeclareMathOperator{\sgn}{sgn}
 \DeclareMathOperator{\diag}{diag}
 \DeclareMathOperator{\grad}{grad}
+\DeclareMathOperator{\mdiv}{div}
+\DeclareMathOperator{\mrot}{rot}
 \DeclareMathOperator{\arccot}{arccot}
 \DeclareMathOperator{\BetaF}{B}
 \DeclareMathOperator{\GammaF}{\upGamma}
@@ -138,7 +170,10 @@ wraponecmd=\mlistnowrap,
 \providecommand*\Bigggl{\mathopen\Biggg}
 \providecommand*\Bigggr{\mathclose\Biggg}
 
-\mathtoolsset{centercolon,mathic}
+\mathtoolsset{
+  centercolon, mathic,
+  shortvdotsadjustabove=\z@,
+  shortvdotsadjustbelow=\z@}
 
 \MHInternalSyntaxOn
 \def\MakeShortMTPairedDelimiterCMD#1{
@@ -169,6 +204,8 @@ wraponecmd=\mlistnowrap,
 
 \MTDeclarePairedDelimiterX\mangle[2]{\langle}{\rangle}{#1,#2}
 \MTDeclarePairedDelimiterX\minp[2]{\lparen}{\rparen}{#1,#2}
+\MTDeclarePairedDelimiterX\mgcd[2]{\lparen}{\rparen}{#1,#2}
+\MTDeclarePairedDelimiterX\mlcm[2]{\lbrack}{\rbrack}{#1,#2}
 
 \MTDeclarePairedDelimiterX\minto[2]{\lparen}{\rparen}{#1,#2}
 \MTDeclarePairedDelimiterX\mintc[2]{\lbrack}{\rbrack}{#1,#2}

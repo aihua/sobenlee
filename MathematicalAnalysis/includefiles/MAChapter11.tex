@@ -4,12 +4,45 @@
 
 
 \chapter{数值级数}\label{ch:11}
+
 \section{数值级数的基本概念与简单性质}
 \subsection{数值级数的收敛与发散}
 \subsection{级数的基本性质}
 \begin{exercise}
-\item
+\item 求下列级数的和。
+\begin{exlistcols}
+  \item $\sum_{k=1}^\sinf\dfrac1{4k^2-1}$；
+  \item $\sum_{k=1}^\sinf\dfrac1{(3k-2)(3k+1)}$；
+  \item $\sum_{k=1}^\sinf\dfrac1{k(k+1)(k+2)}$；
+  \item $\sum_{k=1}^\sinf\dfrac{(-1)^{k-1}}{k(k+2)}$；
+  \item $\sum_{k=1}^\sinf\dfrac1{\smbsqrt{k(k+1)}\mparenb{\sqrt k+\sqrt{k+1}}}$；
+  \item $\sum_{k=1}^\sinf\arctan\dfrac1{2k^2}$。
+\end{exlistcols}
+\item 证明，
+\[
+  \sum_{n=1}^\sinf\frac1{n(n+m)}=\frac1m\mparenB{1+\frac12+\dotsb+\frac1m},
+\]
+其中~$m\geq1$~为固定的自然数。
+\item 证明，若级数~$\sum_{n=1}^\sinf a_n$~各项是正的，而把级数的项经过组合而得到的级数~$\sum_{n=1}^\sinf A_n$~收敛，则原来的级数
+也收敛。
+\item 设~$\lim_\ntoinf na_n=a\neq0$。证明，级数~$\sum_{n=1}^\sinf a_n$~发散。
+\item 证明，若级数~$\sum_{n=1}^\sinf a_n\mcond{a_n\geq0}$~收敛，则级数~$\sum_{n=1}^\sinf a_n^2$~也收敛。请举出例子说明，反之并
+不成立。
+\item 求下列级数的和。
+\begin{exlistcols}
+  \item $\sum_{n=1}^\sinf\dfrac{(-1)^{n-1}}{2^{n-1}}$；
+  \item $\sum_{n=1}^\sinf\dfrac{2n-1}{2^n}$；
+  \item $\sum_{n=1}^\sinf r^n\sin n\theta\mcond{\mabs r<1}$；
+  \item $\dfrac12+\sum_{n=1}^\sinf r^n\cos n\theta\mcond{\mabs r<1}$。
+\end{exlistcols}
+\item 研究级数~$\sum_{n=1}^\sinf\sin nx$~在~$x\in\mintc 0{2\pi}$~上的敛散性。
+\item 讨论下列级数的敛散性。
+\begin{exlistcols}
+  \item $\sum_{n=1}^\sinf\dfrac1{\smbsqrt{n(n+1)}}$；
+  \item $\sum_{n=1}^\sinf\dfrac1{\sqrt{n^3+1}}$。
+\end{exlistcols}
 \end{exercise}
+
 \section{正项级数}
 \subsection{正项级数收敛的充要条件}
 \subsection{比较判别法}
@@ -17,25 +50,267 @@
 \subsection{Raabe~判别法}
 \subsection{Cauchy~积分判别法}
 \begin{exercise}
-\item
+\item 判断下列级数的敛散性。
+\begin{exlistcols}
+  \item $\sum_{n=1}^\sinf\dfrac1{n^{\ln n}}$；
+  \item $\sum_{n=1}^\sinf\dfrac1{(\ln n)^{\ln n}}$。
+\end{exlistcols}
+\item 判断下列级数的敛散性。
+\begin{exlistcols}[3]
+  \item $\sum_{n=1}^\sinf\dfrac{n\ln n}{2^n}$；
+  \item $\sum_{n=1}^\sinf\dfrac{n^{n-1}}{(2n^2+n+1)^{\frac{n-1}2}}$；
+  \item $\sum_{n=1}^\sinf\dfrac{n!\,2^n}{n^n}$；
+  \item $\sum_{n=1}^\sinf\dfrac{n!\,3^n}{n^n}$；
+  \item $\sum_{n=1}^\sinf\dfrac{n^2}{\mparenB{n+\dfrac1n}^n}$；
+  \item $\sum_{n=1}^\sinf\dfrac{a^n}{1+a^{2n}}$；
+  \item $\dfrac31+\dfrac{3\times 5}{1\times 4}+\dfrac{3\times5\times7}{1\times4\times7}+
+         \dfrac{3\times5\times7\times9}{1\times4\times7\times10}+\dotsb$。
+\end{exlistcols}
+\item 用~Cauchy~判别法证明~$\sum_{n=1}^\sinf\dfrac1{2^{n+(-1)^n}}$~收敛，并说明~d'Alembert~判别法对此级数失效。
+\item 设~$a_n>0$，且~$\lim_\ntoinf\dfrac{a_{n+1}}{a_n}=\ell$。证明~$\lim_\ntoinf\sqrt[n]{a_n}=\ell$。并讨论反之是否成立。
+\item 设~$a_n>0$，且~$\dfrac{a_{n+1}}{a_n}\leq r<1$。证明，用~$\sum_{k=1}^na_k$~近似代替~$\sum_{n=1}^\sinf a_n$~的误差
+小于~$\dfrac r{1-r}a_n$。
+\item 用~Cauchy~积分判别法判别下列级数的敛散性。
+\begin{exlistcols}[4]
+  \item $\sum_{n=1}^\sinf\dfrac1{3^{\sqrt n}}$；
+  \item $\sum_{n=1}^\sinf\dfrac n{3^{\sqrt n}}$；
+  \item $\sum_{n=1}^\sinf\dfrac1{2^{\ln n}}$；
+  \item $\sum_{n=1}^\sinf\dfrac1{3^{\ln n}}$。
+\end{exlistcols}
+\item 利用~Taylor~级数估计无穷小量~$a_n$~的阶，从而判别下列级数的敛散性。
+\begin{exlistcols}
+  \item $\sum_{n=1}^\sinf2^n\sin\dfrac\pi{3^n}$；
+  \item $\sum_{n=1}^\sinf\dfrac1{\ln(n+1)}\sin\dfrac1n$；
+  \item $\sum_{n=1}^\sinf\dfrac1{\sqrt{n^3+1}}$；
+  \item $\sum_{n=1}^\sinf\mparenb{\sqrt{n+1}-\sqrt n}^p\ln\dfrac{n-1}{n+1}$；
+  \item $\sum_{n=3}^\sinf\ln^p\cos\dfrac\pi n$；
+  \item $\sum_{n=1}^\sinf\mparenb{\sqrt{n+a}-\sqrt[4]{n^2+n+b}}$；
+  \item $\sum_{n=1}^\sinf\mparenbb{\me-\mparenB{1+\dfrac1n}^n}^p$。
+\end{exlistcols}
+\item 若正项级数~$\sum_{n=1}^\sinf a_n$~发散，而~$S_n$~表示级数的第~$n$~部分和。证明级数~$\sum_{n=1}^\sinf\dfrac{a_n}{S_n}$~也
+发散。
+\item 若正项级数~$\sum_{n=1}^\sinf a_n$~收敛，且~$a_{n+1}\leq a_n$。证明~$\lim_\ntoinf n\cdot a_n=0$。\label{exer-11.2.9}
+\item 设
+\[%\LEFTRIGHT
+  \Bigggl\lbrace\begin{alignedat}{2}
+    a_n     & =\dfrac1{n^2}, &\quad & n\neq k^2,k=1,2,\dotsc;\\[2pt]
+    a_{k^2} & =\dfrac1{k^2}, &\quad & k=1,2,\dotsc 。
+  \end{alignedat}
+\]
+证明，
+\begin{exlistcols}
+  \item 级数~$\sum_{n=1}^\sinf a_n$~收敛；
+  \item 极限~$\lim_\ntoinf na_n\neq0$。
+\end{exlistcols}
+\item\label{exer-11.2.11} 设~$0<p_1<p_2<\dotsb<p_n<\dotsb$。证明~$\sum_{n=1}^\sinf\dfrac1{p_n}$~收敛当且仅
+当~$\sum_{n=1}^\sinf\dfrac n{p_1+p_2+\dotsb+p_n}$~收敛。
+\item 利用~Raabe~判别法判别法研究下列级数的敛散性。
+\begin{exlistcols}
+  \item $\sum_{n=1}^\sinf\mparenbb{\dfrac{(2n-1)!!}{(2n)!!}}^p\mcond{p\in\mR}$；
+  \item $\sum_{n=1}^\sinf\dfrac{\alpha(\alpha+1)\dotsm(\alpha+n-1)}{n!}\dfrac1{n^\beta}\mcond{\alpha,\beta>0}$。
+\end{exlistcols}
+\item 设~$a_n>0$。证明~$\limsup_\ntoinf n\mparenB{\dfrac{1+a_{n+1}}{a_n}-1}\geq1$。
+\item 设两个正项级数~$\sum_{n=1}^\sinf a_n$~与~$\sum_{n=1}^\sinf b_n$~都发散，讨论下列级数的敛散性。
+\begin{exlistcols}
+  \item $\sum_{n=1}^\sinf\min\mrangeb{a_n}{b_n}$；
+  \item $\sum_{n=1}^\sinf\max\mrangeb{a_n}{b_n}$。
+\end{exlistcols}
+\item 设正项级数~$\sum_{n=1}^\sinf a_n$~收敛。证明~$\lim_\ntoinf\dfrac1n\sum_{k=1}^nka_k=0$，并由此推证\ref{exer-11.2.9}。
 \end{exercise}
+
 \section{任意项级数}
 \subsection{交错级数收敛判别法}
 \subsection{绝对收敛与条件收敛}
 \subsection{Dirichlet~判别法}
 \begin{exercise}
-\item
+\item 不用~Cauchy~准则，证明~$\sum_{n=1}^\sinf\mabsb{a_n}$~收敛蕴涵~$\sum_{n=1}^\sinf a_n$~收敛。
+\item 若级数~$\sum_{n=1}^\sinf a_n$~收敛，且~$\lim_\ntoinf\dfrac{b_n}{a_n}=1$，讨论~$\sum_{n=1}^\sinf b_n$~的敛散性。可以研究
+以下例子，
+\[
+  a_n=\frac{(-1)^n}{\sqrt n},\qquad b_n=a_n+\frac1n 。
+\]
+\item 证明，若级数~$A\coloneq\sum_{n=1}^\sinf a_n$~及~$B\coloneq\sum_{n=1}^\sinf b_n$~皆收敛，且
+\[
+  a_n\leq c_n\leq b_n\mcond*{n=1,2,\dotsc}。
+\]
+证明级数~$C\coloneq\sum_{n=1}^\sinf c_n$~也收敛。若级数~$A$~与~$B$~皆发散，讨论级数~$C$~的敛散性。
+\item 级数~$\sum_{n=1}^\sinf a_n$~满足
+\begin{exlistcols}
+  \item $\lim_\ntoinf a_n=0$；
+  \item $\sum_{n=1}^\sinf\mparenb{a_{2n-1}+a_{2n}}$~收敛。
+\end{exlistcols}
+证明~$\sum_{n=1}^\sinf a_n$~收敛。
+\item 证明，若级数~$\sum_{n=1}^\sinf a_n^2$~及~$\sum_{n=1}^\sinf b_n^2$~收敛，则级数
+\[
+  \sum_{n=1}^\sinf\mabsb{a_nb_n},\quad\sum_{n=1}^\sinf (a_n+b_n)^2,\quad \sum_{n=1}^\sinf \dfrac{\mabs{a_n}}n
+\]
+也收敛。
+\item 下列是非题，正确的请给予证明，错误的请举出反例。
+\begin{exlistcols}
+  \item 若~$a_n>0$，则~$a_1-a_1+a_2-a_2+a_3-a_3+\dotsb$~收敛；
+  \item 若~$a_n\to0$，则~$a_1-a_1+a_2-a_2+a_3-a_3+\dotsb$~收敛；
+  \item 若~$\sum_{n=1}^\sinf a_n$~收敛，则~$\sum_{n=1}^\sinf(-1)^na_n$~收敛；
+  \item 若~$\sum_{n=1}^\sinf a_n$~收敛，则~$\sum_{n=1}^\sinf a_n^2$~收敛；
+  \item 若~$\sum_{n=1}^\sinf a_n^2$~收敛，则~$\sum_{n=1}^\sinf a_n^3$~收敛；
+  \item 若~$\sum_{n=1}^\sinf a_n$~发散，则~$a_n\nto0$；
+  \item 若~$\sum_{n=1}^\sinf a_n$~收敛，且~$b_n\to1$，则~$\sum_{n=1}^\sinf a_nb_n$~收敛；
+  \item 若~$\sum_{n=1}^\sinf\mabsb{a_n}$~收敛，且~$b_n\to1$，则~$\sum_{n=1}^\sinf a_nb_n$~收敛；
+  \item 若~$\sum_{n=1}^\sinf a_n$~收敛，且~$a_n>0$，则~$\lim_\ntoinf na_n=0$。
+\end{exlistcols}
+\item 判别下列级数的敛散性。
+\begin{exlistcols}
+  \item $\sum_{n=1}^\sinf(-1)^n\dfrac{\sqrt n}{n+100}$；
+  \item $\sum_{n=1}^\sinf\dfrac{\ln n}n\sin\dfrac n2\pi$；
+  \item $\sum_{n=1}^\sinf(-1)^n\dfrac{1+\dfrac12+\dotsb+\dfrac1n}n$；
+  \item $\sum_{n=1}^\sinf\dfrac{(-1)^n}{\sqrt n+(-1)^n}$；
+  \item $\sum_{n=1}^\sinf\sin\mparenb{\pi\sqrt{n^2+1}}$；
+  \item $\sum_{n=1}^\sinf\dfrac{(-1)^{\frac{n(n-1)}2}}{3^n}$；
+  \item $\sum_{n=1}^\sinf\dfrac{(-1)^n}{n^p}\mcond{p>0}$；
+  \item $\sum_{n=1}^\sinf\dfrac1{3^n}\sin\dfrac n2\pi$；
+  \item $\sum_{n=1}^\sinf(-1)^n\dfrac{\cos2n}n$；
+  \item $\sum_{n=1}^\sinf(-1)^n\dfrac{\sin^2n}n$；
+  \item $\sum_{n=2}^\sinf\mparenbb{\dfrac1{\sqrt n-1}-\dfrac1{\sqrt n+1}}$。
+\end{exlistcols}
+\item\label{exer-11.3.9}设~$b_n>0$，且~$\lim_\ntoinf n\mparenB{\dfrac{b_n}{b_{n+1}}-1}>0$。证明，级
+数~$\sum_{n=1}^\sinf(-1)^{n+1}b_n$~收敛。
+\item 利用\ref{exer-11.3.9}~讨论下列级数的敛散性。
+\begin{exlistcols}
+  \item $\sum_{n=1}^\sinf(-1)^{n+1}\mparenbb{\dfrac{(2n-1)!!}{(2n)!!}}^p$；
+  \item $1+\sum_{n=1}^\sinf\dfrac{\alpha(\alpha-1)\dotsm(\alpha-n+1)}{n!}$。
+\end{exlistcols}
+\item 设~$p>0$。证明级数~$\sum_{n=1}^\sinf\dfrac{(-1)^{n+1}}{n^p}$~的和介于~$\dfrac12$~与~$1$~之间。
+\item 讨论下列级数的敛散性。
+\begin{exlistcols}
+  \item $\sum_{n=1}^\sinf(-1)^n\dfrac{\sin n}n$；
+  \item $\sum_{n=1}^\sinf\dfrac{(-1)^{n+1}}n\cdot\dfrac a{1+a^n}\mcond{a>0}$；
+  \item $\sum_{n=1}^\sinf\dfrac{\sin n\sin n^2}n$；
+  \item $\sum_{n=1}^\sinf\dfrac{\sin\mparenB{n+\dfrac1n}}n$。
+\end{exlistcols}
+\item 设~$\sum_{n=1}^\sinf a_n$~收敛，且~$\lim_\ntoinf na_n=0$。证明~$\sum_{n=1}^\sinf n\mparenb{a_n-a_{n+1}}$~收敛，并且
+\[
+  \sum_{n=1}^\sinf n\mparenb{a_n-a_{n+1}}=\sum_{n=1}^\sinf a_n 。
+\]
+\item 对序列~$\mbrace{a_k}$~与~$\mbrace{b_k}$~分别定义~$S_n=\sum_{k=1}^na_k$~与~$\Delta b_k=b_{k+1}-b_k$。证明，
+\begin{exlist}
+  \item 如果~$\mbrace{S_n}$~有界，$\sum_{k=1}^\sinf\mabsb{\Delta b_k}$~收敛，且~$\lim_\ntoinf b_n=0$，%
+  则~$\sum_{k=1}^\sinf a_kb_k$~收敛，且有
+  \[
+    \sum_{k=1}^\sinf a_kb_k=-\sum_{k=1}^\sinf S_k\Delta b_k;
+  \]
+  \item 如果~$\sum_{k=1}^\sinf a_k$~与~$\sum_{k=1}^\sinf\mabsb{\Delta b_k}$~都收敛，则~$\sum_{k=1}^\sinf a_kb_k$~收敛。
+\end{exlist}
+\item 设正项数列~$\mbrace{x_n}$~单调上升且有界。证明~$\sum_{n=1}^\sinf\mparenB{1-\dfrac{x_n}{x_{n+1}}}$~收敛。
+\item 用~Taylor~公式讨论下列级数的敛散性与绝对收敛性。
+\begin{exlistcols}
+  \item $\sum_{n=1}^\sinf\dfrac{(-1)^{n-1}}{\mparenb{\sqrt n+(-1)^{n-1}}^p}$；
+  \item $\sum_{n=1}^\sinf\ln\mparenbb{1+\dfrac{(-1)^n}{n^p}}$；
+  \item $\sum_{n=1}^\sinf\dfrac{(-1)^n}{\mparenb{n+(-1)^n}^p}$；
+  \item $\sum_{n=1}^\sinf\dfrac{\sin\dfrac n4\pi}{n^p+\sin\dfrac n4\pi}$。
+\end{exlistcols}
+\item 研究下列级数的敛散性与绝对收敛性（其中~$p>0$）。
+\begin{exlistcols}
+  \item $\sum_{n=1}^\sinf\dfrac{(-1)^n}{n^p}$；
+  \item $\sum_{n=1}^\sinf\dfrac{(-1)^n}{n^p+\dfrac1n}$；
+  \item $\sum_{n=1}^\sinf\dfrac{(-1)^n}{\mparenb{n+(-1)^n}^p}$；
+  \item $\sum_{n=1}^\sinf\dfrac{(-1)^{\mfloor{\sqrt n}}}{n^p}$；
+  \item $\sum_{n=1}^\sinf(-1)^{n-1}\dfrac{2^n\sin^{2n}x}n$；
+  \item $\sum_{n=1}^\sinf\mparenbb{\dfrac x{a_n}}^{\msp n}$，这里~$\lim_\ntoinf a_n=a>0$；
+  \item $1+\sum_{n=1}^\sinf\dfrac{(2n-1)!!}{(2n)!!}\cdot\dfrac{(-1)^n}{2n+1}$；
+  \item $\sum_{n=1}^\sinf\dfrac{(-1)^{n-1}n!}{(x+1)(x+2)\dotsm(x+n)}\mcond{x>0}$；
+  \item $\sum_{n=1}^\sinf(-1)^nr^{n+\sqrt n}\mcond{r>0}$；
+  \item $\sum_{n=1}^\sinf n!\,\mparenbb{\dfrac xn}^n$。
+\end{exlistcols}
 \end{exercise}
+
 \section{收敛级数的性质}
 \subsection{无穷级数的可结合性}
 \subsection{无穷级数的可交换性问题}
 \subsection{级数的乘法}
 \begin{exercise}
-\item
+\item 设~$\sum_{n=1}^\sinf a_n$~收敛。证明，将相邻奇偶项交换后所成的级数收敛，且具有相同的和数。
+\item 证明，若将收敛级数的各项重新排列，而使每一项离开原有的位置不超过~$m$~个位置（$m$~为预先给定的数），则其和不变。
+\item%%% 证明，
+\begin{exlist}\FixExHead
+  \item 若级数~$\sum_{n=1}^\sinf a_n$~收敛，则把该级数的项经过组合而不变更其先后次序所得的级数
+  \[
+    \sum_{n=1}^\sinf A_n,\quad A_n\coloneq\sum_{i=p_n}^{p_{n+1}-1}a_i\mcond*{p_1=1<p_2<\dotsb}
+  \]
+  也收敛，且有相同的和。并讨论反之是否成立，即~$\sum_{n=1}^\sinf A_n$~收敛是否蕴涵~$\sum_{n=1}^\sinf a_n$~收敛；
+  \item 若~$A_n$~中各项~$a_i$~同号，且~$A_n$~与~$A_{n+1}$~异号，则~$\sum_{n=1}^\sinf A_n$~收敛蕴涵~$\sum_{n=1}^\sinf a_n$~收敛。
+\end{exlist}
+\item 设~$p_n>0$，级数~$\sum_{n=1}^\sinf\dfrac1{p_n}$~收敛。证明，
+\begin{exlist}
+  \item $\sum_{n=1}^\sinf\dfrac n{p_1+p_2+\dotsb+p_n}$~收敛；（参看\ref{exer-11.2.11}）
+  \item $\lim_\ntoinf\dfrac{n^2}{p_1+p_2+\dotsb+p_n}=0$。
+\end{exlist}
+\item 证明，由级数~$\sum_{n=1}^\sinf\dfrac{(-1)^{n-1}}{\sqrt n}$~的项组合成的级数
+\[
+  1+\frac1{\sqrt 3}-\frac1{\sqrt 2}+\frac1{\sqrt 5}+\frac1{\sqrt 7}-\frac1{\sqrt 4}+\dotsb
+\]
+发散。
+\item 已知
+\[
+  H_n=\sum_{k=1}^n\frac1k=\gamma+\ln n+r_n,
+\]
+这里~$\gamma$~为~Euler~常数，而~$\lim_\ntoinf r_n=0$。证明，
+\begin{exlist}
+  \item $\dfrac12+\dfrac14+\dotsb+\dfrac1{2m}=\dfrac12\ln m+\dfrac12\gamma+\dfrac12r_m$；
+  \item 若把级数~$\sum_{n=1}^\sinf\dfrac{(-1)^{n+1}}n$~的各项重新安排，而使挨次~$p$~个正项的一组与挨次~$q$~个负项的一组相
+  交替，则新级数的和为
+  \[
+    \ln 2+\frac12\ln\frac pq。
+  \]
+\end{exlist}
+\item 证明，级数~$\sum_{n=1}^\sinf\dfrac{(-1)^{n+1}}n$~的平方（Cauchy~乘积）是收敛的。
+\item 设~$x_n>0$，而~$\lim_\ntoinf x_n=0$，并且~$\lim_\ntoinf\dfrac{x_{n+1}}{x_n}=b$。证明~$b\leq1$。
+\item 通过序列转化为级数的方法，证明下面两个序列收敛。
+\begin{exlistcols}
+  \item $x_n=\sum_{k=1}^n\dfrac1{\sqrt k}-2\sqrt n$；
+  \item $x_n=\sum_{k=1}^n\dfrac{\ln k}k-\dfrac{\ln^2n}2$。
+\end{exlistcols}
+\item 求级数
+\[
+  \mparenbb{\sum_{n=1}^\sinf x^n}^{\msp 3}\mcond*{\mabs x<1}
+\]
+的和。
+\item 令~$\me^x=\sum_{n=0}^\sinf\dfrac{x^n}{n!}$。证明~$\me^{x+y}=\me^x\cdot\me^y$。
 \end{exercise}
+
 \section{广义积分与级数的联系}
+
 \begin{exercise*}
-\item
+\item 设~$m\in\mN$。证明，
+\begin{exlist}
+  \item $\dfrac1m=\mbinom m1-\mbinom m2\mparenB{1+\dfrac12}+\mbinom m3\mparenB{1+\dfrac12+\dfrac13}-\dotsb
+          +(-1)^{m-1}\mbinom mm\mparenB{1+\dfrac12+\dotsb+\dfrac1m}$；
+  \item $\sum_{k=1}^\sinf\dfrac1{k(k+1)(k+2)\dotsm(k+m)}=\dfrac1{m!\,m}$。
+\end{exlist}
+\item 设~$\sum_{n=0}^\sinf\dfrac{n^m}{n!}=\me\cdot p_m$。证明，
+\begin{exlistcols}
+  \item $p_{m+1}=1+mp_1+\dfrac{m(m-1)}{2!}p_2+\dotsb+p_m$；
+  \item $p_m$~都是正整数。
+\end{exlistcols}
+\item 设~$\lim_\ntoinf a_n=\ell$。证明，
+\begin{exlistcols}
+  \item 当~$\ell>1$~时，级数~$\sum_{n=1}^\sinf\dfrac1{n^{a_n}}$~收敛；
+  \item 当~$\ell<1$~时，级数~$\sum_{n=1}^\sinf\dfrac1{n^{a_n}}$~发散。
+\end{exlistcols}
+并讨论~$\ell=1$~时会有什么结论。
+\item 设正项级数~$\sum_{n=1}^\sinf a_n$~发散，且~$S_n=\sum_{k=1}^na_k$。证明，级数~$\sum_{n=1}^\sinf\dfrac{a_n}{S_n^p}$~
+当~$p>1$~时收敛，而当~$p\leq 1$~时发散。
+\item 设正项级数~$\sum_{n=1}^\sinf a_n$~收敛，且~$r_n=\sum_{k=n}^\sinf a_k$。证明，级数~$\sum_{n=1}^\sinf\dfrac{a_n}{r_n^p}$~
+当~$p<1$~时收敛，而当~$p\geq 1$~时发散。
+\item 设~$p>1$。证明，级数~$\sum_{n=1}^\sinf\dfrac1{(n+1)n^{\sfrac1p}}<p$。
+\item 设~$0<x_1<\pi$，而~$x_{n+1}=\sin x_n$。讨论级数~$\sum_{n=1}^\sinf x_n^p$~的敛散性。
+\item 设~$x_{n+1}=x_n(1-qx_n)$，其中~$0<q<1$~且~$0<x_1<\dfrac1q$。讨论级数~$\sum_{n=1}^\sinf x_n$~与~$\sum_{n=1}^\sinf x_n^2$~的
+敛散性。
+\item 设~$p_n>0$，而~$\sum_{n=1}^\sinf\dfrac1{p_n}$~收敛。证明，级
+数~$\sum_{n=1}^\sinf\dfrac{n^2}{(p_1+p_2+\dotsb+p_n)^2}p_n$~收敛。
+\item 设~$b_n$~单调下降收敛于零，且级数~$\sum_{n=1}^\sinf a_nb_n$~收敛。令~$S_n=\sum_{k=1}^na_k$。证明，
+\begin{exlist}
+  \item $\lim_\ntoinf S_n\cdot b_n=0$；
+  \item 级数~$\sum_{n=1}^\sinf(b_n-b_{n+1})$~收敛，且~$\sum_{n=1}^\sinf a_nb_n=\sum_{n=1}^\sinf(b_n-b_{n+1})$。
+\end{exlist}
 \end{exercise*}
 
 

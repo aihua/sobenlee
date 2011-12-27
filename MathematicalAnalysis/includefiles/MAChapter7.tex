@@ -8,44 +8,765 @@
 \subsection{实际问题中的例}
 \subsection{定积分的概念及几何意义}
 \begin{exercise}
-\item
+\item 按定义判断下列函数在给定区间上是否可积？倘若可积，试求出积分值。
+\begin{exlistcols}
+  \item $f(x)=1$，$x\in\mintc {-1}1$；
+  \item $f(x)=x$，$x\in\mintc {-1}1$；
+  \item $f(x)=\begin{Bdcases}
+    \frac1x, & \mabs x\leq1~\text{且}~x\neq0; \\ 0 , & x=0 。
+  \end{Bdcases}$
+\end{exlistcols}
+\item 已知下列函数可积，用定义求下列积分，分法任意\mcond{b>a>0}。
+\begin{exlistcols}
+  \item $\int_a^bx\dif x$~（按算术平均值取点）；
+  \item $\int_a^b\dfrac1{x^2}\dif x$~（按几何平均值取点）。
+\end{exlistcols}
+\item 利用定积分的几何意义，求下列积分。
+\begin{exlistcols}[3]
+  \item $\int_a^bx\dif x$；
+  \item $\int_a^b\txts\sqrt{(x-a)(b-x)}\dif x$；
+  \item $\int_a^b\mabsbb{x-\dfrac{a+b}2}\dif x$。
+\end{exlistcols}
+\item 设~$f(x)$~在~$\mintc ab$~上可积。证明，
+\begin{exlist}
+  \item $\int_a^bf(x)\dif x=\lim_\ntoinf\dfrac{b-a}n\sum_{i=0}^{n-1}f\mparenB{a+\dfrac{i(b-a)}n}$；
+  \item $\int_a^bf(x)\dif x=\lim_\ntoinf\dfrac{b-a}n\sum_{i=0}^{n-1}f\mparenB{a+\dfrac{(i+1)(b-a)}n}$；
+  \item $\int_a^bf(x)\dif x=\lim_\ntoinf\dfrac{b-a}n\mparenbb{f(a)+2f\mparenB{a+\dfrac{b-a}n}+\dotsb+
+        2f\mparenB{a+\dfrac{(n-1)(b-a)}n}+f(b)}$。
+\end{exlist}
+\item 对任意~$c\in\minto ab$，令
+\[
+  f(x)=\begin{Bdcases}
+    1,& x=c;\\
+    0,& x\in\mintc ab\difset\mbrace c 。
+  \end{Bdcases}
+\]
+证明~$\int_a^bf(x)\dif x=0$。
+\item 设~$f(t)$~在~$\mintc{a+c}{b+c}$~上可积。证明，$f(x+c)$~在~$\mintc ab$~上可积，且
+\[
+  \int_a^bf(x+c)\dif x=\int_{a+c}^{b+c}f(t)\dif t 。
+\]
+\item 设~$f(x)$~在~$\mintc ab$~上为可积的凸函数。证明，
+\[
+  (b-a)f\mparenB{\dfrac{a+b}2}\leq\int_a^bf(x)\dif x 。
+\]
 \end{exercise}
+
 \section{Newton-Leibniz~公式}
 \begin{exercise}
-\item
+\item 若~$F(x)=\arctan\dfrac1x$，那么~$F'(x)=-\dfrac1{1+x^2}$，积分~$\int_{-1}^1-\dfrac{\dif x}{1+x^2}$~应取负值；但从
+另一方面看，
+\[
+  \int_{-1}^1-\dfrac{\dif x}{1+x^2}=\arctan\dfrac1x\biggr\vert_{-1}^1=\frac\pi2 。
+\]
+请解释这个矛盾。
+\item 计算下列定积分。
+\begin{exlistcols}[4]
+  \item $\int_0^\pi\cos^2x\dif x$；
+  \item $\int_0^a\sqrt{a-x}\dif x$；
+  \item $\int_0^ax\sqrt{a-x}\dif x$；
+  \item $\int_{-4}^{-3}\dfrac{\dif x}{x\sqrt{x^2-4}}$。
+\end{exlistcols}
+\item 求下列极限。
+\begin{exlistcols}
+  \item $\lim_\ntoinf\sum_{k=1}^n\dfrac1n\sin\dfrac kn\pi$；
+  \item $\lim_\ntoinf\mparenB{\dfrac1n+\dfrac1{n+1}+\dotsb+\dfrac1{2n}}$；
+  \item $\lim_\ntoinf\dfrac1n\sqrt[n]{n(n+1)\dotsm(2n-1)}$。
+\end{exlistcols}
+\item%% 证明，
+\begin{exlist}\FixExHead
+  \item $\lim_\ntoinf\sum_{\substack{k=0\\ k\neq n}}^{2n}\dfrac{2n}{n^2+k^2}=2\arctan 2$；
+  \item 若~$S_n(\theta)=\sum_{k=1}^n\dfrac1n\cos\dfrac kn\theta$，则~
+  $
+    \adjustlimits\lim_{\theta\to0}\lim_\ntoinf S_n(\theta)=
+    \adjustlimits\lim_\ntoinf\lim_{\theta\to0}S_n(\theta)=1 。
+  $
+\end{exlist}
+\item 求下列定积分。
+\begin{exlistcols}
+  \item $\int_0^\pi\cos x\dif x$；
+  \item $\int_{-\frac12}^{\frac12}\dfrac{\dif x}{\sqrt{1-x^2}}$；
+  \item $\int_{-1}^1\dfrac{\dif x}{1+x^2}$；
+  \item $\int_{-1}^1\dfrac{\dif x}{x^2-2x\cos\alpha+1}\mcond{0<\alpha<\pi}$；
+  \item $\int_{-\frac\pi2}^{\frac\pi2}\dfrac{\dif x}{\sin^2x+2\cos^2x}$；
+  \item $\int_a^b\sin\mabs x\dif x$；
+  \item $\int_0^{\frac\pi2}\dfrac{\dif x}{a^2\sin^2x+b^2\cos^2x}\mcond{a,b>0}$；
+  \item $\int_0^{\frac\pi2}\dfrac{\cos x}{a^2\sin^2x+b^2\cos^2x}\dif x\mcond{a,b>0}$；
+  \item $\int_{-1}^1\mabs{1-x}\dif x$；
+  \item $\int_0^{2\pi}\dfrac{\dif x}{1+\e\cos x}\mcond{0<\e<1}$。
+\end{exlistcols}
 \end{exercise}
+
 \section{可积函数}
 \subsection{函数可积的充分必要条件}
 \subsection{可积函数类}
 \begin{exercise}
-\item
+\item 判断下列函数的可积性。
+\begin{exlistcols}
+  \item $f(x)$~在~$\mintc01$~上有界，不连续点为~$x=\dfrac1n\mcond{n=1,2,\dotsc}$；
+  \item $f(x)=\begin{cbbdcases}
+    \frac1x-\mfloorbb{\frac1x}, & x\neq0;\\
+    0, & x=0 ;
+  \end{cbbdcases}$
+  \item $f(x)=\begin{cBdcases}
+    1\Big/\mfloorbb{\frac1x}, & x\neq0;\\
+    0, & x=0;
+  \end{cBdcases}$
+  \item $f(x)=\begin{cbbdcases}
+    0, & x=0,\frac1n;\\
+    \sgn\mparenB{\sin\frac\pi x}, & x\in\mintoc 01~\text{且}~x\neq\frac1n 。
+  \end{cbbdcases}$
+\end{exlistcols}
+\item 证明，当
+\[
+  \lambda=\max_{1\leq k\leq n}\Delta x_k\to 0
+\]
+时，Darboux~大和以上积分为极限，而~Darboux~小和以下积分为极限。
+\item 设
+\[
+  f^+(x)=\max\mrange{f(x)}0,\qquad
+  f^-(x)=\min\mrange{f(x)}0 。
+\]
+证明，$f(x)\in R\mintc ab$~当且仅当~$f^+(x)\in R\mintc ab$~与~$f^-(x)\in R\mintc ab$~同时成立。
+\item 设~$\max\mrange{f(x)}{g(x)}\in R\mintc ab$，且~$\min\mrange{f(x)}{g(x)}\in R\mintc ab$。证
+明~$f(x)\cdot g(x)\in R\mintc ab$。
+\item 设~$f(x)\in R\mintc ab$。证明~$\me^{f(x)}\in R\mintc ab$。
+\item 设~$f(x)\in R\mintc ab$，并且~$f(x)\geq\alpha>0$。证明，
+\begin{exlistcols}
+  \item $\dfrac1{f(x)}\in R\mintc ab$；
+  \item $\ln f(x)\in R\mintc ab$。
+\end{exlistcols}
+\item 设~$f(x)\in R\mintc ab$。证明，对任意~$\e>0$，存在逐段为常数的函数~$\phi(x)$，使得
+\[
+  \int_a^b\mabsb{f(x)-\phi(x)}\dif x<\e 。
+\]
+\item 设~$f(x)$~在~$\mintc ab$~上有界，定义
+\[
+  \omega_f\mintc ab=\sup_{x\in\mintc ab}\mbraceb{f(x)}-\inf_{x\in\mintc ab}\mbraceb{f(x)} 。
+\]
+证明
+\[
+  \omega_f\mintc ab=\sup_{x',x''\in\mintc ab}\mbraceb{\mabsb{f(x')-f(x'')}} 。
+\]
+\item 设~$f(x)$~在~$x_0$~附近有定义且有界。定义
+\[
+  \omega_f(x_0)=\lim_\ntoinf\omega_f\mintoB{x_0-\frac1n}{x_0+\frac1n} 。
+\]
+证明，$f(x)$~在~$x_0$~连续当且仅当~$\omega_f(x_0)=0$。
+\item 设~$f(x),g(x)\in R\mintc ab$。证明，
+\[
+  \lim_{\lambda\to0}\sum_{i=0}^{n-1}f(\xi_i)g(\eta_i)\Delta x_i=\int_a^bf(x)g(x)\dif x,
+\]
+其中~$\xi_i,\eta_i\in\mintc{x_i}{x_{i+1}}$，$\Delta x_i=x_{i+1}-x_i$，$i=0,1,\dotsc,n-1$，$x_0=a$，$x_n=b$，%
+$\lambda=\max_{0\leq i\leq n-1}\Delta x_i$。
 \end{exercise}
+
 \section{定积分的性质}
 \subsection{定积分的基本性质}
 \subsection{积分第一中值定理}
 \begin{exercise}
-\item
+\item 设~$f(x)\in C\mintc ab$，且~$\int_a^bf^2(x)\dif x=0$。证明~$f(x)\equiv 0$，$x\in\mintc ab$。
+\item 设
+\[
+  f(x)=\begin{Bdcases}
+    \alpha_i, & x=c_i\in\mintc ab;\\
+    0, & x\in\mintc ab~\text{但}~x\neq c_i,
+  \end{Bdcases}
+\]
+其中~$i=1,2,\dotsc,m$。证明~$\int_a^bf(x)\dif x=0$。
+\item 设~$f(x)\in R\mintc ab$，$g(x)$~与~$f(x)$~只在有限个点上取值不等。证明~$g(x)\in R\mintc ab$，并且
+\[
+  \int_a^bg(x)\dif x=\int_a^bf(x)\dif x 。
+\]
+\item%%% 证明，
+\begin{exlist}\FixExHead
+  \item 若~$t>0$，则~$\ln t\leq t-1$；
+  \item 若~$f(x)\in R\mintc ab$，且~$f(x)\geq\alpha>0$，则
+  \[
+    \int_0^1\ln f(x)\dif x\leq\ln\int_0^1f(x)\dif x;
+  \]
+  \item 若~$f(x)\in R\mintc ab$，则
+  \[
+    \exp\mbracebb{\int_0^1f(x)\dif x}\leq\int_0^1\me^{f(x)}\dif x;
+  \]
+  \item 若~$a_i>0\mcond{i=1,\dotsc,n}$，则
+  \[
+    \sqrt[n]{a_1\dotsm a_n}\leq\dfrac{a_1+\dotsb+a_n}n 。
+  \]
+\end{exlist}
+\item 设~$f(x),g(x)\in R\mintc ab$。证明
+\[
+  \mabsbb{\int_a^bf(x)\cdot g(x)\dif x}\leq\mparenbb{\int_a^bf^2(x)\dif x}^{\msp\frac12}
+  \cdot\mparenbb{\int_a^bg^2(x)\dif x}^{\msp\frac12},
+\]
+而且等号成立当且仅当~$g(x)=\lambda f(x)$，这里~$\lambda$~为某常数。
+\item 设~$f(x),g(x)\in R\mintc ab$。证明
+\[
+  \mabsbb{\int_a^b\mparenb{f(x)+g(x)}^2\dif x}\leq\mparenbb{\int_a^bf^2(x)\dif x}^{\msp\frac12}
+  +\mparenbb{\int_a^bg^2(x)\dif x}^{\msp\frac12},
+\]
+而且等号成立当且仅当~$g(x)=\lambda f(x)$，这里~$\lambda\geq0$~为某常数。
+\item 设~$f(x)\in R\mintc ab$，且~$f(x)\geq\alpha>0$。证明
+\[
+  \int_0^1\frac1{f(x)}\dif x\geq\mparenbb{\int_0^1f(x)\dif x}^{\msp-1}。
+\]
+\item 证明，
+\begin{exlistcols}
+  \item $\lim_{b\to1}\int_0^b\dfrac{\sin x}{\sqrt{1-x^2}}\dif x\leq1$；
+  \item $\lim_{b\to1}\int_0^b\dfrac{\cos x}{\sqrt{1-x^2}}\dif x\geq1$。
+\end{exlistcols}
+\item 设
+\[
+  I_n=\int_0^1\frac{x^n}{1+x}\dif x 。
+\]
+试建立~$I_n$~的递推公式，并利用所得结果证明
+\[
+  \lim_\ntoinf\mparenB{1-\frac12+\frac13-\dotsb+(-1)^{n-1}\frac1n}=\ln 2 。
+\]
+\item\begin{exlistcols}
+  \item 建立~$I_n=\int_0^{\frac\pi2}\dfrac{\sin^2nt}{\sin t}\dif t$~的递推公式；
+  \item 证明~$\lim_\ntoinf\dfrac2{\ln n}\int_0^{\frac\pi2}\dfrac{\sin^2nt}{\sin t}\dif t=1$。
+\end{exlistcols}
+\item 证明下列极限。
+\begin{exlistcols}
+  \item $\lim_\ntoinf\int_0^b(1-x^2)^n\dif x=0\mcond{0<b<1}$；
+  \item $\lim_\ntoinf\int_0^1(1-x^2)^n\dif x=0$；
+  \item $\lim_\ntoinf\int_0^{\frac\pi2}\sin^nx\dif x=0$。
+\end{exlistcols}
+\item\begin{exlist}
+  \item 任意给定~$\delta>0$，证明，
+  \[
+    \lim_\ntoinf\frac{\dps\int_\delta^1(1-t^2)^n\dif t}{\dps\int_0^1(1-t^2)^n\dif t}=0;
+  \]
+  \item 设~$f(x)\in C\mintc{-1}1$，令~$\lambda_n=2\int_0^1(1-t^2)^n\dif t$。证明，
+  \[
+    \lim_\ntoinf\frac1{\lambda_n}\int_{-1}^1(1-t^2)^nf(t)\dif t=f(0)。
+  \]
+\end{exlist}
+\item 设~$a,b>0$，而~$f(x)\geq0$，且~$f(x)\in R\mintc ab$，又知~$\int_{-a}^bxf(x)\dif x=0$。证明，
+\[
+  \int_{-a}^bx^2f(x)\dif x\leq ab\int_{-a}^bf(x)\dif x 。
+\]
+\item 设~$f(x)\geq0$~与~$f''(x)\leq0$~对任意~$x\in\mintc ab$~成立。证明~$f(x)\leq\dfrac2{b-a}\int_a^bf(x)\dif x$。
+\item 设~$f(x)\in C\mintc ab$。证明~$f(x)$~是凸函数当且仅当
+\[
+  f(x)\leq\frac1{2h}\int_{-h}^hf(x+t)\dif t
+\]
+对任意~$\mintc{x-h}{x+h}\subset\mintc ab$~成立。
+\item 设~$f'(x)\in C\mintc ab$。证明
+\[
+  \max_{x\in\mintc ab}\mbraceb{\mabsb{f(x)}}\leq\mabsbb{\frac1{b-a}\int_a^bf(x)\dif x}+\int_a^b\mabsb{f'(x)}\dif x 。
+\]
+\item 设~$f(x)\in R\mintc ab$。证明，函数~$f(x)$~具有积分的连续性，即
+\[
+  \lim_{h\to0}\int_a^b\mabsb{f(x+h)-f(x)}\dif x=0 。
+\]
+这里假设当~$x$~在~$\mintc ab$~外时，$f(x)$~的取值为零。
+\item 我们称函数~$S(x)$~是区间~$\mintc ab$~上的阶梯函数，是指区间~$\mintc ab$~可以分割为有限个子区间，而~$S(x)$~在每一个子区间上
+取常数值。证明，
+\begin{exlist}
+  \item 阶梯函数~$S(x)$~一定可积；
+  \item 若~$f(x)\in R\mintc ab$，则对于任意给定的~$\e>0$，存在两个阶梯函数~$S_1(x)$~与~$S_2(x)$，满足
+  \[
+    S_1(x)\leq f(x)\leq S_2(x)\mcond*{a\leq x\leq b},
+  \]
+  并且
+  \[
+    \int_a^b\mparenb{f(x)-S_1(x)}\dif x<\e,\qquad
+    \int_a^b\mparenb{S_2(x)-f(x)}\dif x<\e 。
+  \]
+\end{exlist}
+\item 设~$f(x)\in R\mintc ab$。证明，存在连续函数序列~$\mbrace{\phi_n(x)}$，使得
+\[
+  \lim_\ntoinf\int_a^b\phi_n(x)\dif x=\int_a^bf(x)\dif x 。
+\]
 \end{exercise}
+
 \section{变限的定积分与原函数的存在性}
 \begin{exercise}
-\item
+\item\begin{exlist}
+  \item 设
+  \[
+    f(x)=\begin{cBdcases}
+      2x\sin\frac1x-\cos\frac1x, & x\neq0;\\
+      0, & x=0 。
+    \end{cBdcases}
+  \]
+  讨论~$f(x)$~在~$\mintc{-1}1$~上的可积性。
+  \item 举出一反例，使得~$f(x)$~在~$\mintc ab$~上可积，且~$f(x)$~在~$x_0$~间断，但是
+  \[
+    \mparenbb{\int_0^xf(t)\dif t}'\biggr\vert_{x=x_0}=f(x_0) 。
+  \]
+\end{exlist}
+\item 设~$f(x)\in C(\mR)$，并存在常数~$a$~满足~$5x^3+40=\int_a^xf(t)\dif t$。
+\begin{exlistcols}
+  \item 确定~$f(x)$；
+  \item 确定常数~$a$。
+\end{exlistcols}
+\item 设~$f(x)\in C(\mR)$，求出下列函数的导数。
+\begin{exlistcols}
+  \item $F(x)=\int_0^{x^2}f(t)\dif t$；
+  \item $F(x)=\int_{x+a}^{x+b}f(t)\dif t$。
+\end{exlistcols}
+\item 求下列极限。
+\begin{exlistcols}
+  \item $\lim_{h\to0}\dfrac1{h^2}\int_0^h\mparenB{\dfrac1\theta-\cot\theta}\dif\theta$；
+  \item $\lim_{x\to\pinf}\dfrac{\me^{-x^2}}x\int_0^xt^2\me^{t^2}\dif t$。
+\end{exlistcols}
+\item 求下列函数在原点的导数~$F'(0)$。
+\begin{exlistcols}
+  \item $F(x)=\int_0^xt\sin\dfrac1t\dif t$；
+  \item $F(x)=\int_0^x\cos\dfrac1t\dif t$。
+\end{exlistcols}
+\item 确定下列函数。
+\begin{exlistcols}
+  \item $f(x)=\int_0^x\sgn t\dif t$；
+  \item $f(x)=\int_0^x\mabs t\dif t$；
+  \item $f(x)=\int_0^1\mabs{x-t}\dif t$；
+  \item $f(x)=\int_0^1t\mabs{x-t}\dif t$。
+\end{exlistcols}
+\item 设~$f(x)$~在正实轴上连续，且在正实轴上成立
+\[
+  \int_0^xf(t)\dif t=\frac12xf(x) 。
+\]
+证明~$f(x)=Cx$，这里~$C$~为某常数。
+\item 设~$f(x)$~在~$x>0$~时连续，对任意~$a,b>0$，积分值~$\int_a^{ab}f(x)\dif x$~与~$a$~无关。证
+明~$f(x)=\dfrac Cx$，这里~$C$~为某常数。
+\item 设~$f'(x)\in R\mintc ab$，且~$f(a)=0$。证明，
+\begin{exlistcols}
+  \item $\mabsb{f(x)}\leq\int_a^x\mabsb{f'(t)}\dif t$；
+  \item $\int_a^bf^2(x)\dif x\leq(b-a)^2\int_a^b\mparenb{f'(x)}^2\dif x$。
+\end{exlistcols}
+\item 设~$f'(x)\in R\mintc ab$。证明~$f(x)$~可以分解成两个单调函数之差。
+\item 设~$P_n(x)$~为~$n$~次代数多项式。证明
+\[
+  \int_a^b\mabsb{P_n'(x)}\dif x\leq 2n\max_{x\in\mintc ab}\mbraceb{\mabsb{P_n(x)}}。
+\]
+\item 设~$f(x)\in C\mintc ab$，并且单调递增。证明，
+\[
+  \int_a^bxf(x)\dif x\geq\frac{a+b}2\int_a^bf(x)\dif x 。
+\]
+\item 设~$f(x)$~在任一有限区间上可积分，且~$\lim_{x\to\pinf}f(x)=\ell$。证明
+\[
+  \lim_{x\to\pinf}\frac1x\int_0^xf(t)\dif t=\ell 。
+\]
+\item 设~$f(x)$~是~$\mR$~上不恒为常数的单调函数，并且对任意~$x,y\in\mR$，有
+\[
+  f(x+y)=f(x)\cdot f(y) 。
+\]
+证明，
+\begin{exlistcols}
+  \item $f(0)=1$；
+  \item $f(x)>0$；
+  \item $f(x)$~在~$\mR$~上连续；
+  \item $f(x)$~在~$\mR$~上可微；
+  \item 确定~$f(x)$~所满足的微分方程；若~$f(1)=2$，解出~$f(x)$。
+\end{exlistcols}
 \end{exercise}
+
 \section{定积分的换元法与分部积分法}
 \subsection{定积分的换元法}
 \subsection{定积分的分部积分法}
 \subsection{积分第二中值定理}
 \begin{exercise}
-\item
+\item 计算下列定积分\mcond{a>0}。
+\begin{exlistcols}[3]
+  \item $\int_0^1\dfrac x{(1+x)^\alpha}\dif x$；
+  \item $\int_0^1\ln(1+\sqrt x)\dif x$；
+  \item $\int_0^a\sqrt{\dfrac{a-x}{\smash[b]{a+x}}}\dif x$；
+  \item $\int_0^a\arctan\sqrt{\dfrac{a-x}{\smash[b]{a+x}}}\dif x$；
+  \item $\int_0^{\frac a{\sqrt2}}\dfrac{\dif x}{(a^2-x^2)^{\sfrac32}}$；
+  \item $\int_1^{\sqrt3}\dfrac{\sqrt{1+x^2}}x\dif x$；
+  \item $\int_0^1x\sqrt{1-x}\dif x$；
+  \item $\int_1^9x\sqrt[3]{1-x}\dif x$；
+  \item $\int_0^{\frac12}\dfrac{x^3}{\sqrt{1-x^2}}\dif x$；
+  \item $\int_0^a\sqrt{a^2-x^2}\dif x$；
+  \item $\int_0^{\frac\pi2}\sin^2x\cos x\dif x$；
+  \item $\int_0^ax^2\sqrt{a^2-x^2}\dif x$；
+  \item $\int_{\frac14}^{\frac12}\dfrac{\arcsin\sqrt x}{\sqrt{x(1-x)}}\dif x$；
+  \item $\int_a^{2a}\dfrac{\sqrt{x^2-a^2}}{x^4}\dif x$。
+\end{exlistcols}
+\item 证明，
+\begin{exlistcols}
+  \item $\int_0^{2\pi}\dfrac{1-r^2}{1-2r\cos\theta+r^2}\dif r=2\pi\mcond{0<r<1}$；
+  \item $\int_0^1\dfrac{\dif x}{(1+x^n)\sqrt[n]{1+x^n}}=\dfrac1{\sqrt[n]2}$。
+\end{exlistcols}
+\item 证明，
+\begin{exlistcols}
+  \item $\int_0^\pi\cos nx\cos kx\dif x=\begin{Bdcases}
+    \frac\pi2, & k=n;\\ 0, & k\neq n;
+  \end{Bdcases}$
+  \item $\int_0^{\frac\pi2}\cos nx\cos^nx\dif x=\dfrac\pi{2^{n+1}}$。
+\end{exlistcols}
+\item 设
+\[
+  I_n=\int_1^{1+\frac1n}\sqrt{1+x^n}\dif x 。
+\]
+\begin{exlistcols}
+  \item 证明~$\lim_\ntoinf I_n=0$；
+  \item 证明极限~$\lim_\ntoinf n\cdot I_n$~存在，并求出此极限值。
+\end{exlistcols}
+\item 设~$f(x)$~在~$\mR$~上连续。证明~$f(x)$~是周期为~$2\pi$~的函数当且仅当积分
+\[
+  \int_0^{2\pi}f(x+y)\dif y
+\]
+与~$y$~无关。
+\item 证明，当~$n$~为奇数时，
+\[
+  F(x)=\int_0^x\sin^n\dif t
+\]
+是以~$2\pi$~为周期的周期函数；而当~$n$~为偶数时，$F(x)$~是线性函数与周期函数之和。
+\item 设~$f(x)$~在~$\mintco 0\pinf$~上单调递增。证明，函数
+\[
+  F(x)=\frac1x\int_0^xf(t)\dif t
+\]
+在~$\mintco 0\pinf$~上单调递增。
+\item 设~$f(x)$~在~$\mintco 0\pinf$~上的凸函数。证明，函数
+\[
+  F(x)=\frac1x\int_0^xf(t)\dif t
+\]
+在~$\mintco 0\pinf$~上的凸函数。
+\item 给定积分~$I=\int_0^\pi xf(\sin x)\dif x$，而~$f(x)$~是~$\mintc01$~上的连续函数。
+\begin{exlistcols}
+  \item 证明~$I=\dfrac\pi2\int_0^\pi f(\sin x)\dif x$；
+  \item 计算~$\int_0^\pi\dfrac{x\sin x}{1+\cos^2x}\dif x$。
+\end{exlistcols}
+\item 设~$f(x)\in C\mintc AB$，且~$A<a<b<B$。证明，
+\[
+  \lim_{h\to0}\int_a^b\dfrac{f(x+h)-f(x)}h\dif x=f(b)-f(a) 。
+\]
+\item 设~$f(x)$~是周期为~$T$~的连续函数。证明，
+\[
+  \lim_{x\to+\infty}\frac1x\int_0^xf(t)\dif t=\frac1T\int_0^Tf(x)\dif x 。
+\]
+\item 计算下列积分。
+\begin{exlistcols}[3]
+  \item $\int_0^1\ln\mparenb{x+\sqrt{1+x^2}}\dif x$；
+  \item $\int_0^1x\arctan^2x\dif x$；
+  \item $\int_0^\pi x^2\sin nx\dif x$；
+  \item $\int_{-\pi}^\pi\me^x\cos nx\dif x$；
+  \item $\int_0^1\dfrac{\dif x}{(2-x^2)^2}$；
+  \item $\int_1^2\dfrac{\sqrt{1+x^2}}{x^2}\dif x$；
+  \item $\int_0^1x^2(1-x^3)^5\dif x$；
+  \item $\int_0^1(1-x)^2x^3\dif x$；
+  \item $\int_1^2x^2\ln x\dif x$；
+  \item $\int_0^1x^2\me^{\sqrt x}\dif x$。
+\end{exlistcols}
+\item 计算下列定积分。
+\begin{exlistcols}
+  \item $\int_0^{\frac\pi2}\me^{\alpha x}\sin\beta x\dif x$；
+  \item $\int_0^{\frac\pi2}\me^{\alpha x}\cos\beta x\dif x$。
+\end{exlistcols}
+\item 计算下列定积分，其中~$n$~与~$m$~均为正整数。
+\begin{exlistcols}
+  \item $\int_0^1x^n\ln^nx\dif x$；
+  \item $\int_0^1x^{m-1}(1-x)^{n-1}\dif x$；
+  \item $\int_0^1\tan^{2n}x\dif x$；
+  \item $\int_0^{2\pi}\sin^nx\cos^mx\dif x$，~$n+m$~为奇数。
+\end{exlistcols}
+\item 设
+\[
+  I_n=\int_0^{\frac\pi4}\dfrac{\cos nx}{\cos^nx}\dif x 。
+\]
+证明
+\[
+  I_n=2^{n-1}\mparenbb{\frac\pi2-\sum_{k=1}^{n-1}\frac{\sin\mparen{\sfrac{k\pi}4}}{k2^{\sfrac k2}}} 。
+\]
+\item 设~$a_n=\int_0^1x^n\sqrt{1-x^2}\dif x$。证明，
+\begin{exlistcols}[3]
+  \item $a_n=\dfrac{n-1}{n+2}a_{n-2}$；
+  \item $a_n\leq a_{n-1}\leq a_{n-2}$；
+  \item $\lim_\ntoinf\dfrac{a_n}{a_{n-1}}=1$。
+\end{exlistcols}
+\item 设~$f'(x)\in C\mintc 01$。证明
+\[
+  \int_0^1x^nf(x)\dif x=\frac{f(1)}n+o\mparenB{\frac1n}\mcond*{\ntoinf}。
+\]
+若只假设~$f(x)\in C\mintc 01$，上式是否成立。
+\item\begin{exlist}
+  \item 设~$f''(x)\in C\mintc 01$。证明，
+  \[
+    \int_0^1x^nf(x)\dif x=\frac{f(1)}n-\frac{f(1)+f'(1)}{n^2}+o\mparenB{\frac1{n^2}}\mcond*{\ntoinf};
+  \]
+  \item 证明，
+  \[
+    \int_0^1\frac{x^n}{1+x}\dif x=\frac1{2n}-\frac1{4n^2}+o\mparenB{\frac1n}\mcond*{\ntoinf}。
+  \]
+\end{exlist}
+\item\begin{exlist}
+  \item 设~$f(x)\in R\mintc 01$。证明，
+  \[
+    \int_0^1\sqrt[n]xf(x)\dif x=\int_0^1f(x)\dif x+o(1)\mcond*{\ntoinf};
+  \]
+  \item 证明，
+  \[
+    \int_0^1\dfrac{\dif x}{1+x^n}=1-\frac{\ln 2}n+o\mparenB{\frac1n}\mcond*{\ntoinf}。
+  \]
+\end{exlist}
+\item 假设~$\pi$~为有理数，即~$\pi=\dfrac ab$，这里~$a,b$~为互素的正整数。令
+\[
+  f(x)=\frac{x^n(a-bx)^n}{n!}。
+\]
+\begin{exlistcols}
+  \item 证明~$\int_0^\pi f(x)\sin x\dif x$~为一整数；\label{exer-7.6.21-1}
+  \item 由~\ref{exer-7.6.21-1}~证明~$\pi$~不可能为一有理数。
+\end{exlistcols}
+\item 设~$f(x)\in C\mintc ab$，且在~$\minto ab$~上有~$m$~个相异零点，又对任意~$n=0,1,\dotsc,m$，有
+\[
+  \int_a^bx^nf(x)\dif x=0 。
+\]
+证明~$f(x)\equiv 0$，$x\in\mintc ab$。
+\item 设~$f'(x)\in C\mintc ab$，且~$f(a)=0$。证明，
+\[
+  \mabsbb{\int_a^bf(x)\dif x}\leq\frac{(b-a)^2}2\max_{x\in\mintc ab}\mbraceb{\mabsb{f'(x)}}。
+\]
+\item 设~$f''(x)\in C\mintc ab$，且~$f(a)=f(b)=0$。证明，
+\begin{exlist}
+  \item $\int_a^bf(x)\dif x=\dfrac12\int_a^bf''(x)(x-a)(x-b)\dif x$；
+  \item $\mabsbb{\int_a^bf(x)\dif x}\leq\dfrac{(b-a)^3}{12}\max_{x\in\mintc ab}\mbraceb{\mabsb{f''(x)}}$。
+\end{exlist}
+\item 设~$f'(x)\in C\mintc ab$，而~$f(a)=f(b)=0$，且~$\int_a^bf^2(x)\dif x=1$。证明，
+\begin{exlistcols}
+  \item $\int_a^bxf(x)f'(x)\dif x=-\dfrac12$；
+  \item $\int_a^bf'^2(x)\dif x\int_a^bx^2f^2(x)\dif x>\dfrac14$。
+\end{exlistcols}
+\item 设~$f''(x)$~在~$\minto ab$~上连续，并且对任意~$x_0\in\minto ab$，取合适的~$r>0$，使得~$x_0\pm r\in\minto ab$。证明，%
+存在~$\xi\in\minto{x_0-r}{x_0+r}$，使得
+\[
+  f''(\xi)=\frac3{r^3}\int_{x_0-r}^{x_0+r}\mparenb{f(x)-f(x_0)}\dif x 。
+\]
+\item 证明，对任意~$p>0$，有
+\[
+  \lim_\ntoinf\int_n^{n+p}\frac{\sin x}x\dif x=0 。
+\]
+\item 设~$f(x)$~在~$\mintc 0{2\pi}$~上单调有界。证明，
+\begin{exlistcols}
+  \item $\lim_{\lambda\to\infty}\int_0^{2\pi}f(x)\sin\lambda x\dif x=0$；
+  \item $\lim_{\lambda\to\infty}\int_0^{2\pi}f(x)\cos\lambda x\dif x=0$。
+\end{exlistcols}
+\item 设~$f(x)=\int_x^{x+1}\sin t^2\dif t$。证明，当~$x>0$~时，有~$\mabsb{f(x)}<\dfrac1x$。
+\item 设~$f(x)$~在~$\mintc 0{2\pi}$~上单调下降。证明，
+\[
+  b_n=\frac1\pi\int_0^{2\pi}f(x)\sin nx\dif x\geq0 。
+\]
+\item 设~$f(x)$~在~$\mintc {-\pi}\pi$~上单调下降。证明，
+\[
+  b_{2n}=\frac1\pi\int_{-\pi}^\pi f(x)\sin 2nx\dif x\geq0,\qquad
+  b_{2n+1}=\frac1\pi\int_{-\pi}^\pi f(x)\sin(2n+1)x\dif x\leq0 。
+\]
+\item 设~$f(x)$~是~$\mintc 0{2\pi}$~上的凸函数，且~$f'(x)$~有界。证明，
+\[
+  a_n=\frac1\pi\int_0^{2\pi}f(x)\cos nx\dif x\geq 0 。
+\]
+\item 设~$f(x)$~是~$\mintc{-\pi}\pi$~上的凸函数，且~$f'(x)$~有界。证明，
+\[
+  a_{2n}=\frac1\pi\int_{-\pi}^\pi f(x)\cos 2nx\dif x\geq 0,\qquad
+  a_{2n+1}=\frac1\pi\int_{-\pi}^\pi f(x)\cos(2n+1)x\dif x\leq 0 。
+\]
+\item 设~$\me^2<a<b$。证明~$\int_a^b\dfrac{\dif x}{\ln x}<\dfrac{2b}{\ln b}$。
+\item 设
+\[
+  F(x)=\begin{cbbdcases}%\LEFTRIGHT
+    \int_0^x\sin\frac1t\dif t, & x\neq0;\\
+    0, & x=0 。
+  \end{cbbdcases}
+\]
+证明，
+\begin{exlistcols}
+  \item $\lim_{x\to0}\dfrac{F(2x)-F(x)}x=0$；
+  \item $F'(0)=0$。
+\end{exlistcols}
+\item 设~$p<3$。证明
+\[
+  \lim_\ntoinf\int_{\frac1n}^1\frac{\sin\dfrac nx}{x^p}\dif x=0 。
+\]
+\item 设~$f(x)$~在~$\mintc 01$~上严格单调下降。证明，
+\begin{exlist}
+  \item 存在~$\theta\in\minto01$，使得
+  \[
+    \int_0^1f(x)\dif x=\theta f(0)+(1-\theta)f(1);
+  \]
+  \item 对任意~$c>f(0)$，存在~$\theta\in\minto01$，使得
+  \[
+    \int_0^1f(x)\dif x=\theta c+(1-\theta)f(1) 。
+  \]
+\end{exlist}
+\item 设~$F(x)$~是在~$\mintco 0\pinf$~上单调增加的正值函数，而~$y$~是微分方程
+\[
+  y''+F(x)y=0
+\]
+的解。证明~$y$~在~$\mintco 0\pinf$~上有界。
 \end{exercise}
+
 \section{定积分的近似计算}
 \subsection{矩形法}
 \subsection{梯形法}
 \subsection{Simpson~公式}
 \begin{exercise}
-\item
+\item 利用~$n=12$~时的矩形公式，近似地计算
+\[
+  \int_0^{2\pi}x\sin x\dif x,
+\]
+并把结果同精确结果相比较。
+\item 利用梯形公式计算下列积分，并估计误差。
+\begin{exlistcols}
+  \item $\int_0^1\dfrac{\dif x}{1+x}\quad(n=8)$；
+  \item $\int_0^1\dfrac{\dif x}{\sqrt{1+x^3}}\quad{(n=10)}$。
+\end{exlistcols}
+\item 利用~Simpson~公式计算下列积分，并估计误差。
+\begin{exlistcols}
+  \item $\int_0^1\dfrac{\dif x}{1+x}\quad(n=8)$；
+  \item $\int_0^1\dfrac{\dif x}{\sqrt{1+x^3}}\quad{(n=10)}$；
+  \item $\int_1^9\sqrt x\dif x\quad(n=16)$；
+  \item $\int_0^{\frac\pi4}\cos x^2\dif x\quad(n=10)$；
+  \item $\int_0^\pi\sqrt{3+\cos x}\dif x\quad(n=6)$；
+  \item $\int_0^{\frac\pi2}\dfrac{\sin x}x\dif x\quad(n=10)$。
+\end{exlistcols}
+\item 利用~Simpson~公式计算积分
+\[
+  \int_0^1\me^{-x^2}\dif x,
+\]
+精确到~$10^{-4}$。
+\item 设~$f(x)\in C^{(4)}\mintc ab$，令
+\[
+  W(x)=\int_{c-x}^{c+x}f(t)\dif t-\frac x3\mparenb{f(c-x)+4f(c)+f(c+x)},
+\]
+其中~$c=\dfrac{a+b}2$，而~$x\in\mintc 0L$，$L=\dfrac{b-a}2$。
+\begin{exlist}
+  \item 求~$W(0)$，$W'(0)$，$W''(0)$~与~$W^{(3)}(x)$；
+  \item 证明
+  \[
+    W(L)=\frac12\int_0^LW^{(3)}(x)(x-L)^2\dif x;
+  \]
+  \item 证明，存在~$\xi\in\mintc ab$，使得
+  \[
+    W(L)=-\dfrac{(b-a)^5}{\num{2880}}f^{(4)}(\xi)。
+  \]
+\end{exlist}
 \end{exercise}
+
 \begin{exercise*}
-\item
+\item\begin{exlist}
+  \item 设~$x\geq0$，而~$n$~为自然数。证明，
+  \[
+    x^n\geq n(x-1)+1;
+  \]
+  \item 对任意~$n\in\mN$，证明，
+  \[
+    \int_0^{1+\frac2{\sqrt n}}x^n\dif x>2;
+  \]
+  \item 设正数列~$\mbrace{a_n}$~满足
+  \[
+    \lim_\ntoinf\int_0^{a_n}x^n\dif x=2 。
+  \]
+  证明~$\lim_\ntoinf a_n=1$。
+\end{exlist}
+\item 设~$f(x)\in C\mintc01$，对于~$k=0,1,\dotsc,n-1$，有
+\[
+  \int_0^1f(x)x^k\dif x=0\quad\text{且}\quad\int_0^1f(x)x^n=1。
+\]
+证明，存在~$\xi\in\minto 01$，使得~$\mabsb{f(\xi)}\geq 2^n(n+1)$。
+\item 设~$f(x),g(x)\in C\mintc ab$，并且~$f(x)$~单调下降，而~$0\leq g(x)\leq 1$，记~$\lambda=\int_a^bg(x)\dif x$。证明，
+\[
+  \int_{b-\lambda}^bf(t)\dif t\leq\int_a^bf(t)g(t)\dif t 。
+\]
+\item 设~$f'(x)\in C\mintc 01$，且满足~$0\leq f'(x)\leq 1$~而~$f(0)=0$。证明，
+\[
+  \int_0^1f^3(x)\dif x\leq\mparenbb{\int_0^1f(x)\dif x}^{\msp2}。
+\]
+\item 设~$f(x)$~在~$\mR$~上有界且可微，同时对任意~$x\in\mR$~有
+\[
+  \mabsb{f(x)+f'(x)}\leq 1 。
+\]
+证明~$\mabsb{f(x)}\leq1$。
+\item 设~$f(x)$~在~$\mintco 0\pinf$~上可微，且~$0\leq f'(x)\leq f(x)$，而~$f(0)=0$。证明~$f(x)\equiv0$。
+\item 设~$f(x)\in C^{(2)}\mintc 01$，并且任意取定~$x\in\minto 0{\sfrac13}$，$\eta\in\minto{\sfrac23}1$。证明，
+\begin{exlist}
+  \item $\mabsb{f'(x)}\leq3\mabsb{f(\xi)-f(\eta)}+\int_0^1\mabsb{f''(x)}\dif x$；
+  \item $\mabsb{f'(x)}\leq9\int_0^1\mabsb{f(x)}\dif x+\int_0^1\mabsb{f''(x)}\dif x$。
+\end{exlist}
+\item 设~$f(x)\in C\mintco1\pinf$，且~$f(x)>0$，同时对任意~$x\geq1$，有
+\[
+  F(x)=\int_1^xf(t)\dif t\leq f^2(x) 。
+\]
+\begin{exlistcols}
+  \item 证明~$F'(x)\geq\sqrt{F(x)}$；
+  \item 证明~$f(x)\geq\dfrac12(x-1)$；
+  \item 若~$\int_1^xf(t)\dif t\leq f^3(x)$，证明~$f(x)\geq\sqrt{\dfrac32(x-1)}\mcond{x\geq1}$。
+\end{exlistcols}
+\item 设~$f(x)\in C^{(2)}\mintc ab$，而~$f(a)=f(b)=0$。证明，
+\begin{exlist}
+  \item 对任意~$x\in\minto ab$，有
+  \[
+    \mabsbb{f(x)\cdot\frac{b-a}{(x-a)(x-b)}}\leq\int_a^b\mabsb{f''(x)}\dif x;
+  \]
+  \item
+  \[
+    \max_{x\in\mintc ab}\mbraceb{\mabsb{f(x)}}\cdot\frac4{b-a}\leq\int_a^b\mabsb{f''(x)}\dif x。
+  \]
+\end{exlist}
+\item\begin{exlist}
+  \item 设~$f(x)$~单调上升，且~$f(0)>0$。证明
+  \[
+    1\leq\int_0^1f(x)\dif x\cdot\int_0^1\frac1{f(x)}\dif x\leq\frac{\mparenb{f(0)+f(1)}^2}{4f(0)f(1)}。
+  \]
+  \item 设~$a_1,a_2,a_3\geq0$，且~$a_1+a_2+a_3=1$，而~$0<\lambda_1<\lambda_2<\lambda_3$。证明，
+  \[
+    1\leq\mparenbb{\sum_{i=1}^3a_i\lambda_i}\mparenbb{\sum_{i=1}^3\frac{a_i}{\lambda_i}}
+     \leq\frac{(\lambda_1+\lambda_3)^2}{4\lambda_1\lambda_3}。
+  \]
+\end{exlist}
+\item\begin{exlist}
+  \item 设~$f(x)$~在~$\minto 0\pinf$~上连续且单调递减。证明，
+  \[
+    \int_1^{n+1}f(x)\dif x\leq\sum_{k=1}^nf(k)\leq f(1)+\int_1^nf(x)\dif x;
+  \]
+  \item 设~$S_n=\sum_{k=1}^n\dfrac1{\sqrt k}$，求极限~$\lim_\ntoinf\dfrac{S_{2n}-S_n}{\sqrt n}$；
+  \item 设
+  \[
+    a_n=\frac1{1+\dfrac11}+\frac1{2+\dfrac12}+\dotsb+\frac1{n+\dfrac1n}-\ln\frac n{\sqrt 2} 。
+  \]
+  证明，序列~$\mbrace{a_n}$~收敛，并证明它的极限值位于~$0$~与~$\dfrac12$~之间。
+\end{exlist}
+\item 设~$a_1\geq a_2\geq\dotsb\geq a_n\geq 0$。
+\begin{exlist}
+  \item 若~$f(0)=0$，且~$f'(0)\geq0$，同时对任意~$x\in\mintco a\pinf$，有~$f''(x)\geq0$。证明，
+  \[
+    \sum_{k=1}^n(-1)^{k+1}f(a_k)\geq f\mparenbb{\sum_{k=1}^n(-1)^{k+1}a_k};
+  \]
+  \item 证明，当~$p>1$~时，
+  \[
+    \sum_{k=1}^n(-1)^{k+1}a_k^p\geq\mparenbb{\sum_{k=1}^n(-1)^{k+1}a_k}^{\msp p} 。
+  \]
+\end{exlist}
+\item 设~$g(x)$~在~$\mintc ab$~上增加。证明，对任意~$c\in\minto ab$，有
+\[
+  f(x)=\int_c^xg(t)\dif t
+\]
+是凸函数。
+\item 设~$f(x)$~在~$\mintc ab$~上时凸函数。证明，对任意~$c,x\in\minto ab$，有
+\[
+  f(x)-f(c)=\int_c^xf_-'(t)\dif t=\int_c^xf_+'(t)\dif t 。
+\]
+\item 证明~$\int_0^{\sqrt{2\pi}}\sin x^2\dif x>0$。
+\item 请按下列提示的思路证明，若~$f(x)\in C\mintc ab$，且单调增加，则
+\[
+  \int_a^bf(x)\dif x\geq\frac{a+b}2\int_a^bf(x)\dif x 。
+\]
+\begin{description}[format=\bfseries,labelindent=\addleftskip,leftmargin=\addleftskip,labelsep=\ccwd]
+\item[思路一]对积分~$\int_a^b\mparenB{x-\dfrac{a+b}2}f(x)\dif x$~分段使用第一中值定理；
+\item[思路二]对积分~$\int_a^b\mparenB{x-\dfrac{a+b}2}f(x)\dif x$~使用第二中值定理；
+\item[思路三]从~$\int_a^b\mparenB{x-\dfrac{a+b}2}\mparenbb{f(x)-f\mparenB{\dfrac{a+b}2}}\dif x\geq0$~出发；
+\item[思路四]从
+\[
+  (t-x)\mparenb{f(t)-f(x)}\geq0\mcond*{t,x\in\mintc ab}
+\]
+出发，先固定住~$x$~对~$t$~积分，将所得结果再对~$x$~积分。
+\end{description}
+\item 设~$b>a>0$。证明
+\[
+  \ln\dfrac ba>\dfrac{2(b-a)}{a+b}。
+\]
 \end{exercise*}
 
 

@@ -50,13 +50,13 @@
 \end{example}
 
 这里~$g=\SI{9.8}{m/s^2}$~是重力加速度，它是常量。$t$~与~$s$~是物体下落过程中的两个变量，当~$t=0$~时，$s=0$；%
-当~$t=\smsqrt{\sfrac{2h}g}$~时，得~$s=h$，表示物体已经到达地面。所以~$t$~的变化范围是从~$0$~到~$\smsqrt{\sfrac{2h}g}$，在这
+当~$t=\smbsqrt{\sfrac{2h}g}$~时，得~$s=h$，表示物体已经到达地面。所以~$t$~的变化范围是从~$0$~到~$\smbsqrt{\sfrac{2h}g}$，在这
 范围内，$g$~的每一个值，由公式~\ref{eq:sec1.1-1}~即可得到对应~$s$~的值。公式~\ref{eq:sec1.1-1}~给出了变量~$s$~与变量~$t$~之
 间的依赖关系，即所谓的函数关系。
 
 \begin{example}\label{ex:sec1.1-2}
-气象台用自动记录器画出了当地某一天的气温变化图（\ref{fig:sec1.1-1}），图中纵轴表示气温~$T\mcond[\,]{\si{\degreeCelsius}}$，横
-轴表示时间~$t$（小时）。
+气象台用自动记录器画出了当地某一天的气温变化图（\ref{fig:sec1.1-1}），图中纵轴表示气温
+~$T\mcond[\,]{\prescript{\circ\!}{}{\mathrm C}}$，横轴表示时间~$t$（小时）。
 \end{example}
 
 从~$0$~到~$24$~小时内的任一时刻~$t$~的值，根据这条曲线，就可以找出气温~$T$~的唯一确定的值与之对应。这条曲线给
@@ -83,9 +83,9 @@
 
 \ref{ex:sec1.1-1}~中对应规则~$f$~为：
 \[
-  \frac12g(\enspace)^2,
+  \frac12g(\enspace\enspace)^2,
 \]
-即先对自变量作平方运算，然后再乘常数~$\sfrac g2$，函数的定义域为闭区间~$\mbrack{0,\smsqrt{\sfrac{2h}g}}$；
+即先对自变量作平方运算，然后再乘常数~$\sfrac g2$，函数的定义域为闭区间~$\mbrack{0,\smbsqrt{\sfrac{2h}g}}$；
 
 \ref{ex:sec1.1-2}~中对应规则~$f$~为给定的曲线，函数的定义域为~$[0,24]$；
 
@@ -110,7 +110,7 @@
 \[
   \phi\colon x\longmapsto f(x)\mcond*{x\in A},
 \]
-为函数~$f$~在~$A$~上的\emph{限制函数}，记作~$f\rest A$；相反，函数~$f$~就称为函数~$\phi$~在~$X$~上的\emph{扩充}或\emph{延拓}。
+为函数~$f$~在~$A$~上的\emph{限制函数}，记作~$f\mrest A$；相反，函数~$f$~就称为函数~$\phi$~在~$X$~上的\emph{扩充}或\emph{延拓}。
 
 如果两个对应关系有相同的定义域和相同的对应规则，不管变量采用什么记号，都认为是同一个函数。例如
 \[
@@ -131,10 +131,10 @@
 \begin{example}\label{ex:sec1.1-4}
 绝对值函数
 \[
-  y=\mabs x=\begin{rbdcases}
+  y=\mabs x=\begin{rBdcases}
     x, & x\geq 0;\\
    -x, & x<0。
-  \end{rbdcases}
+  \end{rBdcases}
 \]
 \end{example}
 
@@ -194,10 +194,10 @@
 
 并不是每一个函数的图象都能画出来。比如数学上有名的~Dirichlet~函数，它对人们提高函数概念的认识是有意义的，其定义为：
 \[
-  D(x)=\chi_{_{\mQ}}(x)\coloneq\begin{cbdcases}
+  D(x)=\chi_{_{\mQ}}(x)\coloneq\begin{cBdcases}
   1, & x\in\mQ;\\
-  0, & x\in\mR-\mQ 。
-  \end{cbdcases}
+  0, & x\in\mR\difset\mQ 。
+  \end{cBdcases}
 \]
 
 函数也可以解释成变换、映照或映射，它把集合~$X$~中的点，变为集合
@@ -231,9 +231,9 @@
 \end{exlistcols}
 \item 设
 \[
-  f(x)=\begin{cbdcases}
+  f(x)=\begin{cBdcases}
   x+1, & x\leq 1;\\
-  x^2,&x>1。\end{cbdcases}
+  x^2,&x>1。\end{cBdcases}
 \]
 求~$f(x)$，~$f\mparenb{f(1)}$。
 \item 设~$f(x)=2x^2+2x-4$。求~$f(1)$，~$f\mparenb{f(1)}$，~$f(x^2)$，~$f^2(x)$，~$f(-x^2)$，~$f(a+b)$，~$f(a)+f(b)$。
@@ -241,7 +241,7 @@
 \begin{exlistcols}
   \item 求~$f(1)$，~$f\mparenb{f(1)}$，~$f\mparenb{f\mparenb{f(1)}}$；
   \item 求~$f(\sqrt2)$；
-  \item 证明，对任意~$x>0$，且~$x\neq\sqrt2$，有~$\mabs{f^2(x)-2}<\mabs{x^2-2}$。
+  \item 证明，对任意~$x>0$，且~$x\neq\sqrt2$，有~$\mabsb{f^2(x)-2}<\mabs{x^2-2}$。
 \end{exlistcols}
 \item 确定下列函数的定义域。
 \begin{exlistcols}
@@ -265,7 +265,7 @@
 \begin{exlistcols}[3]
   \item $y=f(-x)$；
   \item $y=-f(x)$；
-  \item $y=\mabs{f(x)}$；
+  \item $y=\mabsb{f(x)}$；
   \item $y=f(\mabs x)$；
   \item $y=f\mparenB{\dfrac x2}$；
   \item $y=f(2x)$。
@@ -273,13 +273,16 @@
 \item 某水渠的横断面是一个等腰梯形（见\ref{fig:sec1.1-ex2}），底宽~$2$~米，坡度为~$1:1$~（即倾角
 为~\ang{45}），称~\textit{ABCD}~为过水断面，确定过水断面的面积~$S$~与水深~$h$~的函数关系。
 
-\begin{figure}\RawFloats
-\begin{tabu}{*2{X[mc]}F}
-\somefigure\caption{}\label{fig:sec1.1-ex1}&
-\somefigure\caption{}\label{fig:sec1.1-ex2}&\\[\figrowsep]
-\somefigure\caption{}\label{fig:sec1.1-ex3}&
-\somefigure\caption{}\label{fig:sec1.1-ex4}
-\end{tabu}
+\begin{figure}
+\begin{floatrow}
+\figurebox{\caption{}\label{fig:sec1.1-ex1}}{\somefigure}
+\figurebox{\caption{}\label{fig:sec1.1-ex2}}{\somefigure}
+\end{floatrow}
+\newFRline
+\begin{floatrow}
+\figurebox{\caption{}\label{fig:sec1.1-ex3}}{\somefigure}
+\figurebox{\caption{}\label{fig:sec1.1-ex4}}{\somefigure}
+\end{floatrow}
 \end{figure}
 
 \item 一窗户（见\ref{fig:sec1.1-ex3}）下面为矩形，上面为半圆形，周长为~$\ell$，试将窗户的面积表示成底边~$x$~的函数。
@@ -309,12 +312,10 @@ f(-x)=f(x),
 偶函数的图象是关于~$y$~轴对称的。因为由~\ref{eq:sec2.1-2}，若~$\mintob{x}{f(x)}$~在图象上，则它的关于~$y$~轴对称的
 点~$\mintob{-x}{f(x)}=\mintob{-x}{f(-x)}$~也在图象上（见\ref{fig:sec1.2-9}）。
 
-\begin{figure}\figureboxsep{5}
-\begin{floatrow}[2]
-\figurebox{\caption{奇函数}\label{fig:sec1.2-8}}
-          {\somefigure}
-\figurebox{\caption{偶函数}\label{fig:sec1.2-9}}
-          {\somefigure}
+\begin{figure}
+\begin{floatrow}
+\figurebox{\caption{奇函数}\label{fig:sec1.2-8}}{\somefigure}
+\figurebox{\caption{偶函数}\label{fig:sec1.2-9}}{\somefigure}
 \end{floatrow}
 \end{figure}
 
@@ -341,15 +342,15 @@ $y=\mfloor x$~在~$\mR$~上单调上升。
 
 \subsection{函数的有界性}
 
-%\thisfloatsetup{rowprecode=wrapfig}
-\begin{wrapfigure}{O}{0mm}
+\fixwrapfloatsep
+\begin{wrapfigure}[9]{O}{0mm}
 \somefigure
 \caption{有界函数}\label{fig:sec1.2-10}
 \end{wrapfigure}
 
 设函数~$f(x)$~在~$X$~上有定义，若存在~$M>0$，使得对于任意~$x\in X$，都有
 \[
-  \mabs{f(x)}\leq M,
+  \mabsb{f(x)}\leq M,
 \]
 则称函数~$f(x)$~在~$X$~上是\emph{有界}的。
 
@@ -358,12 +359,12 @@ $y=\mfloor x$~在~$\mR$~上单调上升。
 函数在~$X$~上有界，从几何上看，即它的图象（见\ref{fig:sec1.2-10}）位于直线~$y=-M$~与~$y=M$~之间。那么函数~$f(x)$~在~$X$~上
 无界，即找不到直线~$y=M$~和~$y=-M$，使曲线全部落在两直线之间。这么说不好检验，为了便于检验，我们不妨换一种方式来说：函
 数~$f(x)$~在~$X$~上无界，即任意取直线~$y=M$~和~$y=-M$，曲线不全落在两直线之间（若曲线全落在两直线之间，必然导致函数有界），%
-而曲线不全落在两直线之间，意味着总有一点落在两直线之外。%%可用符号表示为，存在~$x'\in X$，使得~$\mabs{f(x')}>M$。
+而曲线不全落在两直线之间，意味着总有一点落在两直线之外。%%可用符号表示为，存在~$x'\in X$，使得~$\mabsb{f(x')}>M$。
 于是，我们就得到了函数~$f(x)$~在~$X$~上无界的定义：
 
 设函数~$f(x)$~在~$X$~上有定义，若对于任意~$M>0$，都存在~$x'\in X$，使得
 \[
-  \mabs{f(x')}>M,
+  \mabsb{f(x')}>M,
 \]
 则称函数~$f(x)$~在~$X$~上是\emph{无界}的。
 
@@ -462,7 +463,7 @@ $y=\mfloor x$~在~$\mR$~上单调上升。
   \item $(x_1+x_2)^p\leq x_1^p+x_2^p$，~$0<p\leq1$；
   \item $(x_1+x_2)^p\geq x_1^p+x_2^p$，~$p>1$。
 \end{exlistcols}
-\item 设~$f(x),g(x)$~在~$(a,b)$~上单调上升。证明，~$\max\mrange{f(x)}{g(x)}$~和~$\min\mintob{f(x)}{g(x)}$~也在~$(a,b)$~上单调上升。
+\item 设~$f(x),g(x)$~在~$(a,b)$~上单调上升。证明，~$\max\mrange{f(x)}{g(x)}$~和~$\min\mrange{f(x)}{g(x)}$~也在~$(a,b)$~上单调上升。
 \item 用肯定语气叙述，在~$\mR$~上，
 \begin{exlistcols}
   \item $f(x)$~不是奇函数；
@@ -577,22 +578,22 @@ $y=\mfloor x$~在~$\mR$~上单调上升。
 \[
   f^{-1}\comp f=\mathrm{id}_X,\quad
   f\comp f^{-1}=\mathrm{id}_Y,\quad
-  (f^{-1})^{-1}=\map fXX,
+  \mparenb{f^{-1}}^{-1}=\map fXX,
 \]
 其中~$\mathrm{id}_X$~表示集合~$X$~上的恒等变换。
 
 易知严格单调函数是一一对应的，所以严格单调的函数，必有反函数存在。反之，一一对应的函数，不一定是
 严格单调的。例如下列函数（见\ref{fig:sec1.2-11}）
 \[
-  f(x)=\begin{cbdcases}
+  f(x)=\begin{cBdcases}
   x,   & 0\leq x<1;\\
   3-x, & 1\leq x\leq 2。
-  \end{cbdcases}
+  \end{cBdcases}
 \]
 在~$[0,2]$~上是一一对应的，但不是单调函数。这个函数的反函数仍是它自己。
 
-\begin{figure}\figureboxsep{5}
-\begin{floatrow}[2]
+\begin{figure}
+\begin{floatrow}
 \figurebox{\caption{}\label{fig:sec1.2-11}}
           {\somefigure}
 \figurebox{\caption{}\label{fig:sec1.2-12}}
@@ -608,8 +609,8 @@ $y=\mfloor x$~在~$\mR$~上单调上升。
 来记，所以旋转后，再把记号改过来，把~$x$~改成~$y$，$y$~改成~$x$，即为反函数~$y=f^{-1}(x)$~的图象（见\ref{fig:sec1.2-14}）。%
 反函数与原函数放在一起讨论时，仍将反函数记为~$x=f^{-1}(y)$。
 
-\begin{figure}\figureboxsep{5}
-\begin{floatrow}[2]
+\begin{figure}
+\begin{floatrow}
 \figurebox{\caption{}\label{fig:sec1.2-13}}
           {\somefigure}
 \figurebox{\caption{}\label{fig:sec1.2-14}}
@@ -678,14 +679,14 @@ $y=\mfloor x$~在~$\mR$~上单调上升。
 \item 设~$f(x)=\arccos x$，而~$g(x)=\sin x$。确定复合函数~$f\mparenb{g(x)}$~和~$g\mparenb{f(x)}$~的定义域和值域，并作出它们的图象。
 \item 设
 \[
-  f(x)=\begin{cbdcases}
+  f(x)=\begin{cBdcases}
     -x-1, & x\leq0;\\
     x,& x>0,
-  \end{cbdcases}\qquad
-  g(x)=\begin{cbdcases}
+  \end{cBdcases}\qquad
+  g(x)=\begin{cBdcases}
     x,    & x\leq0;\\
     \cramped{-x^2}, & x>0。
-  \end{cbdcases}
+  \end{cBdcases}
 \]
 确定复合函数~$f\mparenb{g(x)}$~和~$g\mparenb{f(x)}$。
 \item 设~$f(x)=\dfrac x{\sqrt{1+x^2}}$，确定~$n$~次复合函数~$(f\comp f\comp\dotsb\comp f)(x)$。
@@ -721,13 +722,16 @@ $y=\mfloor x$~在~$\mR$~上单调上升。
 
 函数~$y=x^\alpha$~与~$y=x^{\frac1\alpha}$~互为反函数。
 
-\begin{figure}\RawFloats
-\begin{tabu}{*2{X[mc]}F}
-\somefigure\caption{常数函数}\label{fig:sec1.2-15}&
-\somefigure\caption{幂函数}\label{fig:sec1.2-16} &\\[\figrowsep]
-\somefigure\caption{指数函数}\label{fig:sec1.2-17}&
-\somefigure\caption{对数函数}\label{fig:sec1.2-18}
-\end{tabu}
+\begin{figure}
+\begin{floatrow}
+\figurebox{\caption{常数函数}\label{fig:sec1.2-15}}{\somefigure}
+\figurebox{\caption{幂函数}\label{fig:sec1.2-16}}{\somefigure}
+\end{floatrow}
+\newFRline
+\begin{floatrow}
+\figurebox{\caption{指数函数}\label{fig:sec1.2-17}}{\somefigure}
+\figurebox{\caption{对数函数}\label{fig:sec1.2-18}}{\somefigure}
+\end{floatrow}
 \end{figure}
 
 
@@ -752,13 +756,16 @@ $y=\mfloor x$~在~$\mR$~上单调上升。
 正切函数~$y=\tan x\,\mparenb{x\neq (k+\sfrac12)\pi,k=0,\pm1,\pm2,\dotsc}$~的图象为\ref{fig:sec1.2-21}，而\ref{fig:sec1.2-22}~是
 余切函数~$y=\cot x\mcond{x\neq k\pi,k=0,\pm1,\pm2,\dotsc}$~的图象。
 
-\begin{figure}\RawFloats
-\begin{tabu}{*2{X[mc]}F}
-\somefigure\caption{正弦函数}\label{fig:sec1.2-19}&
-\somefigure\caption{余弦函数}\label{fig:sec1.2-20}&\\[\figrowsep]
-\somefigure\caption{正切函数}\label{fig:sec1.2-21}&
-\somefigure\caption{余切函数}\label{fig:sec1.2-22}
-\end{tabu}
+\begin{figure}
+\begin{floatrow}
+\figurebox{\caption{正弦函数}\label{fig:sec1.2-19}}{\somefigure}
+\figurebox{\caption{余弦函数}\label{fig:sec1.2-20}}{\somefigure}
+\end{floatrow}
+\newFRline
+\begin{floatrow}
+\figurebox{\caption{正切函数}\label{fig:sec1.2-21}}{\somefigure}
+\figurebox{\caption{余切函数}\label{fig:sec1.2-22}}{\somefigure}
+\end{floatrow}
 \end{figure}
 
 \subsubsection{反三角函数}
@@ -774,13 +781,16 @@ $y=\mfloor x$~在~$\mR$~上单调上升。
 反正切函数~$y=\arctan x\;\mparenB{x\in\mR,-\dfrac\pi2<y<\dfrac\pi2}$~的图象为\ref{fig:sec1.2-25}；%
 反余切函数~$y=\arccot x\;\mparenB{x\in\mR,0<y<\pi}$~的图象为\ref{fig:sec1.2-26}。
 
-\begin{figure}\RawFloats
-\begin{tabu}{*2{X[mc]}F}
-\somefigure\caption{反正弦函数}\label{fig:sec1.2-23}&
-\somefigure\caption{反余弦函数}\label{fig:sec1.2-24}&\\[\figrowsep]
-\somefigure\caption{反正切函数}\label{fig:sec1.2-25}&
-\somefigure\caption{反余切函数}\label{fig:sec1.2-26}
-\end{tabu}
+\begin{figure}
+\begin{floatrow}
+\figurebox[1.1\FBwidth]{\caption{反正弦函数}\label{fig:sec1.2-23}}{\somefigure}
+\figurebox[1.1\FBwidth]{\caption{反余弦函数}\label{fig:sec1.2-24}}{\somefigure}
+\end{floatrow}
+\newFRline
+\begin{floatrow}
+\figurebox[1.1\FBwidth]{\caption{反正切函数}\label{fig:sec1.2-25}}{\somefigure}
+\figurebox[1.1\FBwidth]{\caption{反余切函数}\label{fig:sec1.2-26}}{\somefigure}
+\end{floatrow}
 \end{figure}
 
 \begin{example}
@@ -791,8 +801,8 @@ $y=\mfloor x$~在~$\mR$~上单调上升。
 \[
   2\sin\pi(x+2)=2\sin\pi x,
 \]
-由此可知函数~$2\sin\pi x$~是以~$2$~为周期的周期函数，振幅为~$2$，因此可以先画出~$2\sin\pi x$~一个周期的图
-形（见\ref{fig:sec1.2-27}），然后将此图象再往上平移~$1$~个单位，即为所求函数的图象（见\ref{fig:sec1.2-28}）。
+由此可知函数~$2\sin\pi x$~是以~$2$~为周期的周期函数，振幅为~$2$，因此可以先画出函数~$2\sin\pi x$~一个周期的
+图象（见\ref{fig:sec1.2-27}），然后将此图象再往上平移~$1$~个单位，即为所求函数的图象（见\ref{fig:sec1.2-28}）。
 \end{solution}
 
 \begin{figure}
@@ -835,7 +845,7 @@ y_n+y_{n+2}
 由归纳假设，$y_{n-1}$~和~$y_{n-2}$~分别为~$n-1$~次和~$n-2$~次代数多项式，所以~$y_n$~是~$n$~次代数多项式。
 \end{proof}
 
-\ref{ex:sec1.3-4}~中多项式~$y_n$~称为~\emph{Чебышёв~多项式}。
+\ref{ex:sec1.3-4}~中多项式~$y_n$~称为~\emph{Chebyshev~多项式}。
 
 \begin{example}
 设~$f(x)=\arctan x$，~$g(x)=\tan x$，确定复合函数~$f\mparen{g(x)}$~与~$g\mparen{f(x)}$，并作出它们的图象。
@@ -847,8 +857,8 @@ y_n+y_{n+2}
 \]
 图象为\ref{fig:sec1.2-30}。
 
-\begin{figure}\figureboxsep{5}
-\begin{floatrow}[2]
+\begin{figure}
+\begin{floatrow}
 \figurebox{\caption{}\label{fig:sec1.2-30}}
           {\somefigure}
 \figurebox{\caption{}\label{fig:sec1.2-31}}
@@ -869,7 +879,7 @@ y_n+y_{n+2}
 所以函数~$f\mparenb{g(x)}$~的图象（见\ref{fig:sec1.2-31}）为无穷多条平行的直线段。利用取整函数的记号，可以
 统一表达式为
 \[
-f\mparenb{g(x)}=x-\mfloorB{\frac1\pi\mparenB{x+\frac\pi2}}\pi\mcond*{x\neq\mparenB{k+\frac12}\pi},
+f\mparenb{g(x)}=x-\mfloorbb{\frac1\pi\mparenB{x+\frac\pi2}}\pi\mcond*{x\neq\mparenB{k+\frac12}\pi},
 \]
 上式中，$k=0,\pm1,\pm2,\dotsc$。
 \end{proof}
@@ -883,7 +893,7 @@ f\mparenb{g(x)}=x-\mfloorB{\frac1\pi\mparenB{x+\frac\pi2}}\pi\mcond*{x\neq\mpare
 \end{exlist}
 \item\relax
 \begin{exlist}
-  \item 在同一坐标系上画出~$y_1=\sin x$~和~$y_2=\dfrac2\pi x$~在~$x\in\mintcB 0{\dfrac\pi2}$~部分~的图象，并
+  \item 在同一坐标系上画出~$y_1=\sin x$~和~$y_2=\dfrac2\pi x$~在~$x\in\mintcbb 0{\dfrac\pi2}$~部分~的图象，并
         观察~$y_1,y_2$~的图象位置关系；
   \item 通过以上观察证明，在非钝角~$\triangle\mathit{ABC}$~中，有~$\sin A+\sin B+\sin C>2$。
 \end{exlist}

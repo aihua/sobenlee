@@ -4,15 +4,68 @@
 
 
 \chapter{微分形式与~Stokes~公式}\label{ch:app}
+
 \section{反对称的~$k$~重线性函数}
 \section{$k$~次微分形式、外微分}
 \begin{exercise}
-\item
+\item 设~$\omega=\dif x_1\wedge\dif x_2+\dif x_3\wedge\dif x_3$。
+\begin{exlist}
+  \item 求~$\omega\wedge\omega$；
+  \item 证明，不存在两个一次形式~$\alpha,\beta$，使得~$\alpha\wedge\beta=\omega$。
+\end{exlist}
+\item 设
+\[
+\begin{aligned}
+  \alpha&=x_1\dif x_2+x_2\dif x_3+x_3\dif x_1;\\
+  \eta  &=x_1x_2\dif x_1\wedge\dif x_2+x_2x_3\dif x_2\wedge\dif x_3+x_3x_1\dif x_3\wedge\dif x_1 。
+\end{aligned}
+\]
+\begin{exlistcols}
+  \item 求~$\alpha\wedge\eta$；
+  \item 求~$\eta\wedge\alpha$；
+  \item 判断并说明~$\alpha\wedge\eta$~是否与~$\eta\wedge\alpha$~相同。
+\end{exlistcols}
+\item 设~$\omega=\dfrac12\sum_{1\leq i\leq j\leq n}a_{ij}\dif x_i\wedge\dif x_j$，其~$a_{ij}+a_{ji}=0$。证明，
+\[
+  \dif\omega=\frac12\sum_{1\leq i<j<k\leq n}\mparenbb{\pdiff{a_{ij}}{{x_k}}+\pdiff{a_{jk}}{{x_i}}+\pdiff{a_{ki}}{{x_j}}}
+  \dif x_i\wedge\dif x_j\wedge\dif x_k 。
+\]
+\item 设~$\omega=P(x,y,z)\dif x+Q(x,y,z)\dif y+R(x,y,z)\dif z$，而且~$\dif\omega=0$。证明，
+\[
+  \pdiff Ry=\pdiff Qz,\quad \pdiff Pz=\pdiff Rx,\quad \pdiff Qx=\pdiff Py 。
+\]
+\item 寻找一个~$n-1$~次形式~$\eta$，使得~$\dif\eta=\dif x_1\wedge\dif x_2\wedge\dotsb\wedge\dif x_n$。
+\item 设~$\omega=yz\dif y\wedge\dif z+zx\dif z\wedge\dif x+xy\dif x\wedge\dif y$。
+\begin{exlistcols}
+  \item 证明~$\omega$~是闭形式；
+  \item 求一次形式~$\eta$，使得~$\dif\eta=\omega$。
+\end{exlistcols}
 \end{exercise}
+
 \section{微分形式的变量替换}
 \begin{exercise}
-\item
+\item 设
+\[
+\begin{aligned}
+  \omega&=a_1(x)\dif x_1+a_2(\mvec x)\dif x_2+a_3(x)\dif x_3;\\
+    \eta&=b_3(x)\dif x_1\wedge\dif x_2+b_2(x)\dif x_3\wedge\dif x_1+b_1(x)\dif x_2\wedge\dif x_3;\\
+       x&=\phi(a),\enspace\Omega\subset\mR{3}\to\Omega'\subset\mR{3} 。
+\end{aligned}
+\]
+\begin{exlist}\FixExHead
+  \item $\phi\ast\omega=\sum_{j=1}^3\mparenbb{\sum_{i=1}^3a_i\mparenb{\phi(u)}\pdiff{\phi_i}{{u_j}}}\dif u_j$；
+  \item $\phi\ast\eta=\sum_{1\leq i<j\leq3}
+  \begin{vmatrix}
+    b_1\comp\phi & b_2\comp\phi & b_3\comp\phi \\
+    \pdiff{\phi_1}{{u_i}} & \pdiff{\phi_2}{{u_i}} & \pdiff{\phi_3}{{u_i}} \\[1.2ex]
+    \pdiff{\phi_1}{{u_j}} & \pdiff{\phi_2}{{u_j}} & \pdiff{\phi_3}{{u_j}}
+  \end{vmatrix}\dif u_i\wedge\dif u_j$；
+  \item $\phi\ast\mparen{\omega\wedge\eta}=\mparenbb{\sum_{i=1}^3a_i\mparenb{\phi(u)}b_i\mparenb{\phi(u)}}
+  \pdiff{(\phi_1,\phi_2,\phi_2)}{{(u_1,u_2,u_3)}}\dif u_1\wedge\dif u_2\wedge\dif u_3$；
+  \item $\mparen{\phi\ast\omega}\wedge\mparen{\phi\ast\eta}=\phi\ast\mparen{\omega\wedge\eta}$。
+\end{exlist}
 \end{exercise}
+
 \section{流形与流形上的积分}
 \section{Gauss~定理}
 \section{Stokes~公式}

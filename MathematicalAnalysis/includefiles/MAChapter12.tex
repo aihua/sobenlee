@@ -4,19 +4,256 @@
 
 
 \chapter{函数项级数}\label{ch:12}
+
 \section{函数序列及级数中的基本问题}
+
 \section{函数序列及函数级数的一致收敛性}
 \subsection{一致收敛的概念}
 \subsection{一致收敛性的判别法}
 \begin{exercise}
-\item
+\item 确定下列函数项级数的收敛区域（绝对的和条件的）。
+\begin{exlistcols}
+  \item $\sum_{n=1}^\sinf\dfrac{x^n}{1+x^{2n}}$；
+  \item $\sum_{n=1}^\sinf\dfrac n{n+1}\mparenbb{\dfrac x{2x+1}}^n$；
+  \item $\sum_{n=1}^\sinf\dfrac{(-1)^n}{2n-1}\mparenbb{\dfrac{1-x}{1+x}}^n$；
+  \item $\sum_{n=1}^\sinf\dfrac1{\sqrt n}\dfrac1{1+a^{2n}x^2}$，~$\mabs a>1$~或~$\mabs a\leq 1$。
+\end{exlistcols}
+\item 讨论下列函数序列在给定区间上的一致收敛性。
+\begin{exlist}
+  \item $f_n(x)=\dfrac{x^n}{1+x^n}$，
+  \begin{exlistcols}[label=\Ding*,3]
+    \item $x\in\mintc0b\mcond{b<1}$；
+    \item $x\in\mintc01$；
+    \item $x\in\mintc a\pinf\mcond{a>1}$；
+  \end{exlistcols}
+  \item $f_n(x)=\dfrac1{1+nx}$，
+  \begin{exlistcols}[label=\Ding*,3]
+    \item $x\in\mintc a\pinf\mcond{a>0}$；
+    \item $x\in\minto0\pinf$；
+  \end{exlistcols}
+  \item $f_n(x)=\dfrac{n^2x^2}{1+n^3x^3}$；
+  \begin{exlistcols}[label=\Ding*,3]
+    \item $x\in\mintc a\pinf\mcond{a>0}$；
+    \item $x\in\minto0\pinf$；
+  \end{exlistcols}
+  \item $f_n(x)=\me^{-(x-n)^2}$，
+  \begin{exlistcols}[label=\Ding*,3]
+    \item $x\in\mintc{-\ell}\ell$；
+    \item $x\in\mR$；
+  \end{exlistcols}
+\begin{exlistcols*}
+  \item $f_n(x)=\dfrac1n\ln\mparenb{1+\me^{-nx}}$，~$x\in\mR$；
+  \item $f_n(x)=x^n-x^{n+1}$，~$x\in\mintc01$；
+  \item $f_n(x)=\dfrac{nx}{1+n+x}$，~$x\in\mintc01$。
+\end{exlistcols*}
+\end{exlist}
+\item 设~$f(x)$~定义于~$\minto ab$，令
+\[
+  f_n(x)=\frac{\mfloor{nf(x)}}n\mcond*{n=1,2,\dotsc} 。
+\]
+证明，当~$\ntoinf$~时，有~$f_n(x)\unito f(x)$，$x\in\minto ab$。
+\item 设~$f(x)$~在~$\minto ab$~内有连续的导数~$f'(x)$，且
+\[
+  f_n(x)\coloneq n\mparenbb{f\mparenB{x+\frac1n}-f(x)}\mcond*{n=1,2,\dotsc}。
+\]
+证明，在闭区间~$\mintc\alpha\beta\subset\minto ab$~上，当~$\ntoinf$~时，有~$f_n(x)\unito f'(x)$。
+\item 设~$f_n(x)$~在~$\mintc ab$~上有界，并且~$\mbrace{f_n(x)}$~在~$\mintc ab$~上一致收敛。证明，$\mbrace{f_n(x)}$~在~$\mintc ab$~
+上一致有界。（即存在~$M>0$，使得~$\mabsb{f_n(x)}\leq M$~对任意~$x\in\mintc ab$~及任意~$n=1,2,\dotsc$~成立。）
+\item 设~$\mbrace{f_n(x)}$~与~$\mbrace{g_n(x)}$~都是一致收敛且一致有界的函数序列。证明函数序列~$\mbraceb{f_n(x)\cdot g_n(x)}$~也
+一致收敛。
+\item 设
+\[
+  f_1(x)=f(x)=\frac x{\sqrt{1+x^2}},\quad
+  f_{n+1}(x)=f\mparenb{f_n(x)}\mcond*{n=1,2,\dotsc}。
+\]
+证明，当~$\ntoinf$~时，$f_n(x)\unito 0$，$x\in\mR$。
+\item 设~$f_1(x)$~在~$\mintc ab$~上可积。定义函数序列
+\[
+  f_{n+1}(x)=\int_a^xf_n(t)\dif t\mcond*{n=1,2,\dotsc}。
+\]
+证明，当~$\ntoinf$~时，$f_n(x)\unito 0$，$x\in\mintc ab$。
+\item 证明下列级数在所指定区间内的一致收敛性。
+\begin{exlistcols}
+  \item $\sum_{n=1}^\sinf\dfrac{\sin nx}{x+2^n}$，~$x\in\minto{-2}\pinf$；
+  \item $\sum_{n=1}^\sinf\dfrac{nx}{1+n^5x^2}$，~$x\in\mR$；
+  \item $\sum_{n=1}^\sinf\dfrac{n^2}{\sqrt{n!}}\mparenb{x^n+x^{-n}}$，~$\mabs x\in\mintc{0.5}2$；
+  \item $\sum_{n=1}^\sinf x^2\me^{-nx}$，~$x\in\mintco0\pinf$；
+  \item $\sum_{n=1}^\sinf\dfrac{x^n\ln^nx}{n!}$，~$x\in\mintc01$。
+\end{exlistcols}
+\item 通过一般项判断级数的一致收敛性。
+\begin{exlistcols}
+  \item $\sum_{n=1}^\sinf2^n\sin\dfrac1{3^nx}$，~$x\in\minto0\pinf$；
+  \item $\sum_{n=1}^\sinf\dfrac{(-1)^n}{x+n}$，~$x\in\minto{-1}\pinf$；
+  \item $\sum_{n=1}^\sinf\dfrac{(-1)^n}{n+\sin x}$，~$x\in\mR$。
+\end{exlistcols}
+\item 判断下列级数的一致收敛性。
+\begin{exlistcols}
+  \item $\sum_{n=1}^\sinf\dfrac{(-1)^{\frac{n(n-1)}2}}{\sqrt[3]{n^2+\me^x}}$，~$x\in\mintc{-a}a$；
+  \item $\sum_{n=1}^\sinf\dfrac{\cos\dfrac{2n}3\pi}{\sqrt{n^2+x^2}}$，~$x\in\mR$；
+  \item $\sum_{n=1}^\sinf\dfrac{\sin x\sin nx}{\sqrt{n+x}}$，~$x\in\mintco0\pinf$；
+  \item $\sum_{n=1}^\sinf\dfrac{\cos nx}{n^3}$，~$x\in\mR$；
+  \item $\sum_{n=1}^\sinf\mparenbb{\sqrt{x^2+\dfrac1{n^2}}-\sqrt{x^2+\dfrac1{\smash[b]{(n+1)^2}}}}$，~$x\in\mR$；
+  \item $\sum_{n=1}^\sinf\dfrac{\sin nx}n$，~$x\in\mintc0\pi$~与~$x\in\mintc a\pi\mcond{a>0}$。
+\end{exlistcols}
+\item 设级数~$\sum_{n=1}^\sinf a_n$~收敛。证明级数~$\sum_{n=1}^\sinf a_n\me^{-nx}$~在~$\mintco0\pinf$~上一致收敛。
+\item 设级数~$\sum_{n=1}^\sinf a_n$~收敛。证明级数~$\sum_{n=1}^\sinf\dfrac{a_n}{n^x}$~在~$\mintco0\pinf$~上一致收敛。
+\item 若级数~$\sum_{n=1}^\sinf u_n(x)$~在~$\mintc ab$~上绝对收敛且一致收敛，讨论级数~$\sum_{n=1}^\sinf\mabsb{u_n(x)}$~在
+~$\mintc ab$~上的一致收敛性。可以研究级数~$\sum_{n=0}^\sinf(-1)^n(1-x)x^n$，$x\in\mintc01$。
+\item 设级数~$\sum_{n=1}^\sinf\mabsbb{\dfrac1{a_n}}$~收敛。证明，级数~$\sum_{n=1}^\sinf\dfrac1{(x-a_n)}$~在不包含
+点~$a_n\mcond{n=1,2,\dotsc}$~的任意有界闭集合上绝对并一致收敛。
+\item 证明，若各项是单调函数的级数~$\sum_{n=1}^\sinf\phi_n(x)$~在闭区间~$\mintc ab$~的端点绝对收敛，则此函数在闭区间~$\mintc ab$~
+上绝对并一致收敛。
 \end{exercise}
+
 \section{一致收敛的函数序列与函数级数的性质}
 \begin{exercise}
-\item
+\item 研究下列级数所表示的函数在指定区间上的连续性。
+\begin{exlistcols}
+  \item $\sum_{n=0}^\sinf x^n$，~$x\in\minto{-1}1$；
+  \item $\sum_{n=0}^\sinf\dfrac{x^n}n$，~$x\in\mintco{-1}1$；
+  \item $\sum_{n=0}^\sinf\dfrac{x^n}{n^2}$，~$x\in\mintc{-1}1$；
+  \item $\sum_{n=0}^\sinf\dfrac1{(x+n)(x+n+1)}$，~$x\in\minto0\pinf$。
+\end{exlistcols}
+\item 研究下列级数在什么区间上一致收敛，其和函数在何处连续。
+\begin{exlistcols}[3]
+  \item $\sum_{n=1}^\sinf\dfrac1{1+n^2x^2}$；
+  \item $\sum_{n=1}^\sinf\dfrac{nx}{1+n^4x^2}$；
+  \item $\sum_{n=1}^\sinf\dfrac{\cos nx}{n^2}$；
+  \item $\sum_{n=1}^\sinf\dfrac{\sin nx}{n\sqrt n}$；
+  \item $\sum_{n=1}^\sinf\dfrac{x^2}{(1+x^2)^n}$。
+\end{exlistcols}
+\item 设
+\[
+  f_n(x)=\dfrac{x^2}{x^2+(1-nx)^2}\mcond*{x\in\mintc01}。
+\]
+证明，它的任意子序列都不一致连续。
+\item 证明~$\lim_{x\to1}\sum_{n=1}^\sinf\dfrac{x^n(1-x)}{n(1-x^{2n+1})}=\sum_{n=1}^\sinf\dfrac1{n(2n+1)}$。
+\item 分别确定参数~$\alpha$~的值，使得
+\[
+  f_n(x)=n^\alpha x\me^{-nx}\mcond*{n=1,2,\dotsc}
+\]
+\begin{exlistcols}
+  \item 在闭区间~$\mintc01$~上收敛；
+  \item 在闭区间~$\mintc01$~上一致收敛；
+  \item $\lim_\ntoinf\int_0^1f_n(x)\dif x$~可以再积分号下取极限。
+\end{exlistcols}
+\item 证明函数序列~$f_n(x)=nx\me^{-nx^2}$~在闭区间~$\mintc01$~上收敛，但
+\[
+  \int_0^1\mparenB{\lim_\ntoinf f_n(x)}\dif x\neq\lim_\ntoinf\int_0^1f_n(x)\dif x 。
+\]
+\item 证明函数~$f(x)=\sum_{n=1}^\sinf\dfrac{\sin nx}{n^4}$~在~$\mR$~上连续并具有连续的二阶导函数。
+\item 设~$\sum_{n=1}^\sinf u_n(x)$~在~$\minto ab$~上一致收敛，且~$u_n(x)$~在~$\mintc ab$~上连续。证明，
+\begin{exlistcols}
+  \item $\sum_{n=1}^\sinf u_n(x)$~在~$\mintc ab$~上一致收敛；
+  \item $S(x)=\sum_{n=1}^\sinf u_n(x)$~在~$\mintc ab$~上连续。
+\end{exlistcols}
+\item 设~$f_n(x)$~在~$\mR$~上一致连续，且一致收敛于~$f(x)$。证明
+~$f(x)$~在~$\mR$~上一致连续。
+\item 设~$f_n(x)$~在~$\mintc ab$~上连续，且一致收敛于~$f(x)$。又设~$\mbrace{x_n}\subset\mintc ab$，满足
+~$\lim_\ntoinf x_n=x_0\in\mintc ab$。证明~$\lim_\ntoinf f_n(x_n)=f(x_0)$。
+\item 设~$f_n(x)$~在~$\mintc ab$~上连续，且一致收敛于~$f(x)$。又设~$f(x)$~
+在~$\mintc ab$~上无零点。证明，
+\begin{exlist}
+  \item 当~$n$~充分大时，函数~$f_n(x)$~在~$\mintc ab$~上也无零点；
+  \item $\dfrac1{f_n(x)}$~在~$\mintc ab$~上一致收敛于~$\dfrac1{f(x)}$。
+\end{exlist}
+\item 设~$f_n(x)$~在~$\mintc ab$~上有界，且一致收敛于~$f(x)$。证明
+\[
+  \lim_\ntoinf\sup_{x\in\minto ab}\mbrace{f_n(x)}=\sup_{x\in\minto ab}\mbraceb{f(x)}。
+\]
+\item 设~$f_n(x)$~对任意~$x,y\in\mintc ab$，有
+\[
+  \mabsb{f_n(x)-f_n(y)}\leq K\mabs{x-y},
+\]
+且对任意取定的~$x\in\mintc ab$，有~$\lim_\ntoinf f_n(x)=f(x)$。证明~$f_n(x)$~在~$\mintc ab$~上一致收敛于~$f(x)$。
+\item 设函数项级数~$\sum_{n=1}^\sinf u_n(x)$~在~$\mintc ab$~上收敛到函数~$S(x)$，且所有~$u_n(x)$~都是~$\mintc ab$~上的非负连续
+函数。证明，
+\begin{exlist}
+  \item $S(x)$~是\emph{下半连续}函数，即对任意~$x_0\in\mintc ab$~与任意~$\e>0$，都存在~$\delta>0$，使得当~$\mabs{x-x_0}<\delta$~
+  时，对任意~$x\in\mintc ab$，有
+  \[
+    S(x)>S(x_0)-\e;
+  \]
+  \item $S(x)$~在~$\mintc ab$~上达到最小值。
+\end{exlist}
+\item 设~$\mbrace{x_n}\subset\minto 01$，且~$x_i\neq x_j\mcond{i\neq j}$。讨论函数
+\[
+  f(x)=\sum_{n=1}^\sinf\dfrac{\sgn(x-x_n)}{2^n}
+\]
+在~$\minto 01$~上的连续性。
+\item\begin{exlist}\FixExHead
+  \item 函数项级数~$\sum_{n=1}^\sinf x^n\ln x$~在~$\mintc01$~上不一致连续；
+  \item 函数项级数
+  \[
+    \sum_{n=1}^\sinf x^n\dfrac{\ln x}{1+\mabs{\ln\ln\mparen{\sfrac1x}}}
+  \]
+  在~$\mintc 01$~上一致收敛，并说明不能用控制判别法。
+\end{exlist}
+\item 证明，Riemann $\zeta$~函数
+\[
+  \zeta(x)=\sum_{n=1}^\sinf\frac1{n^x}
+\]
+在~$x\in\minto1\pinf$~上连续，并且有任意阶的连续导数。
+\item 设~$f(x)=\sum_{n=1}^\sinf\dfrac{\me^{-nx}}{1+n^2}$。证明，
+\begin{exlistcols}
+  \item $f(x)$~在~$\mintco0\pinf$~上连续；
+  \item $f(x)$~在~$\minto0\pinf$~上无穷次可微。
+\end{exlistcols}
+\item 设~$f(x)=\sum_{n=1}^\sinf\dfrac{(-1)^{n-1}}n\me^{-nx^2}$。证明，
+\begin{exlistcols}
+  \item $f(x)$~在~$\mR$~上连续；
+  \item $f(x)$~在~$\mR$~上有连续的导函数；
+  \item $f(x)$~在~$\mR\difset\mbrace 0$~上无穷次可微。
+\end{exlistcols}
+\item 设函数~$f(x)$~在~$\mR$~上无穷次可微，且导函数~$f^{(n)}(x)$~在~$\mR$~上一致收敛于某个函数~$\phi(x)$。证明~$\phi(x)=C\me^x$，这
+里~$C$~为某常数。
 \end{exercise}
+
 \begin{exercise*}
-\item
+\item 设~$\alpha\in\minto01$。证明，
+\[
+  \lim_{b\to1}\int_0^b\frac{x^{\alpha-1}}{1+x}\dif x=\sum_{n=1}^\sinf\frac{(-1)^n}{\alpha+n}。
+\]
+\item 给定正项级数~$\sum_{n=1}^\sinf a_n$，令~$S_n=\sum_{k=1}^na_k$。对级数~$\sum_{n=1}^\sinf a_n\me^{-S_nx}$
+\begin{exlistcols}
+  \item 确定其收敛域；
+  \item 讨论其在收敛域上的一致收敛性；
+  \item 确定其一致收敛域。
+\end{exlistcols}
+\item 设~$f(x)$~在~$\mintc ab$~上满足，对任意~$x,y\in\mintc ab$，有
+\[
+  \mabsb{f(x)-f(y)}\leq k\mabs{x-y}\mcond*{k\in\minto01},
+\]
+且
+\[
+  a\leq\min_{x\in\mintc ab}\mbraceb{f(x)}\leq\max_{x\in\mintc ab}\mbraceb{f(x)}\leq b 。
+\]
+构造序列，
+\[
+  f_1(x)=f(x),\quad f_{n+1}(x)=f\mparenb{f_n(x)}\mcond*{n=1,2,\dotsc}。
+\]
+证明，存在常数~$C$，使得~$f_n(x)$~在~$\mintc ab$~上一致收敛于~$C$。
+\item 设~$f_n(x)$~在~$\mintc ab$~上连续，并且对任意取定的~$x\in\mintc ab$，序列~$\mbrace{f_n(x)}$~有界。证
+明，存在~$\mintc ab$~上的一个小区间，使得~$\mbraceb{f_n(x)}$~在此小区间上一致有界。
+\item 设~$f_n(x)$~在~$\mintc ab$~上可积且一致收敛于~$f(x)$。证明~$f(x)$~在~$\mintc ab$~上可积。
+\item 设~$f_n(x)$~在~$\minto ab$~上连续，且对任意~$\delta>0$，$f_n(x)$~在
+~$\mintc{a+\delta}{b-\delta}\subset\minto ab$~上一致收敛于~$f(x)$。同时瑕积分存在且满足
+\[
+  \lim_\ntoinf\int_a^bf_n(x)\dif x=\int_a^bf(x)\dif x 。
+\]
+证明，
+\[
+  \lim_\ntoinf\int_a^b\mabsb{f_n(x)-f(x)}\dif x=0 。
+\]
+\item 设~$f_n(x)$~在~$\mintc ab$~上连续，且一致有界。对任意~$\delta>0$，$f_n(x)$~在
+~$\mintc{a+\delta}{b-\delta}\subset\mintc ab$~上一致收敛于~$f(x)$。证明，
+\[
+  \lim_\ntoinf\int_a^bf_n(x)\dif x=\int_a^bf(x)\dif x 。
+\]
+\item 证明，
+\[
+  \sum_{n=0}^\sinf\int_0^1x^n\sin\pi x\dif x=\int_0^\pi\frac{\sin x}x\dif x 。
+\]
 \end{exercise*}
 
 

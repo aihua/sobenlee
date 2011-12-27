@@ -15,9 +15,9 @@
 \RequireXeTeX
 
 \RequirePackage[lucidasmallscale,math-style=iso,nofontinfo]{lucimatx}
-\RequirePackage{empheq,amsthm,thmtools,mlist,siunitx}
+\RequirePackage{empheq,amsthm,thmtools,mlist,systeme,siunitx}
 \RequirePackage[uppi,comma,overparen,mathscrf,mathbb,lucida]{localint}
-\RequirePackage{needspace,chngcntr,changepage,environ,afterpage,ifthen}
+\RequirePackage{needspace,chngcntr,changepage,environ,afterpage}
 \RequirePackage{caption,floatrow,wrapfig,labelref}
 \RequirePackage{enumitem,tabu,diagbox,enumcols}
 \RequirePackage[perpage,stable,bottom]{footmisc}
@@ -32,13 +32,15 @@
 
 %\RequirePackage[cam,a4,center,noinfo]{crop}
 
+\definecolor{linkred}{rgb}{.65,.05,.1}
+
 \hypersetup{
   bookmarksopen,
   bookmarksdepth=2,
   bookmarksopenlevel=0,
   bookmarksnumbered,
   colorlinks,
-  linkcolor=purple,
+  linkcolor=linkred,
   pdfinfo={
       Title={数学分析},
      Author={北京大学数学系},
@@ -89,8 +91,9 @@
 
 \let\orig@includeonly=\includeonly
 \def\includeonly{\@ifstar
-  {\DoNotMakeVolume\orig@includeonly}
-  {\orig@includeonly}}
+  {\DoNotMakeVolume\let\tableofcontents\relax\orig@includeonly}
+  {\orig@includeonly}%
+}
 
 \endinput
 %%

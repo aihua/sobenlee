@@ -4,49 +4,483 @@
 
 
 \chapter{Euclid~空间与多元函数}\label{ch:15}
+
 \section{$m$~维~Euclid~空间}
 \subsection{$m$~维向量空间}
 \subsection{$m$~维~Euclid~空间}
 \subsection{$\mR{m}$~中点列的收敛性}
 \begin{exercise}
-\item
+\item 设~$\mbrace{\mvec x_{n}}$~是~$\mR{m}$~中的点列，若它有极限，证明~$\mbrace{\mvec x_n}$~有界。
+\item 设~$\mvec x_{n},\mvec y_{n}\in\mR{m}$，且有~$\lim_\ntoinf\mvec x_{n}=\mvec a$~与~$\lim_\ntoinf\mvec y_{n}=\mvec b$。%
+证明~$\lim_\ntoinf \mvec x_{n}\cdot\mvec y_{n}=\mvec a\cdot\mvec b$。
+\item 设~$\mvec\ell\in\mR{m}$，且~$\mabs{\mvec\ell}=1$，记~$\mangle{\mvec\ell}{\mvec e_{i}}=\theta_i$~为~$\mvec\ell$~与坐标向量
+~$\mvec e_{i}\mcond{i=1,2,\dotsc,m}$~的夹角。证明
+\[
+  \mvec\ell=\mparenb{\cos\theta_1,\cos\theta_2,\dotsc,\cos\theta_n}。
+\]
+\item 对任意~$\mvec x,\mvec y\in\mR{m}$，记~$\theta=\mangle{\mvec x}{\mvec y}$~为~$\mvec x$~与~$\mvec y$~的夹角。证明，
+\begin{exlistcols}
+  \item $\mabs{\mvec x-\mvec y}^2=\mabs{\mvec x}^2+\mabs{\mvec y}^2-2\mabs{\mvec x}\cdot\mabs{\mvec y}\cos\theta$；
+  \label{exer-15.1.5-1}
+  \item 若~$\mvec x,\mvec y$~正交，则~$\mabs{\mvec x+\mvec y}^2=\mabs{\mvec x}^2+\mabs{\mvec y}^2$；\label{exer-15.1.5-2}
+  \item 说明~\ref{exer-15.1.5-1}~与~\ref{exer-15.1.5-2}~的几何意义。
+\end{exlistcols}
+\item 对任意~$\mvec x,\mvec y\in\mR{m}$，证明
+\[
+  \mabs{\mvec x+\mvec y}^2+\mabs{\mvec x-\mvec y}^2=2\mabs{\mvec x}^2+2\mabs{\mvec y}^2。
+\]
+\item 对任意~$\mvec x,\mvec y\in\mR{m}$，讨论
+\begin{exlist}
+  \item Cauchy~不等式~$\mabs{\minp{\mvec x}{\mvec y}}\leq\mabs{\mvec x}\cdot\mabs{\mvec y}$~中等号何时成立；
+  \item 三角不等式~$\mabs{\mvec x+\mvec y}\leq\mabs{\mvec x}+\mabs{\mvec y}$~中等号何时成立。
+\end{exlist}
+\item 设~$\mvec x=\mparen{\mvec x{1,2,:,m}}\in\mR{m}$。证明，
+\begin{exlist}
+  \item 存在常数~$K_1,K_2>0$，对任意~$\mvec x\in\mR{m}$~有
+  \[
+    K_2\sum_{i=1}^m\mabs{x_i}\leq\mabs{\mvec x}\leq K_1\sum_{i=1}^m\mabs{x_i}
+    \mcond*{\mabs{\mvec x}\coloneq\mparenbb{\sum_{i=1}^nx_i^2}^{\msp\frac12}};
+  \]
+  \item 存在常数~$M_1,M_2>0$，对任意~$\mvec x\in\mR{m}$~有
+  \[
+    M_2\max_{1\leq i\leq m}\mbrace{\mabs{x_i}}\leq\mabs{\mvec x}\leq M_1\max_{1\leq i\leq m}\mbrace{\mabs{x_i}}。
+  \]
+\end{exlist}
 \end{exercise}
+
 \section{Euclid~空间中的点集}
 \subsection{点与集合的关系}
 \subsection{开集与闭集}
 \subsection{$\mR{m}$~中的某些特殊点集与若干术语}
 \begin{exercise}
-\item
+\item 设~$\Omega\subset\mR{2}$，画出下列区域~$\Omega$~的图形，并说明其是开区域还是闭区域，是有界域还是无界域。
+\begin{exlistcols}
+  \item $\Omega=\mathsetb{\minto xy}{y>0,~x>y,~x<1}$；
+  \item $\Omega=\mathsetB{\minto xy}{\dfrac14x^2-1\leq y\leq 2-x}$；
+  \item $\Omega=\mathsetb{\minto xy}{x^2+y^2\neq1}$；
+  \item $\Omega=\mathsetb{\minto xy}{xy=1}$；
+  \item $\Omega=\mathsetb{\minto xy}{\minto xy\neq\minto 00}$；
+  \item $\Omega=\mathsetb{\minto xy}{y\in\mintco02,~x\in\mintc{2y}{2y+2}}$。
+\end{exlistcols}
+\item 设~$\mvec x\in\mR{m}$，说明下列点集在~$\mR{m}$~上是开区域还是闭区域，是有界域还是无界域。
+\begin{exlistcols}
+  \item $a<\mabs{\mvec x}<b\mcond{b>a>0}$；
+  \item $\mparen{a_1\mvec x\cdot\mvec e_{1}}^2+\dotsb+\mparen{a_m\mvec x\cdot\mvec e_{m}}^2\leq1$；
+  \item $x_m=5$，而~$x_1^2+x_2^2+\dotsb+x_{m-1}^2<1$。
+\end{exlistcols}
+\item 设~$\mvec z\in\mR{m}$~是常向量，且~$C$~为常数。证明，
+\begin{exlistcols}
+  \item 半空间~$\mathset{\mvec x}{\mvec x\in\mR{m},~\mvec x\cdot\mvec z<C}$~是开集；
+  \item $\mathset{\mvec x}{\mvec x\in\mR{m},~\mvec x\cdot\mvec z\geq C}$~是闭集。
+\end{exlistcols}
+\item 求下列集合~$\Omega$~的边界~$\bound\Omega$，内部~$\interior\Omega$~和闭包~$\closure\Omega$。
+\begin{exlist}
+  \item $\Omega\subset\mR{2}$，~$\Omega=\mathsetb{\minto xy}{x>-1,~y\in\minto0{x+1}}$；
+  \item $\Omega\subset\mR{2}$，~$\Omega=\mathsetb{\minto{r\cos\theta}{r\sin\theta}}{r\in\minto01,~\theta\in\minto0{2\pi}}$；
+  \item $\Omega\subset\mR{2}$，~$\Omega=\mathsetb{\minto xy}{x~\text{或}~y~\text{是无理数}}$；
+  \item $\Omega\subset\mR{m}$，
+  ~$\Omega=\mathsetb{\mvec x}{\mvec x,\mvec x_{0}\in\mR{m},~0<\mabs{\mvec x-\mvec x_{0}}\leq\delta}$，~$\delta>0$；
+  \item $\Omega\subset\mR{m}$，~$\Omega=\mathsetb{\mvec x}{\mvec x\in\mR{m},~\mabs x=1}$。
+\end{exlist}
+\item 设~$A,B\subset\mR{m}$。证明，
+\begin{exlistcols}
+  \item $\interior{\mparen{A\cap B}}=\interior A\cap\interior B$；
+  \item $\closure{A\cup B}=\closure A\cup\closure B$。
+\end{exlistcols}
+\item 设~$A,B\subset\mR{m}$。证明有下述集合包含关系成立，并举出使等号不成立的例子。
+\begin{exlistcols}
+  \item $\interior{\mparen{A\cup B}}\supset\interior A\cap\interior B$；
+  \item $\closure{A\cap B}\subset\closure A\cap\closure B$；
+\end{exlistcols}
+\item 设~$G_1,G_2$~是~$\mR{m}$~中两个不相交的开集。证明~$G_1\cap\closure G_2=\eset$。
+\item 设~$E\subset\mR{m}$~是闭集，且~$x\nin E$。证明~$\rho\minto{\mvec x}E>0$。若~$E$~不是闭集，讨论结论是否依然成立。
+\begin{exlistcols*}
+\item 设~$E\subset\mR{m}$。证明~$\closure E=\mathset{\mvec x}{\rho\minto{\mvec x}E=0}$。
+\item 对任意~$E\subset\mR{m}$，证明~$\bound E$~是闭集。
+\end{exlistcols*}
+\item 设~$E\subset\mR{m}$，且~$\mvec x,\mvec y\in\mR{m}$。证明
+~$\rho\minto{\mvec x}E\leq\rho\minto{\mvec x}{\mvec y}+\rho\minto{\mvec y}E$。
+\item 设~$A,B$~是~$\mR{m}$~中任意两个点集。证明，对任意~$\mvec x\in\mR{m}$~有
+~$\rho\minto AB\leq\rho\minto{\mvec x}A+\rho\minto{\mvec x}B$。
+\item 设~$E\subset\mR{m}$，令
+\[
+  A\coloneq\mathsetb{\mvec x}{\mvec x\in\mR{m},~\rho\minto{\mvec x}E<r},\quad
+  B\coloneq\mathsetb{\mvec x}{\mvec x\in\mR{m},~\rho\minto{\mvec x}E\leq r}。
+\]
+\begin{exlistcols}
+  \item 证明~$A$~是开集；
+  \item 证明~$B$~是闭集。
+\end{exlistcols}
+\item 设~$F$~是闭集，而~$G$~是开集。证明，
+\begin{exlistcols}
+  \item $F\difset G$~是闭集；
+  \item $G\difset F$~是开集。
+\end{exlistcols}
+\item 设~$E_1,E_2$~是~$\mR{m}$~中的开集，且~$E_1\cap E_2=\eset$。证明~$\bound{\mparen{E_1\cup E_2}}=\bound E_1\cup\bound E_2$。
+\item 对任意~$E\subset\mR{m}$。
+\begin{exlistcols}
+  \item 证明~$\bound{\closure E}\subset\bound E$；
+  \item 证明或反驳~$\bound{\closure E}=\bound E$。
+\end{exlistcols}
+\item 设~$1\leq s\leq m-1\mcond{m>1}$，且~$A\subset\mR{s}$，而~$B\subset\mR{m-s}$，则~$A\times B\subset\mR{m}$。证明，
+\begin{exlistcols}
+  \item 若~$A,B$~是开集，则~$A\times B$~是开集；
+  \item 若~$A,B$~是闭集，则~$A\times B$~是闭集。
+\end{exlistcols}
 \end{exercise}
+
 \section{$m$~维~Euclid~空间的性质}
 \subsection{$\mR{m}$~空间的完备性}
 \subsection{聚点原理}
 \subsection{有限覆盖定理}
 \begin{exercise}
-\item
+\item 设~$\mR{m}$~中的点列~$\mbrace{\mvec x_{n}}$~满足~$\sum_{n=1}^\sinf\mabs{\mvec x_{n+1}-\mvec x_{n}}<\pinf$。证明
+~$\mbrace{\mvec x_{n}}$~是收敛列。
+\item 设~$\mR{2}$~中有一列闭长方形
+\[
+  A_n=\mathsetb{\minto xy}{x\in\mintc{a_n}{b_n},~y\in\mintc{c_n}{d_n}},\quad A_n\supset A_{n+1}\mcond*{n=1,2,\dotsc}。
+\]
+又设~$A_n$~的对角线长~$\ell_n$~收敛于~$0$。用~$\mR$~上的闭区间套定理证明，存在唯一的~$\minto{x_0}{y_0}\in\mR{2}$，使得
+~$\minto{x_0}{y_0}\in A_n\mcond{n=1,2,\dotsc}$。
+\item\label{exer-closeSetThm} 设~$\mbrace{F_n}$~是~$\mR{m}$~上的有界闭集列，并且~$F_n\supset F_{n+1}\mcond{n=1,2,\dotsc}$。%
+又设~$F_n$~的直径~$d_n$~收敛于~$0$。证明，存在唯一的~$\mvec x_{0}\in\mR{m}$，使得~$\mvec x_{0}\in F_n\mcond{n=1,2,\dotsc}$。
+\item 设~$A\subset\mR{m}$~为有界闭集，而~$\setfam A$~是~$E$~的一个开覆盖，它由一列开集~$\mbrace{A_n}$~组成。试用闭集套定理（参
+看\ref{exer-closeSetThm}）证明，在~$\setfam A$~中存在~$E$~的有限子覆盖，即存在~$n_0$，使得
+\[
+  \bigcup_{i=1}^{n_0}A_{n_i}\supset E 。
+\]
+\item 设~$E\subset\mR{m}$~为有界闭集，而~$d(E)$~为~$E$~的直径。证明，存在~$\mvec x_{0},\mvec y_{0}\in E$，使得
+~$\rho\minto{\mvec x_{0}}{\mvec y_{0}}=d(E)$。
+\item 设~$E_1,E_2$~是~$\mR{m}$~中的闭集，并且~$E_1,E_2$~中至少有一个为有界集。证明，
+\begin{exlist}
+  \item 存在~$\mvec x_{0}\in E_1$~与~$\mvec y_{0}\in E_2$，使得
+  ~$\rho\minto{\mvec x_{0}}{\mvec y_{0}}=\rho\minto{E_1}{E_2}$；
+  \item 若~$E_1\cap E_2=\eset$，则~$\rho\minto{E_1}{E_2}\neq0$。
+\end{exlist}
+\item 设~$A,B$~是~$\mR{m}$~中互不相交的有界闭集。证明，存在开集~$W,V\subset\mR{m}$，满足~$W\supset A$~而~$V\supset B$，并且
+~$W\cap V=\eset$。
+\item 设~$\Omega$~是有界开区域，而~$G$~是闭区域，并且~$G\subset\Omega$。证明，存在开区域~$V$，使得~$G\subset B$~且
+~$\closure V\subset\Omega$。
 \end{exercise}
+
 \section{多元向量函数}
 \subsection{映\emspace 射}
 \subsection{向量函数}
 \subsection{多元函数的几何表示}
 \begin{exercise}
-\item
+\item 试用函数定义说明函数~$u=f(x_1)\mcond{a\leq x_1\leq b}$~能否看作以~$\mvec x{1,2,:,m}$~为自变量，而以~$u$~为因变量的~$m$~
+元函数。若可以，请指出它的定义域。
+\item 确定并画出下列二元函数的定义域。
+\begin{exlistcols}[3]
+  \item $u=x+\smbsqrt y$；
+  \item $u=\sqrt{1-x^2}+\smbsqrt{y^2-1}$；
+  \item $u=\smbsqrt{x^2+y^2-1}$；
+  \item $u=\smbsqrt{1-x^2-y^2}$；
+  \item $u=\ln\mparen{x+y}$；
+  \item $u=f(x,y)=C\mcond{\text{常数}}$；
+  \item $u=f(x,y)=\smbsqrt y$；
+  \item $u=\mbinom mn$；
+  \item[]
+  \item $u=\arcsin\dfrac yx$；
+  \item $u=\arccos\dfrac x{x+y}$；
+  \item $u=\sqrt{\dfrac{2x-x^2-y^2}{\smash[b]{x^2+y^2-x}}}$；
+  \item $u=\arcsin\dfrac x{y^2}+\arcsin\mparen{1-y}$。
+\end{exlistcols}
+\item 确定下列三元函数的定义域，并描述定义域的图形。
+\begin{exlistcols}
+  \item $u=\ln\mparen{xyz}$；
+  \item $u=\ln\mparenb{-1-x^2-y^2+z^2}$；
+  \item $u=\dfrac1{x^2+y^2}$；
+  \item $u=\arccos\dfrac z{\smbsqrt{x^2+y^2}}$。
+\end{exlistcols}
+\item 画出下列二元函数的等高线，其中~$a>0$。
+\begin{exlistcols}[3]
+\item $z=\mparen{x+y}^2$；
+\item $z=\dfrac1{x^2+2y^2}$；
+\item $z=\smbsqrt{xy}$；
+\item $z=\mabs x+y$；
+\item $z=\me^{\frac{2x}{x^2+y^2}}$；
+\item $z=\ln\sqrt{\dfrac{(x-a)^2+y^2}{\smash[b]{(x+a)^2+y^2}}}$。
+\end{exlistcols}
+\item 描述下列三元函数~$f(x,y,z)$~的等量面（即~$f(x,y,z)=C$~的曲面，这里~$C$~为常数）。
+\begin{exlistcols}[3]
+  \item $u=x^2+y^2-z^2$；
+  \item $u=(x+y)^2+z^2$；
+  \item $u=\dfrac z{x^2+y^2+1}$。
+\end{exlistcols}
+\item 作下列二元函数的图象。
+\begin{exlistcols}[3]
+  \item $u=1-\sqrt{x^2+z^2}$；
+  \item $u=x^2+4y^2$；
+  \item $u=x^2-y^2$；
+  \item $u=\dfrac1{2x^2+3y^2}$；
+  \item $u=\me^{-\mparen{x^2+y^2}}$；
+  \item $u=\smbsqrt{xy}$。
+\end{exlistcols}
+\item 说明下列方程表示什么曲面。任选其中一个变量为因变量，其余的为自变量，说明其否是二元函数；若是，指出其定义域。
+\begin{exlistcols}
+  \item $\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}+\dfrac{z^2}{c^2}-1=0$；
+  \item $4x^2+4x+\dfrac{y^2}4-y-3z=0$。
+\end{exlistcols}
+\item 说明下列函数的图象具有什么性质。
+\begin{exlistcols}[4]
+  \item $z=f\mparenb{x^2+z^2}$；
+  \item $z=f\mparenB{\dfrac yx}$；
+  \item $z=f\mparen{y-ax}$；
+  \item $z=zf\mparenB{\dfrac yx}$。
+\end{exlistcols}
 \end{exercise}
+
 \section{多元函数的极限}
 \subsection{多元数值函数的极限}
 \subsection{向量函数的极限}
 \subsection{累次极限}
 \begin{exercise}
-\item
+\item 设~$\mvec x=\mparen{\mvec x{1,:,m}}$，而~$\mvec a=\mparen{\mvec a{1,:,m}}$。证明~$\lim_{\mvec x\to\mvec a}\vecfunc f{x}=A$~
+当且仅当对任意~$\e>0$，存在~$\delta>0$，只要~$\mvec x\neq\mvec a$，且~$\mabs{x_i-a_i}<\delta\mcond{i=1,2,\dotsc,m}$，就有
+~$\mabsb{\vecfunc f{x}-A}<\e$。
+\item 叙述下列定义。
+\begin{exlistcols}
+  \item $\lim_{\substack{x\to a\\ y\to\pinf}}f(x,y)=A$；
+  \item $\lim_{\minto xy\to\minto{x_0}{y_0}}f(x,y)=\pinf$；
+  \item $\lim_{\substack{x\to\pinf\\ y\to\minf}}f(x,y)=A$；
+  \item $\lim_{\mvec x\to\pinf}\vecfunc f{x}=A\mcond{\mvec x\in\mR{m}}$。
+\end{exlistcols}
+\item 按定义证明下列极限等式。
+\begin{exlistcols}
+  \item $\lim_{\minto xy\to\minto 32}\mparen{3x-4y}=1$；
+  \item $\lim_{\minto xy\to\minto 11}\mparen{x^2+y^2}=2$；
+  \item $\lim_{\minto xy\to\minto aa}\mabsbb{\dfrac1{x-y}}=\pinf$；
+  \item $\lim_{\substack{x=3\\ y\to\pinf}}\dfrac{xy-2}{y+1}=3$。
+\end{exlistcols}
+\item 求下列极限。
+\begin{exlistcols}
+  \item $\lim_{\minto xy\to\minto 00}\dfrac{\me^x+\me^y}{\cos x-\sin y}$；
+  \item $\lim_{\minto xy\to\minto 00}\dfrac{x^2y^{\frac32}}{x^4+y^2}$；
+  \item $\lim_{\minto xy\to\minto 00}\dfrac{\sin\mparen{xy}} x$；
+  \item $\lim_{\minto xy\to\minto 00}x^2y^2\ln\mparenb{x^2+y^2}$；
+  \item $\lim_{\substack{x\to\pinf\\ y\to\pinf}}\mparenb{x^2+y^2}\me^{-(x+y)}$；
+  \item $\lim_{\minto xy\to\minto 00}\dfrac{\sin\mparenb{x^3+y^3}}{x^2+y^2}$；
+  \item $\lim_{\substack{x\to\pinf\\ y\to\pinf}}\mparenbb{\dfrac{xy}{x^2+y^2}}^{\msp x^2}$；
+  \item $\lim_{\substack{x\to\infty\\ y\to\infty}}\mparenbb{1+\dfrac1x}^{\msp\frac{x^2}{x+y}}$。
+\end{exlistcols}
+\item 对下列函数~$f(x,y)$，证明~$\lim_{\minto xy\to\minto 00}f(x,y)$~不存在。
+\begin{exlistcols}[3]
+  \item $f(x,y)=\dfrac{x^2}{x^2+y^2}$；
+  \item $f(x,y)=\dfrac{x^4+3x^2y^2+2xy^3}{\mparen{x^2+y^2}^2}$；
+  \item $f(x,y)=\dfrac{x^3+y^3}{x^2+y}$；
+  \item $f(x,y)=\dfrac{x^4y^4}{\mparen{x^2+y^4}^3}$；
+  \item $f(x,y)=\dfrac{x^2y^2}{x^3+y^3}$。
+\end{exlistcols}
+\item 设~$f(x,y)=\dfrac1{xy}$，而~$r=\smbsqrt{x^2+y^2}$。并且有区域
+\[
+  \Omega_1=\mathsetB{\minto xy}{\frac1k x\leq y\leq kx,~k>1~\text{为常数}},\quad
+  \Omega_2=\mathsetb{\minto xy}{x>0,~y>0}。
+\]
+\begin{exlistcols}
+  \item 判断~$\lim_{\substack{r\to\pinf\\ \minto xy\in\Omega_1}}f(x,y)$~是否存在；
+  \item 判断~$\lim_{\substack{r\to\pinf\\ \minto xy\in\Omega_2}}f(x,y)$~是否存在。
+\end{exlistcols}
+\item 设~$\alpha,\beta>0$，且记~$r=\smbsqrt{x^2+y^2}$。
+\begin{exlistcols}
+  \item 证明~$\cramped{x^\alpha y^\beta=o\mparen{r^\ell}}\mcond{r\to0}$，其中~$0<\ell<\alpha+\beta$；
+  \item 判断~$\lim_{\minto xy\to\minto 00}\dfrac{\cramped{x^\alpha y^\beta}}{\cramped{r^{\alpha+\beta}}}$~是否存在。
+\end{exlistcols}
+\item 设~$\mvec x=\mparen{\mvec x{1,2,:,m}}$，而~$r=\mabs{\mvec x}$。证明，对任意
+~$1\leq i,j\leq m$，有
+\[
+  x_io\mparen{x_j}=o\mparen{r^2}\mcond*{r\to0}。
+\]
+\item 叙述并证明~$\lim_{\substack{x\to\pinf\\ y\to\minf}}f(x,y)$~存在的~Cauchy~收敛准则。
+\item 证明~$\lim_{\substack{x\to\pinf\\ y\to\minf}}\mparenb{f(x)+g(y)}$~存在当且仅当~$\lim_{x\to\pinf}f(x)$~与
+~$\lim_{y\to\minf}g(y)$~同时存在。
+\item 设~$f(x)$~定义在~$\mR$~上，并且在任意有限区间上可积。证明无穷积分~$\int_\minf^\pinf f(x)\dif x$~收敛当且仅当
+极限~$\lim_{\substack{A\to\pinf\\ B\to\minf}}\int_A^Bf(x)\dif x$~存在。
 \end{exercise}
+
 \section{多元函数的连续性}
 \subsection{多元连续函数的定义与运算}
 \subsection{连续函数的基本性质}
 \begin{exercise}
-\item
+\item 证明下列函数是全平面上的连续函数。
+\begin{exlistcols}
+  \item $f(x,y)=\begin{cbbdcases}
+    \frac{\sin xy}{\smbsqrt{x^2+y^2}}, & x^2+y^2\neq0;\\
+    0, & x^2+y^2=0;
+  \end{cbbdcases}$
+  \item $f(x,y)=\begin{cBdcases}
+    y^2\ln\mparenb{x^2+y^2}, & x^2+y^2\neq0;\\
+    0, & x^2+y^2=0 。
+  \end{cBdcases}$
+\end{exlistcols}
+\item 指出下列函数的本性不连续点，并说明理由。
+\begin{exlistcols}[3]
+  \item $\dfrac{x^2-y^2}{x^2+y^2}$；
+  \item $\dfrac x{x+y}$；
+  \item $\dfrac{x+y}{x^3+y^3}$；
+  \item $\dfrac1{\sin x\sin y}$；
+  \item $\me^{-\frac xy}$；
+  \item $\mabs x^{\frac1{\mabs y}}$。
+\end{exlistcols}
+\item 讨论由以下式子定义的函数~$\map{f(x,y)}{\mR{2}}{\mR{2}}$~的连续性。
+\[%\LEFTRIGHT
+  f(x,y)=\begin{cBBdcases}
+    \mintobb{\frac x{\mparenb{x^2+y^2}^\alpha}}{~\frac y{\mparenb{x^2+y^2}^\alpha}}, & \minto xy\neq\minto 00;\\
+    \minto 00, & \minto xy=\minto 00 。
+  \end{cBBdcases}
+\]
+\item 设~$u=f(x,u)$~在~$M_0\minto{x_0}{y_0}$~连续，且~$f(x_0,y_0)>0$。证明，存在~$M_0$~的一个邻域~$U(M_0)$，使得~$f(x,y)$~
+在~$U(M_0)$~上取正值。
+\item 设向量函数~$\mvec f(x)=\mparenb{f_1(x),\dotsc,f_n(x)}$~在~$x_0$~点连续，且~$\mvec f(x_0)\neq0$。证明，存在~$x_0$~
+的一个邻域~$U(x_0)$，使得~$\mvec f(x)$~在~$U(x_0)$~上均不为零向量。
+\item 设函数~$\map f{\mR{m}}{\mR{1}}$~连续，对任意~$C\in\mR$，作集合
+\[
+  E\coloneq\mathsetb{\mvec x}{\vecfunc f{x}>C},\quad
+  F\coloneq\mathsetb{\mvec x}{\vecfunc f{x}\geq C}。
+\]
+证明，集合~$E$~是~$\mR{m}$~上的开集，而~$F$~是~$\mR{m}$~上的闭集。
+\item 设~$f(x,y)$~在~$\minto{x_0}{y_0}$~点连续。问作为~$x$~的一元函数~$f(x,y_0)$~在~$x_0$~处是否连续？作为~$y$~的一元函数
+~$f(x_0,y)$~在~$y_0$~处是否连续？反之，若~$f(x,y_0)$~在~$x=x_0$~处连续，且~$f(x_0,y)$~在~$y=y_0$~处连续，问~$f(x,y)$~在
+~$\minto{x_0}{y_0}$~处是否一定连续？请说明理由。
+\item 证明，函数
+\[
+  f(x,y)=\begin{cbbdcases}
+    \frac{x^2y}{x^4+y^3}, & x^2+y^2\neq0;\\
+    0, & x^2+y^2=0
+  \end{cbbdcases}
+\]
+在~$\minto 00$~点沿过此点的每一射线
+\[
+  \Biggl\lbrace\begin{aligned}
+  x&=t\cos\alpha;\\
+  y&=t\sin\alpha,\end{aligned}\quad 0\leq t<\pinf
+\]
+连续，即~$\lim_{t\to0}f\minto{t\cos\alpha}{t\sin\alpha}=f(0,0)$，但~$f(x,y)$~在~$\minto 00$~点不连续。
+\item 设~$f\minto xy$~定义在~$\Omega$~上，若~$f\minto xy$~在~$x$~处连续，对~$y$~满足~Lipschitz~条件，即对~$\Omega$~上任意两点
+~$\minto x{y'}$~与~$\minto x{y''}$，有
+\[
+  \mabsb{f\minto x{y'}-f\minto x{y''}}\leq L\mabs{y'-y''},
+\]
+其中~$L$~为常数。证明~$f\minto xy$~在~$\Omega$~上连续。
+\item 设~$E$~是~$\mR{m}$~上的任意点集。证明~$\rho\minto{\mvec x}E$~在~$\mR{m}$~上一致连续。
+\item 设~$E$~是~$\mR{m}$~上的有界闭集。证明，
+\begin{exlist}
+  \item 对给定的~$\mvec a\in\mR{m}$，存在~$\mvec x_{0}\in E$，使得~$\rho\minto{\mvec a}E=\rho\minto{\mvec a}{\mvec x_{0}}$；
+  \item 存在~$\mvec x_{0},\mvec y_{0}\in E$，使得~$d(E)=\rho\minto{\mvec x_{0}}{\mvec y_{0}}$。
+\end{exlist}
+\item 设二元数值函数~$f\minto xy$~在全平面连续，且~$\lim_{r\to\pinf}f\minto xy=A$，其中~$r=\smbsqrt{x^2+y^2}$。证明，
+\begin{exlistcols}
+  \item $f\minto xy$~在全平面有界；
+  \item $f\minto xy$~在全平面一致连续。
+\end{exlistcols}
+\item 证明，
+\begin{exlistcols}
+  \item 二元函数~$\cos\mparen{xy}$~在~$\mR{2}$~上不一致连续；
+  \item 三元函数~$\sin\mparen{xyz}$~在~$\mR{3}$~上不一致连续。
+\end{exlistcols}
+\item 设二元矩形函数~$f\minto xy$~在矩形区域~$\mintc ab\times\mintc cd$~上连续，函数序列~$\mbrace{\phi_n(x)}$~在~$\mintc ab$~
+上一致收敛且~$c\leq\phi_n(x)\leq d$。证明
+\[
+  F_n(x)=f\mintob x{\phi_n(x)}\mcond*{n=1,2,\dotsc}
+\]
+也在~$\mintc ab$~上一致收敛。
+\item 设~$\vecfunc f{x}$~在~$\mR{m}$~上连续，对~$\mvec x\neq0$，有~$\vecfunc f{x}>0$。且对任意~$\mvec x\in\mR{m}$~和~$c>0$，有
+~$f(c\mvec x)=c\vecfunc f{x}$。证明，存在~$a,b>0$，使得
+\[
+  a\mabs{\mvec x}\leq \vecfunc f{x}\leq b\mabs{\mvec x}\mcond*{\mvec x\in\mR{m}}。
+\]
+\item 设~$A$~是~$m$~阶方阵，且~$\det A\neq0$。证明，存在常数~$\alpha>0$，使得对任意~$\mvec x\in\mR{m}$，有
+\[
+  \mabs{A\mvec x}\geq\alpha\mabs{\mvec x} 。
+\]
+\item 设有二元数值函数~$f\minto xy$~在圆周
+\[
+  C\colon\mparen{x-x_0}^2+\mparen{y-y_0}^2=R^2
+\]
+上连续。证明，$f\minto xy$~在~$C$~上达到上确界~$M$~和下确界~$m$，并且它取~$\minto mM$~上的所有值至少两次。
 \end{exercise}
+
 \begin{exercise*}
-\item
+\item 设~$f(x,y)$~在~$\minto 00$~邻域上有定义，函数
+\[
+  F\minto r\theta=f\minto{r\cos\theta}{r\sin\theta}\mcond*{r\geq0,\enspace\theta\in\mintc0{2\pi}}
+\]
+对~$r$~（$\theta$~固定）连续，对~$\theta$~（关于~$r$）一致连续。证明~$f\minto xy$~在~$\minto 00$~点连续。
+\item 证明，若~$f\minto xy$~分别对每一变量~$x$~和~$y$~是连续的，并且对其中的一个是单调的，则~$f\minto xy$~是二元连续函数。
+\item 设有~$m$~元数值函数
+\[
+  g\mparen{\mvec a{1,2,:,m}}=\max_{x\in\mintc{-1}1}\mbraceb{\mabsb{a_1x^{m-1}+a_2x^{m-2}+\dotsb+a_{m-1}x+a_m}}。
+\]
+%%证明，
+\begin{exlist}\FixExHead
+  \item $g\mparen{\mvec a{1,:,m}}$~是~$\mR{m}$~上的连续函数；
+  \item $g\mparen{\mvec a{1,:,m}}$~在单位球面~$a_1^2+\dotsb+a_m^2=1$~取正的最小值；
+  \item 当~$a_1^2+\dotsb+a_m^2\to\pinf$~时，有~$g\mparen{\mvec a{1,:,m}}\to\pinf$；
+  \item 存在~$\mintc{-1}1$~上的多项式~$T_m(x)$，使得
+  \[
+    \max_{x\in\mintc{-1}1}\mbraceb{\mabsb{T_m(x)}}=
+    \inf_{\mvec a{1,:,m}}\mbraceB{\max_{x\in\mintc{-1}1}\mbraceb{\mabsb{a_1x^{m-1}+\dotsb+a_{m-1}x+a_m}}}。
+  \]
+\end{exlist}
+\item 设集合~$E\subset\mR{m}$~不是闭集，函数~$\vecfunc f{x}$~在~$E$~上一致连续。证明，可以唯一地把函数~$\vecfunc f{x}$~延拓到
+~$\closure E\difset E$~上，使得延拓后的函数在~$\closure E$~上一致连续。即存在唯一的函数~$\hat f(\mvec x)$，它在~$\closure E$~上
+一致连续，且~$x\in E$~时~$\hat f(\mvec x)=\vecfunc f{x}$。
+\item 我们称~$\vecfunc f{x}$~在~$\mR{m}$~上某区域~$\Omega$~是~Lipschitz~的，若存在一个常数~$L$，使得当~$\mvec x,\mvec y\in\Omega$~
+时，有
+\[
+  \mabsb{\vecfunc f{x}-\vecfunc f{y}}\leq L\mabs{\mvec x-\mvec y}。
+\]
+我们称~$\vecfunc f{x}$~在~$\Omega$~是\emph{局部~Lipschitz}~的，若对~$\Omega$~上每一点，存在该点的一个邻域
+~$U_0\mcond{U_0\subset\Omega}$，使得~$\vecfunc f{x}$~在~$U_0$~上时~Lipschitz~的。试证明，若~$\vecfunc f{x}$~在~$\Omega$~上是局部
+~Lipschitz~的，而~$D$~是~$\Omega$~上的有界闭区域，则~$\vecfunc f{x}$~在~$D$~上是~Lipschitz~的。
+\item 设函数~$\map f{\mR{m}}\mR$，满足以下条件，
+\begin{exlist}
+  \item 对任意~$\mvec x\in\mR{m}$，有~$\vecfunc f{x}\geq0$，且仅当~$\mvec x=0$~时~$\vecfunc f{x}=0$；
+  \item 对任意~$\lambda\in\mR$，有~$f(\lambda\mvec x)=\mabs\lambda \vecfunc f{x}$；
+  \item 对任意~$\mvec x,\mvec y\in\mR{m}$，有~$f(\mvec x+\mvec y)\leq \vecfunc f{x}+\vecfunc f{y}$。
+\end{exlist}
+%%证明，
+\begin{exlist}\FixExHead
+  \item 存在常数~$M>0$，使得对任意~$\mvec x\in\mR{m}$，有~$\vecfunc f{x}\leq M\mabs{\mvec x}$；
+  \item $\vecfunc f{x}$~在~$\mR{m}$~上是~Lipschitz~的，因而一致连续；
+  \item 存在常数~$m>0$，使得对任意~$\mvec x\in\mR{m}$，有~$m\mabs{\mvec x}\leq \vecfunc f{x}$。
+\end{exlist}
+\item 设~$\vecfunc f{x}$~在~$\mvec x_{0}$~的邻域上有界，令
+\begin{align*}
+  M_f\minto{\mvec x_{0}}\delta&\coloneq\sup\mathsetb{\vecfunc f{x}}{\mabs{\mvec x-\mvec x_{0}}<\delta},\\
+  m_f\minto{\mvec x_{0}}\delta&\coloneq\inf\mathsetb{\vecfunc f{x}}{\mabs{\mvec x-\mvec x_{0}}<\delta}。
+\end{align*}
+于是存在极限
+\[
+  \omega_f(\mvec x_{0})=\lim_{\delta\to0+0}\mparenb{M_f\mparen{\mvec x_{0}}-m_f\mparen{\mvec x_{0}}},
+\]
+称它为~$\vecfunc f{x}$~在~$\mvec x_{0}$~处的振幅。证明~$\vecfunc f{x}$~在~$\mvec x_{0}$~处连续当且仅当
+~$\omega_f(\mvec x_{0})=0$。
+\item 设函数~$\map f{\mR{m}}{\mR{\ell}}$~对任意~$E\subset\mR{m}$，有~$f\mparen{\closure E}\subset\closure{f(E)}$。证明，若
+~$\mvec x_{n}\to \mvec x_{0}\in\mR{m}$，则必有收敛子序列~$f\mparen{\mvec x_{n_k}}$，且
+~$f\mparen{\mvec x_{n_k}}\to f(\mvec x_{0})$。
+\item 证明函数~$\map f{\mR{m}}{\mR{\ell}}$~连续当且仅当对任意~$E\subset\mR{m}$，都有~$f\mparen{\closure E}\subset\closure{f(E)}$。
+\item 证明函数~$\map f{\mR{m}}{\mR{\ell}}$~连续当且仅当对~$\mR{\ell}$~上任一开集~$E$，都有~$f^{-1}(E)$~是~$\mR{m}$~上的开集。
+\item 设~$\phi(\mvec x)$~是~$\mR{m}$~上的实值函数，满足
+\begin{exlist}
+  \item 对任意~$\mvec x\in\mR{m}$，有~$\phi(\mvec x)\geq0$，且~$\phi(\mvec x)=0$~当且仅当~$\mvec x=0$；
+  \item 对任意~$\mvec x\in\mR{m}$~和任意~$\alpha\in\mR$，有~$\phi(\alpha\mvec x)=\mabs\alpha\phi(\mvec x)$；
+  \item 对任意~$\mvec x,\mvec y\in\mR{m}$，有~$\phi(\mvec x+\mvec y)\leq\phi(\mvec x)+\phi(\mvec y)$。
+\end{exlist}
+这时，称~$\phi(\mvec x)$~为~$\mR{m}$~中~$\mvec x$~的\emph{范数}，又记为~$\mnorm x\coloneq\phi(\mvec x)$。试证明，
+\begin{exlist}
+  \item 对任意~$\mvec x=\mparen{\mvec x{1,:,m}}\in\mR{m}$，定义
+  \[
+    \mnorm{\mvec x}_1=\sum_{i=1}^m\mabs{x_i},\quad
+    \mnorm{\mvec x}_2=\max_{1\leq i\leq m}\mbraceb{\mabs{x_i}},
+  \]
+  则~$\mnorm{\mvec x}_1$~和$\mnorm{\mvec x}_2$~均是~$\mvec x$~的范数；
+  \item $\phi(\mvec x)=\mnorm{\mvec x}$~是~$\mR{m}$~上的一致连续函数；
+  \item 设~$\mnorm{{}\cdot{}}$~是~$\mR{m}$~上的任意一种范数，则存在~$M_1,M_2>0$，对任意~$\mvec x\in\mR{m}$，有
+  \[
+    M_1\mnorm{\mvec x}_1\leq\mnorm{\mvec x}\leq M_2\mnorm{\mvec x}_2 。
+  \]
+\end{exlist}
 \end{exercise*}
 
 

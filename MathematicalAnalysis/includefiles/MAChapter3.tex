@@ -13,10 +13,10 @@
 
 怎么去刻画连续性呢？能否说函数在每一点极限存在，它就表示一条连续曲线呢？不能。比如在~$\mR$~上定义的函数
 \[
-  f(x)=\begin{bdcases}
+  f(x)=\begin{Bdcases}
     2, & x=1;\\
     1, & x\neq1,
-  \end{bdcases}
+  \end{Bdcases}
 \]
 它在每一点~$x_0$~的极限都存在，且
 \[
@@ -44,23 +44,23 @@
 $(a,b)$~上给定的函数~$f(x)$~在~$x_0\in(a,b)$~连续的定义改用“$\e-\delta$”说法，就是对任意~$\e>0$，都存在~$\delta>0$，当
 ~$\mabs{x-x_0}<\delta$~时，有
 \[
-  \mabs{f(x)-f(x_0)}<\e 。
+  \mabsb{f(x)-f(x_0)}<\e 。
 \]
 
 \begin{example}
 设函数
 \[
-  f(x)=\begin{bdcases}
-    x, & x\in\mR-\mQ;\\
+  f(x)=\begin{Bdcases}
+    x, & x\in\mR\difset\mQ;\\
     0, & x\in\mQ 。
-  \end{bdcases}
+  \end{Bdcases}
 \]
 证明~$x=0$~是函数~$f(x)$~的连续点。
 \end{example}
 \begin{proof}
 对任意~$\e>0$，取~$\delta=\e$，当~$\mabs{x-0}=\mabs x<\delta$~时，
 \[
-  \mabs{f(x)-f(0)}=\mabs{f(x)}\leq\mabs x<\e,
+  \mabsb{f(x)-f(0)}=\mabsb{f(x)}\leq\mabs x<\e,
 \]
 由\ref{def:sec3.1-1}~可知~$f(x)$~在~$x=0$~点连续。
 \end{proof}
@@ -92,39 +92,36 @@ f(x_0-0)=f(x_0)=f(x_0+0) 。
 
 例如，函数
 \[
-  f(x)=\begin{cdcases}
+  f(x)=\begin{cBdcases}
     \arctan\frac1x, & x\neq0;\\
     0, & x=0,
-  \end{cdcases}
+  \end{cBdcases}
 \]
 在~$x_0=0$~点的左、右极限分别为~$-\dfrac\pi2$~和~$\dfrac\pi2$，所以~$x=0$~是函数的第一类间断点（见\ref{fig:sec3.1-1}）。
 
 \begin{figure}
 \begin{floatrow}[3]
-\figurebox{\caption{}\label{fig:sec3.1-1}}
-          {\somefigure}
-\figurebox{\caption{}\label{fig:sec3.1-2}}
-          {\somefigure}
-\figurebox{\caption{}\label{fig:sec3.1-3}}
-          {\somefigure}
+\figurebox{\caption{}\label{fig:sec3.1-1}}{\somefigure}
+\figurebox{\caption{}\label{fig:sec3.1-2}}{\somefigure}
+\figurebox{\caption{}\label{fig:sec3.1-3}}{\somefigure}
 \end{floatrow}
 \end{figure}
 
 又例如，函数
 \[
-  f(x)=\begin{cdcases}
+  f(x)=\begin{cBdcases}
     \frac1x, & x\neq0;\\
     0, & x=0,
-  \end{cdcases}
+  \end{cBdcases}
 \]
 在~$x_0=0$~点的左、右极限不存在，所以~$x=0$~是函数的第二类间断点（见\ref{fig:sec3.1-2}）。
 
 再例如，函数
 \[
-  f(x)=\begin{cdcases}
+  f(x)=\begin{cBdcases}
     \sin\frac1x, & x\neq0;\\
     0, & x=0,
-  \end{cdcases}
+  \end{cBdcases}
 \]
 在~$x_0=0$~点的左、右极限不存在，所以~$x=0$~也是函数的第二类间断点（见\ref{fig:sec3.1-3}）。
 
@@ -184,14 +181,14 @@ f(x_0-0)=f(x_0)=f(x_0+0) 。
   \item $y=\dfrac x{(1+x)^2}$；
   \item $y=\cos^2\dfrac1x$；
   \item $y=\sgn(\sin x)$；
-  \item $y=1\Big/\mfloorB{\dfrac1x}\mcond{0<x\leq 1}$。
+  \item $y=1\Big/\mfloorbb{\dfrac1x}\mcond{0<x\leq 1}$。
 \end{exlistcols}
 \item 适当选取常数~$a$，使得下列函数~$f(x)$~连续。
 \[
-  f(x)=\begin{cbdcases}
+  f(x)=\begin{cBdcases}
     \me^x, & x<0; \\
     a+x,   & x\geq0
-  \end{cbdcases}
+  \end{cBdcases}
 \]
 \item 设~$f(x)$~在~$x=x_0$~连续，$g(x)$~在~$x=x_0$~间断。判断~$f(x)+g(x)$~和~$f(x)\cdot g(x)$~在~$x=x_0$~的连续性。
 \item 设~$f(x),g(x)$~在~$x=x_0$~间断。判断~$f(x)+g(x)$~和~$f(x)\cdot g(x)$~在~$x=x_0$~的连续性。
@@ -201,7 +198,7 @@ f(x_0-0)=f(x_0)=f(x_0+0) 。
 \begin{exproof}
 对任意~$\e>0$，不妨设~$0<\e<f(x_0)$。由函数~$f(x)$~在~$x_0$~点连续，存在~$\delta>0$，当~$\mabs{x-x_0}<\delta$~时，有
 \[
-  \mabs{f(x)-f(x_0)}<\e,
+  \mabsb{f(x)-f(x_0)}<\e,
 \]
 即有
 \[
@@ -240,15 +237,15 @@ f(x_0-0)=f(x_0)=f(x_0+0) 。
 \begin{proof}
 对任意~$\e>0$，由~$f(t)$~在~$t_0$~点连续，存在~$\eta>0$，当~$\mabs{t-t_0}<\eta$~时，有
 \[
-  \mabs{f(t)-f(t_0)}<\e;
+  \mabsb{f(t)-f(t_0)}<\e;
 \]
 对于~$\eta>0$，由~$g(x)$~在~$x_0$~点连续，存在~$\delta>0$，当~$\mabs{x-x_0}<\delta$~时，有
 \[
-  \mabs{g(x)-g(x_0)}=\mabs{t-t_0}<\eta 。
+  \mabsb{g(x)-g(x_0)}=\mabs{t-t_0}<\eta 。
 \]
 所以，当~$\mabs{x-x_0}<\delta$~时，有
 \[
-  \mabs{f(t)-f(t_0)}=\mabsb{f\mparenb{g(x)}-f\mparenb{g(x_0)}}<\e,
+  \mabsb{f(t)-f(t_0)}=\mabsb{f\mparenb{g(x)}-f\mparenb{g(x_0)}}<\e,
 \]
 即函数~$f\mparenb{g(x)}$~在~$x_0$~点连续。
 \end{proof}
@@ -276,12 +273,12 @@ f(x_0-0)=f(x_0)=f(x_0+0) 。
 \begin{proof}
 对任意~$x_0\in\mR$~和任意~$\e>0$，要使
 \[
-  \mabs{\sin x-\sin x_0}<\e,
+  \mabsb{\sin x-\sin x_0}<\e,
 \]
 只要
 \[
-  \mabsB{2\cos\frac{x+x_0}2\sin\frac{x-x_0}2}\leq2\mabsB{\sin\frac{x-x_0}2}
-  \leq2\mabsB{\frac{x-x_0}2}=\mabs{x-x_0}<\e 。
+  \mabsbb{2\cos\frac{x+x_0}2\sin\frac{x-x_0}2}\leq2\mabsbb{\sin\frac{x-x_0}2}
+  \leq2\mabsbb{\frac{x-x_0}2}=\mabs{x-x_0}<\e 。
 \]
 
 取~$\delta=\e$，则当~$\mabs{x-x_0}<\delta$~时，就有~$\mabs{\sin x-\sin x_0}<\e$。所以~$\sin x$~在~$x_0$~点连续。%
@@ -303,16 +300,16 @@ y=\tan x=\frac{\sin x}{\cos x}\in C(D),
 \begin{exercise}
 \item 设~$f(x),g(x)$~在~$[a,b]$~上连续。证明
 \begin{exlistcols}
-  \item $\mabs{f(x)}\in C[a,b]$；
+  \item $\mabsb{f(x)}\in C[a,b]$；
   \item $\max\mrange{f(x)}{g(x)}\in C[a,b]$；
   \item $\min\mrange{f(x)}{g(x)}\in C[a,b]$。
 \end{exlistcols}
 \item 设~$f(x)\in C[a,b]$，证明~$f_t(x)\in C[a,b]$，其中
 \[
-  f_t(x)=\begin{cbdcases}
+  f_t(x)=\begin{cBdcases}
     f(x),& x\in\mathset x{f(x)>t};\\
     t,   & x\in\mathset x{f(x)\leq t}。
-  \end{cbdcases}
+  \end{cBdcases}
 \]
 \item 设~$f(x)$~在~$(0,+\infty)$~上连续，且满足
 \[
@@ -353,12 +350,9 @@ y=\tan x=\frac{\sin x}{\cos x}\in C(D),
 \ref{thm:sec3.3-1}~的几何意义是，若连续曲线由~$x$~轴之下跑到~$x$~轴之上，则中间至少要经过~$x$~轴一次（见\ref{fig:sec3.3-1}）。
 
 \begin{figure}
-\figureboxsep{5}
-\begin{floatrow}[2]
-\figurebox{\caption{}\label{fig:sec3.3-1}}
-          {\somefigure}
-\figurebox{\caption{}\label{fig:sec3.3-2}}
-          {\somefigure}
+\begin{floatrow}
+\figurebox{\caption{}\label{fig:sec3.3-1}}{\somefigure}
+\figurebox{\caption{}\label{fig:sec3.3-2}}{\somefigure}
 \end{floatrow}
 \end{figure}
 
@@ -388,7 +382,7 @@ y=\tan x=\frac{\sin x}{\cos x}\in C(D),
 \ref{thm:sec3.3-2}~说明，连续函数可以取得~$f(a)$~与~$f(b)$~之间的一切值。反之，若一个函数能取到~$f(a)$~与~$f(b)$~之间
 的一切值，它是否一定连续呢？例如函数
 \[
-  f(x)=\begin{cdcases}
+  f(x)=\begin{cdcases} %\LEFTRIGHT
     x, & x\in\mintco 01;\\
     3-x, & x\in\mintc 12;\\
     x, & x\in\mintoc 23,
@@ -418,7 +412,7 @@ y=\tan x=\frac{\sin x}{\cos x}\in C(D),
 \begin{theorem}\label{thm:sec3.3-3}
 设~$y=f(x)\in C\minto ab$，且严格上升，记
 \[
-  \alpha\coloneq\inf_{a<x<b}\mbrace{f(x)},\quad\beta\coloneq\sup_{a<x<b}\mbrace{f(x)},
+  \alpha\coloneq\inf_{x\in\minto ab}\mbraceb{f(x)},\quad\beta\coloneq\sup_{x\in\minto ab}\mbraceb{f(x)},
 \]
 其中~$\alpha$~可以使~$\minf$，而~$\beta$~可以为~$\pinf$，则
 \begin{enumlistcols}
@@ -436,7 +430,7 @@ y=\tan x=\frac{\sin x}{\cos x}\in C(D),
 \[
   f(x')<y_0<f(x'')。
 \]
-在~$\mintc{x'}{x''}$~（或~$\mintc{x''}{x'}$）上应用\ref{thm:sec3.3-2}，则存在~$x_0\in\minto{x'}{x''}\subset\minto ab$，使得
+在~$\mintc{x'}{x''}$~或~$\mintc{x''}{x'}$~上应用\ref{thm:sec3.3-2}，则存在~$x_0\in\minto{x'}{x''}\subset\minto ab$，使得
 ~$f(x_0)=y_0$，即~$y_0$~是~$f(x)$~的函数值。由~$y_0$~的任意性，得到~$\minto\alpha\beta$~为~$f(x)$~的值域（$\alpha,\beta$~不
 可能是~$f(x)$~的函数值），即~$\minto\alpha\beta$~为~$x=\phi(y)$~的定义域。
 \item 设~$y_1,y_2\in\minto\alpha\beta$，且~$y_1<y_2$，往证
@@ -492,12 +486,12 @@ y=\tan x=\frac{\sin x}{\cos x}\in C(D),
   \lim_\ntoinf f(x_n)=A,\quad \lim_\ntoinf f(y_n)=B\mcond{B>A}。
 \]
 证明，对任意~$\eta\in\minto AB$，存在~$\mbrace{z_n}\subset\minto ab$，使得~$\lim_\ntoinf z_n=b$，并且~$\lim_\ntoinf f(z_n)=\eta$。
-\item 设~$f(x)\in C\mintc ab$，而~$\mabs{f(x)}$~在~$\mintc ab$~上单调。证明~$f(x)$~也在~$\mintc ab$~上单调。
+\item 设~$f(x)\in C\mintc ab$，而~$\mabsb{f(x)}$~在~$\mintc ab$~上单调。证明~$f(x)$~也在~$\mintc ab$~上单调。
 \item 设~$f(x)\in C\mintc ab$，且~对任意$x_1,x_2\in\mintc ab$，当~$x_1\neq x_2$~时，有~$f(x_1)\neq f(x_2)$。证
 明，$f(x)$~在~$\mintc ab$~上严格单调上升或严格单调下降。
 \item 设~$f(x)\in C(\mR)$，并且对任意~$x,y\in\mR$，函数~$f(x)$~满足
 \[
-  \mabs{f(x)-f(y)}\leq k\mabs{x-y}\mcond*{0<k<1}。
+  \mabsb{f(x)-f(y)}\leq k\mabs{x-y}\mcond*{0<k<1}。
 \]
 证明，
 \begin{exlistcols}
@@ -661,17 +655,17 @@ y=\tan x=\frac{\sin x}{\cos x}\in C(D),
 
 \begin{example}
 \[
-  \lim_{x\to+\infty}\mparenB{1+\sin\frac1x}^x 。
+  \lim_{x\to+\infty}\mparenbb{1+\sin\frac1x}^x 。
 \]
 \end{example}
 \begin{proof}
 注意到
 \[
-  \mparenB{1+\sin\frac1x}^x=\mparenB{1+\sin\frac1x}^{\frac1{\sin(\sfrac1x)}\cdot\frac{\sin(\sfrac1x)}{\sfrac1x}},
+  \mparenbb{1+\sin\frac1x}^x=\mparenbb{1+\sin\frac1x}^{\frac1{\sin(\sfrac1x)}\cdot\frac{\sin(\sfrac1x)}{\sfrac1x}},
 \]
 令
 \[
-  u(x)=\mparenB{1+\sin\frac1x}^{\frac1{\sin(\sfrac1x)}},\quad
+  u(x)=\mparenbb{1+\sin\frac1x}^{\frac1{\sin(\sfrac1x)}},\quad
   v(x)=\frac{\sin(\sfrac1x)}{\sfrac1x} 。
 \]
 由
@@ -680,7 +674,7 @@ y=\tan x=\frac{\sin x}{\cos x}\in C(D),
 \]
 所以
 \[
-  \lim_{x\to+\infty}\mparenB{1+\sin\frac1x}^x=\me^1=\me 。\qedhere
+  \lim_{x\to+\infty}\mparenbb{1+\sin\frac1x}^x=\me^1=\me 。\qedhere
 \]
 \end{proof}
 
@@ -688,7 +682,7 @@ y=\tan x=\frac{\sin x}{\cos x}\in C(D),
 \begin{exercise}
 \item 求下列极限。
 \begin{exlistcols}
-  \item $\lim_{x\to1}\mparenB{\dfrac{1+x}{2+x}}^{\frac{1-\sqrt x}{1+x}}$；
+  \item $\lim_{x\to1}\mparenbb{\dfrac{1+x}{2+x}}^{\frac{1-\sqrt x}{1+x}}$；
   \item $\lim_\ntoinf\mparen{\arctan x}^{\cos\frac1x}$。
 \end{exlistcols}
 \item 求下列极限。
@@ -708,8 +702,8 @@ y=\tan x=\frac{\sin x}{\cos x}\in C(D),
 \begin{theorem}[最大最小值定理]\label{thm:sec3.5-1}
 设~$f(x)\in C\mintc ab$，则~$f(x)$~一定有最大值与最小值。即存在~$x_1,x_2\in\mintc ab$，使得对任意~$x\in\mintc ab$，有
 \[
-  f(x)\leq f(x_1)=\max_{a\leq x\leq b}\mbrace{f(x)},\quad
-  f(x)\geq f(x_2)=\min_{a\leq x\leq b}\mbrace{f(x)}。
+  f(x)\leq f(x_1)=\max_{x\in\mintc ab}\mbraceb{f(x)},\quad
+  f(x)\geq f(x_2)=\min_{x\in\mintc ab}\mbraceb{f(x)}。
 \]
 此时，$x_1,x_2$~分别称为函数的\emph{最大值点}与\emph{最小值点}。
 \end{theorem}
@@ -739,7 +733,7 @@ y=\tan x=\frac{\sin x}{\cos x}\in C(D),
 在~$f(x_1)$~的~$\e$~邻域。但在平坦处的点适用的~$\delta$，对陡处的点不一定适用（见\ref{fig:sec3.5-1}）。这样，就提出一个问
 题，对任意~$\e>0$，能否找到对每一个~$x$~都适用的公共~$\delta$~呢？
 
-\thisfloatsetup{rowprecode=wrapfig}
+\fixwrapfloatsep
 \begin{wrapfigure}{O}{0mm}
 \somefigure
 \caption{}\label{fig:sec3.5-1}
@@ -755,7 +749,7 @@ y=\tan x=\frac{\sin x}{\cos x}\in C(D),
 设~$f(x)$~在区间~$I$~上定义，若对任意~$\e>0$，存在~$\delta=\delta(\e)>0$，使得对任意~$x_1,x_2\in I$，%
 当~$\mabs{x_1-x_2}<\delta$~时，有
 \[
-  \mabsb{f(x-1)-f(x_2)}<\e,
+  \mabsb{f(x_1)-f(x_2)}<\e,
 \]
 则称~$f(x)$~在~$I$~上\emph{一致连续}。
 \end{definition}
@@ -784,7 +778,7 @@ y=\tan x=\frac{\sin x}{\cos x}\in C(D),
 
 由\ref{fig:sec3.5-2}~看出，函数在~$x=0$~处坡度最陡，$x=0$~处的~$\delta$~即可最为公共的~$\delta$。
 
-%\thisfloatsetup{rowprecode=wrapfig}
+%\fixwrapfloatsep
 \begin{wrapfigure}{O}{0mm}
 \somefigure
 \caption{}\label{fig:sec3.5-2}
@@ -795,7 +789,7 @@ y=\tan x=\frac{\sin x}{\cos x}\in C(D),
 \begin{enumlist}
 \item $\max\mrange{x_1}{x_2}\geq\e^2$~时，
 \[
-  \mabsb{\sqrt{x_1}-\sqrt{x_2}}=\mabsB{\frac{x_1-x_2}{\sqrt{x_1}+\sqrt{x_2}}}\leq\frac{\mabs{x_1-x_2}}{\sqrt{\e^2}}
+  \mabsb{\sqrt{x_1}-\sqrt{x_2}}=\mabsbb{\frac{x_1-x_2}{\sqrt{x_1}+\sqrt{x_2}}}\leq\frac{\mabs{x_1-x_2}}{\sqrt{\e^2}}
   <\frac\delta\e=\e;
 \]
 \item $\max\mrange{x_1}{x_2}<\e^2$~时，无妨设~$x_1\geq x_2$~时
@@ -823,7 +817,7 @@ y=\tan x=\frac{\sin x}{\cos x}\in C(D),
 评语，而不允许倾斜或侧转，如果圆管能从曲线一端进去，平行移动从另一端出来，而不碰到曲线，就认为检查通过。对每一直径为~$\e$~的圆
 管，检查都能通过，产品就是合格品，即曲线一致连续。
 
-%\thisfloatsetup{rowprecode=wrapfig}
+%\fixwrapfloatsep
 \begin{wrapfigure}{O}{0mm}
 \somefigure
 \caption{}\label{fig:sec3.5-3}
@@ -866,21 +860,21 @@ y=\tan x=\frac{\sin x}{\cos x}\in C(D),
 
 \ref{eq:sec3.5-3}~蕴涵~\ref{eq:sec3.5-2}。事实上，令~$\e_0=\sfrac{\mabs C}2>0$，当~$n>N$~时，
 \[
-  \mabsb{\mabs{f(x_n')-f(x_n'')}-\mabs C}\leq\frac{\mabs C}2,
+  \mabsB{\mabsb{f(x_n')-f(x_n'')}-\mabs C}\leq\frac{\mabs C}2,
 \]
 所以
 \[
   \mabsb{f(x_n')-f(x_n'')}\geq\mabs C-\frac{\mabs C}2=\frac{\mabs C}2 。
 \]
-再令~$\tilde x_n'=x_{N+n}'$~和~$\tilde x_n''=x_{N+n}''$，则
+再令~$\mtilde x_n'=x_{N+n}'$~和~$\mtilde x_n''=x_{N+n}''$，则
 \[
-  \lim_\ntoinf\mparenb{\tilde x_n'-\tilde x_n''}=\lim_\ntoinf\mparenb{x_{n+N}'-x_{n+N}''}=0,
+  \lim_\ntoinf\mparenb{\mtilde x_n'-\mtilde x_n''}=\lim_\ntoinf\mparenb{x_{n+N}'-x_{n+N}''}=0,
 \]
 但是
 \[
-  \mabsb{\tilde x_n'-\tilde x_n''}\geq\frac{\mabs C}2=\e_0 。
+  \mabsb{\mtilde x_n'-\mtilde x_n''}\geq\frac{\mabs C}2=\e_0 。
 \]
-这就是说找到了~\ref{eq:sec3.5-2}~所要求的~$\e_0$~与序列~$\mbrace{\tilde x_n'}$~和~$\mbrace{\tilde x_n'}$。
+这就是说找到了~\ref{eq:sec3.5-2}~所要求的~$\e_0$~与序列~$\mbrace{\mtilde x_n'}$~和~$\mbrace{\mtilde x_n'}$。
 
 这样，判断不一致连续，就归结为寻找符合~\ref{eq:sec3.5-3}~的两个序列即可。
 
@@ -928,25 +922,25 @@ y=\tan x=\frac{\sin x}{\cos x}\in C(D),
 \end{exlist}
 \item 设~$f(x),g(x)\in C\mintc ab$。证明
 \[
-  \max_{a\leq x\leq b}\mbrace{\mabs{f(x)+g(x)}}\leq
-  \max_{a\leq x\leq b}\mbrace{\mabs{f(x)}}+\max_{a\leq x\leq b}\mbrace{\mabs{g(x)}}。
+  \max_{x\in\mintc ab}\mbraceb{\mabsb{f(x)+g(x)}}\leq
+  \max_{x\in\mintc ab}\mbraceb{\mabsb{f(x)}}+\max_{x\in\mintc ab}\mbraceb{\mabsb{g(x)}}。
 \]
 \item 设~$f(x)\in C(\mR)$，且~$\lim_{x\to\infty}f\mparenb{f(x)}=\infty$。证明~$\lim_{x\to\infty}f(x)=\infty$。
 \item 设~$f(x)\in C\mintc 01$，且~$f(x)>0$。令
 \[
-  M(x)\coloneq\max_{0\leq t\leq x}\mbrace{f(t)}\mcond*{x\in\mintc 01}。
+  M(x)\coloneq\max_{t\in\mintc0x}\mbrace{f(t)}\mcond*{x\in\mintc 01}。
 \]
 证明函数
 \[
-  Q(x)\coloneq\lim_\ntoinf\mparenB{\frac{f(x)}{M(x)}}^n
+  Q(x)\coloneq\lim_\ntoinf\mparenbb{\frac{f(x)}{M(x)}}^{\msp n}
 \]
 连续当且仅当~$f(x)$~在~$\mintc 01$~上时单调上升的。
 \item 设~$f(x)\in C\mintc ab$，记
 \[
-  g(x)\coloneq\max_{a\leq t\leq x}\mbrace{f(t)}\mcond*{x\in\mintc ab}。
+  g(x)\coloneq\max_{t\in\mintc ax}\mbraceb{f(t)}\mcond*{x\in\mintc ab}。
 \]
 证明~$g(x)\in C\mintc ab$。
-\item 设~$f(x)\in C\mintc ab$，并且对任意~$x\in\mintc ab$，存在~$y\in\mintc ab$，使得~$\mabs{f(y)}\leq\dfrac12\mabs{f(x)}$。证
+\item 设~$f(x)\in C\mintc ab$，并且对任意~$x\in\mintc ab$，存在~$y\in\mintc ab$，使得~$\mabsb{f(y)}\leq\dfrac12\mabsb{f(x)}$。证
 明，存在~$\xi\in\mintc ab$，使得~$f(\xi)=0$。
 \item 设~$f(x)\in C(\mR)$，若~$\lim_{x\to+\infty}f(x)=+\infty$，且~$f(x)$~的最小值~$f(a)<a$。证明~$f\mparenb{f(x)}$~至少在
 两点取到最小值。
@@ -955,8 +949,10 @@ y=\tan x=\frac{\sin x}{\cos x}\in C(D),
 g(x)=-a\mabs x+b\geq f(x)\mcond*{x\in\mintc{-1}1};
 \]
 且存在~$c\mcond{-1<c<1}$，使得~$g(c)=-a\mabs c+b=f(c)$。
+\begin{exlistcols*}
 \item 证明~$y=x$~和~$y=\sin x$~在~$\mR$~上一致连续。
 \item 证明~$y=\sqrt[3]x$~在~$\mintco 0\pinf$~上一致连续。
+\end{exlistcols*}
 \item 证明下列函数在~$\mR$~上不一致连续。
 \begin{exlistcols}
   \item $y=x^3$；
@@ -974,7 +970,7 @@ g(x)=-a\mabs x+b\geq f(x)\mcond*{x\in\mintc{-1}1};
   \item $f(x)$~在~$\mR$~上一致连续；
   \item $f(x)=\sin^2x+\sin x^2$~不是周期函数。
 \end{exlistcols}
-\item 设~$f(x)$~在~$\mintc ab$~上满足~Lipschitz~条件，即对任意~$x,y\in\mintc ab$，有
+\item 设~$f(x)$~在~$\mintc ab$~上满足~\emph{Lipschitz~条件}，即对任意~$x,y\in\mintc ab$，有
 \[
   \mabsb{f(x)-f(y)}\leq k\mabs{x-y},
 \]
@@ -997,7 +993,7 @@ g(x)=-a\mabs x+b\geq f(x)\mcond*{x\in\mintc{-1}1};
 \[
   \mabsb{f(x_1)-f(x_2)}<\e 。
 \]
-由此即可得到~$f(x)$~在~$\mintco\minf{X_2}$~上一致连续。
+由此即可得到~$f(x)$~在~$\mintoc\minf{X_2}$~上一致连续。
 
 又因为~$f(x)$~在闭区间~$\mintc{X_2}{X_1}$~上连续，故在闭区间~$\mintc{X_2}{X_1}$~上一致连续。
 
@@ -1037,7 +1033,7 @@ g(x)=-a\mabs x+b\geq f(x)\mcond*{x\in\mintc{-1}1};
 证明，
 \begin{exlistcols}
   \item $f(nx)=nf(x)\mcond{n\in\mZ}$；
-  \item $f\mparenB{\dfrac xn}=\dfrac1nf(x)\mcond{n\in\mZ-\mbrace 0}$；
+  \item $f\mparenB{\dfrac xn}=\dfrac1nf(x)\mcond{n\in\mZ\difset\mbrace 0}$；
   \item $f(\alpha x)=\alpha f(x)\mcond{\alpha\in\mQ}$；
   \item $f(x)$~在~$x=0$~处连续；
   \item $f(x)$~在~$\mR$~上连续；
@@ -1052,8 +1048,8 @@ g(x)=-a\mabs x+b\geq f(x)\mcond*{x\in\mintc{-1}1};
 \[
   f\mparenB{\frac{x+y}2}\leq\frac{f(x)+f(y)}2 。
 \]
-证明，
-\begin{exlist}
+%证明，
+\begin{exlist}\FixExHead
   \item 对任意~$\mvec x{1,2,:,n}\in\minto ab$，有
   \[
     f\mparenB{\frac{x_1+x_2+\dotsb+x_n}n}\leq\frac1n\mparenb{f(x_1)+f(x_2)+\dotsb+f(x_n)};
@@ -1065,10 +1061,10 @@ g(x)=-a\mabs x+b\geq f(x)\mcond*{x\in\mintc{-1}1};
 \end{exlist}
 \item 证明~Riemann~函数
 \[
-  R(x)=\begin{dcases}
-    \frac1n, & x=\frac mn,\text{且}~(m,n)=1;\\
-    0,       & x\in\mR-\mQ,
-  \end{dcases}
+  R(x)=\begin{Bdcases}
+    \frac1n, & x=\frac mn~\text{且}~(m,n)=1;\\
+    0,       & x\in\mR\difset\mQ,
+  \end{Bdcases}
 \]
 在任一有理点间断，而在任一无理点连续。
 \item 设~$f(x)\in C\mintc 01$，$f(0)=f(1)=0$，并且~$f(x)$~有正的最大值。证明，存在二次多项式
@@ -1080,21 +1076,21 @@ g(x)=-a\mabs x+b\geq f(x)\mcond*{x\in\mintc{-1}1};
 \item 证明，方程~$x^2+3x^3+7x^4-5x^6-8x^7=0$~有且仅有一个正实数根。
 \item 设~$f(x),g(x)\in C\mintc ab$。证明，
 \begin{exlist}
-  \item 若~$f(x_0)=\max_{a\leq x\leq b}\mbrace{\mabs{f(x)}}>\max_{a\leq x\leq b}\mbrace{\mabs{g(x)}}$，则~$f(x_0)>g(x_0)$；
-  \item 若~$\max_{a\leq x\leq b}\mbrace{\mabs{f(x)}}>\max_{a\leq x\leq b}\mbrace{\mabs{g(x)}}$，则~$f(x)$~与~$f(x)-g(x)$~在
-  ~$\mabs{f(x)}$~的最大值点处有相同的符号。
+  \item 若~$f(x_0)=\max_{x\in\mintc ab}\mbraceb{\mabsb{f(x)}}>\max_{x\in\mintc ab}\mbraceb{\mabsb{g(x)}}$，则~$f(x_0)>g(x_0)$；
+  \item 若~$\max_{x\in\mintc ab}\mbraceb{\mabsb{f(x)}}>\max_{x\in\mintc ab}\mbraceb{\mabsb{g(x)}}$，则~$f(x)$~与~$f(x)-g(x)$~在
+  ~$\mabsb{f(x)}$~的最大值点处有相同的符号。
 \end{exlist}
 \item 设在~$\mintc{-1}1$~上，对于~$n=1,2,\dotsc$，有
 \[
   T_n(x)=\frac1{2^{n-1}}\cos(n\arccos x) 。
 \]
-证明，
-\begin{exlist}
+%证明，
+\begin{exlist}\FixExHead
   \item $\mabs{T_n(x)}$~在~$n+1$~个点~$x_k=\cos\dfrac kn\pi\mcond{k=0,1,\dotsc,n}$~上达到最大值；
   \item 对任一首项系数为~$1$~的~$n$~次多项式~$P(x)=x^n+a_1x^{n-1}+\dotsc+a_n$，必有
   \[
-    \max_{-1\leq x\leq 1}\mbrace{\mabs{P(x)}}\geq\max_{-1\leq x\leq 1}\mbrace{\mabs{T_n(x)}}=\frac1{2^{n-1}} 。
-  \]  
+    \max_{x\in\mintc{-1}1}\mbraceb{\mabsb{P(x)}}\geq\max_{x\in\mintc{-1}1}\mbraceb{\mabsb{T_n(x)}}=\frac1{2^{n-1}} 。
+  \]
 \end{exlist}
 \item 设~$f(x)$~在~$\mintc ab$~上定义。对~$\mintc ab$~上任一闭区间~$\mintc{x_1}{x_2}\subset\mintc ab$~和介于~$f(x_1)$~与~$f(x_2)$~
 之间的任一常数~$\ell$，方程~$f(x)=\ell$~在~$\mintc{x_1}{x_2}$~上有且仅有有限个解。证明~$f(x)\in C\mintc ab$。

@@ -33,8 +33,7 @@ labelwidth=\widthof{\bfseries\ref{enumLastItem-\theLastItem}},
   \global\leftskip=\addleftskip\relax
   \nobreak\hss\llap{\unhbox\@tempboxa\strut}}
 
-\newrobustcmd*\iscurrentsection[1]{%
-  \ifthenelse{\equal{\thesection}{#1}}{}{~\CTEX@presection #1~}}
+\newrobustcmd*\iscurrentsection[1]{\IfStrEq{\thesection}{#1}{}{~\CTEX@presection #1~}}
 
 \SetEnumitemKey{hang}{nosep,align=hang,leftmargin=*}
 
@@ -52,13 +51,14 @@ labelwidth=\widthof{\bfseries\ref{enumLastItem-\theLastItem}},
 \setenumcols[cols=2,adjust]
 
 \newenvironment{exlistcols}[1][2]{%
-    \enumcols[hang, counter=exlist,
+    \enumcols[hang, counter=exlist, labelsep=\labelsep,
          label=\prestar(\arabic*), leftmargin=\z@,
       leftskip=\addleftskip,#1]\relax}
   {\endenumcols}
 
-\newenvironment{exlistcols*}[1][2]
-  {\enumcols[inlist,leftmargin=\z@,leftmargin=-\labelwidth-\labelsep,#1]\relax}
+\newenvironment{exlistcols*}[1][2]{%
+    \enumcols[inlist,leftmargin=\z@, labelsep=\labelsep,
+        leftmargin=-\labelwidth-\labelsep,#1]\relax}
   {\endenumcols}
 
 \newenvironment{enumlistcols}[1][2]{\CTEXindent
@@ -66,12 +66,23 @@ labelwidth=\widthof{\bfseries\ref{enumLastItem-\theLastItem}},
       label=(\arabic*), leftmargin=\parindent, #1]\relax}
   {\endenumcols}
 
-\newcommand*\thmitemhspace[1]{\sbox{\@labels}{\unhbox\@labels\kern#1}}
+\newcommand*\thmitemhspace[1]{\sbox\@labels{\unhbox\@labels\kern#1}}
 \newcommand*\fixthmitem[1][-\parindent]{\thmitemhspace{#1}}
 \newcommand*\emphitem[1]{\mbox{\emph*{#1}\kern\ccwd}\ignorespaces}
 
-\newenvironment{thmenumlist}[1][before=\fixthmitem]
-  {\enumlist[#1]}{\endenumlist}
+\newcommand*\FixExHead[1][证明]{%
+  \ifvoid\@labels
+    \sbox\@labels{%
+      \hskip-\dimexpr\labelwidth+\labelsep\relax
+      #1%
+      \hskip\dimexpr\leftmargin+1.5\labelsep\relax
+    }%
+  \else
+    \sbox\@labels{\unhbox\@labels#1\hskip1.5\labelsep\relax}%
+  \fi
+}
+
+\newenvironment{thmenumlist}[1][]{\enumlist[before=\fixthmitem,#1]}{\endenumlist}
 
 \newdimen\orig@leftskip
 
@@ -82,7 +93,8 @@ labelwidth=\widthof{\bfseries\ref{enumLastItem-\theLastItem}},
     \medskip\normalsize\raggedright
     \ziju{.4}\fzydzhhei\TeXGyreBonum\let~\enspace
   }%
-  \subsection{习题~\thesection}\small
+  \subsection{习题~\thesection}%
+  \small\setlength\labelsep{.5\ccwd}%
   \let\fix@capfontsize\small\relax
   \exlist\relax
 }{%

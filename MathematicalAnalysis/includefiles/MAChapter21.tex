@@ -4,20 +4,114 @@
 
 
 \chapter{曲线积分}\label{ch:21}
+
 \section{与曲线有关的一些概念}
 \subsection{弧段的直径、弦长与对应的参数值}
 \subsection{曲线的定向}
 \subsection{可求长曲线}
 \begin{exercise}
-\item
+\item 若光滑曲线~$\Gamma$~有一参数式~$\mvec r(t)\in C^{(1)}\mintc ab$，且~$\mabsb{\mvec r'(t)}\neq0$，则称~$\mvec r(t)$~为
+~$\Gamma$~的~$C^{(1)}$~参数式。
+\begin{exlist}
+  \item 设有一元函数~$\phi(\tau)\in C^{(1)}\mintc\alpha\beta$，$\phi(\alpha)=a$，$\phi(\beta)=b$，而且
+  ~$\phi'(\tau)$~在~$\mintc\alpha\beta$~上恒正。证明~$\mvec\rho(\tau)\coloneq\mvec r\mparenb{\phi(\tau)}$，%
+  $\tau\in\mintc\alpha\beta$~也是~$\Gamma$~的~$C^{(1)}$~参数式。记作~$\mvec\rho(\tau)\sim\mvec r(t)$。
+  \item 证明~$\Gamma$~的~$C^{(1)}$~参数式~$\mvec\rho(\tau)\sim\mvec r(t)$~满足等价关系，即
+  \begin{exlistcols}[label=\Ding*]
+    \item $\mvec r(t)\sim\mvec r(t)$；
+    \item 若~$\mvec\phi(\tau)\sim\mvec r(t)$，则~$\mvec r(t)\sim\mvec\rho(\tau)$；
+    \item 若~$\mvec r(t)\sim\mvec\rho(\tau)$，$\mvec\rho(\tau)\sim\mvec s(v)$，则~$\mvec r(t)\sim\mvec s(v)$。
+  \end{exlistcols}
+  \item 证明，若~$\mvec r(t)\sim\mvec\rho(t)$，则有
+  \[
+    \int_a^b\mabsb{\mvec r'(t)}\dif t=\int_\alpha^\beta\mabsb{\mvec\rho'(\tau)}\dif\tau 。
+  \]
+  这说明对于等价的~$C^{(1)}$~参数式来说，弧长有相同的积分表达式。
+\end{exlist}
+\item 设~$\Gamma$~是一条光滑曲线，$\mvec r(t)$~是它的~$C^{(1)}$~参数式，$\Gamma$~对应于~$\mintc a\tau$~一段的弧长为
+\[
+  s=\phi(\tau)=\int_a^\tau\mabsb{\mvec r'(t)}\dif t\mcond*{\tau\in\mintc ab}。
+\]
+如果~$\Gamma$~的弧长为~$\ell$，则~$\phi(b)=\ell$。证明，
+\begin{exlist}
+  \item $\map\phi{\mintc ab}{\mintc0\ell}$~是双射；
+  \item $\Gamma$~有以弧长~$s$~为参数的~$C^{(1)}$~参数式~$\mvec p(s)$，$s\in\mintc0\ell$；
+  \item $\mabsb{\mvec p'(s)}=1$；
+  \item 若~$\mvec r(t)\in C^{(2)}\mintc ab$，则~$\mvec p(s)\in C^{(2)}\mintc 0\ell$，而且
+  ~$\mvec p''(s)$~与~$\mvec p'(s)$~正交，$s\in\mintc0\ell$；
+  \item $\phi''(t)=\dfrac{\mvec r'(t)\cdot\mvec r''(t)}{\phi'(t)}$；
+  \item $\Gamma$~的\emph{绝对曲率}
+  \[
+    \mabsb{\mvec p''(s)}\mrest[\Bigr]{s=\phi(t)}=
+    \frac{\sqrt{\mabsb{\mvec r''(t)}^2\mabsb{\mvec r(t)}^2-\mvec r'(t)\cdot\mvec r''(t)}}{\mabsb{\mvec r'(t)}^2}。
+  \]
+\end{exlist}
+\item 计算下列曲线的弧长。
+\begin{exlist}
+  \item $\mvec r(t)=t\mvec i+\ln\sec t\mvec j+\ln\mparen{\sec t+\tan t}\mvec k$，~$0\leq t\leq\dfrac\pi4$；
+  \item $\mvec r(t)=a\sin\omega t\mvec i+a\sin\omega t\mvec j+b\omega t\mvec k$，~$0\leq t\leq t_1$；
+  \item $x^2+y^2=cz$，$y=x\tan\dfrac zc$，从~$O(0,0,0)$~到~$P_0(x_0,y_0,z_0)$，其中~$z_0>0$。
+\end{exlist}
+\item 在~$\mR{3}$~的柱坐标系中，光滑曲线~$\Gamma$~有~$C^{(1)}$~参数式
+\[
+  \mvec p(\phi)=r(\phi)\cos\phi\mvec i+r(\phi)\sin\phi\mvec j+z(\phi)\mvec k\mcond*{\phi\in\mintc{\phi_1}{\phi_2}}。
+\]
+求~$\Gamma$~的弧长的积分表达式。
+\item 在~$\mR{3}$~的球坐标系中，光滑曲线~$\Gamma$~有参数式
+\[
+  \mvec p(\phi)=\rho(\phi)\cos\phi\cos\mparenb{\psi(\phi)}\mvec i+\rho(\phi)\sin\phi\cos\mparenb{\psi(\phi)}\mvec j
+  +\rho(\phi)\sin\mparenb{\psi(\phi)}\mvec k,
+\]
+其中~$\phi\in\mintc{\phi_1}{\phi_2}$，且~$\rho(\phi),\psi(\phi)\in C^{(1)}\mintc{\phi_1}{\phi_2}$。求
+~$\Gamma$~的弧长的积分表达式。
+\item 设一元函数~$y=f(x)$~是非负单调连续可微函数，且~$f(x)$~在任一区间上的曲边梯形的面积与弧长成正比，求此函数~$f(x)$。
+\item 设光滑曲线~$\Gamma$~有一~$C^{(1)}$~参数式
+\[
+  \mvec r(t)=x(t)\mvec i+y(t)\mvec j+z(t)\mvec k\mcond*{t\in\mintc ab},
+\]
+满足~$x(t):y(t):z(t)=\alpha:\beta:\gamma$，其中~$\alpha,\beta,\gamma$~为正常数，而且任意给定~$t_1\in\mintc ab$，对应于
+~$t\in\mintc a{t_1}$~的一段弧长为~$t_1^3$。确定~$\Gamma$~的~$C^{(1)}$~参数式。
 \end{exercise}
+
 \section{第一型曲线积分}
 \subsection{第一型曲线积分概念}
 \subsection{第一型曲线积分化为定积分}
 \subsection{第一型曲线积分在力学上的应用}
 \begin{exercise}
-\item
+\item 计算下列第一型曲线积分。
+\begin{exlist}
+  \item $\int_Cy^2\dif s$，其中~$C$~为摆线的一拱，即~$C\colon x=a\mparen{t-\sin t}$，$y=a\mparen{1-\cos t}$，$t\in\mintc0{2\pi}$；
+  \item $\oint_C\mparenb{x^{\frac 43}+y^{\frac 43}}\dif s$，其中~$C$~为内摆线~$x^{\frac 23}+y^{\frac 23}=a^{\frac 23}$；
+  \item $\int_C xyz\dif s$，其中~$C$~为螺线，即~$C\colon x=a\cos t$，$t=a\sin t$，$z=bt$，$0<a<b$，$t\in\mintc0{2\pi}$；
+  \item $\oint_C\txts\smbsqrt{x^2+y^2}\dif s$，其中~$C$~为圆周~$x^2+y^2=ax$；
+  \item\label{exer-21.2.1-3}$\oint_C x^2\dif s$，其中~$C$~为球面~$x^2+y^2+z^2=a^2$~与平面~$x+y+z=0$~的交线；
+\begin{exlistcols*}
+  \item $\oint_Cxy\dif s$，其中~$C$~与~\ref{exer-21.2.1-3}~相同；
+  \item $\oint_C\mparen{xy+yz+zx}\dif s$，其中~$C$~与~\ref{exer-21.2.1-3}~相同。
+\end{exlistcols*}
+\end{exlist}
+\item 设~$\rho=\rho(x,y,z)$~为曲线~$C$~在点~$(x,y,z)$~的线密度。若~$\rho\equiv\rho_0$~（常数），则称~$C$~为\emph{密度均匀}的。
+\begin{exlist}
+  \item 计算密度均匀的平面曲线~$y=a\cosh\dfrac xa$~从~$A\minto 0a$~到~$B\mintob b{a\cosh(\sfrac ba)}$~的弧段的重心坐标；
+  \item 计算球面三角形~$x^2+y^2+z^2=a^2$，$x,y,z>0$~的周线的重心坐标。
+\end{exlist}
+\item 求螺线的一支~$C\colon x=a\cos t$，$y=a\sin t$，$z=\dfrac h{2\pi}t$，$t\in\mintc0{2\pi}$~对~$x$~轴的转动惯量
+\[
+  I=\int_C\mparenb{y^2+z^2}\dif s,
+\]
+设此螺线的线密度是均匀的。
+\item 计算单层对数位势
+\[
+  u(x,u)\coloneq\oint_L\rho_0\ln\mparenBB{\frac1{\smbsqrt{(x-\xi)^2+(y-\eta)^2}}}\dif s,
+\]
+其中~$\rho_0$~为常数，$L$~为圆周~$\xi^2+\eta^2=R^2$，而~$\minto xy$~为不在圆周上的固定一点。
+\item 设~$f(x,y)$~连续，而~$L$~是逐段光滑的简单闭曲线，令
+\[
+  u(x,y)\coloneq\oint_Lf\minto\xi\eta\ln\mparenBB{\frac1{\smbsqrt{(x-\xi)^2+(y-\eta)^2}}}\dif s 。
+\]
+证明~$\lim_{\substack{x\to\infty\\ y\to\infty}}u(x,y)=0$~当且仅当~$\oint_Lf\minto\xi\eta\dif s=0$。
 \end{exercise}
+
 \section{第二型曲线积分}
 \subsection{第二型曲线积分概念}
 \subsection{第二型曲线积分的存在与计算}
@@ -25,8 +119,60 @@
 \subsection{第一、二型曲线积分的联系}
 \subsection{第二型曲线积分的应用}
 \begin{exercise}
-\item
+\item\label{exer-21.3.1}按下列路径计算第二型曲线积分
+~$\int_{\marc{AB}}y\dif x+x\dif y$，其中~$A(1,1)$，$B(2,4)$，方向从~$A$~到~$B$。
+\begin{exlist}
+  \item $\marc{AB}$~为连结~$A$~与~$B$~点的直线段~$\mbar{AB}$；
+  \item $\marc{AB}$~为连结~$A$~与~$B$~点的抛物线段~$y=x^2$，$x\in\mintc12$；
+  \item $\marc{AB}$~为折线段~$\mbar{AC}+\mbar{CB}$，其中~$C(2,1)$，方向从~$A$~到~$C$，再从~$C$~到~$B$。
+\end{exlist}
+\item 计算~$\int_{\marc{AB}}y\dif x-x\dif y$，其中~$A$~点，$B$~点以及弧~$\marc{AB}$~都同\ref{exer-21.3.1}。
+\item 求力场~$\mvec F$~对运动的单位质点所作的功，此质点沿曲线~$\Gamma$~从~$A$~点运动到~$B$~点。
+\begin{exlist}
+  \item $\mvec F=\mparen{x-2xy^2}\mvec i+\mparen{y-2x^2y}\mvec j$，其中~$\Gamma$~平面曲线~$y=x^2$，$A(0,0)$，$B(1,1)$；
+  \item $\mvec F=(x+y)\mvec i+xy\mvec j$，其中~$\Gamma$~为平面曲线~$y=1-\mabs{1-x}$，$A(0,0)$，$B(2,0)$；
+  \item $\mvec F=(x-y)\mvec i+(y-z)\mvec j-(z-x)\mvec k$，其中~$\Gamma$~的~$C^{(1)}$~参数式为
+  ~$\mvec r(t)=t\mvec i+t^2\mvec j+t^3\mvec k$，$A(0,0,0)$，$B(1,1,1)$；
+  \item $\mvec F=y^2\mvec i+z^2\mvec j+x^2\mvec k$，其中~$\Gamma$~的参数式为~$x=\alpha t$，$y=\beta\sin t$，$z=\gamma t$，%
+  $A(\alpha,0,0)$，$B(\alpha,0,2\pi\gamma)$，$\alpha,\beta,\gamma>0$。
+\end{exlist}
+\item 计算下列曲线积分
+\[
+  \int_C\mparenb{y^2-z^2}\dif x+\mparenb{z^2-x^2}\dif y+\mparenb{x^2-y^2}\dif z,
+\]
+\begin{exlist}\FixExHead[其中]
+  \item $C$~为球面三角形~$x^2+y^2+z^2=1$，$x,y,z>0$~的周线，从球的外侧开去，$C$~的方向为逆时针方向；
+  \item $C$~为球面~$x^2+y^2+z^2=a^2$~和柱面~$x^2+y^2=ax\mcond{a>0}$~的交线位于~$xy$~平面上方的部分，从~$x$~轴上
+  ~$(b,0,0)\mcond{b>a}$~点看去，$C$~的方向为顺时针方向。
+\end{exlist}
+\item\label{exer-21.3.5}求闭曲线~$C$~上的第二型曲线积分
+\[
+  \oint_C\frac{y\dif x-x\dif y}{x^2+y^2},
+\]
+其中
+\begin{exlistcols}
+  \item $C$~为圆周~$x^2+y^2=a^2$，逆时针方向；
+  \item $C$~为椭圆~$\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}=1$，顺时针方向；
+  \item $C$~是以~$\minto 00$~为中心而边长为~$a$~的正方形，顺时针方向；
+  \item $C$~是以~$(-1,-1)$，$(1,-1)$~与~$(0,1)$~为顶点的三角形，顺时针方向。
+\end{exlistcols}
+\item 求闭曲线~$C$~上的第二型曲线积分
+\[
+  \oint_C\frac{y\dif x+x\dif y}{x^2+y^2},
+\]
+曲线~$C$~以及~$C$~的方向都同\ref{exer-21.3.5}。
+\item 设~$P,Q,R$~在~$L$~上连续，而~$L$~是弧长为~$\ell$~的光滑弧段。证明
+\[
+  \mabsbb{\int_LP\dif x+Q\dif y+R\dif z}\leq M\ell,
+\]
+其中~$M=\max_{(x,y,z)\in L}\mbraceb{\sqrt{P^2+Q^2+R^2}}$。
+\item 设~$L$~设圆周~$x^2+y^2=R^2$，计算
+\[
+  \oint_L\frac{x\dif y-y\dif x}{Ax^2-12Bxy+Cy^2}
+\]
+其中~$A,C>0$~且~$AC-B^2>0$，而~$L$~取正向。
 \end{exercise}
+
 \section{平面上的第二型曲线积分与~Green~公式}
 \subsection{平面闭曲线的定向}
 \subsection{Green~公式}
@@ -34,10 +180,197 @@
 \subsection{平面上的分部积分公式与~Green~第一、第二公式}
 \subsection{正则变换下闭曲线定向的变化}
 \begin{exercise}
-\item
+\item 应用~Green~公式计算下列积分。
+\begin{exlist}
+  \item $\oint_{\bound D^+}xy^2\dif y-x^2y\dif x$，其中~$D\colon\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}\leq 1$；
+  \item $\oint_{\bound D^+}\mparenb{x^2+y^3}\dif x-\mparenb{x^3-y^3}\dif y$，其中~$D\colon x^2+y^2\leq 1$；
+  \item $\oint_{\bound D^+}\mparenb{\me^y\sin x\dif x+\me^{-x}\sin y\dif y}$，其中~$D=\mintc ab\times\mintc cd$；
+  \item $\oint_{\bound D^+}\me^{xy}\mparenB{\mparenb{y\sin xy+\cos(x+y)}\dif x+\mparenb{x\sin xy+\cos(x+y)}\dif y}$，其中
+  ~$D$~是由分段光滑曲线围成的单连通闭区域。
+\end{exlist}
+\item 设~$f(x)\in C^{(1)}$，而~$L$~为任一逐段光滑的封闭曲线。证明，
+\begin{exlistcols}
+  \item $\oint_Lf(xy)\mparenb{y\dif x+x\dif y}=0$；
+  \item $\oint_Lf\mparenb{x^2+y^2}\mparenb{x\dif x+y\dif y}=0$；
+  \item $\oint_Lf\mparenb{x^n+y^n}\mparenb{x^{n-1}\dif x+y^{n-1}\dif y}=0$。
+\end{exlistcols}
+\item 设~$P(x,y)$~与~$Q(x,y)$~除一点~$M_0\minto{x_0}{y_0}$~之外，在全平面上连续可微。而且~$\pdiff Py\equiv\pdiff Qx$，$L$~
+是逐段光滑的简单闭曲线，讨论曲线积分
+\[
+  I=\oint_LP\dif x+Q\dif y
+\]
+的取值。
+\begin{exlist}
+  \item 若~$L$~围成的内部区域不包含~$M_0$~点，且~$L$~不经过~$M_0$~点，则~$I=0$；
+  \item\label{exer-21.4.3-2}若~$L$~围成的内部区域包含~$M_0$~点，则对任一以~$M_0$~为圆心的圆~$\Gamma$，都有
+  \[
+    I=\oint_\Gamma P\dif x+Q\dif y,
+  \]
+  其中~$L$~与~$\Gamma$~都取正向；
+  \item 设~$C$~是一条环绕~$M_0$~转~$n$~圈的闭曲线，方向为逆时针方向，$\Gamma$~同~\ref{exer-21.4.3-2}，则
+  \[
+    \oint_CP\dif x+Q\dif y=n\oint_\Gamma P\dif x+Q\dif y 。
+  \]
+\end{exlist}
+\item 设~$L$~是不经过原点的简单闭曲线，取逆时针方向。设~$L$~围成的区域为~$D$，计算
+\[
+  I=\oint_L\frac{x\dif y-y\dif x}{x^2+y^2},
+\]
+其中
+\begin{exlistcols}
+  \item\label{exer-21.4.4-1}$D$~不包含原点；
+  \item\label{exer-21.4.4-2}$D$~包含原点于其内部；
+  \item 依~\ref{exer-21.4.4-1}~与~\ref{exer-21.4.4-2}~的~$D$，讨论~$J=\oint_L\dfrac{x\dif y+y\dif y}{x^2+y^2}$。
+\end{exlistcols}
+\item 设~$P(x,y)$~和~$Q(x,y)$~除有限个点~$M_1\minto{x_1}{y_1}$，$\dotsc$，$M_n\minto{x_n}{y_n}$~之外有连续连续偏导数，而且
+~$\pdiff Py\equiv\pdiff Qx$，$L$~是不经过众~$M_i$~的简单闭曲线。讨论曲线积分
+\[
+  I=\oint_LP\dif x+Q\dif y
+\]
+的取值。
+\begin{exlist}
+  \item 若~$L$~围成的内部区域为~$\Omega$，众~$M_i$~都位于~$D$~之内部，则
+  \[
+    I=\sum_{i=1}^n\oint_{\Gamma_i}P\dif x+Q\dif y,
+  \]
+  其中~$\Gamma_i$~是以~$M_i$~为圆心，$R_i$~为半径的圆，且~$\Gamma_i$~不包含~$M_j\mcond{j\neq i}$，$\Gamma_i$~与~$L$~同向；
+  \item 若~$L$~围成的闭区域~$\closure\Omega$~不包含众~$M_i$，则~$I=0$；
+  \item 若~$L$~围成的区域~$\Omega$~内部只含有~$M_{i_1},\dotsc,M_{i_m}$，其中~$i_1,\dotsc,i_m$~是~$1,\dotsc,n$~中彼此不等的
+  正数，$L$~不包含~$M_1,\dotsc,M_n$~中的其它点，则
+  \[
+    I=\sum_{j=1}^m\oint_{\Gamma_{i_j}}P\dif x+Q\dif y,
+  \]
+  其中~$\Gamma_{i_j}$~是以~$M_{i_j}$~为圆心的小圆。
+\end{exlist}
+\item 设~$C$~为光滑的闭曲线，$\mvec\alpha$~为任一固定的单位向量。证明
+\[
+  \oint_C\cos\mangle{\mvec\alpha}{\mvec n}\dif s=0,
+\]
+其中~$\mvec n$~为~$C$~的外法线方向。
+\item 设~$L$~为包围有界区域~$D$~的光滑闭曲线，而~$\mvec n$~为~$L$~的外法线方向，计算
+\[
+  I=\oint_L\mparenb{x\cos\mangle{\mvec n}{\mvec i}+y\cos\mangle{\mvec n}{\mvec j}}\dif s 。
+\]
+\item 设~$L$~是包含原点在其内部的分段光滑的闭曲线，计算
+\[
+  I=\oint_L\frac{\me^x}{x^2+y^2}\mparenb{\mparen{x\cos y+y\sin y}\dif y+\mparen{x\sin y-y\cos y}\dif x}。
+\]
+\item 设简单闭曲线~$L$~包含坐标原点。又设~$\xi=\phi(x,y)$，$\eta=\psi(x,y)$~都属于~$C^{(2)}$。曲线~$\phi(x,y)=0$~与~$\psi(x,y)=0$~
+在~$L$~围成的区域~$D$~内有~$n$~个交点~$M_1\minto{x_1}{y_1},\dotsc,M_n\minto{x_n}{y_n}$，而且
+\[
+  \pdiff{(\xi,\eta)}{{(x,y)}}\mrest[\biggr]{M_i}\neq 0\mcond*{i=1,\dotsc,n}。
+\]
+证明
+\[
+  I=\frac1{2\pi}\oint_L\frac{\phi\dif\psi-\psi\dif\phi}{\phi^2+\psi^2}=
+  \sum_{i=1}^n\sgn\mparenbb{\pdiff{(\xi,\eta)}{{(x,y)}}\mrest[\biggr]{M_i}},
+\]
+其中~$L$~为逆时针方向，$L$~不含~$\phi(x,y)=0$~与~$\psi(x,y)=0$~的交点。
+\item 设~$P(x,y),Q(x,y)\in C^{(2)}$，曲线积分
+\[
+  I=\oint_CP\minto{x+\alpha}{y+\beta}\dif x+Q\minto{x+\alpha}{y+\beta}\dif y 。
+\]
+证明对于逐段光滑闭曲线~$C$，$I$~与~$\alpha$~和~$\beta$~无关当且仅当存在一个常数~$K$，存在~$u(x,y)\in C^{(2)}$~和
+~$\phi(y)\in C^{(2)}$，使得
+\[
+  P(x,y)=\pdiff{u(x,y)}x,\quad
+  Q(x,y)=Kx+\pdiff{u(x,y)}y+\phi(y) 。
+\]
+\item 利用~Green~公式计算下列图形的面积。
+\begin{exlistcols}
+  \item 笛卡尔叶形线~$x^3+y^3=3axy\mcond{a>0}$；
+  \item 双纽线~$\mparenb{x^2+y^2}^2=a^2\mparenb{x^2-y^2}$；
+  \item $x^n+y^n=1\mcond{n>0}$；
+  \item $\mparenbb{\dfrac xa}^{\msp 2n+1}+\mparenbb{\dfrac yb}^{\msp2n+1}=
+  c\mparenbb{\dfrac xa}^{\msp n}\mparenbb{\dfrac yb}^{\msp n}$，其中~$a,b,c>0$,而~$n\in\mN$。
+\end{exlistcols}
+\item 一个半径为~$r$~的圆沿着半径为~$R$~的定圆外侧圆周滚动而不滑动，此时动圆上一定点的轨迹称为\emph{外摆线}。%
+设~$\dfrac Rr=n\in\mN$。
+\begin{exlistcols}
+  \item 求外摆线的参数方程；
+  \item 求外摆线围成的图形的面积；
+  \item 如果~$r=R$，则称为\emph{心脏线}，求出心脏线围成区域的面积。
+\end{exlistcols}
+\item 一个半径为~$r$~的圆沿着半径为~$R$~的定圆内侧圆周滚动而不滑动，此时动圆上一定点的轨迹称为\emph{内摆线}。%
+设~$\dfrac Rr=n\in\mN$。
+\begin{exlistcols}
+  \item 求内摆线的参数方程；
+  \item 求内摆线围成的图形的面积；
+  \item 如果~$\dfrac Rr=4$，则称为\emph{星形线}，求出星形线围成区域的面积。
+\end{exlistcols}
+\item 设~$u=u(x,y)$~为单位圆~$D$~上的\emph{正调和函数}，即
+\[
+  u(x,y)\geq0,\quad \pdiff u{x2}+\pdiff u{y2}=0 。
+\]
+令~$f(x,u)=\mparenb{u(x,y)}^p$，其中~$p>0$。
+\begin{exlist}
+  \item 求~$\pdiff f{x2}+\pdiff f{y2}$；
+  \item 设~$C_1,C_2$~为~$D$~上的光滑曲线，且~$C_1$~位于~$C_2$~围成的区域内。又设~$\pdiff f{{\mvec n}}$~为~$f$~沿~$C$~的外法向的
+  方向导数。证明，
+  \begin{exlistcols}[label=\Ding*]
+    \item 若~$p>1$，则~$0\leq\int_{C_1}\pdiff f{{\mvec n}}\dif s\leq \int_{C_2}\pdiff f{{\mvec n}}\dif s$；
+    \item 若~$p=1$，则~$0=   \int_{C_1}\pdiff f{{\mvec n}}\dif s\leq \int_{C_2}\pdiff f{{\mvec n}}\dif s$；
+    \item 若~$0<p<1$，则~$0\geq\int_{C_1}\pdiff f{{\mvec n}}\dif s\geq \int_{C_2}\pdiff f{{\mvec n}}\dif s$；
+  \end{exlistcols}
+  \item 设~$0<r<1$，证明，
+  \begin{exlist}
+    \item 若~$p>1$，则~$\mparenb{u(0,0)}^p\leq\dfrac1{2\pi}\int_0^{2\pi}\mparenb{u\minto{r\cos\theta}{r\sin\theta}}^p\dif\theta$；
+    \item 若~$p=1$，则~$\mparenb{u(0,0)}^p=\dfrac1{2\pi}\int_0^{2\pi}\mparenb{u\minto{r\cos\theta}{r\sin\theta}}^p\dif\theta$；
+    \item 若~$0<p<1$，则~$\mparenb{u(0,0)}^p\geq\dfrac1{2\pi}\int_0^{2\pi}\mparenb{u\minto{r\cos\theta}{r\sin\theta}}^p\dif\theta$。
+  \end{exlist}
+\end{exlist}
 \end{exercise}
+
 \begin{exercise*}
-\item
+\item 设~$\Gamma$~有参数式~$\mvec r(t)$，$t\in\mintc ab$，且~$\mvec r(t)\in C^{(1)}$，且~$\mabsb{\mvec r'(t)}\neq0$。%
+设~$P_0\mparen{x_0,y_0,z_0}$~是~$\Gamma$~上一点，使得~$\mvec r(t)=P_0$~的参数~$t$~的的个数称为~$P_0$~点的\emph{重数}。证明，
+\begin{exlistcols}
+  \item $\Gamma$~上任一点的重数是有限数；
+  \item $\Gamma$~是可求长曲线。
+\end{exlistcols}
+\item 设~$\Gamma$~是椭圆~$x^2+4y^2-2\sqrt3x-1=0$。求~$\oint_{\Gamma^+}\dfrac{y\dif x}{x^2=y^2}$。
+\item 设有一中心力
+\[
+  \mvec F=\frac K{r^3}\mvec r\mcond*{\mvec r=x\mvec i+y\mvec j+z\mvec k},
+\]
+一动点~$P$~沿一曲线~$C$~运动，其中~$C\colon\mvec r(\theta)=a\cos\theta\mvec i+a\sin\theta\mvec j+c\theta\mvec k$。求
+~$\theta$~从~$0$~变到~$\pi$~时，力~$\mvec F$~对动点~$P$~所作的功（$P$~的质量设为~$1$）。
+\item 设~$C$~是平面上面积为常数~$A$~的区域~$D$~的任一条逐段光滑的简单闭曲线。证明
+\[
+  \oint_C\mparenb{a_1x+a_2y+a_3}\dif x+\mparenb{b_1x+b_2y+b_3}\dif y=\mparenb{b_1-a_2}A,
+\]
+其中~$a_i,b_i\mcond{i=1,2,3}$~为常数，而~$C$~取正向。
+\item 设~$G$~是~$\mR{2}$~的一个开区域，它是由~$xy$~平面去掉~$\minto{-2}0$~和~$\minto20$~所构成的。设~$P$~是~$G$~上的任一点，而
+~$L$~是连结~$\minto00$~与~$P$~点而位于~$G$~内的任一逐段光滑曲线。给定曲线积分
+\[
+  I=\int_L\mparenbb{\frac y{(x-2)^2+y^2}+\frac y{(x+2)^2+y^2}}\dif x+
+  \mparenbb{\frac{2-x}{(2-x)^2+y^2}-\frac{x+2}{(x+2)^2+y^2}}\dif y 。
+\]
+讨论当~$L$~选取不同的路径时~$I$~取值的情况，确定~$I$~能取到几种不同的值。
+\item 设~$C_1,C_2$~是围绕原点的两条简单光滑闭曲线，且~$C_1$~整个位于~$C_2$~之内。证明，若~$p>0$，则
+\[
+  \oint_{C_1}r^p\dif\theta\leq\oint_{C_2}r^p\dif\theta,
+\]
+其中~$r$~为向径，而~$\theta$~为极角。
+\item 设~$u(x,y)$~在区域~$D$~上有二阶连续偏导数。证明~$u(x,y)$~在~$D$~内为调和函数当且仅当对~$D$~内任意简单光滑闭曲线~$L$，都有
+\[
+  \oint_L\pdiff u{{\mvec n}}\dif s=0,
+\]
+其中~$\mvec n$~为~$L$~的外法线。
+\item 设~$D$~是一个闭区域。证明，在~$D$~上调和且连续的函数~$u(x,y)$~由它在~$\bound D$~上的值唯一确定。并讨论如果~$D$~是有限个
+闭区域的并集，这个结论是否仍正确。
+\item 设~$u(x,u)$~是区域~$G$~上的调和函数，而~$\minto{x_0}{y_0}$~是~$G$~内的一点。$C_R$~是以~$\minto{x_0}{y_0}$~为圆心半径为~$R$~
+的圆周，且~$C\subset G$。又设~$C_\rho$~是以~$\minto{x_0}{y_0}$~为圆心半径为~$\rho\mcond{\rho<R}$~的任一圆周。令
+\[
+  \txts v(x,y)\coloneq \ln\smbsqrt{(x-x_0)^2+(y-y_0)^2}\mcond*{(x,y)\neq\minto{x_0}{y_0}}。
+\]
+\begin{exlist}
+  \item 证明~$v(x,y)$~是~$xy$~平面挖去~$\minto{x_0}{y_0}$~点而得到的开区域上的调和函数；
+  \item\label{exer-21.10-2}证明~$\oint_{C_\rho}\pdiff u{{\mvec n}}\dif s=\oint_{C_R}u\pdiff v{{\mvec n}}\dif s$；
+  \item 利用~\ref{exer-21.10-2}~证明~$u\minto{x_0}{y_0}=\dfrac1{2\pi R}\oint_{C_R}u(x,y)\dif s$。
+\end{exlist}
+\item 设~$D$~是有界闭区域，$u(x,y)$~在~$D$~上连续，在~$D$~内调和。证明，除非~$u(x,y)$~在~$D$~上为常数，否则~$u(x,u)$~不能在~$D$~
+的内部取到最大值与最小值。也就是说，$u(x,y)$~只能在~$\bound D$~上达到最大值与最小值。
 \end{exercise*}
 
 

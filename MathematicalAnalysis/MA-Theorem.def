@@ -13,7 +13,7 @@
   \ifcsundef\uniq@toggle}
 
 \def\declarethmheadformat#1#2{\csdef{thmt@headstyle@#1}{#2}}
-\declarethmheadformat{note}  {\ifthenelse{\equal{\NOTE}{\@empty}}{\NAME}{\let\thmt@space\relax\NOTE}}
+\declarethmheadformat{note}  {\IfStrEq{\NOTE}{\@empty}{\NAME}{\let\thmt@space\relax\NOTE}}
 \declarethmheadformat{unique}{\NAME\ifcntruniqinsec{\thmt@envname}{}{\NUMBER}\NOTE}
 \declarethmheadformat{normal}{\NAME~\NUMBER\NOTE}
 

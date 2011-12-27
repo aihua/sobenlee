@@ -4,54 +4,685 @@
 
 
 \chapter{多元数值函数的微分学}\label{ch:16}
+
 \section{偏导数}
 \subsection{偏导数的概念}
 \subsection{偏导数的求法}
 \subsection{微分中值定理}
 \subsection{偏导数的存在性与函数的连续性}
 \begin{exercise}
-\item
+\item 求下列函数的偏导数。
+\begin{exlistcols}[3]
+  \item $u=\dfrac x{\smbsqrt{x^2+y^2}}$；
+  \item $u=\tan\dfrac xy$；
+  \item $u=\sin\mparen{x\cos y}$；
+  \item $u=\me^{\frac xy}$；
+  \item $u=\arctan\dfrac{x+y}{1-xy}$；
+  \item $u=\mparenbb{\dfrac xy}^{\msp z}$；
+  \item $u=x^{\frac zx}$；
+  \item $u=x^{yz}$；
+  \item $u=\dfrac1{\smbsqrt{x_1^2+x_2^2+x_3^2}}$；
+  \item $u=\arcsin\dfrac x{\smbsqrt{x^2+y^2}}$。
+\end{exlistcols}
+\item 求下列函数在指定点的所有偏导数。
+\begin{exlistcols}[2]
+  \item $u=\sqrt[\uproot{8}\leftroot{-2}z]{\dfrac x{\smash[b]y}}$~在~$(1,1,1)$~处；
+  \item $z=x+\mparen{y-1}\arcsin\sqrt{\dfrac x{\smash[b]y}}$~在~$(0,1)$~处；
+  \item $u=\arctan\dfrac{x+y+z-xyz}{1-xy-yz-zx}$~在~$(0,0,0)$~处。
+\end{exlistcols}
+\item 设~$u=\ln\mparenb{1+x_1+x_2^2+x_3^2}$，求~$\sum_{i=1}^3u_{x_i}'$~在~$(1,1,1)$~点的值。
+\item 已知~$x=r\cos\theta$，$y=r\sin\theta$，$r=\smbsqrt{x^2+y^2}$~与~$\theta=\arctan\dfrac yx$。%
+求偏导数~$x_r'$，$y_r'$，$x_\theta'$，$y_\theta'$，$r_x'$，$r_y'$，$\theta_x'$~与~$\theta_y'$。
+\item 设~$\vecfunc f{x}$~在~$U(\mvec x_0)\difset\mbrace{\mvec x_0}$~有偏导数~$f_{x_i}'$，且偏导数在~$\mvec x_0$~处关于
+~$x_i$~连续，其中~$U_{\mvec x_0}$~是~$\mvec x_0$~的邻域。
+\begin{exlist}
+  \item 若~$\lim_{\mvec x\to\mvec x_0}\pdiff{\vecfunc f{x}}{{x_i}}=A_i$，证明~$\pdiff{\vecfunc f{x}}{{x_i}}=A_i$；
+  \item 若~$\lim_{\mvec x\to\mvec x_0}\pdiff{\vecfunc f{x}}{{x_i}}=\infty$，讨论~$\pdiff{\vecfunc f{x}}{{x_i}}$~是否存在；
+  \item 若~$\lim_{\mvec x\to\mvec x_0}\pdiff{\vecfunc f{x}}{{x_i}}=A_i$~不存在，讨论~$\pdiff{\vecfunc f{x}}{{x_i}}$~是否存在。
+\end{exlist}
+\item 求下列函数的偏导数。
+\begin{exlist}
+  \item $f(x,y)=\begin{cBdcases}
+    \txts\smbsqrt{x^2+y^2}\sin\dfrac1{x^2+y^2}, & x^2+y^2\neq0;\\
+    0,& x^2+y^2=0;
+  \end{cBdcases}$
+  \item $f(x,y)=\begin{cBdcases}
+    x\ln\mparenb{x^2+y^2}, & x^2+y^2\neq0;\\
+    0,& x^2+y^2=0 。
+  \end{cBdcases}$
+\end{exlist}
+\item 设~$z=x^nf\mparenB{\dfrac y{x^2}}$，其中~$f$~为一元可微函数。证明，函数~$z$~满足方程
+\[
+  z\pdiff zx+2y\pdiff zy=nz 。
+\]
+\item 设~$\Omega=\minto ab\times\minto cd$，且~$f\minto xy$~在~$\closure\Omega$~上连续，在~$\Omega$~内有~$f_x'\equiv 0$。
+\begin{exlistcols}
+  \item $f\minto xy$~在~$\closure\Omega$~上是否为常值函数；
+  \item $f\minto xy$~在~$\closure\Omega$~上有什么特点。
+\end{exlistcols}
+\item 设~$\Omega=\minto ab\times\minto cd$，且~$f\minto xy$~在~$\closure\Omega$~上连续，在~$\Omega$~内有~$f_x'=f_y'\equiv 0$。%
+证明~$f\minto xy$~在~$\closure\Omega$~上为常值函数。
+\item 设~$\Omega=\minto ab\times\minto cd$，且~$\pdiff{f\minto xy}y$~在~$\closure\Omega$~上连续。证明，对任意
+~$x\in\mintc ab$~与~$y_i\in\mintc cd\mcond{i=1,2}$，存在常数~$L$，使得
+\[
+  \mabsb{f\minto x{y_2}-f\minto x{y_1}}\leq L\mabs{y_2-y_1}。
+\]
+\item 设~$\Omega\subset\mR{2}$~是开区域，且~$f\minto xy$~在~$\Omega$~上有~$f_x'=f_y'\equiv 0$。证明
+~$f\minto xy$~在~$\Omega$~上为常值函数。
+\item 设~$\Omega\subset\mR{2}$~是开区域，且~$u\minto xy$~与~$v\minto xy$~在~$\Omega$~上满足
+\[
+  \pdiff ux=\pdiff vy,\quad  \pdiff uy=-\pdiff vx,\quad  u^2+v^2\equiv C,
+\]
+其中~$C$~为常数。证明~$u\minto xy$~与~$v\minto xy$~在~$\Omega$~上为常值函数。
 \end{exercise}
+
 \section{全微分与可微性}
 \subsection{一次逼近与全微分的概念}
 \subsection{连续性与可微性，偏导数与可微性}
 \subsection{全微分的四则运算法则}
 \subsection{全微分的几何意义}
 \begin{exercise}
-\item
+\item 求下列函数的全微分。
+\begin{exlistcols}[4]
+  \item $u=\ln\smbsqrt{x^2+y^2}$；
+  \item $u=\me^{xy}$；
+  \item $u=\dfrac z{x^2+y^2}$；
+  \item $u=x^{yz}$。
+\end{exlistcols}
+\item 求~$u=\ln\mparenb{1+x^2+y^2}$~在~$\minto xy=\minto 12$~处的全微分。
+\item 已知~$u=\dfrac yx$。求~$u$~当~$x=2$，$y=1$，$\dif x=\num{0.1}$，$\dif y=\num{.2}$~时的全微分和改变量~$\Delta U$。
+\item 设~$u=u\minto xy$~与~$v=v\minto xy$~在~$\minto xy$~处可微。按定义证明~$u\cdot v$~可微且
+\[
+  \dif\mparen{u\cdot v}=u\dif v+v\dif u。
+\]
+\item 设~$\pdiff fx$~在~$\minto{x_0}{y_0}$~存在，且~$\pdiff fy$~在~$\minto{x_0}{y_0}$~连续。证明
+~$f\minto xy$~在~$\minto{x_0}{y_0}$~可微。
+\item 设~$m$~元函数~$\vecfunc f{x}$~与~$\vecfunc g{x}$~满足~$\vecfunc f{x}$~在~$\mvec x_0$~连续，而
+~$\vecfunc g{x}$~在~$\mvec x_0$~可微且~$\vecfunc g{x_0}=0$。证明~$\vecfunc f{x}\cdot \vecfunc g{x}$~在~$\mvec x_0$~可微，且
+\[
+  \dif\mparenb{\vecfunc f{x}\cdot \vecfunc g{x}}\mrest{\mvec x=\mvec x_0}=\vecfunc f{x_0}\dif\vecfunc g{x_0}。
+\]
+\item 设~$m$~元函数~$\vecfunc f{x}$~满足~$\mabsb{\vecfunc f{x}}\leq\mabs{\mvec x}^{1+\alpha}$，其中~$\alpha>0$~为常数。证明
+~$\vecfunc f{x}$~在~$\mvec x=0$~处可微，并求~$\dif f(0)$。
+\item 设
+\[
+  f(x,y)=\begin{cBBdcases}
+    \dfrac{1-\me^{x\mparen{x^2+y^2}}}{x^2+y^2},& x^2+y^2\neq0;\\
+    0, & x^2+y^2=0 。
+  \end{cBBdcases}
+\]
+证明~$f\minto xy$~在~$\minto 00$~可微，并求~$\dif f\minto 00$。
+\item 设
+\[
+  f\minto xy=\begin{cbbdcases}
+    \dfrac{x^2y^2}{x^2+y^2},& x^2+y^2\neq0;\\
+    0, & x^2+y^2=0 。
+  \end{cbbdcases}
+\]
+证明偏导数~$\pdiff fx$~与~$\pdiff fy$~在~$\minto 00$~连续。
+\item 设
+\[
+  f\minto xy=\begin{cbbdcases}
+    \dfrac{x^2y}{x^2+y^2},& x^2+y^2\neq0;\\
+    0, & x^2+y^2=0 。
+  \end{cbbdcases}
+\]
+证明，
+\begin{exlistcols}
+  \item $f\minto xy$~在~$\minto 00$~连续；
+  \item $\pdiff{f\minto 00}x$~与~$\pdiff{f\minto 00}y$~存在；
+  \item $\pdiff{f\minto xy}x$~与~$\pdiff{f\minto xy}y$~在~$\minto 00$~不连续；
+  \item $f\minto xy$~在~$\minto 00$~不可微。
+\end{exlistcols}
+\item 设
+\[
+  f\minto xy=\begin{cbbdcases}
+    xy\sin\dfrac 1{x^2+y^2},& x^2+y^2\neq0;\\
+    0, & x^2+y^2=0 。
+  \end{cbbdcases}
+\]
+证明，
+\begin{exlistcols}
+  \item $\pdiff{f\minto 00}x$~与~$\pdiff{f\minto 00}y$~存在；
+  \item $\pdiff{f\minto xy}x$~与~$\pdiff{f\minto xy}y$~在~$\minto 00$~不连续；
+  \item $f\minto xy$~在~$\minto 00$~可微。
+\end{exlistcols}
+\item 讨论函数
+\[
+  f\minto xy=\begin{cbbdcases}
+    \dfrac{x^{\frac 32}y^\beta}{x^2+y^2},& x^2+y^2\neq0;\\
+    0, & x^2+y^2=0
+  \end{cbbdcases}
+\]
+的连续性，可微性及偏导数的连续性。
+\item 设
+\[
+  f\minto xy=\begin{cbbdcases}
+    \dfrac{x^3}{x^2+y^2},& x^2+y^2\neq0;\\
+    0, & x^2+y^2=0 。
+  \end{cbbdcases}
+\]
+\begin{exlist}
+  \item 设~$x=x(t)$，$y=y(t)$~是通过原点的任意可微曲线（即~$x^2(0)+y^2(0)=0$，而当~$t\neq0$~时~$x^2(t)+y^2(t)\neq0$，%
+  并且~$x(t)$~与~$y(t)$~均可微）。证明~$f\mintob{x(t)}{y(t)}$~可微；
+  \item $f\minto xy$~在~$\minto 00$~不可微。
+\end{exlist}
+\item 设~$u=u\minto xy$。已知~$\dif u$~如下，确定~$u$。
+\begin{exlistcols}
+  \item $\dif u=ax\dif x+by\dif y$；
+  \item $\dif u=\mparenb{x^2+2xy+y^2}\dif x+\mparenb{x^2-2xy-y^2}\dif y$；
+  \item $\dif u=\mparenb{5x^4+3xy^2-y^3}\dif x+\mparenb{3x^2y-3xy^2+y^2}\dif y$。
+\end{exlistcols}
+\item 设~$\mabs x$~与~$\mabs y$~很小，利用全微分对下列各式推出近似公式。
+\begin{exlistcols}
+  \item $(1+x)^m(1+y)^n$；
+  \item $\arctan\dfrac{x+y}{1+xy}$。
+\end{exlistcols}
+\item 用全微分近似函数改变量，近似计算下列各量。
+\begin{exlistcols}
+  \item $\dfrac{\num{1.03}^2}{\sqrt[3]{\num{.98}}\sqrt[4]{\num{1.05}^3}}$；
+  \item $\sin\ang{29;46;}$。
+\end{exlistcols}
+\item 设一扇形的中心角~$\alpha=\dfrac\pi3$，半径~$R=20$~米，当~$\alpha$~增加~$\Delta\alpha=\ang 1$，为使面积保持不变，应
+把半径~$R$~减少多少。
+\item 三个电阻~$R_1,R_2,R_3$~并联，若每个电阻的阻值有很小的相对误差~$\e$，求总电阻的最大相对误差的近似值。
+\item 设~$y=f\mparen{\mvec x{1,:,m}}=x_1^{q_1}\dotsm x_m^{q_m}$，这里诸~$q_i\in\mN$。若每个~$x_i=x_i^\ast\mcond{x_i^\ast>0}$~的
+绝对误差为~$\Delta x_i$，那么由~$x_1^\ast,\dotsc,x_m^\ast$~计算~$y$~时，其相对误差约为多少。
+\item 设~$A$~点对空中目标~$M$~的水平距离为~$\ell$，仰角为~$\gamma$，高度为~$h$。
+\begin{exlist}
+  \item 在~$A$~点观测~$M$，水平距离和仰角的观测值分别为~$\ell^\ast$~和~$\gamma^\ast$，其误差分别为
+  ~$\Delta\ell=\ell-\ell^\ast$~与~$\Delta\gamma=\gamma-\gamma^\ast$。由~$\ell^\ast$~与~$\gamma^\ast$~求出高度~$h$~的近似值
+  ~$h^\ast$，并导出绝对误差~$\mabs{h-h^\ast}$~的近似公式；
+  \item 今在~$A$~点测得~$\ell^\ast=\num{100}\text{~米~}\pm\num{.05}$~米，而~$\gamma^\ast=\ang{30}\pm\ang 1$。由观测值求出
+  高度~$h$~的近似值~$h^\ast$，并估计~$\mabs{h-h^\ast}$；
+  \item 若变动观测点~$A$~的位置，水平距离与仰角的最大绝对误差~$\updelta\ell$~与~$\updelta\gamma$~不变，并设
+  ~$\dfrac{\updelta\ell}{h\updelta\gamma}$~很小，由绝对误差的近似公式说明，仰角~$\gamma$~取何值时，高度的最大绝对误差最小。
+\end{exlist}
 \end{exercise}
+
 \section{复合函数的偏导数与可微性}
 \subsection{复合函数的求导法则——链锁法则}
 \subsection{复合函数的可微性与一阶全微分形式的不变性}
 \begin{exercise}
-\item
+\item 设~$u=f(x,y,z)$，$x=x(s,t)$，$y=y(s,t)$~与~$z=z(s,t)$。写出复合函数
+\[
+  u=f\mparenb{x(s,t),y(s,t),z(s,t)}
+\]
+的偏导数~$\pdiff us$~与~$\pdiff ut$~的链锁法则。
+\item 求下列复合函数的偏导数。
+\begin{exlistcols}[3]
+  \item $u=f\mparenb{\smbsqrt{x^2+y^2}}$；
+  \item $u=f\mparenb{x^2+y^2=z^2}$；
+  \item $u=f\mparenB{\dfrac{xz}y}$；
+  \item $u=f\mparenB{x,\dfrac xy}$；
+  \item $u=f\mparenb{x,xy,xyz}$；
+  \item $u=f\mparen{x+y,z}$；
+  \item $u=f\mparenb{x+y+z,x^2+y^2+z^2}$；
+  \item $u=f\mparenB{\dfrac xy,\dfrac yz}$；
+  \item $u=f\mparenb{x^2+y^2,x^2-y^2,2xy}$；
+  \item $u=f\mparenbb{\dfrac1{\smbsqrt{x^2+y^2+z^2}}}$。
+\end{exlistcols}
+\item 设~$u=f\minto xy$，$x=r\cos\theta$，$y=r\sin\theta$。
+\begin{exlistcols}
+  \item 求~$\pdiff ur$~与~$\pdiff u\theta$；
+  \item 证明~$\mparenbb{\pdiff ur}^{\msp2}+\dfrac1{r^2}\mparenbb{\pdiff u\theta}^{\msp2}
+  =\mparenbb{\pdiff ux}^{\msp2}+\mparenbb{\pdiff uy}^{\msp2}$。
+\end{exlistcols}
+\item 设~$u=f(x,y,z)$，$x=r\cos\theta\sin\phi$，$y=r\cos\theta\sin\phi$~与~$z=r\sin\theta$。求~$\pdiff ur$，
+$\pdiff u\phi$~与~$\pdiff u\theta$。
+\item 设~$u=x^nf\mintoB{\dfrac y{x^\alpha}}{\dfrac z{x^\beta}}$。证明~$u$~满足
+\[
+  x\pdiff ux+\alpha y\pdiff uy+\beta z\pdiff uz=nu 。
+\]
+\item 设~$x=\sqrt{vw}$，$y=\sqrt{uv}$，$z=\sqrt{uw}$~与~$f(x,y,z)=F(u,v,w)$。证明，
+\[
+  xf_x'+yf_y'+zf_z'=uF_u'+vF_v'+wF_w' 。
+\]
+\item 一质量为~$m$~的质点在可微曲面~$z=f\minto xy$~上运动，若~$x(t)$~与~$y(t)$~分别是~$t$~时刻指点的水平坐标，求它的动能。
+\item 设可微函数~$u=f(x,y)$~满足方程~$xf_x'+yf_y'=0$。证明~$u$~在极坐标系里只是极角~$\theta$~的函数。
+\item 设可微函数~$u=f\minto xy$~满足方程~$\dfrac 1xf_x'=\dfrac1yf_y'$。证明~$u$~在极坐标系里只是向径~$r$~的函数。
+\item 设~$\Omega$~是包含原点的凸开区域， 可微函数~$u=f\minto xy$~满足方程~$xf_x'+yf_y'=0$。证明~$f\minto xy$~在~$\Omega$~
+上恒为常数。
+\item 若函数~$f(x,y,z)$~对任意正实数~$t$~满足方程
+\[
+  f\mparen{tx,ty,tz}=t^nf\mparen{x,y,z},
+\]
+则称~$f\mparen{x,y,z}$~为\emph{~$n$~次齐次函数}。设~$f(x,y,z)$~可微，试证明~$f(x,y,z)$~为~$n$~次齐次函数当且仅当
+\[
+  x\pdiff fx+y\pdiff fy+z\pdiff fz=nf\mparen{x,y,z}。
+\]
+\item 设二元可微函数~$F\minto xy$~在直角坐标系里可写成~$F(x,y)=f(x)+g(y)$，在极坐标系里可写成~$F\minto xy=S(r)$。试确定
+二元函数~$F(x,y)$。
+\item 设有二元可微函数~$F\minto xy=f(x)g(y)$。
+\begin{exlist}
+  \item 在极坐标系里可表成~$F(x,y)=S(r)$，求~$F(x,y)$；
+  \item 在极坐标系里可表成~$F(x,y)=\Phi(\theta)$，求~$F(x,y)$。
+\end{exlist}
+\item 设~$x=x\minto\xi\eta$~与~$y=y\minto\xi\eta$~在~$\minto\xi\eta$~有连续的偏导数。$u=f\minto xy$~在相应的~$\minto xy$~也有连续
+的偏导数。试证明~$u=f\mintob{x\minto\xi\eta}{y\minto\xi\eta}$~在~$\minto\xi\eta$~有连续的偏导数。
+\item 利用全微分运算法则求下列函数的全微分，然后求偏导数。
+\begin{exlistcols}[3]
+  \item $u=\sin\mparen{2x+y}$；
+  \item $u=\me^{x+2y+3z}$；
+  \item $u=\arctan\dfrac yx$；
+  \item $u=\me^{xy}\sin\mparen{x+y}$；
+  \item $u=\ln\smbsqrt{x^2+y^2+z^2}$；
+  \item $u=\dfrac x{x^2+y^2=z^2}$。
+\end{exlistcols}
+\item 利用一阶全微分形式的不变形证明全微分的四则运算法则。
+\item 设~$f(x)=\mparen{\mvec x{1,:,m}}$~在以原点为心，$R$~为半径的球内可微且~$f(0)=0$。证明
+\[
+  \vecfunc f{x}=\sum_{i=1}^mx_i\int_0^1\pdiff{\vecfunc f{y}}{{y_i}}\biggr\rvert_{\mvec y=t\mvec x}\!\dif t 。
+\]
+\item 设可微函数~$u=f\minto xy$~满足方程
+\[
+  yf_x'-xf_y'=0 。
+\]
+作变换~$\xi=x$，$\eta=x^2+y^2$，变换上述方程并证明~$f\minto xy=F\mparenb{x^2+y^2}$。
+\item 证明方程~$yu_x'+xu_y'=0$~的解为~$u=f\mparenb{x^2-y^2}$。
+\item\begin{exlist}
+  \item 令~$\xi=x$，$\eta=xy$，解方程~$xu_x'-yu_y'=0$；
+  \item 令~$\xi=x$，$\eta=y-x$，$\zeta=z-x$，解方程~$u_x'+u_y'+u_z'=0$。
+\end{exlist}
 \end{exercise}
+
 \section{方向导数}
 \subsection{方向导数的概念与计算}
 \subsection{梯度向量}
 \begin{exercise}
-\item
+\item 分别对下列函数，求方向导数~$\pdiff u{{\mvec\ell}}\mrest[\biggr]{\minto{x_0}{y_0}}$。
+\begin{exlist}
+  \item $u=x^2+y^2$，$\minto{x_0}{y_0}=\minto11$，$\mangle{\mvec\ell}{\mvec e_1}=\dfrac\pi3$，%
+        $\mangle{\mvec\ell}{\mvec e_2}=\dfrac\pi6$；
+  \item $u=\ln\mparenb{x^2+y^2}$，$\minto{x_0}{y_0}=\minto11$，$\mvec \ell$~与~$x$~轴正向夹角为~$\ang{60}$；
+  \item $u=x\me^{xy}$，$\minto{x_0}{y_0}=\minto11$，$\mvec\ell$~与向量~$\minto11$~同向。
+\end{exlist}
+\item 分别对下列函数，求方向导数~$\pdiff u{{\mvec\ell}}\mrest[\biggr]{\mparen{x_0,y_0,z_0}}$。
+\begin{exlist}
+  \item $u=x^2+2y^2+3z^2$，$\mparen{x_0,y_0,z_0}=\mparen{1,1,0}$，$\mvec\ell$~与向量~$\mparen{1,-1,2}$~同向；
+  \item $u=\mparenbb{\dfrac xy}^{\msp z}$，$\mparen{x_0,y_0,z_0}=\mparen{1,1,1}$，$\mvec\ell$~与向量~$\mparen{2,1,-1}$~同向。
+\end{exlist}
+\item 设函数~$f\minto xy$~在~$\minto{x_0}{y_0}$~可微，且
+\[
+  \mvec\ell_1=\mintobb{\dfrac1{\sqrt 2}}{\dfrac1{\sqrt 2}},\enspace
+  \mvec\ell_2=\mintobb{-\dfrac1{\sqrt 2}}{\dfrac1{\sqrt 2}},\enspace
+  \pdiff{f\minto{x_0}{y_0}}{{\mvec\ell_1}}=1,\enspace
+  \pdiff{f\minto{x_0}{y_0}}{{\mvec\ell_2}}=0 。
+\]
+确定方向向量~$\mvec\ell$，使得~$\pdiff{f\minto{x_0}{y_0}}{{\mvec\ell}}=\dfrac 7{5\sqrt 2}$。
+\item 设~$f\minto xy$~在~$P_0=\minto 20$~指向~$P_1=\minto2{-2}$~的方向导数是~$1$，指向原点的方向导数是~$-3$。计算，
+\begin{exlistcols}
+  \item $P_0=\minto 20$~指向~$P_2=\minto 21$~的方向导数；
+  \item $P_0=\minto 20$~指向~$P_3=\minto 32$~的方向导数。
+\end{exlistcols}
+\item 设~$f\minto xy=x^2-xy+y^2$，且~$\minto{x_0}{y_0}=\minto 11$。求~$\pdiff{f\minto{x_0}{y_0}}{{\mvec\ell}}$。又
+问在怎样的方向上，此方向导数
+\begin{exlistcols}[3]
+  \item 有最大值；
+  \item 有最小值；
+  \item 等于零。
+\end{exlistcols}
+\item 设~$f\mparen{x,y,z}=\mabs{x+y-z}$。在点~$M_0\mparen{1,-1,0}$~处，哪些方向~$\mvec\ell$~的
+方向导数~$\pdiff{f(M_0)}{{\mvec\ell}}$~存在。
+\item 设~$f\minto xy$~可微，而~$\mvec\ell$~是一确定的单位向量，对任意~$x,y$~有~$\pdiff{f\minto xy}{{\mvec\ell}}\equiv0$。%
+问此函数有什么特点。
+\item 设~$u=\vecfunc f{x}$。证明~$\pdiff{\vecfunc f{x_0}}{{\mvec\ell}}$~存在当且仅当
+\[
+  \lim_{\mvec x-\mvec x_0}\frac{\vecfunc f{x}-\vecfunc f{x_0}}{\mabs{\mvec x-\mvec x_0}}
+  \mcond[\quad]{\mvec x-\mvec x_0\text{~与~}\mvec\ell\text{~同向}}
+\]
+与
+\[
+  \lim_{\mvec x-\mvec x_0}\frac{\vecfunc f{x}-\vecfunc f{x_0}}{-\mabs{\mvec x-\mvec x_0}}
+  \mcond[\quad]{\mvec x-\mvec x_0\text{~与~}\mvec\ell\text{~反向}}
+\]
+存在且相等。
+\item 设~$f\minto xy$~在~$P_0\minto{x_0}{y_0}$~可微，在~$P_0$~点给定~$n$~个单位向量~$\mvec{\mvec\ell}{1,2,:,n}$，相邻两个向量之间
+的夹角为~$\dfrac2n\pi$。证明
+\[
+  \sum_{i=1}^n\pdiff{f\minto{x_0}{y_0}}{{\mvec\ell_i}}=0 。
+\]
+\item 设~$f\minto xy$~在区域~$\Omega$~上可微。给定两个方向~$\mvec\ell_1$~与~$\mvec\ell_2$，且
+~$\mangle{\mvec\ell_1}{\mvec\ell_2}=\phi\mcond{0<\phi<\pi}$。证明，
+\[
+  \mabsbb{\pdiff fx}\leq\frac{\sqrt 2}{\sin\phi}
+  \sqrt{\mparenbb{\pdiff f{{\mvec\ell_1}}}^{\msp2}+\mparenbb{\pdiff f{{\mvec\ell_2}}}^{\msp2}},\quad
+  \mabsbb{\pdiff fy}\leq\frac{\sqrt 2}{\sin\phi}
+  \sqrt{\mparenbb{\pdiff f{{\mvec\ell_1}}}^{\msp2}+\mparenbb{\pdiff f{{\mvec\ell_2}}}^{\msp2}}。
+\]
+\item 在~$\mR{m}$~中给了一组线性无关的单位向量~$\mvec{\mvec\ell}{1,2,:,m}$，并且~$f\mparen{\mvec x}$~可微。证明，若
+~$\pdiff{\vecfunc f{x}}{{\mvec\ell_i}}\equiv0\mcond{i=1,2,\dotsc,m}$，则~$\vecfunc f{x}\equiv C$，$C$~为常数。
+\item 在~$\mR{m}$~中给了一组线性无关的单位向量~$\mvec{\mvec\tau}{1,2,:,m}$，并且~$f\mparen{\mvec x}$~可微。证明，
+\begin{exlist}
+  \item 若~$\mvec\ell$~为单位向量，则~$\pdiff{\vecfunc f{x}}{{\mvec\ell}}=
+  \sum_{i=1}^m\pdiff{\vecfunc f{x}}{{\mvec\ell_i}}\cos\mangle{\mvec\ell}{\mvec\tau_i}$；
+  \item $\sum_{i=1}^m\mparenbb{\pdiff{\vecfunc f{x}}{{\mvec\ell_i}}}^{\msp2}
+  =\sum_{i=1}^m\mparenbb{\pdiff{\vecfunc f{x}}{{\mvec x_i}}}^{\msp2}$。
+\end{exlist}
+\item 证明梯度算子的下述运算法则。
+\begin{exlistcols}[3]
+  \item $\nabla\mparen{u+v}=\nabla u+\nabla v$；
+  \item $\nabla\mparen{uv}=u\nabla v+v\nabla u$；
+  \item $\nabla f(u)=f'(u)\nabla u$。
+\end{exlistcols}
+\item 设~$r=\smbsqrt{x^2+y^2=z^2}$。计算下列梯度。
+\begin{exlistcols}
+  \item $\grad r$；
+  \item $\grad\dfrac1r$；
+  \item $\grad\dfrac1{r^n}$；
+  \item $\grad\mparenb{\mparen{ax+by+cz}r}$。
+\end{exlistcols}
+\item 求函数~$u=x^3+y^3+z^3-3xyz$~的梯度。并确定在何处其梯度满足，
+\begin{exlistcols}[3]
+  \item 垂直于~$z$~轴；
+  \item 平行于~$z$~轴；
+  \item 为零向量。
+\end{exlistcols}
+\item 求函数~$u=\dfrac x{x^2+y^2+z^2}$~在点~$A\mparen{1,2,2}$~与~$B\mparen{-3,1,0}$~处两梯度之间的夹角。
+\item 设~$u=f(r,\theta)$，$x=r\cos\theta$，$y=r\sin\theta$。证明
+\[
+  \nabla u=\pdiff fr\mvec r_0+\frac1r\pdiff f\theta\mvec\theta_0,
+\]
+其中~$\mvec r_0$~和~$\mvec\theta_0$~分别是径向与切向的单位向量。
 \end{exercise}
+
 \section{高阶偏导数和高阶全微分}
 \subsection{高阶偏导数的概念}
 \subsection{混合偏导数与求导顺序}
 \subsection{复合函数的高阶偏导数}
 \subsection{高阶全微分}
+
 \begin{exercise}
-\item
+\item 求下列函数的二阶偏导数。
+\begin{exlistcols}[4]
+  \item $u=\smbsqrt{x^2+y^2}$；
+  \item $u=xy+\dfrac yx$；
+  \item $u=\ln\mparenb{x^2+y^2}$；
+  \item $u=\mparen{xy}^z$。
+\end{exlistcols}
+\item%% 对下列函数求指定阶的偏导数。
+\begin{exlistcols}
+  \item $u=x^4+y^4-4x^2y^2$，求各三阶偏导数；
+  \item $u=\arctan\dfrac{x+y}{1-xy}$，求各三阶偏导数；
+  \item $u=x\ln\mparen{xy}$，求~$\pdiff u{x2}$；
+  \item $u=x^3\sin y+y^3\sin x$，求~$\pdiff u{x3y3}$；
+  \item $u=\sin\mparenb{x^2+y^2}$，求~$\pdiff u{x3}$~与~$\pdiff u{y3}$；
+  \item $u=\me^{xyz}$，求~$\pdiff u{xyz}$；
+  \item $u=\ln\dfrac1{\smbsqrt{(x-\xi)^2+(y-\eta)^2}}$，求~$\pdiff u{xy\xi\eta}$；
+  \item $f(x,y)=x+(y-1)\arcsin\sqrt{\dfrac x{\smash[b]y}}$，求~$\pdiff{f(x,1)}{x2}$；
+  \item $u=\arctan\dfrac{x+y+z-xyz}{1-xy-xz-yz}$，求~$\pdiff u{xy}\mrest[\biggr]{\mparen{1,0,0}}$；
+  \item $u=\sum_{i=1}^na_{ij}x_ix_j$，求所有二阶偏导数；
+  \item $f(x,y)=\begin{cBdcases}
+    \me^{-\frac1{x^2+y^2}}, & x^2+y^2\neq0; \\ 0, & x^2+y^2=0,  \end{cBdcases}$~~
+    求~$\pdiff{f(0,0)}{x2}$~与~$\pdiff{f(0,0)}{xy}$。
+\end{exlistcols}
+\item 验证下述函数都满足~Laplace~方程~$\nabla^2u=\pdiff u{x2}+\pdiff u{y2}=0$。
+\begin{exlistcols}[4]
+  \item $u=\mparenb{x^2+y^2}$；
+  \item $u=x^2-y^2$；
+  \item $u=\me^x\cos y$；
+  \item $u=\arctan\dfrac yx$。
+\end{exlistcols}
+\item 设~$a,b\in\mR$。证明，函数
+\[
+  u=\frac1{2a\sqrt{\pi t}}\exp\mbracebb{-\frac{(x-b)^2}{4a^2t}}
+\]
+当~$t>0$~时满足~$\pdiff ut=a^2\pdiff u{x2}$。
+\item 设~$u=u(x,y)$~与~$v=v(x,y)$~满足~Laplace~方程~$\nabla^2u=\nabla^2v=0$。令~$F=\sqrt{u^2+v^2}$，证明，当
+~$p\geq2$~时，有~$\nabla^2\mparenb{F^p}\geq0$。
+\item\begin{exlistcols}
+  \item $u=(x-x_0)^p(y-y_0)^q$，求~$\dfrac{\pdif^{p+q}u}{\pdif x^p\pdif y^q}$；
+  \item $u=\dfrac{x+y}{x-y}\mcond{x\neq y}$，求~$\dfrac{\pdif^{m+n}u}{\pdif x^m\pdif y^n}$；
+  \item $u=\ln\mparenb{ax+by}$，求~$\dfrac{\pdif^{m+n}u}{\pdif x^m\pdif y^n}$；
+  \item $u=xyz\me^{x+y+z}$，求~$\dfrac{\pdif^{p+q+r}u}{\pdif x^p\pdif y^q\pdif z^r}$。
+\end{exlistcols}
+\item 求下列函数的所有二阶偏导数。
+\begin{exlistcols}
+  \item $u=f\minto{ax}{by}$；
+  \item $u=f\minto{x+y}{x-y}$；
+  \item $u=f\minto{x+y}{xy}$；
+  \item $u=f\mintob{x+y+z}{x^2+y^2+z^2}$；
+  \item $u=f\mintoB{\dfrac xy}{\dfrac yz}$；
+  \item $u=f\mparenb{x^2+y^2+z^2}$。
+\end{exlistcols}
+\item 设~$x=f\minto uv$~与~$y=g\minto uv$~满足方程~$f_u'=g_v'$~与~$f_v'=-g_u'$。
+又设~$w=w\minto xy$~满足%%~$w_{xx}''+w_{yy}''=0$。
+\[
+  \pdiff w{x2}+\pdiff w{y2}=0 。
+\]
+\begin{exlist}
+  \item 证明函数~$w=w\mintob{f(u,v)}{g(u,v)}$~满足方程~$w_{uu}''+w_{vv}''=0$；
+  \item 证明~$\pdiff{(fg)}{u2}+\pdiff{(fg)}{c2}=0$。
+\end{exlist}
+\item\label{exer-16.5.9}给定空间直角坐标系中的~Laplace~方程
+\[
+  \nabla^2u=\pdiff u{x2}+\pdiff u{y2}+\pdiff u{z2}=0 。
+\]
+作柱坐标变换，求柱坐标系中的~Laplace~方程。
+\item 利用\ref{exer-16.5.9}~求~Laplace~方程的球坐标形式。
+\item 设~$u=u\minto xy$~有连续的二阶偏导数，满足~$u_{xx}''=u_{yy}''$，且~$u(x,2x)=x$，$u_x'(x,2x)=x^2$。
+\begin{exlistcols}
+  \item 求~$u_y'(x,2x)$；
+  \item 求~$u_{xx}''(x,2x)$，$u_{xy}''(x,2x)$~与~$u_{yy}''(x,2x)$。
+\end{exlistcols}
+\item 设~$u=u(x,y)$。解下述方程。
+\begin{exlistcols}[3]
+  \item $\pdiff u{x2}=0$；
+  \item $\pdiff u{xy}=0$；
+  \item $\pdiff u{xy}=x+y$。
+\end{exlistcols}
+\item\begin{exlist}\FixExHead
+  \item $f(x,y)=ax+by+c$~当且仅当梯度~$\grad f(x,y)$~为常向量；
+  \item $f(x,y)=ax+by+c$~当且仅当~$f_{xx}''=f_{xy}''=f_{yx}''=f_{yy}''\equiv0$。
+\end{exlist}
+\item 试确定~$f\in C^{(2)}\mparen{\mR{2}}$，使之满足
+\[
+  \pdiff f{x2}=x,\quad
+  \pdiff f{xy}\equiv0,\quad
+  \pdiff f{y2}\equiv0 。
+\]
+\item 试作变量替换~$\xi=x+t$，$\eta=x-t$，求解方程
+\[
+  \pdiff f{t2}=\pdiff u{x2}=0,
+\]
+并验证之。
+\item 设~$x=\me^\xi$，而~$y=\me^\eta$。变换方程
+\[
+  ax^2\pdiff u{x2}+2bxy\pdiff u{xy}+cy^2\pdiff u{y2}=0 。
+\]
+\item 解方程
+\[
+  3x^2\pdiff u{x2}-4xy\pdiff u{xy}+y^2\pdiff u{y2}+3x\pdiff ux+y\pdiff uy=0 。
+\]
+\item 在函数类~$f\mparenb{\smbsqrt{x^2+y^2}}$~中求解~Laplace~方程~$\pdiff u{x2}+\pdiff u{y2}=0$。
+\item 设~$f(x,y,z)=g(r)$，$r=\smbsqrt{x^2+y^2+z^2}$。
+\begin{exlistcols}
+  \item 直接计算~$\nabla^2u=\pdiff u{x2}+\pdiff u{y2}+\pdiff u{z2}$；
+  \item 若~$\nabla^2f=0$，证明~$f=\dfrac ar+b\mcond{a,b\in\mR}$。
+\end{exlistcols}
+\item 证明，不存在函数~$f(x,y)$~满足~$f_x'=y$~而~$f_y'=x^2$。
+\item 设二元函数~$f(x,y)$~在开区域~$\Omega$~上偏导数~$f_x',f_y',f_{yx}''$~存在且连续。证明~$f_{xy}''$~在~$\Omega$~内存在且
+连续，并且~$f_{yx}''=f_{xy}''$。
+\item 设~$f(x,y)$~的偏导数~$f_x'$~与~$f_y'$~在~$\minto{x_0}{y_0}$~点可微。证明
+~$f_{xy}''\minto{x_0}{y_0}=f_{yx}''\minto{x_0}{y_0}$。
 \end{exercise}
+
 \section{Taylor~公式}
 \begin{exercise}
-\item
+\item 证明~Taylor~公式的唯一性。
+\begin{exlist}
+  \item 设~$\rho=\smbsqrt{x^2+y^2}$，且
+  \[
+    \sum_{i+j=0}^nA_{ij}x^ix^j+o\mparen{\rho^n}=0\mcond*{\rho\to0}。
+  \]
+  证明~$A_{ij}=0$，其中~$i,j$~为非负整数，且~$i+j\leq n$。
+  \item 设~$\vecfunc{P_n}{x}+o(\rho^n)=0\mcond{\rho\to0}$，其中~$\rho=\mabs{\mvec x}$，并且
+  ~$\vecfunc{P_n}{x}=\sum_{\mabs k\leq n}a_k\mvec x^k$，这里
+  \[
+    a_k=a_{k_1k_2\dotsm k_n},\quad \mabs k=\sum_{i=1}^nk_i,\quad\mvec x^k=\prod_{i=1}^nx_i^{k_i},
+  \]
+  其中~$\mvec k{1,2,:,n}$~为非负整数。证明对任意~$\mabs k\leq n$，有~$a_k=0$。
+\end{exlist}
+\item 求函数~$f\minto xy=x^2+xy+y^2+3x-2y+4$~在~$\minto{-1}1$~点邻域的~Taylor~展开式。
+\item 求函数~$f(x,y,z)=x^3+y^3+z^3-3xyz$~在~$(1,1,1)$~点邻域的~Taylor~展开式。
+\item 求函数~$f(x,y)=\dfrac xy$~在~$(1,1)$~点邻域带余项的~Taylor~公式。
+\item 求函数~$f(x,y)=\dfrac{y^2}{x^2}$~在~$(1,-1)$~点邻域带余项的~Taylor~公式。
+\item 求下列函数在~$(0,0)$~点邻域带~Peano~余项的~$4$~阶~Taylor~公式。
+\begin{exlistcols}[3]
+  \item $u=\sin\mparenb{x^2+y^2}$；
+  \item $u=\smbsqrt{1+x^2+y^2}$；
+  \item $u=\ln(1+x)\ln(1+y)$；
+  \item $u=\me^x\cos y$；
+  \item $u=\ln\mparen{1+x+y}$。
+\end{exlistcols}
+\item 设~$f(x,y)=\psi(ax+by)$，其中~$a,b$~均为常数，在包含原点的某邻域内，$\psi\in C^{(q)}$。证明在~$(0,0)$~点邻域的~Taylor~公式是
+\[
+  f(x,y)=\sum_{k=0}^{q-1}\frac{\psi^{(k)}(0)}{k!}\sum_{j=0}^k\mbinom kj(ax)^j(by)^{k-j}+R_q(x,y)。
+\]
+\item 求~$f(x,y)=\me^{x+y}$~在~$(0,0)$~点邻域的~$n$~阶~Taylor~公式并写出余项。
+\item 求~$f(x,y)=\dfrac1x\cos y$~在~$\minto{x_0}{y_0}=(1,0)$~的~$n$~阶~Taylor~展开式，并证明在~$\minto{x_0}{y_0}$~的某邻域
+内，其余项~$R_n(x,y)=o(1)\mcond{\ntoinf}$。
+\item 设
+\[
+  f(x,y)=\begin{cBBdcases}
+    \frac{1-\me^{x(x^2+y^2)}}{x^2+y^2}, & x^2+y^2\neq0;\\
+    0, &  x^2+y^2=0 。
+  \end{cBBdcases}
+\]
+求~$\minto 00$~点邻域的四阶~Taylor~展开式，并求~$\pdiff{f\minto00}{xy}$~与
+~$\pdiff{f\minto00}{x4}$。
+\item 若~$\mabs x$~与~$\mabs y$~为很小的量，推导出下列函数准确到二次项的近似公式。
+\begin{exlistcols}
+  \item $\dfrac{\cos x}{\cos y}$；
+  \item $\arctan\dfrac{1+x+y}{1-xy}$。
+\end{exlistcols}
 \end{exercise}
+
 \section{由一个方程式确定的隐函数及其微分法}
 \subsection{函数的存在唯一性与连续性}
 \subsection{隐函数的可微性}
 \begin{exercise}
-\item
+\item 对由下列各方程式所定义的函数~$y$~求出~$y'$~和~$y''$。
+\begin{exlistcols}
+  \item $x^2+2xy-y^2=a^2$；
+  \item $\ln\smbsqrt{x^2+y^2}=\arctan\dfrac yx$；
+  \item $y=2x\arctan\dfrac yx$；
+  \item $xy-2^x\ln 2+2^y=0$。
+\end{exlistcols}
+\item 对下列方程确定的函数~$z=z(x,y)$~求~$z_x'$~和~$z_y'$。
+\begin{exlistcols}[4]
+  \item $x^n+y^n+z^n=a^n$；
+  \item $x+y+z=\me^{x+y+z}$；
+  \item $\me^{-xy}-2z+\me^z=0$；
+  \item $z^x=y^z$。
+\end{exlistcols}
+\item 设~$\dfrac xz=\ln\dfrac zy$~确定隐函数~$z=z(x,y)$，求~$\dif z$。
+\item 设~$xy+yz+zx=1$~确定隐函数~$z=z(x,y)$，求~$z$~的一、二阶偏导数。
+\item 设~$\dfrac xy+\dfrac yz+\dfrac zx=1$~确定~$z=z(x,y)$，求~$z$~的所有二阶偏导数。
+\item 设
+\begin{equation}\label{exer-16.7.6}
+  x^2+y^2+z^2-3xyz=0\tag*{($\ast$)}
+\end{equation}
+及~$f(x,y,z)=xy^2z^3$。求，
+\begin{exlist}
+  \item $f_x'(1,1,1)$，其中~$z=z(x,y)$~是由方程~\ref{exer-16.7.6}~确定的隐函数；
+  \item $f_x'(1,1,1)$，其中~$y=y(x,z)$~是由方程~\ref{exer-16.7.6}~确定的隐函数。
+\end{exlist}
+\item 求由下列方程确定的函数~$z=z(x,y)$~的微分。
+\begin{exlistcols}
+  \item $f\mintob{x+y+z}{x^2+y^2+z^2}=0$；
+  \item $z=f\minto{xz}{z-y}$；
+  \item $f\mparen{x-y,y-z,z-x}=0$；
+  \item $f\mparen{x,x+y,x+y+z}=0$。
+\end{exlistcols}
+\item 设~$z=z(x,y)$~由方程
+\[
+  x^2+y^2+z^2=yf\mparenB{\frac zy}
+\]
+所确定。证明~$\mparenb{x^2-y^2-z^2}\pdiff zx+2xy\pdiff zy=2xz$。
+\item 设~$z=z\minto xy$~由方程
+\[
+  F\mintoB{x+\frac zy}{y+\frac zx}=0
+\]
+所确定。证明~$x\pdiff zx+y\pdiff zy=z-xy$。
+\item 设~$u=u(x,y,z)$~由方程
+\[
+  F\mparenb{u^2-x^2,u^2-y^2,u^2-z^2}=0
+\]
+所确定。证明~$\dfrac{u_x'}x+\dfrac{u_y'}y+\dfrac{u_z'}z=\dfrac1u$。
+\item 求下列函数~$z=z(x,y)$~的二阶偏导数。
+\begin{exlistcols}
+  \item $z=f\minto{x+y}{z+y}$；
+  \item $f\mparen{x+y,y+z,z+x}=0$。
+\end{exlistcols}
+\item 证明，由方程~$u=y+x\phi(u)$~确定的隐函数~$u=u(x,y)$~满足方程
+\[
+  \pdiff u{x2}=\pdiff{}y\mparenbb{\phi^2(u)\pdiff uy}。
+\]
+\item 证明，由方程~$y=x\phi(z)+\psi(z)$~所确定的隐函数~$z=z(x,y)$~满足方程
+\[
+  \mparenbb{\pdiff zy}^{\msp2}\pdiff z{x2}-2z\pdiff zx\pdiff zy\pdiff z{xy}+\mparenbb{\pdiff zx}^{\msp2}\pdiff z{y2}=0 。
+\]
+\item 已知~$z+\me^z+x-2y-1=0$。求~$z=f(x,y)$~在~$\minto 00$~点的二阶近似公式，其中~$f(0,0)=0$。
+\item 已知方程~(A)~$x^2+y^2=1$。设函数~(B)~$y=y(x)$，$x\in\mintc{-1}1$~为满足方程~(A)~的函数。
+\begin{exlistcols}
+  \item 有多少函数~(B)~满足方程~(A)；
+  \item 有多少连续函数~(B)~满足方程~(A)；
+  \item 又设~$y(0)=1$~与~$y(1)=0$，这时有多少连续函数~(B)~满足方程~(A)。
+\end{exlistcols}
+\item 设方程~(C)~$x=y+\phi(y)$，其中~$\phi(0)=0$，且当~$y\in\minto{-a}a$~时~$\mabsb{\psi'(y)}\leq K<1$。证明，存在~$\delta>0$，当
+~$x\in\minto{-\delta}\delta$~时，存在唯一的可微函数~$y=y(x)$~满足方程~(C)，且~$y(0)=0$。
+\item 方程~$x^2+y+\sin(xy)=0$~确定连续曲线。在原点附近能否用形如~$y=f(x)$~的方程表示？又能否用形如~$x=g(y)$~的方程表示。
+\item 证明方程
+\[
+  \mparenb{x^2+y^2}^2=a^2\mparenb{x^2-y^2}\mcond*{a>0},
+\]
+在点~$\minto00$~邻域确定两个可微函数~$y=y_1(x)$~与~$y=y_2(x)$，并求出~$y_1'(0)$~与~$y_2'(0)$~（不直接求解方程）。
+\item 设
+\[
+  \mparenb{x^2+y^2}^2=3x^2y-y^3。
+\]
+问此方程在~$\minto 00$~邻域确定几个可微函数？并求出~$y'(0)$。
 \end{exercise}
+
 \begin{exercise*}
-\item
+\item 设~$f(x,y)$~是~$\mR{2}$~上的可微函数，满足
+\[
+  \lim_{r\to\pinf}\mparenB{\pdiff fxx+\pdiff fyy}\geq\alpha>0,
+\]
+其中~$r=\smbsqrt{x^2+y^2}$，而~$\alpha$~为常数。证明~$f(x,y)$~在~$\mR{2}$~上有最小值。
+\item 在开区域~$\Omega$~内，有~$f_y'=0$。讨论~$f$~是否关于~$y$~为常数。
+\item 设~$\vecfunc f{x}$~定义在~$\mR{m}$~中的凸开区域~$\Omega$~上。对任意~$\mvec x_1,\mvec x_2\in\Omega$~与
+~$t\in\mintc01$，若~$\vecfunc f{x}$~满足
+\[
+  f\mparenb{t\mvec x_1+(1-t)\mvec x_2}\leq\vecfunc f{x_1}+(1-t)\vecfunc f{x_2},
+\]
+则称~$\vecfunc f{x}$~在~$\Omega$~上是凹函数。
+\begin{exlist}
+  \item 设~$\vecfunc f{x}$~在凸开区域~$\Omega$~上可微。证明~$\vecfunc f{x}$~在~$\Omega$~上时凹函数当且仅当，对每个
+  ~$\mvec x,\mvec x_0\in\Omega$，有
+  \[
+    \vecfunc f{x}\geq \vecfunc f{x_0}+\Dif \vecfunc f{x_0}\mparen{\mvec x-\mvec x_0};
+  \]
+  \item 设~$\Omega$~是凸开区域，而~$\vecfunc f{x}\in C^{(2)}(\Omega)$，且~Hessian~矩阵~$H_f\mparen{\mvec x}$~对任意
+  ~$\mvec x\in\Omega$~是半正定的。证明~$\vecfunc f{x}$~是~$\Omega$~内的凹函数。
+\end{exlist}
+\item 函数~$V(x,y)$~满足，
+\begin{exlistcols}
+  \item 在~$\minto00$~邻域属于~$C^{(2)}$；
+  \item $V\minto 0y=0$~且~$V_x'(0,0)=0$；
+  \item $V_{xy}''\minto 00\neq0$。
+\end{exlistcols}
+问方程~$V\minto xy=0$~在原点邻域是否确定隐函数~$y=y(x)$~满足~$y(0)=0$。
+\item 设函数~$\psi(x,y)$~在区域~$\Omega\colon \minto ab\times\mintco 0h$~上属于~$C^{(n)}$。令
+\[
+  \psi^\ast(x,y)=\begin{cBBdcases}
+    \phi(x,y), & (x,y)\in\minto ab\times\mintc 0h;\\
+    \sum_{k=1}^{n+1}\lambda_k\psi\mintoB x{-\dfrac1k y}, & (x,y)\in\minto ab\times \mintco{-h}0 。
+  \end{cBBdcases}
+\]
+证明，存在常数~$\mvec\lambda{1,2,:,n+1}$~使得~$\phi^\ast(x,y)\in C^{(n)}\mparen{\Omega^\ast}$，其中
+区域~$\Omega^\ast\colon\minto ab\times\minto{-h}h$。
 \end{exercise*}
 
 
