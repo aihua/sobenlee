@@ -18,22 +18,17 @@ BoldSlantedFeatures = {FakeSlant=.167}]{MyriadPro}
 \def\bfsansfea{\addfontfeature{BoldFont={MyriadPro-BoldSemiCn}}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \ExplSyntaxOn
-\NewDocumentCommand\newCJKfontfamily{o m O{} m O{} g}{
+\NewDocumentCommand\newCJKfontfamily{omO{}mO{}g}{
   \IfNoValueTF{#1}
-    {\edef\@CJKfamilyName{\cs_to_str:N #2}}
-    {\edef\@CJKfamilyName{#1}}
-  \setCJKfamilyfont{\@CJKfamilyName}[
-       BoldFont=*, ItalicFont=*, SlantedFont=*,
-       ItalicFeatures={FakeSlant=.167}, BoldItalicFeatures={FakeSlant=.167},
-      SlantedFeatures={FakeSlant=.167},BoldSlantedFeatures={FakeSlant=.167},
-    #3]{#4}
-  \@ifdefinable{#2}{\protected\edef#2{\noexpand\CJKfamily{\@CJKfamilyName}}}
+    {\tl_set:Nx \l_CJK_familyname_tl {\cs_to_str:N #2}}
+    {\tl_set:Nx \l_CJK_familyname_tl {#1}}
+  \setCJKfamilyfont{\l_CJK_familyname_tl}
+    [BoldFont=*,ItalicFont=*,SlantedFont=*,#3]{#4}
+  \cs_new_protected_nopar:Npx #2
+    {\exp_not:N \CJKfamily {\l_CJK_familyname_tl}}
   \IfNoValueTF{#6}{}{
-    \setCJKfallbackfamilyfont{\@CJKfamilyName}[
-       BoldFont=*, ItalicFont=*, SlantedFont=*,
-       ItalicFeatures={FakeSlant=.167}, BoldItalicFeatures={FakeSlant=.167},
-      SlantedFeatures={FakeSlant=.167},BoldSlantedFeatures={FakeSlant=.167},
-    #5]{#6}
+    \setCJKfallbackfamilyfont{\l_CJK_familyname_tl}
+      [BoldFont=*,ItalicFont=*,SlantedFont=*,#5]{#6}
   }
 }
 \ExplSyntaxOff
@@ -46,7 +41,7 @@ BoldSlantedFeatures = {FakeSlant=.167}]{MyriadPro}
   [BoldFont={FZHei-B01_GB18030},ItalicFont={FZKai-Z03_GB18030},SlantedFont={FZFangSong-Z02_GB18030}]{FZZhongDengXian-Z07_GB18030}
 \newCJKfontfamily[\CJKttdefault]{\CJKttfamily}
   [BoldFont={FZHei-B01},ItalicFont={FZJKai-Z03S},SlantedFont={FZFangSong-Z02}]{FZJKai-Z03S}%%
-  [BoldFont={FZHei-B01_GB18030},ItalicFont={FZKai-Z03_GB18030},SlantedFont={FZFangSong-Z02_GB18030}]{FZKai-Z03_GB18030}  
+  [BoldFont={FZHei-B01_GB18030},ItalicFont={FZKai-Z03_GB18030},SlantedFont={FZFangSong-Z02_GB18030}]{FZKai-Z03_GB18030}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newCJKfontfamily{\songti}  {FZJSong-Z01S}{FZShuSong-Z01_GB18030}
 \newCJKfontfamily{\kaishu}  {FZJKai-Z03S}{FZKai-Z03_GB18030}
