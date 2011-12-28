@@ -16,7 +16,6 @@
 \RequirePackage[pagestyles,clearempty]{titlesec}
 \RequirePackage[titles]{tocloft}
 \RequirePackage[xetex]{xcolor}
-\RequirePackage[xetex]{graphicx}
 \RequirePackage[xetex, bookmarksnumbered, pdfstartview={XYZ null null 1}, pdfborder=001,
                 pdfpagemode=UseNone, pdfprintscaling=None]{hyperref}
 
@@ -28,14 +27,14 @@
   }
 }
 
-\def\HyPsd@Warning#1{\relax}
+\let\HyPsd@Warning\@gobble\relax
 
 \geometry{papersize={145mm,210mm}, textwidth=110mm, lines=30, inner=15mm,
           top=20mm, bindingoffset=5mm, headheight=10mm, headsep=6mm, foot=5mm}
 
-\setmainfont[BoldFont={PalatinoLTStd-Medium}]{PalatinoLTStd-Roman}
+\setmainfont{TeX Gyre Pagella}
 
-\def\xeCJK@fallback@testsymbol#1{%
+\renewcommand*\xeCJK@fallback@testsymbol[1]{%
   \iffontchar\font`#1%
     #1%
   \else{%
@@ -47,44 +46,59 @@
       \fi}%
   \fi}
 
-\def\newCJKfontfamily{\@ifnextchar[%]
-  {\CJK@newfont@family@}
-  {\CJK@newfont@family}}
-\def\CJK@newfont@family#1{\@ifnextchar[%]
-  {\@CJK@newfont@family{#1}}
-  {\@CJK@newfont@family{#1}[]}}
-\def\CJK@newfont@family@[#1]#2{\@ifnextchar[%]
-  {\@@CJK@newfont@family{#1}{#2}}
-  {\@@CJK@newfont@family{#1}{#2}[]}}
-\def\@CJK@newfont@family#1[#2]#3{
-  \setCJKfamilyfont{\@cs@str#1}[#2]{#3}
-  \DeclareRobustCommand*{#1}{\CJKfamily{\@cs@str#1}}}
-\def\@@CJK@newfont@family#1#2[#3]#4{
-  \setCJKfamilyfont{#1}[#3]{#4}
-  \DeclareRobustCommand*{#2}{\CJKfamily{#1}}}
+\ExplSyntaxOn
+\NewDocumentCommand\newCJKfontfamily{omO{}mO{}g}{
+  \IfNoValueTF{#1}
+    {\tl_set:Nx \l_CJK_familyname_tl {\cs_to_str:N #2}}
+    {\tl_set:Nx \l_CJK_familyname_tl {#1}}
+  \setCJKfamilyfont{\l_CJK_familyname_tl}
+    [BoldFont=*,ItalicFont=*,SlantedFont=*,#3]{#4}
+  \cs_new_protected_nopar:Npx #2
+    {\exp_not:N \CJKfamily {\l_CJK_familyname_tl}}
+  \IfNoValueTF{#6}{}{
+    \setCJKfallbackfamilyfont{\l_CJK_familyname_tl}
+      [BoldFont=*,ItalicFont=*,SlantedFont=*,#5]{#6}
+  }
+}
+\cs_new:Nn \JPM_includechapters:n {
+  \prg_replicate:nn {#1} \JPM_includechapters:
+}
+\int_new:N \g_JPM_chapter_int
+\cs_new:Nn \JPM_includechapters: {
+  \int_gincr:N \g_JPM_chapter_int
+  \int_compare:nTF{\g_JPM_chapter_int < \c_ten}{
+    \tl_set:Nx \l_JPM_chapter_tl {00}
+  }{
+    \int_compare:nTF{\g_JPM_chapter_int < \c_one_hundred}{
+      \tl_set:Nx \l_JPM_chapter_tl {0}
+    }{
+      \tl_set:Nx \l_JPM_chapter_tl {}
+    }
+  }
+  \include{includefiles/JPM\l_JPM_chapter_tl\int_use:N\g_JPM_chapter_int}
+}
+\cs_new_eq:NN \includechapters \JPM_includechapters:n
+\ExplSyntaxOff
 
-\setCJKmainfont[BoldFont={FZHei-B01},ItalicFont={FZJKai-Z03S}]          {FZJSong-Z01S}
-\setCJKsansfont[BoldFont={FZLanTingHei-M-GBK},ItalicFont={FZJKai-Z03S}] {FZLanTingHei-R-GBK}
-\setCJKmonofont[BoldFont={FZHei-B01},ItalicFont={FZJKai-Z03S}]          {FZFangSong-Z02}
-
-\setCJKfallbackfamilyfont{\CJKrmdefault}
-  [BoldFont={FZHei-B01_GB18030},ItalicFont={FZKai-Z03_GB18030}]{FZShuSong-Z01_GB18030}
-\setCJKfallbackfamilyfont{\CJKsfdefault}
-  [BoldFont={FZHei-B01_GB18030},ItalicFont={FZKai-Z03_GB18030}]{FZLanTingHei-R_GB18030_YS}
-\setCJKfallbackfamilyfont{\CJKttdefault}
-  [BoldFont={FZHei-B01_GB18030},ItalicFont={FZKai-Z03_GB18030}]{FZFangSong-Z02_GB18030}
+\newCJKfontfamily[\CJKrmdefault]{\CJKrmfamily}
+  [BoldFont={FZHei-B01},ItalicFont={FZJKai-Z03S},SlantedFont={FZFangSong-Z02}]{FZJSong-Z01S}%%
+  [BoldFont={FZHei-B01_GB18030},ItalicFont={FZKai-Z03_GB18030},SlantedFont={FZFangSong-Z02_GB18030}]{FZShuSong-Z01_GB18030}
+\newCJKfontfamily[\CJKsfdefault]{\CJKsffamily}
+  [BoldFont={FZHei-B01},ItalicFont={FZJKai-Z03S},SlantedFont={FZFangSong-Z02}]{FZZhongDengXian-Z07}%%
+  [BoldFont={FZHei-B01_GB18030},ItalicFont={FZKai-Z03_GB18030},SlantedFont={FZFangSong-Z02_GB18030}]{FZZhongDengXian-Z07_GB18030}
+\newCJKfontfamily[\CJKttdefault]{\CJKttfamily}
+  [BoldFont={FZHei-B01},ItalicFont={FZJKai-Z03S},SlantedFont={FZFangSong-Z02}]{FZJKai-Z03S}%%
+  [BoldFont={FZHei-B01_GB18030},ItalicFont={FZKai-Z03_GB18030},SlantedFont={FZFangSong-Z02_GB18030}]{FZKai-Z03_GB18030}
 
 \setCJKfallbackfamilyfont{fallback@\CJKrmdefault}[ItalicFont={FZKaiS-Extended(SIP)}]{Sun-ExtB}
 
-\newCJKfontfamily{\fzwkai}     [BoldFont=*] {FZBeiWeiKaiShu-S19_GB18030}  % 方正北魏楷书
-\newCJKfontfamily{\fzzhdxian}  [BoldFont=*] {FZZhongDengXian-Z07_GB18030} % 方正中等线
-\newCJKfontfamily{\fzltheib}   [BoldFont=*] {FZLanTingHei-RC-GBK}         % 方正兰亭黑扁
-\newCJKfontfamily{\fzydzhhei}  [BoldFont=*] {FZYunDongHei-M-GBK}          % 方正韵动中黑
-\newCJKfontfamily{\fzzhysong}  [BoldFont=*] {FZYaSong-DB-GBK}             % 方正中雅宋
-\newCJKfontfamily{\fzqiti}     [BoldFont=*] {FZQiTi-S14}                  % 方正启体
-\newCJKfontfamily{\fzliukai}   [BoldFont=*] {FZSuXinShiLiuKaiS-R-GB}      % 方正苏新诗柳楷简体
-
-\setCJKfallbackfamilyfont{fzliukai}[BoldFont=*]{FZQiTi-S14}
+\newCJKfontfamily{\fzwkai}   {FZBeiWeiKaiShu-S19_GB18030}  % 方正北魏楷书
+\newCJKfontfamily{\fzzhdxian}{FZZhongDengXian-Z07_GB18030} % 方正中等线
+\newCJKfontfamily{\fzltheib} {FZLanTingHei-RC-GBK}         % 方正兰亭黑扁
+\newCJKfontfamily{\fzydzhhei}{FZYunDongHei-M-GBK}          % 方正韵动中黑
+\newCJKfontfamily{\fzzhysong}{FZYaSong-DB-GBK}             % 方正中雅宋
+\newCJKfontfamily{\fzqiti}   {FZQiTi-S14}                  % 方正启体
+\newCJKfontfamily{\fzliukai} {FZSuXinShiLiuKaiS-R-GB}{FZQiTi-S14}% 方正苏新诗柳楷简体
 
 \@namedef{xeCJK@kaiming：}{}
 \@namedef{xeCJK@kaiming；}{}
@@ -132,7 +146,7 @@
   \fi}
 
 \DeclareRobustCommand*\KG{\kern\ccwd}
-\DeclareRobustCommand*\@cdot{\raisebox{.5ex}{.}}
+\DeclareRobustCommand*\@cdot{\textcentereddot}
 
 \def\CTEX@postchapter{回}
 \renewcommand\contentsname{目\KG 录}
@@ -146,7 +160,7 @@
     \def\makeheadrule{\rule[-#1]{\linewidth}{#2}}%
   \fi}
 
-\newpagestyle{main}[\sffamily\boldmath\small]{%
+\newpagestyle{main}[\sffamily\small]{%
   \sethead[\rmfamily\bfseries\@cdot\enskip\thepage\enskip\@cdot]
           [金瓶梅词话]
           [\ifthechapter{\CTEXthechapter}{}]
@@ -237,11 +251,15 @@
     \item\relax\itshape}
   {\endlist\ignorespacesafterend}
 
-\DeclareRobustCommand{\[}{\begin{quote}\obeylines}
-\DeclareRobustCommand{\]}{\end{quote}}
+\renewrobustcmd*{\[}{\begin{quote}\obeylines}
+\renewrobustcmd*{\]}{\end{quote}}
 
-\newcommand\named[1]{{\unskip\nobreak\hfil\penalty50\quad\hbox{}\nobreak\hfill
-  \normalfont ——\,#1\parfillskip\z@ \finalhyphendemerits\z@ \par}}
+\newcommand\named[1]{%
+  \unskip\nobreak\hfill\allowbreak\null\nobreak\hfill\quad\hbox{\normalfont ——\,#1}}
+
+%\newcommand\named[1]{{\unskip\nobreak\hfil\penalty50\quad\hbox{}\nobreak\hfill
+%  \normalfont ——\,#1\parfillskip\z@ \finalhyphendemerits\z@ \par}}
+
 
 \newcommand\cipaim[1]{{\upshape\fzzhdxian 【#1】}\enspace\ignorespaces}
 

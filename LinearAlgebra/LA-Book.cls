@@ -25,7 +25,7 @@
 \RequirePackage[loosequotes,lf,onlymath]{MinionPro}
 \RequirePackage{empheq,amsthm,extarrows,polynom,systeme}
 \RequirePackage[uppi,tau,fourier,mathscrf,mathcal,mathbb,comma]{localint}
-\RequirePackage{pifont,marvosym,metalogo,multicol,afterpage,chngcntr,xifthen}
+\RequirePackage{pifont,marvosym,metalogo,multicol,afterpage,chngcntr}
 \RequirePackage{caption,floatrow,rotating,wrapfig,varioref}
 \RequirePackage{paralist,enumcols,booktabs}
 \RequirePackage[delarray]{tabu}
@@ -470,8 +470,7 @@
   \@itempenalty     = \z@
   \@endparpenalty   = \z@}
 
-\newrobustcmd*\iscurrentsection[1]{%
-  \ifthenelse{\equal{\thesection}{#1}}{}{~\CTEX@presection #1~}}
+\newrobustcmd*\iscurrentsection[1]{\IfStrEq{\thesection}{#1}{}{~\CTEX@presection #1~}}
 \newenvironment{exercise}{\subsection{}\small
     \renewcommand\labelenumi{\bfseries\sffamily\theenumi.}%
     \labelformat{enumi}{\iscurrentsection{\thesection}习题~##1}%
@@ -494,9 +493,9 @@
   {\endenumcols}
 
 \newenvironment{IntroPar}{\kaishu\small
-    \multicolsep   = 10\p@
-    \columnsep     = 12\p@
-    \columnseprule =   \z@
+    \multicolsep   = 10\p@\relax
+    \columnsep     = 12\p@\relax
+    \columnseprule =   \z@\relax
     \hrule\@height\ruleheight\vspace{-3\p@}%
     \raggedcolumns\begin{multicols}{2}\compactitem[\small\Writinghand]}%
   {\endcompactitem\end{multicols}\hrule\@height\ruleheight\vspace{2mm}}
