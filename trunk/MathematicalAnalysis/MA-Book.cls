@@ -19,18 +19,17 @@
 \RequirePackage[uppi,comma,overparen,mathscrf,mathbb,lucida]{localint}
 \RequirePackage{needspace,chngcntr,changepage,environ,afterpage}
 \RequirePackage{caption,floatrow,wrapfig,labelref}
-\RequirePackage{enumitem,tabu,diagbox,enumcols}
+\RequirePackage[inline,shortlabels]{enumitem}
+\RequirePackage{tabu,diagbox,enumcols}
 \RequirePackage[perpage,stable,bottom]{footmisc}
 \RequirePackage[pagestyles,explicit,clearempty,outermarks]{titlesec}
 \RequirePackage[titlesec]{interfaces}
-\RequirePackage{titletoc,pifont,marvosym,xcolor}
+\RequirePackage{titletoc,pifont,marvosym}
 \RequirePackage[showframe=false,headheight=5mm,headsep=7mm,footskip=1em,bindingoffset=10mm]{geometry}
 \RequirePackage{hypbmsec}
 \RequirePackage[pdfstartview={XYZ null null 1},pdfpagemode=UseNone,pdfprintscaling=None]{hyperref}
 
 \geometry{papersize={170mm,240mm},top=20mm,textwidth=130mm,lines=36,inner=15mm}
-
-%\RequirePackage[cam,a4,center,noinfo]{crop}
 
 \definecolor{linkred}{rgb}{.65,.05,.1}
 

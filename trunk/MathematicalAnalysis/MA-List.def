@@ -6,9 +6,10 @@
 \AddEnumerateCounter*\Ding\DingNum{1}
 
 \setlist{nosep}
+\SetEnumitemKey{inline}{before=\unskip\qquad,itemjoin=\quad,afterlabel=\hskip\labelsep}
+\SetEnumerateShortLabel{D}{\Ding*}
 
 \newcounter{LastItem}
-
 \SetEnumitemKey{adjust}{%
        nosep,
 leftmargin=!,
