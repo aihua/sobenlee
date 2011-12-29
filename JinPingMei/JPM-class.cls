@@ -15,7 +15,6 @@
 \RequirePackage[xetex]{geometry}
 \RequirePackage[pagestyles,clearempty]{titlesec}
 \RequirePackage[titles]{tocloft}
-\RequirePackage[xetex]{xcolor}
 \RequirePackage[xetex, bookmarksnumbered, pdfstartview={XYZ null null 1}, pdfborder=001,
                 pdfpagemode=UseNone, pdfprintscaling=None]{hyperref}
 

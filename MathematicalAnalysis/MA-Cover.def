@@ -34,9 +34,7 @@
 \MAB@key{print}[河北省香河县印刷厂]{\def\MAB@print{#1}}
 \MAB@key{publication}[新华书店北京发行所]{\def\MAB@publication{#1}}
 
-
 \newrobustcmd*\SetVolInfo[1]{\setkeys{MAbook}{#1}}
-
 \newrobustcmd*\ResetVolInfo{\SetVolInfo{%
   pretitle,title,institute,author,volume,size,
   sheets,words,copies,version,time,ISBN,price,
