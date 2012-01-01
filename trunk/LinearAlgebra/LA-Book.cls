@@ -124,7 +124,7 @@
   \goodbreak\renewcommand*\bottomtitlespace{.3\textheight}}
 
 \titleformat{\chapter}[display]
-            {\bfseries\fzcuheisong\addfontfeature{BoldFont={MyriadPro-Bold}}}
+            {\bfseries\fzcuheisong\TeXGyreBonum}
             {\fillouter\zihao{-3}\fzydzhhei\CTEXthechapter\\ \titlerule[\ruleheight]}
             {\z@}
             {\ifthechapter{\zihao{-2}\fillinner}{\zihao{3}\filcenter}}
@@ -145,7 +145,7 @@
             {}
 \titleformat{\paragraph}[runin]
             {\emphfont\normalsize}
-            {\addfontfeature{BoldFont={MyriadPro-Bold}}\theparagraph.\hskip\labelsep}
+            {\addfontfeature{BoldFont={MyriadPro-BoldSemiCn}}\theparagraph.\hskip\labelsep}
             {\z@}
             {}
 \titlespacing*%
@@ -483,7 +483,7 @@
 \newcommand*\thmitemhspace[1]{\sbox{\@labels}{\unhbox\@labels\kern#1}}
 \newcommand*\fixthmitem[1][-\parindent]{\thmitemhspace{#1}}
 
-\setenumcols[cols=2,leftmargin=\parindent,itemindent=\parindent]
+\setenumcols{cols=2,leftmargin=\parindent,itemindent=\parindent}
 
 \newenvironment{enumitemcols}[1][2]
   {\enumcols[leftmargin=\parindent,itemindent=\parindent,#1]\relax}

@@ -35,13 +35,13 @@
 %%
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
 \ProvidesPackage{enumcols}
-    [2011/12/03 v2.0 Produce an enumerated array of multiple columns]
+    [2012/01/01 v2.1 Produce an enumerated array of multiple columns]
 \RequirePackage{kvoptions}
 \RequirePackage{etoolbox}
 \RequirePackage{varwidth}
 \RequirePackage{calc}
 
-\SetupKeyvalOptions{family=ecols,prefix=ecols@}
+\SetupKeyvalOptions{family=ecols,prefix=ecols@,setkeys=\kvsetkeys}
 
 \DeclareBoolOption[true]{top}
 \DeclareBoolOption[true]{varwidth}
@@ -61,8 +61,8 @@
 }
 
 \def\ecols@lengthkey@for#1==#2\@nil{
-  \csgluedef{ecols@#1@l}{#2}
-  \ECOLS@key{#1}{\csgluedef{ecols@#1@l}{##1}}
+  \DeclareStringOption[#2]{#1}%
+  \csdef{ecols@#1@l}{\the\dimexpr\csuse{ecols@#1}\relax}%
 }
 
 \ecols@forcsvlist{\ecols@for@lengthkey}{
@@ -111,13 +111,11 @@
     \ecols@ref@format{\@enumctr}{#1{\@enumctr}#2}}%
 }
 
-\let\ecols@save@refstepcounter\refstepcounter
-\def\refstepcounter#1{%
-  \ecols@save@refstepcounter{#1}%
+\apptocmd\refstepcounter{%
   \ifcsundef{ecols@ref@the#1}{}{%
     \protected@edef\@currentlabel{\csuse{ecols@ref@the#1}}%
   }%
-}
+}{}{}
 \def\ecols@ref@format#1#2{\csdef{ecols@ref@the#1}{#2}}
 
 \ECOLS@key{label}{\ecols@labelkey{#1}}
@@ -140,7 +138,7 @@
 
 \ProcessKeyvalOptions*\relax
 
-\newrobustcmd*\setenumcols[1][]{\setkeys{ecols}{#1}}
+\newrobustcmd*\setenumcols[1]{\KVO@setkeys{ecols}{#1}}
 
 \newdimen\ecolsleftmargin
 \newdimen\ecolswidth
@@ -180,7 +178,7 @@
         \ecols@nesterr
         \let\@endecols@item\relax
       \else
-        \setenumcols[itemize=false,#1]%
+        \setenumcols{itemize=false,#1}%
         \ecolsleftmargin=\ecols@leftmargin@l\relax
         \stepcounter{ecols@list}%
         \edef\ecols@currlist{\theecols@list}%

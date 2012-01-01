@@ -49,17 +49,16 @@ labelwidth=\widthof{\bfseries\ref{enumLastItem-\theLastItem}},
 \setlist[enumlist,1]{format=\bfseries,label=(\arabic*)}
 \setlist[enumlist,2]{label=\Ding*}
 
-\setenumcols[cols=2,adjust]
+\setenumcols{cols=2,adjust}
 
 \newenvironment{exlistcols}[1][2]{%
-    \enumcols[hang, counter=exlist, labelsep=\labelsep,
-         label=\prestar(\arabic*), leftmargin=\z@,
-      leftskip=\addleftskip,#1]\relax}
+    \enumcols[hang, counter=exlist, label=\prestar(\arabic*),
+      leftmargin=\z@, leftskip=\addleftskip,#1]\relax}
   {\endenumcols}
 
 \newenvironment{exlistcols*}[1][2]{%
-    \enumcols[inlist,leftmargin=\z@, labelsep=\labelsep,
-        leftmargin=-\labelwidth-\labelsep,#1]\relax}
+    \enumcols[inlist,leftmargin=\z@,
+      leftmargin=-\labelwidth-\labelsep,#1]\relax}
   {\endenumcols}
 
 \newenvironment{enumlistcols}[1][2]{\CTEXindent
