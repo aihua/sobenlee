@@ -52,12 +52,12 @@ labelwidth=\widthof{\bfseries\ref{enumLastItem-\theLastItem}},
 \setenumcols{cols=2,adjust}
 
 \newenvironment{exlistcols}[1][2]{%
-    \enumcols[hang, counter=exlist, label=\prestar(\arabic*),
+    \enumcols[hang, counter=exlist, label=\prestar(\arabic*), labelsep=\labelsep,
       leftmargin=\z@, leftskip=\addleftskip,#1]\relax}
   {\endenumcols}
 
 \newenvironment{exlistcols*}[1][2]{%
-    \enumcols[inlist,leftmargin=\z@,
+    \enumcols[inlist,leftmargin=\z@, labelsep=\labelsep,
       leftmargin=-\labelwidth-\labelsep,#1]\relax}
   {\endenumcols}
 
@@ -71,7 +71,7 @@ labelwidth=\widthof{\bfseries\ref{enumLastItem-\theLastItem}},
 \newcommand*\emphitem[1]{\mbox{\emph*{#1}\kern\ccwd}\ignorespaces}
 
 \newcommand*\FixExHead[1][证明]{%
-  \ifvoid\@labels
+  \ifvoid\@labels\relax
     \sbox\@labels{%
       \hskip-\dimexpr\labelwidth+\labelsep\relax
       #1%
