@@ -61,8 +61,8 @@
 }
 
 \def\ecols@lengthkey@for#1==#2\@nil{
-  \DeclareStringOption[#2]{#1}%
-  \csdef{ecols@#1@l}{\the\dimexpr\csuse{ecols@#1}\relax}%
+  \csdimdef{ecols@#1@l}{#2}
+  \ECOLS@key{#1}{\csdimdef{ecols@#1@l}{##1}}
 }
 
 \ecols@forcsvlist{\ecols@for@lengthkey}{
@@ -76,7 +76,7 @@
    {leftmargin==\z@},
    {leftskip==\z@},
    {ecolswidth==\z@},
-   {ecolstotalwidth==\linewidth/\tw@},
+   {ecolstotalwidth==\textwidth/\tw@},
 }
 
 \def\ecols@for@colskey#1{
@@ -451,7 +451,7 @@
     \settowidth\@tempdima{#1}%
     \ecolswidth=\dimexpr\linewidth-\@tempdima-\ecols@labelsep@l\relax}%
   \hskip\ecols@labelsep@l\relax
-  \parindent\ecols@listparindent@l\relax
+  \expandafter\parindent\ecols@listparindent@l\relax
   \ifbool{ecols@hang}{%
     \hangindent\ecols@hangindent\relax
     \advance\parindent\hangindent}{}%
