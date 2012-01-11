@@ -24,7 +24,7 @@
 
 \RequirePackage[loosequotes,lf,onlymath]{MinionPro}
 \RequirePackage{empheq,amsthm,extarrows,polynom,systeme}
-\RequirePackage[uppi,tau,fourier,mathscrf,mathcal,mathbb,comma]{localint}
+\RequirePackage[uppi,tau,fourier,mathscrf,mathcal,mathbb,comma]{varint}
 \RequirePackage{pifont,marvosym,metalogo,multicol,afterpage,chngcntr}
 \RequirePackage{caption,floatrow,rotating,wrapfig,varioref}
 \RequirePackage{paralist,enumcols,booktabs}
@@ -37,15 +37,23 @@
 \RequirePackage{tikz}
 \usetikzlibrary{arrows,matrix}
 \RequirePackage[showframe=false,headheight=5mm,headsep=7mm,footskip=1em,bindingoffset=10mm]{geometry}
-\RequirePackage[bookmarksnumbered,pdfstartview={XYZ null null 1},pdfpagemode=UseNone,pdfprintscaling=None]{hyperref}
-\RequirePackage[xetex,color=purple]{bookmark}
+\RequirePackage{hyperref}
+\RequirePackage[dvipdfm,color=purple]{bookmark}
 \ifLA@wmark
   \RequirePackage{eso-pic}
 \fi
 
+\definecolor{linkred}{rgb}{.65,.05,.1}
+
 \graphicspath{{includefiles/figures/}}
-\hypersetup{%
-  colorlinks,linkcolor=purple,citecolor=purple,linkbordercolor=purple,%pdfborder=001,% bookmarksopen=true,linktocpage,%
+\hypersetup{
+     pdfstartview={XYZ null null 1},
+      pdfpagemode=UseNone,
+  pdfprintscaling=None,
+        pdfduplex=DuplexFlipLongEdge,
+  bookmarksnumbered,
+  colorlinks,
+  linkcolor=linkred,
   pdfinfo={
     Title   = {线性代数},
     Author  = {李炯生，查建国},
@@ -432,11 +440,8 @@
   \kern-3.6\p@
   \hrule\@width.4\columnwidth\@height.6\p@
   \kern3\p@}
-\begingroup
- \footnotesize
- \settowidth\footnotemargin{\DingNum{1}}
- \global\footnotemargin=\dimexpr\footnotemargin+\labelsep\relax
-\endgroup
+\settowidth\footnotemargin{\footnotesize\DingNum{1}}
+\footnotemargin=\dimexpr1.5\footnotemargin\relax
 \renewcommand\@makefntext[1]{%
   \@setpar{\@@par
            \@tempdima\dimexpr\hsize-\footnotemargin\relax
