@@ -194,11 +194,8 @@
   \kern-3.6\p@
   \hrule\@width.4\columnwidth\@height.6\p@
   \kern3\p@}
-\begingroup
- \footnotesize
- \settowidth\footnotemargin{\DingNum{1}}
- \global\footnotemargin=\dimexpr\footnotemargin+\labelsep\relax
-\endgroup
+\settowidth\footnotemargin{\footnotesize\DingNum{1}}
+\footnotemargin=\dimexpr1.5\footnotemargin\relax
 \renewcommand\@makefntext[1]{%
   \@setpar{\@@par
            \@tempdima\dimexpr\hsize-\footnotemargin\relax
