@@ -337,9 +337,6 @@ indentfirst=auto}
 \newcommand\named[1]{%
   \unskip\nobreak\hfill\allowbreak\null\nobreak\hfill\quad\hbox{\normalfont ——\,#1}}
 
-\newcommand\cipaim[1]{{\upshape\fzzhdxian 【#1】}\enspace\ignorespaces}
-
-
 \endinput
 %%
 %% End of file `GaoHua.cls'.
