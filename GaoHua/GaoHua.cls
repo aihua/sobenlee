@@ -26,7 +26,6 @@
 \widowpenalty        = \z@
 \displaywidowpenalty = \z@
 \interlinepenalty    = \z@
-\brokenpenalty       = \sixt@@n
 \parskip             = \z@
 
 \raggedbottom
@@ -281,8 +280,8 @@ indentfirst=auto}
 \ifdefdimen\footnotemargin{}{\newdimen\footnotemargin}
 \renewcommand*\thefootnote{\Ding{footnote}}
 \renewcommand*\footnoterule{%
-  \kern-3.6\p@
-  \hrule\@width.4\columnwidth\@height.6\p@
+  \kern-3.5\p@
+  \hrule\@width.45\columnwidth\@height.5\p@\relax
   \kern3\p@}
 \settowidth\footnotemargin{\footnotesize\DingNum{1}}
 \footnotemargin=\dimexpr1.5\footnotemargin\relax
@@ -295,11 +294,14 @@ indentfirst=auto}
   \linespread{1.2}\selectfont
   \llap{\makebox[\footnotemargin][l]{\@thefnmark}}%
   \ignorespaces#1}
-\renewcommand*\@makefnmark{\raisebox{1ex}[\z@]{\small\@thefnmark}}
+\renewcommand*\@makefnmark{\raisebox{1ex}[\z@]{\normalfont\small\@thefnmark}}
 \footnotesep=\dimexpr1.2\footnotesep\relax
 
 \let\orig@footnote\footnote
-\renewcommand\footnote[1]{\unskip\orig@footnote{#1}\ignorespaces}
+\RenewDocumentCommand\footnote{ o +m }{%
+  \IfNoValueTF{#1}
+    {\unskip\orig@footnote{#2}\ignorespaces}
+    {\unskip\orig@footnote[#1]{#2}\ignorespaces}}
 
 \renewenvironment{thebibliography}[1]{%
   \chapter{\bibname}
