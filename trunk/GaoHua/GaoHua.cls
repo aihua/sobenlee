@@ -48,46 +48,98 @@
 
 \setmainfont{TeX Gyre Pagella}
 
-\renewcommand*\xeCJK@fallback@testsymbol[1]{%
-  \iffontchar\font`#1\relax
-    #1%
-  \else{%
-    \@nameuse{xeCJK@fallback@\xeCJK@family}%
-      \iffontchar\font`#1\relax
-        #1%
-      \else
-        \@nameuse{xeCJK@fallback@FallBack\xeCJK@family}%
-        #1%
-      \fi}%
-  \fi}
-
 \ExplSyntaxOn
-\NewDocumentCommand\newCJKfontfamily{omO{}mO{}g}{
-  \IfNoValueTF{#1}
-    {\tl_set:Nx \l_CJK_familyname_tl {\cs_to_str:N #2}}
-    {\tl_set:Nx \l_CJK_familyname_tl {#1}}
-  \setCJKfamilyfont{\l_CJK_familyname_tl}
-    [BoldFont=*,ItalicFont=*,SlantedFont=*,#3]{#4}
-  \cs_new_protected_nopar:Npx #2
-    {\exp_not:N \CJKfamily {\l_CJK_familyname_tl}}
-  \IfNoValueTF{#6}{}{
-    \setCJKfallbackfamilyfont{\l_CJK_familyname_tl}
-      [BoldFont=*,ItalicFont=*,SlantedFont=*,#5]{#6}
+\cs_new:Npn \l_CJK_fallback:nn [#1]#2 {
+  \clist_set:Nx \l_CJK_features_FB_clist { #1 }
+  \tl_set:Nx \l_CJK_fontname_FB_tl { #2 }
+}
+\cs_if_exist:NF \keys_set_known:nxN
+  { \cs_generate_variant:Nn \keys_set_known:nnN { nx } }
+\keys_define:nn { CJK } { FallBack .code:n = {
+    \tl_set:Nx \l_tmpa_tl { #1 }
+    \str_if_eq:xxTF { \exp_after:wN \tl_head:w \l_tmpa_tl \q_stop } \lbrack
+      { \exp_after:wN \l_CJK_fallback:nn \l_tmpa_tl \c_empty_tl }
+      { \l_CJK_fallback:nn [] { \l_tmpa_tl } }
+    \tl_if_empty:NTF \l_CJK_fontname_FB_tl
+      { \tl_set:Nx \l_CJK_fontname_FB_tl \l_CJK_fontname_tl }
+      { \tl_replace_all:Nnx \l_CJK_fontname_FB_tl * \l_CJK_fontname_tl }
+    \setCJKfallbackfamilyfont
+      { \l_CJK_familyname_tl }[ \l_CJK_features_FB_clist ]{ \l_CJK_fontname_FB_tl }
+  },
+  FallBack .default:n = \c_empty_tl
+}
+\NewDocumentCommand \newCJKfontfamily { o m O{} m } {
+  \IfNoValueTF { #1 }
+    { \tl_set:Nx \l_CJK_familyname_tl { \cs_to_str:N #2 } }
+    { \tl_set:Nx \l_CJK_familyname_tl { #1 } }
+  \tl_set:Nx \l_CJK_fontname_tl { #4 }
+  \tl_clear:N \l_CJK_fontname_FB_tl
+  \keys_set_known:nxN { CJK } { #3 } \l_CJK_features_clist
+  \clist_put_left:Nx \l_CJK_features_clist
+    { BoldFont=*, ItalicFont=*, SlantedFont=* }
+  \use:x {
+    \exp_not:N \setCJKfamilyfont
+      { \l_CJK_familyname_tl }[ \l_CJK_features_clist ]{ \l_CJK_fontname_tl }
   }
+  \cs_new_protected_nopar:Npx #2
+    { \exp_not:N \CJKfamily { \l_CJK_familyname_tl } }
+}
+\int_new:N \l_files_int
+\tl_set:Nn \g_files_prefix_tl { GH }
+\tl_set:Nn \g_files_folder_tl { includefiles/ }
+\NewDocumentCommand \IncludeFiles { > { \TrimSpaces } > { \SplitArgument { 1 } { - } }m }
+  { \includefiles_aux:nn #1 }
+\cs_new:Nn \includefiles_aux:nn {
+  \int_set:Nn \l_tmpa_int { #1 }
+  \IfNoValueTF { #2 } {
+    \includefiles_aux:N \l_tmpa_int
+  }{
+    \int_set:Nn \l_tmpb_int { #2 }
+    \int_do_while:nn { \l_tmpa_int <= \l_tmpb_int } {
+      \includefiles_aux:N \l_tmpa_int
+      \int_incr:N \l_tmpa_int
+    }
+  }
+}
+\cs_new:Nn \includefiles_aux:N {
+  \int_set:Nn \l_files_int { #1 }
+  \int_compare:nTF { \l_files_int < \c_ten }
+    { \tl_set:Nn \l_files_tl { 0 } }
+    { \tl_set:Nx \l_files_tl \c_empty_tl }
+  \include
+    { \g_files_folder_tl\g_files_prefix_tl\l_files_tl\int_use:N\l_files_int }
 }
 \ExplSyntaxOff
 
-\newCJKfontfamily[\CJKrmdefault]{\CJKrmfamily}
-  [BoldFont={FZHei-B01},ItalicFont={FZJKai-Z03S},SlantedFont={FZFangSong-Z02}]{FZJSong-Z01S}%%
-  [BoldFont={FZHei-B01_GB18030},ItalicFont={FZKai-Z03_GB18030},SlantedFont={FZFangSong-Z02_GB18030}]{FZShuSong-Z01_GB18030}
-\newCJKfontfamily[\CJKsfdefault]{\CJKsffamily}
-  [BoldFont={FZHei-B01},ItalicFont={FZJKai-Z03S},SlantedFont={FZFangSong-Z02}]{FZZhongDengXian-Z07}%%
-  [BoldFont={FZHei-B01_GB18030},ItalicFont={FZKai-Z03_GB18030},SlantedFont={FZFangSong-Z02_GB18030}]{FZZhongDengXian-Z07_GB18030}
-\newCJKfontfamily[\CJKttdefault]{\CJKttfamily}
-  [BoldFont={FZHei-B01},ItalicFont={FZJKai-Z03S},SlantedFont={FZFangSong-Z02}]{FZJKai-Z03S}%%
-  [BoldFont={FZHei-B01_GB18030},ItalicFont={FZKai-Z03_GB18030},SlantedFont={FZFangSong-Z02_GB18030}]{FZKai-Z03_GB18030}
+\newCJKfontfamily[\CJKrmdefault]{\CJKrmfamily}[
+     BoldFont=FZHei-B01,
+   ItalicFont=FZJKai-Z03S,
+  SlantedFont=FZFangSong-Z02,
+     FallBack={[
+       BoldFont=FZHei-B01_GB18030,
+     ItalicFont=FZKai-Z03_GB18030,
+    SlantedFont=FZFangSong-Z02_GB18030]{FZShuSong-Z01_GB18030}}
+]{FZJSong-Z01S}
 
-\setCJKfallbackfamilyfont{FallBack\CJKrmdefault}[ItalicFont={FZKaiS-Extended(SIP)}]{Sun-ExtB}
+\newCJKfontfamily[\CJKsfdefault]{\CJKsffamily}[
+     BoldFont=FZHei-B01,
+   ItalicFont=FZJKai-Z03S,
+  SlantedFont=FZFangSong-Z02,
+     FallBack={[
+       BoldFont=FZHei-B01_GB18030,
+     ItalicFont=FZKai-Z03_GB18030,
+    SlantedFont=FZFangSong-Z02_GB18030]{FZZhongDengXian-Z07_GB18030}}
+]{FZZhongDengXian-Z07}
+
+\newCJKfontfamily[\CJKttdefault]{\CJKttfamily}[
+     BoldFont=FZHei-B01,
+   ItalicFont=FZJKai-Z03S,
+  SlantedFont=FZFangSong-Z02,
+     FallBack={[
+       BoldFont=FZHei-B01_GB18030,
+     ItalicFont=FZKai-Z03_GB18030,
+    SlantedFont=FZFangSong-Z02_GB18030]{FZKai-Z03_GB18030}}
+]{FZJKai-Z03S}
 
 \newCJKfontfamily{\fzcusong} {FZCuSong-B09}                % 方正粗宋
 \newCJKfontfamily{\fzbykans} {FZBoYaKanSongK}              % 方正博雅刊宋
@@ -96,11 +148,11 @@
 \newCJKfontfamily{\fzydzhhei}{FZYunDongHei-M-GBK}          % 方正韵动中黑
 \newCJKfontfamily{\fzzhysong}{FZYaSong-DB-GBK}             % 方正中雅宋
 \newCJKfontfamily{\fzqiti}   {FZQiTi-S14}                  % 方正启体
-\newCJKfontfamily{\fzliukai} {FZSuXinShiLiuKaiS-R-GB}{FZQiTi-S14}% 方正苏新诗柳楷简体
-\newCJKfontfamily{\kaishu}   {FZJKai-Z03S}{FZKai-Z03_GB18030}
+\newCJKfontfamily{\kaishu}  [FallBack=FZKai-Z03_GB18030]{FZJKai-Z03S}
+\newCJKfontfamily{\fzliukai}[FallBack=FZQiTi-S14] {FZSuXinShiLiuKaiS-R-GB}
 
-\@namedef{xeCJK@kaiming：}{}
-\@namedef{xeCJK@kaiming；}{}
+\csdef{xeCJK@kaiming：}{}
+\csdef{xeCJK@kaiming；}{}
 
 \newrobustcmd*~{\unskip\hskip 0.2em minus 0.05em\ignorespaces}
 \AtEndPreamble{\punctstyle{mixedwidth}}
@@ -150,11 +202,11 @@
     {\raggedright}}
 
 \quotingsetup{
-       font=itshape,
-      vskip=\z@,
- leftmargin=\parindent,
-rightmargin=\z@,
-indentfirst=auto}
+         font=itshape,
+        vskip=\z@,
+   leftmargin=\parindent,
+  rightmargin=\z@,
+  indentfirst=auto}
 
 \DeclareRobustCommand*\KG{\kern\ccwd}
 \DeclareRobustCommand*\@cdot{\textcentereddot}
@@ -242,7 +294,7 @@ indentfirst=auto}
 \sectionformat\chapter{%
      class=top,
      shape=block,
-    format=\zihao{4}\fzzhysong\ifthechapter{\fillinner}{\filcenter},
+    format=\zihao{4}\bfseries\fzzhysong\ifthechapter{\fillinner}{\filcenter},
      label=\fzltheib\fillouter\zihao{-4}\CTEXthechapter\\[-2\p@]\titlerule[\ruleheight]\smallskip,
   labelsep=\z@,
     before=\varwidth[t]{\dimexpr\textwidth-3\ccwd\relax}#1\endvarwidth,
@@ -251,7 +303,7 @@ indentfirst=auto}
 
 \sectionformat\chapter*{%
      shape=block,
-    format=\zihao{4}\fzzhysong\fillinner,
+    format=\zihao{4}\bfseries\fzzhysong\fillinner,
     before=#1,
      after=\vspace{\baselineskip}\titlerule[\ruleheight],
        top=\bigskipamount,
@@ -270,8 +322,7 @@ indentfirst=auto}
 
 \pretocmd\part\cleardoublepage{}{}
 
-\robustify{\ding}
-\newcommand*\DingNum[1]{%
+\newrobustcmd*\DingNum[1]{%
   \ifnumgreater{#1}{10}%
     {\typeout{The value of input number is \number#1, larger than 10}}{}%
   \ding{\number\numexpr#1 + 171\relax}}
