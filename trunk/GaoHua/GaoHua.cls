@@ -49,41 +49,6 @@
 \setmainfont{TeX Gyre Pagella}
 
 \ExplSyntaxOn
-\cs_new:Npn \l_CJK_fallback:nn [#1]#2 {
-  \clist_set:Nx \l_CJK_features_FB_clist { #1 }
-  \tl_set:Nx \l_CJK_fontname_FB_tl { #2 }
-}
-\cs_if_exist:NF \keys_set_known:nxN
-  { \cs_generate_variant:Nn \keys_set_known:nnN { nx } }
-\keys_define:nn { CJK } { FallBack .code:n = {
-    \tl_set:Nx \l_tmpa_tl { #1 }
-    \str_if_eq:xxTF { \exp_after:wN \tl_head:w \l_tmpa_tl \q_stop } \lbrack
-      { \exp_after:wN \l_CJK_fallback:nn \l_tmpa_tl \c_empty_tl }
-      { \l_CJK_fallback:nn [] { \l_tmpa_tl } }
-    \tl_if_empty:NTF \l_CJK_fontname_FB_tl
-      { \tl_set:Nx \l_CJK_fontname_FB_tl \l_CJK_fontname_tl }
-      { \tl_replace_all:Nnx \l_CJK_fontname_FB_tl * \l_CJK_fontname_tl }
-    \setCJKfallbackfamilyfont
-      { \l_CJK_familyname_tl }[ \l_CJK_features_FB_clist ]{ \l_CJK_fontname_FB_tl }
-  },
-  FallBack .default:n = \c_empty_tl
-}
-\NewDocumentCommand \newCJKfontfamily { o m O{} m } {
-  \IfNoValueTF { #1 }
-    { \tl_set:Nx \l_CJK_familyname_tl { \cs_to_str:N #2 } }
-    { \tl_set:Nx \l_CJK_familyname_tl { #1 } }
-  \tl_set:Nx \l_CJK_fontname_tl { #4 }
-  \tl_clear:N \l_CJK_fontname_FB_tl
-  \keys_set_known:nxN { CJK } { #3 } \l_CJK_features_clist
-  \clist_put_left:Nx \l_CJK_features_clist
-    { BoldFont=*, ItalicFont=*, SlantedFont=* }
-  \use:x {
-    \exp_not:N \setCJKfamilyfont
-      { \l_CJK_familyname_tl }[ \l_CJK_features_clist ]{ \l_CJK_fontname_tl }
-  }
-  \cs_new_protected_nopar:Npx #2
-    { \exp_not:N \CJKfamily { \l_CJK_familyname_tl } }
-}
 \int_new:N \l_files_int
 \tl_set:Nn \g_files_prefix_tl { GH }
 \tl_set:Nn \g_files_folder_tl { includefiles/ }
@@ -111,7 +76,16 @@
 }
 \ExplSyntaxOff
 
-\newCJKfontfamily[\CJKrmdefault]{\CJKrmfamily}[
+\xeCJKsetup {
+  AutoFakeBold = false,
+ AutoFakeSlant = false,
+AutoFakeItalic = false,
+ KaiMingPunct+ = {：；},
+     CJKecglue = {},
+    PunctStyle = kaiming,
+}
+
+\setCJKmainfont[
      BoldFont=FZHei-B01,
    ItalicFont=FZJKai-Z03S,
   SlantedFont=FZFangSong-Z02,
@@ -121,7 +95,7 @@
     SlantedFont=FZFangSong-Z02_GB18030]{FZShuSong-Z01_GB18030}}
 ]{FZJSong-Z01S}
 
-\newCJKfontfamily[\CJKsfdefault]{\CJKsffamily}[
+\setCJKsansfont[
      BoldFont=FZHei-B01,
    ItalicFont=FZJKai-Z03S,
   SlantedFont=FZFangSong-Z02,
@@ -131,7 +105,7 @@
     SlantedFont=FZFangSong-Z02_GB18030]{FZZhongDengXian-Z07_GB18030}}
 ]{FZZhongDengXian-Z07}
 
-\newCJKfontfamily[\CJKttdefault]{\CJKttfamily}[
+\setCJKmonofont[
      BoldFont=FZHei-B01,
    ItalicFont=FZJKai-Z03S,
   SlantedFont=FZFangSong-Z02,
@@ -151,12 +125,7 @@
 \newCJKfontfamily{\kaishu}  [FallBack=FZKai-Z03_GB18030]{FZJKai-Z03S}
 \newCJKfontfamily{\fzliukai}[FallBack=FZQiTi-S14] {FZSuXinShiLiuKaiS-R-GB}
 
-\csdef{xeCJK@kaiming：}{}
-\csdef{xeCJK@kaiming；}{}
-
 \newrobustcmd*~{\unskip\hskip 0.2em minus 0.05em\ignorespaces}
-\AtEndPreamble{\punctstyle{mixedwidth}}
-\CJKsetecglue{}
 
 \let\origemph\emph
 \renewcommand*\CJKunderlinecolor{}
