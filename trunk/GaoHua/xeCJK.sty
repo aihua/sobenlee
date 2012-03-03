@@ -748,7 +748,9 @@
   \fp_set_eq:NN \l_xeCJK_EmboldenFactor_fp \g_xeCJK_EmboldenFactor_fp
   \fp_set_eq:NN \l_xeCJK_ItalicFactor_fp   \g_xeCJK_ItalicFactor_fp
   \fp_set_eq:NN \l_xeCJK_SlantFactor_fp    \g_xeCJK_SlantFactor_fp
-  \keys_set_known:nxN { xeCJK-Features } { #2 } \l_xeCJK_features_clist
+  \keys_set_known:nxN
+    { xeCJK-Features }
+    { \g_xeCJK_default_features_clist, #2 } \l_xeCJK_features_clist
   \bool_if:nTF {
     \tl_if_empty_p:N \l_xeCJK_fontname_bf_tl && \l_xeCJK_AutoFakeBold_bool
   }{
@@ -859,7 +861,7 @@
   \cs_set_eq:NN \CJKsymbol \xeCJK_fallback_CJKsymbol
 }
 \NewDocumentCommand \setCJKfallbackfamilyfont { m O{} m } {
-  \exp_args:Nc \newfontfamily { fallback/#1 } [ #2 ] { #3 }
+  \xeCJK_newfontfamily:nnn { #1/fallback } { #2 } { #3 }
 }
 \keys_define:nn { xeCJK } {
   AutoFallBack .choice:,
@@ -900,6 +902,10 @@
     { xeCJK_family_fontspec_\int_use:N \g_xeCJK_fontspec_int }
   \xeCJK_newfontfamily:nnn { \l_xeCJK_family_fontspec_tl } { #1 } { #2 }
   \exp_args:Nx \CJKfamily { \l_xeCJK_family_fontspec_tl }
+}
+\clist_clear_new:N \g_xeCJK_default_features_clist
+\DeclareDocumentCommand \defaultCJKfontfeatures { m } {
+  \clist_set:Nn \g_xeCJK_default_features_clist { #1 }
 }
 \NewDocumentCommand \addCJKfontfeatures { m } {
   \cs_if_exist:NT \l_xeCJK_family_tl {
