@@ -18,7 +18,7 @@
 %%  and version 1.3 or later is part of all distributions of LaTeX
 %%  version 2005/12/01 or later.
 %%
-\RequirePackage{l3keys2e,fontspec}
+\RequirePackage{l3keys2e}
 \ProvidesExplPackage {xeCJK} {2012/01/31} {2.4.5}
   { package for typesetting CJK scripts with XeLaTeX }
 \xetex_if_engine:F
@@ -528,14 +528,14 @@
   {
   \cs_if_exist_use:cF { \l_xeCJK_current_coor_tl }
     {
-      \use:c { xeCJK/font/\l_xeCJK_family_tl }
+      \cs_if_exist_use:c { xeCJK/font/\l_xeCJK_family_tl }
       \group_begin:
         \get@external@font
         \exp_args:Nx
       \group_end:
       {
         \exp_args:NNc \tex_global:D \tex_font:D
-        { \l_xeCJK_current_coor_tl } = \external@font
+          { \l_xeCJK_current_coor_tl } = \external@font
       }
     }
   }
@@ -548,7 +548,8 @@
     CJKallowbreakbetweenpuncts .choice:,
     CJKallowbreakbetweenpuncts / true  .code:n =
       {
-        \cs_set_nopar:Nn \xeCJK_punct_nobreak: { \skip_horizontal:N \c_zero_skip }
+        \cs_set_nopar:Nn \xeCJK_punct_nobreak:
+          { \skip_horizontal:N \c_zero_skip }
       },
     CJKallowbreakbetweenpuncts / false .code:n =
       { \cs_set_eq:NN \xeCJK_punct_nobreak: \nobreak },
@@ -740,7 +741,7 @@
             \clist_map_inline:Nn \g_xeCJK_punctstyle_clist
               {
                 \tl_gset:cx { \l_xeCJK_current_coor_tl/##1/kern/#1-#1 }
-                { - \dim_use:N \l_tmpa_dim }
+                  { - \dim_use:N \l_tmpa_dim }
               }
           }
       }
@@ -1090,7 +1091,7 @@
   }
 \clist_clear_new:N \g_xeCJK_default_features_clist
 \DeclareDocumentCommand \defaultCJKfontfeatures { m }
-  { \clist_set:Nn \g_xeCJK_default_features_clist { #1 } }
+  { \clist_gset:Nn \g_xeCJK_default_features_clist { #1 } }
 \NewDocumentCommand \addCJKfontfeatures { m }
   {
     \cs_if_exist:NT \l_xeCJK_family_tl
@@ -1213,7 +1214,6 @@
       { \cs_set_eq:NN \@afterindentfalse \scan_stop: },
     indentfirst .default:n  = { true },
     normalindentfirst .meta:n = { indentfirst = false },
-    CJKecglue     .tl_set_x:N = \CJKecglue ,
     unknown .code:n =
       { \PassOptionsToPackage { \l_keys_key_tl } { fontspec } },
   }
@@ -1226,6 +1226,7 @@
     CJKecglue = { \c_space_token }
   }
 \ProcessKeysOptions { xeCJK }
+\RequirePackage { fontspec }
 \dim_set:Nn \parindent { 2 em }
 \NewDocumentCommand \xeCJKsetup { m } { \keys_set:nn { xeCJK } { #1 } }
 \NewDocumentCommand \CJKspace { }
