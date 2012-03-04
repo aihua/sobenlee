@@ -46,7 +46,7 @@
     xeCJKactive .choice:,
     xeCJKactive / true  .code:n = { \XeTeXinterchartokenstate = \c_one  } ,
     xeCJKactive / false .code:n = { \XeTeXinterchartokenstate = \c_zero } ,
-    xeCJKactive     .default:n  = { true },
+    xeCJKactive      .default:n = { true },
  }
 \int_const:Nn \xeCJK_Default_class   { 0   }
 \int_const:Nn \xeCJK_CJK_class       { 1   }
@@ -645,9 +645,9 @@
                     { \dim_set:Nn \l_tmpb_dim { \l_tmpc_dim + .5\l_tmpb_dim } }
                     { \dim_set:Nn \l_tmpb_dim { \l_tmpc_dim + .2\l_tmpb_dim } }
                 }
-            } { \scan_stop: }
+            } { \prg_do_nothing: }
             \dim_set_max:Nn \l_tmpb_dim { \c_zero_dim }
-          }{
+          } {
             \dim_zero:N \l_tmpa_dim
             \dim_zero:N \l_tmpb_dim
             \dim_zero:N \l_tmpc_dim
@@ -683,12 +683,16 @@
             {
               \cs_if_exist:cT { \l_xeCJK_current_punct_tl/glue/l/#2 }
                 {
-                  \dim_set:Nn \l_tmpb_dim
+                  \dim_set:Nn \l_tmpa_dim
                     { \use:c { \l_xeCJK_current_punct_tl/space/l/#1 } }
-                  \dim_set_min:Nn \l_tmpb_dim
+                  \dim_set_min:Nn \l_tmpa_dim
                     { \use:c { \l_xeCJK_current_punct_tl/space/r/#1 } }
-                  \dim_set:Nn \l_tmpa_dim { \l_tmpb_dim }
                 }
+            }
+          \cs_if_exist:cT { \l_xeCJK_current_punct_tl/glue/r/#2 }
+            {
+              \dim_set_min:Nn \l_tmpa_dim
+                { \use:c { \l_xeCJK_current_punct_tl/glue/r/#2 } }
             }
         }
         \dim_set_max:Nn \l_tmpa_dim { \c_zero_dim }
@@ -716,7 +720,7 @@
       { top    } { \int_set:Nn \l_tmpa_int \c_two   }
       { right  } { \int_set:Nn \l_tmpa_int \c_three }
       { bottom } { \int_set:Nn \l_tmpa_int \c_four  }
-    } { \scan_stop: }
+    } { \prg_do_nothing: }
     \dim_set:Nn \l_xeCJK_glyph_bounds_dim
       { \XeTeXglyphbounds \l_tmpa_int \int_eval:n { \XeTeXcharglyph `#2 } }
   }
@@ -880,9 +884,14 @@
     AutoFakeSlant .default:n  = { \g_xeCJK_SlantFactor_fp },
     FallBack .code:n =
       {
-        \l_xeCJK_get_features:n { #1 }
-        \xeCJK_newfontfamily:nnn { \l_xeCJK_familyname_tl/fallback }
-          { \l_xeCJK_get_features_clist } { \l_xeCJK_get_features_tl }
+        \tl_if_empty:xTF { #1 }
+          { \tl_put_right:Nn \l_xeCJK_familyname_tl { /fallback } }
+          {
+            \l_xeCJK_get_features:n { #1 }
+            \xeCJK_setCJKfamilyfont:nnn { \l_xeCJK_familyname_tl/fallback }
+              { \l_xeCJK_get_features_clist }
+              { \l_xeCJK_get_features_tl }
+          }
       },
     FallBack .default:n = \c_empty_tl,
     Mono .choice:,
@@ -893,7 +902,7 @@
         \tl_set:Nx \l_xeCJK_monoscale_tl { Scale = \fp_use:N \g_xeCJK_monoscale_fp }
       }
   }
-\cs_new_protected_nopar:Nn \xeCJK_newfontfamily:nnn
+\cs_new_protected_nopar:Nn \xeCJK_setCJKfamilyfont:nnn
   {
     \group_begin:
     \tl_set:Nx \l_xeCJK_familyname_tl { #1 }
@@ -1039,7 +1048,7 @@
 \NewDocumentCommand \xeCJKdisablefallback { }
   { \cs_set_eq:NN \CJKsymbol \xeCJK_fallback_CJKsymbol }
 \NewDocumentCommand \setCJKfallbackfamilyfont { m O{} m }
-  { \xeCJK_newfontfamily:nnn { #1/fallback } { #2 } { #3 } }
+  { \xeCJK_setCJKfamilyfont:nnn { #1/fallback } { #2 } { #3 } }
 \keys_define:nn { xeCJK }
   {
     AutoFallBack .choice:,
@@ -1070,13 +1079,13 @@
     }
   }
 \NewDocumentCommand \setCJKfamilyfont { m O{} m }
-  { \xeCJK_newfontfamily:nnn { #1 } { #2 } { #3 } }
+  { \xeCJK_setCJKfamilyfont:nnn { #1 } { #2 } { #3 } }
 \NewDocumentCommand \newCJKfontfamily { o m O{} m }
   {
     \IfNoValueTF { #1 }
       { \tl_set:Nx \l_xeCJK_familyname_tl { \cs_to_str:N #2 } }
       { \tl_set:Nx \l_xeCJK_familyname_tl { #1 } }
-    \xeCJK_newfontfamily:nnn { \l_xeCJK_familyname_tl } { #3 } { #4 }
+    \xeCJK_setCJKfamilyfont:nnn { \l_xeCJK_familyname_tl } { #3 } { #4 }
     \cs_new_protected_nopar:Npx #2
       { \exp_not:N \CJKfamily { \l_xeCJK_familyname_tl } }
   }
@@ -1086,7 +1095,7 @@
     \int_gincr:N \g_xeCJK_fontspec_int
     \tl_set:Nx \l_xeCJK_family_fontspec_tl
       { xeCJK_family_fontspec_\int_use:N \g_xeCJK_fontspec_int }
-    \xeCJK_newfontfamily:nnn { \l_xeCJK_family_fontspec_tl } { #1 } { #2 }
+    \xeCJK_setCJKfamilyfont:nnn { \l_xeCJK_family_fontspec_tl } { #1 } { #2 }
     \exp_args:Nx \CJKfamily { \l_xeCJK_family_fontspec_tl }
   }
 \clist_clear_new:N \g_xeCJK_default_features_clist
@@ -1105,16 +1114,16 @@
 \cs_set_eq:NN \addCJKfontfeature \addCJKfontfeatures
 \cs_if_free:NT \CJKrmdefault { \tl_set:Nn \CJKrmdefault { rm } }
 \NewDocumentCommand \setCJKmainfont { O{} m }
-  { \xeCJK_newfontfamily:nnn { \CJKrmdefault } { #1 } { #2 } }
+  { \xeCJK_setCJKfamilyfont:nnn { \CJKrmdefault } { #1 } { #2 } }
 \cs_new_eq:NN \setCJKromanfont \setCJKmainfont
 \cs_if_free:NT \CJKsfdefault { \tl_set:Nn \CJKsfdefault { sf } }
 \NewDocumentCommand \setCJKsansfont { O{} m }
-  { \xeCJK_newfontfamily:nnn { \CJKsfdefault } { #1 } { #2 } }
+  { \xeCJK_setCJKfamilyfont:nnn { \CJKsfdefault } { #1 } { #2 } }
 \cs_if_free:NT \CJKttdefault { \tl_set:Nn \CJKttdefault { tt } }
 \etex_protected:D \tl_put_right:Nn \normalfont { \CJKfamily \CJKfamilydefault }
 \etex_protected:D \tl_put_right:Nn \rmfamily   { \CJKfamily \CJKrmdefault }
 \etex_protected:D \tl_put_right:Nn \sffamily   { \CJKfamily \CJKsfdefault }
-\etex_protected:D \tl_put_right:Nn \rmfamily   { \CJKfamily \CJKttdefault }
+\etex_protected:D \tl_put_right:Nn \ttfamily   { \CJKfamily \CJKttdefault }
 \cs_set_eq:NN \reset@font \normalfont
 \tl_set:Nn \CJKfamilydefault { \CJKrmdefault }
 \tl_new:c { xeCJK/font/\CJKfamilydefault }
@@ -1138,7 +1147,7 @@
   }
 \NewDocumentCommand \setCJKmonoscalefont { O{} m }
   {
-    \xeCJK_newfontfamily:nnn
+    \xeCJK_setCJKfamilyfont:nnn
       { \CJKttdefault } { Mono = Scale, #1 } { #2 }
   }
 \cs_new:Nn \xeCJK_set_monoexspace:
@@ -1183,7 +1192,7 @@
   }
 \NewDocumentCommand \setCJKmonoexspacefont { O{} m }
   {
-    \xeCJK_newfontfamily:nnn { \CJKttdefault } { Mono = Exspace, #1 } { #2 }
+    \xeCJK_setCJKfamilyfont:nnn { \CJKttdefault } { Mono = Exspace, #1 } { #2 }
   }
 \NewDocumentCommand \setCJKmonofont { s t+ O{} m }
   {
@@ -1191,7 +1200,7 @@
       { \setCJKmonoscalefont [ #3 ] { #4 } }
       { \IfBooleanTF { #2 }
           { \setCJKmonoexspacefont [ #3 ] { #4 } }
-          { \xeCJK_newfontfamily:nnn { \CJKttdefault } { #3 } { #4 } }
+          { \xeCJK_setCJKfamilyfont:nnn { \CJKttdefault } { #3 } { #4 } }
      }
   }
 \bool_new:N \l_xeCJK_number_bool
@@ -1203,7 +1212,7 @@
     CJKnumber      .default:n = { true },
     indentfirst .choice:,
     indentfirst / true  .code:n =
-      { \cs_set_eq:NN \@afterindentfalse \scan_stop: },
+      { \cs_set_eq:NN \@afterindentfalse \prg_do_nothing: },
     indentfirst / false .code:n =
       { \cs_set_eq:NN \if@afterindent \if_false: },
     indentfirst      .default:n = { true },
@@ -1293,7 +1302,7 @@
     \cs_set_nopar:Npn \r #1
       {
         \group_begin:
-        \makexeCJKinactive \xeCJK_aux_r { #1 }
+          \makexeCJKinactive \xeCJK_aux_r { #1 }
         \group_end:
       }
     \@ifpackageloaded { pifont }
@@ -1402,7 +1411,7 @@
   {
     \IfValueT { #1 } { \XeTeXdefaultencoding "#1" }
     \makeatletter
-    \input { #2.cpx }
+    \file_input:n { #2.cpx }
     \makeatother
     \XeTeXdefaultencoding "UTF-8"
   }
