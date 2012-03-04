@@ -52,7 +52,8 @@
 \int_new:N \l_files_int
 \tl_set:Nn \g_files_prefix_tl { GH }
 \tl_set:Nn \g_files_folder_tl { includefiles/ }
-\NewDocumentCommand \IncludeFiles { > { \TrimSpaces } > { \SplitArgument { 1 } { - } }m }
+\NewDocumentCommand \IncludeFiles
+  { > { \TrimSpaces } > { \SplitArgument { 1 } { - } } m }
   { \includefiles_aux:nn #1 }
 \cs_new:Nn \includefiles_aux:nn {
   \int_set:Nn \l_tmpa_int { #1 }
@@ -80,9 +81,9 @@
   AutoFakeBold = false,
  AutoFakeSlant = false,
 AutoFakeItalic = false,
- KaiMingPunct+ = {：；},
      CJKecglue = {},
     PunctStyle = kaiming,
+ KaiMingPunct+ = {：；},
 }
 
 \setCJKmainfont[
