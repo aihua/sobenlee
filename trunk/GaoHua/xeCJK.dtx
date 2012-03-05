@@ -67,11 +67,17 @@ may observe
 \documentclass[full]{l3doc}
 \usepackage[CJKnumber]{xeCJK}
 \usepackage{metalogo}
+\usepackage{enumitem}
+\setlist{nosep}
 \setmainfont{TeX Gyre Pagella}
 \setmonofont{Inconsolata}
 \setCJKmainfont[BoldFont=SimHei]{SimSun}
 \setCJKmonofont{FangSong}
 \def\MacroFont{\small\normalfont\ttfamily}
+\parindent=2em
+\AtBeginDocument{
+  \DeleteShortVerb{\"}
+  \MakeShortVerb{\|}}
 \begin{document}
   \DocInput{\jobname.dtx}
 \end{document}
@@ -88,13 +94,11 @@ may observe
 % \begin{documentation}
 %
 % \section{简介}
-% \parindent 2em
-% \parskip 5pt
 %
 % \pkg{xeCJK} 是一个 \XeLaTeX 宏包，用于排版 CJK 文字，包括字体选择和标点控制等。主要特点：
 % \begin{enumerate}
 % \item 分别设置 CJK 和英文字体；
-% \item 自动忽略 CJK 文字间的空格而保留其它空格，允许在非标点汉字和英文字母（a--z, A--Z）间断行；
+% \item 自动忽略 CJK 文字间的空格而保留其它空格，允许在非标点汉字和英文字母间断行；
 % \item 提供多种标点处理方式： 全角式、半角式、开明式、行末半角式和 CCT 式；
 % \item 自动调整中英文间空白。
 % \end{enumerate}
@@ -131,7 +135,7 @@ may observe
   }
 %    \end{macrocode}
 %
-% \cmd\XeTeXglyphbouds\ 可以得到一个字符的上下左右边距，用于标点压缩。
+% |\XeTeXglyphbouds| 可以得到一个字符的上下左右边距，用于标点压缩。
 %    \begin{macrocode}
 \cs_if_free:NT \XeTeXglyphbounds
   {
@@ -143,9 +147,8 @@ may observe
   }
 %    \end{macrocode}
 %
-% 禁止在 \pkg{xeCJK} 宏包后再载入 \pkg{CJK} 宏包。
+% 抑制换行符产生的空格。
 %    \begin{macrocode}
-\tl_set:cn { ver@CJK.sty } { 2020/01/01 }
 \tex_endlinechar:D \c_minus_one
 %    \end{macrocode}
 %
@@ -162,6 +165,24 @@ may observe
 %
 % \subsection{字符类别设定}
 %
+% \pkg{xeCJK} 需要以下字符类别用于字符输出。其中 |Default|、|CJK|、|FullLeft|、
+% |FullRight|、|Boundary| 为 \XeTeX\ 中预定义的类别，\pkg{xeCJK} 新增加了\
+% |HalfLeft|、|HalfRight|、|NormalSpace|。
+% \begin{center}
+% \begin{tabular}{cll}
+% \hline
+%   类别        & 说明                & 例子 \\ \hline
+% |Default|     & 西文一般符号       & abc123 \\
+% |CJK|         & CJK 表意符号       & 汉字ぁぃぅ \\
+% |FullLeft|    & 全角左标点         & （《：“ \\
+% |FullRight|   & 全角右标点         & ，。）》” \\
+% |HalfLeft|    & 半角左标点         & ( [ \{ \\
+% |HalfRight|   & 半角右标点         & , . ? ) ] \} \\
+% |NormalSpace| & 前后原始间距的符号 & / \\
+% |Boundary|    & 边界              & 空格 \\
+% \hline
+% \end{tabular}
+% \end{center}
 % \begin{macro}[int]
 %   { \xeCJK_Default_class, \xeCJK_CJK_class, \xeCJK_FullLeft_class,
 %     \xeCJK_FullRight_class, \xeCJK_Boundary_class, \xeCJK_HalfLeft_class,
@@ -180,13 +201,16 @@ may observe
 % \end{macro}
 %
 % \begin{macro}{\xeCJK_class_num:n}
+% |#1| 为字符类别名称，用于取得字符类别对应的编号。
 %    \begin{macrocode}
 \cs_new_nopar:Nn \xeCJK_class_num:n { \use:c { xeCJK_#1_class } }
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{\xeCJKDeclareCharClass}
-% 用于设置字符所属的类别。
+% \begin{macro}[aux]{\xeCJK_setcharclass_aux:nn}
+% 用于设置字符所属的类别，|#1| 为类别名称，|#2| 为字符的 |Unicode|，相邻字符用
+% 半角逗号隔开，支持类似 |"1100 -> "11FF| 起止范围的使用方式。
 %    \begin{macrocode}
 \NewDocumentCommand \xeCJKDeclareCharClass { > { \TrimSpaces } m m }
   {
@@ -201,8 +225,10 @@ may observe
   { \xeCJKsetcharclass #1 { #2 } }
 %    \end{macrocode}
 % \end{macro}
+% \end{macro}
 %
 % \begin{macro}{\xeCJKsetcharclass}
+% |#1| 和 |#2| 为字符类别起止的 |Unicode|，|#3| 为类别名称对应编号。
 %     \begin{macrocode}
 \NewDocumentCommand \xeCJKsetcharclass { m m m }
   {
@@ -221,7 +247,7 @@ may observe
 % \end{macro}
 %
 % \begin{macro}{\xeCJKResetPunctClass}
-% 用于声明重置标点符号所属的字符类。
+% 用于重置标点符号所属的字符类。
 %    \begin{macrocode}
 \NewDocumentCommand \xeCJKResetPunctClass { }
   {
@@ -235,10 +261,10 @@ may observe
       }
     \xeCJKDeclareCharClass { FullLeft }
       {
-        "2018 , "201C , "300A , "300C , "300E , "3010 , "3012 , "3014 ,
-        "3016 , "3018 , "301A , "301D , "301F , "3036 , "FF59 , "FF5B ,
-        "FF5D , "FF5F , "FF60 , "FF69 , "FF6B , "FF03 , "FF04 , "FF08 ,
-        "FF20 , "FF3B , "FF5B , "FFE0 , "FFE1 , "FFE5 , "FFE6 ,
+        "2018 , "201C , "3008 , "300A , "300C , "300E , "3010 , "3012 ,
+        "3014 , "3016 , "3018 , "301A , "301D , "301F , "3036 , "FE59 ,
+        "FE5B , "FE5D , "FE5F , "FE60 , "FE69 , "FE6B , "FF03 , "FF04 ,
+        "FF08 , "FF20 , "FF3B , "FF5B , "FFE0 , "FFE1 , "FFE5 , "FFE6 ,
       }
     \xeCJKDeclareCharClass { FullRight }
       {
@@ -248,8 +274,8 @@ may observe
         "3063 , "3083 , "3085 , "3087 , "308E , "309B , "309C , "309D ,
         "309E , "30A1 , "30A3 , "30A5 , "30A7 , "30A9 , "30C3 , "30E3 ,
         "30E5 , "30E7 , "30EE , "30F5 , "30F6 , "30FB , "30FC , "30FD ,
-        "30FE , "FF50 , "FF51 , "FF52 , "FF54 , "FF55 , "FF56 , "FF57 ,
-        "FF5A , "FF5C , "FF5E , "FF6A , "FF01 , "FF05 , "FF09 , "FF0C ,
+        "30FE , "FE50 , "FE51 , "FE52 , "FE54 , "FE55 , "FE56 , "FE57 ,
+        "FE5A , "FE5C , "FE5E , "FE6A , "FF01 , "FF05 , "FF09 , "FF0C ,
         "FF0E , "FF1A , "FF1B , "FF1F , "FF3D , "FF5D , "FF61 , "FF63 ,
         "FF64 , "FF65 , "FF67 , "FF68 , "FF69 , "FF6A , "FF6B , "FF6C ,
         "FF6D , "FF6E , "FF6F , "FF70 , "FF9E , "FF9F ,
@@ -259,36 +285,142 @@ may observe
 % \end{macro}
 %
 % 设置 CJK 文字的范围。
-%    \begin{macrocode}
+%     \begin{macrocode}
 \xeCJKDeclareCharClass { CJK }
   {
+%    \end{macrocode}
+% \begin{itemize}
+% \item Hangul Jamo （谚文字母）
+%    \begin{macrocode}
     "1100 -> "11FF ,
+%    \end{macrocode}
+% \item CJK Radicals Supplement （中日韩部首补充）
+%    \begin{macrocode}
     "2E80 -> "2EFF ,
+%    \end{macrocode}
+% \item Kangxi Radicals （康熙部首）
+%    \begin{macrocode}
     "2F00 -> "2FDF ,
+%    \end{macrocode}
+% \item Ideographic Description Characters （表意文字描述符）
+%    \begin{macrocode}
     "2FF0 -> "2FFF ,
+%    \end{macrocode}
+% \item CJK Symbols and Punctuation （中日韩符号和标点）
+%    \begin{macrocode}
     "3000 -> "303F ,
+%    \end{macrocode}
+% \item Hiragana （日文平假名）
+%    \begin{macrocode}
     "3040 -> "309F ,
+%    \end{macrocode}
+% \item Katakana （日文片假名）
+%    \begin{macrocode}
     "30A0 -> "30FF ,
+%    \end{macrocode}
+% \item Bopomofo （注音字母）
+%    \begin{macrocode}
     "3100 -> "312F ,
+%    \end{macrocode}
+% \item Hangul Compatibility Jamo （谚文兼容字母）
+%    \begin{macrocode}
     "3130 -> "318F ,
+%    \end{macrocode}
+% \item Kanbun （象形字注释标志）
+%    \begin{macrocode}
     "3190 -> "319F ,
+%    \end{macrocode}
+% \item Bopomofo Extended （注音字母扩展）
+%    \begin{macrocode}
     "31A0 -> "31BF ,
+%    \end{macrocode}
+% \item CJK Strokes （中日韩笔画）
+%    \begin{macrocode}
     "31C0 -> "31EF ,
+%    \end{macrocode}
+% \item Katakana Phonetic Extensions （日文片假名语音扩展）
+%    \begin{macrocode}
     "31F0 -> "31FF ,
+%    \end{macrocode}
+% \item Enclosed CJK Letters and Months （带圈中日韩字母和月份）
+%    \begin{macrocode}
     "3200 -> "32FF ,
+%    \end{macrocode}
+% \item CJK Compatibility （中日韩兼容）
+%    \begin{macrocode}
     "3300 -> "33FF ,
+%    \end{macrocode}
+% \item CJK Unified Ideographs Extension-A （中日韩统一表意文字扩展 A）
+%    \begin{macrocode}
     "3400 -> "4DBF ,
+%    \end{macrocode}
+% \item Yijing Hexagrams Symbols （易经六十四卦符号）
+%    \begin{macrocode}
+    "4DC0 -> "4DFF,
+%    \end{macrocode}
+% \item CJK Unified Ideographs （中日韩统一表意文字）
+%    \begin{macrocode}
     "4E00 -> "9FFF ,
-    "A000 -> "A4CF ,
+%    \end{macrocode}
+% \item Yi Syllables （彝文音节）
+%    \begin{macrocode}
+    "A000 -> "A48F ,
+%    \end{macrocode}
+% \item Yi Radicals （彝文字根）
+%    \begin{macrocode}
+    "A490 -> "A4CF ,
+%    \end{macrocode}
+% \item Hangul Jamo Extended-A （谚文扩展 A）
+%    \begin{macrocode}
+    "A960 -> "A97F ,
+%    \end{macrocode}
+% \item Hangul Syllables （谚文音节）
+%    \begin{macrocode}
     "AC00 -> "D7AF ,
+%    \end{macrocode}
+% \item Kana Supplement （日文假名增补）
+%    \begin{macrocode}
+    "B000 -> "B0FF ,
+%    \end{macrocode}
+% \item Hangul Jamo Extended-B （谚文扩展 B）
+%    \begin{macrocode}
+    "D7B0 -> "D7FF ,
+%    \end{macrocode}
+% \item CJK Compatibility Ideographs （中日韩兼容表意文字）
+%    \begin{macrocode}
     "F900 -> "FAFF ,
+%    \end{macrocode}
+% \item CJK Compatibility Forms （中日韩兼容形式）
+%    \begin{macrocode}
     "FE30 -> "FE4F ,
+%    \end{macrocode}
+% \item Halfwidth and Fullwidth Forms （半角及全角形式）
+%    \begin{macrocode}
     "FF00 -> "FFEF ,
-    "2000 -> "2A6DF ,
+%    \end{macrocode}
+% \item CJK Unified Ideographs Extension-B （中日韩统一表意文字扩展 B）
+%    \begin{macrocode}
+    "20000 -> "2A6DF ,
+%    \end{macrocode}
+% \item CJK Unified Ideographs Extension-C （中日韩统一表意文字扩展 C）
+%    \begin{macrocode}
     "2A700 -> "2B73F ,
+%    \end{macrocode}
+% \item CJK Unified Ideographs Extension-D （中日韩统一表意文字扩展 D）
+%    \begin{macrocode}
     "2B740 -> "2B81F ,
+%    \end{macrocode}
+% \item CJK Compatibility Ideographs Supplement （中日韩兼容表意文字增补）
+%    \begin{macrocode}
     "2F800 -> "2FA1F ,
+%    \end{macrocode}
+% \end{itemize}
+%    \begin{macrocode}
   }
+%    \end{macrocode}
+%
+% 重置标点符号的字符类。
+%    \begin{macrocode}
 \xeCJKResetPunctClass
 %    \end{macrocode}
 %
@@ -306,6 +438,7 @@ may observe
 % \end{macro}
 %
 % \begin{macro}{\xeCJK_inter_class_toks:nnn}
+% 在相邻类别之间插入内容。
 %    \begin{macrocode}
 \cs_set:Nn \xeCJK_inter_class_toks:nnn
   {
@@ -316,6 +449,7 @@ may observe
 % \end{macro}
 %
 % \begin{macro}{\xeCJK_clear_class_toks:nn}
+% 清除相邻类别之间的内容。
 %    \begin{macrocode}
 \cs_set:Nn \xeCJK_clear_class_toks:nn
   {
@@ -326,6 +460,7 @@ may observe
 % \end{macro}
 %
 % \begin{macro}{\xeCJK_empty_CJK_toks:}
+% 清除边界与 CJK 文字、全角左右标点之间的内容。
 %    \begin{macrocode}
 \cs_set_nopar:Nn \xeCJK_empty_CJK_toks:
   {
@@ -335,6 +470,8 @@ may observe
   }
 %    \end{macrocode}
 % \end{macro}
+%
+% \subsection{字符输出规则}
 %
 %    \begin{macrocode}
 \xeCJK_inter_class_toks:nnn { Default } { CJK }
@@ -452,8 +589,7 @@ may observe
 %    \begin{macrocode}
 \xeCJK_inter_class_toks:nnn { Boundary } { Default }
   {
-    \int_compare:nT
-      { \tex_lastkern:D = \c_one }
+    \int_compare:nT { \tex_lastkern:D = \c_one }
       { \c_space_token }
   }
 %    \end{macrocode}
@@ -461,8 +597,7 @@ may observe
 %    \begin{macrocode}
 \xeCJK_inter_class_toks:nnn { Boundary } { HalfLeft }
   {
-    \int_compare:nT
-      { \tex_lastkern:D = \c_one }
+    \int_compare:nT { \tex_lastkern:D = \c_one }
       { \c_space_token }
   }
 %    \end{macrocode}
@@ -523,13 +658,12 @@ may observe
 %
 % \begin{macro}{\xeCJK_CJK_and_CJK:n}
 %    \begin{macrocode}
-\cs_set_nopar:Nn \xeCJK_CJK_and_CJK:n {
-  \bool_if:NTF \l_xeCJK_checksingle_bool {
-    \xeCJK_checksingle:n { #1 }
-  }{
-    \CJKglue \CJKsymbol { #1 }
+\cs_set_nopar:Nn \xeCJK_CJK_and_CJK:n
+  {
+    \bool_if:NTF \l_xeCJK_checksingle_bool
+      { \xeCJK_checksingle:n { #1 } }
+      { \CJKglue \CJKsymbol { #1 } }
   }
-}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -545,18 +679,30 @@ may observe
 \xeCJK_inter_class_toks:nnn { CJK } { HalfRight }  { \group_end: }
 %    \end{macrocode}
 %
-% \begin{macro}{\xeCJK_punct_rule:n, \xeCJK_punct_skip:n, \xeCJK_punct_kern:n}
+% \begin{macro}{\xeCJK_punct_rule:n}
+% |#1| 为标点符号字体中的的实际左/右空白的负值，用于抹去标点符号的左/右空白。
 %    \begin{macrocode}
 \cs_set_nopar:Nn \xeCJK_punct_rule:n
   {
     \tex_vrule:D         \@width \use:c { #1 }
     \@depth \c_zero_dim  \@height \c_zero_dim \scan_stop:
   }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\xeCJK_punct_skip:n}
+% |#1| 为根据所选的标点符号输出风格在标点符号左/右增加的空白。
+%    \begin{macrocode}
 \cs_set_nopar:Nn \xeCJK_punct_skip:n
   {
-    \skip_horizontal:n
-      { \use:c { #1 } \@plus 0.1 em \@minus 0.1 em \scan_stop: }
+    \skip_horizontal:n { \use:c { #1 } \@plus 0.1 em \@minus 0.1 em }
   }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\xeCJK_punct_kern:n}
+% |#1| 为相邻两个标点之间的间距。
+%    \begin{macrocode}
 \cs_set_nopar:Nn \xeCJK_punct_kern:n
   {
     \tex_kern:D \use:c { #1 } \scan_stop:
@@ -564,7 +710,7 @@ may observe
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\xeCJK_before_FullLeft:n, \xeCJK_after_FullRight:}
+% \begin{macro}{\xeCJK_before_FullLeft:n}
 %    \begin{macrocode}
 \cs_set_nopar:Nn \xeCJK_before_FullLeft:n
   {
@@ -572,6 +718,11 @@ may observe
     \xeCJK_punct_rule:n { \l_xeCJK_current_punct_tl/rule/l/#1 }
     \CJKpunctsymbol { #1 }
   }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\xeCJK_after_FullRight:}
+%    \begin{macrocode}
 \cs_set_nopar:Nn \xeCJK_after_FullRight:
   {
     \xeCJK_punct_rule:n
@@ -585,12 +736,20 @@ may observe
 %    \begin{macrocode}
 \xeCJK_inter_class_toks:nnn { CJK } { FullLeft }
   { \xeCJK_CJK_and_FullLeft:n }
+%    \end{macrocode}
+%
+% \begin{macro}{\xeCJK_CJK_and_FullLeft:n}
+%    \begin{macrocode}
 \cs_set_nopar:Nn \xeCJK_CJK_and_FullLeft:n
   {
     \xeCJK_get_punct_bounds:nn { l } { #1 }
     \xeCJK_punct_skip:n { \l_xeCJK_current_punct_tl/glue/l/#1 }
     \xeCJK_before_FullLeft:n { #1 }
   }
+%    \end{macrocode}
+% \end{macro}
+%
+%    \begin{macrocode}
 \xeCJK_inter_class_toks:nnn { CJK } { FullRight }
   { \xeCJK_CJK_and_FullRight:n }
 %    \end{macrocode}
@@ -722,14 +881,11 @@ may observe
 %
 %    \begin{macrocode}
 \xeCJK_inter_class_toks:nnn { FullLeft } { Boundary }
-%    \end{macrocode}
-%
-%    \begin{macrocode}
   { \nobreak \group_end: \tex_ignorespaces:D }
-\xeCJK_inter_class_toks:nnn { FullRight } { Default }
 %    \end{macrocode}
 %
 %    \begin{macrocode}
+\xeCJK_inter_class_toks:nnn { FullRight } { Default }
   { \xeCJK_after_FullRight: \group_end: }
 %    \end{macrocode}
 %
@@ -799,13 +955,10 @@ may observe
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}
-%    {\CJK_nobreakglue:, \xeCJK_CJKkern:, \xeCJK_CJKkern:, \xeCJK_zerokern:}
+% \begin{macro}{\xeCJK_CJKkern:, \xeCJK_zerokern:}
 %     \begin{macrocode}
-\cs_set_nopar:Nn \CJK_nobreakglue:    { \nobreak \CJKglue \nobreak }
 \cs_set_nopar:Nn \xeCJK_CJKkern:      { \tex_kern:D -1 sp  \tex_kern:D 1 sp }
-\cs_set_nopar:Nn \xeCJK_prepunctkern: { \tex_kern:D -2 sp  \tex_kern:D 2 sp }
-\cs_set_nopar:Nx \xeCJK_zerokern:     { \tex_kern:D -4 sp  \tex_kern:D 4 sp }
+\cs_set_nopar:Nn \xeCJK_zerokern:     { \tex_kern:D -4 sp  \tex_kern:D 4 sp }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -829,8 +982,12 @@ may observe
             \peek_meaning_ignore_spaces:NTF $
               { \c_space_token }
               {
-                \peek_charcode_ignore_spaces:NT \scan_stop:
+                \peek_charcode_ignore_spaces:NTF \scan_stop:
                   { \c_space_token }
+                  {
+                    \peek_catcode_ignore_spaces:NT \c_catcode_active_tl
+                      { \c_space_token }
+                  }
               }
           }
     }{
@@ -882,13 +1039,6 @@ may observe
   }
 %    \end{macrocode}
 % \end{macro}
-% \end{macro}
-%
-% \begin{macro}{\CJKsymbol, \CJKpunctsymbol}
-%    \begin{macrocode}
-\cs_new_nopar:Npn \CJKsymbol      #1 { #1 }
-\cs_new_nopar:Npn \CJKpunctsymbol #1 { #1 }
-%    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{\xeCJK_get_font:}
@@ -1057,21 +1207,24 @@ may observe
     \cs_if_free:cT { \l_xeCJK_current_punct_tl/kern/#1-#2 }
       {
         \dim_zero:N \l_tmpa_dim
-        \cs_if_exist:cT { \l_xeCJK_current_punct_tl/glue/r/#1 }
-          {
-            \dim_add:Nn \l_tmpa_dim
-              { \use:c { \l_xeCJK_current_punct_tl/glue/r/#1 } }
-          }
-        \cs_if_exist:cT { \l_xeCJK_current_punct_tl/glue/l/#2 }
-          {
-            \dim_add:Nn \l_tmpa_dim
-              { \use:c { \l_xeCJK_current_punct_tl/glue/l/#2 } }
-          }
         \prg_case_tl:Nnn \l_xeCJK_punctstyle_tl
         {
-          \c_xeCJK_ps_marginkerning_tl { \c_empty_tl }
-          \c_xeCJK_ps_fullwidth_tl { \dim_set:Nn \l_tmpa_dim { .5 \l_tmpa_dim } }
-        }{
+          \c_xeCJK_ps_marginkerning_tl
+            {
+              \cs_if_exist:cT { \l_xeCJK_current_punct_tl/glue/r/#1 }
+                {
+                  \dim_add:Nn \l_tmpa_dim
+                    { \use:c { \l_xeCJK_current_punct_tl/glue/r/#1 } }
+                }
+              \cs_if_exist:cT { \l_xeCJK_current_punct_tl/glue/l/#2 }
+                {
+                  \dim_add:Nn \l_tmpa_dim
+                    { \use:c { \l_xeCJK_current_punct_tl/glue/l/#2 } }
+                }
+            }
+          \c_xeCJK_ps_fullwidth_tl
+            { \xeCJK_get_kern_aux:Nnnn \l_tmpa_dim { 1.5 em } { #1 } { #2 } }
+        } {
           \xeCJK_get_kern_aux:Nnnn \l_tmpa_dim { 1 em } { #1 } { #2 }
           \dim_compare:nT { \l_tmpa_dim < .1 em }
             {
@@ -1096,10 +1249,26 @@ may observe
   }
 \cs_set_nopar:Nn \xeCJK_get_kern_aux:Nnnn
   {
+    \dim_zero:N \l_tmpb_dim
+    \cs_if_exist:cTF { \l_xeCJK_current_punct_tl/glue/r/#3 }
+      {
+        \dim_add:Nn \l_tmpb_dim
+          { \use:c { \l_xeCJK_current_punct_tl/space/l/#3 } }
+      } {
+        \dim_add:Nn \l_tmpb_dim
+          { \use:c { \l_xeCJK_current_punct_tl/glue/l/#3 } }
+      }
+    \cs_if_exist:cTF { \l_xeCJK_current_punct_tl/glue/l/#4 }
+      {
+        \dim_add:Nn \l_tmpb_dim
+          { \use:c { \l_xeCJK_current_punct_tl/space/r/#4 } }
+      } {
+        \dim_add:Nn \l_tmpb_dim
+          { \use:c { \l_xeCJK_current_punct_tl/glue/r/#4 } }
+      }
     \dim_set:Nn #1
       {
-        #2 - \use:c { \l_xeCJK_current_punct_tl/space/l/#3 }
-           - \use:c { \l_xeCJK_current_punct_tl/space/r/#4 }
+        #2 - \l_tmpb_dim
            - \use:c { \l_xeCJK_current_punct_tl/dimen/#3 }
            - \use:c { \l_xeCJK_current_punct_tl/dimen/#4 }
       }
@@ -1163,6 +1332,61 @@ may observe
 %    \end{macrocode}
 % \end{macro}
 %
+% \subsection{后备字体}
+%
+% 后备字体的宏包选项声明。
+%    \begin{macrocode}
+\keys_define:nn { xeCJK }
+  {
+    AutoFallBack .choice:,
+    AutoFallBack / true  .code:n = { \xeCJKenablefallback },
+    AutoFallBack / false .code:n = { \xeCJKdisablefallback },
+    AutoFallBack      .default:n = { true },
+    FallBack     .meta:n = { AutoFallBack = #1 },
+    fallback     .meta:n = { AutoFallBack = #1 },
+    FallBack .default:n  = { true },
+    fallback .default:n  = { true },
+  }
+%    \end{macrocode}
+%
+% \begin{macro}{\xeCJKenablefallback, \xeCJKdisablefallback}
+% 后备字体的启用开关，默认关闭。
+%     \begin{macrocode}
+\NewDocumentCommand \xeCJKenablefallback { }
+  {
+    \cs_set_eq:NN \xeCJK_fallback_CJKsymbol \CJKsymbol
+    \cs_set_nopar:Npn \CJKsymbol ##1
+      { \xeCJK_fallback_CJKsymbol { \xeCJK_fallback_testsymbol:n { ##1 } } }
+  }
+\NewDocumentCommand \xeCJKdisablefallback { }
+  { \cs_set_eq:NN \CJKsymbol \xeCJK_fallback_CJKsymbol }
+\NewDocumentCommand \setCJKfallbackfamilyfont { m O{} m }
+  { \xeCJK_setCJKfamilyfont:nnn { #1/fallback } { #2 } { #3 } }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\xeCJK_fallback_testsymbol:n}
+% 测试当前字体中是否存在当前字符，如存在则直接输出，否则启用后备字体。
+%     \begin{macrocode}
+\cs_new_nopar:Nn \xeCJK_fallback_testsymbol:n
+  {
+    \etex_iffontchar:D \tex_font:D `#1 \scan_stop:
+      #1
+    \else:
+      \group_begin:
+        \cs_if_exist_use:c
+          { xeCJK/font/\l_xeCJK_family_tl/fallback }
+        \reverse_if:N \etex_iffontchar:D \tex_font:D `#1 \scan_stop:
+          \cs_if_exist_use:c { xeCJK/font/\l_xeCJK_family_tl/fallback/fallback }
+        \fi:
+        #1
+      \group_end:
+    \fi:
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+%
 % \subsection{CJK 字体族声明方式}
 %
 %    \begin{macrocode}
@@ -1216,19 +1440,7 @@ may observe
         \bool_set_true:N  \g_xeCJK_AutoFakeSlant_bool
         \fp_set:Nn \g_xeCJK_SlantFactor_fp {\l_keys_value_tl }
       },
-    AutoFakeSlant .default:n  = { true },
-    AutoFallBack .choice:,
-    AutoFallBack / true  .code:n =
-      {
-        \bool_set_true:N \g_xeCJK_AutoFallBack_bool
-        \cs_if_exist_use:N \xeCJKenablefallback
-      },
-    AutoFallBack / false .code:n =
-      {
-        \bool_set_false:N \g_xeCJK_AutoFallBack_bool
-        \cs_if_exist_use:N \xeCJKdisablefallback
-      },
-    AutoFallBack .default:n  = { true },
+    AutoFakeSlant .default:n = { true },
     EmboldenFactor .fp_set:N = \g_xeCJK_EmboldenFactor_fp,
     ItalicFactor   .fp_set:N = \g_xeCJK_ItalicFactor_fp,
     SlantFactor    .fp_set:N = \g_xeCJK_SlantFactor_fp,
@@ -1236,12 +1448,10 @@ may observe
     boldfont  .meta:n = { AutoFakeBold  = #1 },
     SlantFont .meta:n = { AutoFakeSlant = #1 },
     slantfont .meta:n = { AutoFakeSlant = #1 },
-    FallBack  .meta:n = { AutoFallBack  = #1 },
-    fallback  .meta:n = { AutoFallBack  = #1 },
-    BoldFont  .default:n  = { true },
-    boldfont  .default:n  = { true },
-    SlantFont .default:n  = { true },
-    slantfont .default:n  = { true },
+    BoldFont  .default:n = { true },
+    boldfont  .default:n = { true },
+    SlantFont .default:n = { true },
+    slantfont .default:n = { true },
   }
 \cs_if_free:NT \keys_set_known:nxN
   { \cs_generate_variant:Nn \keys_set_known:nnN { nx } }
@@ -1329,7 +1539,7 @@ may observe
 %    \end{macrocode}
 %
 % \begin{macro}{\xeCJK_setCJKfamilyfont:nnn}
-% 设置一个 CJK 新字体族，与 \cmd\newfontfamily\ 类似，增加 \meta{FallBack} 选项。
+% 设置一个 CJK 新字体族，与 |\newfontfamily| 类似，增加 |FallBack| 选项。
 %    \begin{macrocode}
 \cs_new_protected_nopar:Nn \xeCJK_setCJKfamilyfont:nnn
   {
@@ -1456,58 +1666,6 @@ may observe
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\xeCJK_fallback_testsymbol:n}
-% 测试当前字体中是否存在当前字符，如存在则直接输出，否则启用后备字体。
-%     \begin{macrocode}
-\cs_new_nopar:Nn \xeCJK_fallback_testsymbol:n
-  {
-    \etex_iffontchar:D \tex_font:D `#1 \scan_stop:
-      #1
-    \else:
-      \group_begin:
-        \cs_if_exist_use:c
-          { xeCJK/font/\l_xeCJK_family_tl/fallback }
-        \reverse_if:N \etex_iffontchar:D \tex_font:D `#1 \scan_stop:
-          \cs_if_exist_use:c { xeCJK/font/\l_xeCJK_family_tl/fallback/fallback }
-        \fi:
-        #1
-      \group_end:
-    \fi:
-  }
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{\xeCJKenablefallback, \xeCJKdisablefallback}
-% 后备字体的启用开关。
-%     \begin{macrocode}
-\NewDocumentCommand \xeCJKenablefallback { }
-  {
-    \cs_set_eq:NN \xeCJK_fallback_CJKsymbol \CJKsymbol
-    \cs_set_nopar:Npn \CJKsymbol ##1
-      { \xeCJK_fallback_CJKsymbol { \xeCJK_fallback_testsymbol:n { ##1 } } }
-  }
-\NewDocumentCommand \xeCJKdisablefallback { }
-  { \cs_set_eq:NN \CJKsymbol \xeCJK_fallback_CJKsymbol }
-\NewDocumentCommand \setCJKfallbackfamilyfont { m O{} m }
-  { \xeCJK_setCJKfamilyfont:nnn { #1/fallback } { #2 } { #3 } }
-%    \end{macrocode}
-% \end{macro}
-%
-% 后备字体的宏包选项声明。
-%    \begin{macrocode}
-\keys_define:nn { xeCJK }
-  {
-    AutoFallBack .choice:,
-    AutoFallBack / true  .code:n = { \xeCJKenablefallback },
-    AutoFallBack / false .code:n = { \xeCJKdisablefallback },
-    AutoFallBack .default:n  = { true },
-    FallBack  .meta:n = { AutoFallBack  = #1 },
-    fallback  .meta:n = { AutoFallBack  = #1 },
-    FallBack  .default:n  = { true },
-    fallback  .default:n  = { true },
-  }
-%    \end{macrocode}
-%
 % \begin{macro}{\CJKfamily}
 % 用于切换 CJK 字体族。
 %     \begin{macrocode}
@@ -1559,10 +1717,10 @@ may observe
 % \end{macro}
 %
 % \begin{macro}{\defaultCJKfontfeatures, \addCJKfontfeatures}
-% 设置 CJK 字体的默认属性和增加当前 CJK 字体的属性。
+% 分别用于设置 CJK 字体的默认属性和增加当前 CJK 字体的属性。
 %    \begin{macrocode}
 \clist_clear_new:N \g_xeCJK_default_features_clist
-\DeclareDocumentCommand \defaultCJKfontfeatures { m }
+\NewDocumentCommand \defaultCJKfontfeatures { m }
   { \clist_gset:Nn \g_xeCJK_default_features_clist { #1 } }
 \NewDocumentCommand \addCJKfontfeatures { m }
   {
@@ -1580,7 +1738,7 @@ may observe
 %
 % \begin{macro}
 %   { \CJKrmdefault, \setCJKmainfont, \CJKsfdefault, \setCJKsansfont,
-%     \CJKttdefault, \CJKfamilydefault}
+%     \CJKttdefault, \CJKfamilydefault }
 % 设置文档的 CJK 普通字体、无衬线字体。
 %    \begin{macrocode}
 \cs_if_free:NT \CJKrmdefault { \tl_set:Nn \CJKrmdefault { rm } }
@@ -1729,7 +1887,11 @@ may observe
 %    \end{macrocode}
 % \end{macro}
 %
-% \subsection{\pkg{xeCJK} 初始化设置}
+% \subsection{\pkg{xeCJK} 其它选项}
+%
+% 是否启用 \pkg{CJKnumber} 宏包和首行是否缩进，其中 |CJKnumber| 选项仅
+% 在 \pkg{xeCJK} 宏包调用的时候有效。并将 \pkg{xeCJK} 中未知的选项传递给
+% \pkg{fontspec} 宏包。
 %     \begin{macrocode}
 \bool_new:N \l_xeCJK_number_bool
 \keys_define:nn { xeCJK }
@@ -1748,6 +1910,12 @@ may observe
     unknown .code:n =
       { \PassOptionsToPackage { \l_keys_key_tl } { fontspec } },
   }
+%    \end{macrocode}
+%
+% \subsection{\pkg{xeCJK} 初始化设置}
+%
+% \pkg{xeCJK} 宏包的初始化设置。
+%     \begin{macrocode}
 \keys_set:nn { xeCJK }
   {
     xeCJKactive = true , CJKallowbreakbetweenpuncts = false ,
@@ -1756,11 +1924,23 @@ may observe
     KaiMingPunct = { ． 。？ ！ } , SpecialPunct = { — … ─ } ,
     CJKecglue = { \c_space_token }
   }
+%    \end{macrocode}
+%
+% \begin{macro}{\CJKsymbol, \CJKpunctsymbol}
+%    \begin{macrocode}
+\cs_new_nopar:Npn \CJKsymbol      #1 { #1 }
+\cs_new_nopar:Npn \CJKpunctsymbol #1 { #1 }
+%    \end{macrocode}
+% \end{macro}
+%
+% 执行宏包选项，并载入 \pkg{fongspec} 宏包。
+%    \begin{macrocode}
 \ProcessKeysOptions { xeCJK }
 \RequirePackage { fontspec }
 %    \end{macrocode}
 %
 % \begin{macro}{\xeCJKsetup}
+% 在导言区或文档中设置 \pkg{xeCJK}。
 %     \begin{macrocode}
 \NewDocumentCommand \xeCJKsetup { m } { \keys_set:nn { xeCJK } { #1 } }
 %    \end{macrocode}
@@ -1842,6 +2022,8 @@ may observe
 %    \end{macrocode}
 % \end{macro}
 %
+% \subsection{兼容性修补}
+%
 % \begin{macro}{\/}
 % \begin{macro}[aux]{\xeCJK_itcorr_aux}
 % 修复倾斜校正。
@@ -1904,6 +2086,11 @@ may observe
           }
       } { }
   }
+%    \end{macrocode}
+%
+% 禁止在 \pkg{xeCJK} 宏包后再载入 \pkg{CJK} 宏包。
+%    \begin{macrocode}
+\tl_set:cn { ver@CJK.sty } { 2020/01/01 }
 %    \end{macrocode}
 %
 % \begin{macro}[aux]
@@ -2010,7 +2197,7 @@ may observe
 %    \end{macrocode}
 %
 % \begin{macro}{\xeCJKcaption}
-% 可以使用 \pkg{CJK} 宏包中的\ ".cpx" 文件。
+% 可以使用 \pkg{CJK} 宏包中的 |.cpx| 文件。
 %    \begin{macrocode}
 \cs_if_free:NT \CJK@ifundefined
   { \cs_set_eq:NN \CJK@ifundefined \cs_if_free:NTF }
