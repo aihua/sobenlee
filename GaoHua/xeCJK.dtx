@@ -1158,37 +1158,30 @@ may observe
             \dim_set:Nn \l_tmpa_dim
               { \use:c { \l_xeCJK_current_punct_tl/space/#1/#2 } }
             \str_if_eq:xxTF { #1 } { l }
-              {
-                \dim_set:Nn \l_tmpc_dim
-                  { \use:c { \l_xeCJK_current_punct_tl/space/r/#2 } }
-              }{
-                \dim_set:Nn \l_tmpc_dim
-                  { \use:c { \l_xeCJK_current_punct_tl/space/l/#2 } }
-              }
-            \dim_set_min:Nn \l_tmpc_dim { \l_tmpa_dim }
-            \dim_set_eq:NN \l_tmpb_dim \l_tmpa_dim
+              { \tl_set:Nn \l_tmpa_tl { r } }
+              { \tl_set:Nn \l_tmpa_tl { l } }
+            \dim_set:Nn \l_tmpb_dim
+              { \use:c { \l_xeCJK_current_punct_tl/space/\l_tmpa_tl/#2 } }
+            \dim_set_min:Nn \l_tmpb_dim { \l_tmpa_dim }
             \prg_case_tl:Nnn \l_xeCJK_punctstyle_tl
             {
-              \c_xeCJK_ps_halfwidth_tl
-                { \dim_set:Nn \l_tmpb_dim { \l_tmpc_dim } }
+              \c_xeCJK_ps_halfwidth_tl { \prg_do_nothing: }
               \c_xeCJK_ps_mixedwidth_tl
                 {
-                  \tl_if_in:NnTF \l_xeCJK_mixedwidth_punct_tl { #2 }
-                    { \dim_set:Nn \l_tmpb_dim { \l_tmpc_dim + .5\l_tmpb_dim } }
-                    { \dim_set:Nn \l_tmpb_dim { \l_tmpc_dim } }
+                  \tl_if_in:NnT \l_xeCJK_mixedwidth_punct_tl { #2 }
+                    { \dim_add:Nn \l_tmpb_dim { .5\l_tmpa_dim } }
                 }
               \c_xeCJK_ps_CCT_tl
                 {
-                  \tl_if_in:NnTF \l_xeCJK_mixedwidth_punct_tl { #2 }
-                    { \dim_set:Nn \l_tmpb_dim { \l_tmpc_dim + .5\l_tmpb_dim } }
-                    { \dim_set:Nn \l_tmpb_dim { \l_tmpc_dim + .2\l_tmpb_dim } }
+                  \tl_if_in:NnT \l_xeCJK_mixedwidth_punct_tl { #2 }
+                    { \dim_add:Nn \l_tmpb_dim { .5\l_tmpa_dim } }
                 }
-            } { \prg_do_nothing: }
+            }
+            { \dim_set_eq:NN \l_tmpb_dim \l_tmpa_dim }
             \dim_set_max:Nn \l_tmpb_dim { \c_zero_dim }
           } {
             \dim_zero:N \l_tmpa_dim
             \dim_zero:N \l_tmpb_dim
-            \dim_zero:N \l_tmpc_dim
           }
           \tl_gset:cx { \l_xeCJK_current_punct_tl/rule/#1/#2 }
             { - \dim_use:N \l_tmpa_dim }
