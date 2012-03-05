@@ -498,10 +498,9 @@
       { \bool_set_false:N \l_xeCJK_checksingle_bool },
     CJKchecksingle     .default:n  = { true },
   }
-\cs_set_eq:NN \xeCJK_par \par
 \cs_set_nopar:Nn \xeCJK_checksingle:n
   {
-    \peek_catcode:NTF 。
+    \peek_catcode:NTF \c_catcode_other_token
       {
         \tl_set:Nn \l_xeCJK_last_char_tl { \CJKsymbol { #1 } }
         \xeCJK_checksingle_aux:n
@@ -515,12 +514,11 @@
     \tl_set:Nn \l_xeCJK_current_nobreak_char_tl { \l_xeCJK_last_char_tl #1 }
     \peek_meaning:NTF \c_space_token
       {
-        \peek_meaning_ignore_spaces:NTF \xeCJK_par
+        \peek_meaning_ignore_spaces:NTF \tex_par:D
           { \l_xeCJK_current_nobreak_char_tl }
           { \l_xeCJK_current_char_tl }
-      }{
-      \l_xeCJK_current_char_tl
-    }
+      }
+      { \l_xeCJK_current_char_tl }
   }
 \tl_set:Nn \l_xeCJK_current_coor_tl
   { xeCJK/\l_xeCJK_family_tl/\f@series/\f@shape/\f@size }
