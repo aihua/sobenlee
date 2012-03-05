@@ -1008,7 +1008,6 @@ may observe
       { \bool_set_false:N \l_xeCJK_checksingle_bool },
     CJKchecksingle     .default:n  = { true },
   }
-\cs_set_eq:NN \xeCJK_par \par
 %    \end{macrocode}
 %
 % \begin{macro}{\xeCJK_checksingle:n}
@@ -1016,7 +1015,7 @@ may observe
 %     \begin{macrocode}
 \cs_set_nopar:Nn \xeCJK_checksingle:n
   {
-    \peek_catcode:NTF 。
+    \peek_catcode:NTF \c_catcode_other_token
       {
         \tl_set:Nn \l_xeCJK_last_char_tl { \CJKsymbol { #1 } }
         \xeCJK_checksingle_aux:n
@@ -1030,22 +1029,27 @@ may observe
     \tl_set:Nn \l_xeCJK_current_nobreak_char_tl { \l_xeCJK_last_char_tl #1 }
     \peek_meaning:NTF \c_space_token
       {
-        \peek_meaning_ignore_spaces:NTF \xeCJK_par
+        \peek_meaning_ignore_spaces:NTF \tex_par:D
           { \l_xeCJK_current_nobreak_char_tl }
           { \l_xeCJK_current_char_tl }
-      }{
-      \l_xeCJK_current_char_tl
-    }
+      }
+      { \l_xeCJK_current_char_tl }
   }
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
 %
-% \begin{macro}{\xeCJK_get_font:}
-% 缓存当前字体。
+% \begin{macro}{\l_xeCJK_current_coor_tl}
+% 记录当前的字体信息。
 %    \begin{macrocode}
 \tl_set:Nn \l_xeCJK_current_coor_tl
   { xeCJK/\l_xeCJK_family_tl/\f@series/\f@shape/\f@size }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\xeCJK_get_font:}
+% 缓存当前字体。
+%    \begin{macrocode}
 \cs_new_nopar:Nn \xeCJK_get_font:
   {
   \cs_if_exist_use:cF { \l_xeCJK_current_coor_tl }
@@ -1129,12 +1133,19 @@ may observe
       },
   }
 \bool_new:N \l_xeCJK_punct_dokerning_bool
+%    \end{macrocode}
+%
+% \begin{macro}{\l_xeCJK_current_punct_tl}
+% 缓存当前字体状态下的标点处理方式。
+%    \begin{macrocode}
 \tl_set:Nn \l_xeCJK_current_punct_tl
   { \l_xeCJK_current_coor_tl/\l_xeCJK_punctstyle_tl }
 %    \end{macrocode}
+% \end{macro}
 %
 % \begin{macro}{\xeCJK_get_punct_bounds:nn}
-% 设置标点的边距。
+% |#1| 为 |l/r|，|#2| 为标点字符，返回标点的左/右实际空白的负值和根据标点处理方式
+% 决定添加的左/右空白。
 %     \begin{macrocode}
 \cs_set_nopar:Nn \xeCJK_get_punct_bounds:nn
   {
@@ -1240,6 +1251,13 @@ may observe
           { \dim_use:N \l_tmpa_dim }
     }
   }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\xeCJK_get_kern_aux:Nnnn}
+% |#3| 和 |#4| 为相邻的两个标点，|#2| 为要确定的相邻两个标点总共占的宽度，|#1| 是
+% 尺寸寄存器，用于记录根据所占宽度计算得出的相邻两个标点间距。
+%    \begin{macrocode}
 \cs_set_nopar:Nn \xeCJK_get_kern_aux:Nnnn
   {
     \dim_zero:N \l_tmpb_dim
