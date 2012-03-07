@@ -1,0 +1,43 @@
+%# -*- coding:utf-8 -*-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass{article}
+
+\usepackage{xeCJK}
+
+\setCJKmainfont{SimSun}
+\xeCJKDeclareSubCJKBlock{Ext-B}    { "20000 -> "2A6DF }
+\xeCJKDeclareSubCJKBlock{Japanese} { "3040 -> "309F, "30A0 -> "30FF, "31F0 -> "31FF, }
+\xeCJKDeclareSubCJKBlock{Korean}   { "1100 -> "11FF, "3130 -> "318F, "A960 -> "A97F, "AC00 -> "D7AF }
+\setCJKmainfont[Ext-B]{SimSun-ExtB}
+\setCJKmainfont[Japanese]{AdobeMyungjoStd-Medium}
+\setCJKmainfont[Korean]{AdobeGothicStd-Bold}
+
+\begin{document}
+
+\long\def\showtext{%
+中国是$x^2+y^2=z^2$位于亚洲东部的一个ABC地理区域范围，最早是指炎黄子孙在中原建立的国度，至现代国际体系成形后才开始作为国家的通称。作为其根基的中华文明是世界上古老的文明之一，对周边国家和民族的文化产生深远影响，形成了东亚／汉字文化圈。
+
+「日本」と$x^2+y^2=z^2$いABCう国号の表記は、太陽崇拝と相俟った自国中心的発想に基づくもの、また日本列島が中国大陸から見て東の果て、つまり「日の本（ひのもと）」に位置することに由来しているのではないかとされる。憲法の表題に「日本国憲法」や「大日本帝国憲法」と示されているが、国号を「日本国」ないしは「日本」と直接かつ明確に規定した法令は存在しない。他に法律などで正式な国名を規定していない国としてはスペインなどが挙げられる。
+
+대한$x^2+y^2=z^2$민국은 동아시아의 한반ABC도 남반부에 자리한 공화국이다. 한일 병합 조약을 통하여 대한제국을 병합했던 일본 제국이 태평양 전쟁에서 연합국에게 패배하고, 이후 주요 연합국 중 하나인 미국이 한반도의 북위 38도 이남을 점령하면서 실시한 군정이 통치권을 이양하여, 1948년 8월 15일에 성립되었다.}
+
+\showtext
+\bigskip
+\xeCJKCancelSubCJKBlock{Japanese,Korean}
+\showtext
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{|cc|cc|cc|cc|}
+𠀀 & 20000 & 𠀁 & 20001 & 𠀂 & 20002 & 𠀃 & 20003 \\
+𠀄 & 20004 & 𠀅 & 20005 & 𠀆 & 20006 & 𠀇 & 20007 \\
+𠀈 & 20008 & 𠀉 & 20009 & 𠀊 & 2000A & 𠀋 & 2000B \\
+𠀌 & 2000C & 𠀍 & 2000D & 𠀎 & 2000E & 𠀏 & 2000F \\
+𠀐 & 20010 & 𠀑 & 20011 & 𠀒 & 20012 & 𠀓 & 20013 \\
+𠀔 & 20014 & 𠀕 & 20015 & 𠀖 & 20016 & 𠀗 & 20017 \\
+𠀘 & 20018 & 𠀙 & 20019 & 𠀚 & 2001A & 𠀛 & 2001B \\
+𠀜 & 2001C & 𠀝 & 2001D & 𠀞 & 2001E & 𠀟 & 2001F \\
+\end{tabular}
+\end{table}
+\end{document}
