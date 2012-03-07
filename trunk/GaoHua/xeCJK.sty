@@ -1395,18 +1395,12 @@
 \tl_set:cn { ver@CJK.sty } { 2020/01/01 }
 \cs_set_protected_nopar:Nn \xeCJK_ULprepunctchar:n
   {
-    \group_begin:
-      \makexeCJKinactive
-      \CJKpunctsymbol { #1 } \nobreak
-    \group_end:
+    { \makexeCJKinactive \CJKpunctsymbol { #1 } \nobreak }
     \tex_ignorespaces:D
   }
 \cs_set_protected_nopar:Nn \xeCJK_ULpostpunctchar:n
   {
-    \group_begin:
-      \makexeCJKinactive
-      \CJKpunctsymbol { #1 }
-    \group_end:
+    { \makexeCJKinactive \CJKpunctsymbol { #1 } }
     \xeCJK_ignorespaces:
   }
 \cs_set_protected_nopar:Nn \xeCJK_ULroutines:
