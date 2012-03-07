@@ -1093,7 +1093,7 @@ may observe
 %    \end{macrocode}
 % \end{macro}
 %
-% \subsection{缓存字体}
+% \subsection{字体切换}
 %
 % \begin{macro}{\l_xeCJK_current_coor_tl}
 % 记录当前的字体信息。
@@ -2221,18 +2221,12 @@ may observe
 %    \begin{macrocode}
 \cs_set_protected_nopar:Nn \xeCJK_ULprepunctchar:n
   {
-    \group_begin:
-      \makexeCJKinactive
-      \CJKpunctsymbol { #1 } \nobreak
-    \group_end:
+    { \makexeCJKinactive \CJKpunctsymbol { #1 } \nobreak }
     \tex_ignorespaces:D
   }
 \cs_set_protected_nopar:Nn \xeCJK_ULpostpunctchar:n
   {
-    \group_begin:
-      \makexeCJKinactive
-      \CJKpunctsymbol { #1 }
-    \group_end:
+    { \makexeCJKinactive \CJKpunctsymbol { #1 } }
     \xeCJK_ignorespaces:
   }
 \cs_set_protected_nopar:Nn \xeCJK_ULroutines:
