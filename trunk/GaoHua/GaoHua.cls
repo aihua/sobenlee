@@ -8,8 +8,6 @@
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{ctexbook}}
 \ProcessOptions\relax
 
-\PassOptionsToPackage{fallback,CJKchecksingle}{xeCJK}
-
 \LoadClass[c5size,openany,fntef,nofonts]{ctexbook}
 
 \RequirePackage[xetex]{geometry}
@@ -75,9 +73,68 @@
   \include
     { \g_files_folder_tl\g_files_prefix_tl\l_files_tl\int_use:N\l_files_int }
 }
+\iow_new:N \l_GB_range_stream
+\file_if_exist:nTF { GB.range } { \file_input:n { GB.range } }
+  {
+    \clist_clear_new:N \l_GB_range_clist
+    \tl_clear_new:N \l_GB_range_tl
+    \bool_new:N \l_first_bool
+    \bool_set_true:N \l_first_bool
+    \group_begin:
+    \tex_font:D \test_font_a "[FZJSJW.TTF]"
+    \tex_font:D \test_font_b "[FZSS_GB18030.TTF]"
+    \int_zero:N \l_tmpa_int
+    \int_zero:N \l_tmpb_int
+    \test_font_a
+    \int_until_do:nNnn \l_tmpa_int > { "FFFF }
+      {
+        \reverse_if:N \etex_iffontchar:D \tex_font:D \l_tmpa_int
+          \group_begin:
+            \test_font_b
+            \etex_iffontchar:D \tex_font:D \l_tmpa_int
+              \bool_if:NTF \l_first_bool
+                {
+                  \int_gset_eq:NN \l_tmpb_int \l_tmpa_int
+                  \int_gset_eq:NN \l_tmpc_int \l_tmpa_int
+                  \bool_gset_false:N \l_first_bool
+                }
+                {
+                  \int_compare:nF { \l_tmpa_int == \l_tmpb_int + 1 }
+                    {
+                      \int_compare:nTF { \l_tmpc_int == \l_tmpb_int }
+                        {
+                          \tl_gput_right:Nx \l_GB_range_tl
+                            { \int_use:N \l_tmpb_int , }
+                        }
+                        {
+                          \tl_gput_right:Nx \l_GB_range_tl
+                            { \int_use:N \l_tmpc_int -> \int_use:N \l_tmpb_int , }
+                        }
+                      \int_gset_eq:NN \l_tmpc_int \l_tmpa_int
+                    }
+                  \int_gset_eq:NN \l_tmpb_int \l_tmpa_int
+                }
+            \fi:
+          \group_end:
+        \fi:
+        \int_incr:N \l_tmpa_int
+      }
+    \tl_gput_right:Nx \l_GB_range_tl
+      { \int_use:N \l_tmpc_int -> \int_use:N \l_tmpb_int }
+    \group_end:
+    \iow_open:Nn \l_GB_range_stream { GB.range }
+    \iow_now:Nx \l_GB_range_stream
+      {
+        \exp_not:n { \clist_gset:Nn \l_GB_range_clist }
+        { \tl_use:N \l_GB_range_tl }
+      }
+    \iow_close:N \l_GB_range_stream
+  }
+\xeCJKDeclareSubCJKBlock{GB18030}{ \l_GB_range_clist }
 \ExplSyntaxOff
 
 \xeCJKsetup {
+CJKchecksingle = true,
   AutoFakeBold = false,
  AutoFakeSlant = false,
 AutoFakeItalic = false,
@@ -90,7 +147,7 @@ AutoFakeItalic = false,
      BoldFont=FZHei-B01,
    ItalicFont=FZJKai-Z03S,
   SlantedFont=FZFangSong-Z02,
-     FallBack={[
+     GB18030={[
        BoldFont=FZHei-B01_GB18030,
      ItalicFont=FZKai-Z03_GB18030,
     SlantedFont=FZFangSong-Z02_GB18030]{FZShuSong-Z01_GB18030}}
@@ -100,7 +157,7 @@ AutoFakeItalic = false,
      BoldFont=FZHei-B01,
    ItalicFont=FZJKai-Z03S,
   SlantedFont=FZFangSong-Z02,
-     FallBack={[
+     GB18030={[
        BoldFont=FZHei-B01_GB18030,
      ItalicFont=FZKai-Z03_GB18030,
     SlantedFont=FZFangSong-Z02_GB18030]{FZZhongDengXian-Z07_GB18030}}
@@ -110,7 +167,7 @@ AutoFakeItalic = false,
      BoldFont=FZHei-B01,
    ItalicFont=FZJKai-Z03S,
   SlantedFont=FZFangSong-Z02,
-     FallBack={[
+     GB18030={[
        BoldFont=FZHei-B01_GB18030,
      ItalicFont=FZKai-Z03_GB18030,
     SlantedFont=FZFangSong-Z02_GB18030]{FZKai-Z03_GB18030}}
@@ -123,8 +180,8 @@ AutoFakeItalic = false,
 \newCJKfontfamily{\fzydzhhei}{FZYunDongHei-M-GBK}          % 方正韵动中黑
 \newCJKfontfamily{\fzzhysong}{FZYaSong-DB-GBK}             % 方正中雅宋
 \newCJKfontfamily{\fzqiti}   {FZQiTi-S14}                  % 方正启体
-\newCJKfontfamily{\kaishu}  [FallBack=FZKai-Z03_GB18030]{FZJKai-Z03S}
-\newCJKfontfamily{\fzliukai}[FallBack=FZQiTi-S14] {FZSuXinShiLiuKaiS-R-GB}
+\newCJKfontfamily{\kaishu}  [GB18030=FZKai-Z03_GB18030]{FZJKai-Z03S}
+\newCJKfontfamily{\fzliukai}[GB18030=FZQiTi-S14] {FZSuXinShiLiuKaiS-R-GB}
 
 \newrobustcmd*~{\unskip\hskip 0.2em minus 0.05em\ignorespaces}
 

@@ -8,13 +8,12 @@
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{ctexbook}}
 \ProcessOptions\relax
 
-\PassOptionsToPackage{fallback,CJKchecksingle}{xeCJK}
-
 \LoadClass[c5size,openany,nofonts]{ctexbook}
 
 \RequirePackage[xetex]{geometry}
 \RequirePackage[pagestyles,clearempty]{titlesec}
 \RequirePackage[titles]{tocloft}
+\RequirePackage{calc}
 \RequirePackage[xetex, bookmarksnumbered, pdfstartview={XYZ null null 1}, pdfborder=001,
                 pdfpagemode=UseNone, pdfprintscaling=None]{hyperref}
 
@@ -33,63 +32,126 @@
 
 \setmainfont{TeX Gyre Pagella}
 
-\renewcommand*\xeCJK@fallback@testsymbol[1]{%
-  \iffontchar\font`#1%
-    #1%
-  \else{%
-    \@nameuse{xeCJK@fallback@\xeCJK@family}%
-      \iffontchar\font`#1%
-        #1%
-      \else\@nameuse{xeCJK@fallback@fallback@\xeCJK@family}%
-        #1%
-      \fi}%
-  \fi}
-
 \ExplSyntaxOn
-\NewDocumentCommand\newCJKfontfamily{omO{}mO{}g}{
-  \IfNoValueTF{#1}
-    {\tl_set:Nx \l_CJK_familyname_tl {\cs_to_str:N #2}}
-    {\tl_set:Nx \l_CJK_familyname_tl {#1}}
-  \setCJKfamilyfont{\l_CJK_familyname_tl}
-    [BoldFont=*,ItalicFont=*,SlantedFont=*,#3]{#4}
-  \cs_new_protected_nopar:Npx #2
-    {\exp_not:N \CJKfamily {\l_CJK_familyname_tl}}
-  \IfNoValueTF{#6}{}{
-    \setCJKfallbackfamilyfont{\l_CJK_familyname_tl}
-      [BoldFont=*,ItalicFont=*,SlantedFont=*,#5]{#6}
-  }
-}
-\cs_new:Nn \JPM_includechapters:n {
-  \prg_replicate:nn {#1} \JPM_includechapters:
-}
+\cs_new:Nn \JPM_includechapters:n
+  { \prg_replicate:nn {#1} \JPM_includechapters: }
 \int_new:N \g_JPM_chapter_int
-\cs_new:Nn \JPM_includechapters: {
-  \int_gincr:N \g_JPM_chapter_int
-  \int_compare:nTF{\g_JPM_chapter_int < \c_ten}{
-    \tl_set:Nx \l_JPM_chapter_tl {00}
-  }{
-    \int_compare:nTF{\g_JPM_chapter_int < \c_one_hundred}{
-      \tl_set:Nx \l_JPM_chapter_tl {0}
-    }{
-      \tl_set:Nx \l_JPM_chapter_tl {}
-    }
+\cs_new:Nn \JPM_includechapters:
+  {
+    \int_gincr:N \g_JPM_chapter_int
+    \int_compare:nTF { \g_JPM_chapter_int < \c_ten }
+      {
+        \tl_set:Nx \l_JPM_chapter_tl { 0 0 }
+      }
+      {
+        \int_compare:nTF { \g_JPM_chapter_int < \c_one_hundred }
+          { \tl_set:Nx \l_JPM_chapter_tl { 0 } }
+          { \tl_set:Nx \l_JPM_chapter_tl { \c_empty_tl } }
+      }
+    \include{includefiles/JPM\l_JPM_chapter_tl\int_use:N\g_JPM_chapter_int}
   }
-  \include{includefiles/JPM\l_JPM_chapter_tl\int_use:N\g_JPM_chapter_int}
-}
 \cs_new_eq:NN \includechapters \JPM_includechapters:n
+\iow_new:N \l_GB_range_stream
+\file_if_exist:nTF { GB.range } { \file_input:n { GB.range } }
+  {
+    \clist_clear_new:N \l_GB_range_clist
+    \tl_clear_new:N \l_GB_range_tl
+    \bool_new:N \l_first_bool
+    \bool_set_true:N \l_first_bool
+    \group_begin:
+    \tex_font:D \test_font_a "[FZJSJW.TTF]"
+    \tex_font:D \test_font_b "[FZSS_GB18030.TTF]"
+    \int_zero:N \l_tmpa_int
+    \int_zero:N \l_tmpb_int
+    \test_font_a
+    \int_until_do:nNnn \l_tmpa_int > { "FFFF }
+      {
+        \reverse_if:N \etex_iffontchar:D \tex_font:D \l_tmpa_int
+          \group_begin:
+            \test_font_b
+            \etex_iffontchar:D \tex_font:D \l_tmpa_int
+              \bool_if:NTF \l_first_bool
+                {
+                  \int_gset_eq:NN \l_tmpb_int \l_tmpa_int
+                  \int_gset_eq:NN \l_tmpc_int \l_tmpa_int
+                  \bool_gset_false:N \l_first_bool
+                }
+                {
+                  \int_compare:nF { \l_tmpa_int == \l_tmpb_int + 1 }
+                    {
+                      \int_compare:nTF { \l_tmpc_int == \l_tmpb_int }
+                        {
+                          \tl_gput_right:Nx \l_GB_range_tl
+                            { \int_use:N \l_tmpb_int , }
+                        }
+                        {
+                          \tl_gput_right:Nx \l_GB_range_tl
+                            { \int_use:N \l_tmpc_int -> \int_use:N \l_tmpb_int , }
+                        }
+                      \int_gset_eq:NN \l_tmpc_int \l_tmpa_int
+                    }
+                  \int_gset_eq:NN \l_tmpb_int \l_tmpa_int
+                }
+            \fi:
+          \group_end:
+        \fi:
+        \int_incr:N \l_tmpa_int
+      }
+    \tl_gput_right:Nx \l_GB_range_tl
+      { \int_use:N \l_tmpc_int -> \int_use:N \l_tmpb_int }
+    \group_end:
+    \iow_open:Nn \l_GB_range_stream { GB.range }
+    \iow_now:Nx \l_GB_range_stream
+      {
+        \exp_not:n { \clist_gset:Nn \l_GB_range_clist }
+        { \tl_use:N \l_GB_range_tl }
+      }
+    \iow_close:N \l_GB_range_stream
+  }
+\xeCJKDeclareSubCJKBlock{GB18030}{ \l_GB_range_clist }
+\xeCJKDeclareSubCJKBlock{Ext-B}{ "20000 -> "2A6DF }
 \ExplSyntaxOff
 
-\newCJKfontfamily[\CJKrmdefault]{\CJKrmfamily}
-  [BoldFont={FZHei-B01},ItalicFont={FZJKai-Z03S},SlantedFont={FZFangSong-Z02}]{FZJSong-Z01S}%%
-  [BoldFont={FZHei-B01_GB18030},ItalicFont={FZKai-Z03_GB18030},SlantedFont={FZFangSong-Z02_GB18030}]{FZShuSong-Z01_GB18030}
-\newCJKfontfamily[\CJKsfdefault]{\CJKsffamily}
-  [BoldFont={FZHei-B01},ItalicFont={FZJKai-Z03S},SlantedFont={FZFangSong-Z02}]{FZZhongDengXian-Z07}%%
-  [BoldFont={FZHei-B01_GB18030},ItalicFont={FZKai-Z03_GB18030},SlantedFont={FZFangSong-Z02_GB18030}]{FZZhongDengXian-Z07_GB18030}
-\newCJKfontfamily[\CJKttdefault]{\CJKttfamily}
-  [BoldFont={FZHei-B01},ItalicFont={FZJKai-Z03S},SlantedFont={FZFangSong-Z02}]{FZJKai-Z03S}%%
-  [BoldFont={FZHei-B01_GB18030},ItalicFont={FZKai-Z03_GB18030},SlantedFont={FZFangSong-Z02_GB18030}]{FZKai-Z03_GB18030}
+\xeCJKsetup {
+CJKchecksingle = true,
+  AutoFakeBold = false,
+ AutoFakeSlant = false,
+AutoFakeItalic = false,
+     CJKecglue = {},
+    PunctStyle = kaiming,
+ KaiMingPunct+ = {：；},
+}
+\setCJKmainfont[
+     BoldFont=FZHei-B01,
+   ItalicFont=FZJKai-Z03S,
+  SlantedFont=FZFangSong-Z02,
+     GB18030={[
+       BoldFont=FZHei-B01_GB18030,
+     ItalicFont=FZKai-Z03_GB18030,
+    SlantedFont=FZFangSong-Z02_GB18030]{FZShuSong-Z01_GB18030}},
+       Ext-B={[
+     ItalicFont={FZKaiS-Extended(SIP)}]{Sun-ExtB}}
+]{FZJSong-Z01S}
 
-\setCJKfallbackfamilyfont{fallback@\CJKrmdefault}[ItalicFont={FZKaiS-Extended(SIP)}]{Sun-ExtB}
+\setCJKsansfont[
+     BoldFont=FZHei-B01,
+   ItalicFont=FZJKai-Z03S,
+  SlantedFont=FZFangSong-Z02,
+     GB18030={[
+       BoldFont=FZHei-B01_GB18030,
+     ItalicFont=FZKai-Z03_GB18030,
+    SlantedFont=FZFangSong-Z02_GB18030]{FZZhongDengXian-Z07_GB18030}}
+]{FZZhongDengXian-Z07}
+
+\setCJKmonofont[
+     BoldFont=FZHei-B01,
+   ItalicFont=FZJKai-Z03S,
+  SlantedFont=FZFangSong-Z02,
+     GB18030={[
+       BoldFont=FZHei-B01_GB18030,
+     ItalicFont=FZKai-Z03_GB18030,
+    SlantedFont=FZFangSong-Z02_GB18030]{FZKai-Z03_GB18030}}
+]{FZJKai-Z03S}
 
 \newCJKfontfamily{\fzwkai}   {FZBeiWeiKaiShu-S19_GB18030}  % 方正北魏楷书
 \newCJKfontfamily{\fzzhdxian}{FZZhongDengXian-Z07_GB18030} % 方正中等线
@@ -97,14 +159,7 @@
 \newCJKfontfamily{\fzydzhhei}{FZYunDongHei-M-GBK}          % 方正韵动中黑
 \newCJKfontfamily{\fzzhysong}{FZYaSong-DB-GBK}             % 方正中雅宋
 \newCJKfontfamily{\fzqiti}   {FZQiTi-S14}                  % 方正启体
-\newCJKfontfamily{\fzliukai} {FZSuXinShiLiuKaiS-R-GB}{FZQiTi-S14}% 方正苏新诗柳楷简体
-
-\@namedef{xeCJK@kaiming：}{}
-\@namedef{xeCJK@kaiming；}{}
-
-\punctstyle{mixedwidth}
-
-\CJKsetecglue{}
+\newCJKfontfamily{\fzliukai}[GB18030=FZQiTi-S14]{FZSuXinShiLiuKaiS-R-GB}% 方正苏新诗柳楷简体
 
 \parskip           \z@
 \clubpenalty      -\@m
