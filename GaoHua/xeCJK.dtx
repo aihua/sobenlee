@@ -160,7 +160,7 @@ may observe
     xeCJKactive / true  .code:n = { \XeTeXinterchartokenstate = \c_one  } ,
     xeCJKactive / false .code:n = { \XeTeXinterchartokenstate = \c_zero } ,
     xeCJKactive      .default:n = { true },
- }
+  }
 %    \end{macrocode}
 %
 % \subsection{字符类别设定}
@@ -206,7 +206,8 @@ may observe
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\xeCJK_class_num:n}
+% \begin{macro}[int]
+%   { \xeCJK_HalfLeft_class, \xeCJK_HalfRight_class, \xeCJK_NormalSpace_class }
 % 新增西文半角左/右标点和前后原始间距的符号类。
 %    \begin{macrocode}
 \xeCJK_new_class:n { HalfLeft }
@@ -266,11 +267,10 @@ may observe
       { \int_set:Nn \l_tmpb_int \l_tmpa_int }
       { \int_set:Nn \l_tmpb_int { #2 } }
     \int_set:Nn \l_tmpc_int { #3 }
-    \int_do_while:nn { \l_tmpa_int <= \l_tmpb_int }
-      {
-        \XeTeXcharclass \l_tmpa_int = \l_tmpc_int
-        \int_incr:N \l_tmpa_int
-      }
+    \loop
+      \XeTeXcharclass \l_tmpa_int = \l_tmpc_int
+      \int_incr:N \l_tmpa_int
+    \reverse_if:N \if_int_compare:w \l_tmpa_int > \l_tmpb_int \repeat
   }
 %    \end{macrocode}
 % \end{macro}
@@ -884,14 +884,11 @@ may observe
 %
 % 是否保留 CJK 文字间的空白，默认不保留。
 %    \begin{macrocode}
-\bool_new:N \l_xeCJK_space_bool
 \keys_define:nn { xeCJK }
   {
-    CJKspace .choice:,
-    CJKspace / true  .code:n = { \bool_set_true:N  \l_xeCJK_space_bool },
-    CJKspace / false .code:n = { \bool_set_false:N \l_xeCJK_space_bool },
-    CJKspace      .default:n = { true },
-    CJKecglue    .tl_set_x:N = \CJKecglue ,
+    CJKspace  .bool_set:N = \l_xeCJK_space_bool ,
+    CJKspace   .default:n = { true },
+    CJKecglue .tl_set_x:N = \CJKecglue,
   }
 %    \end{macrocode}
 %
@@ -923,15 +920,10 @@ may observe
 %
 % 避免单个汉字单独占一行。
 %    \begin{macrocode}
-\bool_new:N \l_xeCJK_checksingle_bool
 \keys_define:nn { xeCJK }
   {
-    CJKchecksingle .choice:,
-    CJKchecksingle / true  .code:n =
-      { \bool_set_true:N  \l_xeCJK_checksingle_bool },
-    CJKchecksingle / false .code:n =
-      { \bool_set_false:N \l_xeCJK_checksingle_bool },
-    CJKchecksingle     .default:n  = { true },
+    CJKchecksingle .bool_set:N = \l_xeCJK_checksingle_bool,
+    CJKchecksingle .default:n  = { true },
   }
 %    \end{macrocode}
 %
@@ -1010,8 +1002,12 @@ may observe
   { > { \TrimSpaces } m > { \TrimSpaces } m m }
   {
     \tl_set:Nx \l_tmpa_tl { #1/#2 }
-    \xeCJK_new_class:n { \l_tmpa_tl }
-    \clist_gset:cx { g_xeCJK_\l_tmpa_tl _range_clist } { #3 }
+    \cs_if_free:cTF { xeCJK_\l_tmpa_tl _class }
+      {
+        \xeCJK_new_class:n { \l_tmpa_tl }
+        \clist_gset:cx { g_xeCJK_\l_tmpa_tl _range_clist } { #3 }
+      }
+      { \clist_gput_right:cx { g_xeCJK_\l_tmpa_tl _range_clist } { #3 } }
     \xeCJKDeclareCharClass { \l_tmpa_tl } { #3 }
     \clist_map_inline:Nn \g_xeCJK_base_class_clist
       {
@@ -1088,6 +1084,7 @@ may observe
     \exp_args:Nx \clist_map_inline:nn { #2 }
       {
         \xeCJKDeclareCharClass { #1 } { \use:c { g_xeCJK_#1/##1_range_clist } }
+        \clist_gclear:c { g_xeCJK_#1/##1_range_clist }
       }
   }
 %    \end{macrocode}
@@ -1106,6 +1103,9 @@ may observe
 % \begin{macro}{\xeCJK_push_font:nn,\xeCJK_get_font:}
 % 缓存当前字体。
 %    \begin{macrocode}
+\bool_new:N \l_xeCJK_rmdefault_bool
+\tl_set:Nn \l_xeCJK_current_coor_tl
+  { xeCJK/\l_xeCJK_family_tl/\f@series/\f@shape/\f@size }
 \cs_new_nopar:Nn \xeCJK_get_font: { \xeCJK_push_font:nn aa }
 \cs_new_nopar:Nn \xeCJK_push_font:nn
   {
@@ -1116,12 +1116,19 @@ may observe
           {
             \tl_put_right:Nn \l_xeCJK_family_tl { /#2 }
             \cs_if_exist:cF { xeCJK/font/\l_xeCJK_family_tl }
-              { \tl_set:Nn \l_xeCJK_family_tl { \CJKrmdefault/#2 } }
+              { \bool_set_true:N \l_xeCJK_rmdefault_bool }
           }
       }
     \cs_if_exist_use:cF { \l_xeCJK_current_coor_tl }
       {
-        \cs_if_exist_use:c { xeCJK/font/\l_xeCJK_family_tl }
+        \cs_if_exist_use:cF { xeCJK/font/\l_xeCJK_family_tl }
+          {
+            \bool_if:NT \l_xeCJK_rmdefault_bool
+              {
+                \bool_gset_false:N \l_xeCJK_rmdefault_bool
+                \cs_if_exist_use:c { xeCJK/font/\CJKrmdefault/#2 }
+              }
+          }
         \group_begin:
           \get@external@font
           \exp_args:Nx
@@ -1499,7 +1506,7 @@ may observe
     AutoFakeBold / unknown .code:n =
       {
         \bool_set_true:N  \g_xeCJK_AutoFakeBold_bool
-        \fp_set:Nn \g_xeCJK_EmboldenFactor_fp {\l_keys_value_tl}
+        \fp_set:Nn \g_xeCJK_EmboldenFactor_fp { \l_keys_value_tl }
       },
     AutoFakeBold .default:n  = { true },
     AutoFakeItalic .choice:,
@@ -1510,9 +1517,9 @@ may observe
     AutoFakeItalic / unknown  .code:n =
       {
         \bool_set_true:N  \g_xeCJK_AutoFakeItalic_bool
-        \fp_set:Nn \g_xeCJK_ItalicFactor_fp {\l_keys_value_tl }
+        \fp_set:Nn \g_xeCJK_ItalicFactor_fp { \l_keys_value_tl }
       },
-    AutoFakeSlant .default:n  = { true },
+    AutoFakeItalic .default:n  = { true },
     AutoFakeSlant .choice:,
     AutoFakeSlant / true     .code:n =
       { \bool_set_true:N  \g_xeCJK_AutoFakeSlant_bool },
@@ -1521,7 +1528,7 @@ may observe
     AutoFakeSlant / unknown  .code:n =
       {
         \bool_set_true:N  \g_xeCJK_AutoFakeSlant_bool
-        \fp_set:Nn \g_xeCJK_SlantFactor_fp {\l_keys_value_tl }
+        \fp_set:Nn \g_xeCJK_SlantFactor_fp { \l_keys_value_tl }
       },
     AutoFakeSlant .default:n = { true },
     EmboldenFactor .fp_set:N = \g_xeCJK_EmboldenFactor_fp,
@@ -2042,10 +2049,10 @@ may observe
 \keys_set:nn { xeCJK }
   {
     xeCJKactive = true , CJKallowbreakbetweenpuncts = false ,
-    indentfirst = true , CJKspace = false , PunctStyle = quanjiao ,
+    indentfirst = true , CJKspace = false , CJKecglue = { \c_space_token } ,
+    CJKchecksingle = false , PunctStyle = quanjiao ,
     EmboldenFactor = 4 , ItalicFactor = .167 , SlantFactor = .167 ,
     KaiMingPunct = { ． 。？ ！ } , SpecialPunct = { — … ─ } ,
-    CJKecglue = { \c_space_token }
   }
 %    \end{macrocode}
 %
