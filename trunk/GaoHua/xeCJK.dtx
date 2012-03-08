@@ -65,11 +65,11 @@ may observe
 %
 %<*driver>
 \documentclass[full]{l3doc}
-\usepackage[CJKnumber]{xeCJK}
+\usepackage{xeCJK}
 \usepackage{metalogo}
 \usepackage{enumitem}
 \setlist{nosep}
-\setmainfont{TeX Gyre Pagella}
+\setmainfont[Ligatures=TeX]{TeX Gyre Pagella}
 \setmonofont{Inconsolata}
 \setCJKmainfont[BoldFont=SimHei]{SimSun}
 \setCJKmonofont{FangSong}
@@ -95,10 +95,12 @@ may observe
 %
 % \section{简介}
 %
-% \pkg{xeCJK} 是一个 \XeLaTeX 宏包，用于排版 CJK 文字，包括字体选择和标点控制等。主要特点：
+% \pkg{xeCJK} 是一个 \XeLaTeX 宏包，用于排版 CJK 文字，包括字体选择和标点控制
+% 等。主要特点：
 % \begin{enumerate}
 % \item 分别设置 CJK 和英文字体；
-% \item 自动忽略 CJK 文字间的空格而保留其它空格，允许在非标点汉字和英文字母间断行；
+% \item 自动忽略 CJK 文字间的空格而保留其它空格，允许在非标点汉字和英文
+% 字母 (a--z, A--Z) 间断行；
 % \item 提供多种标点处理方式： 全角式、半角式、开明式、行末半角式和 CCT 式；
 % \item 自动调整中英文间空白。
 % \end{enumerate}
@@ -152,6 +154,7 @@ may observe
 \tex_endlinechar:D \c_minus_one
 %    \end{macrocode}
 %
+% \begin{macro}{xeCJKactive}
 % \pkg{xeCJK} 功能开关。
 %    \begin{macrocode}
 \keys_define:nn { xeCJK }
@@ -162,6 +165,7 @@ may observe
     xeCJKactive      .default:n = { true },
   }
 %    \end{macrocode}
+% \end{macro}
 %
 % \subsection{字符类别设定}
 %
@@ -198,6 +202,7 @@ may observe
 % \end{macro}
 %
 % \begin{macro}{\xeCJK_new_class:n}
+% 新建一个字符类别。
 %    \begin{macrocode}
 \cs_set:Nn \xeCJK_new_class:n
   {
@@ -223,10 +228,7 @@ may observe
     Default, CJK, FullLeft, FullRight, Boundary,
     HalfLeft, HalfRight, NormalSpace
   }
-\clist_set:Nn \g_xeCJK_CJK_class_clist
-  {
-    CJK, FullLeft, FullRight
-  }
+\clist_set:Nn \g_xeCJK_CJK_class_clist { CJK, FullLeft, FullRight }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -244,15 +246,13 @@ may observe
 %    \begin{macrocode}
 \NewDocumentCommand \xeCJKDeclareCharClass { > { \TrimSpaces } m m }
   {
-    \clist_set:Nx \l_tmpa_clist { #2 }
+    \clist_set:Nx \l_tmpa_clist {#2}
     \clist_map_inline:Nn \l_tmpa_clist
-      {
-        \xeCJK_setcharclass_aux:nn { ##1 } { \xeCJK_class_num:n { #1 } }
-      }
+      { \xeCJK_setcharclass_aux:nn {##1} { \xeCJK_class_num:n {#1} } }
   }
 \NewDocumentCommand \xeCJK_setcharclass_aux:nn
   { > { \SplitArgument { 1 } { -> } } m m }
-  { \xeCJKsetcharclass #1 { #2 } }
+  { \xeCJKsetcharclass #1 {#2} }
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
@@ -262,11 +262,11 @@ may observe
 %     \begin{macrocode}
 \NewDocumentCommand \xeCJKsetcharclass { m m m }
   {
-    \int_set:Nn \l_tmpa_int { #1 }
-    \IfNoValueTF { #2 }
+    \int_set:Nn \l_tmpa_int {#1}
+    \IfNoValueTF {#2}
       { \int_set:Nn \l_tmpb_int \l_tmpa_int }
-      { \int_set:Nn \l_tmpb_int { #2 } }
-    \int_set:Nn \l_tmpc_int { #3 }
+      { \int_set:Nn \l_tmpb_int {#2} }
+    \int_set:Nn \l_tmpc_int {#3}
     \loop
       \XeTeXcharclass \l_tmpa_int = \l_tmpc_int
       \int_incr:N \l_tmpa_int
@@ -458,22 +458,22 @@ may observe
 %    \begin{macrocode}
 \NewDocumentCommand \normalspacedchars { m }
   {
-    \tl_map_inline:nn
-      { #1 }
+    \tl_map_inline:nn {#1}
       { \XeTeXcharclass `##1 = \xeCJK_class_num:n { NormalSpace } }
   }
 \normalspacedchars{/}
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\xeCJK_inter_class_toks:nnn}
+% \begin{macro}{\xeCJK_inter_class_toks:nnn,\xeCJK_inter_class_toks:nnc}
 % 在相邻类别之间插入内容。
 %    \begin{macrocode}
 \cs_set:Nn \xeCJK_inter_class_toks:nnn
   {
     \XeTeXinterchartoks
-    \xeCJK_class_num:n { #1 } \xeCJK_class_num:n { #2 } = { #3 }
+    \xeCJK_class_num:n {#1} \xeCJK_class_num:n {#2} = {#3}
   }
+\cs_generate_variant:Nn \xeCJK_inter_class_toks:nnn { nnc }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -483,7 +483,7 @@ may observe
 \cs_set:Nn \xeCJK_clear_inter_class_toks:nn
   {
     \XeTeXinterchartoks
-    \xeCJK_class_num:n { #1 } \xeCJK_class_num:n { #2 } = { \c_empty_tl }
+    \xeCJK_class_num:n {#1} \xeCJK_class_num:n {#2} = { \c_empty_tl }
   }
 %    \end{macrocode}
 % \end{macro}
@@ -496,17 +496,17 @@ may observe
     \use:x
       {
         \XeTeXinterchartoks
-        \xeCJK_class_num:n { #1 } \xeCJK_class_num:n { #2 } =
+        \xeCJK_class_num:n {#1} \xeCJK_class_num:n {#2} =
           {
-            \exp_not:n { #3 } \tex_the:D\XeTeXinterchartoks
-            \xeCJK_class_num:n { #1 } \xeCJK_class_num:n { #2 }
+            \exp_not:n {#3} \tex_the:D \XeTeXinterchartoks
+              \xeCJK_class_num:n {#1} \xeCJK_class_num:n {#2}
           }
      }
   }
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\xeCJK_app_inter_class_toks:nnn}
+% \begin{macro}{\xeCJK_app_inter_class_toks:nnn,\xeCJK_app_inter_class_toks:nnc}
 % 在相邻类别之间已有的内容后追加内容。
 %    \begin{macrocode}
 \cs_set:Nn \xeCJK_app_inter_class_toks:nnn
@@ -514,13 +514,14 @@ may observe
     \use:x
       {
         \XeTeXinterchartoks
-        \xeCJK_class_num:n { #1 } \xeCJK_class_num:n { #2 } =
+        \xeCJK_class_num:n {#1} \xeCJK_class_num:n {#2} =
           {
-            \tex_the:D \XeTeXinterchartoks \xeCJK_class_num:n { #1 }
-            \xeCJK_class_num:n { #2 } \exp_not:n { #3 }
+            \tex_the:D \XeTeXinterchartoks \xeCJK_class_num:n {#1}
+            \xeCJK_class_num:n {#2} \exp_not:n {#3}
           }
      }
   }
+\cs_generate_variant:Nn \xeCJK_app_inter_class_toks:nnn { nnc }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -530,7 +531,7 @@ may observe
 \cs_set:Nn \xeCJK_get_inter_class_toks:nn
   {
     \tex_the:D \XeTeXinterchartoks
-    \xeCJK_class_num:n { #1 } \xeCJK_class_num:n { #2 }
+    \xeCJK_class_num:n {#1} \xeCJK_class_num:n {#2}
   }
 %    \end{macrocode}
 % \end{macro}
@@ -542,8 +543,8 @@ may observe
   {
     \use:x
       {
-        \xeCJK_inter_class_toks:nnn { #1 } { #2 }
-          { \xeCJK_get_inter_class_toks:nn { #3 } { #4 } }
+        \xeCJK_inter_class_toks:nnn {#1} {#2}
+          { \xeCJK_get_inter_class_toks:nn {#3} {#4} }
       }
   }
 %    \end{macrocode}
@@ -555,9 +556,7 @@ may observe
 \cs_set_nopar:Nn \xeCJK_empty_CJK_toks:
   {
     \clist_map_inline:Nn \g_xeCJK_CJK_class_clist
-      {
-        \xeCJK_clear_inter_class_toks:nn { Boundary } { ##1 }
-      }
+      { \xeCJK_clear_inter_class_toks:nn { Boundary } {##1} }
   }
 %    \end{macrocode}
 % \end{macro}
@@ -569,21 +568,20 @@ may observe
   {
     \clist_map_inline:nn { CJK, FullLeft, FullRight }
       {
-        \xeCJK_inter_class_toks:nnn { #1 } { ##1 }
+        \xeCJK_inter_class_toks:nnn {#1} {##1}
           {
             \group_begin:
             \xeCJK_get_font:
-            \xeCJK_clear_inter_class_toks:nn { #1 } { ##1 }
+            \xeCJK_clear_inter_class_toks:nn {#1} {##1}
             \xeCJK_empty_CJK_toks:
           }
       }
-    \xeCJK_app_inter_class_toks:nnn { #1 } { CJK } { \CJKsymbol }
+    \xeCJK_app_inter_class_toks:nnn {#1} { CJK } { \CJKsymbol }
     \clist_map_inline:nn { FullLeft, FullRight }
       {
-        \xeCJK_app_inter_class_toks:nnn { #1 } { ##1 }
-          { \use:c { xeCJK_CJK_and_##1:n } }
+        \xeCJK_app_inter_class_toks:nnc {#1} {##1} { xeCJK_CJK_and_##1:n }
       }
-    \xeCJK_inter_class_toks:nnn { CJK } { #1 } { \group_end: }
+    \xeCJK_inter_class_toks:nnn { CJK } {#1} { \group_end: }
   }
 %    \end{macrocode}
 %
@@ -594,21 +592,17 @@ may observe
 %    \begin{macrocode}
 \clist_map_inline:nn { Default, HalfLeft }
   {
-    \xeCJK_inter_class_toks:nnn { Boundary } { #1 }
-      {
-        \int_compare:nT { \tex_lastkern:D = \c_one } { \c_space_token }
-      }
-    \xeCJK_app_inter_class_toks:nnn { CJK } { #1 } { \CJKecglue }
+    \xeCJK_inter_class_toks:nnn { Boundary } {#1}
+      { \int_compare:nT { \tex_lastkern:D = \c_one } { \c_space_token } }
+    \xeCJK_app_inter_class_toks:nnn { CJK } {#1} { \CJKecglue }
   }
 %    \end{macrocode}
 %
 %    \begin{macrocode}
 \clist_map_inline:nn { Default, HalfRight }
   {
-    \xeCJK_inter_class_toks:nnn { #1 } { Boundary }
-      {
-        \peek_meaning:NF \c_space_token  { { \xeCJK_zerokern: } }
-      }
+    \xeCJK_inter_class_toks:nnn {#1} { Boundary }
+      { \peek_meaning:NF \c_space_token  { { \xeCJK_zerokern: } } }
   }
 %    \end{macrocode}
 %
@@ -621,14 +615,11 @@ may observe
 \cs_set_nopar:Nn \xeCJK_Boundary_and_CJK:
   {
     {
-      \int_compare:nTF { \tex_lastkern:D = \c_one }
-        { \CJKglue }
+      \int_compare:nTF { \tex_lastkern:D = \c_one } { \CJKglue }
         {
-          \int_compare:nTF { \tex_lastkern:D = \c_four }
-            { \c_space_token }
+          \int_compare:nTF { \tex_lastkern:D = \c_four } { \c_space_token }
             {
-              \int_compare:nT  { \etex_lastnodetype:D = \c_ten }
-                { \CJKecglue }
+              \int_compare:nT  { \etex_lastnodetype:D = \c_ten } { \CJKecglue }
             }
         }
     }
@@ -655,8 +646,8 @@ may observe
 \cs_set_nopar:Nn \xeCJK_CJK_and_CJK:n
   {
     \bool_if:NTF \l_xeCJK_checksingle_bool
-      { \xeCJK_checksingle:n { #1 } }
-      { \CJKglue \CJKsymbol { #1 } }
+      { \xeCJK_checksingle:n {#1} }
+      { \CJKglue \CJKsymbol {#1} }
   }
 %    \end{macrocode}
 % \end{macro}
@@ -673,8 +664,8 @@ may observe
 %    \begin{macrocode}
 \clist_map_inline:nn { Default, HalfLeft, HalfRight, Boundary }
   {
-    \xeCJK_inter_class_toks:nnn { FullLeft } { #1 } { \nobreak \group_end: }
-    \xeCJK_inter_class_toks:nnn { FullRight } { #1 }
+    \xeCJK_inter_class_toks:nnn { FullLeft } {#1} { \nobreak \group_end: }
+    \xeCJK_inter_class_toks:nnn { FullRight } {#1}
       { \xeCJK_after_FullRight: \group_end: }
   }
 %    \end{macrocode}
@@ -682,28 +673,28 @@ may observe
 %    \begin{macrocode}
 \clist_map_inline:nn { FullLeft, FullRight }
   {
-    \xeCJK_app_inter_class_toks:nnn { #1 } { Boundary } { \tex_ignorespaces:D }
+    \xeCJK_app_inter_class_toks:nnn {#1} { Boundary } { \tex_ignorespaces:D }
   }
 %    \end{macrocode}
 %
 %    \begin{macrocode}
 \clist_map_inline:nn { CJK, FullLeft, FullRight }
   {
-    \xeCJK_inter_class_toks:nnn { NormalSpace } { #1 }
+    \xeCJK_inter_class_toks:nnn { NormalSpace } {#1}
       {
         \group_begin:
         \xeCJK_empty_CJK_toks:
         \xeCJK_get_font:
         \CJKsymbol
       }
-    \xeCJK_inter_class_toks:nnn { #1 } { NormalSpace } { \group_end: }
+    \xeCJK_inter_class_toks:nnn {#1} { NormalSpace } { \group_end: }
   }
 %    \end{macrocode}
 %
 %    \begin{macrocode}
 \clist_map_inline:nn { FullLeft, FullRight }
   {
-    \xeCJK_inter_class_toks:nnn { Boundary } { #1 }
+    \xeCJK_inter_class_toks:nnn { Boundary } {#1}
       {
         \group_begin:
         \xeCJK_empty_CJK_toks:
@@ -713,34 +704,32 @@ may observe
   }
 %    \end{macrocode}
 %
-% \begin{macro}{\xeCJK_punct_rule:n}
+% \begin{macro}{\xeCJK_punct_rule:c}
 % |#1| 为标点符号字体中的的实际左/右空白的负值，用于抹去标点符号的左/右空白。
 %    \begin{macrocode}
-\cs_set_nopar:Nn \xeCJK_punct_rule:n
+\cs_set_nopar:Nn \xeCJK_punct_rule:c
   {
-    \tex_vrule:D         \@width \use:c { #1 }
+    \tex_vrule:D         \@width \use:c {#1}
     \@depth \c_zero_dim  \@height \c_zero_dim \scan_stop:
   }
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\xeCJK_punct_skip:n}
+% \begin{macro}{\xeCJK_punct_skip:c}
 % |#1| 为根据所选的标点处理方式在标点符号左/右增加的空白。
 %    \begin{macrocode}
-\cs_set_nopar:Nn \xeCJK_punct_skip:n
+\cs_set_nopar:Nn \xeCJK_punct_skip:c
   {
-    \skip_horizontal:n { \use:c { #1 } \@plus 0.1 em \@minus 0.1 em }
+    \skip_horizontal:n {  \use:c {#1} \@plus 0.1 em \@minus 0.1 em \scan_stop: }
   }
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\xeCJK_punct_kern:n}
+% \begin{macro}{\xeCJK_punct_kern:c}
 % |#1| 为相邻两个标点之间的间距。
 %    \begin{macrocode}
-\cs_set_nopar:Nn \xeCJK_punct_kern:n
-  {
-    \tex_kern:D \use:c { #1 } \scan_stop:
-  }
+\cs_set_nopar:Nn \xeCJK_punct_kern:c
+  { \tex_kern:D \use:c {#1} \scan_stop: }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -748,9 +737,9 @@ may observe
 %    \begin{macrocode}
 \cs_set_nopar:Nn \xeCJK_before_FullLeft:n
   {
-    \tl_set:Nx \l_xeCJK_lastpunct_tl { #1 }
-    \xeCJK_punct_rule:n { \l_xeCJK_current_punct_tl/rule/l/#1 }
-    \CJKpunctsymbol { #1 }
+    \tl_set:Nx \l_xeCJK_lastpunct_tl {#1}
+    \xeCJK_punct_rule:c { \l_xeCJK_current_punct_tl/rule/l/#1 }
+    \CJKpunctsymbol {#1}
   }
 %    \end{macrocode}
 % \end{macro}
@@ -759,10 +748,8 @@ may observe
 %    \begin{macrocode}
 \cs_set_nopar:Nn \xeCJK_after_FullRight:
   {
-    \xeCJK_punct_rule:n
-      { \l_xeCJK_current_punct_tl/rule/r/\l_xeCJK_lastpunct_tl }
-    \xeCJK_punct_skip:n
-      { \l_xeCJK_current_punct_tl/glue/r/\l_xeCJK_lastpunct_tl }
+    \xeCJK_punct_rule:c { \l_xeCJK_current_punct_tl/rule/r/\l_xeCJK_lastpunct_tl }
+    \xeCJK_punct_skip:c { \l_xeCJK_current_punct_tl/glue/r/\l_xeCJK_lastpunct_tl }
   }
 %    \end{macrocode}
 % \end{macro}
@@ -771,10 +758,7 @@ may observe
 \clist_map_inline:nn { CJK, FullLeft, FullRight }
   {
     \clist_map_inline:nn { FullLeft, FullRight }
-      {
-        \xeCJK_inter_class_toks:nnn { #1 } { ##1 }
-          { \use:c { xeCJK_#1_and_##1:n } }
-      }
+      { \xeCJK_inter_class_toks:nnc {#1} {##1} { xeCJK_#1_and_##1:n } }
   }
 %    \end{macrocode}
 %
@@ -782,9 +766,9 @@ may observe
 %    \begin{macrocode}
 \cs_set_nopar:Nn \xeCJK_CJK_and_FullLeft:n
   {
-    \xeCJK_get_punct_bounds:nn { l } { #1 }
-    \xeCJK_punct_skip:n { \l_xeCJK_current_punct_tl/glue/l/#1 }
-    \xeCJK_before_FullLeft:n { #1 }
+    \xeCJK_get_punct_bounds:nn { l } {#1}
+    \xeCJK_punct_skip:c { \l_xeCJK_current_punct_tl/glue/l/#1 }
+    \xeCJK_before_FullLeft:n {#1}
   }
 %    \end{macrocode}
 % \end{macro}
@@ -793,12 +777,10 @@ may observe
 %    \begin{macrocode}
 \cs_set_nopar:Nn \xeCJK_CJK_and_FullRight:n
   {
-    \xeCJK_get_punct_bounds:nn { r } { #1 }
-    \tl_if_in:NnT \l_xeCJK_special_punct_tl { #1 }
-      { \CJKglue }
-      { \nobreak }
-    \tl_gset:Nx \l_xeCJK_lastpunct_tl { #1 }
-    \CJKpunctsymbol{ #1 }
+    \xeCJK_get_punct_bounds:nn { r } {#1}
+    \tl_if_in:NnTF \l_xeCJK_special_punct_tl {#1} { \CJKglue } { \nobreak }
+    \tl_gset:Nx \l_xeCJK_lastpunct_tl {#1}
+    \CJKpunctsymbol {#1}
   }
 %    \end{macrocode}
 % \end{macro}
@@ -808,11 +790,11 @@ may observe
 \cs_set_nopar:Nn \xeCJK_FullLeft_and_FullLeft:n
   {
     \nobreak
-    \xeCJK_get_punct_bounds:nn { l } { #1 }
-    \xeCJK_get_kern:nn  { \l_xeCJK_lastpunct_tl } { #1 }
-    \xeCJK_punct_kern:n
+    \xeCJK_get_punct_bounds:nn { l } {#1}
+    \xeCJK_get_kern:nn { \l_xeCJK_lastpunct_tl } {#1}
+    \xeCJK_punct_kern:c
       { \l_xeCJK_current_punct_tl/kern/\l_xeCJK_lastpunct_tl-#1 }
-    \xeCJK_before_FullLeft:n { #1 }
+    \xeCJK_before_FullLeft:n {#1}
   }
 %    \end{macrocode}
 % \end{macro}
@@ -822,13 +804,13 @@ may observe
 \cs_set_nopar:Nn \xeCJK_FullLeft_and_FullRight:n
   {
     \nobreak
-    \xeCJK_get_punct_bounds:nn { r } { #1 }
-    \xeCJK_get_kern:nn { \l_xeCJK_lastpunct_tl } { #1 }
-    \xeCJK_punct_kern:n
+    \xeCJK_get_punct_bounds:nn { r } {#1}
+    \xeCJK_get_kern:nn { \l_xeCJK_lastpunct_tl } {#1}
+    \xeCJK_punct_kern:c
       { \l_xeCJK_current_punct_tl/kern/\l_xeCJK_lastpunct_tl-#1 }
     \nobreak
-    \tl_set:Nx \l_xeCJK_lastpunct_tl { #1 }
-    \CJKpunctsymbol { #1 }
+    \tl_set:Nx \l_xeCJK_lastpunct_tl {#1}
+    \CJKpunctsymbol {#1}
   }
 %    \end{macrocode}
 % \end{macro}
@@ -837,14 +819,14 @@ may observe
 %    \begin{macrocode}
 \cs_set_nopar:Nn \xeCJK_FullRight_and_FullLeft:n
   {
-    \xeCJK_punct_rule:n
+    \xeCJK_punct_rule:c
       { \l_xeCJK_current_punct_tl/rule/r/\l_xeCJK_lastpunct_tl }
-    \xeCJK_get_punct_bounds:nn { l } { #1 }
-    \xeCJK_get_kern:nn { \l_xeCJK_lastpunct_tl } { #1 }
-    \xeCJK_punct_kern:n
+    \xeCJK_get_punct_bounds:nn { l } {#1}
+    \xeCJK_get_kern:nn { \l_xeCJK_lastpunct_tl } {#1}
+    \xeCJK_punct_kern:c
       { \l_xeCJK_current_punct_tl/kern/\l_xeCJK_lastpunct_tl-#1 }
     \xeCJK_punct_nobreak:
-    \xeCJK_before_FullLeft:n { #1 }
+    \xeCJK_before_FullLeft:n {#1}
  }
 %    \end{macrocode}
 % \end{macro}
@@ -853,15 +835,15 @@ may observe
 %    \begin{macrocode}
 \cs_set_nopar:Nn \xeCJK_FullRight_and_FullRight:n
   {
-    \xeCJK_punct_rule:n
+    \xeCJK_punct_rule:c
       { \l_xeCJK_current_punct_tl/rule/r/\l_xeCJK_lastpunct_tl }
-    \xeCJK_get_punct_bounds:nn { r } { #1 }
-    \xeCJK_get_kern:nn { \l_xeCJK_lastpunct_tl } { #1 }
-    \xeCJK_punct_kern:n
+    \xeCJK_get_punct_bounds:nn { r } {#1}
+    \xeCJK_get_kern:nn { \l_xeCJK_lastpunct_tl } {#1}
+    \xeCJK_punct_kern:c
       { \l_xeCJK_current_punct_tl/kern/\l_xeCJK_lastpunct_tl-#1 }
     \nobreak
-    \tl_set:Nx \l_xeCJK_lastpunct_tl { #1 }
-    \CJKpunctsymbol { #1 }
+    \tl_set:Nx \l_xeCJK_lastpunct_tl {#1}
+    \CJKpunctsymbol {#1}
   }
 %    \end{macrocode}
 % \end{macro}
@@ -869,9 +851,7 @@ may observe
 % \begin{macro}{\CJKglue}
 %     \begin{macrocode}
 \cs_new_nopar:Npn \CJKglue
-  {
-    \skip_horizontal:n { \c_zero_skip \@plus .08\baselineskip }
-  }
+  { \skip_horizontal:n { \c_zero_skip \@plus .08\baselineskip } }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -882,15 +862,26 @@ may observe
 %    \end{macrocode}
 % \end{macro}
 %
+% \begin{macro}{CJKecglue}
+% CJK 与西文和数学行内数学公式之间自动添加的空白。
+%    \begin{macrocode}
+\keys_define:nn { xeCJK }
+  {
+    CJKecglue .tl_set_x:N = \CJKecglue,
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{CJKspace}
 % 是否保留 CJK 文字间的空白，默认不保留。
 %    \begin{macrocode}
 \keys_define:nn { xeCJK }
   {
     CJKspace  .bool_set:N = \l_xeCJK_space_bool ,
     CJKspace   .default:n = { true },
-    CJKecglue .tl_set_x:N = \CJKecglue,
   }
 %    \end{macrocode}
+% \end{macro}
 %
 % \begin{macro}{\xeCJK_ignorespaces:}
 %     \begin{macrocode}
@@ -918,6 +909,7 @@ may observe
 %    \end{macrocode}
 % \end{macro}
 %
+% \begin{macro}{CJKchecksingle}
 % 避免单个汉字单独占一行。
 %    \begin{macrocode}
 \keys_define:nn { xeCJK }
@@ -926,6 +918,7 @@ may observe
     CJKchecksingle .default:n  = { true },
   }
 %    \end{macrocode}
+% \end{macro}
 %
 % \begin{macro}{\xeCJK_checksingle:n}
 % \begin{macro}[aux]{\xeCJK_checksingle_aux:n}
@@ -934,11 +927,10 @@ may observe
   {
     \peek_catcode:NTF \c_catcode_other_token
       {
-        \tl_set:Nn \l_xeCJK_last_char_tl { \CJKsymbol { #1 } }
+        \tl_set:Nn \l_xeCJK_last_char_tl { \CJKsymbol {#1} }
         \xeCJK_checksingle_aux:n
-      }{
-        \CJKglue \CJKsymbol { #1 }
       }
+      { \CJKglue \CJKsymbol {#1} }
   }
 \cs_set_nopar:Nn \xeCJK_checksingle_aux:n
   {
@@ -980,11 +972,11 @@ may observe
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\xeCJKDeclareSubCJKBlock, \xeCJKCancelSubCJKBlock}
+% \begin{macro}{\xeCJKDeclareSubCJKBlock}
 % 声明 CJK 子区范围，|#1| 为自定义名称，|#2| 为子区的 |Unicode| 范围。
 %    \begin{macrocode}
 \NewDocumentCommand \xeCJKDeclareSubCJKBlock { m m }
-  { \xeCJKDeclareSubCharClass { CJK } { #1 } { #2 } }
+  { \xeCJKDeclareSubCharClass { CJK } {#1} {#2} }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -992,7 +984,7 @@ may observe
 % 取消对 CJK 子区的声明。
 %    \begin{macrocode}
 \NewDocumentCommand \xeCJKCancelSubCJKBlock { m }
-  { \xeCJKCancelSubCharClass { CJK } { #1 } }
+  { \xeCJKCancelSubCharClass { CJK } {#1} }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -1005,69 +997,64 @@ may observe
     \cs_if_free:cTF { xeCJK_\l_tmpa_tl _class }
       {
         \xeCJK_new_class:n { \l_tmpa_tl }
-        \clist_gset:cx { g_xeCJK_\l_tmpa_tl _range_clist } { #3 }
+        \clist_gset:cx { g_xeCJK_\l_tmpa_tl _range_clist } {#3}
       }
-      { \clist_gput_right:cx { g_xeCJK_\l_tmpa_tl _range_clist } { #3 } }
-    \xeCJKDeclareCharClass { \l_tmpa_tl } { #3 }
+      { \clist_gput_right:cx { g_xeCJK_\l_tmpa_tl _range_clist } {#3} }
+    \xeCJKDeclareCharClass { \l_tmpa_tl } {#3}
     \clist_map_inline:Nn \g_xeCJK_base_class_clist
       {
-        \xeCJK_copy_inter_class_toks:nnnn
-          {  \l_tmpa_tl } { ##1 } {  #1 } { ##1 }
-        \xeCJK_copy_inter_class_toks:nnnn
-          { ##1 } {  \l_tmpa_tl } { ##1 } {  #1 }
-        \bool_if:nTF { \str_if_eq_p:xx { ##1 } { CJK } }
+        \xeCJK_copy_inter_class_toks:nnnn { \l_tmpa_tl } {##1} {#1}  {##1}
+        \xeCJK_copy_inter_class_toks:nnnn {##1} { \l_tmpa_tl } {##1} {#1}
+        \bool_if:nTF { \str_if_eq_p:xx {##1} { CJK } }
           {
-            \xeCJK_pre_inter_class_toks:nnn {  ##1 } { \l_tmpa_tl }
-              { \xeCJK_push_font:nn { #1 } { #2 } }
+            \xeCJK_pre_inter_class_toks:nnn {##1} { \l_tmpa_tl }
+              { \xeCJK_push_font:nn {#1} {#2} }
           }
           {
-            \xeCJK_pre_inter_class_toks:nnn {  ##1 } { \l_tmpa_tl }
+            \xeCJK_pre_inter_class_toks:nnn {##1} { \l_tmpa_tl }
               { \xeCJK_erase_CJKsymbol: }
-            \xeCJK_app_inter_class_toks:nnn {  ##1 } { \l_tmpa_tl }
-              { \xeCJK_push_font:nn { #1 } { #2 } \xeCJK_restore_CJKsymbol: }
+            \xeCJK_app_inter_class_toks:nnn {##1} { \l_tmpa_tl }
+              { \xeCJK_push_font:nn {#1} {#2} \xeCJK_restore_CJKsymbol: }
           }
     }
-    \xeCJK_copy_inter_class_toks:nnnn
-      { \l_tmpa_tl } { \l_tmpa_tl } { #1 } { #1 }
+    \xeCJK_copy_inter_class_toks:nnnn { \l_tmpa_tl } { \l_tmpa_tl } {#1} {#1}
     \clist_if_empty:NF \g_xeCJK_CJK_subclass_clist
       {
         \clist_map_inline:Nn \g_xeCJK_CJK_subclass_clist
           {
-            \xeCJK_copy_inter_class_toks:nnnn
-              { \l_tmpa_tl } { #1/##1 } { #1 } { #1 }
-            \xeCJK_copy_inter_class_toks:nnnn
-              { #1/##1 } { \l_tmpa_tl } { #1 } { #1 }
+            \xeCJK_copy_inter_class_toks:nnnn { \l_tmpa_tl } { #1/##1 } {#1} {#1}
+            \xeCJK_copy_inter_class_toks:nnnn { #1/##1 } { \l_tmpa_tl } {#1} {#1}
             \xeCJK_pre_inter_class_toks:nnn { \l_tmpa_tl } { #1/##1 }
-              { \xeCJK_push_font:nn { #2 } { ##1 } }
+              { \xeCJK_push_font:nn {#2} {##1} }
             \xeCJK_pre_inter_class_toks:nnn { #1/##1 } { \l_tmpa_tl }
-              { \xeCJK_push_font:nn { ##1 } { #2 } }
+              { \xeCJK_push_font:nn {##1} {#2} }
           }
       }
-    \clist_gput_right:Nn \g_xeCJK_CJK_subclass_clist { #2 }
+    \clist_gput_right:Nn \g_xeCJK_CJK_subclass_clist {#2}
     \exp_args:NNx \clist_gput_right:Nn \g_xeCJK_CJK_class_clist \l_tmpa_tl
     \clist_map_inline:nn { CJK, FullLeft, FullRight }
       {
-        \xeCJK_pre_inter_class_toks:nnn { \l_tmpa_tl } { ##1 }
-          { \xeCJK_push_font:nn { #2 } { #1 } }
+        \xeCJK_pre_inter_class_toks:nnn { \l_tmpa_tl } {##1}
+          { \xeCJK_push_font:nn {#2} {#1} }
       }
-    \xeCJK_new_features_key:n { #2 }
+    \xeCJK_new_features_key:n {#2}
     \tl_put_right:Nn \xeCJK_UL_subclass_patch_tl
       {
         \clist_map_inline:nn { Default, HalfLeft, HalfRight }
           {
-            \bool_if:nTF { \str_if_eq_p:xx { ##1 } { HalfLeft } }
+            \bool_if:nTF { \str_if_eq_p:xx {##1} { HalfLeft } }
               {
-                \xeCJK_inter_class_toks:nnn { #1 } { #1/#2 }
+                \xeCJK_inter_class_toks:nnn {#1} { #1/#2 }
                   { \CJKecglue \CJKsymbol }
               }
               {
-                \xeCJK_inter_class_toks:nnn { #1 } { #1/#2 } { \CJKsymbol }
+                \xeCJK_inter_class_toks:nnn {#1} { #1/#2 } { \CJKsymbol }
               }
             \xeCJK_inter_class_toks:nnn { Boundary } { #1/#2 }
               {
                 \xeCJK_erase_CJKsymbol:
                 \xeCJK_Boundary_and_CJK:
-                \xeCJK_push_font:nn { #1 } { #2 }
+                \xeCJK_push_font:nn {#1} {#2}
                 \xeCJK_restore_CJKsymbol:
               }
           }
@@ -1081,9 +1068,9 @@ may observe
 \NewDocumentCommand \xeCJKCancelSubCharClass
   { > { \TrimSpaces } m > { \TrimSpaces } m }
   {
-    \exp_args:Nx \clist_map_inline:nn { #2 }
+    \exp_args:Nx \clist_map_inline:nn {#2}
       {
-        \xeCJKDeclareCharClass { #1 } { \use:c { g_xeCJK_#1/##1_range_clist } }
+        \xeCJKDeclareCharClass {#1} { \use:c { g_xeCJK_#1/##1_range_clist } }
         \clist_gclear:c { g_xeCJK_#1/##1_range_clist }
       }
   }
@@ -1104,15 +1091,13 @@ may observe
 % 缓存当前字体。
 %    \begin{macrocode}
 \bool_new:N \l_xeCJK_rmdefault_bool
-\tl_set:Nn \l_xeCJK_current_coor_tl
-  { xeCJK/\l_xeCJK_family_tl/\f@series/\f@shape/\f@size }
 \cs_new_nopar:Nn \xeCJK_get_font: { \xeCJK_push_font:nn aa }
 \cs_new_nopar:Nn \xeCJK_push_font:nn
   {
-    \str_if_eq:xxF { #1 } { #2 }
+    \str_if_eq:xxF {#1} {#2}
       {
         \tl_remove_once:Nn \l_xeCJK_family_tl { /#1 }
-        \str_if_eq:xxF { #2 } { CJK }
+        \str_if_eq:xxF {#2} { CJK }
           {
             \tl_put_right:Nn \l_xeCJK_family_tl { /#2 }
             \cs_if_exist:cF { xeCJK/font/\l_xeCJK_family_tl }
@@ -1126,7 +1111,12 @@ may observe
             \bool_if:NT \l_xeCJK_rmdefault_bool
               {
                 \bool_gset_false:N \l_xeCJK_rmdefault_bool
-                \cs_if_exist_use:c { xeCJK/font/\CJKrmdefault/#2 }
+                \cs_if_exist_use:cF { xeCJK/font/\CJKrmdefault/#2 }
+                  {
+                    \tl_set:Nx \l_tmpa_tl \l_xeCJK_family_tl
+                    \tl_remove_once:Nn \l_tmpa_tl { /#2 }
+                    \cs_if_exist_use:c { xeCJK/font/\l_tmpa_tl }
+                  }
               }
           }
         \group_begin:
@@ -1135,7 +1125,7 @@ may observe
         \group_end:
           {
             \exp_args:NNc \tex_global:D \tex_font:D
-              { \l_xeCJK_current_coor_tl } = \external@font
+              \l_xeCJK_current_coor_tl = \external@font
           }
       }
   }
@@ -1144,14 +1134,27 @@ may observe
 %
 % \subsection{标点处理}
 %
+% \begin{macro}{\g_xeCJK_punctstyle_clist}
 % 标点处理方式。
 %    \begin{macrocode}
 \clist_set:Nx \g_xeCJK_punctstyle_clist
   { CCT , halfwidth , fullwidth , marginkerning , mixedwidth , plain }
 \clist_map_inline:Nn \g_xeCJK_punctstyle_clist
-  { \tl_const:cn { c_xeCJK_ps_#1_tl } { #1 } }
+  { \tl_const:cn { c_xeCJK_ps_#1_tl } {#1} }
 %    \end{macrocode}
+% \end{macro}
+
+% \begin{macro}{\keys_choices_generate:V, .generate_choices:V}
+%    \begin{macrocode}
+\cs_if_free:NT \keys_choices_generate:V
+  { \cs_generate_variant:Nn \keys_choices_generate:n { V } }
+\cs_new_protected:cpn { \c_keys_props_root_tl .generate_choices:V } #1
+  { \keys_choices_generate:V {#1} }
+%    \end{macrocode}
+% \end{macro}
 %
+% \begin{macro}
+%    {CJKallowbreakbetweenpuncts, PunctStyle, KaiMingPunct, SpecialPunct}
 % 相关选项声明。
 %    \begin{macrocode}
 \keys_define:nn { xeCJK }
@@ -1167,21 +1170,21 @@ may observe
     CJKallowbreakbetweenpuncts .default:n  = { true },
     KaiMingPunct  .tl_set_x:N = \l_xeCJK_mixedwidth_punct_tl ,
     KaiMingPunct+ .code:n =
-      { \tl_put_right:Nx \l_xeCJK_mixedwidth_punct_tl { #1 } },
+      { \tl_put_right:Nx \l_xeCJK_mixedwidth_punct_tl {#1} },
     KaiMingPunct- .code:n =
       {
-        \tl_set:Nx \l_tmpa_tl { #1 }
+        \tl_set:Nx \l_tmpa_tl {#1}
         \tl_map_inline:Nn \l_tmpa_tl
-          { \tl_remove_all:Nn \l_xeCJK_mixedwidth_punct_tl { ##1 } }
+          { \tl_remove_all:Nn \l_xeCJK_mixedwidth_punct_tl {##1} }
       },
     SpecialPunct  .tl_set_x:N = \l_xeCJK_special_punct_tl ,
     SpecialPunct+ .code:n =
-      { \tl_put_right:Nx \l_xeCJK_special_punct_tl { #1 } },
+      { \tl_put_right:Nx \l_xeCJK_special_punct_tl {#1} },
     SpecialPunct- .code:n =
       {
-        \tl_set:Nx \l_tmpa_tl { #1 }
+        \tl_set:Nx \l_tmpa_tl {#1}
         \tl_map_inline:Nn \l_tmpa_tl
-          { \tl_remove_all:Nn \l_xeCJK_special_punct_tl { ##1 } }
+          { \tl_remove_all:Nn \l_xeCJK_special_punct_tl {##1} }
       },
     PunctStyle .choice_code:n =
       {
@@ -1191,10 +1194,7 @@ may observe
             \keys_set:nn { xeCJK } { CJKallowbreakbetweenpuncts = true }
           }
       },
-    PunctStyle .generate_choices:n =
-      {
-        CCT , halfwidth , fullwidth , marginkerning , mixedwidth , plain
-      },
+    PunctStyle .generate_choices:V = \g_xeCJK_punctstyle_clist,
     PunctStyle / banjiao       .meta:n = { PunctStyle = halfwidth },
     PunctStyle / quanjiao      .meta:n = { PunctStyle = fullwidth },
     PunctStyle / kaiming       .meta:n = { PunctStyle = mixedwidth },
@@ -1202,12 +1202,19 @@ may observe
     PunctStyle .default:n  = { fullwidth },
     PunctStyle / unknown .code:n =
       {
-        \PackageError { xeCJK }
-          { Punctstyle~ "\l_keys_value_tl"~ is~ not~ defined. }
+        \PackageError { xeCJK } { Punctstyle~"\l_keys_value_tl"~is~not~defined. }
       },
   }
-\bool_new:N \l_xeCJK_punct_dokerning_bool
 %    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\dim_set:Nv,\dim_add:Nv,\dim_set_min:Nv}
+%    \begin{macrocode}
+\cs_if_free:NT \dim_set:Nv { \cs_generate_variant:Nn \dim_set:Nn { Nv } }
+\cs_if_free:NT \dim_add:Nv { \cs_generate_variant:Nn \dim_add:Nn { Nv } }
+\cs_if_free:NT \dim_set_min:Nv { \cs_generate_variant:Nn \dim_set_min:Nn { Nv } }
+%    \end{macrocode}
+% \end{macro}
 %
 % \begin{macro}{\l_xeCJK_current_punct_tl}
 % 记录当前字体状态下的标点处理方式。
@@ -1222,6 +1229,7 @@ may observe
 % 决定添加的左/右空白。全角方式直接添加标点的实际左/右空白；半角方式添加标点左右空白
 % 中的最小值；开明方式空半角，只在开明标点再增加实际左/右空白的一半。
 %     \begin{macrocode}
+\bool_new:N \l_xeCJK_punct_dokerning_bool
 \cs_set_nopar:Nn \xeCJK_get_punct_bounds:nn
   {
     \cs_if_free:cT { \l_xeCJK_current_punct_tl/rule/#1/#2 }
@@ -1229,51 +1237,50 @@ may observe
         \cs_if_free:cT { \l_xeCJK_current_punct_tl/space/#1/#2 }
           {
             \group_begin:
-              \xeCJK_get_font: \xeCJK_get_punct_dimen:n { #2 }
+              \xeCJK_get_font: \xeCJK_get_punct_dimen:n {#2}
             \group_end:
           }
         \bool_set_true:N \l_xeCJK_punct_dokerning_bool
         \tl_if_eq:NNTF \l_xeCJK_punctstyle_tl \c_xeCJK_ps_plain_tl
           { \bool_set_false:N \l_xeCJK_punct_dokerning_bool }
           {
-            \tl_if_in:NnT \l_xeCJK_special_punct_tl { #2 }
+            \tl_if_in:NnT \l_xeCJK_special_punct_tl {#2}
               { \bool_set_false:N \l_xeCJK_punct_dokerning_bool }
           }
         \bool_if:NTF \l_xeCJK_punct_dokerning_bool
           {
-            \dim_set:Nn \l_tmpa_dim
-              { \use:c { \l_xeCJK_current_punct_tl/space/#1/#2 } }
-            \str_if_eq:xxTF { #1 } { l }
+            \dim_set:Nv \l_tmpa_dim { \l_xeCJK_current_punct_tl/space/#1/#2 }
+            \str_if_eq:xxTF {#1} { l }
               { \tl_set:Nn \l_tmpa_tl { r } }
               { \tl_set:Nn \l_tmpa_tl { l } }
-            \dim_set:Nn \l_tmpb_dim
-              { \use:c { \l_xeCJK_current_punct_tl/space/\l_tmpa_tl/#2 } }
-            \dim_set_min:Nn \l_tmpb_dim { \l_tmpa_dim }
+            \dim_set:Nv \l_tmpb_dim
+              { \l_xeCJK_current_punct_tl/space/\l_tmpa_tl/#2 }
+            \dim_set_min:Nn \l_tmpb_dim \l_tmpa_dim
             \prg_case_tl:Nnn \l_xeCJK_punctstyle_tl
-            {
-              \c_xeCJK_ps_halfwidth_tl { \prg_do_nothing: }
-              \c_xeCJK_ps_mixedwidth_tl
-                {
-                  \tl_if_in:NnT \l_xeCJK_mixedwidth_punct_tl { #2 }
-                    { \dim_add:Nn \l_tmpb_dim { .5\l_tmpa_dim } }
-                }
-              \c_xeCJK_ps_CCT_tl
-                {
-                  \tl_if_in:NnTF \l_xeCJK_mixedwidth_punct_tl { #2 }
-                    { \dim_add:Nn \l_tmpb_dim { .5\l_tmpa_dim } }
-                    { \dim_add:Nn \l_tmpb_dim { .2\l_tmpa_dim } }
-                }
-            }
-            { \dim_set_eq:NN \l_tmpb_dim \l_tmpa_dim }
-            \dim_set_max:Nn \l_tmpb_dim { \c_zero_dim }
-          } {
+              {
+                \c_xeCJK_ps_halfwidth_tl { \prg_do_nothing: }
+                \c_xeCJK_ps_mixedwidth_tl
+                  {
+                    \tl_if_in:NnT \l_xeCJK_mixedwidth_punct_tl {#2}
+                      { \dim_add:Nn \l_tmpb_dim { .5\l_tmpa_dim } }
+                  }
+                \c_xeCJK_ps_CCT_tl
+                  {
+                    \tl_if_in:NnTF \l_xeCJK_mixedwidth_punct_tl {#2}
+                      { \dim_add:Nn \l_tmpb_dim { .5\l_tmpa_dim } }
+                      { \dim_add:Nn \l_tmpb_dim { .2\l_tmpa_dim } }
+                  }
+              }
+              { \dim_set_eq:NN \l_tmpb_dim \l_tmpa_dim }
+            \dim_set_max:Nn \l_tmpb_dim \c_zero_dim
+          }
+          {
             \dim_zero:N \l_tmpa_dim
             \dim_zero:N \l_tmpb_dim
           }
           \tl_gset:cx { \l_xeCJK_current_punct_tl/rule/#1/#2 }
             { - \dim_use:N \l_tmpa_dim }
-          \tl_gset:cx { \l_xeCJK_current_punct_tl/glue/#1/#2 }
-            { \dim_use:N \l_tmpb_dim }
+          \tl_gset:cV { \l_xeCJK_current_punct_tl/glue/#1/#2 } \l_tmpb_dim
       }
   }
 %    \end{macrocode}
@@ -1289,43 +1296,41 @@ may observe
       {
         \dim_zero:N \l_tmpa_dim
         \prg_case_tl:Nnn \l_xeCJK_punctstyle_tl
-        {
-          \c_xeCJK_ps_marginkerning_tl
-            {
-              \cs_if_exist:cT { \l_xeCJK_current_punct_tl/glue/r/#1 }
-                {
-                  \dim_add:Nn \l_tmpa_dim
-                    { \use:c { \l_xeCJK_current_punct_tl/glue/r/#1 } }
-                }
-              \cs_if_exist:cT { \l_xeCJK_current_punct_tl/glue/l/#2 }
-                {
-                  \dim_add:Nn \l_tmpa_dim
-                    { \use:c { \l_xeCJK_current_punct_tl/glue/l/#2 } }
-                }
-            }
-          \c_xeCJK_ps_fullwidth_tl
-            { \xeCJK_get_kern_aux:Nnnn \l_tmpa_dim { 1.5 em } { #1 } { #2 } }
-        } {
-          \xeCJK_get_kern_aux:Nnnn \l_tmpa_dim { 1 em } { #1 } { #2 }
-          \dim_compare:nT { \l_tmpa_dim < .1 em }
-            {
-              \cs_if_exist:cT { \l_xeCJK_current_punct_tl/glue/l/#2 }
-                {
-                  \dim_set:Nn \l_tmpa_dim
-                    { \use:c { \l_xeCJK_current_punct_tl/space/l/#1 } }
-                  \dim_set_min:Nn \l_tmpa_dim
-                    { \use:c { \l_xeCJK_current_punct_tl/space/r/#1 } }
-                }
-            }
-          \cs_if_exist:cT { \l_xeCJK_current_punct_tl/glue/r/#2 }
-            {
-              \dim_set_min:Nn \l_tmpa_dim
-                { \use:c { \l_xeCJK_current_punct_tl/glue/r/#2 } }
-            }
-        }
-        \dim_set_max:Nn \l_tmpa_dim { \c_zero_dim }
-        \tl_gset:cx { \l_xeCJK_current_punct_tl/kern/#1-#2 }
-          { \dim_use:N \l_tmpa_dim }
+          {
+            \c_xeCJK_ps_marginkerning_tl
+              {
+                \cs_if_exist:cT { \l_xeCJK_current_punct_tl/glue/r/#1 }
+                  {
+                    \dim_add:Nv \l_tmpa_dim { \l_xeCJK_current_punct_tl/glue/r/#1 }
+                  }
+                \cs_if_exist:cT { \l_xeCJK_current_punct_tl/glue/l/#2 }
+                  {
+                    \dim_add:Nv \l_tmpa_dim { \l_xeCJK_current_punct_tl/glue/l/#2 }
+                  }
+              }
+            \c_xeCJK_ps_fullwidth_tl
+              { \xeCJK_get_kern_aux:Nnnn \l_tmpa_dim { 1.5 em } {#1} {#2} }
+          }
+          {
+            \xeCJK_get_kern_aux:Nnnn \l_tmpa_dim { 1 em } {#1} {#2}
+            \dim_compare:nT { \l_tmpa_dim < .1 em }
+              {
+                \cs_if_exist:cT { \l_xeCJK_current_punct_tl/glue/l/#2 }
+                  {
+                    \dim_set:Nv \l_tmpa_dim
+                      { \l_xeCJK_current_punct_tl/space/l/#1 }
+                    \dim_set_min:Nv \l_tmpa_dim
+                      { \l_xeCJK_current_punct_tl/space/r/#1 }
+                  }
+              }
+            \cs_if_exist:cT { \l_xeCJK_current_punct_tl/glue/r/#2 }
+              {
+                \dim_set_min:Nv \l_tmpa_dim
+                  { \l_xeCJK_current_punct_tl/glue/r/#2 }
+              }
+          }
+        \dim_set_max:Nn \l_tmpa_dim \c_zero_dim
+        \tl_gset:cV { \l_xeCJK_current_punct_tl/kern/#1-#2 } \l_tmpa_dim
     }
   }
 %    \end{macrocode}
@@ -1339,21 +1344,11 @@ may observe
   {
     \dim_zero:N \l_tmpb_dim
     \cs_if_exist:cTF { \l_xeCJK_current_punct_tl/glue/r/#3 }
-      {
-        \dim_add:Nn \l_tmpb_dim
-          { \use:c { \l_xeCJK_current_punct_tl/space/l/#3 } }
-      } {
-        \dim_add:Nn \l_tmpb_dim
-          { \use:c { \l_xeCJK_current_punct_tl/glue/l/#3 } }
-      }
+      { \dim_add:Nv \l_tmpb_dim { \l_xeCJK_current_punct_tl/space/l/#3 } }
+      { \dim_add:Nv \l_tmpb_dim { \l_xeCJK_current_punct_tl/glue/l/#3 } }
     \cs_if_exist:cTF { \l_xeCJK_current_punct_tl/glue/l/#4 }
-      {
-        \dim_add:Nn \l_tmpb_dim
-          { \use:c { \l_xeCJK_current_punct_tl/space/r/#4 } }
-      } {
-        \dim_add:Nn \l_tmpb_dim
-          { \use:c { \l_xeCJK_current_punct_tl/glue/r/#4 } }
-      }
+      { \dim_add:Nv \l_tmpb_dim { \l_xeCJK_current_punct_tl/space/r/#4 } }
+      { \dim_add:Nv \l_tmpb_dim { \l_xeCJK_current_punct_tl/glue/r/#4 } }
     \dim_set:Nn #1
       {
         #2 - \l_tmpb_dim
@@ -1369,22 +1364,20 @@ may observe
 %    \begin{macrocode}
 \cs_set:Nn \xeCJK_get_punct_dimen:n
   {
-    \xeCJK_get_glyph_bounds:nn { left } { #1 }
-    \tl_gset:cx { \l_xeCJK_current_punct_tl/space/l/#1 }
-      { \dim_use:N \l_xeCJK_glyph_bounds_dim }
+    \xeCJK_get_glyph_bounds:nn { left } {#1}
+    \tl_gset:cV { \l_xeCJK_current_punct_tl/space/l/#1 } \l_xeCJK_glyph_bounds_dim
     \dim_set_eq:NN \l_tmpa_dim \l_xeCJK_glyph_bounds_dim
-    \xeCJK_get_glyph_bounds:nn { right } { #1 }
-    \tl_gset:cx { \l_xeCJK_current_punct_tl/space/r/#1 }
-      { \dim_use:N \l_xeCJK_glyph_bounds_dim }
+    \xeCJK_get_glyph_bounds:nn { right } {#1}
+    \tl_gset:cV { \l_xeCJK_current_punct_tl/space/r/#1 } \l_xeCJK_glyph_bounds_dim
     \dim_add:Nn \l_tmpa_dim \l_xeCJK_glyph_bounds_dim
     \tl_gset:cx { \l_xeCJK_current_punct_tl/dimen/#1 }
       { \dim_eval:n { 1 em - \l_tmpa_dim } }
-    \tl_if_in:NnT \l_xeCJK_special_punct_tl { #1 }
+    \tl_if_in:NnT \l_xeCJK_special_punct_tl {#1}
       {
-        \str_if_eq:xxF { #1 } { … }
+        \str_if_eq:xxF {#1} { … }
           {
             \exp_args:NNo \clist_remove_all:Nn
-            \g_xeCJK_punctstyle_clist \c_xeCJK_ps_plain_tl
+              \g_xeCJK_punctstyle_clist \c_xeCJK_ps_plain_tl
             \clist_map_inline:Nn \g_xeCJK_punctstyle_clist
               {
                 \tl_gset:cx { \l_xeCJK_current_coor_tl/##1/kern/#1-#1 }
@@ -1402,12 +1395,14 @@ may observe
 \dim_zero_new:N \l_xeCJK_glyph_bounds_dim
 \cs_set_nopar:Nn \xeCJK_get_glyph_bounds:nn
   {
-    \prg_case_str:xxn { #1 } {
-      { left   } { \int_set:Nn \l_tmpa_int \c_one   }
-      { top    } { \int_set:Nn \l_tmpa_int \c_two   }
-      { right  } { \int_set:Nn \l_tmpa_int \c_three }
-      { bottom } { \int_set:Nn \l_tmpa_int \c_four  }
-    } { \prg_do_nothing: }
+    \prg_case_str:xxn {#1}
+      {
+        { left   } { \int_set:Nn \l_tmpa_int \c_one   }
+        { top    } { \int_set:Nn \l_tmpa_int \c_two   }
+        { right  } { \int_set:Nn \l_tmpa_int \c_three }
+        { bottom } { \int_set:Nn \l_tmpa_int \c_four  }
+      }
+      { \prg_do_nothing: }
     \dim_set:Nn \l_xeCJK_glyph_bounds_dim
       { \XeTeXglyphbounds \l_tmpa_int \int_eval:n { \XeTeXcharglyph `#2 } }
   }
@@ -1418,12 +1413,13 @@ may observe
 % 手动设置相邻标点的距离，仅在当前字体状态下有效。
 %    \begin{macrocode}
 \NewDocumentCommand \xeCJKsetkern  { m m m }
-  { \tl_gset:cx { \l_xeCJK_current_punct_tl/kern/#1-#2 } { #3 } }
+  { \tl_gset:cx { \l_xeCJK_current_punct_tl/kern/#1-#2 } {#3} }
 %    \end{macrocode}
 % \end{macro}
 %
 % \subsection{后备字体}
 %
+% \begin{macro}{AutoFallBack, FallBack}
 % 后备字体的宏包选项声明。
 %    \begin{macrocode}
 \keys_define:nn { xeCJK }
@@ -1432,12 +1428,13 @@ may observe
     AutoFallBack / true  .code:n = { \xeCJKenablefallback },
     AutoFallBack / false .code:n = { \xeCJKdisablefallback },
     AutoFallBack      .default:n = { true },
-    FallBack     .meta:n = { AutoFallBack = #1 },
-    fallback     .meta:n = { AutoFallBack = #1 },
-    FallBack .default:n  = { true },
-    fallback .default:n  = { true },
+    FallBack    .meta:n = { AutoFallBack = #1 },
+    fallback    .meta:n = { AutoFallBack = #1 },
+    FallBack .default:n = { true },
+    fallback .default:n = { true },
   }
 %    \end{macrocode}
+% \end{macro}
 %
 % \begin{macro}{\xeCJKenablefallback, \xeCJKdisablefallback}
 % 后备字体的启用开关，默认关闭。
@@ -1446,12 +1443,12 @@ may observe
   {
     \cs_set_eq:NN \xeCJK_fallback_CJKsymbol \CJKsymbol
     \cs_set_nopar:Npn \CJKsymbol ##1
-      { \xeCJK_fallback_CJKsymbol { \xeCJK_fallback_testsymbol:n { ##1 } } }
+      { \xeCJK_fallback_CJKsymbol { \xeCJK_fallback_testsymbol:n {##1} } }
   }
 \NewDocumentCommand \xeCJKdisablefallback { }
   { \cs_set_eq:NN \CJKsymbol \xeCJK_fallback_CJKsymbol }
 \NewDocumentCommand \setCJKfallbackfamilyfont { m O{} m }
-  { \xeCJK_setCJKfamilyfont:nnn { #1/FallBack } { #2 } { #3 } }
+  { \xeCJK_setCJKfamilyfont:nnn { #1/FallBack } {#2} {#3} }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -1464,8 +1461,7 @@ may observe
       #1
     \else:
       \group_begin:
-        \cs_if_exist_use:c
-          { xeCJK/font/\l_xeCJK_family_tl/FallBack }
+        \cs_if_exist_use:c { xeCJK/font/\l_xeCJK_family_tl/FallBack }
         \reverse_if:N \etex_iffontchar:D \tex_font:D `#1 \scan_stop:
           \cs_if_exist_use:c { xeCJK/font/\l_xeCJK_family_tl/FallBack/FallBack }
         \fi:
@@ -1494,7 +1490,10 @@ may observe
 \fp_new:N \l_xeCJK_SlantFactor_fp
 %    \end{macrocode}
 %
-% 伪粗体、伪斜体、后备字体等宏包选项声明。
+% \begin{macro}
+%    {AutoFakeBold, AutoFakeItalic, AutoFakeSlant, EmboldenFactor,
+%     ItalicFactor, SlantFactor, BoldFont, SlantFont}
+% 伪粗体和伪斜体的宏包选项声明。
 %    \begin{macrocode}
 \keys_define:nn { xeCJK }
   {
@@ -1544,6 +1543,7 @@ may observe
     slantfont .default:n = { true },
   }
 %    \end{macrocode}
+% \end{macro}
 %
 % \begin{macro}{\keys_set_known:nxN}
 %    \begin{macrocode}
@@ -1563,10 +1563,10 @@ may observe
       {
         #1 .code:n =
           {
-            \tl_if_empty:xTF { ##1 }
+            \tl_if_empty:xTF {##1}
               { \tl_put_right:Nn \l_xeCJK_familyname_tl { /#1 } }
               {
-                \xeCJK_get_features:n { ##1 }
+                \xeCJK_get_features:n {##1}
                 \xeCJK_setCJKfamilyfont:nnn { \l_xeCJK_familyname_tl/#1 }
                   { \l_xeCJK_get_features_clist }
                   { \l_xeCJK_get_features_tl }
@@ -1577,7 +1577,7 @@ may observe
   }
 \cs_new_nopar:Nn \xeCJK_get_features:n
   {
-    \tl_set:Nx \l_tmpa_tl { #1 }
+    \tl_set:Nx \l_tmpa_tl {#1}
     \clist_clear:N \l_xeCJK_get_features_clist
     \exp_args:No \tl_if_head_eq_charcode:nNTF \l_tmpa_tl [
       { \exp_after:wN \xeCJK_get_features_aux:nn \l_tmpa_tl \c_empty_tl }
@@ -1593,20 +1593,25 @@ may observe
       { \tl_set:Nx \l_xeCJK_get_features_tl \l_xeCJK_fontname_tl }
       { \tl_replace_all:Nnx \l_xeCJK_get_features_tl * \l_xeCJK_fontname_tl }
   }
-\cs_new_nopar:Npn \xeCJK_get_features_aux:nn [ #1 ] #2
+\cs_new_nopar:Npn \xeCJK_get_features_aux:nn [#1]#2
   {
-    \clist_set:Nx \l_xeCJK_get_features_clist { #1 }
-    \tl_set:Nx \l_xeCJK_get_features_tl { #2 }
+    \clist_set:Nx \l_xeCJK_get_features_clist {#1}
+    \tl_set:Nx \l_xeCJK_get_features_tl {#2}
   }
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
 % \end{macro}
 %
+% \begin{macro}{FallBack}
 %    \begin{macrocode}
 \xeCJK_new_features_key:n { FallBack }
 %    \end{macrocode}
+% \end{macro}
 %
+% \begin{macro}
+%    {BoldFont, ItalicFont, BoldItalicFont, SlantedFont, BoldSlantedFont,
+%     AutoFakeBold, AutoFakeItalic, AutoFakeSlant, Mono}
 % 调用字体的属性声明，大部分同 \pkg{fontspec} 宏包。
 %    \begin{macrocode}
 \keys_define:nn { xeCJK-Features }
@@ -1652,6 +1657,7 @@ may observe
       }
   }
 %    \end{macrocode}
+% \end{macro}
 %
 % \begin{macro}{\xeCJK_setCJKfamilyfont:nnn}
 % 设置一个 CJK 新字体族，与 |\newfontfamily| 类似，增加 |FallBack| 选项。
@@ -1659,8 +1665,8 @@ may observe
 \cs_new_protected_nopar:Nn \xeCJK_setCJKfamilyfont:nnn
   {
     \group_begin:
-    \tl_set:Nx \l_xeCJK_familyname_tl { #1 }
-    \tl_set:Nx \l_xeCJK_fontname_tl   { #3 }
+    \tl_set:Nx \l_xeCJK_familyname_tl {#1}
+    \tl_set:Nx \l_xeCJK_fontname_tl   {#3}
     \tl_clear:N \l_xeCJK_monoscale_tl    \tl_clear:N \l_xeCJK_fontname_bf_tl
     \tl_clear:N \l_xeCJK_fontname_it_tl  \tl_clear:N \l_xeCJK_fontname_bfit_tl
     \tl_clear:N \l_xeCJK_fontname_sl_tl  \tl_clear:N \l_xeCJK_fontname_bfsl_tl
@@ -1758,8 +1764,8 @@ may observe
         \clist_put_right:Nx \l_xeCJK_features_aux_clist
           { BoldSlantedFeatures = { \l_xeCJK_features_bfsl_clist } }
       }{
-      \clist_put_right:Nx \l_xeCJK_features_aux_clist
-        { BoldSlantedFont = \l_xeCJK_fontname_bfsl_tl }
+        \clist_put_right:Nx \l_xeCJK_features_aux_clist
+          { BoldSlantedFont = \l_xeCJK_fontname_bfsl_tl }
       }
     \clist_if_empty:NF \l_xeCJK_features_aux_clist
       { \clist_put_left:Nx \l_xeCJK_features_clist \l_xeCJK_features_aux_clist }
@@ -1770,12 +1776,8 @@ may observe
       {
         \exp_not:N \fontspec [ \l_xeCJK_features_clist ] { \l_xeCJK_fontname_tl }
       }
-    \clist_gset:cx
-      { xeCJK_fontoptions_\l_xeCJK_familyname_tl }
-      { #2 }
-    \tl_gset:cx
-      { xeCJK_fontname_\l_xeCJK_familyname_tl }
-      { \l_xeCJK_fontname_tl }
+    \clist_gset:cx { xeCJK_fontoptions_\l_xeCJK_familyname_tl } {#2}
+    \tl_gset:cx { xeCJK_fontname_\l_xeCJK_familyname_tl } { \l_xeCJK_fontname_tl }
     \group_end:
   }
 %    \end{macrocode}
@@ -1787,16 +1789,15 @@ may observe
 \NewDocumentCommand \CJKfamily { m }
   {
     \cs_if_exist:cTF { xeCJK/font/#1 }
+      { \tl_set:Nx \l_xeCJK_family_tl {#1} }
       {
-        \tl_set:Nx \l_xeCJK_family_tl { #1 }
-      }{
         \cs_if_exist:cF { xeCJK_warned_aux_#1 }
           {
             \PackageWarning { xeCJK }
               {
                 Unknown~CJK~family~`#1'~is~ignored.^^J
                 Use~\token_to_str:N \setCJKfamilyfont\c_space_tl to~
-                define~ a~ CJK~ family.
+                define~a~CJK~family.
               }
             \tl_gset:cx { xeCJK_warned_aux_#1 } { \c_empty_tl }
           }
@@ -1809,13 +1810,13 @@ may observe
 % 分别用于预声明 CJK 字体和随机调用 CJK 字体。
 %    \begin{macrocode}
 \NewDocumentCommand \setCJKfamilyfont { m O{} m }
-  { \xeCJK_setCJKfamilyfont:nnn { #1 } { #2 } { #3 } }
+  { \xeCJK_setCJKfamilyfont:nnn {#1} {#2} {#3} }
 \NewDocumentCommand \newCJKfontfamily { o m O{} m }
   {
-    \IfNoValueTF { #1 }
+    \IfNoValueTF {#1}
       { \tl_set:Nx \l_xeCJK_familyname_tl { \cs_to_str:N #2 } }
-      { \tl_set:Nx \l_xeCJK_familyname_tl { #1 } }
-    \xeCJK_setCJKfamilyfont:nnn { \l_xeCJK_familyname_tl } { #3 } { #4 }
+      { \tl_set:Nx \l_xeCJK_familyname_tl {#1} }
+    \xeCJK_setCJKfamilyfont:nnn { \l_xeCJK_familyname_tl } {#3} {#4}
     \cs_new_protected_nopar:Npx #2
       { \exp_not:N \CJKfamily { \l_xeCJK_familyname_tl } }
   }
@@ -1825,7 +1826,7 @@ may observe
     \int_gincr:N \g_xeCJK_fontspec_int
     \tl_set:Nx \l_xeCJK_family_fontspec_tl
       { xeCJK_family_fontspec_\int_use:N \g_xeCJK_fontspec_int }
-    \xeCJK_setCJKfamilyfont:nnn { \l_xeCJK_family_fontspec_tl } { #1 } { #2 }
+    \xeCJK_setCJKfamilyfont:nnn { \l_xeCJK_family_fontspec_tl } {#1} {#2}
     \exp_args:Nx \CJKfamily { \l_xeCJK_family_fontspec_tl }
   }
 %    \end{macrocode}
@@ -1836,12 +1837,12 @@ may observe
 %    \begin{macrocode}
 \clist_clear_new:N \g_xeCJK_default_features_clist
 \NewDocumentCommand \defaultCJKfontfeatures { m }
-  { \clist_gset:Nn \g_xeCJK_default_features_clist { #1 } }
+  { \clist_gset:Nn \g_xeCJK_default_features_clist {#1} }
 \NewDocumentCommand \addCJKfontfeatures { m }
   {
     \cs_if_exist:NT \l_xeCJK_family_tl
       {
-        \clist_put_right:cx { xeCJK_fontoptions_\l_xeCJK_family_tl } { #1 }
+        \clist_put_right:cx { xeCJK_fontoptions_\l_xeCJK_family_tl } {#1}
         \CJKfontspec
           [ \clist_use:c { xeCJK_fontoptions_\l_xeCJK_family_tl } ]
           { \tl_use:c { xeCJK_fontname_\l_xeCJK_family_tl } }
@@ -1858,11 +1859,11 @@ may observe
 %    \begin{macrocode}
 \cs_if_free:NT \CJKrmdefault { \tl_set:Nn \CJKrmdefault { rm } }
 \NewDocumentCommand \setCJKmainfont { O{} m }
-  { \xeCJK_setCJKfamilyfont:nnn { \CJKrmdefault } { #1 } { #2 } }
+  { \xeCJK_setCJKfamilyfont:nnn { \CJKrmdefault } {#1} {#2} }
 \cs_new_eq:NN \setCJKromanfont \setCJKmainfont
 \cs_if_free:NT \CJKsfdefault { \tl_set:Nn \CJKsfdefault { sf } }
 \NewDocumentCommand \setCJKsansfont { O{} m }
-  { \xeCJK_setCJKfamilyfont:nnn { \CJKsfdefault } { #1 } { #2 } }
+  { \xeCJK_setCJKfamilyfont:nnn { \CJKsfdefault } {#1} {#2} }
 \cs_if_free:NT \CJKttdefault { \tl_set:Nn \CJKttdefault { tt } }
 %    \end{macrocode}
 % \end{macro}
@@ -1892,11 +1893,13 @@ may observe
 %
 % \subsection{处理等宽字体和抄录环境}
 %
+% \begin{macro}{\g_xeCJK_monoscale_fp,\g_xeCJK_exspace_dim}
 %    \begin{macrocode}
 \fp_new:N \g_xeCJK_monoscale_fp
 \fp_gset_eq:NN \g_xeCJK_monoscale_fp \c_one_fp
 \dim_gzero_new:N \g_xeCJK_exspace_dim
 %    \end{macrocode}
+% \end{macro}
 %
 % \begin{macro}{\setCJKmonoscale}
 % \begin{macro}[aux]{\xeCJK_setmonoscale:}
@@ -1923,8 +1926,7 @@ may observe
 %     \begin{macrocode}
 \NewDocumentCommand \setCJKmonoscalefont { O{} m }
   {
-    \xeCJK_setCJKfamilyfont:nnn
-      { \CJKttdefault } { Mono = Scale, #1 } { #2 }
+    \xeCJK_setCJKfamilyfont:nnn { \CJKttdefault } { Mono = Scale, #1 } {#2}
   }
 %    \end{macrocode}
 % \end{macro}
@@ -1997,7 +1999,7 @@ may observe
 %     \begin{macrocode}
 \NewDocumentCommand \setCJKmonoexspacefont { O{} m }
   {
-    \xeCJK_setCJKfamilyfont:nnn { \CJKttdefault } { Mono = Exspace, #1 } { #2 }
+    \xeCJK_setCJKfamilyfont:nnn { \CJKttdefault } { Mono = Exspace, #1 } {#2}
   }
 %    \end{macrocode}
 % \end{macro}
@@ -2007,11 +2009,11 @@ may observe
 %    \begin{macrocode}
 \NewDocumentCommand \setCJKmonofont { s t+ O{} m }
   {
-    \IfBooleanTF { #1 }
-      { \setCJKmonoscalefont [ #3 ] { #4 } }
-      { \IfBooleanTF { #2 }
-          { \setCJKmonoexspacefont [ #3 ] { #4 } }
-          { \xeCJK_setCJKfamilyfont:nnn { \CJKttdefault } { #3 } { #4 } }
+    \IfBooleanTF {#1}
+      { \setCJKmonoscalefont [#3] {#4} }
+      { \IfBooleanTF {#2}
+          { \setCJKmonoexspacefont [#3] {#4} }
+          { \xeCJK_setCJKfamilyfont:nnn { \CJKttdefault } {#3} {#4} }
      }
   }
 %    \end{macrocode}
@@ -2019,17 +2021,15 @@ may observe
 %
 % \subsection{\pkg{xeCJK} 其它选项}
 %
+% \begin{macro}{CJKnumber, indentfirst, normalindentfirst}
 % 是否启用 \pkg{CJKnumber} 宏包和首行是否缩进，其中 |CJKnumber| 选项仅
 % 在 \pkg{xeCJK} 宏包调用的时候有效。并将 \pkg{xeCJK} 中未知的选项传递给
 % \pkg{fontspec} 宏包。
 %     \begin{macrocode}
-\bool_new:N \l_xeCJK_number_bool
 \keys_define:nn { xeCJK }
   {
-    CJKnumber .choice:,
-    CJKnumber / true  .code:n = { \bool_set_true:N  \l_xeCJK_number_bool },
-    CJKnumber / false .code:n = { \bool_set_false:N \l_xeCJK_number_bool },
-    CJKnumber      .default:n = { true },
+    CJKnumber .bool_set:N = \l_xeCJK_number_bool ,
+    CJKnumber  .default:n = { true },
     indentfirst .choice:,
     indentfirst / true  .code:n =
       { \cs_set_eq:NN \@afterindentfalse \prg_do_nothing: },
@@ -2041,6 +2041,7 @@ may observe
       { \PassOptionsToPackage { \l_keys_key_tl } { fontspec } },
   }
 %    \end{macrocode}
+% \end{macro}
 %
 % \subsection{\pkg{xeCJK} 初始化设置}
 %
@@ -2050,7 +2051,7 @@ may observe
   {
     xeCJKactive = true , CJKallowbreakbetweenpuncts = false ,
     indentfirst = true , CJKspace = false , CJKecglue = { \c_space_token } ,
-    CJKchecksingle = false , PunctStyle = quanjiao ,
+    CJKchecksingle = false , CJKnumber = false , PunctStyle = quanjiao ,
     EmboldenFactor = 4 , ItalicFactor = .167 , SlantFactor = .167 ,
     KaiMingPunct = { ． 。？ ！ } , SpecialPunct = { — … ─ } ,
   }
@@ -2058,12 +2059,12 @@ may observe
 %
 % \begin{macro}{\CJKsymbol, \CJKpunctsymbol}
 %    \begin{macrocode}
-\cs_new_nopar:Npn \CJKsymbol      #1 { #1 }
-\cs_new_nopar:Npn \CJKpunctsymbol #1 { #1 }
+\cs_new_nopar:Npn \CJKsymbol      #1 {#1}
+\cs_new_nopar:Npn \CJKpunctsymbol #1 {#1}
 %    \end{macrocode}
 % \end{macro}
 %
-% 执行宏包选项，并载入 \pkg{fongspec} 宏包。
+% 执行宏包选项，并载入 \pkg{fontspec} 宏包。
 %    \begin{macrocode}
 \ProcessKeysOptions { xeCJK }
 \RequirePackage { fontspec }
@@ -2072,7 +2073,7 @@ may observe
 % \begin{macro}{\xeCJKsetup}
 % 在导言区或文档中设置 \pkg{xeCJK} 的接口。
 %     \begin{macrocode}
-\NewDocumentCommand \xeCJKsetup { m } { \keys_set:nn { xeCJK } { #1 } }
+\NewDocumentCommand \xeCJKsetup { m } { \keys_set:nn { xeCJK } {#1} }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -2106,19 +2107,19 @@ may observe
 % \begin{macro}{\DeclareKaiMingPunct, \DeclareSpecialPunct}
 %     \begin{macrocode}
 \NewDocumentCommand \DeclareKaiMingPunct { t+ t- m }
-  { \IfBooleanTF { #1 }
-      { \keys_set:nn { xeCJK } { KaiMingPunct+ = { #3 } } }
-      { \IfBooleanTF { #2 }
-          { \keys_set:nn { xeCJK } { KaiMingPunct- = { #3 } } }
-          { \keys_set:nn { xeCJK } { KaiMingPunct  = { #3 } } }
+  { \IfBooleanTF {#1}
+      { \keys_set:nn { xeCJK } { KaiMingPunct+ = {#3} } }
+      { \IfBooleanTF {#2}
+          { \keys_set:nn { xeCJK } { KaiMingPunct- = {#3} } }
+          { \keys_set:nn { xeCJK } { KaiMingPunct  = {#3} } }
       }
   }
 \NewDocumentCommand \DeclareSpecialPunct { t+ t- m }
-  { \IfBooleanTF { #1 }
-      { \keys_set:nn { xeCJK } { SpecialPunct+ = { #3 } } }
-      { \IfBooleanTF { #2 }
-          { \keys_set:nn { xeCJK } { SpecialPunct- = { #3 } } }
-          { \keys_set:nn { xeCJK } { SpecialPunct  = { #3 } } }
+  { \IfBooleanTF {#1}
+      { \keys_set:nn { xeCJK } { SpecialPunct+ = {#3} } }
+      { \IfBooleanTF {#2}
+          { \keys_set:nn { xeCJK } { SpecialPunct- = {#3} } }
+          { \keys_set:nn { xeCJK } { SpecialPunct  = {#3} } }
       }
   }
 %    \end{macrocode}
@@ -2128,18 +2129,18 @@ may observe
 %   {\xeCJKsetEmboldenFactor, \xeCJKsetItaticFactor, \xeCJKsetSlantFactor}
 %    \begin{macrocode}
 \NewDocumentCommand \xeCJKsetEmboldenFactor { m }
-  { \keys_set:nn { xeCJK } { EmboldenFactor = { #1 } } }
+  { \keys_set:nn { xeCJK } { EmboldenFactor = {#1} } }
 \NewDocumentCommand \xeCJKsetItaticFactor { m }
-  { \keys_set:nn { xeCJK } { ItaticFactor = { #1 } } }
+  { \keys_set:nn { xeCJK } { ItaticFactor = {#1} } }
 \NewDocumentCommand \xeCJKsetSlantFactor { m }
-  { \keys_set:nn { xeCJK } { SlantFactor = { #1 } } }
+  { \keys_set:nn { xeCJK } { SlantFactor = {#1} } }
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{\punctstyle, \xeCJKplainchr}
 %    \begin{macrocode}
 \NewDocumentCommand \punctstyle { m }
-  { \keys_set:nn { xeCJK } { PunctStyle = { #1 } } }
+  { \keys_set:nn { xeCJK } { PunctStyle = {#1} } }
 \cs_new_nopar:Npn \xeCJKplainchr { \punctstyle { plain } }
 %    \end{macrocode}
 % \end{macro}
@@ -2147,7 +2148,7 @@ may observe
 % \begin{macro}{\CJKsetecglue}
 %    \begin{macrocode}
 \NewDocumentCommand \CJKsetecglue { m }
-  { \keys_set:nn { xeCJK } { CJKecglue = { #1 } } }
+  { \keys_set:nn { xeCJK } { CJKecglue = {#1} } }
 \cs_set_eq:NN \xeCJKsetecglue \CJKsetecglue
 %    \end{macrocode}
 % \end{macro}
@@ -2176,8 +2177,8 @@ may observe
 %    \begin{macrocode}
 \cs_new_nopar:Nn \xeCJK_patch:Nnn
   {
-    \tl_put_left:Nn  #1 { #2 }
-    \tl_put_right:Nn #1 { #3 }
+    \tl_put_left:Nn  #1 {#2}
+    \tl_put_right:Nn #1 {#3}
   }
 %    \end{macrocode}
 % \end{macro}
@@ -2192,24 +2193,23 @@ may observe
         \textellipsis , \textemdash , \textperiodcentered ,
         \textcentereddot , \textquoteleft , \textquoteright ,
         \textquotedblleft , \textquotedblright
-      }{
-        \xeCJK_patch:Nnn #1
-          { \group_begin: \makexeCJKinactive }
-          { \group_end: }
+      }
+      {
+        \xeCJK_patch:Nnn #1 { \group_begin: \makexeCJKinactive } { \group_end: }
       }
     \xeCJK_patch:Nnn \tipaencoding { \makexeCJKinactive } { }
     \cs_set_eq:NN \xeCJK_aux_r \r
     \cs_set_nopar:Npn \r #1
       {
         \group_begin:
-          \makexeCJKinactive \xeCJK_aux_r { #1 }
+          \makexeCJKinactive \xeCJK_aux_r {#1}
         \group_end:
       }
     \@ifpackageloaded { pifont }
       {
         \RenewDocumentCommand \Pifont { m }
           {
-            \fontfamily { #1 }   \fontencoding { U }
+            \fontfamily {#1}   \fontencoding { U }
             \fontseries { m }    \fontshape { n }
             \selectfont
             \makexeCJKinactive
@@ -2228,12 +2228,12 @@ may observe
 %    \begin{macrocode}
 \cs_set_protected_nopar:Nn \xeCJK_ULprepunctchar:n
   {
-    { \makexeCJKinactive \CJKpunctsymbol { #1 } \nobreak }
+    { \makexeCJKinactive \CJKpunctsymbol {#1} \nobreak }
     \tex_ignorespaces:D
   }
 \cs_set_protected_nopar:Nn \xeCJK_ULpostpunctchar:n
   {
-    { \makexeCJKinactive \CJKpunctsymbol { #1 } }
+    { \makexeCJKinactive \CJKpunctsymbol {#1} }
     \xeCJK_ignorespaces:
   }
 \cs_set_protected_nopar:Nn \xeCJK_ULroutines:
@@ -2244,10 +2244,8 @@ may observe
     \xeCJK_inter_class_toks:nnn { Boundary }  { CJK } { \xeCJK_Boundary_and_CJK: }
     \clist_map_inline:nn { Default, HalfLeft, HalfRight, Boundary }
       {
-        \xeCJK_inter_class_toks:nnn { ##1 } { FullLeft }
-          { \xeCJK_ULprepunctchar:n }
-        \xeCJK_inter_class_toks:nnn { ##1 } { FullRight }
-          { \xeCJK_ULpostpunctchar:n }
+        \xeCJK_inter_class_toks:nnn {##1} { FullLeft }  { \xeCJK_ULprepunctchar:n }
+        \xeCJK_inter_class_toks:nnn {##1} { FullRight } { \xeCJK_ULpostpunctchar:n }
       }
     \xeCJK_UL_subclass_patch_tl
   }
@@ -2267,14 +2265,14 @@ may observe
             \cs_set_nopar:Npn \CJKsymbol #1
               {
                 \group_begin:
-                  \xeCJK_get_font: \xeCJK_UL_CJKsymbol { #1 }
+                  \xeCJK_get_font: \xeCJK_UL_CJKsymbol {#1}
                 \group_end:
                 \xeCJK_CJKkern: \xeCJK_ignorespaces:
               }
             \cs_set_nopar:Npn \CJKpunctsymbol #1
               {
                 \group_begin:
-                  \xeCJK_get_font: \xeCJK_UL_CJKpunctsymbol { #1 }
+                  \xeCJK_get_font: \xeCJK_UL_CJKpunctsymbol {#1}
                 \group_end:
               }
             \xeCJK_ULroutines:
@@ -2282,8 +2280,7 @@ may observe
     }
     \cs_if_exist:cT { ver@CJKfntef.sty }
       {
-        \tl_set:Nn \XeTeX@CJKfntef@hook
-          { \xeCJK_get_font: \makexeCJKinactive }
+        \tl_set:Nn \XeTeX@CJKfntef@hook { \xeCJK_get_font: \makexeCJKinactive }
       }
   }
 %    \end{macrocode}
@@ -2294,13 +2291,9 @@ may observe
   {
     \tl_set:Nn \CJK@UnicodeEnc { UTF8 }
     \cs_set_nopar:Npn \CJKaddEncHook #1#2
-      {
-        \cs_set_nopar:cpn { xeCJK_enc_#1 } { #2 }
-      }
+      { \cs_set_nopar:cpn { xeCJK_enc_#1 } {#2} }
     \cs_set_nopar:Npn \Unicode #1#2
-      {
-        \tex_char:D \int_eval:n { #1 * \c_two_hundred_fifty_six + #2 }
-      }
+      { \tex_char:D \int_eval:n { #1 * \c_two_hundred_fifty_six + #2 } }
     \RequirePackage { CJKnumb }
     \use:c { xeCJK_enc_\CJK@UnicodeEnc }
     \tl_set:Nn \CJK@tenthousand { 万 }
@@ -2315,10 +2308,10 @@ may observe
   { \cs_set_eq:NN \CJK@ifundefined \cs_if_free:NTF }
 \NewDocumentCommand \xeCJKcaption { o m }
   {
-    \IfValueT { #1 } { \XeTeXdefaultencoding "#1" }
-    \makeatletter
+    \IfValueT {#1} { \XeTeXdefaultencoding "#1" }
+    \char_set_catcode_letter:N \@
     \file_input:n { #2.cpx }
-    \makeatother
+    \char_set_catcode_other:N \@
     \XeTeXdefaultencoding "UTF-8"
   }
 %    \end{macrocode}
