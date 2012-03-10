@@ -99,9 +99,9 @@
                   \bool_gset_false:N \l_first_bool
                 }
                 {
-                  \int_compare:nF { \l_tmpa_int == \l_tmpb_int + 1 }
+                  \int_compare:nNnF \l_tmpa_int = { \l_tmpb_int + \c_one }
                     {
-                      \int_compare:nTF { \l_tmpc_int == \l_tmpb_int }
+                      \int_compare:nNnTF \l_tmpc_int = \l_tmpb_int
                         {
                           \tl_gput_right:Nx \l_GB_range_tl
                             { \int_use:N \l_tmpb_int , }

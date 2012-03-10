@@ -31,7 +31,7 @@
       }
     \tex_endinput:D
   }
-\cs_if_free:NT \XeTeXglyphbounds
+\token_if_primitive:NF \XeTeXglyphbounds
   {
     \PackageError { xeCJK }
       {
@@ -84,8 +84,9 @@
     \int_set:Nn \l_tmpc_int {#3}
     \loop
       \XeTeXcharclass \l_tmpa_int = \l_tmpc_int
-      \int_incr:N \l_tmpa_int
-    \reverse_if:N \if_int_compare:w \l_tmpa_int > \l_tmpb_int \repeat
+      \if_int_compare:w \l_tmpa_int < \l_tmpb_int
+        \int_incr:N \l_tmpa_int
+    \repeat
   }
 \NewDocumentCommand \xeCJKResetPunctClass { }
   {
@@ -94,8 +95,8 @@
       { "28 , "2D , "5B , "60 , "7B }
     \xeCJKDeclareCharClass { HalfRight }
       {
-        "21 , "22 , "25 , "27 , "29 , "2C , "2E ,
-        "3A , "3B , "3F , "5D , "7D ,
+        "21 , "22 , "25 , "27 , "29 , "2C ,
+        "2E , "3A , "3B , "3F , "5D , "7D ,
       }
     \xeCJKDeclareCharClass { FullLeft }
       {
@@ -220,7 +221,7 @@
       {
         \xeCJK_inter_class_toks:nnn {#1} {##1}
           {
-            \group_begin:
+            \bgroup
             \xeCJK_get_font:
             \xeCJK_clear_inter_class_toks:nn {#1} {##1}
             \xeCJK_empty_CJK_toks:
@@ -231,13 +232,13 @@
       {
         \xeCJK_app_inter_class_toks:nnc {#1} {##1} { xeCJK_CJK_and_##1:n }
       }
-    \xeCJK_inter_class_toks:nnn { CJK } {#1} { \group_end: }
+    \xeCJK_inter_class_toks:nnn { CJK } {#1} { \egroup }
   }
 \xeCJK_pre_inter_class_toks:nnn { Default } { CJK } { \CJKecglue }
 \clist_map_inline:nn { Default, HalfLeft }
   {
     \xeCJK_inter_class_toks:nnn { Boundary } {#1}
-      { \int_compare:nT { \tex_lastkern:D = \c_one } { \c_space_token } }
+      { \int_compare:nNnT \tex_lastkern:D = \c_one { \c_space_token } }
     \xeCJK_app_inter_class_toks:nnn { CJK } {#1} { \CJKecglue }
   }
 \clist_map_inline:nn { Default, HalfRight }
@@ -249,22 +250,25 @@
 \cs_set_nopar:Nn \xeCJK_Boundary_and_CJK:
   {
     {
-      \int_compare:nTF { \tex_lastkern:D = \c_one } { \CJKglue }
+      \int_compare:nNnTF \tex_lastkern:D = \c_one
+        { \CJKglue }
         {
-          \int_compare:nTF { \tex_lastkern:D = \c_four } { \c_space_token }
+          \int_compare:nNnTF \tex_lastkern:D = \c_four
+            { \c_space_token }
             {
-              \int_compare:nT  { \etex_lastnodetype:D = \c_ten } { \CJKecglue }
+              \int_compare:nNnT \etex_lastnodetype:D = \c_ten
+                { \CJKecglue }
             }
         }
     }
-    \group_begin:
+    \bgroup
     \xeCJK_empty_CJK_toks:
     \xeCJK_get_font:
     \CJKsymbol
   }
 \xeCJK_inter_class_toks:nnn { CJK } { Boundary }
   {
-    \group_end:
+    \egroup
     { \xeCJK_CJKkern: }
     \xeCJK_ignorespaces:
   }
@@ -280,9 +284,9 @@
   { \xeCJK_after_FullRight: \CJKsymbol }
 \clist_map_inline:nn { Default, HalfLeft, HalfRight, Boundary }
   {
-    \xeCJK_inter_class_toks:nnn { FullLeft } {#1} { \nobreak \group_end: }
+    \xeCJK_inter_class_toks:nnn { FullLeft } {#1} { \nobreak \egroup }
     \xeCJK_inter_class_toks:nnn { FullRight } {#1}
-      { \xeCJK_after_FullRight: \group_end: }
+      { \xeCJK_after_FullRight: \egroup }
   }
 \clist_map_inline:nn { FullLeft, FullRight }
   {
@@ -292,34 +296,34 @@
   {
     \xeCJK_inter_class_toks:nnn { NormalSpace } {#1}
       {
-        \group_begin:
+        \bgroup
         \xeCJK_empty_CJK_toks:
         \xeCJK_get_font:
         \CJKsymbol
       }
-    \xeCJK_inter_class_toks:nnn {#1} { NormalSpace } { \group_end: }
+    \xeCJK_inter_class_toks:nnn {#1} { NormalSpace } { \egroup }
   }
 \clist_map_inline:nn { FullLeft, FullRight }
   {
     \xeCJK_inter_class_toks:nnn { Boundary } {#1}
       {
-        \group_begin:
+        \bgroup
         \xeCJK_empty_CJK_toks:
         \xeCJK_get_font:
         \use:c { xeCJK_CJK_and_#1:n }
       }
   }
-\cs_set_nopar:Nn \xeCJK_punct_rule:c
+\cs_set_nopar:Nn \xeCJK_punct_rule:n
   {
-    \tex_vrule:D         \@width \use:c {#1}
+    \tex_vrule:D         \@width #1
     \@depth \c_zero_dim  \@height \c_zero_dim \scan_stop:
   }
-\cs_set_nopar:Nn \xeCJK_punct_skip:c
-  {
-    \skip_horizontal:n {  \use:c {#1} \@plus 0.1 em \@minus 0.1 em \scan_stop: }
-  }
-\cs_set_nopar:Nn \xeCJK_punct_kern:c
-  { \tex_kern:D \use:c {#1} \scan_stop: }
+\cs_generate_variant:Nn \xeCJK_punct_rule:n { c }
+\cs_set_nopar:Nn \xeCJK_punct_skip:n
+  { \skip_horizontal:n { #1 \@plus 0.1 em \@minus 0.1 em \scan_stop: } }
+\cs_generate_variant:Nn \xeCJK_punct_skip:n { c }
+\cs_set_nopar:Nn \xeCJK_punct_kern:n { \tex_kern:D #1 \scan_stop: }
+\cs_generate_variant:Nn \xeCJK_punct_kern:n { c }
 \cs_set_nopar:Nn \xeCJK_before_FullLeft:n
   {
     \tl_set:Nx \l_xeCJK_lastpunct_tl {#1}
@@ -339,7 +343,8 @@
 \cs_set_nopar:Nn \xeCJK_CJK_and_FullLeft:n
   {
     \xeCJK_get_punct_bounds:nn { l } {#1}
-    \xeCJK_punct_skip:c { \l_xeCJK_current_punct_tl/glue/l/#1 }
+    \int_compare:nNnF \etex_lastnodetype:D = \c_one
+      { \xeCJK_punct_skip:c { \l_xeCJK_current_punct_tl/glue/l/#1 } }
     \xeCJK_before_FullLeft:n {#1}
   }
 \cs_set_nopar:Nn \xeCJK_CJK_and_FullRight:n
@@ -656,11 +661,7 @@
     \cs_if_free:cT { \l_xeCJK_current_punct_tl/rule/#1/#2 }
       {
         \cs_if_free:cT { \l_xeCJK_current_punct_tl/space/#1/#2 }
-          {
-            \group_begin:
-              \xeCJK_get_font: \xeCJK_get_punct_dimen:n {#2}
-            \group_end:
-          }
+          { { \xeCJK_get_font: \xeCJK_get_punct_dimen:n {#2} } }
         \bool_set_true:N \l_xeCJK_punct_dokerning_bool
         \tl_if_eq:NNTF \l_xeCJK_punctstyle_tl \c_xeCJK_ps_plain_tl
           { \bool_set_false:N \l_xeCJK_punct_dokerning_bool }
@@ -727,7 +728,7 @@
           }
           {
             \xeCJK_get_kern_aux:Nnnn \l_tmpa_dim { 1 em } {#1} {#2}
-            \dim_compare:nT { \l_tmpa_dim < .1 em }
+            \dim_compare:nNnT \l_tmpa_dim < { .1 em }
               {
                 \cs_if_exist:cT { \l_xeCJK_current_punct_tl/glue/l/#2 }
                   {
@@ -829,13 +830,13 @@
     \etex_iffontchar:D \tex_font:D `#1 \scan_stop:
       #1
     \else:
-      \group_begin:
+      {
         \cs_if_exist_use:c { xeCJK/font/\l_xeCJK_family_tl/FallBack }
         \reverse_if:N \etex_iffontchar:D \tex_font:D `#1 \scan_stop:
           \cs_if_exist_use:c { xeCJK/font/\l_xeCJK_family_tl/FallBack/FallBack }
         \fi:
         #1
-      \group_end:
+      }
     \fi:
   }
 \bool_new:N \g_xeCJK_AutoFakeBold_bool
@@ -1101,6 +1102,7 @@
     \tl_gset:cx { xeCJK_fontname_\l_xeCJK_familyname_tl } { \l_xeCJK_fontname_tl }
     \group_end:
   }
+\tl_new:N \l_xeCJK_family_tl
 \NewDocumentCommand \CJKfamily { m }
   {
     \cs_if_exist:cTF { xeCJK/font/#1 }
@@ -1313,7 +1315,7 @@
 \cs_set_nopar:Npn \/
   {
     \scan_stop:
-    \int_compare:nT { \tex_lastkern:D = \c_four }
+    \int_compare:nNnT \tex_lastkern:D = \c_four
       { \tex_unkern:D \tex_unkern:D }
     \xeCJK_itcorr_aux
   }
@@ -1387,17 +1389,11 @@
             \cs_set_eq:NN \xeCJK_UL_CJKpunctsymbol \CJKpunctsymbol
             \cs_set_nopar:Npn \CJKsymbol #1
               {
-                \group_begin:
-                  \xeCJK_get_font: \xeCJK_UL_CJKsymbol {#1}
-                \group_end:
+                { \xeCJK_get_font: \xeCJK_UL_CJKsymbol {#1} }
                 \xeCJK_CJKkern: \xeCJK_ignorespaces:
               }
             \cs_set_nopar:Npn \CJKpunctsymbol #1
-              {
-                \group_begin:
-                  \xeCJK_get_font: \xeCJK_UL_CJKpunctsymbol {#1}
-                \group_end:
-              }
+              { { \xeCJK_get_font: \xeCJK_UL_CJKpunctsymbol {#1} } }
             \xeCJK_ULroutines:
         }
     }
