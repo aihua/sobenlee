@@ -133,12 +133,14 @@
 \xeCJKDeclareSubCJKBlock{GB18030}{ \l_GB_range_clist }
 \ExplSyntaxOff
 
+\newrobustcmd*~{\unskip\hskip 0.2em minus 0.05em\ignorespaces}
+
 \xeCJKsetup {
 CJKchecksingle = true,
   AutoFakeBold = false,
  AutoFakeSlant = false,
 AutoFakeItalic = false,
-     CJKecglue = {},
+     CJKecglue = {~},
     PunctStyle = kaiming,
  KaiMingPunct+ = {：；},
 }
@@ -182,8 +184,6 @@ AutoFakeItalic = false,
 \newCJKfontfamily{\fzqiti}   {FZQiTi-S14}                  % 方正启体
 \newCJKfontfamily{\kaishu}  [GB18030=FZKai-Z03_GB18030]{FZJKai-Z03S}
 \newCJKfontfamily{\fzliukai}[GB18030=FZQiTi-S14] {FZSuXinShiLiuKaiS-R-GB}
-
-\newrobustcmd*~{\unskip\hskip 0.2em minus 0.05em\ignorespaces}
 
 \let\origemph\emph
 \renewcommand*\CJKunderlinecolor{}
