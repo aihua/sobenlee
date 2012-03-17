@@ -232,11 +232,8 @@
             \boolfalse{ecols@adjust}%
             \boolfalse{ecols@flushleft}%
           }{%
-            \ifbool{ecols@resume}{}{%
-              \ifdef{\ecols@start}
-                {\setcounter\@enumctr{\ecols@start}}
-                {\setcounter\@enumctr{\@ne}}%
-            }
+            \ifbool{ecols@resume}{\numdef\ecols@tempa{\arabic\@enumctr}}{}%
+            \setcounter\@enumctr{\@ne}%
           }%
           \ifbool{ecols@adjust}{%
             \settowidth\ecols@dima{\@itemlabel}%
@@ -249,8 +246,8 @@
           }{%
             \settowidth\ecols@labelwidth{\@itemlabel}%
           }%
-          \ifbool{ecols@itemize}{}{
-            \ifbool{ecols@resume}{}{%
+          \ifbool{ecols@itemize}{}{%
+            \ifbool{ecols@resume}{\setcounter\@enumctr\ecols@tempa}{%
               \ifdef{\ecols@start}
                 {\setcounter\@enumctr{\ecols@start-\@ne}}
                 {\setcounter\@enumctr{\z@}}%
