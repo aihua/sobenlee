@@ -140,6 +140,8 @@
 
 \newrobustcmd*\setenumcols[1]{\KVO@setkeys{ecols}{#1}}
 
+\ECOLS@key{start}{\numdef\ecols@start{#1}}
+
 \newdimen\ecolsleftmargin
 \newdimen\ecolswidth
 \newdimen\ecolstotalwidth
@@ -178,6 +180,7 @@
         \ecols@nesterr
         \let\@endecols@item\relax
       \else
+        \undef{\ecols@start}%
         \setenumcols{itemize=false,#1}%
         \ecolsleftmargin=\ecols@leftmargin@l\relax
         \stepcounter{ecols@list}%
@@ -189,7 +192,11 @@
             \edef\@itemitem{label\ecols@counter\romannumeral\the\@listdepth}%
           }{%
             \edef\@enumctr{\ecols@counter\romannumeral\the\@listdepth}%
-            \ifltxcounter{\@enumctr}{}{\newcounter{\@enumctr}}%
+            \ifltxcounter{\@enumctr}{}{%
+              \newcounter{\@enumctr}%
+              \ifcsundef{label\@enumctr}
+                {\csdef{label\@enumctr}{\arabic\@enumctr}}{}%
+            }%
           }%
           \advance\@listdepth\m@ne
         }{\item[]}%
@@ -203,7 +210,7 @@
           \topsep       \ecols@topsep@l\relax
         }%
         \item\relax
-        \rightskip\@flushglue
+        \rightskip\@flushglue\relax
         \iftoggle{ecols@formatogl}{%
             \def\@itemlabel{\ecols@format\ecols@labelformat}%
             \iftoggle{ecols@reftogl}{}
@@ -224,7 +231,9 @@
             \boolfalse{ecols@adjust}%
             \boolfalse{ecols@flushleft}%
           }{%
-            \setcounter\@enumctr{\@ne}%
+            \ifdef{\ecols@start}
+              {\setcounter\@enumctr{\ecols@start}}
+              {\setcounter\@enumctr{\@ne}}%
           }%
           \ifbool{ecols@adjust}{%
             \settowidth\ecols@dima{\@itemlabel}%
@@ -237,7 +246,11 @@
           }{%
             \settowidth\ecols@labelwidth{\@itemlabel}%
           }%
-            \ifbool{ecols@itemize}{}{\setcounter{\@enumctr}{\z@}}%
+          \ifbool{ecols@itemize}{}{
+            \ifdef{\ecols@start}
+              {\setcounter\@enumctr{\ecols@start-\@ne}}
+              {\setcounter\@enumctr{\z@}}%
+          }%
         }{}%
         \leftskip=\ecols@leftskip@l\relax
         \advance\linewidth-\leftskip\relax
