@@ -48,6 +48,7 @@
 \DeclareBoolOption{itemize}
 \DeclareBoolOption{hang}
 \DeclareBoolOption{adjust}
+\DeclareBoolOption{resume}
 \DeclareBoolOption{flushleft}
 \DeclareStringOption[enum]{counter}
 \DeclareStringOption{format}
@@ -231,9 +232,11 @@
             \boolfalse{ecols@adjust}%
             \boolfalse{ecols@flushleft}%
           }{%
-            \ifdef{\ecols@start}
-              {\setcounter\@enumctr{\ecols@start}}
-              {\setcounter\@enumctr{\@ne}}%
+            \ifbool{ecols@resume}{}{%
+              \ifdef{\ecols@start}
+                {\setcounter\@enumctr{\ecols@start}}
+                {\setcounter\@enumctr{\@ne}}%
+            }
           }%
           \ifbool{ecols@adjust}{%
             \settowidth\ecols@dima{\@itemlabel}%
@@ -247,9 +250,11 @@
             \settowidth\ecols@labelwidth{\@itemlabel}%
           }%
           \ifbool{ecols@itemize}{}{
-            \ifdef{\ecols@start}
-              {\setcounter\@enumctr{\ecols@start-\@ne}}
-              {\setcounter\@enumctr{\z@}}%
+            \ifbool{ecols@resume}{}{%
+              \ifdef{\ecols@start}
+                {\setcounter\@enumctr{\ecols@start-\@ne}}
+                {\setcounter\@enumctr{\z@}}%
+              }
           }%
         }{}%
         \leftskip=\ecols@leftskip@l\relax
