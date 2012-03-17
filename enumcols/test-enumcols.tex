@@ -2,15 +2,7 @@
 
 \documentclass[UTF8,hyperref]{ctexart}
 
-\usepackage{showframe,picture}
-
-\AtBeginShipout{%
-  \AtBeginShipoutUpperLeft{%
-    \color{red}%
-    \put(0.5\paperwidth, 0){\line(0,-1){\paperheight}}%
-  }%
-}
-
+\usepackage[draft,columns=6,headings=false,margin=false]{typogrid}
 \usepackage{enumitem}
 \usepackage{lipsum}
 \usepackage{enumcols}
@@ -22,7 +14,7 @@
 \setlist[enumlist,1]{label=\bfseries\arabic*.}
 \setlist[enumlist,2]{label=\bfseries(\arabic*)}
 
-\setenumcols[adjust,3,hang,format=\bfseries]
+\setenumcols{adjust,3,hang,format=\bfseries}
 
 \def\testitem{\item\rule{\ecolswidth}{1pt}}
 
