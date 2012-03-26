@@ -157,7 +157,7 @@ may observe
 % \begin{macro}{xeCJKactive}
 % \pkg{xeCJK} 功能开关。
 %    \begin{macrocode}
-\keys_define:nn { xeCJK }
+\keys_define:nn { xeCJK / options }
   {
     xeCJKactive .choice:,
     xeCJKactive / true  .code:n = { \XeTeXinterchartokenstate = \c_one  } ,
@@ -471,8 +471,7 @@ may observe
 %    \begin{macrocode}
 \cs_set:Nn \xeCJK_inter_class_toks:nnn
   {
-    \XeTeXinterchartoks
-    \xeCJK_class_num:n {#1} \xeCJK_class_num:n {#2} = {#3}
+    \XeTeXinterchartoks \xeCJK_class_num:n {#1} \xeCJK_class_num:n {#2} = {#3}
   }
 \cs_generate_variant:Nn \xeCJK_inter_class_toks:nnn { nnc }
 %    \end{macrocode}
@@ -496,13 +495,12 @@ may observe
   {
     \use:x
       {
-        \XeTeXinterchartoks
-        \xeCJK_class_num:n {#1} \xeCJK_class_num:n {#2} =
+        \XeTeXinterchartoks \xeCJK_class_num:n {#1} \xeCJK_class_num:n {#2} =
           {
             \exp_not:n {#3} \tex_the:D \XeTeXinterchartoks
               \xeCJK_class_num:n {#1} \xeCJK_class_num:n {#2}
           }
-     }
+      }
   }
 %    \end{macrocode}
 % \end{macro}
@@ -514,13 +512,12 @@ may observe
   {
     \use:x
       {
-        \XeTeXinterchartoks
-        \xeCJK_class_num:n {#1} \xeCJK_class_num:n {#2} =
+        \XeTeXinterchartoks \xeCJK_class_num:n {#1} \xeCJK_class_num:n {#2} =
           {
             \tex_the:D \XeTeXinterchartoks \xeCJK_class_num:n {#1}
             \xeCJK_class_num:n {#2} \exp_not:n {#3}
           }
-     }
+      }
   }
 \cs_generate_variant:Nn \xeCJK_app_inter_class_toks:nnn { nnc }
 %    \end{macrocode}
@@ -531,8 +528,7 @@ may observe
 %    \begin{macrocode}
 \cs_set:Nn \xeCJK_get_inter_class_toks:nn
   {
-    \tex_the:D \XeTeXinterchartoks
-    \xeCJK_class_num:n {#1} \xeCJK_class_num:n {#2}
+    \tex_the:D \XeTeXinterchartoks \xeCJK_class_num:n {#1} \xeCJK_class_num:n {#2}
   }
 %    \end{macrocode}
 % \end{macro}
@@ -613,6 +609,7 @@ may observe
 %
 % \begin{macro}{\xeCJK_Boundary_and_CJK:}
 %    \begin{macrocode}
+\int_const:Nn \c_etex_math_node \c_ten
 \cs_set_nopar:Nn \xeCJK_Boundary_and_CJK:
   {
     {
@@ -622,7 +619,7 @@ may observe
           \int_compare:nNnTF \tex_lastkern:D = \c_two
             { \c_space_token }
             {
-              \int_compare:nNnT \etex_lastnodetype:D = \c_ten
+              \int_compare:nNnT \etex_lastnodetype:D = \c_etex_math_node
                 { \CJKecglue }
             }
         }
@@ -724,7 +721,7 @@ may observe
 % |#1| 为根据所选的标点处理方式在标点符号左/右增加的空白。
 %    \begin{macrocode}
 \cs_set_nopar:Nn \xeCJK_punct_skip:n
-  { \skip_horizontal:n { #1 \@plus 0.1 em \@minus 0.1 em \scan_stop: } }
+  { \skip_horizontal:n { #1 \@plus 0.1 em \@minus 0.1 em } }
 \cs_generate_variant:Nn \xeCJK_punct_skip:n { c }
 %    \end{macrocode}
 % \end{macro}
@@ -768,10 +765,11 @@ may observe
 %
 % \begin{macro}{\xeCJK_CJK_and_FullLeft:n}
 %    \begin{macrocode}
+\int_const:Nn \c_etex_hlist_node \c_one
 \cs_set_nopar:Nn \xeCJK_CJK_and_FullLeft:n
   {
     \xeCJK_get_punct_bounds:nn { l } {#1}
-    \int_compare:nNnF \etex_lastnodetype:D = \c_one
+    \int_compare:nNnF \etex_lastnodetype:D = \c_etex_hlist_node
       { \xeCJK_punct_skip:c { \l_xeCJK_current_punct_tl/glue/l/#1 } }
     \xeCJK_before_FullLeft:n {#1}
   }
@@ -870,7 +868,7 @@ may observe
 % \begin{macro}{CJKecglue}
 % CJK 与西文和数学行内数学公式之间自动添加的空白。
 %    \begin{macrocode}
-\keys_define:nn { xeCJK }
+\keys_define:nn { xeCJK / options }
   {
     CJKecglue .tl_set_x:N = \CJKecglue,
   }
@@ -880,7 +878,7 @@ may observe
 % \begin{macro}{CJKspace}
 % 是否保留 CJK 文字间的空白，默认不保留。
 %    \begin{macrocode}
-\keys_define:nn { xeCJK }
+\keys_define:nn { xeCJK / options }
   {
     CJKspace  .bool_set:N = \l_xeCJK_space_bool ,
     CJKspace   .default:n = { true },
@@ -917,7 +915,7 @@ may observe
 % \begin{macro}{CJKchecksingle}
 % 避免单个汉字单独占一行。
 %    \begin{macrocode}
-\keys_define:nn { xeCJK }
+\keys_define:nn { xeCJK / options }
   {
     CJKchecksingle .bool_set:N = \l_xeCJK_checksingle_bool,
     CJKchecksingle .default:n  = { true },
@@ -1075,7 +1073,7 @@ may observe
   {
     \exp_args:Nx \clist_map_inline:nn {#2}
       {
-        \xeCJKDeclareCharClass {#1} { \use:c { g_xeCJK_#1/##1_range_clist } }
+        \xeCJKDeclareCharClass {#1} { \clist_use:c { g_xeCJK_#1/##1_range_clist } }
         \clist_gclear:c { g_xeCJK_#1/##1_range_clist }
       }
   }
@@ -1089,6 +1087,13 @@ may observe
 %    \begin{macrocode}
 \tl_set:Nn \l_xeCJK_current_coor_tl
   { xeCJK/\l_xeCJK_family_tl/\f@series/\f@shape/\f@size }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\xeCJK_font_gset:Nn,\xeCJK_font_gset:cn}
+%    \begin{macrocode}
+\cs_new:Nn \xeCJK_font_gset:Nn { \tex_global:D \tex_font:D #1 = #2 \scan_stop: }
+\cs_generate_variant:Nn \xeCJK_font_gset:Nn { c }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -1125,13 +1130,9 @@ may observe
               }
           }
         \group_begin:
-        \get@external@font
-        \use:x
-          {
-            \group_end:
-            \tex_global:D \tex_font:D \exp_not:c
-              \l_xeCJK_current_coor_tl = \external@font
-          }
+          \get@external@font
+          \xeCJK_font_gset:cn \l_xeCJK_current_coor_tl \external@font
+        \group_end:
       }
   }
 %    \end{macrocode}
@@ -1162,7 +1163,7 @@ may observe
 %    {CJKallowbreakbetweenpuncts, PunctStyle, KaiMingPunct, SpecialPunct}
 % 相关选项声明。
 %    \begin{macrocode}
-\keys_define:nn { xeCJK }
+\keys_define:nn { xeCJK / options }
   {
     CJKallowbreakbetweenpuncts .choice:,
     CJKallowbreakbetweenpuncts / true  .code:n =
@@ -1194,7 +1195,7 @@ may observe
       {
         \tl_set:Nx \l_xeCJK_punctstyle_tl { \l_keys_choice_tl }
         \tl_if_eq:NNT \l_keys_choice_tl \c_xeCJK_ps_plain_tl
-          { \keys_set:nn { xeCJK } { CJKallowbreakbetweenpuncts = true } }
+          { \keys_set:nn { xeCJK / options } { CJKallowbreakbetweenpuncts = true } }
       },
     PunctStyle .generate_choices:V = \g_xeCJK_punctstyle_clist,
     PunctStyle / banjiao       .meta:n = { PunctStyle = halfwidth },
@@ -1371,8 +1372,8 @@ may observe
     \dim_set:Nn #1
       {
         #2 - \l_tmpb_dim
-           - \use:c { \l_xeCJK_current_punct_tl/dimen/#3 }
-           - \use:c { \l_xeCJK_current_punct_tl/dimen/#4 }
+           - \tl_use:c { \l_xeCJK_current_punct_tl/dimen/#3 }
+           - \tl_use:c { \l_xeCJK_current_punct_tl/dimen/#4 }
       }
   }
 %    \end{macrocode}
@@ -1441,7 +1442,7 @@ may observe
 % \begin{macro}{AutoFallBack, FallBack}
 % 后备字体的宏包选项声明。
 %    \begin{macrocode}
-\keys_define:nn { xeCJK }
+\keys_define:nn { xeCJK / options }
   {
     AutoFallBack .choice:,
     AutoFallBack / true  .code:n = { \xeCJKenablefallback },
@@ -1476,17 +1477,18 @@ may observe
 %     \begin{macrocode}
 \cs_new_nopar:Nn \xeCJK_fallback_testsymbol:n
   {
-    \etex_iffontchar:D \tex_font:D `#1 \scan_stop:
-      #1
-    \else:
+    \font_glyph_if_exist:NnTF \tex_font:D {`#1} {#1}
       {
-        \cs_if_exist_use:c { xeCJK/font/\l_xeCJK_family_tl/FallBack }
-        \reverse_if:N \etex_iffontchar:D \tex_font:D `#1 \scan_stop:
-          \cs_if_exist_use:c { xeCJK/font/\l_xeCJK_family_tl/FallBack/FallBack }
-        \fi:
-        #1
+        {
+          \cs_if_exist_use:c { xeCJK/font/\l_xeCJK_family_tl/FallBack }
+          \font_glyph_if_exist:NnF \tex_font:D {`#1}
+            {
+              \cs_if_exist_use:c
+                { xeCJK/font/\l_xeCJK_family_tl/FallBack/FallBack }
+            }
+          #1
+        }
       }
-    \fi:
   }
 %    \end{macrocode}
 % \end{macro}
@@ -1514,7 +1516,7 @@ may observe
 %     ItalicFactor, SlantFactor, BoldFont, SlantFont}
 % 伪粗体和伪斜体的宏包选项声明。
 %    \begin{macrocode}
-\keys_define:nn { xeCJK }
+\keys_define:nn { xeCJK / options }
   {
     AutoFakeBold .choice:,
     AutoFakeBold / true    .code:n =
@@ -1578,7 +1580,7 @@ may observe
 %     \begin{macrocode}
 \cs_new_nopar:Nn \xeCJK_new_features_key:n
   {
-    \keys_define:nn { xeCJK-Features }
+    \keys_define:nn { xeCJK / features }
       {
         #1 .code:n =
           {
@@ -1637,7 +1639,7 @@ may observe
 %     AutoFakeBold, AutoFakeItalic, AutoFakeSlant, Mono}
 % 调用字体的属性声明，大部分同 \pkg{fontspec} 宏包。
 %    \begin{macrocode}
-\keys_define:nn { xeCJK-Features }
+\keys_define:nn { xeCJK / features }
   {
     BoldFont        .tl_set_x:N = \l_xeCJK_fontname_bf_tl,
     ItalicFont      .tl_set_x:N = \l_xeCJK_fontname_it_tl,
@@ -1703,8 +1705,7 @@ may observe
     \fp_set_eq:NN \l_xeCJK_EmboldenFactor_fp \g_xeCJK_EmboldenFactor_fp
     \fp_set_eq:NN \l_xeCJK_ItalicFactor_fp   \g_xeCJK_ItalicFactor_fp
     \fp_set_eq:NN \l_xeCJK_SlantFactor_fp    \g_xeCJK_SlantFactor_fp
-    \keys_set_known:nxN
-      { xeCJK-Features }
+    \keys_set_known:nxN { xeCJK / features }
       { \g_xeCJK_default_features_clist, #2 } \l_xeCJK_features_clist
     \bool_if:nTF
       {
@@ -1794,8 +1795,7 @@ may observe
       { \clist_put_left:Nx \l_xeCJK_features_clist \l_xeCJK_features_aux_clist }
     \tl_if_empty:NF \l_xeCJK_monoscale_tl
       { \clist_put_right:Nx \l_xeCJK_features_clist \l_xeCJK_monoscale_tl }
-    \cs_gset_protected_nopar:cpx
-      { xeCJK/font/\l_xeCJK_familyname_tl }
+    \cs_gset_protected_nopar:cpx { xeCJK/font/\l_xeCJK_familyname_tl }
       {
         \exp_not:N \fontspec [ \l_xeCJK_features_clist ] { \l_xeCJK_fontname_tl }
       }
@@ -1929,8 +1929,9 @@ may observe
     \dim_gzero:N \g_xeCJK_exspace_dim
     \group_begin:
       \fontfamily \ttdefault \selectfont
-      \fp_gset_from_dim:Nn \g_xeCJK_monoscale_fp { \c_two\fontdimen\c_two\font }
-      \fp_gdiv:Nn \g_xeCJK_monoscale_fp { \f@size }
+      \fp_gset_from_dim:Nn \g_xeCJK_monoscale_fp
+        { \c_two \tex_fontdimen:D \c_two \tex_font:D }
+      \fp_gdiv:Nn \g_xeCJK_monoscale_fp \f@size
     \group_end:
   }
 \NewDocumentCommand \setCJKmonoscale { }
@@ -1960,7 +1961,7 @@ may observe
     \group_begin:
       \fontfamily \ttdefault \selectfont
       \dim_gset:Nn \g_xeCJK_exspace_dim
-        { \c_two\fontdimen\c_two\font - \f@size\p@ }
+        { \c_two \tex_fontdimen:D \c_two \tex_font:D - \f@size \p@ }
     \group_end:
   }
 \NewDocumentCommand \setCJKmonoexspace { } { \xeCJK_set_monoexspace: }
@@ -2046,7 +2047,7 @@ may observe
 % 在 \pkg{xeCJK} 宏包调用的时候有效。并将 \pkg{xeCJK} 中未知的选项传递给
 % \pkg{fontspec} 宏包。
 %     \begin{macrocode}
-\keys_define:nn { xeCJK }
+\keys_define:nn { xeCJK / options }
   {
     CJKnumber .bool_set:N = \l_xeCJK_number_bool ,
     CJKnumber  .default:n = { true },
@@ -2067,7 +2068,7 @@ may observe
 %
 % \pkg{xeCJK} 宏包的初始化设置。
 %     \begin{macrocode}
-\keys_set:nn { xeCJK }
+\keys_set:nn { xeCJK / options }
   {
     xeCJKactive = true , CJKallowbreakbetweenpuncts = false ,
     indentfirst = true , CJKspace = false , CJKecglue = { \c_space_token } ,
@@ -2086,41 +2087,45 @@ may observe
 %
 % 执行宏包选项，并载入 \pkg{fontspec} 宏包。
 %    \begin{macrocode}
-\ProcessKeysOptions { xeCJK }
+\ProcessKeysOptions { xeCJK / options }
 \RequirePackage { fontspec }
 %    \end{macrocode}
 %
 % \begin{macro}{\xeCJKsetup}
 % 在导言区或文档中设置 \pkg{xeCJK} 的接口。
 %     \begin{macrocode}
-\NewDocumentCommand \xeCJKsetup { m } { \keys_set:nn { xeCJK } {#1} }
+\NewDocumentCommand \xeCJKsetup { m }
+  {
+    \keys_set:nn { xeCJK / options } {#1}
+    \tex_ignorespaces:D
+  }
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{\CJKspace, \CJKnospace}
 %     \begin{macrocode}
 \NewDocumentCommand \CJKspace { }
-  { \keys_set:nn { xeCJK } { CJKspace = true } }
+  { \keys_set:nn { xeCJK / options } { CJKspace = true } }
 \NewDocumentCommand \CJKnospace { }
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{\makexeCJKactive, \makexeCJKinactive}
 %     \begin{macrocode}
-  { \keys_set:nn { xeCJK } { CJKspace = false } }
+  { \keys_set:nn { xeCJK / options } { CJKspace = false } }
 \NewDocumentCommand \makexeCJKactive { }
-  { \keys_set:nn { xeCJK } { xeCJKactive = true } }
+  { \keys_set:nn { xeCJK / options } { xeCJKactive = true } }
 \NewDocumentCommand \makexeCJKinactive { }
-  { \keys_set:nn { xeCJK } { xeCJKactive = false } }
+  { \keys_set:nn { xeCJK / options } { xeCJKactive = false } }
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{\xeCJKallowbreakbetweenpuncts, \xeCJKnobreakbetweenpuncts}
 %     \begin{macrocode}
 \NewDocumentCommand \xeCJKallowbreakbetweenpuncts { }
-  { \keys_set:nn { xeCJK } { CJKallowbreakbetweenpuncts = true } }
+  { \keys_set:nn { xeCJK / options } { CJKallowbreakbetweenpuncts = true } }
 \NewDocumentCommand \xeCJKnobreakbetweenpuncts { }
-  { \keys_set:nn { xeCJK } { CJKallowbreakbetweenpuncts = false } }
+  { \keys_set:nn { xeCJK / options } { CJKallowbreakbetweenpuncts = false } }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -2128,18 +2133,18 @@ may observe
 %     \begin{macrocode}
 \NewDocumentCommand \DeclareKaiMingPunct { t+ t- m }
   { \IfBooleanTF {#1}
-      { \keys_set:nn { xeCJK } { KaiMingPunct+ = {#3} } }
+      { \keys_set:nn { xeCJK / options } { KaiMingPunct+ = {#3} } }
       { \IfBooleanTF {#2}
-          { \keys_set:nn { xeCJK } { KaiMingPunct- = {#3} } }
-          { \keys_set:nn { xeCJK } { KaiMingPunct  = {#3} } }
+          { \keys_set:nn { xeCJK / options } { KaiMingPunct- = {#3} } }
+          { \keys_set:nn { xeCJK / options } { KaiMingPunct  = {#3} } }
       }
   }
 \NewDocumentCommand \DeclareSpecialPunct { t+ t- m }
   { \IfBooleanTF {#1}
-      { \keys_set:nn { xeCJK } { SpecialPunct+ = {#3} } }
+      { \keys_set:nn { xeCJK / options } { SpecialPunct+ = {#3} } }
       { \IfBooleanTF {#2}
-          { \keys_set:nn { xeCJK } { SpecialPunct- = {#3} } }
-          { \keys_set:nn { xeCJK } { SpecialPunct  = {#3} } }
+          { \keys_set:nn { xeCJK / options } { SpecialPunct- = {#3} } }
+          { \keys_set:nn { xeCJK / options } { SpecialPunct  = {#3} } }
       }
   }
 %    \end{macrocode}
@@ -2149,18 +2154,18 @@ may observe
 %   {\xeCJKsetEmboldenFactor, \xeCJKsetItaticFactor, \xeCJKsetSlantFactor}
 %    \begin{macrocode}
 \NewDocumentCommand \xeCJKsetEmboldenFactor { m }
-  { \keys_set:nn { xeCJK } { EmboldenFactor = {#1} } }
+  { \keys_set:nn { xeCJK / options } { EmboldenFactor = {#1} } }
 \NewDocumentCommand \xeCJKsetItaticFactor { m }
-  { \keys_set:nn { xeCJK } { ItaticFactor = {#1} } }
+  { \keys_set:nn { xeCJK / options } { ItaticFactor = {#1} } }
 \NewDocumentCommand \xeCJKsetSlantFactor { m }
-  { \keys_set:nn { xeCJK } { SlantFactor = {#1} } }
+  { \keys_set:nn { xeCJK / options } { SlantFactor = {#1} } }
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{\punctstyle, \xeCJKplainchr}
 %    \begin{macrocode}
 \NewDocumentCommand \punctstyle { m }
-  { \keys_set:nn { xeCJK } { PunctStyle = {#1} } }
+  { \keys_set:nn { xeCJK / options } { PunctStyle = {#1} } }
 \cs_new_nopar:Npn \xeCJKplainchr { \punctstyle { plain } }
 %    \end{macrocode}
 % \end{macro}
@@ -2168,7 +2173,7 @@ may observe
 % \begin{macro}{\CJKsetecglue}
 %    \begin{macrocode}
 \NewDocumentCommand \CJKsetecglue { m }
-  { \keys_set:nn { xeCJK } { CJKecglue = {#1} } }
+  { \keys_set:nn { xeCJK / options } { CJKecglue = {#1} } }
 \cs_set_eq:NN \xeCJKsetecglue \CJKsetecglue
 %    \end{macrocode}
 % \end{macro}
@@ -2290,11 +2295,7 @@ may observe
             \cs_set_nopar:Npn \CJKpunctsymbol #1
               { { \xeCJK_get_font: \xeCJK_UL_CJKpunctsymbol {#1} } }
             \xeCJK_ULroutines:
-        }
-    }
-    \cs_if_exist:cT { ver@CJKfntef.sty }
-      {
-        \tl_set:Nn \XeTeX@CJKfntef@hook { \xeCJK_get_font: \makexeCJKinactive }
+          }
       }
   }
 %    \end{macrocode}

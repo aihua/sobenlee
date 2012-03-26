@@ -40,7 +40,7 @@
       }
   }
 \tex_endlinechar:D \c_minus_one
-\keys_define:nn { xeCJK }
+\keys_define:nn { xeCJK / options }
   {
     xeCJKactive .choice:,
     xeCJKactive / true  .code:n = { \XeTeXinterchartokenstate = \c_one  } ,
@@ -163,8 +163,7 @@
 \normalspacedchars{/}
 \cs_set:Nn \xeCJK_inter_class_toks:nnn
   {
-    \XeTeXinterchartoks
-    \xeCJK_class_num:n {#1} \xeCJK_class_num:n {#2} = {#3}
+    \XeTeXinterchartoks \xeCJK_class_num:n {#1} \xeCJK_class_num:n {#2} = {#3}
   }
 \cs_generate_variant:Nn \xeCJK_inter_class_toks:nnn { nnc }
 \cs_set:Nn \xeCJK_clear_inter_class_toks:nn
@@ -176,31 +175,28 @@
   {
     \use:x
       {
-        \XeTeXinterchartoks
-        \xeCJK_class_num:n {#1} \xeCJK_class_num:n {#2} =
+        \XeTeXinterchartoks \xeCJK_class_num:n {#1} \xeCJK_class_num:n {#2} =
           {
             \exp_not:n {#3} \tex_the:D \XeTeXinterchartoks
               \xeCJK_class_num:n {#1} \xeCJK_class_num:n {#2}
           }
-     }
+      }
   }
 \cs_set:Nn \xeCJK_app_inter_class_toks:nnn
   {
     \use:x
       {
-        \XeTeXinterchartoks
-        \xeCJK_class_num:n {#1} \xeCJK_class_num:n {#2} =
+        \XeTeXinterchartoks \xeCJK_class_num:n {#1} \xeCJK_class_num:n {#2} =
           {
             \tex_the:D \XeTeXinterchartoks \xeCJK_class_num:n {#1}
             \xeCJK_class_num:n {#2} \exp_not:n {#3}
           }
-     }
+      }
   }
 \cs_generate_variant:Nn \xeCJK_app_inter_class_toks:nnn { nnc }
 \cs_set:Nn \xeCJK_get_inter_class_toks:nn
   {
-    \tex_the:D \XeTeXinterchartoks
-    \xeCJK_class_num:n {#1} \xeCJK_class_num:n {#2}
+    \tex_the:D \XeTeXinterchartoks \xeCJK_class_num:n {#1} \xeCJK_class_num:n {#2}
   }
 \cs_set:Nn \xeCJK_copy_inter_class_toks:nnnn
   {
@@ -247,6 +243,7 @@
       { \peek_meaning:NF \c_space_token  { { \xeCJK_zero_kern: } } }
   }
 \xeCJK_inter_class_toks:nnn { Boundary } { CJK } { \xeCJK_Boundary_and_CJK: }
+\int_const:Nn \c_etex_math_node \c_ten
 \cs_set_nopar:Nn \xeCJK_Boundary_and_CJK:
   {
     {
@@ -256,7 +253,7 @@
           \int_compare:nNnTF \tex_lastkern:D = \c_two
             { \c_space_token }
             {
-              \int_compare:nNnT \etex_lastnodetype:D = \c_ten
+              \int_compare:nNnT \etex_lastnodetype:D = \c_etex_math_node
                 { \CJKecglue }
             }
         }
@@ -320,7 +317,7 @@
   }
 \cs_generate_variant:Nn \xeCJK_punct_rule:n { c }
 \cs_set_nopar:Nn \xeCJK_punct_skip:n
-  { \skip_horizontal:n { #1 \@plus 0.1 em \@minus 0.1 em \scan_stop: } }
+  { \skip_horizontal:n { #1 \@plus 0.1 em \@minus 0.1 em } }
 \cs_generate_variant:Nn \xeCJK_punct_skip:n { c }
 \cs_set_nopar:Nn \xeCJK_punct_kern:n { \tex_kern:D #1 \scan_stop: }
 \cs_generate_variant:Nn \xeCJK_punct_kern:n { c }
@@ -340,10 +337,11 @@
     \clist_map_inline:nn { FullLeft, FullRight }
       { \xeCJK_inter_class_toks:nnc {#1} {##1} { xeCJK_#1_and_##1:n } }
   }
+\int_const:Nn \c_etex_hlist_node \c_one
 \cs_set_nopar:Nn \xeCJK_CJK_and_FullLeft:n
   {
     \xeCJK_get_punct_bounds:nn { l } {#1}
-    \int_compare:nNnF \etex_lastnodetype:D = \c_one
+    \int_compare:nNnF \etex_lastnodetype:D = \c_etex_hlist_node
       { \xeCJK_punct_skip:c { \l_xeCJK_current_punct_tl/glue/l/#1 } }
     \xeCJK_before_FullLeft:n {#1}
   }
@@ -401,11 +399,11 @@
   { \skip_horizontal:n { \c_zero_skip \@plus .08\baselineskip } }
 \cs_set_nopar:Nn \xeCJK_CJK_kern:  { \tex_kern:D -1 sp  \tex_kern:D 1 sp }
 \cs_set_nopar:Nn \xeCJK_zero_kern: { \tex_kern:D -2 sp  \tex_kern:D 2 sp }
-\keys_define:nn { xeCJK }
+\keys_define:nn { xeCJK / options }
   {
     CJKecglue .tl_set_x:N = \CJKecglue,
   }
-\keys_define:nn { xeCJK }
+\keys_define:nn { xeCJK / options }
   {
     CJKspace  .bool_set:N = \l_xeCJK_space_bool ,
     CJKspace   .default:n = { true },
@@ -431,7 +429,7 @@
       \peek_meaning:NT $ { \CJKecglue }
     }
   }
-\keys_define:nn { xeCJK }
+\keys_define:nn { xeCJK / options }
   {
     CJKchecksingle .bool_set:N = \l_xeCJK_checksingle_bool,
     CJKchecksingle .default:n  = { true },
@@ -548,12 +546,14 @@
   {
     \exp_args:Nx \clist_map_inline:nn {#2}
       {
-        \xeCJKDeclareCharClass {#1} { \use:c { g_xeCJK_#1/##1_range_clist } }
+        \xeCJKDeclareCharClass {#1} { \clist_use:c { g_xeCJK_#1/##1_range_clist } }
         \clist_gclear:c { g_xeCJK_#1/##1_range_clist }
       }
   }
 \tl_set:Nn \l_xeCJK_current_coor_tl
   { xeCJK/\l_xeCJK_family_tl/\f@series/\f@shape/\f@size }
+\cs_new:Nn \xeCJK_font_gset:Nn { \tex_global:D \tex_font:D #1 = #2 \scan_stop: }
+\cs_generate_variant:Nn \xeCJK_font_gset:Nn { c }
 \bool_new:N \l_xeCJK_rmdefault_bool
 \cs_new_nopar:Nn \xeCJK_get_font: { \xeCJK_push_font:nn aa }
 \cs_new_nopar:Nn \xeCJK_push_font:nn
@@ -584,13 +584,9 @@
               }
           }
         \group_begin:
-        \get@external@font
-        \use:x
-          {
-            \group_end:
-            \tex_global:D \tex_font:D \exp_not:c
-              \l_xeCJK_current_coor_tl = \external@font
-          }
+          \get@external@font
+          \xeCJK_font_gset:cn \l_xeCJK_current_coor_tl \external@font
+        \group_end:
       }
   }
 \clist_set:Nx \g_xeCJK_punctstyle_clist
@@ -602,7 +598,7 @@
   { \cs_generate_variant:Nn \keys_choices_generate:n { V } }
 \cs_new_protected:cpn { \c_keys_props_root_tl .generate_choices:V } #1
   { \keys_choices_generate:V {#1} }
-\keys_define:nn { xeCJK }
+\keys_define:nn { xeCJK / options }
   {
     CJKallowbreakbetweenpuncts .choice:,
     CJKallowbreakbetweenpuncts / true  .code:n =
@@ -634,7 +630,7 @@
       {
         \tl_set:Nx \l_xeCJK_punctstyle_tl { \l_keys_choice_tl }
         \tl_if_eq:NNT \l_keys_choice_tl \c_xeCJK_ps_plain_tl
-          { \keys_set:nn { xeCJK } { CJKallowbreakbetweenpuncts = true } }
+          { \keys_set:nn { xeCJK / options } { CJKallowbreakbetweenpuncts = true } }
       },
     PunctStyle .generate_choices:V = \g_xeCJK_punctstyle_clist,
     PunctStyle / banjiao       .meta:n = { PunctStyle = halfwidth },
@@ -773,8 +769,8 @@
     \dim_set:Nn #1
       {
         #2 - \l_tmpb_dim
-           - \use:c { \l_xeCJK_current_punct_tl/dimen/#3 }
-           - \use:c { \l_xeCJK_current_punct_tl/dimen/#4 }
+           - \tl_use:c { \l_xeCJK_current_punct_tl/dimen/#3 }
+           - \tl_use:c { \l_xeCJK_current_punct_tl/dimen/#4 }
       }
   }
 \cs_set:Nn \xeCJK_get_punct_dimen:n
@@ -817,7 +813,7 @@
   }
 \NewDocumentCommand \xeCJKsetkern  { m m m }
   { \tl_gset:cx { \l_xeCJK_current_punct_tl/kern/#1-#2 } {#3} }
-\keys_define:nn { xeCJK }
+\keys_define:nn { xeCJK / options }
   {
     AutoFallBack .choice:,
     AutoFallBack / true  .code:n = { \xeCJKenablefallback },
@@ -840,17 +836,18 @@
   { \xeCJK_setCJKfamilyfont:nnn { #1/FallBack } {#2} {#3} }
 \cs_new_nopar:Nn \xeCJK_fallback_testsymbol:n
   {
-    \etex_iffontchar:D \tex_font:D `#1 \scan_stop:
-      #1
-    \else:
+    \font_glyph_if_exist:NnTF \tex_font:D {`#1} {#1}
       {
-        \cs_if_exist_use:c { xeCJK/font/\l_xeCJK_family_tl/FallBack }
-        \reverse_if:N \etex_iffontchar:D \tex_font:D `#1 \scan_stop:
-          \cs_if_exist_use:c { xeCJK/font/\l_xeCJK_family_tl/FallBack/FallBack }
-        \fi:
-        #1
+        {
+          \cs_if_exist_use:c { xeCJK/font/\l_xeCJK_family_tl/FallBack }
+          \font_glyph_if_exist:NnF \tex_font:D {`#1}
+            {
+              \cs_if_exist_use:c
+                { xeCJK/font/\l_xeCJK_family_tl/FallBack/FallBack }
+            }
+          #1
+        }
       }
-    \fi:
   }
 \bool_new:N \g_xeCJK_AutoFakeBold_bool
 \bool_new:N \l_xeCJK_AutoFakeBold_bool
@@ -864,7 +861,7 @@
 \fp_new:N \l_xeCJK_ItalicFactor_fp
 \fp_new:N \g_xeCJK_SlantFactor_fp
 \fp_new:N \l_xeCJK_SlantFactor_fp
-\keys_define:nn { xeCJK }
+\keys_define:nn { xeCJK / options }
   {
     AutoFakeBold .choice:,
     AutoFakeBold / true    .code:n =
@@ -915,7 +912,7 @@
   { \cs_generate_variant:Nn \keys_set_known:nnN { nx } }
 \cs_new_nopar:Nn \xeCJK_new_features_key:n
   {
-    \keys_define:nn { xeCJK-Features }
+    \keys_define:nn { xeCJK / features }
       {
         #1 .code:n =
           {
@@ -959,7 +956,7 @@
     \tl_set:Nx \l_xeCJK_get_features_tl {#2}
   }
 \xeCJK_new_features_key:n { FallBack }
-\keys_define:nn { xeCJK-Features }
+\keys_define:nn { xeCJK / features }
   {
     BoldFont        .tl_set_x:N = \l_xeCJK_fontname_bf_tl,
     ItalicFont      .tl_set_x:N = \l_xeCJK_fontname_it_tl,
@@ -1019,8 +1016,7 @@
     \fp_set_eq:NN \l_xeCJK_EmboldenFactor_fp \g_xeCJK_EmboldenFactor_fp
     \fp_set_eq:NN \l_xeCJK_ItalicFactor_fp   \g_xeCJK_ItalicFactor_fp
     \fp_set_eq:NN \l_xeCJK_SlantFactor_fp    \g_xeCJK_SlantFactor_fp
-    \keys_set_known:nxN
-      { xeCJK-Features }
+    \keys_set_known:nxN { xeCJK / features }
       { \g_xeCJK_default_features_clist, #2 } \l_xeCJK_features_clist
     \bool_if:nTF
       {
@@ -1110,8 +1106,7 @@
       { \clist_put_left:Nx \l_xeCJK_features_clist \l_xeCJK_features_aux_clist }
     \tl_if_empty:NF \l_xeCJK_monoscale_tl
       { \clist_put_right:Nx \l_xeCJK_features_clist \l_xeCJK_monoscale_tl }
-    \cs_gset_protected_nopar:cpx
-      { xeCJK/font/\l_xeCJK_familyname_tl }
+    \cs_gset_protected_nopar:cpx { xeCJK/font/\l_xeCJK_familyname_tl }
       {
         \exp_not:N \fontspec [ \l_xeCJK_features_clist ] { \l_xeCJK_fontname_tl }
       }
@@ -1195,8 +1190,9 @@
     \dim_gzero:N \g_xeCJK_exspace_dim
     \group_begin:
       \fontfamily \ttdefault \selectfont
-      \fp_gset_from_dim:Nn \g_xeCJK_monoscale_fp { \c_two\fontdimen\c_two\font }
-      \fp_gdiv:Nn \g_xeCJK_monoscale_fp { \f@size }
+      \fp_gset_from_dim:Nn \g_xeCJK_monoscale_fp
+        { \c_two \tex_fontdimen:D \c_two \tex_font:D }
+      \fp_gdiv:Nn \g_xeCJK_monoscale_fp \f@size
     \group_end:
   }
 \NewDocumentCommand \setCJKmonoscale { }
@@ -1214,7 +1210,7 @@
     \group_begin:
       \fontfamily \ttdefault \selectfont
       \dim_gset:Nn \g_xeCJK_exspace_dim
-        { \c_two\fontdimen\c_two\font - \f@size\p@ }
+        { \c_two \tex_fontdimen:D \c_two \tex_font:D - \f@size \p@ }
     \group_end:
   }
 \NewDocumentCommand \setCJKmonoexspace { } { \xeCJK_set_monoexspace: }
@@ -1261,7 +1257,7 @@
           { \xeCJK_setCJKfamilyfont:nnn { \CJKttdefault } {#3} {#4} }
      }
   }
-\keys_define:nn { xeCJK }
+\keys_define:nn { xeCJK / options }
   {
     CJKnumber .bool_set:N = \l_xeCJK_number_bool ,
     CJKnumber  .default:n = { true },
@@ -1275,7 +1271,7 @@
     unknown .code:n =
       { \PassOptionsToPackage { \l_keys_key_tl } { fontspec } },
   }
-\keys_set:nn { xeCJK }
+\keys_set:nn { xeCJK / options }
   {
     xeCJKactive = true , CJKallowbreakbetweenpuncts = false ,
     indentfirst = true , CJKspace = false , CJKecglue = { \c_space_token } ,
@@ -1285,48 +1281,52 @@
   }
 \cs_new_nopar:Npn \CJKsymbol      #1 {#1}
 \cs_new_nopar:Npn \CJKpunctsymbol #1 {#1}
-\ProcessKeysOptions { xeCJK }
+\ProcessKeysOptions { xeCJK / options }
 \RequirePackage { fontspec }
-\NewDocumentCommand \xeCJKsetup { m } { \keys_set:nn { xeCJK } {#1} }
+\NewDocumentCommand \xeCJKsetup { m }
+  {
+    \keys_set:nn { xeCJK / options } {#1}
+    \tex_ignorespaces:D
+  }
 \NewDocumentCommand \CJKspace { }
-  { \keys_set:nn { xeCJK } { CJKspace = true } }
+  { \keys_set:nn { xeCJK / options } { CJKspace = true } }
 \NewDocumentCommand \CJKnospace { }
-  { \keys_set:nn { xeCJK } { CJKspace = false } }
+  { \keys_set:nn { xeCJK / options } { CJKspace = false } }
 \NewDocumentCommand \makexeCJKactive { }
-  { \keys_set:nn { xeCJK } { xeCJKactive = true } }
+  { \keys_set:nn { xeCJK / options } { xeCJKactive = true } }
 \NewDocumentCommand \makexeCJKinactive { }
-  { \keys_set:nn { xeCJK } { xeCJKactive = false } }
+  { \keys_set:nn { xeCJK / options } { xeCJKactive = false } }
 \NewDocumentCommand \xeCJKallowbreakbetweenpuncts { }
-  { \keys_set:nn { xeCJK } { CJKallowbreakbetweenpuncts = true } }
+  { \keys_set:nn { xeCJK / options } { CJKallowbreakbetweenpuncts = true } }
 \NewDocumentCommand \xeCJKnobreakbetweenpuncts { }
-  { \keys_set:nn { xeCJK } { CJKallowbreakbetweenpuncts = false } }
+  { \keys_set:nn { xeCJK / options } { CJKallowbreakbetweenpuncts = false } }
 \NewDocumentCommand \DeclareKaiMingPunct { t+ t- m }
   { \IfBooleanTF {#1}
-      { \keys_set:nn { xeCJK } { KaiMingPunct+ = {#3} } }
+      { \keys_set:nn { xeCJK / options } { KaiMingPunct+ = {#3} } }
       { \IfBooleanTF {#2}
-          { \keys_set:nn { xeCJK } { KaiMingPunct- = {#3} } }
-          { \keys_set:nn { xeCJK } { KaiMingPunct  = {#3} } }
+          { \keys_set:nn { xeCJK / options } { KaiMingPunct- = {#3} } }
+          { \keys_set:nn { xeCJK / options } { KaiMingPunct  = {#3} } }
       }
   }
 \NewDocumentCommand \DeclareSpecialPunct { t+ t- m }
   { \IfBooleanTF {#1}
-      { \keys_set:nn { xeCJK } { SpecialPunct+ = {#3} } }
+      { \keys_set:nn { xeCJK / options } { SpecialPunct+ = {#3} } }
       { \IfBooleanTF {#2}
-          { \keys_set:nn { xeCJK } { SpecialPunct- = {#3} } }
-          { \keys_set:nn { xeCJK } { SpecialPunct  = {#3} } }
+          { \keys_set:nn { xeCJK / options } { SpecialPunct- = {#3} } }
+          { \keys_set:nn { xeCJK / options } { SpecialPunct  = {#3} } }
       }
   }
 \NewDocumentCommand \xeCJKsetEmboldenFactor { m }
-  { \keys_set:nn { xeCJK } { EmboldenFactor = {#1} } }
+  { \keys_set:nn { xeCJK / options } { EmboldenFactor = {#1} } }
 \NewDocumentCommand \xeCJKsetItaticFactor { m }
-  { \keys_set:nn { xeCJK } { ItaticFactor = {#1} } }
+  { \keys_set:nn { xeCJK / options } { ItaticFactor = {#1} } }
 \NewDocumentCommand \xeCJKsetSlantFactor { m }
-  { \keys_set:nn { xeCJK } { SlantFactor = {#1} } }
+  { \keys_set:nn { xeCJK / options } { SlantFactor = {#1} } }
 \NewDocumentCommand \punctstyle { m }
-  { \keys_set:nn { xeCJK } { PunctStyle = {#1} } }
+  { \keys_set:nn { xeCJK / options } { PunctStyle = {#1} } }
 \cs_new_nopar:Npn \xeCJKplainchr { \punctstyle { plain } }
 \NewDocumentCommand \CJKsetecglue { m }
-  { \keys_set:nn { xeCJK } { CJKecglue = {#1} } }
+  { \keys_set:nn { xeCJK / options } { CJKecglue = {#1} } }
 \cs_set_eq:NN \xeCJKsetecglue \CJKsetecglue
 \cs_set_eq:NN \xeCJK_itcorr_aux \/
 \cs_set_nopar:Npn \/
@@ -1412,11 +1412,7 @@
             \cs_set_nopar:Npn \CJKpunctsymbol #1
               { { \xeCJK_get_font: \xeCJK_UL_CJKpunctsymbol {#1} } }
             \xeCJK_ULroutines:
-        }
-    }
-    \cs_if_exist:cT { ver@CJKfntef.sty }
-      {
-        \tl_set:Nn \XeTeX@CJKfntef@hook { \xeCJK_get_font: \makexeCJKinactive }
+          }
       }
   }
 \bool_if:NT \l_xeCJK_number_bool
