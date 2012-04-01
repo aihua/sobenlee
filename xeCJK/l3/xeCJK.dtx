@@ -1478,11 +1478,12 @@ may observe
     \font_glyph_if_exist:NnTF \tex_font:D {`#1} {#1}
       {
         {
-          \cs_if_exist_use:c { xeCJK/font/\l_xeCJK_family_tl/FallBack }
+          \CJKfamily { \l_xeCJK_family_tl/FallBack }
+          \xeCJK_get_font:
           \font_glyph_if_exist:NnF \tex_font:D {`#1}
             {
-              \cs_if_exist_use:c
-                { xeCJK/font/\l_xeCJK_family_tl/FallBack/FallBack }
+              \CJKfamily { \l_xeCJK_family_tl/FallBack/FallBack }
+              \xeCJK_get_font:
             }
           #1
         }
