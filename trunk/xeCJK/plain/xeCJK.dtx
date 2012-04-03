@@ -2348,9 +2348,9 @@ may observe
 %    \begin{macrocode}
 \def\CJK@ifundefined#1{
   \ifdefined#1
-    \expandafter\@firstoftwo
-  \else
     \expandafter\@secondoftwo
+  \else
+    \expandafter\@firstoftwo
   \fi}
 \newcommand{\xeCJKcaption}[2][]{
   \xeCJK@StrIfBlankTF{#1}{}{\XeTeXdefaultencoding "#1"}

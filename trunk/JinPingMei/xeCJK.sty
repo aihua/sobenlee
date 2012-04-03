@@ -39,7 +39,7 @@
         You~have~to~update~XeTeX~to~the~version~0.9995.0~or~later.
       }
   }
-\tex_endlinechar:D \c_minus_one
+\char_set_catcode_ignore:n { "FEFF }
 \keys_define:nn { xeCJK / options }
   {
     xeCJKactive .choice:,
@@ -939,7 +939,7 @@
         }
         { \tl_set:Nx \l_xeCJK_get_features_tl \l_tmpa_tl }
       }
-    \tl_if_blank:x:xTF \l_xeCJK_get_features_tl
+    \tl_if_blank:xTF \l_xeCJK_get_features_tl
       { \tl_set:Nx \l_xeCJK_get_features_tl \l_xeCJK_fontname_tl }
       { \tl_replace_all:Nnx \l_xeCJK_get_features_tl * \l_xeCJK_fontname_tl }
   }
@@ -1451,8 +1451,6 @@
     \char_set_catcode_other:N \@
     \XeTeXdefaultencoding "UTF-8"
   }
-\tex_endlinechar:D `\^^M
-\char_set_catcode_ignore:n { "FEFF }
 \endinput
 %%
 %% End of file `xeCJK.sty'.
