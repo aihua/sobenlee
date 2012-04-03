@@ -28,14 +28,18 @@
   \endgroup
 \fi
 \ProvidesPackage{xeCJK}
-  [2012/01/31 v2.4.5 package for typesetting CJK scripts with XeLaTeX]
+  [2012/01/31 v2.4.5 package for typesetting CJK scripts with Xe(La)TeX]
+\RequirePackage{ifxetex}
+\RequireXeTeX
 \@namedef{ver@CJK.sty}{2020/01/01}
-\newif\ifxeCJK@SlantFont@
-\newif\ifxeCJK@BoldFont@
+\def\CJKsymbol#1{#1}
+\def\CJKpunctsymbol#1{#1}
 \newif\ifxeCJK@fallback@
 \newif\ifxeCJK@num
 \newif\ifxeCJK@checksingle
 \newif\ifxeCJK@space@
+\newif\ifxeCJK@SlantFont@
+\newif\ifxeCJK@BoldFont@
 \newif\ifxeCJK@indentfirst \xeCJK@indentfirsttrue
 \DeclareOption{boldfont}{\xeCJK@BoldFont@true}
 \DeclareOption{BoldFont}{\ExecuteOptions{boldfont}}
@@ -44,7 +48,7 @@
 \DeclareOption{fallback}{\xeCJK@fallback@true}
 \DeclareOption{CJKnumber}{\xeCJK@numtrue}
 \DeclareOption{normalindentfirst}{\xeCJK@indentfirstfalse}
-\DeclareOption{CJKchecksingle}{\AtEndOfPackage{\let\xeCJK@i@i\xeCJK@checksingle}}
+\DeclareOption{CJKchecksingle}{\xeCJK@checksingletrue}
 \DeclareOption{space}{\xeCJK@space@true}
 \DeclareOption{nospace}{\xeCJK@space@false}
 \DeclareOption{CJKnormalspaces}{\PackageWarning{xeCJK}{%
@@ -69,6 +73,23 @@
 \fi
 \endlinechar \m@ne
 \catcode "FEFF=9\relax
+\def\xeCJK@StrIfEqTF#1#2{
+  \ifnum\strcmp{#1}{#2}=\z@
+    \expandafter\@firstoftwo
+  \else
+    \expandafter\@secondoftwo
+  \fi}
+\def\xeCJK@StrIfBlankTF#1{
+  \ifnum\strcmp{\space}{#1}=\z@
+    \expandafter\@firstoftwo
+  \else\ifnum\strcmp{\empty}{#1}=\z@
+    \expandafter\expandafter
+    \expandafter\@firstoftwo
+  \else
+    \expandafter\expandafter
+    \expandafter\@secondoftwo
+  \fi\fi}
+\AtBeginDocument{\CJKfamily{\CJKfamilydefault}}
 \def\xeCJK@setfont{
   \ifcsname xeCJK@\xeCJK@family/\f@series/\f@shape/\f@size\endcsname
     \csname xeCJK@\xeCJK@family/\f@series/\f@shape/\f@size\endcsname
@@ -77,45 +98,33 @@
     \csname xeCJK@font@\xeCJK@family\endcsname
     \begingroup
       \get@external@font
-      \edef\xeCJK@temp{\def\noexpand\external@font{\external@font}}
-    \expandafter\endgroup\xeCJK@temp
-    \expandafter\global\expandafter\font
-      \csname\xeCJK@currentcoor\endcsname=\external@font
+      \global\expandafter\font
+        \csname\xeCJK@currentcoor\endcsname=\external@font\relax
+    \endgroup
   \fi}
-\def\setCJKmainfont{\xeCJK@newfontfamily{\CJKrmdefault}}
-\let\setCJKromanfont\setCJKmainfont
-\def\setCJKsansfont{\xeCJK@newfontfamily{\CJKsfdefault}}
-\DeclareRobustCommand*\normalfont
-        {\CJKfamily{\CJKfamilydefault}
-         \usefont\encodingdefault
-                 \familydefault
-                 \seriesdefault
-                 \shapedefault
-         \relax}
-\let\reset@font\normalfont
-\DeclareRobustCommand*\rmfamily
-        {\not@math@alphabet\rmfamily\mathrm
-         \fontfamily\rmdefault\CJKfamily{\CJKrmdefault}\selectfont}
-\DeclareRobustCommand*\sffamily
-        {\not@math@alphabet\sffamily\mathsf
-         \fontfamily\sfdefault\CJKfamily{\CJKsfdefault}\selectfont}
-\DeclareRobustCommand*\ttfamily
-        {\not@math@alphabet\ttfamily\mathtt
-         \fontfamily\ttdefault\CJKfamily{\CJKttdefault}\selectfont}
 \ExplSyntaxOn
 \cs_if_free:NT \keys_set_known:nxN {
   \cs_generate_variant:Nn \keys_set_known:nnN { nx } }
+\prg_set_conditional:Nnn \tl_if_blank:x { p , T , F , TF }
+  {
+    \if_int_compare:w \pdftex_strcmp:D { \c_space_tl } {#1} = \c_zero
+      \prg_return_true:
+    \else:
+      \if_int_compare:w \pdftex_strcmp:D { \c_empty_tl } {#1} = \c_zero
+        \prg_return_true: \else: \prg_return_false: \fi:
+    \fi:
+  }
 \cs_new_nopar:Nn \xeCJK_new_features_key:n
   {
     \keys_define:nn { xeCJK / features }
       {
         #1 .code:n =
           {
-            \tl_if_empty:xTF {##1}
-              { \tl_put_right:Nn \l_xeCJK_familyname_tl { /#1 } }
+            \tl_if_blank:xTF {##1}
+              { \tl_put_right:Nn \l_xeCJK_familyname_tl {  @ #1 } }
               {
                 \xeCJK_get_features:n {##1}
-                \xeCJK_setCJKfamilyfont:nnn { \l_xeCJK_familyname_tl/#1 }
+                \xeCJK_setCJKfamilyfont:nnn { \l_xeCJK_familyname_tl @ #1 }
                   { \l_xeCJK_get_features_clist }
                   { \l_xeCJK_get_features_tl }
               }
@@ -141,7 +150,7 @@
         }
         { \tl_set:Nx \l_xeCJK_get_features_tl \l_tmpa_tl }
       }
-    \tl_if_empty:NTF \l_xeCJK_get_features_tl
+    \tl_if_blank:xTF \l_xeCJK_get_features_tl
       { \tl_set:Nx \l_xeCJK_get_features_tl \l_xeCJK_fontname_tl }
       { \tl_replace_all:Nnx \l_xeCJK_get_features_tl * \l_xeCJK_fontname_tl }
   }
@@ -284,7 +293,7 @@
   }
 \prg_set_conditional:Nnn \xeCJK_if_font_exist:n { p, T, F, TF }
   {
-    \exp_args:Nc \tl_if_empty:xTF { l_xeCJK_fontname_#1_tl }
+    \exp_args:Nc \tl_if_blank:xTF { l_xeCJK_fontname_#1_tl }
       { \prg_return_false: } { \prg_return_true:  }
   }
 \prg_set_conditional:Nnn \xeCJK_if_it_or_sl:n { p, T, F, TF }
@@ -322,7 +331,7 @@
   { \tl_use:c { l_xeCJK_fontname_\str_if_eq:xxTF {#1} {it} {sl} {it} _tl } }
 \prg_set_conditional:Nnn \xeCJK_if_map_font_exist:n { p, T, F, TF }
   {
-    \tl_if_empty:xTF { \xeCJK_get_map_font:n {#1} }
+    \tl_if_blank:xTF { \xeCJK_get_map_font:n {#1} }
       { \prg_return_false: } { \prg_return_true:  }
   }
 \cs_new:Nn \xeCJK_pass_features:
@@ -337,7 +346,7 @@
       }
     \prop_map_inline:Nn \l_xeCJK_add_font_prop
       { \clist_put_right:Nx \l_xeCJK_pass_features_clist { ##1 = { ##2 } } }
-    \tl_if_empty:NF \l_xeCJK_monoscale_tl
+    \tl_if_blank:xF \l_xeCJK_monoscale_tl
       { \clist_put_right:Nx \l_xeCJK_pass_features_clist \l_xeCJK_monoscale_tl }
   }
 \NewDocumentCommand \setCJKfamilyfont { m O{} m }
@@ -462,15 +471,13 @@
   \xeCJK@patch\textquoteright     {\begingroup\makexeCJKinactive}{\endgroup}
   \xeCJK@patch\textquotedblleft   {\begingroup\makexeCJKinactive}{\endgroup}
   \xeCJK@patch\textquotedblright  {\begingroup\makexeCJKinactive}{\endgroup}
-  \xeCJK@patch\tipaencoding      {\makexeCJKinactive}{} % tipa package in T3 encoding
+  \xeCJK@patch\tipaencoding       {\makexeCJKinactive}{} % tipa package in T3 encoding
   \let\xeCJK@save@r\r
   \def\r#1{{\makexeCJKinactive\xeCJK@save@r{#1}}} % \r{u} in T1 encoding
   \@ifpackageloaded{pifont}{ % pifont package in U encoding
     \renewcommand\Pifont[1]{\fontfamily{#1}\fontencoding{U}%
       \fontseries{m}\fontshape{n}\selectfont\makexeCJKinactive}}{}
 }
-\def\CJKsymbol#1{#1}
-\def\CJKpunctsymbol#1{#1}
 \endlinechar `\^^M
 \endinput
 %%

@@ -57,6 +57,7 @@ may observe
 \generate{\file{example-CJKchecksingle.tex}{\from{xeCJK.dtx}{example-CJKchecksingle}}}
 \generate{\file{example-CJKfntef.tex}{\from{xeCJK.dtx}{example-CJKfntef}}}
 \generate{\file{example-fallback.tex}{\from{xeCJK.dtx}{example-fallback}}}
+\generate{\file{example-plain.tex}{\from{xeCJK.dtx}{example-plain}}}
 %</batchfile>
 %<batchfile>\endbatchfile
 %<*internal>
@@ -135,7 +136,7 @@ may observe
 \end{document}
 %</driver>
 %
-%<xeCJK&plain>\input miniltx
+%<xeCJK&!base&plain>\input miniltx
 %<*xeCJK&!base&!plain>
 \begingroup
 \def\temp{plain}
@@ -150,7 +151,7 @@ may observe
 %<xeCJK&!base>\ProvidesPackage{xeCJK}
 %<xeCJK&base>\ProvidesPackage{xeCJK-base}
 %<*xeCJK>
-  [2012/01/31 v2.4.5 package for typesetting CJK scripts with XeLaTeX]
+  [2012/01/31 v2.4.5 package for typesetting CJK scripts with Xe(La)TeX]
 %</xeCJK>
 %
 % \fi
@@ -655,31 +656,35 @@ may observe
 % \section{宏包选项与内部工具}
 % \fontsize{10pt}{10pt}\selectfont
 %
-%    \begin{macrocode}
+%     \begin{macrocode}
+%<*xeCJK&!base>
 %<*xeCJK&plain>
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\input keyval.sty\relax
 \input plnfss
 \makeatletter
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%</xeCJK&plain>
 %    \end{macrocode}
 %
 % \xeCJK\ 只能在XeLaTeX中使用
 %    \begin{macrocode}
 \RequirePackage{ifxetex}
 \RequireXeTeX
-%</xeCJK&plain>
-%    \end{macrocode}
-%
-%    \begin{macrocode}
-%<*xeCJK&!base>
 %    \end{macrocode}
 %
 % 禁止在\xeCJK\ 之后调入CJK包。
 %    \begin{macrocode}
 \@namedef{ver@CJK.sty}{2020/01/01}
+\def\CJKsymbol#1{#1}
+\def\CJKpunctsymbol#1{#1}
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\newif\ifxeCJK@SlantFont@
-\newif\ifxeCJK@BoldFont@
 \newif\ifxeCJK@fallback@
 \newif\ifxeCJK@num
 \newif\ifxeCJK@checksingle
@@ -688,6 +693,11 @@ may observe
 %
 %    \begin{macrocode}
 %<*xeCJK&!plain>
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\newif\ifxeCJK@SlantFont@
+\newif\ifxeCJK@BoldFont@
 \newif\ifxeCJK@indentfirst \xeCJK@indentfirsttrue
 \DeclareOption{boldfont}{\xeCJK@BoldFont@true}
 \DeclareOption{BoldFont}{\ExecuteOptions{boldfont}}
@@ -696,7 +706,7 @@ may observe
 \DeclareOption{fallback}{\xeCJK@fallback@true}
 \DeclareOption{CJKnumber}{\xeCJK@numtrue}
 \DeclareOption{normalindentfirst}{\xeCJK@indentfirstfalse}
-\DeclareOption{CJKchecksingle}{\AtEndOfPackage{\let\xeCJK@i@i\xeCJK@checksingle}}
+\DeclareOption{CJKchecksingle}{\xeCJK@checksingletrue}
 \DeclareOption{space}{\xeCJK@space@true}
 \DeclareOption{nospace}{\xeCJK@space@false}
 \DeclareOption{CJKnormalspaces}{\PackageWarning{xeCJK}{%
@@ -719,20 +729,10 @@ may observe
 \ifxeCJK@indentfirst
   \let\@afterindentfalse\relax
 \fi
-%</xeCJK&!plain>
-%<*xeCJK&plain>
-\def\@onefilewithoptions#1[#2][#3]#4{%
-  \unless\ifcsname ver@#1.#4\endcsname
-    \input #1.#4
-  \fi}
-\long\def\addto@hook#1#2{#1\expandafter{\the#1#2}}
-\providecommand*\AtEndOfPackage[1]{#1}
-\providecommand*\PackageWarning[2]{\log{#1: #2}}
-\providecommand*\MessageBreak{^^J}
-%</xeCJK&plain>
 %    \end{macrocode}
 %
 %    \begin{macrocode}
+%</xeCJK&!plain>
 %</xeCJK&!base>
 %<*xeCJK>
 %    \end{macrocode}
@@ -744,6 +744,79 @@ may observe
 %    \end{macrocode}
 %
 %    \begin{macrocode}
+%<*xeCJK&plain>
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\def\@onefilewithoptions#1[#2][#3]#4{
+  \unless\ifcsname ver@#1.#4\endcsname
+    \input #1.#4\relax
+  \fi}
+\long\def\addto@hook#1#2{#1\expandafter{\the#1#2}}
+\providecommand*\AtEndOfPackage[1]{#1}
+\providecommand*\PackageWarning[2]{\typeout{#1: #2}}
+\providecommand*\MessageBreak{^^J}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%</xeCJK&plain>
+%<*xeCJK&!base>
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\def\xeCJK@StrIfEqTF#1#2{
+  \ifnum\strcmp{#1}{#2}=\z@
+    \expandafter\@firstoftwo
+  \else
+    \expandafter\@secondoftwo
+  \fi}
+\def\xeCJK@StrIfBlankTF#1{
+  \ifnum\strcmp{\space}{#1}=\z@
+    \expandafter\@firstoftwo
+  \else\ifnum\strcmp{\empty}{#1}=\z@
+    \expandafter\expandafter
+    \expandafter\@firstoftwo
+  \else
+    \expandafter\expandafter
+    \expandafter\@secondoftwo
+  \fi\fi}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%</xeCJK&!base>
+%<*xeCJK&plain>
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\def\xeCJKenablefallback{\xeCJK@fallback@true}
+\def\xeCJKdisablefallback{\xeCJK@fallback@false}
+\def\xeCJKenablechecksingle{\xeCJK@checksingletrue}
+\def\xeCJKdisablechecksingle{\xeCJK@checksinglefalse}
+\def\CJKspace{\xeCJK@space@true}
+\def\CJKnospace{\xeCJK@space@false}
+\define@key{xeCJK/options}{fallback}[true]{
+  \xeCJK@StrIfEqTF{true}{#1}\xeCJKenablefallback\xeCJKdisablefallback}
+\define@key{xeCJK/options}{CJKchecksingle}[true]{
+  \xeCJK@StrIfEqTF{true}{#1}\xeCJKenablechecksingle\xeCJKdisablechecksingle}
+\define@key{xeCJK/options}{space}[true]{
+  \xeCJK@StrIfEqTF{true}{#1}\CJKspace\CJKnospace}
+\define@key{xeCJK/options}{CJKnumber}[true]{
+  \xeCJK@StrIfEqTF{true}{#1}\xeCJK@numtrue\xeCJK@numfalse}
+\define@key{xeCJK/options}{CJKfntef}[true]{\xeCJK@StrIfEqTF{true}{#1}{
+  \unless\ifcsname if@ignore\endcsname
+    \input CJKfntef.sty\relax
+    \csname newif\expandafter\endcsname\csname if@ignore\endcsname
+  \fi}{}}
+\protected\def\xeCJKsetup#1{
+  \setkeys{xeCJK/options}{#1}
+  \unless\ifcsname xeCJK-base-load\endcsname
+    \input xeCJK-base.sty\relax
+    \global\@namedef{xeCJK-base-load}{xeCJK-base-loaded}
+  \fi\ignorespaces}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%</xeCJK&plain>
 %</xeCJK>
 %<*xeCJK&base>
 %    \end{macrocode}
@@ -999,6 +1072,7 @@ may observe
 \def\xeCJK@i@i{
   \CJKglue
   \CJKsymbol}
+\let\xeCJK@i@i@save\xeCJK@i@i
 \def\xeCJK@i@ii#1{
   \xeCJK@punctrule{#1}{l}
   \hskip \csname xeCJK\xeCJK@punctstyle\xeCJK@bboxname @lglue@#1\endcsname
@@ -1189,6 +1263,18 @@ may observe
 \chardef\xeCJK@ten=10
 %    \end{macrocode}
 %
+% \verb+\CJKspace+ 保留 CJK 文字之间的空格（仍忽略标点相关空格）；\verb+\CJKnospace+
+% 忽略 CJK 文字之间的空格。默认使用 \verb+\CJKnospace+。
+%    \begin{macrocode}
+\def\CJKspace{\let\xeCJK@ignorespaces\@empty}
+\def\CJKnospace{\def\xeCJK@ignorespaces{\xeCJK@@ignorespaces}}
+\ifxeCJK@space@
+  \AtEndOfPackage{\CJKspace}
+\else
+  \AtEndOfPackage{\CJKnospace}
+\fi
+%    \end{macrocode}
+%
 %  处理省略 CJK 文字间空格的代码。
 %    \begin{macrocode}
 \def\xeCJK@@ignorespaces{
@@ -1218,20 +1304,13 @@ may observe
   \let\xeCJK@nexttoken\relax}
 %    \end{macrocode}
 %
-% \verb+\CJKspace+ 保留 CJK 文字之间的空格（仍忽略标点相关空格）；\verb+\CJKnospace+
-% 忽略 CJK 文字之间的空格。默认使用 \verb+\CJKnospace+。
-%    \begin{macrocode}
-\def\CJKspace{\let\xeCJK@ignorespaces\@empty}
-\def\CJKnospace{\let\xeCJK@ignorespaces\xeCJK@@ignorespaces}
-\ifxeCJK@space@
-  \AtEndOfPackage{\CJKspace}
-\else
-  \AtEndOfPackage{\CJKnospace}
-\fi
-%    \end{macrocode}
-%
 % 避免单个汉字占一行。
 %    \begin{macrocode}
+\def\xeCJKenablechecksingle{\def\xeCJK@i@i{\xeCJK@checksingle}}
+\def\xeCJKdisablechecksingle{\let\xeCJK@i@i\xeCJK@i@i@save}
+\ifxeCJK@checksingle
+  \AtEndOfPackage{\xeCJKenablechecksingle}
+\fi
 \def\xeCJK@checksingle#1{
   \def\xeCJK@setcurrentchar@i{
     \CJKglue
@@ -1514,7 +1593,6 @@ may observe
 \def\CJKttdefault{tt}
 \def\CJKfamilydefault{\CJKrmdefault}
 \@namedef{xeCJK@font@\CJKfamilydefault}{}
-\AtBeginDocument{\CJKfamily{\CJKfamilydefault}}
 %    \end{macrocode}
 %
 % 设置备用字体，如果主字体没有相应的符号，将尝试使用备用字体显示。
@@ -1529,35 +1607,175 @@ may observe
 % |\xeCJKenablefallback| 命令打开备用字体功能，|\xeCJKdisablefallback| 命令关
 % 闭备用字体功能。此功能默认关闭。
 %    \begin{macrocode}
-\newcommand\xeCJKenablefallback{\let\xeCJK@fallback@CJKsymbol\CJKsymbol
+\def\xeCJKenablefallback{\let\xeCJK@fallback@CJKsymbol\CJKsymbol
   \def\CJKsymbol##1{\xeCJK@fallback@CJKsymbol{\xeCJK@fallback@testsymbol{##1}}}}
-\newcommand\xeCJKdisablefallback{\let\CJKsymbol\xeCJK@fallback@CJKsymbol}
+\def\xeCJKdisablefallback{
+  \ifcsname xeCJK@fallback@CJKsymbol\endcsname
+    \let\CJKsymbol\xeCJK@fallback@CJKsymbol
+  \fi}
 \ifxeCJK@fallback@
   \xeCJKenablefallback
 \fi
+%    \end{macrocode}
+%
+%    \begin{macrocode}
 \def\xeCJKsetslantfactor#1{\edef\xeCJK@slantfactor{#1}}
 \def\xeCJKsetemboldenfactor#1{\edef\xeCJK@emboldenfactor{#1}}
 \xeCJKsetslantfactor{0.167}
 \xeCJKsetemboldenfactor{4}
 %    \end{macrocode}
 %
+% |\setCJKmonofont| 在后面单独定义。
+% 重定义 |\normalfont|, |\rmfamily|, |\sffamily|, |\ttfamily|，添加 CJK 字体族
+% 的设置。
+%    \begin{macrocode}
+\def\setCJKmainfont{\xeCJK@newfontfamily{\CJKrmdefault}}
+\let\setCJKromanfont\setCJKmainfont
+\def\setCJKsansfont{\xeCJK@newfontfamily{\CJKsfdefault}}
+\DeclareRobustCommand*\normalfont
+        {\CJKfamily{\CJKfamilydefault}
+         \usefont\encodingdefault
+                 \familydefault
+                 \seriesdefault
+                 \shapedefault
+         \relax}
+\let\reset@font\normalfont
+\DeclareRobustCommand*\rmfamily
+        {\not@math@alphabet\rmfamily\mathrm
+         \fontfamily\rmdefault\CJKfamily{\CJKrmdefault}\selectfont}
+\DeclareRobustCommand*\sffamily
+        {\not@math@alphabet\sffamily\mathsf
+         \fontfamily\sfdefault\CJKfamily{\CJKsfdefault}\selectfont}
+\DeclareRobustCommand*\ttfamily
+        {\not@math@alphabet\ttfamily\mathtt
+         \fontfamily\ttdefault\CJKfamily{\CJKttdefault}\selectfont}
+%    \end{macrocode}
+%
 %    \begin{macrocode}
 %</xeCJK&base>
+%<*xeCJK&!base>
 %<*xeCJK&plain>
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\def\f@encoding{\@fontencoding}
-\def\f@family{\@fontfamily}
-\def\f@series{\@fontseries}
-\def\f@shape{\@fontshape}
+\def\setCJKmonofont{\xeCJK@newfontfamily{\CJKttdefault}}
+\let\fontfamily\setfontfamily
+\let\not@math@alphabet\@gobbletwo
+\def\mdseries{\setfontseries\mddefault\selectfont}
+\def\bfseries{\setfontseries\bfdefault\selectfont}
+\def\itshape{\setfontshape\itdefault\selectfont}
+\def\slshape{\setfontshape\sldefault\selectfont}
+\def\scshape{\setfontshape\scdefault\selectfont}
+\def\upshape{\setfontshape\updefault\selectfont}
+\def\rm{\rmfamily}    \def\sf{\sffamily}    \def\tt{\ttfamily}
+\def\md{\mdseries}    \def\bf{\bfseries}    \def\up{\upshape}
+\def\it{\itshape}     \def\sl{\slshape}     \def\sc{\scshape}
+\def\rmdefault{cmr}   \def\sfdefault{cmss}  \def\ttdefault{cmtt}
+\def\bfdefault{bx}    \def\mddefault{m}     \def\itdefault{it}
+\def\sldefault{sl}    \def\scdefault{sc}    \def\updefault{n}
+\def\encodingdefault{EU1}         \def\familydefault{\rmdefault}
+\def\seriesdefault{\mddefault}    \def\shapedefault{\updefault}
+\def\f@encoding{\@fontencoding}   \def\f@family{\@fontfamily}
+\def\f@series{\@fontseries}       \def\f@shape{\@fontshape}
 \def\f@size{\the\@fontsize}
-\def\xeCJK@setfont{\setfontfamily{\xeCJK@family}\selectfont}
+\def\xeCJK@map@fontfamily#1{
+  \SubstFont{\encodingdefault/#1/\mddefault/\itdefault}
+            {\encodingdefault/#1/\mddefault/\updefault}
+  \SubstFont{\encodingdefault/#1/\mddefault/\sldefault}
+            {\encodingdefault/#1/\mddefault/\updefault}
+  \SubstFont{\encodingdefault/#1/\mddefault/\scdefault}
+            {\encodingdefault/#1/\mddefault/\updefault}
+  \SubstFont{\encodingdefault/#1/\bfdefault/\updefault}
+            {\encodingdefault/#1/\mddefault/\updefault}
+  \SubstFont{\encodingdefault/#1/\bfdefault/\itdefault}
+            {\encodingdefault/#1/\bfdefault/\updefault}
+  \SubstFont{\encodingdefault/#1/\bfdefault/\sldefault}
+            {\encodingdefault/#1/\bfdefault/\updefault}
+  \SubstFont{\encodingdefault/#1/\bfdefault/\scdefault}
+            {\encodingdefault/#1/\bfdefault/\updefault}}
+\define@key{xeCJK/features}{BoldFont}[]{\xeCJK@StrIfBlankTF{#1}{}{
+  \DeclareFont{\encodingdefault/\curr@family/\bfdefault/\updefault}{"#1"()}}}
+\define@key{xeCJK/features}{ItalicFont}[]{\xeCJK@StrIfBlankTF{#1}{}{
+  \DeclareFont{\encodingdefault/\curr@family/\mddefault/\itdefault}{"#1"()}}}
+\define@key{xeCJK/features}{BoldItalicFont}[]{\xeCJK@StrIfBlankTF{#1}{}{
+  \DeclareFont{\encodingdefault/\curr@family/\bfdefault/\itdefault}{"#1"()}}}
+\define@key{xeCJK/features}{SlantedFont}[]{\xeCJK@StrIfBlankTF{#1}{}{
+  \DeclareFont{\encodingdefault/\curr@family/\mddefault/\sldefault}{"#1"()}}}
+\define@key{xeCJK/features}{BoldSlantedFont}[]{\xeCJK@StrIfBlankTF{#1}{}{
+  \DeclareFont{\encodingdefault/\curr@family/\bfdefault/\sldefault}{"#1"()}}}
+\define@key{xeCJK/features}{SmallCapsFont}[]{\xeCJK@StrIfBlankTF{#1}{}{
+  \DeclareFont{\encodingdefault/\curr@family/\mddefault/\scdefault}{"#1"()}}}
+\define@key{xeCJK/features}{BoldSmallCapsFont}[]{\xeCJK@StrIfBlankTF{#1}{}{
+  \DeclareFont{\encodingdefault/\curr@family/\bfdefault/\scdefault}{"#1"()}}}
+\def\xeCJK@new@fontfamily#1[#2]#3{
+  \begingroup
+  \global\advance\xeCJK@font@cnt\@ne\relax
+  \edef\curr@family{}
+  \edef\xeCJK@temp@{\unexpanded{\@tfor\reserved@a:=}#3}
+  \xeCJK@temp@\do{
+    \edef\curr@family{\curr@family\xeCJK@StrIfEqTF{\reserved@a}{/}{@}{\reserved@a}}}
+  \edef\curr@family{\curr@family(\number\xeCJK@font@cnt)}
+  \DeclareFont{\encodingdefault/\curr@family/\mddefault/\updefault}{"#3"()}
+  \setkeys{xeCJK/features}{#2}
+  \xeCJK@map@fontfamily{\curr@family}
+  \edef\xeCJK@temp@{\endgroup\unexpanded{\edef#1}{\curr@family}}
+  \xeCJK@temp@}
+\def\newfontfamily#1{\@ifnextchar[%]
+  {\newfontfamily@aux{#1}}{\newfontfamily@aux{#1}[]}}
+\def\newfontfamily@aux#1[#2]#3{
+  \begingroup
+  \xeCJK@new@fontfamily\xeCJK@temp@name[#2]{#3}
+  \protected\xdef#1{
+    \noexpand\setfontfamily{\xeCJK@temp@name}\noexpand\selectfont}
+  \endgroup}
+\def\setmainfont{\xeCJK@newfontfamily@{\rmdefault}}
+\let\setromanfont\setmainfont
+\def\setsansfont{\xeCJK@newfontfamily@{\sfdefault}}
+\def\setmonofont{\xeCJK@newfontfamily@{\ttdefault}}
+\def\xeCJK@newfontfamily@#1{\@ifnextchar[%]
+  {\xeCJK@new@fontfamily{#1}}{\xeCJK@new@fontfamily{#1}[]}}
+\protected\def\fontspec{\@ifnextchar[%]
+  {\xeCJK@fontspec}{\xeCJK@fontspec[]}}
+\newcount\xeCJK@font@cnt
+\def\xeCJK@fontspec[#1]#2{
+  \xeCJK@new@fontfamily\@fontfamily[#1]{#2}
+  \selectfont\ignorespaces}
+\protected\def\xeCJK@newfontfamily#1{\@ifnextchar[%]
+  {\xeCJK@newfontfamily@aux{#1}}{\xeCJK@newfontfamily@aux{#1}[]}}
+\def\xeCJK@newfontfamily@aux#1[#2]#3{
+  \expandafter\xdef\csname xeCJK@font@#1\endcsname{#3}
+  \xeCJK@new@fontfamily\xeCJK@temp@name[#2]{#3}
+  \expandafter\xdef\csname CJKfamily@#1\endcsname{\xeCJK@temp@name}}
+\let\setCJKfamilyfont\xeCJK@newfontfamily
+\def\setCJKfallbackfamilyfont#1{\xeCJK@newfontfamily{#1@FallBack}}
+\def\newCJKfontfamily#1{\@ifnextchar[%]
+  {\newCJKfontfamily@aux{#1}}{\newCJKfontfamily@aux{#1}[]}}
+\def\newCJKfontfamily@aux#1[#2]#3{
+  \begingroup
+  \edef\xeCJK@temp{\expandafter\@gobble\detokenize\expandafter{\string#1}}
+  \xeCJK@newfontfamily\xeCJK@temp[#2]{#3}
+  \protected\xdef#1{\noexpand\CJKfamily{\xeCJK@temp}}
+  \endgroup}
+\def\CJKfontspec{\@ifnextchar[%]
+  {\xeCJK@CJKfontspec}{\xeCJK@CJKfontspec[]}}
+\def\xeCJK@CJKfontspec[#1]#2{
+  \global\advance\xeCJK@font@cnt\@ne\relax
+  \edef\xeCJK@fontspec@name{xeCJK@family@\number\xeCJK@font@cnt}
+  \xeCJK@newfontfamily\xeCJK@fontspec@name[#1]{#2}
+  \CJKfamily{\xeCJK@fontspec@name}\ignorespaces}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\def\xeCJK@setfont{\setfontfamily{\@nameuse{CJKfamily@\xeCJK@family}}\selectfont}
 %    \end{macrocode}
 %
 %    \begin{macrocode}
 %</xeCJK&plain>
-%<*xeCJK&!base&!plain>
+%<*xeCJK&!plain>
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\AtBeginDocument{\CJKfamily{\CJKfamilydefault}}
 %    \end{macrocode}
 %
 % |\xeCJK@setfont| 实际切换中文字体。它使用名为
@@ -1588,53 +1806,39 @@ may observe
 %    \begin{macrocode}
     \begingroup
       \get@external@font
-      \edef\xeCJK@temp{\def\noexpand\external@font{\external@font}}
-    \expandafter\endgroup\xeCJK@temp
 %    \end{macrocode}
 % 缓存字体。
 %    \begin{macrocode}
-    \expandafter\global\expandafter\font
-      \csname\xeCJK@currentcoor\endcsname=\external@font
+      \global\expandafter\font
+        \csname\xeCJK@currentcoor\endcsname=\external@font\relax
+    \endgroup
   \fi}
 %    \end{macrocode}
-% |\setCJKmonofont| 在后面单独定义。
-% 重定义 |\normalfont|, |\rmfamily|, |\sffamily|, |\ttfamily|，添加 CJK 字体族
-% 的设置。
+%
 %    \begin{macrocode}
-\def\setCJKmainfont{\xeCJK@newfontfamily{\CJKrmdefault}}
-\let\setCJKromanfont\setCJKmainfont
-\def\setCJKsansfont{\xeCJK@newfontfamily{\CJKsfdefault}}
-\DeclareRobustCommand*\normalfont
-        {\CJKfamily{\CJKfamilydefault}
-         \usefont\encodingdefault
-                 \familydefault
-                 \seriesdefault
-                 \shapedefault
-         \relax}
-\let\reset@font\normalfont
-\DeclareRobustCommand*\rmfamily
-        {\not@math@alphabet\rmfamily\mathrm
-         \fontfamily\rmdefault\CJKfamily{\CJKrmdefault}\selectfont}
-\DeclareRobustCommand*\sffamily
-        {\not@math@alphabet\sffamily\mathsf
-         \fontfamily\sfdefault\CJKfamily{\CJKsfdefault}\selectfont}
-\DeclareRobustCommand*\ttfamily
-        {\not@math@alphabet\ttfamily\mathtt
-         \fontfamily\ttdefault\CJKfamily{\CJKttdefault}\selectfont}
 \ExplSyntaxOn
 \cs_if_free:NT \keys_set_known:nxN {
   \cs_generate_variant:Nn \keys_set_known:nnN { nx } }
+\prg_set_conditional:Nnn \tl_if_blank:x { p , T , F , TF }
+  {
+    \if_int_compare:w \pdftex_strcmp:D { \c_space_tl } {#1} = \c_zero
+      \prg_return_true:
+    \else:
+      \if_int_compare:w \pdftex_strcmp:D { \c_empty_tl } {#1} = \c_zero
+        \prg_return_true: \else: \prg_return_false: \fi:
+    \fi:
+  }
 \cs_new_nopar:Nn \xeCJK_new_features_key:n
   {
     \keys_define:nn { xeCJK / features }
       {
         #1 .code:n =
           {
-            \tl_if_empty:xTF {##1}
-              { \tl_put_right:Nn \l_xeCJK_familyname_tl { /#1 } }
+            \tl_if_blank:xTF {##1}
+              { \tl_put_right:Nn \l_xeCJK_familyname_tl {  @ #1 } }
               {
                 \xeCJK_get_features:n {##1}
-                \xeCJK_setCJKfamilyfont:nnn { \l_xeCJK_familyname_tl/#1 }
+                \xeCJK_setCJKfamilyfont:nnn { \l_xeCJK_familyname_tl @ #1 }
                   { \l_xeCJK_get_features_clist }
                   { \l_xeCJK_get_features_tl }
               }
@@ -1660,7 +1864,7 @@ may observe
         }
         { \tl_set:Nx \l_xeCJK_get_features_tl \l_tmpa_tl }
       }
-    \tl_if_empty:NTF \l_xeCJK_get_features_tl
+    \tl_if_blank:xTF \l_xeCJK_get_features_tl
       { \tl_set:Nx \l_xeCJK_get_features_tl \l_xeCJK_fontname_tl }
       { \tl_replace_all:Nnx \l_xeCJK_get_features_tl * \l_xeCJK_fontname_tl }
   }
@@ -1835,7 +2039,7 @@ may observe
 %    \begin{macrocode}
 \prg_set_conditional:Nnn \xeCJK_if_font_exist:n { p, T, F, TF }
   {
-    \exp_args:Nc \tl_if_empty:xTF { l_xeCJK_fontname_#1_tl }
+    \exp_args:Nc \tl_if_blank:xTF { l_xeCJK_fontname_#1_tl }
       { \prg_return_false: } { \prg_return_true:  }
   }
 \prg_set_conditional:Nnn \xeCJK_if_it_or_sl:n { p, T, F, TF }
@@ -1885,7 +2089,7 @@ may observe
 %    \begin{macrocode}
 \prg_set_conditional:Nnn \xeCJK_if_map_font_exist:n { p, T, F, TF }
   {
-    \tl_if_empty:xTF { \xeCJK_get_map_font:n {#1} }
+    \tl_if_blank:xTF { \xeCJK_get_map_font:n {#1} }
       { \prg_return_false: } { \prg_return_true:  }
   }
 %    \end{macrocode}
@@ -1903,7 +2107,7 @@ may observe
       }
     \prop_map_inline:Nn \l_xeCJK_add_font_prop
       { \clist_put_right:Nx \l_xeCJK_pass_features_clist { ##1 = { ##2 } } }
-    \tl_if_empty:NF \l_xeCJK_monoscale_tl
+    \tl_if_blank:xF \l_xeCJK_monoscale_tl
       { \clist_put_right:Nx \l_xeCJK_pass_features_clist \l_xeCJK_monoscale_tl }
   }
 %    \end{macrocode}
@@ -2060,7 +2264,7 @@ may observe
   \xeCJK@patch\textquoteright     {\begingroup\makexeCJKinactive}{\endgroup}
   \xeCJK@patch\textquotedblleft   {\begingroup\makexeCJKinactive}{\endgroup}
   \xeCJK@patch\textquotedblright  {\begingroup\makexeCJKinactive}{\endgroup}
-  \xeCJK@patch\tipaencoding      {\makexeCJKinactive}{} % tipa package in T3 encoding
+  \xeCJK@patch\tipaencoding       {\makexeCJKinactive}{} % tipa package in T3 encoding
   \let\xeCJK@save@r\r
   \def\r#1{{\makexeCJKinactive\xeCJK@save@r{#1}}} % \r{u} in T1 encoding
   \@ifpackageloaded{pifont}{ % pifont package in U encoding
@@ -2070,28 +2274,20 @@ may observe
 %    \end{macrocode}
 %
 % \begin{macrocode}
-%</xeCJK&!base&!plain>
+%</xeCJK&!plain>
+%</xeCJK&!base>
 %    \end{macrocode}
 %
 % \section{使用CJKnumb宏包和CJKfntef宏包}
-%    \begin{macrocode}
-%<*xeCJK&!base>
-%    \end{macrocode}
 %
 %    \begin{macrocode}
-\def\CJKsymbol#1{#1}
-\def\CJKpunctsymbol#1{#1}
-%    \end{macrocode}
-%
-% \begin{macrocode}
-%</xeCJK&!base>
 %<*xeCJK&base>
 %    \end{macrocode}
 %
 %    \begin{macrocode}
 \ifxeCJK@num
   \edef\CJK@UnicodeEnc{UTF8}
-  \def\CJKaddEncHook#1#2{\expandafter\def\csname xeCJK@enc@#1\endcsname{#2}}
+  \def\CJKaddEncHook#1#2{\@namedef{xeCJK@enc@#1}{#2}}
   \def\Unicode#1#2{\@tempcnta #1\relax
     \multiply\@tempcnta 256\relax
     \advance\@tempcnta #2\relax
@@ -2107,16 +2303,13 @@ may observe
         \unless\ifx\CJK@tempb \@empty
       \repeat
    \fi}}
-  \csname xeCJK@enc@UTF8\endcsname
+  \@nameuse{xeCJK@enc@UTF8}
   \def\CJK@tenthousand{万}
   \def\CJK@hundredmillion{亿}
 \fi
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\unless\ifcsname if@ignore\endcsname
-  \csname newif\expandafter\endcsname\csname if@ignore\endcsname
-\fi
 \DeclareRobustCommand*{\xeCJK@ULprepunctchar}[1]{
  {\XeTeXinterchartokenstate=0
   \CJKpunctsymbol{#1}
@@ -2154,16 +2347,13 @@ may observe
 %  可以使用CJK包中的cpx或cp文件。
 %    \begin{macrocode}
 \def\CJK@ifundefined#1{
-  \ifx #1\@undefined
+  \ifdefined#1
     \expandafter\@firstoftwo
   \else
     \expandafter\@secondoftwo
-  \fi
-}
+  \fi}
 \newcommand{\xeCJKcaption}[2][]{
-  \if\relax\detokenize{#1}\relax
-    \XeTeXdefaultencoding "#1"
-  \fi
+  \xeCJK@StrIfBlankTF{#1}{}{\XeTeXdefaultencoding "#1"}
   \makeatletter
   \input{#2.cpx}
   \makeatother
@@ -2212,13 +2402,17 @@ This is an example. 这是一个例子
 \CJKsetecglue{\hskip 0.15em plus 0.05em minus 0.05em}
 \verb+\CJKsetecglue{\hskip 0.15em plus 0.05em minus 0.05em}+
 \sometexts
+
 \def\colora{red}
 \CJKsetecglue{ }
+
 \verb+\CJKsetecglue{ }+
 \sometexts
+
 {\verb+\CJKspace+
 \CJKspace
 这 是 一行 文字。}
+
 {\verb+\CJKnospace+
 \CJKnospace
 这 是 一行 文字。}
@@ -2250,12 +2444,14 @@ xeCJK  改进了中英文间距的处理, 并且还可以避免单个汉字独�
 
 }
 \sometexts
+
 \vskip 20mm
 不用CJKchecksingle的效果：
 
 \makeatletter
-\def\xeCJK@i@i{\CJKglue\CJKsymbol}
+\xeCJKdisablechecksingle
 \sometexts
+
 \end{document}
 %    \end{macrocode}
 % \iffalse
@@ -2310,7 +2506,7 @@ Alignment with English characters.
 \setCJKmainfont[FallBack=SimSun-ExtB]{SimSun}
 \begin{document}
 漢字源𣴑考
-\CJKunderwave{漢字源𣴑考}
+%\CJKunderwave{漢字源𣴑考}
 \begin{table}[ht]
 \caption{生僻字测试}
 \centering
@@ -2329,6 +2525,132 @@ Alignment with English characters.
 %    \end{macrocode}
 % \iffalse
 %</example-fallback>
+%<*example-plain>
+% \fi
+% \clearpage
+% \part{example-plain.tex}
+%    \begin{macrocode}
+\input xeCJK
+\xeCJKsetup{CJKnumber,CJKfntef}
+\punctstyle{quanjiao}
+\setmainfont[
+       ItalicFont={[cmunti.otf]},
+         BoldFont={[cmunbx.otf]},
+   BoldItalicFont={[cmunbi.otf]},
+      SlantedFont={[cmunsl.otf]},
+  BoldSlantedFont={[cmunbl.otf]},
+    SmallCapsFont={[cmunrm.otf]:+smcp;+onum;},
+BoldSmallCapsFont={[cmunbx.otf]:+smcp;+onum;}]{[cmunrm]}
+\setsansfont[
+       ItalicFont={[cmunsi.otf]},
+         BoldFont={[cmunsx.otf]},
+   BoldItalicFont={[cmunso.otf]},
+      SlantedFont={[cmunss.otf]:slant=.167;},
+  BoldSlantedFont={[cmunsx.otf]:slant=.167;},
+    SmallCapsFont={[cmunss.otf]:+smcp;+onum;},
+BoldSmallCapsFont={[cmunsx.otf]:+smcp;+onum;}]{[cmunss.otf]}
+\setmonofont[
+       ItalicFont={[cmunit.otf]},
+         BoldFont={[cmuntb.otf]},
+   BoldItalicFont={[cmuntx.otf]},
+      SlantedFont={[cmuntt.otf]:slant=.167;},
+  BoldSlantedFont={[cmuntb.otf]:slant=.167;},
+    SmallCapsFont={[cmuntt.otf]:+smcp;+onum;},
+BoldSmallCapsFont={[cmuntb.otf]:+smcp;+onum;}]{[cmuntt.otf]}
+\newfontfamily\cmunrmbf{[cmunbx.otf]}
+\setCJKmainfont[
+       BoldFont={[simhei.ttf]},
+     ItalicFont={[simkai.ttf]},
+ BoldItalicFont={[simkai.ttf]:embolden=4;},
+    SlantedFont={[simfang.ttf]},
+BoldSlantedFont={[simfang.ttf]:embolden=4;}]{[simsun.ttc]}
+\setCJKsansfont[
+        BoldFont={[simyou.ttf]:embolden=4;},
+     SlantedFont={[simyou.ttf]:slant=.167;},
+ BoldSlantedFont={[simyou.ttf]:embolden=4;slant=.167;}]{[simyou.ttf]}
+\setCJKmonofont[
+        BoldFont={[simfang.ttf]:embolden=4;},
+     SlantedFont={[simfang.ttf]:slant=.167;},
+ BoldSlantedFont={[simfang.ttf]:embolden=4;slant=.167;}]{[simfang.ttf]}
+\newCJKfontfamily\heiti{[simhei.ttf]}
+\setCJKfallbackfamilyfont\CJKrmdefault
+  [BoldFont={SimSun-ExtB:embolden=4;}]{SimSun-ExtB}
+\normalfont
+\begingroup
+\cmunrmbf\heiti abc\fontspec{[simsun.ttc]:slant=.167;}abc 文字
+abcabc 文\CJKfontspec{[simkai.ttf]:embolden=4;}字 abc 文字 abc
+\endgroup
+\bigskip
+\begingroup
+\def\text{\textup{ABC 文字 123}\quad\textit{ABC 文字 123}\quad
+  \textsl{ABC 文字 123}\quad\textsc{abc 文字 123}\par}
+\rmfamily\mdseries\text\bfseries\text
+\sffamily\mdseries\text\bfseries\text
+\ttfamily\mdseries\text\bfseries\text
+\endgroup
+\bigskip
+\begingroup
+\long\def\sometexts{\par
+ 这是 English 中文 {\itshape Chinese} 中文    \TeX\
+  间隔 \textit{Italic} 中文\textbf{字体} a 数学 $b$ 数学 $c$ $d$\par
+ 这是English中文{\itshape Chinese}中文\TeX\
+ 间隔\textit{Italic}中文\textbf{字体}a数学$b$数学$c$ $d$\par
+This is an example. 这是一个例子\bigskip}
+\CJKsetecglue{\hskip 0.15em plus 0.05em minus 0.05em}
+\sometexts
+\CJKsetecglue{ }
+\sometexts
+\xeCJKsetup{space=true} 这 是 一行 文字。\par
+\xeCJKsetup{space=false} 这 是 一行 文字。
+\endgroup
+\bigskip
+\begingroup
+\hsize 120mm    \parskip 1ex
+\parindent 0em
+\long\def\sometexts{%
+xeCJK   改进了中英文间距的处理，并可以避免单个汉字独占一段的最后一行。
+
+xeCJK  改进了中英文间距的处理，并且可以避免单个汉字独占一段的最后一行。
+
+xeCJK  改进了中英文间距的处理, 并且还可以避免单个汉字独占一段的最后一行.
+
+}
+\xeCJKsetup{CJKchecksingle}
+\sometexts
+\bigskip
+不用CJKchecksingle的效果：
+
+\xeCJKsetup{CJKchecksingle=false}
+\sometexts
+\endgroup
+\bigskip
+\CJKunderwave{\texttt{CJKfntef} 不正常，会加大字间距，原因不清楚。}
+\bigskip
+\CJKnumber{1234567890}\par
+\CJKdigits{0101011234567890}\par
+\CJKdigits*{0101011234567890}
+\begingroup
+\bigskip
+\xeCJKsetup{fallback=true}
+\vbox{\tabskip=1em plus1em \offinterlineskip
+\halign to .75\hsize {\strut\hfil#&\ttfamily U+#\hfil&\hfil#&
+\ttfamily U+#\hfil&\hfil#&\ttfamily U+#\hfil&\hfil#&\ttfamily U+#\hfil\cr
+\multispan8\hfil 漢字源𣴑考 \hfil\cr
+\noalign{\medbreak\hrule\medbreak}
+𠀀 & 20000 & 𠀁 & 20001 & 𠀂 & 20002 & 𠀃 & 20003 \cr
+𠀄 & 20004 & 𠀅 & 20005 & 𠀆 & 20006 & 𠀇 & 20007 \cr
+𠀈 & 20008 & 𠀉 & 20009 & 𠀊 & 2000A & 𠀋 & 2000B \cr
+𠀌 & 2000C & 𠀍 & 2000D & 𠀎 & 2000E & 𠀏 & 2000F \cr
+𠀐 & 20010 & 𠀑 & 20011 & 𠀒 & 20012 & 𠀓 & 20013 \cr
+𠀔 & 20014 & 𠀕 & 20015 & 𠀖 & 20016 & 𠀗 & 20017 \cr
+𠀘 & 20018 & 𠀙 & 20019 & 𠀚 & 2001A & 𠀛 & 2001B \cr
+𠀜 & 2001C & 𠀝 & 2001D & 𠀞 & 2001E & 𠀟 & 2001F \cr
+\noalign{\smallbreak\hrule}}}
+\endgroup
+\bye
+%    \end{macrocode}
+% \iffalse
+%</example-plain>
 % \fi
 % \Finale
 %

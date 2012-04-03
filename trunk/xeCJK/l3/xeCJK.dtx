@@ -1130,8 +1130,9 @@ may observe
               }
           }
         \group_begin:
+          \exp_args:NNc
           \get@external@font
-          \xeCJK_font_gset:cn \l_xeCJK_current_coor_tl \external@font
+          \xeCJK_font_gset:Nn \l_xeCJK_current_coor_tl \external@font
         \group_end:
       }
   }
@@ -1555,6 +1556,20 @@ may observe
 %    \end{macrocode}
 % \end{macro}
 %
+% \begin{macro}[pTF]{\tl_if_blank:x}
+%     \begin{macrocode}
+\prg_set_conditional:Nnn \tl_if_blank:x { p , T , F , TF }
+  {
+    \if_int_compare:w \pdftex_strcmp:D { \c_space_tl } {#1} = \c_zero
+      \prg_return_true:
+    \else:
+      \if_int_compare:w \pdftex_strcmp:D { \c_empty_tl } {#1} = \c_zero
+        \prg_return_true: \else: \prg_return_false: \fi:
+    \fi:
+  }
+%    \end{macrocode}
+% \end{macro}
+%
 % \begin{macro}{\xeCJK_new_features_key:n}
 % \begin{macro}[aux]{\xeCJK_get_features:n}
 % \begin{macro}[aux]{\xeCJK_get_features_aux:nn}
@@ -1566,7 +1581,7 @@ may observe
       {
         #1 .code:n =
           {
-            \tl_if_empty:xTF {##1}
+            \tl_if_blank:xTF {##1}
               { \tl_put_right:Nn \l_xeCJK_familyname_tl { /#1 } }
               {
                 \xeCJK_get_features:n {##1}
@@ -1596,7 +1611,7 @@ may observe
         }
         { \tl_set:Nx \l_xeCJK_get_features_tl \l_tmpa_tl }
       }
-    \tl_if_empty:NTF \l_xeCJK_get_features_tl
+    \tl_if_blank:x:xTF \l_xeCJK_get_features_tl
       { \tl_set:Nx \l_xeCJK_get_features_tl \l_xeCJK_fontname_tl }
       { \tl_replace_all:Nnx \l_xeCJK_get_features_tl * \l_xeCJK_fontname_tl }
   }
@@ -1789,7 +1804,7 @@ may observe
 %    \begin{macrocode}
 \prg_set_conditional:Nnn \xeCJK_if_font_exist:n { p, T, F, TF }
   {
-    \exp_args:Nc \tl_if_empty:xTF { l_xeCJK_fontname_#1_tl }
+    \exp_args:Nc \tl_if_blank:xTF { l_xeCJK_fontname_#1_tl }
       { \prg_return_false: } { \prg_return_true:  }
   }
 \prg_set_conditional:Nnn \xeCJK_if_it_or_sl:n { p, T, F, TF }
@@ -1848,7 +1863,7 @@ may observe
 %    \begin{macrocode}
 \prg_set_conditional:Nnn \xeCJK_if_map_font_exist:n { p, T, F, TF }
   {
-    \tl_if_empty:xTF { \xeCJK_get_map_font:n {#1} }
+    \tl_if_blank:xTF { \xeCJK_get_map_font:n {#1} }
       { \prg_return_false: } { \prg_return_true:  }
   }
 %    \end{macrocode}
@@ -1868,7 +1883,7 @@ may observe
       }
     \prop_map_inline:Nn \l_xeCJK_add_font_prop
       { \clist_put_right:Nx \l_xeCJK_pass_features_clist { ##1 = { ##2 } } }
-    \tl_if_empty:NF \l_xeCJK_monoscale_tl
+    \tl_if_blank:xF \l_xeCJK_monoscale_tl
       { \clist_put_right:Nx \l_xeCJK_pass_features_clist \l_xeCJK_monoscale_tl }
   }
 %    \end{macrocode}

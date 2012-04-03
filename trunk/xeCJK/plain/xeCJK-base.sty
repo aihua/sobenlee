@@ -19,7 +19,7 @@
 %%  version 2005/12/01 or later.
 %% 
 \ProvidesPackage{xeCJK-base}
-  [2012/01/31 v2.4.5 package for typesetting CJK scripts with XeLaTeX]
+  [2012/01/31 v2.4.5 package for typesetting CJK scripts with Xe(La)TeX]
 \endlinechar \m@ne
 \catcode "FEFF=9\relax
 \def\xeCJK@patch#1#2#3{
@@ -158,6 +158,7 @@
 \def\xeCJK@i@i{
   \CJKglue
   \CJKsymbol}
+\let\xeCJK@i@i@save\xeCJK@i@i
 \def\xeCJK@i@ii#1{
   \xeCJK@punctrule{#1}{l}
   \hskip \csname xeCJK\xeCJK@punctstyle\xeCJK@bboxname @lglue@#1\endcsname
@@ -346,6 +347,13 @@
 \edef\xeCJK@zerokern{\kern -4sp\kern 4sp}
 \chardef\xeCJK@four=4
 \chardef\xeCJK@ten=10
+\def\CJKspace{\let\xeCJK@ignorespaces\@empty}
+\def\CJKnospace{\def\xeCJK@ignorespaces{\xeCJK@@ignorespaces}}
+\ifxeCJK@space@
+  \AtEndOfPackage{\CJKspace}
+\else
+  \AtEndOfPackage{\CJKnospace}
+\fi
 \def\xeCJK@@ignorespaces{
   \futurelet\xeCJK@nexttoken\xeCJK@checknext}
 \def\xeCJK@checknext{
@@ -371,12 +379,10 @@
     \fi
   \fi
   \let\xeCJK@nexttoken\relax}
-\def\CJKspace{\let\xeCJK@ignorespaces\@empty}
-\def\CJKnospace{\let\xeCJK@ignorespaces\xeCJK@@ignorespaces}
-\ifxeCJK@space@
-  \AtEndOfPackage{\CJKspace}
-\else
-  \AtEndOfPackage{\CJKnospace}
+\def\xeCJKenablechecksingle{\def\xeCJK@i@i{\xeCJK@checksingle}}
+\def\xeCJKdisablechecksingle{\let\xeCJK@i@i\xeCJK@i@i@save}
+\ifxeCJK@checksingle
+  \AtEndOfPackage{\xeCJKenablechecksingle}
 \fi
 \def\xeCJK@checksingle#1{
   \def\xeCJK@setcurrentchar@i{
@@ -632,16 +638,18 @@
 \def\CJKttdefault{tt}
 \def\CJKfamilydefault{\CJKrmdefault}
 \@namedef{xeCJK@font@\CJKfamilydefault}{}
-\AtBeginDocument{\CJKfamily{\CJKfamilydefault}}
 \def\xeCJK@fallback@testsymbol#1{
   \iffontchar\font`#1\relax
     #1
   \else
     {\CJKfamily{\xeCJK@family @FallBack}\xeCJK@setfont#1}
   \fi}
-\newcommand\xeCJKenablefallback{\let\xeCJK@fallback@CJKsymbol\CJKsymbol
+\def\xeCJKenablefallback{\let\xeCJK@fallback@CJKsymbol\CJKsymbol
   \def\CJKsymbol##1{\xeCJK@fallback@CJKsymbol{\xeCJK@fallback@testsymbol{##1}}}}
-\newcommand\xeCJKdisablefallback{\let\CJKsymbol\xeCJK@fallback@CJKsymbol}
+\def\xeCJKdisablefallback{
+  \ifcsname xeCJK@fallback@CJKsymbol\endcsname
+    \let\CJKsymbol\xeCJK@fallback@CJKsymbol
+  \fi}
 \ifxeCJK@fallback@
   \xeCJKenablefallback
 \fi
@@ -649,9 +657,29 @@
 \def\xeCJKsetemboldenfactor#1{\edef\xeCJK@emboldenfactor{#1}}
 \xeCJKsetslantfactor{0.167}
 \xeCJKsetemboldenfactor{4}
+\def\setCJKmainfont{\xeCJK@newfontfamily{\CJKrmdefault}}
+\let\setCJKromanfont\setCJKmainfont
+\def\setCJKsansfont{\xeCJK@newfontfamily{\CJKsfdefault}}
+\DeclareRobustCommand*\normalfont
+        {\CJKfamily{\CJKfamilydefault}
+         \usefont\encodingdefault
+                 \familydefault
+                 \seriesdefault
+                 \shapedefault
+         \relax}
+\let\reset@font\normalfont
+\DeclareRobustCommand*\rmfamily
+        {\not@math@alphabet\rmfamily\mathrm
+         \fontfamily\rmdefault\CJKfamily{\CJKrmdefault}\selectfont}
+\DeclareRobustCommand*\sffamily
+        {\not@math@alphabet\sffamily\mathsf
+         \fontfamily\sfdefault\CJKfamily{\CJKsfdefault}\selectfont}
+\DeclareRobustCommand*\ttfamily
+        {\not@math@alphabet\ttfamily\mathtt
+         \fontfamily\ttdefault\CJKfamily{\CJKttdefault}\selectfont}
 \ifxeCJK@num
   \edef\CJK@UnicodeEnc{UTF8}
-  \def\CJKaddEncHook#1#2{\expandafter\def\csname xeCJK@enc@#1\endcsname{#2}}
+  \def\CJKaddEncHook#1#2{\@namedef{xeCJK@enc@#1}{#2}}
   \def\Unicode#1#2{\@tempcnta #1\relax
     \multiply\@tempcnta 256\relax
     \advance\@tempcnta #2\relax
@@ -667,12 +695,9 @@
         \unless\ifx\CJK@tempb \@empty
       \repeat
    \fi}}
-  \csname xeCJK@enc@UTF8\endcsname
+  \@nameuse{xeCJK@enc@UTF8}
   \def\CJK@tenthousand{万}
   \def\CJK@hundredmillion{亿}
-\fi
-\unless\ifcsname if@ignore\endcsname
-  \csname newif\expandafter\endcsname\csname if@ignore\endcsname
 \fi
 \DeclareRobustCommand*{\xeCJK@ULprepunctchar}[1]{
  {\XeTeXinterchartokenstate=0
@@ -707,16 +732,13 @@
       \xeCJK@ULroutines}
   \fi}
 \def\CJK@ifundefined#1{
-  \ifx #1\@undefined
+  \ifdefined#1
     \expandafter\@firstoftwo
   \else
     \expandafter\@secondoftwo
-  \fi
-}
+  \fi}
 \newcommand{\xeCJKcaption}[2][]{
-  \if\relax\detokenize{#1}\relax
-    \XeTeXdefaultencoding "#1"
-  \fi
+  \xeCJK@StrIfBlankTF{#1}{}{\XeTeXdefaultencoding "#1"}
   \makeatletter
   \input{#2.cpx}
   \makeatother
