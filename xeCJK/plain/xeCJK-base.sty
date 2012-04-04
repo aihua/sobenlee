@@ -171,7 +171,7 @@
   \else
     \nobreak
   \fi
-  \global\edef\xeCJK@lastpunct{#1}
+  \xdef\xeCJK@lastpunct{#1}
   \CJKpunctsymbol{#1}}
 \def\xeCJK@setprepunct#1{
   \edef\xeCJK@lastpunct{#1}
@@ -421,7 +421,7 @@
 \CJKsetecglue{ }
 \def\xeCJKallowbreakbetweenpuncts{
   \def\xeCJKpunctnobreak{
-    \hskip 0pt}}
+    \hskip \z@\relax}}
 \def\xeCJKnobreakbetweenpuncts{
   \let\xeCJKpunctnobreak\nobreak}
 \xeCJKnobreakbetweenpuncts
@@ -485,14 +485,14 @@
       \xeCJK@cntd=0\relax
     \fi
     \xeCJK@numtodim{\xeCJK@cnta}
-    \global\expandafter\edef\csname
+    \expandafter\xdef\csname
       xeCJK\xeCJK@punctstyle\xeCJK@bboxname @#2rule@#1\endcsname{
         -\xeCJK@temp em}
     \xeCJK@numtodim{\xeCJK@cntc}
-    \global\expandafter\edef\csname
+    \expandafter\xdef\csname
       xeCJK\xeCJK@punctstyle\xeCJK@bboxname @#2glue@#1\endcsname{
         \xeCJK@temp em}
-    \global\expandafter\edef\csname
+    \expandafter\xdef\csname
       xeCJK\xeCJK@punctstyle\xeCJK@bboxname @#2oglue@#1\endcsname{
         \the\xeCJK@cntd}
   \fi}
@@ -543,13 +543,13 @@
       \xeCJK@cnta=0\relax
     \fi
     \xeCJK@numtodim{\xeCJK@cnta}
-    \global\expandafter\edef\csname
+    \expandafter\xdef\csname
       xeCJK\xeCJK@punctstyle\xeCJK@bboxname @kern#1#2\endcsname{
         \xeCJK@temp em}
   \fi}
 \def\xeCJKsetkern#1#2#3{
   \xdef\xeCJK@bboxname{\xeCJK@family/\f@series/\f@shape/\f@size}
-  \global\expandafter\edef\csname
+  \expandafter\xdef\csname
       xeCJK\xeCJK@punctstyle\xeCJK@bboxname @kern#1#2\endcsname{#3}}
 \def\punctstyle#1{
   \ifcsname xeCJK@ps@#1\endcsname
@@ -623,7 +623,7 @@
     You have to update XeTeX  to the version 0.9995.0 or later}
 \fi
 \DeclareRobustCommand*\CJKfamily[1]{
-  \ifcsname xeCJK@font@#1\endcsname
+  \ifcsname xeCJK@family@#1\endcsname
     \edef\xeCJK@family{#1}
   \else
     \unless\ifcsname xeCJK@#1@warned\endcsname
@@ -637,7 +637,7 @@
 \def\CJKsfdefault{sf}
 \def\CJKttdefault{tt}
 \def\CJKfamilydefault{\CJKrmdefault}
-\@namedef{xeCJK@font@\CJKfamilydefault}{}
+\@namedef{xeCJK@family@\CJKfamilydefault}{}
 \def\xeCJK@fallback@testsymbol#1{
   \iffontchar\font`#1\relax
     #1

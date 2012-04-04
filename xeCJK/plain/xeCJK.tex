@@ -50,9 +50,9 @@
     \expandafter\@secondoftwo
   \fi}
 \def\xeCJK@StrIfBlankTF#1{
-  \ifnum\strcmp{\space}{#1}=\z@
+  \ifnum\strcmp{\empty}{#1}=\z@
     \expandafter\@firstoftwo
-  \else\ifnum\strcmp{\empty}{#1}=\z@
+  \else\ifnum\strcmp{\space}{#1}=\z@
     \expandafter\expandafter
     \expandafter\@firstoftwo
   \else
@@ -135,12 +135,12 @@
   \DeclareFont{\encodingdefault/\curr@family/\bfdefault/\scdefault}{"#1"()}}}
 \def\xeCJK@new@fontfamily#1[#2]#3{
   \begingroup
-  \global\advance\xeCJK@font@cnt\@ne\relax
+  \global\advance\xeCJK@family@cnt\@ne\relax
   \edef\curr@family{}
   \edef\xeCJK@temp@{\unexpanded{\@tfor\reserved@a:=}#3}
   \xeCJK@temp@\do{
     \edef\curr@family{\curr@family\xeCJK@StrIfEqTF{\reserved@a}{/}{@}{\reserved@a}}}
-  \edef\curr@family{\curr@family(\number\xeCJK@font@cnt)}
+  \edef\curr@family{\curr@family(\number\xeCJK@family@cnt)}
   \DeclareFont{\encodingdefault/\curr@family/\mddefault/\updefault}{"#3"()}
   \setkeys{xeCJK/features}{#2}
   \xeCJK@map@fontfamily{\curr@family}
@@ -162,14 +162,14 @@
   {\xeCJK@new@fontfamily{#1}}{\xeCJK@new@fontfamily{#1}[]}}
 \protected\def\fontspec{\@ifnextchar[%]
   {\xeCJK@fontspec}{\xeCJK@fontspec[]}}
-\newcount\xeCJK@font@cnt
+\newcount\xeCJK@family@cnt
 \def\xeCJK@fontspec[#1]#2{
   \xeCJK@new@fontfamily\@fontfamily[#1]{#2}
   \selectfont\ignorespaces}
 \protected\def\xeCJK@newfontfamily#1{\@ifnextchar[%]
   {\xeCJK@newfontfamily@aux{#1}}{\xeCJK@newfontfamily@aux{#1}[]}}
 \def\xeCJK@newfontfamily@aux#1[#2]#3{
-  \expandafter\xdef\csname xeCJK@font@#1\endcsname{#3}
+  \expandafter\xdef\csname xeCJK@family@#1\endcsname{#3}
   \xeCJK@new@fontfamily\xeCJK@temp@name[#2]{#3}
   \expandafter\xdef\csname CJKfamily@#1\endcsname{\xeCJK@temp@name}}
 \let\setCJKfamilyfont\xeCJK@newfontfamily
@@ -185,8 +185,8 @@
 \def\CJKfontspec{\@ifnextchar[%]
   {\xeCJK@CJKfontspec}{\xeCJK@CJKfontspec[]}}
 \def\xeCJK@CJKfontspec[#1]#2{
-  \global\advance\xeCJK@font@cnt\@ne\relax
-  \edef\xeCJK@fontspec@name{xeCJK@family@\number\xeCJK@font@cnt}
+  \global\advance\xeCJK@family@cnt\@ne\relax
+  \edef\xeCJK@fontspec@name{xeCJK@family@\number\xeCJK@family@cnt}
   \xeCJK@newfontfamily\xeCJK@fontspec@name[#1]{#2}
   \CJKfamily{\xeCJK@fontspec@name}\ignorespaces}
 \def\xeCJK@setfont{\setfontfamily{\@nameuse{CJKfamily@\xeCJK@family}}\selectfont}
