@@ -51,8 +51,9 @@ may observe
 \endpreamble
 \askforoverwritefalse
 \generate{\file{\jobname.sty}{\from{\jobname.dtx}{package}}}
+\generate{\file{example-autofake.tex}{\from{\jobname.dtx}{ex-autofake}}}
 \generate{\file{example-fallback.tex}{\from{\jobname.dtx}{ex-fallback}}}
-\generate{\file{example-SubCJKBlock.tex}{\from{\jobname.dtx}{ex-block}}}
+\generate{\file{example-subCJKblock.tex}{\from{\jobname.dtx}{ex-block}}}
 %</batchfile>
 %<batchfile>\endbatchfile
 %<*internal>
@@ -117,7 +118,7 @@ may observe
 %
 %\end{documentation}
 %
-%
+% \clearpage
 %
 %\begin{implementation}
 %
@@ -1510,10 +1511,10 @@ may observe
 %     \begin{macrocode}
 \prg_set_conditional:Nnn \tl_if_blank:x { p , T , F , TF }
   {
-    \if_int_compare:w \pdftex_strcmp:D { \c_space_tl } {#1} = \c_zero
+    \if_int_compare:w \pdftex_strcmp:D { \c_empty_tl } {#1} = \c_zero
       \prg_return_true:
     \else:
-      \if_int_compare:w \pdftex_strcmp:D { \c_empty_tl } {#1} = \c_zero
+      \if_int_compare:w \pdftex_strcmp:D { \c_space_tl } {#1} = \c_zero
         \prg_return_true: \else: \prg_return_false: \fi:
     \fi:
   }
@@ -1817,7 +1818,7 @@ may observe
       {
         \xeCJK_add_font:nx {#1} { \xeCJK_get_map_font:n {#1} }
         \xeCJK_if_font_exist:nF {bf#1}
-          { \xeCJK_add_font:nx {bf#1} { \xeCJK_get_map_font:n {#1} } }
+          { \xeCJK_add_font_if_new:nx {bf#1} { \xeCJK_get_map_font:n {#1} } }
       }
   }
 %    \end{macrocode}
@@ -2538,6 +2539,68 @@ may observe
 %%
 % \section{例子}
 %
+% \subsection{\pkg{example-autofake.tex}}
+%
+%    \begin{macrocode}
+%<*ex-autofake>
+%    \end{macrocode}
+%
+% \begin{macrocode}
+\documentclass{article}
+\usepackage[AutoFakeBold,AutoFakeSlant]{xeCJK}
+\setCJKmainfont[BoldFont=simhei.ttf, ItalicFont=simkai.ttf]{simsun.ttc}
+\setCJKsansfont[
+  AutoFakeBold=false, AutoFakeSlant=false,
+  BoldFont=simhei.ttf, ItalicFont=simkai.ttf]{simsun.ttc}
+\setCJKmonofont[ItalicFont=simkai.ttf]{simsun.ttc}
+\begin{document}
+\centering
+\begin{tabular}{lllll}
+\hline
+ {\bf rm} & md & up & \verb|\rmfamily\mdseries\upshape| &
+                      {\rmfamily\mdseries\upshape English 中文字体} \\
+          & md & it & \verb|\rmfamily\mdseries\itshape| &
+                      {\rmfamily\mdseries\itshape English 中文字体} \\
+          & md & sl & \verb|\rmfamily\mdseries\slshape| &
+                      {\rmfamily\mdseries\slshape English 中文字体} \\ \cline{2-5}
+          & bf & up & \verb|\rmfamily\bfseries\upshape| &
+                      {\rmfamily\bfseries\upshape English 中文字体} \\
+          & bf & it & \verb|\rmfamily\bfseries\itshape| &
+                      {\rmfamily\bfseries\itshape English 中文字体} \\
+          & bf & sl & \verb|\rmfamily\bfseries\slshape| &
+                      {\rmfamily\bfseries\slshape English 中文字体} \\ \hline
+ {\bf sf} & md & up & \verb|\sffamily\mdseries\upshape| &
+                      {\sffamily\mdseries\upshape English 中文字体} \\
+          & md & it & \verb|\sffamily\mdseries\itshape| &
+                      {\sffamily\mdseries\itshape English 中文字体} \\
+          & md & sl & \verb|\sffamily\mdseries\slshape| &
+                      {\sffamily\mdseries\slshape English 中文字体} \\ \cline{2-5}
+          & bf & up & \verb|\sffamily\bfseries\upshape| &
+                      {\sffamily\bfseries\upshape English 中文字体} \\
+          & bf & it & \verb|\sffamily\bfseries\itshape| &
+                      {\sffamily\bfseries\itshape English 中文字体} \\
+          & bf & sl & \verb|\sffamily\bfseries\slshape| &
+                      {\sffamily\bfseries\slshape English 中文字体} \\ \hline
+ {\bf tt} & md & up & \verb|\ttfamily\mdseries\upshape| &
+                      {\ttfamily\mdseries\upshape English 中文字体} \\
+          & md & it & \verb|\ttfamily\mdseries\itshape| &
+                      {\ttfamily\mdseries\itshape English 中文字体} \\
+          & md & sl & \verb|\ttfamily\mdseries\slshape| &
+                      {\ttfamily\mdseries\slshape English 中文字体} \\ \cline{2-5}
+          & bf & up & \verb|\ttfamily\bfseries\upshape| &
+                      {\ttfamily\bfseries\upshape English 中文字体} \\
+          & bf & it & \verb|\ttfamily\bfseries\itshape| &
+                      {\ttfamily\bfseries\itshape English 中文字体} \\
+          & bf & sl & \verb|\ttfamily\bfseries\slshape| &
+                      {\ttfamily\bfseries\slshape English 中文字体} \\ \hline
+\end{tabular}
+\end{document}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%</ex-autofake>
+%    \end{macrocode}
+%
 % \subsection{\pkg{example-fallback.tex}}
 %
 %    \begin{macrocode}
@@ -2599,7 +2662,8 @@ may observe
 대한$x^2+y^2=z^2$민국은 동아시아의 한반ABC도 남반부에 자리한 공화국이다. 한일 병합 조약을 통하여 대한제국을 병합했던 일본 제국이 태평양 전쟁에서 연합국에게 패배하고, 이후 주요 연합국 중 하나인 미국이 한반도의 북위 38도 이남을 점령하면서 실시한 군정이 통치권을 이양하여, 1948년 8월 15일에 성립되었다.}
 \showtext
 
-\bigskip\xeCJKCancelSubCJKBlock{Kana,Hangul}
+\bigskip
+\xeCJKCancelSubCJKBlock{Kana,Hangul}
 \showtext
 
 \begin{table}[ht]

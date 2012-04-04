@@ -771,9 +771,9 @@ may observe
     \expandafter\@secondoftwo
   \fi}
 \def\xeCJK@StrIfBlankTF#1{
-  \ifnum\strcmp{\space}{#1}=\z@
+  \ifnum\strcmp{\empty}{#1}=\z@
     \expandafter\@firstoftwo
-  \else\ifnum\strcmp{\empty}{#1}=\z@
+  \else\ifnum\strcmp{\space}{#1}=\z@
     \expandafter\expandafter
     \expandafter\@firstoftwo
   \else
@@ -1085,7 +1085,7 @@ may observe
   \else
     \nobreak
   \fi
-  \global\edef\xeCJK@lastpunct{#1}
+  \xdef\xeCJK@lastpunct{#1}
   \CJKpunctsymbol{#1}}
 \def\xeCJK@setprepunct#1{
   \edef\xeCJK@lastpunct{#1}
@@ -1356,7 +1356,7 @@ may observe
 %    \begin{macrocode}
 \def\xeCJKallowbreakbetweenpuncts{
   \def\xeCJKpunctnobreak{
-    \hskip 0pt}}
+    \hskip \z@\relax}}
 \def\xeCJKnobreakbetweenpuncts{
   \let\xeCJKpunctnobreak\nobreak}
 \xeCJKnobreakbetweenpuncts
@@ -1432,14 +1432,14 @@ may observe
       \xeCJK@cntd=0\relax
     \fi
     \xeCJK@numtodim{\xeCJK@cnta}
-    \global\expandafter\edef\csname
+    \expandafter\xdef\csname
       xeCJK\xeCJK@punctstyle\xeCJK@bboxname @#2rule@#1\endcsname{
         -\xeCJK@temp em}
     \xeCJK@numtodim{\xeCJK@cntc}
-    \global\expandafter\edef\csname
+    \expandafter\xdef\csname
       xeCJK\xeCJK@punctstyle\xeCJK@bboxname @#2glue@#1\endcsname{
         \xeCJK@temp em}
-    \global\expandafter\edef\csname
+    \expandafter\xdef\csname
       xeCJK\xeCJK@punctstyle\xeCJK@bboxname @#2oglue@#1\endcsname{
         \the\xeCJK@cntd}
   \fi}
@@ -1490,7 +1490,7 @@ may observe
       \xeCJK@cnta=0\relax
     \fi
     \xeCJK@numtodim{\xeCJK@cnta}
-    \global\expandafter\edef\csname
+    \expandafter\xdef\csname
       xeCJK\xeCJK@punctstyle\xeCJK@bboxname @kern#1#2\endcsname{
         \xeCJK@temp em}
   \fi}
@@ -1499,7 +1499,7 @@ may observe
 %    \begin{macrocode}
 \def\xeCJKsetkern#1#2#3{
   \xdef\xeCJK@bboxname{\xeCJK@family/\f@series/\f@shape/\f@size}
-  \global\expandafter\edef\csname
+  \expandafter\xdef\csname
       xeCJK\xeCJK@punctstyle\xeCJK@bboxname @kern#1#2\endcsname{#3}}
 \def\punctstyle#1{
   \ifcsname xeCJK@ps@#1\endcsname
@@ -1578,7 +1578,7 @@ may observe
 % | \CJKfamily | 用于切换字体。
 %    \begin{macrocode}
 \DeclareRobustCommand*\CJKfamily[1]{
-  \ifcsname xeCJK@font@#1\endcsname
+  \ifcsname xeCJK@family@#1\endcsname
     \edef\xeCJK@family{#1}
   \else
     \unless\ifcsname xeCJK@#1@warned\endcsname
@@ -1592,7 +1592,7 @@ may observe
 \def\CJKsfdefault{sf}
 \def\CJKttdefault{tt}
 \def\CJKfamilydefault{\CJKrmdefault}
-\@namedef{xeCJK@font@\CJKfamilydefault}{}
+\@namedef{xeCJK@family@\CJKfamilydefault}{}
 %    \end{macrocode}
 %
 % 设置备用字体，如果主字体没有相应的符号，将尝试使用备用字体显示。
@@ -1709,12 +1709,12 @@ may observe
   \DeclareFont{\encodingdefault/\curr@family/\bfdefault/\scdefault}{"#1"()}}}
 \def\xeCJK@new@fontfamily#1[#2]#3{
   \begingroup
-  \global\advance\xeCJK@font@cnt\@ne\relax
+  \global\advance\xeCJK@family@cnt\@ne\relax
   \edef\curr@family{}
   \edef\xeCJK@temp@{\unexpanded{\@tfor\reserved@a:=}#3}
   \xeCJK@temp@\do{
     \edef\curr@family{\curr@family\xeCJK@StrIfEqTF{\reserved@a}{/}{@}{\reserved@a}}}
-  \edef\curr@family{\curr@family(\number\xeCJK@font@cnt)}
+  \edef\curr@family{\curr@family(\number\xeCJK@family@cnt)}
   \DeclareFont{\encodingdefault/\curr@family/\mddefault/\updefault}{"#3"()}
   \setkeys{xeCJK/features}{#2}
   \xeCJK@map@fontfamily{\curr@family}
@@ -1736,14 +1736,14 @@ may observe
   {\xeCJK@new@fontfamily{#1}}{\xeCJK@new@fontfamily{#1}[]}}
 \protected\def\fontspec{\@ifnextchar[%]
   {\xeCJK@fontspec}{\xeCJK@fontspec[]}}
-\newcount\xeCJK@font@cnt
+\newcount\xeCJK@family@cnt
 \def\xeCJK@fontspec[#1]#2{
   \xeCJK@new@fontfamily\@fontfamily[#1]{#2}
   \selectfont\ignorespaces}
 \protected\def\xeCJK@newfontfamily#1{\@ifnextchar[%]
   {\xeCJK@newfontfamily@aux{#1}}{\xeCJK@newfontfamily@aux{#1}[]}}
 \def\xeCJK@newfontfamily@aux#1[#2]#3{
-  \expandafter\xdef\csname xeCJK@font@#1\endcsname{#3}
+  \expandafter\xdef\csname xeCJK@family@#1\endcsname{#3}
   \xeCJK@new@fontfamily\xeCJK@temp@name[#2]{#3}
   \expandafter\xdef\csname CJKfamily@#1\endcsname{\xeCJK@temp@name}}
 \let\setCJKfamilyfont\xeCJK@newfontfamily
@@ -1759,8 +1759,8 @@ may observe
 \def\CJKfontspec{\@ifnextchar[%]
   {\xeCJK@CJKfontspec}{\xeCJK@CJKfontspec[]}}
 \def\xeCJK@CJKfontspec[#1]#2{
-  \global\advance\xeCJK@font@cnt\@ne\relax
-  \edef\xeCJK@fontspec@name{xeCJK@family@\number\xeCJK@font@cnt}
+  \global\advance\xeCJK@family@cnt\@ne\relax
+  \edef\xeCJK@fontspec@name{xeCJK@family@\number\xeCJK@family@cnt}
   \xeCJK@newfontfamily\xeCJK@fontspec@name[#1]{#2}
   \CJKfamily{\xeCJK@fontspec@name}\ignorespaces}
 %    \end{macrocode}
@@ -1781,7 +1781,7 @@ may observe
 % |\xeCJK@setfont| 实际切换中文字体。它使用名为
 % |xeCJK@\xeCJK@family/\f@series/\f@shape/\f@size| 的宏来缓存特定 NFSS 坐标
 % 中文字体的原始 |\font| 命令格式，以加快编译速度。在第一次使用这一 NFSS 坐标
-% 时，会调用名为 |xeCJK@font@\xeCJK@family| 的宏（它将展开为 |\fontspec|），
+% 时，会调用名为 |xeCJK@family@\xeCJK@family| 的宏（它将展开为 |\fontspec|），
 % 利用 |fontspec| 宏包选择中文字体，并缓存原始字体形式。
 %    \begin{macrocode}
 \def\xeCJK@setfont{
@@ -1798,7 +1798,7 @@ may observe
 %    \end{macrocode}
 % 切换未缓存的字体。
 %    \begin{macrocode}
-    \csname xeCJK@font@\xeCJK@family\endcsname
+    \csname xeCJK@family@\xeCJK@family\endcsname
 %    \end{macrocode}
 % |\get@external@font| 可能会产生奇怪的副作用\footnote{参见 ctex-kit 项目
 % \href{http://code.google.com/p/ctex-kit/issues/detail?id=57}{issue 57}。}。
@@ -1821,10 +1821,10 @@ may observe
   \cs_generate_variant:Nn \keys_set_known:nnN { nx } }
 \prg_set_conditional:Nnn \tl_if_blank:x { p , T , F , TF }
   {
-    \if_int_compare:w \pdftex_strcmp:D { \c_space_tl } {#1} = \c_zero
+    \if_int_compare:w \pdftex_strcmp:D { \c_empty_tl } {#1} = \c_zero
       \prg_return_true:
     \else:
-      \if_int_compare:w \pdftex_strcmp:D { \c_empty_tl } {#1} = \c_zero
+      \if_int_compare:w \pdftex_strcmp:D { \c_space_tl } {#1} = \c_zero
         \prg_return_true: \else: \prg_return_false: \fi:
     \fi:
   }
@@ -1977,7 +1977,7 @@ may observe
     \xeCJK_parse_features:
     \xeCJK_pass_features:
     \fontspec_select:nn \l_xeCJK_pass_features_clist \l_xeCJK_fontname_tl
-    \cs_gset_protected_nopar:cpx { xeCJK@font@\l_xeCJK_familyname_tl }
+    \cs_gset_protected_nopar:cpx { xeCJK@family@\l_xeCJK_familyname_tl }
       {
         \exp_not:N \fontencoding { \g_fontspec_encoding_tl }
         \exp_not:N \fontfamily   { \l_fontspec_family_tl }
@@ -2092,7 +2092,7 @@ may observe
       {
         \xeCJK_add_font:nx {#1} { \xeCJK_get_map_font:n {#1} }
         \xeCJK_if_font_exist:nF {bf#1}
-          { \xeCJK_add_font:nx {bf#1} { \xeCJK_get_map_font:n {#1} } }
+          { \xeCJK_add_font_if_new:nx {bf#1} { \xeCJK_get_map_font:n {#1} } }
       }
   }
 %    \end{macrocode}

@@ -855,10 +855,10 @@
   { \cs_generate_variant:Nn \keys_set_known:nnN { nx } }
 \prg_set_conditional:Nnn \tl_if_blank:x { p , T , F , TF }
   {
-    \if_int_compare:w \pdftex_strcmp:D { \c_space_tl } {#1} = \c_zero
+    \if_int_compare:w \pdftex_strcmp:D { \c_empty_tl } {#1} = \c_zero
       \prg_return_true:
     \else:
-      \if_int_compare:w \pdftex_strcmp:D { \c_empty_tl } {#1} = \c_zero
+      \if_int_compare:w \pdftex_strcmp:D { \c_space_tl } {#1} = \c_zero
         \prg_return_true: \else: \prg_return_false: \fi:
     \fi:
   }
@@ -1082,7 +1082,7 @@
       {
         \xeCJK_add_font:nx {#1} { \xeCJK_get_map_font:n {#1} }
         \xeCJK_if_font_exist:nF {bf#1}
-          { \xeCJK_add_font:nx {bf#1} { \xeCJK_get_map_font:n {#1} } }
+          { \xeCJK_add_font_if_new:nx {bf#1} { \xeCJK_get_map_font:n {#1} } }
       }
   }
 \cs_new:Nn \xeCJK_get_map_font:n

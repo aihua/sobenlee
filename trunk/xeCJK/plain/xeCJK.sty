@@ -80,9 +80,9 @@
     \expandafter\@secondoftwo
   \fi}
 \def\xeCJK@StrIfBlankTF#1{
-  \ifnum\strcmp{\space}{#1}=\z@
+  \ifnum\strcmp{\empty}{#1}=\z@
     \expandafter\@firstoftwo
-  \else\ifnum\strcmp{\empty}{#1}=\z@
+  \else\ifnum\strcmp{\space}{#1}=\z@
     \expandafter\expandafter
     \expandafter\@firstoftwo
   \else
@@ -95,7 +95,7 @@
     \csname xeCJK@\xeCJK@family/\f@series/\f@shape/\f@size\endcsname
   \else
     \edef\xeCJK@currentcoor{xeCJK@\xeCJK@family/\f@series/\f@shape/\f@size}
-    \csname xeCJK@font@\xeCJK@family\endcsname
+    \csname xeCJK@family@\xeCJK@family\endcsname
     \begingroup
       \get@external@font
       \global\expandafter\font
@@ -107,10 +107,10 @@
   \cs_generate_variant:Nn \keys_set_known:nnN { nx } }
 \prg_set_conditional:Nnn \tl_if_blank:x { p , T , F , TF }
   {
-    \if_int_compare:w \pdftex_strcmp:D { \c_space_tl } {#1} = \c_zero
+    \if_int_compare:w \pdftex_strcmp:D { \c_empty_tl } {#1} = \c_zero
       \prg_return_true:
     \else:
-      \if_int_compare:w \pdftex_strcmp:D { \c_empty_tl } {#1} = \c_zero
+      \if_int_compare:w \pdftex_strcmp:D { \c_space_tl } {#1} = \c_zero
         \prg_return_true: \else: \prg_return_false: \fi:
     \fi:
   }
@@ -243,7 +243,7 @@
     \xeCJK_parse_features:
     \xeCJK_pass_features:
     \fontspec_select:nn \l_xeCJK_pass_features_clist \l_xeCJK_fontname_tl
-    \cs_gset_protected_nopar:cpx { xeCJK@font@\l_xeCJK_familyname_tl }
+    \cs_gset_protected_nopar:cpx { xeCJK@family@\l_xeCJK_familyname_tl }
       {
         \exp_not:N \fontencoding { \g_fontspec_encoding_tl }
         \exp_not:N \fontfamily   { \l_fontspec_family_tl }
@@ -340,7 +340,7 @@
       {
         \xeCJK_add_font:nx {#1} { \xeCJK_get_map_font:n {#1} }
         \xeCJK_if_font_exist:nF {bf#1}
-          { \xeCJK_add_font:nx {bf#1} { \xeCJK_get_map_font:n {#1} } }
+          { \xeCJK_add_font_if_new:nx {bf#1} { \xeCJK_get_map_font:n {#1} } }
       }
   }
 \cs_new:Nn \xeCJK_get_map_font:n
