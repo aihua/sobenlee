@@ -124,7 +124,7 @@
               { \tl_put_right:Nn \l_xeCJK_familyname_tl {  @ #1 } }
               {
                 \xeCJK_get_features:n {##1}
-                \xeCJK_setCJKfamilyfont:nnn { \l_xeCJK_familyname_tl @ #1 }
+                \xeCJK_set_family:nnn { \l_xeCJK_familyname_tl @ #1 }
                   { \l_xeCJK_get_features_clist }
                   { \l_xeCJK_get_features_tl }
               }
@@ -177,7 +177,7 @@
     \keys_define:nn { xeCJK / features }
       {
         #2Font        .tl_set_x:c = { l_xeCJK_fontname_#1_tl },
-        #2Features .clist_set_x:c = { l_xeCJK_features_#1_clist } ,
+        #2Features .clist_set_x:c = { l_xeCJK_fontfeat_#1_clist } ,
       }
   }
 \keys_define:nn { xeCJK / features }
@@ -216,7 +216,7 @@
     \prop_map_inline:Nn \g_xeCJK_features_id_prop
       {
         \tl_clear:c     { l_xeCJK_fontname_##1_tl    }
-        \clist_clear:c  { l_xeCJK_features_##1_clist }
+        \clist_clear:c  { l_xeCJK_fontfeat_##1_clist }
       }
     \clist_clear:N \l_xeCJK_pass_features_clist
     \ifxeCJK@BoldFont@
@@ -232,7 +232,7 @@
     \fp_set:Nn \l_xeCJK_EmboldenFactor_fp \xeCJK@emboldenfactor
     \fp_set:Nn \l_xeCJK_SlantFactor_fp    \xeCJK@slantfactor
   }
-\cs_new_protected_nopar:Nn \xeCJK_setCJKfamilyfont:nnn
+\cs_new_protected_nopar:Nn \xeCJK_set_family:nnn
   {
     \group_begin:
     \xeCJK_set_init:
@@ -242,9 +242,12 @@
       { \g_xeCJK_default_features_clist, #2 } \l_xeCJK_pass_features_clist
     \xeCJK_parse_features:
     \xeCJK_pass_features:
+    \fontspec_select:nn \l_xeCJK_pass_features_clist \l_xeCJK_fontname_tl
     \cs_gset_protected_nopar:cpx { xeCJK@font@\l_xeCJK_familyname_tl }
       {
-        \exp_not:N \fontspec [ \l_xeCJK_pass_features_clist ] { \l_xeCJK_fontname_tl }
+        \exp_not:N \fontencoding { \g_fontspec_encoding_tl }
+        \exp_not:N \fontfamily   { \l_fontspec_family_tl }
+        \exp_not:N \selectfont
       }
     \clist_gset:cx { xeCJK_fontoptions_\l_xeCJK_familyname_tl } {#2}
     \tl_gset:cx { xeCJK_fontname_\l_xeCJK_familyname_tl } { \l_xeCJK_fontname_tl }
@@ -266,12 +269,12 @@
 \cs_generate_variant:Nn \prop_put_if_new:Nnn { Nxx }
 \cs_new:Nn \xeCJK_add_fake_bold:n
   {
-    \clist_put_left:cx { l_xeCJK_features_#1_clist }
+    \clist_put_left:cx { l_xeCJK_fontfeat_#1_clist }
       { FakeBold = { \fp_use:N \l_xeCJK_EmboldenFactor_fp } }
   }
 \cs_new:Nn \xeCJK_add_fake_slant:n
   {
-    \clist_put_left:cx { l_xeCJK_features_#1_clist }
+    \clist_put_left:cx { l_xeCJK_fontfeat_#1_clist }
       { FakeSlant = { \fp_use:N \l_xeCJK_SlantFactor_fp } }
   }
 \cs_new:Nn \xeCJK_parse_features:
@@ -283,10 +286,20 @@
     \xeCJK_if_font_exist:nTF {#1}
       {
         \xeCJK_add_font:nv {#1} { l_xeCJK_fontname_#1_tl }
-        \xeCJK_if_it_or_sl:nT {#1}
+        \xeCJK_if_it_or_sl:nTF {#1}
           {
             \xeCJK_if_font_exist:nF {bf#1}
-              { \xeCJK_add_font:nv {bf#1} { l_xeCJK_fontname_#1_tl } }
+              { \xeCJK_add_font_if_new:nv {bf#1} { l_xeCJK_fontname_#1_tl }  }
+          }
+          {
+            \str_if_eq:xxT {#1} {bf}
+              {
+                \clist_map_inline:nn { it , sl }
+                  {
+                    \xeCJK_if_font_exist:nF {bf##1}
+                      { \xeCJK_add_font:nx {bf##1} \l_xeCJK_fontname_bf_tl }
+                  }
+              }
           }
       }
       { \xeCJK_set_fake:n {#1} }
@@ -307,14 +320,17 @@
     \str_if_eq:xxTF {#1} { bf }
       {
         \bool_if:NT \l_xeCJK_AutoFakeBold_bool { \xeCJK_add_fake_bold:n {#1} }
-      }{
+      }
+      {
         \bool_if:NTF \l_xeCJK_AutoFakeSlant_bool
           { \xeCJK_add_fake_slant:n {#1} }
           { \xeCJK_if_it_or_sl:nT {#1} { \xeCJK_map_it_sl:n {#1} } }
-        \xeCJK_if_it_or_sl:nF {#1}
-          {
-            \bool_if:NT \l_xeCJK_AutoFakeBold_bool { \xeCJK_add_fake_bold:n {#1} }
+        \bool_if:nT
+          {      \l_xeCJK_AutoFakeBold_bool
+            && ! ( \xeCJK_if_it_or_sl_p:n {#1} )
+            && ! ( \xeCJK_if_font_exist_p:n {bf} )
           }
+          { \xeCJK_add_fake_bold:n {#1} }
       }
     \xeCJK_add_font_if_new:nn {#1} { * }
   }
@@ -332,16 +348,16 @@
 \prg_set_conditional:Nnn \xeCJK_if_map_font_exist:n { p, T, F, TF }
   {
     \tl_if_blank:xTF { \xeCJK_get_map_font:n {#1} }
-      { \prg_return_false: } { \prg_return_true:  }
+      { \prg_return_false: } { \prg_return_true: }
   }
 \cs_new:Nn \xeCJK_pass_features:
   {
     \prop_map_inline:Nn \g_xeCJK_features_id_prop
       {
-        \clist_if_empty:cF { l_xeCJK_features_##1_clist }
+        \clist_if_empty:cF { l_xeCJK_fontfeat_##1_clist }
           {
             \clist_put_right:Nx \l_xeCJK_pass_features_clist
-              { ##2Features = { \clist_use:c { l_xeCJK_features_##1_clist } } }
+              { ##2Features = { \clist_use:c { l_xeCJK_fontfeat_##1_clist } } }
           }
       }
     \prop_map_inline:Nn \l_xeCJK_add_font_prop
@@ -350,27 +366,28 @@
       { \clist_put_right:Nx \l_xeCJK_pass_features_clist \l_xeCJK_monoscale_tl }
   }
 \NewDocumentCommand \setCJKfamilyfont { m O{} m }
-  { \xeCJK_setCJKfamilyfont:nnn {#1} {#2} {#3} }
+  { \xeCJK_set_family:nnn {#1} {#2} {#3} }
 \cs_set_eq:NN \xeCJK@newfontfamily \setCJKfamilyfont
 \NewDocumentCommand \setCJKfallbackfamilyfont { m O{} m }
-  { \xeCJK_setCJKfamilyfont:nnn { #1@FallBack } [#2] {#3} }
+  { \xeCJK_set_family:nnn { #1@FallBack } [#2] {#3} }
 \NewDocumentCommand \newCJKfontfamily { o m O{} m }
   {
     \IfNoValueTF {#1}
       { \tl_set:Nx \l_xeCJK_familyname_tl { \cs_to_str:N #2 } }
       { \tl_set:Nx \l_xeCJK_familyname_tl {#1} }
-    \xeCJK_setCJKfamilyfont:nnn { \l_xeCJK_familyname_tl } {#3} {#4}
+    \xeCJK_set_family:nnn { \l_xeCJK_familyname_tl } {#3} {#4}
     \cs_new_protected_nopar:Npx #2
       { \exp_not:N \CJKfamily { \l_xeCJK_familyname_tl } }
   }
 \int_new:N \g_xeCJK_fontspec_int
 \NewDocumentCommand \CJKfontspec { O{} m }
   {
-    \int_gincr:N \g_xeCJK_fontspec_int
     \tl_set:Nx \l_xeCJK_family_fontspec_tl
-      { xeCJK_family_fontspec_\int_use:N \g_xeCJK_fontspec_int }
-    \xeCJK_setCJKfamilyfont:nnn { \l_xeCJK_family_fontspec_tl } {#1} {#2}
-    \exp_args:Nx \CJKfamily { \l_xeCJK_family_fontspec_tl }
+      { CJKfontspec ( \int_use:N \g_xeCJK_fontspec_int ) }
+    \int_gincr:N \g_xeCJK_fontspec_int
+    \xeCJK_set_family:nnn { \l_xeCJK_family_fontspec_tl } {#1} {#2}
+    \CJKfamily \l_xeCJK_family_fontspec_tl
+    \tex_ignorespaces:D
   }
 \clist_clear_new:N \g_xeCJK_default_features_clist
 \NewDocumentCommand \defaultCJKfontfeatures { m }
@@ -383,6 +400,7 @@
         \CJKfontspec
           [ \clist_use:c { xeCJK_fontoptions_\xeCJK@family } ]
           { \tl_use:c { xeCJK_fontname_\xeCJK@family } }
+        \tex_ignorespaces:D
       }
   }
 \cs_set_eq:NN \addCJKfontfeature \addCJKfontfeatures
