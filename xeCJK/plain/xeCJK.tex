@@ -104,7 +104,8 @@
 \def\f@encoding{\@fontencoding}   \def\f@family{\@fontfamily}
 \def\f@series{\@fontseries}       \def\f@shape{\@fontshape}
 \def\f@size{\the\@fontsize}
-\def\font@name{\csname\selectedfont\endcsname}
+\expandafter\def\expandafter\selectfont\expandafter{
+  \selectfont\edef\font@name{\csname\selectedfont\endcsname}}
 \def\xeCJK@map@fontfamily#1{
   \SubstFont{\encodingdefault/#1/\mddefault/\itdefault}
             {\encodingdefault/#1/\mddefault/\updefault}
