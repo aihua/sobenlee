@@ -118,7 +118,7 @@ may observe
 %
 %\end{documentation}
 %
-% \clearpage
+%
 %
 %\begin{implementation}
 %
@@ -130,7 +130,7 @@ may observe
 %
 %    \begin{macrocode}
 \RequirePackage{l3keys2e}
-\ProvidesExplPackage {xeCJK} {2012/01/31} {2.4.5}
+\ProvidesExplPackage {xeCJK} {2012/04/05} {2.5.0}
   {package for typesetting CJK scripts with XeLaTeX}
 %    \end{macrocode}
 %
@@ -143,20 +143,21 @@ may observe
         ^^J The~xeCJK~package~requires~XeTeX~to~function.^^J
         You~must~change~your~typesetting~engine~to~"xelatex"^^J
        instead~of~plain~"latex"~or~"pdflatex".
-      }
+      } { }
     \tex_endinput:D
   }
 %    \end{macrocode}
 %
 % |\XeTeXglyphbouds| 可以得到一个字符的上下左右边距，用于标点压缩。
 %    \begin{macrocode}
-\token_if_primitive:NF \XeTeXglyphbounds
+\cs_if_free:NT \XeTeXglyphbounds
   {
     \PackageError { xeCJK }
       {
         ^^J \token_to_str:N \XeTeXglyphbounds\c_space_tl not~defined.^^J
         You~have~to~update~XeTeX~to~the~version~0.9995.0~or~later.
-      }
+      } { }
+    \AtBeginDocument { \punctstyle { plain } }
   }
 %    \end{macrocode}
 %
@@ -1110,9 +1111,7 @@ may observe
   {
     CJKallowbreakbetweenpuncts .choice:,
     CJKallowbreakbetweenpuncts / true  .code:n =
-      {
-        \cs_set_nopar:Nn \xeCJK_punct_nobreak: { \skip_horizontal:N \c_zero_skip }
-      },
+      { \cs_set_nopar:Nn \xeCJK_punct_nobreak: { \skip_horizontal:N \c_zero_skip } },
     CJKallowbreakbetweenpuncts / false .code:n =
       { \cs_set_eq:NN \xeCJK_punct_nobreak: \nobreak },
     CJKallowbreakbetweenpuncts .default:n  = { true },
@@ -1147,9 +1146,7 @@ may observe
     PunctStyle / hangmobanjiao .meta:n = { PunctStyle = marginkerning },
     PunctStyle .default:n  = { fullwidth },
     PunctStyle / unknown .code:n =
-      {
-        \PackageError { xeCJK } { Punctstyle~"\l_keys_value_tl"~is~not~defined. }
-      },
+      { \PackageError { xeCJK } { Punctstyle~"\l_keys_value_tl"~is~not~defined. } { } },
   }
 %    \end{macrocode}
 % \end{macro}
@@ -1175,49 +1172,47 @@ may observe
 % 决定添加的左/右空白。全角方式直接添加标点的实际左/右空白；半角方式添加标点左右空白
 % 中的最小值；开明方式空半角，只在开明标点再增加实际左/右空白的一半。
 %     \begin{macrocode}
-\bool_new:N \l_xeCJK_punct_dokerning_bool
 \cs_new_nopar:Nn \xeCJK_get_punct_bounds:nn
   {
     \cs_if_free:cT { \l_xeCJK_current_punct_tl/rule/#1/#2 }
       {
-        \cs_if_free:cT { \l_xeCJK_current_punct_tl/space/#1/#2 }
-          { { \xeCJK_select_font: \xeCJK_get_punct_dimen:n {#2} } }
-        \bool_set_true:N \l_xeCJK_punct_dokerning_bool
         \tl_if_eq:NNTF \l_xeCJK_punctstyle_tl \c_xeCJK_ps_plain_tl
-          { \bool_set_false:N \l_xeCJK_punct_dokerning_bool }
           {
-            \tl_if_in:NnT \l_xeCJK_special_punct_tl {#2}
-              { \bool_set_false:N \l_xeCJK_punct_dokerning_bool }
+            \clist_map_inline:nn { glue , rule , space }
+              { \tl_gset:cV { \l_xeCJK_current_punct_tl/##1/#1/#2 } \c_zero_dim }
           }
-        \bool_if:NTF \l_xeCJK_punct_dokerning_bool
           {
-            \dim_set:Nv \l_tmpa_dim { \l_xeCJK_current_punct_tl/space/#1/#2 }
-            \tl_set:Nx \l_tmpa_tl { \str_if_eq:xxTF {#1} { l } { r } { l } }
-            \dim_set:Nv \l_tmpb_dim
-              { \l_xeCJK_current_punct_tl/space/\l_tmpa_tl/#2 }
-            \dim_set_min:Nn \l_tmpb_dim \l_tmpa_dim
-            \prg_case_tl:Nnn \l_xeCJK_punctstyle_tl
+            \cs_if_free:cT { \l_xeCJK_current_punct_tl/space/#1/#2 }
+              { { \xeCJK_select_font: \xeCJK_get_punct_dimen:n {#2} } }
+            \xeCJK_punct_if_special:nTF {#2}
+              { \dim_zero:N \l_tmpa_dim \dim_zero:N \l_tmpb_dim }
               {
-                \c_xeCJK_ps_halfwidth_tl { \prg_do_nothing: }
-                \c_xeCJK_ps_mixedwidth_tl
+                \dim_set:Nv \l_tmpa_dim { \l_xeCJK_current_punct_tl/space/#1/#2 }
+                \dim_set:Nv \l_tmpb_dim
+                  { \l_xeCJK_current_punct_tl/space/\str_if_eq:xxTF {#1} lrl/#2 }
+                \dim_set_min:Nn \l_tmpb_dim \l_tmpa_dim
+                \prg_case_tl:Nnn \l_xeCJK_punctstyle_tl
                   {
-                    \xeCJK_punct_if_mixedwidth:nT {#2}
-                      { \dim_add:Nn \l_tmpb_dim { .5\l_tmpa_dim } }
+                    \c_xeCJK_ps_halfwidth_tl { \prg_do_nothing: }
+                    \c_xeCJK_ps_mixedwidth_tl
+                      {
+                        \xeCJK_punct_if_mixedwidth:nT {#2}
+                          { \dim_add:Nn \l_tmpb_dim { .5\l_tmpa_dim } }
+                      }
+                    \c_xeCJK_ps_CCT_tl
+                      {
+                        \xeCJK_punct_if_mixedwidth:nTF {#2}
+                          { \dim_add:Nn \l_tmpb_dim { .5\l_tmpa_dim } }
+                          { \dim_add:Nn \l_tmpb_dim { .2\l_tmpa_dim } }
+                      }
                   }
-                \c_xeCJK_ps_CCT_tl
-                  {
-                    \xeCJK_punct_if_mixedwidth:nTF {#2}
-                      { \dim_add:Nn \l_tmpb_dim { .5\l_tmpa_dim } }
-                      { \dim_add:Nn \l_tmpb_dim { .2\l_tmpa_dim } }
-                  }
+                  { \dim_set_eq:NN \l_tmpb_dim \l_tmpa_dim }
+                \dim_set_max:Nn \l_tmpb_dim \c_zero_dim
               }
-              { \dim_set_eq:NN \l_tmpb_dim \l_tmpa_dim }
-            \dim_set_max:Nn \l_tmpb_dim \c_zero_dim
+            \tl_gset:cx { \l_xeCJK_current_punct_tl/rule/#1/#2 }
+              { - \dim_use:N \l_tmpa_dim }
+            \tl_gset:cV { \l_xeCJK_current_punct_tl/glue/#1/#2 } \l_tmpb_dim
           }
-          { \dim_zero:N \l_tmpa_dim \dim_zero:N \l_tmpb_dim }
-          \tl_gset:cx { \l_xeCJK_current_punct_tl/rule/#1/#2 }
-            { - \dim_use:N \l_tmpa_dim }
-          \tl_gset:cV { \l_xeCJK_current_punct_tl/glue/#1/#2 } \l_tmpb_dim
       }
   }
 %    \end{macrocode}
@@ -1261,6 +1256,7 @@ may observe
         \dim_zero:N \l_tmpa_dim
         \prg_case_tl:Nnn \l_xeCJK_punctstyle_tl
           {
+            \c_xeCJK_ps_plain_tl { \prg_do_nothing: }
             \c_xeCJK_ps_marginkerning_tl
               {
                 \xeCJK_punct_if_right:nT {#1}
@@ -1667,8 +1663,7 @@ may observe
     Mono / Scale   .code:n =
       {
         \xeCJK_set_monoscale:
-        \tl_set:Nx \l_xeCJK_monoscale_tl
-          { Scale = { \fp_use:N \g_xeCJK_monoscale_fp } }
+        \tl_set:Nx \l_xeCJK_monoscale_tl { Scale = { \fp_use:N \g_xeCJK_monoscale_fp } }
       }
   }
 %    \end{macrocode}
@@ -1997,13 +1992,22 @@ may observe
     \cs_if_exist_use:cF { \l_xeCJK_current_coor_tl }
       {
         \tl_set:Nx \l_xeCJK_coor_tl \l_xeCJK_current_coor_tl
-        \cs_if_exist_use:cF { xeCJK/family/\l_xeCJK_family_tl }
-          { \cs_if_exist_use:c { xeCJK/family/\CJKfamilydefault } }
-        \prop_gput:Nxx \g_xeCJK_family_prop \l_xeCJK_family_tl \f@family
-        \prop_gput:Nxx \g_xeCJK_family_font_prop
-          \l_xeCJK_family_tl { \tex_fontname:D \tex_font:D }
-         \exp_after:wN \cs_gset_eq:cN
-         \exp_after:wN \l_xeCJK_coor_tl \font@name
+        \cs_if_exist_use:cF { xeCJK/family/\l_xeCJK_family_tl/NFSS }
+          {
+            \cs_if_exist_use:cF { xeCJK/family/\l_xeCJK_family_tl }
+              { \cs_if_exist_use:c { xeCJK/family/\CJKfamilydefault } }
+            \cs_gset_protected_nopar:cpx { xeCJK/family/\l_xeCJK_family_tl/NFSS }
+              {
+                \exp_not:N \fontencoding { \f@encoding }
+                \exp_not:N \fontfamily   { \f@family }
+                \exp_not:N \selectfont
+              }
+            \prop_gput:Nxx \g_xeCJK_family_prop \l_xeCJK_family_tl \f@family
+            \prop_gput:Nxx \g_xeCJK_family_font_prop \l_xeCJK_family_tl
+              { \tex_fontname:D \tex_font:D }
+          }
+        \exp_after:wN \cs_gset_eq:cN
+        \exp_after:wN \l_xeCJK_coor_tl \font@name
       }
   }
 \cs_new_nopar:Nn \xeCJK_switch_font:nn
@@ -2483,13 +2487,12 @@ may observe
       { \xeCJK_patch:Nnn #1 { \group_begin: \makexeCJKinactive } { \group_end: } }
     \xeCJK_patch:Nnn \tipaencoding { \makexeCJKinactive } { }
     \cs_set_eq:NN \xeCJK_aux_r \r
-    \cs_set_nopar:Npn \r #1
-      { { \makexeCJKinactive \xeCJK_aux_r {#1} } }
+    \cs_set_nopar:Npn \r #1 { { \makexeCJKinactive \xeCJK_aux_r {#1} } }
     \@ifpackageloaded { pifont }
       {
         \RenewDocumentCommand \Pifont { m }
           {
-            \fontfamily {#1} \fontencoding {U} \fontseries {m} \fontshape {n}
+            \fontencoding {U} \fontfamily {#1} \fontseries {m} \fontshape {n}
             \selectfont \makexeCJKinactive
           }
       } { }
@@ -2558,8 +2561,7 @@ may observe
 \bool_if:NT \l_xeCJK_number_bool
   {
     \tl_set:Nn \CJK@UnicodeEnc { UTF8 }
-    \cs_set_nopar:Npn \CJKaddEncHook #1#2
-      { \cs_set_nopar:cpn { xeCJK_enc_#1 } {#2} }
+    \cs_set_nopar:Npn \CJKaddEncHook #1#2 { \cs_set_nopar:cpn { xeCJK_enc_#1 } {#2} }
     \cs_set_nopar:Npn \Unicode #1#2
       { \tex_char:D \int_eval:n { #1 * \c_two_hundred_fifty_six + #2 } }
     \RequirePackage { CJKnumb }

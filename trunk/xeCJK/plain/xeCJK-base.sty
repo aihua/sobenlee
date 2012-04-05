@@ -687,7 +687,14 @@
     \csname xeCJK@\xeCJK@family/\f@series/\f@shape/\f@size\endcsname
   \else
     \edef\xeCJK@currentcoor{xeCJK@\xeCJK@family/\f@series/\f@shape/\f@size}
-    \csname xeCJK@family@\xeCJK@family\endcsname
+    \ifcsname xeCJK@family@\xeCJK@family/NFSS\endcsname
+      \csname xeCJK@family@\xeCJK@family/NFSS\endcsname
+    \else
+      \csname xeCJK@family@\xeCJK@family\endcsname
+      \expandafter\xdef\csname xeCJK@family@\xeCJK@family/NFSS\endcsname{
+        \noexpand\fontencoding{\f@encoding}\noexpand\fontfamily{\f@family}
+        \noexpand\selectfont}
+    \fi
     \global\expandafter\let\csname\xeCJK@currentcoor\expandafter\endcsname\font@name
   \fi}
 \ifxeCJK@num
