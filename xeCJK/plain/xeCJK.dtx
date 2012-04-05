@@ -1570,7 +1570,7 @@ may observe
   \fi}
 \unless\ifcsname XeTeXglyphbounds\endcsname
   \PackageError{xeCJK}{\string\XeTeXglyphbounds \space not defined.^^J
-    You have to update XeTeX  to the version 0.9995.0 or later}
+    You have to update XeTeX  to the version 0.9995.0 or later}{}
 \fi
 %    \end{macrocode}
 %
@@ -1673,7 +1673,14 @@ may observe
 %    \end{macrocode}
 % 切换未缓存的字体。
 %    \begin{macrocode}
-    \csname xeCJK@family@\xeCJK@family\endcsname
+    \ifcsname xeCJK@family@\xeCJK@family/NFSS\endcsname
+      \csname xeCJK@family@\xeCJK@family/NFSS\endcsname
+    \else
+      \csname xeCJK@family@\xeCJK@family\endcsname
+      \expandafter\xdef\csname xeCJK@family@\xeCJK@family/NFSS\endcsname{
+        \noexpand\fontencoding{\f@encoding}\noexpand\fontfamily{\f@family}
+        \noexpand\selectfont}
+    \fi
 %    \end{macrocode}
 % 缓存字体。
 %    \begin{macrocode}
@@ -1689,6 +1696,7 @@ may observe
 %
 %    \begin{macrocode}
 \def\setCJKmonofont{\xeCJK@newfontfamily{\CJKttdefault}}
+\let\fontencoding\setfontencoding
 \let\fontfamily\setfontfamily
 \let\not@math@alphabet\@gobbletwo
 \def\mdseries{\setfontseries\mddefault\selectfont}
