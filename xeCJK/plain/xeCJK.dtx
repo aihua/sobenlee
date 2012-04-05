@@ -1598,10 +1598,15 @@ may observe
 % 设置备用字体，如果主字体没有相应的符号，将尝试使用备用字体显示。
 %    \begin{macrocode}
 \def\xeCJK@fallback@testsymbol#1{
-  \iffontchar\font`#1\relax
-    #1
+  \ifcsname xeCJK@family@\xeCJK@family @FallBack\endcsname
+    \iffontchar\font`#1\relax
+      #1
+    \else
+      {\CJKfamily{\xeCJK@family @FallBack}\xeCJK@setfont
+       \xeCJK@fallback@testsymbol{#1}}
+    \fi
   \else
-    {\CJKfamily{\xeCJK@family @FallBack}\xeCJK@setfont#1}
+    #1
   \fi}
 %    \end{macrocode}
 % |\xeCJKenablefallback| 命令打开备用字体功能，|\xeCJKdisablefallback| 命令关
@@ -1651,6 +1656,37 @@ may observe
          \fontfamily\ttdefault\CJKfamily{\CJKttdefault}\selectfont}
 %    \end{macrocode}
 %
+% |\xeCJK@setfont| 实际切换中文字体。它使用名为
+% |xeCJK@\xeCJK@family/\f@series/\f@shape/\f@size| 的宏来缓存特定 NFSS 坐标
+% 中文字体的原始 |\font| 命令格式，以加快编译速度。在第一次使用这一 NFSS 坐标
+% 时，会调用名为 |xeCJK@family@\xeCJK@family| 的宏（它将展开为 |\fontspec|），
+% 利用 |fontspec| 宏包选择中文字体，并缓存原始字体形式。
+%    \begin{macrocode}
+\def\xeCJK@setfont{
+  \ifcsname xeCJK@\xeCJK@family/\f@series/\f@shape/\f@size\endcsname
+    \csname xeCJK@\xeCJK@family/\f@series/\f@shape/\f@size\endcsname
+  \else
+%    \end{macrocode}
+% 预存需要的 NFSS 坐标到 |\xeCJK@currentcoor|，以免在缺字体时被替换字体改变。
+%    \begin{macrocode}
+    \edef\xeCJK@currentcoor{xeCJK@\xeCJK@family/\f@series/\f@shape/\f@size}
+%    \end{macrocode}
+% 切换未缓存的字体。
+%    \begin{macrocode}
+    \csname xeCJK@family@\xeCJK@family\endcsname
+%    \end{macrocode}
+% 缓存字体。
+%    \begin{macrocode}
+    \global
+    \expandafter\expandafter
+    \expandafter\let
+    \expandafter\csname
+    \expandafter\xeCJK@currentcoor
+    \expandafter\expandafter
+    \expandafter\endcsname\font@name
+  \fi}
+%    \end{macrocode}
+%
 %    \begin{macrocode}
 %</xeCJK&base>
 %<*xeCJK&!base>
@@ -1678,6 +1714,7 @@ may observe
 \def\f@encoding{\@fontencoding}   \def\f@family{\@fontfamily}
 \def\f@series{\@fontseries}       \def\f@shape{\@fontshape}
 \def\f@size{\the\@fontsize}
+\def\font@name{\csname\selectedfont\endcsname}
 \def\xeCJK@map@fontfamily#1{
   \SubstFont{\encodingdefault/#1/\mddefault/\itdefault}
             {\encodingdefault/#1/\mddefault/\updefault}
@@ -1743,7 +1780,8 @@ may observe
 \protected\def\xeCJK@newfontfamily#1{\@ifnextchar[%]
   {\xeCJK@newfontfamily@aux{#1}}{\xeCJK@newfontfamily@aux{#1}[]}}
 \def\xeCJK@newfontfamily@aux#1[#2]#3{
-  \expandafter\xdef\csname xeCJK@family@#1\endcsname{#3}
+  \expandafter\gdef\csname xeCJK@family@#1\endcsname{
+    \setfontfamily{\@nameuse{CJKfamily@\xeCJK@family}}\selectfont}
   \xeCJK@new@fontfamily\xeCJK@temp@name[#2]{#3}
   \expandafter\xdef\csname CJKfamily@#1\endcsname{\xeCJK@temp@name}}
 \let\setCJKfamilyfont\xeCJK@newfontfamily
@@ -1766,53 +1804,12 @@ may observe
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\def\xeCJK@setfont{\setfontfamily{\@nameuse{CJKfamily@\xeCJK@family}}\selectfont}
-%    \end{macrocode}
-%
-%    \begin{macrocode}
 %</xeCJK&plain>
 %<*xeCJK&!plain>
 %    \end{macrocode}
 %
 %    \begin{macrocode}
 \AtBeginDocument{\CJKfamily{\CJKfamilydefault}}
-%    \end{macrocode}
-%
-% |\xeCJK@setfont| 实际切换中文字体。它使用名为
-% |xeCJK@\xeCJK@family/\f@series/\f@shape/\f@size| 的宏来缓存特定 NFSS 坐标
-% 中文字体的原始 |\font| 命令格式，以加快编译速度。在第一次使用这一 NFSS 坐标
-% 时，会调用名为 |xeCJK@family@\xeCJK@family| 的宏（它将展开为 |\fontspec|），
-% 利用 |fontspec| 宏包选择中文字体，并缓存原始字体形式。
-%    \begin{macrocode}
-\def\xeCJK@setfont{
-  \ifcsname xeCJK@\xeCJK@family/\f@series/\f@shape/\f@size\endcsname
-%    \end{macrocode}
-% 使用已缓存的字体。
-%    \begin{macrocode}
-    \csname xeCJK@\xeCJK@family/\f@series/\f@shape/\f@size\endcsname
-  \else
-%    \end{macrocode}
-% 预存需要的 NFSS 坐标到 |\xeCJK@currentcoor|，以免在缺字体时被替换字体改变。
-%    \begin{macrocode}
-    \edef\xeCJK@currentcoor{xeCJK@\xeCJK@family/\f@series/\f@shape/\f@size}
-%    \end{macrocode}
-% 切换未缓存的字体。
-%    \begin{macrocode}
-    \csname xeCJK@family@\xeCJK@family\endcsname
-%    \end{macrocode}
-% |\get@external@font| 可能会产生奇怪的副作用\footnote{参见 ctex-kit 项目
-% \href{http://code.google.com/p/ctex-kit/issues/detail?id=57}{issue 57}。}。
-% 这里使用分组令其局部化，仅保留对 |\external@font| 的赋值。
-%    \begin{macrocode}
-    \begingroup
-      \get@external@font
-%    \end{macrocode}
-% 缓存字体。
-%    \begin{macrocode}
-      \global\expandafter\font
-        \csname\xeCJK@currentcoor\endcsname=\external@font\relax
-    \endgroup
-  \fi}
 %    \end{macrocode}
 %
 %    \begin{macrocode}
@@ -1976,12 +1973,10 @@ may observe
       { \g_xeCJK_default_features_clist, #2 } \l_xeCJK_pass_features_clist
     \xeCJK_parse_features:
     \xeCJK_pass_features:
-    \fontspec_select:nn \l_xeCJK_pass_features_clist \l_xeCJK_fontname_tl
     \cs_gset_protected_nopar:cpx { xeCJK@family@\l_xeCJK_familyname_tl }
       {
-        \exp_not:N \fontencoding { \g_fontspec_encoding_tl }
-        \exp_not:N \fontfamily   { \l_fontspec_family_tl }
-        \exp_not:N \selectfont
+        \exp_not:N \fontspec
+          [ \l_xeCJK_pass_features_clist ] { \l_xeCJK_fontname_tl }
       }
     \clist_gset:cx { xeCJK_fontoptions_\l_xeCJK_familyname_tl } {#2}
     \tl_gset:cx { xeCJK_fontname_\l_xeCJK_familyname_tl } { \l_xeCJK_fontname_tl }
@@ -2149,7 +2144,7 @@ may observe
     \IfNoValueTF {#1}
       { \tl_set:Nx \l_xeCJK_familyname_tl { \cs_to_str:N #2 } }
       { \tl_set:Nx \l_xeCJK_familyname_tl {#1} }
-    \xeCJK_set_family:nnn { \l_xeCJK_familyname_tl } {#3} {#4}
+    \xeCJK_set_family:nnn \l_xeCJK_familyname_tl {#3} {#4}
     \cs_new_protected_nopar:Npx #2
       { \exp_not:N \CJKfamily { \l_xeCJK_familyname_tl } }
   }
@@ -2524,7 +2519,7 @@ Alignment with English characters.
 \setCJKmainfont[FallBack=SimSun-ExtB]{SimSun}
 \begin{document}
 漢字源𣴑考
-%\CJKunderwave{漢字源𣴑考}
+\CJKunderwave{漢字源𣴑考}
 \begin{table}[ht]
 \caption{生僻字测试}
 \centering

@@ -104,6 +104,7 @@
 \def\f@encoding{\@fontencoding}   \def\f@family{\@fontfamily}
 \def\f@series{\@fontseries}       \def\f@shape{\@fontshape}
 \def\f@size{\the\@fontsize}
+\def\font@name{\csname\selectedfont\endcsname}
 \def\xeCJK@map@fontfamily#1{
   \SubstFont{\encodingdefault/#1/\mddefault/\itdefault}
             {\encodingdefault/#1/\mddefault/\updefault}
@@ -169,7 +170,8 @@
 \protected\def\xeCJK@newfontfamily#1{\@ifnextchar[%]
   {\xeCJK@newfontfamily@aux{#1}}{\xeCJK@newfontfamily@aux{#1}[]}}
 \def\xeCJK@newfontfamily@aux#1[#2]#3{
-  \expandafter\xdef\csname xeCJK@family@#1\endcsname{#3}
+  \expandafter\gdef\csname xeCJK@family@#1\endcsname{
+    \setfontfamily{\@nameuse{CJKfamily@\xeCJK@family}}\selectfont}
   \xeCJK@new@fontfamily\xeCJK@temp@name[#2]{#3}
   \expandafter\xdef\csname CJKfamily@#1\endcsname{\xeCJK@temp@name}}
 \let\setCJKfamilyfont\xeCJK@newfontfamily
@@ -189,7 +191,6 @@
   \edef\xeCJK@fontspec@name{xeCJK@family@\number\xeCJK@family@cnt}
   \xeCJK@newfontfamily\xeCJK@fontspec@name[#1]{#2}
   \CJKfamily{\xeCJK@fontspec@name}\ignorespaces}
-\def\xeCJK@setfont{\setfontfamily{\@nameuse{CJKfamily@\xeCJK@family}}\selectfont}
 \endlinechar `\^^M
 \endinput
 %%
