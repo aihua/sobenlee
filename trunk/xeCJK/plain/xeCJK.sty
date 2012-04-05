@@ -90,18 +90,6 @@
     \expandafter\@secondoftwo
   \fi\fi}
 \AtBeginDocument{\CJKfamily{\CJKfamilydefault}}
-\def\xeCJK@setfont{
-  \ifcsname xeCJK@\xeCJK@family/\f@series/\f@shape/\f@size\endcsname
-    \csname xeCJK@\xeCJK@family/\f@series/\f@shape/\f@size\endcsname
-  \else
-    \edef\xeCJK@currentcoor{xeCJK@\xeCJK@family/\f@series/\f@shape/\f@size}
-    \csname xeCJK@family@\xeCJK@family\endcsname
-    \begingroup
-      \get@external@font
-      \global\expandafter\font
-        \csname\xeCJK@currentcoor\endcsname=\external@font\relax
-    \endgroup
-  \fi}
 \ExplSyntaxOn
 \cs_if_free:NT \keys_set_known:nxN {
   \cs_generate_variant:Nn \keys_set_known:nnN { nx } }
@@ -242,12 +230,10 @@
       { \g_xeCJK_default_features_clist, #2 } \l_xeCJK_pass_features_clist
     \xeCJK_parse_features:
     \xeCJK_pass_features:
-    \fontspec_select:nn \l_xeCJK_pass_features_clist \l_xeCJK_fontname_tl
     \cs_gset_protected_nopar:cpx { xeCJK@family@\l_xeCJK_familyname_tl }
       {
-        \exp_not:N \fontencoding { \g_fontspec_encoding_tl }
-        \exp_not:N \fontfamily   { \l_fontspec_family_tl }
-        \exp_not:N \selectfont
+        \exp_not:N \fontspec
+          [ \l_xeCJK_pass_features_clist ] { \l_xeCJK_fontname_tl }
       }
     \clist_gset:cx { xeCJK_fontoptions_\l_xeCJK_familyname_tl } {#2}
     \tl_gset:cx { xeCJK_fontname_\l_xeCJK_familyname_tl } { \l_xeCJK_fontname_tl }
@@ -375,7 +361,7 @@
     \IfNoValueTF {#1}
       { \tl_set:Nx \l_xeCJK_familyname_tl { \cs_to_str:N #2 } }
       { \tl_set:Nx \l_xeCJK_familyname_tl {#1} }
-    \xeCJK_set_family:nnn { \l_xeCJK_familyname_tl } {#3} {#4}
+    \xeCJK_set_family:nnn \l_xeCJK_familyname_tl {#3} {#4}
     \cs_new_protected_nopar:Npx #2
       { \exp_not:N \CJKfamily { \l_xeCJK_familyname_tl } }
   }

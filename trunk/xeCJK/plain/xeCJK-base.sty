@@ -639,10 +639,15 @@
 \def\CJKfamilydefault{\CJKrmdefault}
 \@namedef{xeCJK@family@\CJKfamilydefault}{}
 \def\xeCJK@fallback@testsymbol#1{
-  \iffontchar\font`#1\relax
-    #1
+  \ifcsname xeCJK@family@\xeCJK@family @FallBack\endcsname
+    \iffontchar\font`#1\relax
+      #1
+    \else
+      {\CJKfamily{\xeCJK@family @FallBack}\xeCJK@setfont
+       \xeCJK@fallback@testsymbol{#1}}
+    \fi
   \else
-    {\CJKfamily{\xeCJK@family @FallBack}\xeCJK@setfont#1}
+    #1
   \fi}
 \def\xeCJKenablefallback{\let\xeCJK@fallback@CJKsymbol\CJKsymbol
   \def\CJKsymbol##1{\xeCJK@fallback@CJKsymbol{\xeCJK@fallback@testsymbol{##1}}}}
@@ -677,6 +682,20 @@
 \DeclareRobustCommand*\ttfamily
         {\not@math@alphabet\ttfamily\mathtt
          \fontfamily\ttdefault\CJKfamily{\CJKttdefault}\selectfont}
+\def\xeCJK@setfont{
+  \ifcsname xeCJK@\xeCJK@family/\f@series/\f@shape/\f@size\endcsname
+    \csname xeCJK@\xeCJK@family/\f@series/\f@shape/\f@size\endcsname
+  \else
+    \edef\xeCJK@currentcoor{xeCJK@\xeCJK@family/\f@series/\f@shape/\f@size}
+    \csname xeCJK@family@\xeCJK@family\endcsname
+    \global
+    \expandafter\expandafter
+    \expandafter\let
+    \expandafter\csname
+    \expandafter\xeCJK@currentcoor
+    \expandafter\expandafter
+    \expandafter\endcsname\font@name
+  \fi}
 \ifxeCJK@num
   \edef\CJK@UnicodeEnc{UTF8}
   \def\CJKaddEncHook#1#2{\@namedef{xeCJK@enc@#1}{#2}}
