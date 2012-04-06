@@ -2143,7 +2143,7 @@ may observe
 % |\setCJKfallbackfamilyfont| 为 CJK 字体族设置备用字体。
 %    \begin{macrocode}
 \NewDocumentCommand \setCJKfallbackfamilyfont { m O{} m }
-  { \xeCJK_set_family:nnn { #1@FallBack } [#2] {#3} }
+  { \xeCJK_set_family:nnn { #1@FallBack } {#2} {#3} }
 %    \end{macrocode}
 %
 % |\newCJKfontfamily| 与 |\newfontfamily| 用法类似，用于增加 CJK 字体族，可以直接用
