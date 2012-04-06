@@ -134,29 +134,36 @@ may observe
   {package for typesetting CJK scripts with XeLaTeX}
 %    \end{macrocode}
 %
+% \begin{macro}{\xeCJK_error:n,\xeCJK_warning:nx,\xeCJK_info:nx,\xeCJK_info:nxx}
+%    \begin{macrocode}
+\cs_new_nopar:Npn \xeCJK_error:n    { \msg_error:nn    { xeCJK } }
+\cs_new_nopar:Npn \xeCJK_warning:nx { \msg_warning:nnx { xeCJK } }
+\cs_new_nopar:Npn \xeCJK_info:nx    { \msg_info:nnx    { xeCJK } }
+\cs_new_nopar:Npn \xeCJK_info:nxx   { \msg_info:nnxx   { xeCJK } }
+%    \end{macrocode}
+% \end{macro}
+%
 % \pkg{xeCJK} 必须使用 \XeTeX 引擎的支持。
 %    \begin{macrocode}
-\xetex_if_engine:F
+\msg_new:nnn {xeCJK} { Require-XeTeX }
   {
-    \PackageError { xeCJK }
-      {
-        ^^J The~xeCJK~package~requires~XeTeX~to~function.^^J
-        You~must~change~your~typesetting~engine~to~"xelatex"^^J
-       instead~of~plain~"latex"~or~"pdflatex".
-      } { }
-    \tex_endinput:D
+    The~xeCJK~package~requires~XeTeX~to~function.\\\\
+    You~must~change~your~typesetting~engine~to~"xelatex" \\
+    instead~of~plain~"latex"~or~"pdflatex".
   }
+\xetex_if_engine:F { \msg_critical:nn { xeCJK } { Require-XeTeX } }
 %    \end{macrocode}
 %
 % |\XeTeXglyphbouds| 可以得到一个字符的上下左右边距，用于标点压缩。
 %    \begin{macrocode}
+\msg_new:nnn { xeCJK } { XeTeX-too-old }
+  {
+    \token_to_str:N \XeTeXglyphbounds\c_space_tl not~defined.\\\\
+    You~have~to~update~XeTeX~to~the~version~0.9995.0~or~later.
+  }
 \cs_if_free:NT \XeTeXglyphbounds
   {
-    \PackageError { xeCJK }
-      {
-        ^^J \token_to_str:N \XeTeXglyphbounds\c_space_tl not~defined.^^J
-        You~have~to~update~XeTeX~to~the~version~0.9995.0~or~later.
-      } { }
+    \xeCJK_error:n { XeTeX-too-old }
     \AtBeginDocument { \punctstyle { plain } }
   }
 %    \end{macrocode}
@@ -1144,9 +1151,14 @@ may observe
     PunctStyle / quanjiao      .meta:n = { PunctStyle = fullwidth },
     PunctStyle / kaiming       .meta:n = { PunctStyle = mixedwidth },
     PunctStyle / hangmobanjiao .meta:n = { PunctStyle = marginkerning },
-    PunctStyle .default:n  = { fullwidth },
     PunctStyle / unknown .code:n =
-      { \PackageError { xeCJK } { Punctstyle~"\l_keys_value_tl"~is~not~defined. } { } },
+      { \xeCJK_error:nx { PunctStyle-undefined } \l_keys_value_tl },
+  }
+\msg_new:nnn { xeCJK } { PunctStyle-undefined }
+  {
+    Punctstyle~"#1"~is~not~available. \\\\
+    You~just~can~use~one~of\\\\
+    "\g_xeCJK_punctstyle_clist".\\
   }
 %    \end{macrocode}
 % \end{macro}
@@ -1435,12 +1447,20 @@ may observe
       {
         \font_glyph_if_exist:NnTF \tex_font:D {`#1} {#1}
           { {
+              \xeCJK_info:nx { fallback } {#1}
               \CJKfamily { \l_xeCJK_family_tl/FallBack }
               \xeCJK_select_font:
               \xeCJK_fallback_testsymbol:n {#1}
           } }
       }
       {#1}
+  }
+\msg_new:nnn { xeCJK } { fallback }
+  {
+    CJKfamily~'\l_xeCJK_family_tl'~
+    ( \prop_get:NV \g_xeCJK_family_name_prop \l_xeCJK_family_tl )~
+    does~not~contain~glyph~#1~(U+\int_to_hexadecimal:n {`#1}).\\
+    Now~switch~to~the~fallback~font.\\
   }
 %    \end{macrocode}
 % \end{macro}
@@ -2014,6 +2034,7 @@ may observe
   {
     \str_if_eq:xxF {#1} {#2}
       {
+        \xeCJK_info:nxx { CJK-block } {#1} {#2}
         \tl_remove_all:Nn \l_xeCJK_family_tl { /#1 }
         \str_if_eq:xxF {#2} { CJK }
           {
@@ -2031,6 +2052,7 @@ may observe
       }
     \xeCJK_select_font:
   }
+\msg_new:nnn { xeCJK } { CJK-block } { Switch~from~block~'#1'~to~'#2'. }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -2054,15 +2076,16 @@ may observe
       {
         \cs_if_free:cT { xeCJK_warned_aux_#1 }
           {
-            \PackageWarning { xeCJK }
-              {
-                Unknown~CJK~family~`#1'~is~ignored.^^J
-                Use~\token_to_str:N \setCJKfamilyfont\c_space_tl to~
-                define~a~CJK~family.
-              }
+            \xeCJK_warning:nx { CJKfamily-Unknown } {#1}
             \tl_new:c { xeCJK_warned_aux_#1 }
           }
       }
+  }
+\msg_new:nnn { xeCJK } { CJKfamily-Unknown }
+  {
+    Unknown~CJK~family~'#1'~is~ignored.\\\\
+    Try~to~use~\token_to_str:N \setCJKfamilyfont\c_space_tl to~
+    define~a~new~CJK~family.
   }
 %    \end{macrocode}
 % \end{macro}
@@ -2322,13 +2345,23 @@ may observe
   {
     CJKnumber .bool_set:N = \l_xeCJK_number_bool ,
     CJKnumber  .default:n = { true },
-    indentfirst .choice:,
-    indentfirst / true  .code:n =
-      { \cs_set_eq:NN \@afterindentfalse \prg_do_nothing: },
-    indentfirst / false .code:n =
-      { \cs_set_eq:NN \if@afterindent \if_false: },
+    indentfirst .choice: ,
+    indentfirst / true  .code:n = { \cs_set_eq:NN \@afterindentfalse \prg_do_nothing: },
+    indentfirst / false .code:n = { \cs_set_eq:NN \if@afterindent \if_false: },
     indentfirst      .default:n = { true },
-    normalindentfirst .meta:n = { indentfirst = false },
+    normalindentfirst   .meta:n = { indentfirst = false },
+    quiet .code:n =
+      {
+        \msg_redirect_module:nnn { xeCJK } { warning } { info }
+        \msg_redirect_module:nnn { xeCJK } { info }    { none }
+        \PassOptionsToPackage { quiet } { fontspec }
+      },
+    silent .code:n =
+      {
+        \msg_redirect_module:nnn { xeCJK } { warning } { none }
+        \msg_redirect_module:nnn { xeCJK } { info }    { none }
+        \PassOptionsToPackage { silent } { fontspec }
+      },
     unknown .code:n =
       { \PassOptionsToPackage { \l_keys_key_tl } { fontspec } },
   }
