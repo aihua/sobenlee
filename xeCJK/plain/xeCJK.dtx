@@ -1858,7 +1858,7 @@ may observe
         \exp_after:wN \xeCJK_get_sub_features_aux:n \l_tmpa_tl \c_empty_tl
         \tl_if_blank:xT \l_xeCJK_sub_fontname_tl
           {
-            \tl_set:Nx \l_xeCJK_sub_fontname_tl \l_xeCJK_sub_fontfeat_clist
+            \tl_set:Nx \l_xeCJK_sub_fontname_tl \l_tmpa_tl
             \clist_clear:N \l_xeCJK_sub_fontfeat_clist
           }
       }
@@ -2520,8 +2520,7 @@ Alignment with English characters.
 % \fi
 % \clearpage
 % \part{example-fallback.tex}
-% \newCJKfontfamily{\SimSun}[FallBack=SimSun-ExtB]{SimSun}
-% \xeCJKenablefallback\SimSun
+% \xeCJKenablefallback\addCJKfontfeatures{FallBack=SimSun-ExtB}
 %    \begin{macrocode}
 \documentclass{article}
 \usepackage[fallback]{xeCJK}

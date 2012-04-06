@@ -764,6 +764,7 @@ may observe
 %    \begin{macrocode}
 \cs_new_nopar:Nn \xeCJK_after_FullRight:
   {
+    \xeCJK_get_punct_bounds:nx { r } \l_xeCJK_lastpunct_tl
     \xeCJK_punct_rule:c { \l_xeCJK_current_punct_tl/rule/r/\l_xeCJK_lastpunct_tl }
     \xeCJK_punct_skip:c { \l_xeCJK_current_punct_tl/glue/r/\l_xeCJK_lastpunct_tl }
   }
@@ -1227,6 +1228,7 @@ may observe
           }
       }
   }
+\cs_generate_variant:Nn \xeCJK_get_punct_bounds:nn { nx }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -1433,8 +1435,34 @@ may observe
     \cs_if_free:NF \xeCJK_fallback_CJKsymbol
       { \cs_set_eq:NN \CJKsymbol \xeCJK_fallback_CJKsymbol }
   }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\setCJKfallbackfamilyfont,\xeCJK_set_family_fallback:nnn}
+%     \begin{macrocode}
 \NewDocumentCommand \setCJKfallbackfamilyfont { m O{} m }
-  { \xeCJK_set_family:nnn { #1/FallBack } {#2} {#3} }
+  {
+    \exp_args:Nx \tl_if_in:nnTF {#3} { , }
+      { \xeCJK_set_family_fallback:nnn {#1} {#2} {#3} }
+      { \xeCJK_set_family:nnn { #1/FallBack } {#2} {#3} }
+  }
+\cs_new_nopar:Nn \xeCJK_set_family_fallback:nnn
+  {
+    \group_begin:
+    \tl_set:Nx \l_xeCJK_family_fb_tl {#1}
+    \prop_get:NVNF \g_xeCJK_family_name_prop \l_xeCJK_family_fb_tl \l_xeCJK_fontname_tl
+      { \tl_clear:N \l_xeCJK_fontname_tl }
+    \exp_args:Nx \clist_map_inline:nn {#3}
+      {
+        \tl_put_right:Nn \l_xeCJK_family_fb_tl { /FallBack }
+        \xeCJK_get_sub_features:nn \l_xeCJK_family_fb_tl {##1}
+        \clist_put_left:cx { l_xeCJK_ \l_xeCJK_family_fb_tl _fontfeat_clist } {#2}
+        \xeCJK_set_family:ncc \l_xeCJK_family_fb_tl
+          { l_xeCJK_ \l_xeCJK_family_fb_tl _fontfeat_clist }
+          { l_xeCJK_ \l_xeCJK_family_fb_tl _fontname_tl }
+      }
+    \group_end:
+  }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -1586,7 +1614,7 @@ may observe
         \exp_after:wN \xeCJK_get_sub_features_aux:n \l_tmpa_tl \c_empty_tl
         \tl_if_blank:xT \l_xeCJK_sub_fontname_tl
           {
-            \tl_set:Nx \l_xeCJK_sub_fontname_tl \l_xeCJK_sub_fontfeat_clist
+            \tl_set:Nx \l_xeCJK_sub_fontname_tl \l_tmpa_tl
             \clist_clear:N \l_xeCJK_sub_fontfeat_clist
           }
       }
@@ -2059,9 +2087,7 @@ may observe
 % \begin{macro}[TF]{\xeCJK_family_if_exist:n}
 %    \begin{macrocode}
 \prg_new_conditional:Nnn \xeCJK_family_if_exist:n { T, F, TF }
-  {
-    \cs_if_free:cTF { xeCJK/family/#1 } \prg_return_false: \prg_return_true:
-  }
+  { \cs_if_free:cTF { xeCJK/family/#1 } \prg_return_false: \prg_return_true: }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -2700,10 +2726,15 @@ may observe
 \usepackage{CJKfntef}
 \usepackage{array}
 \setCJKmainfont{KaiTi_GB2312}
-\setCJKmainfont[FallBack]{SimHei}
-\setCJKmainfont[FallBack,FallBack]{SimSun-ExtB}
+\setCJKfallbackfamilyfont{\CJKrmdefault}[BoldFont=SimHei]
+  { [SlantedFont=FangSong]{SimSun} ,
+    [BoldFont=*]          {SimSun-ExtB} }
 \begin{document}
-漢字源𣴑考。
+漢字源𣴑考
+
+\textbf{漢字源𣴑考}
+
+\textsl{漢字源𣴑考}
 
 \CJKunderwave{漢字源𣴑考}
 \begin{table}[ht]
