@@ -1,3 +1,4 @@
+%% $Id$
 %%
 %% This is file `xeCJK.sty',
 %% generated with the docstrip utility.
@@ -5,14 +6,14 @@
 %% The original source files were:
 %%
 %% xeCJK.dtx  (with options: `package')
-%% 
+%%
 %%  Version 3.0.0 (08-Apr-2012)
-%% 
+%%
 %%  Copyright (C) Wenchang Sun <sunwch@hotmail.com>
-%% 
+%%
 %%  Modified by Leo Liu <leoliu.pku@gmail.com>
 %%          and Qing Lee  <sobenlee@gmail.com>
-%% 
+%%
 %%  This file may be distributed and/or modified under the
 %%  conditions of the LaTeX Project Public License, either version 1.3
 %%  of this license or (at your option) any later version.
@@ -20,7 +21,7 @@
 %%    http://www.latex-project.org/lppl.txt
 %%  and version 1.3 or later is part of all distributions of LaTeX
 %%  version 2005/12/01 or later.
-%% 
+%%
 \RequirePackage{l3keys2e}
 \ProvidesExplPackage {xeCJK} {2012/04/08} {3.0.0}
   {package for typesetting CJK scripts with XeLaTeX}
@@ -79,18 +80,36 @@
 \cs_generate_variant:Nn \prop_gput:Nnn { Nvx }
 \clist_map_inline:nn { CJK, FullLeft, FullRight } { \xeCJK_save_CJK_class:n {#1} }
 \cs_new_nopar:Nn \xeCJK_class_num:n { \use:c { xeCJK_#1_class } }
+\prg_set_conditional:Nnn \tl_if_blank:x { p , T , F , TF }
+  {
+    \if_int_compare:w \pdftex_strcmp:D { \c_empty_tl } {#1} = \c_zero
+      \prg_return_true:
+    \else:
+      \if_int_compare:w \pdftex_strcmp:D { \c_space_tl } {#1} = \c_zero
+        \prg_return_true: \else: \prg_return_false: \fi:
+    \fi:
+  }
 \NewDocumentCommand \xeCJKDeclareCharClass { > { \TrimSpaces } m m }
   {
     \exp_args:Nx \clist_map_inline:nn {#2}
-      { \xeCJK_setcharclass_aux:nn {##1} { \xeCJK_class_num:n {#1} } }
+      {
+        \str_if_eq:xxF {##1} { -> }
+          { \xeCJK_setcharclass_aux:nn {##1} { \xeCJK_class_num:n {#1} } }
+      }
   }
 \NewDocumentCommand \xeCJK_setcharclass_aux:nn
-  { > { \SplitArgument { 1 } { -> } } m m }
-  { \xeCJKsetcharclass #1 {#2} }
+  { > { \SplitArgument { 1 } { -> } } m m } { \xeCJKsetcharclass #1 {#2} }
 \NewDocumentCommand \xeCJKsetcharclass { m m m }
   {
-    \int_set:Nn \l_tmpa_int {#1}
-    \int_set:Nn \l_tmpb_int { \IfNoValueTF {#2} {#1} {#2} }
+    \bool_if:nTF { \tl_if_blank_p:x {#1} || \tl_if_blank_p:x {#2} }
+      {
+        \int_set:Nn \l_tmpa_int { \tl_if_blank:xTF {#1} {#2} {#1} }
+        \int_set_eq:NN \l_tmpb_int \l_tmpa_int
+      }
+      {
+        \int_set:Nn \l_tmpa_int { \int_min:nn {#1} { \IfNoValueTF {#2} {#1} {#2} } }
+        \int_set:Nn \l_tmpb_int { \int_max:nn {#1} { \IfNoValueTF {#2} {#1} {#2} } }
+      }
     \int_set:Nn \l_tmpc_int {#3}
     \prop_if_in:NVTF \g_xeCJK_CJK_class_prop \l_tmpc_int
       {
@@ -926,15 +945,6 @@
     slantfont .default:n = { true },
   }
 \cs_generate_variant:Nn \keys_set_known:nnN { nx }
-\prg_set_conditional:Nnn \tl_if_blank:x { p , T , F , TF }
-  {
-    \if_int_compare:w \pdftex_strcmp:D { \c_empty_tl } {#1} = \c_zero
-      \prg_return_true:
-    \else:
-      \if_int_compare:w \pdftex_strcmp:D { \c_space_tl } {#1} = \c_zero
-        \prg_return_true: \else: \prg_return_false: \fi:
-    \fi:
-  }
 \clist_new:N \g_xeCJK_sub_key_clist
 \cs_new_nopar:Nn \xeCJK_new_sub_key:n
   {
