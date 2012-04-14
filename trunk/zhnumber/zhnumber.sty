@@ -32,7 +32,11 @@
       }
     \int_compare:nNnTF { \zhnum_hundreds:n {#2} } = \c_zero
       {
-        \int_compare:nNnF { \zhnum_thousands:n {#2} } = \c_zero
+        \bool_if:nT
+          {
+            ! ( \int_compare_p:nNn { \zhnum_thousands:n {#2} } = \c_zero )         &&
+            ! ( \int_compare_p:nNn { \int_mod:nn {#2} \c_one_hundred } = \c_zero )
+          }
           { \zhnum_digit_map:n \c_zero }
       }
       {
@@ -41,15 +45,19 @@
       }
     \int_compare:nNnTF { \zhnum_tens:n {#2} } = \c_zero
       {
-        \int_compare:nNnF { \zhnum_hundreds:n {#2} } = \c_zero
+        \bool_if:nT
+          {
+            ! ( \int_compare_p:nNn { \zhnum_hundreds:n {#2} } = \c_zero ) &&
+            ! ( \int_compare_p:nNn { \zhnum_units:n {#2} } = \c_zero )
+          }
           { \zhnum_digit_map:n \c_zero }
       }
       {
         \bool_if:nF
           {
-            ! ( \int_compare_p:nNn {#1} = \c_zero )                 &&
             \int_compare_p:nNn { \zhnum_tens:n {#2} }     = \c_one  &&
-            \int_compare_p:nNn { \zhnum_hundreds:n {#2} } = \c_zero
+            \int_compare_p:nNn { \zhnum_hundreds:n {#2} } = \c_zero &&
+            ! ( \int_compare_p:nNn {#1} = \c_zero )
           }
           { \zhnum_digit_map:n { \zhnum_tens:n {#2} } }
         \zhnum_digit_map:n \c_ten
@@ -74,15 +82,21 @@
       {
         \zhnum_process_number:nn \c_one { \int_div_truncate:nn {#1} \c_hundred_million }
         \zhnum_digit_map:n \c_hundred_million
-        \int_compare:nNnF
-          { \int_mod:nn { \int_div_truncate:nn {#1} \c_ten_thousand } \c_ten_thousand } = \c_zero
+        \int_compare:nNnF { \int_mod:nn {#1} \c_hundred_million } = \c_zero
           {
-            \zhnum_process_number:nn \c_zero
-              { \int_mod:nn { \int_div_truncate:nn {#1} \c_ten_thousand } \c_ten_thousand }
-            \zhnum_digit_map:n \c_ten_thousand
+            \int_compare:nNnTF { \int_mod:nn {#1} \c_hundred_million } < \c_ten_thousand
+              {
+                \int_compare:nNnF { \int_mod:nn {#1} \c_hundred_million } < \c_one_thousand
+                  { \zhnum_digit_map:n \c_zero }
+              }
+              {
+                \zhnum_process_number:nn \c_zero
+                  { \int_mod:nn { \int_div_truncate:nn {#1} \c_ten_thousand } \c_ten_thousand }
+                \zhnum_digit_map:n \c_ten_thousand
+              }
+            \int_compare:nNnF { \int_mod:nn {#1} \c_ten_thousand } = \c_zero
+              { \zhnum_process_number:nn \c_zero { \int_mod:nn {#1} \c_ten_thousand } }
           }
-        \int_compare:nNnF { \int_mod:nn {#1} \c_ten_thousand } = \c_zero
-          { \zhnum_process_number:nn \c_zero { \int_mod:nn {#1} \c_ten_thousand } }
       }
   }
 
