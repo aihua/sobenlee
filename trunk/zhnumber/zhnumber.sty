@@ -37,7 +37,7 @@
       {
         \bool_if:nT
           {
-            \int_compare_p:nNn { \zhnum_thousands:n {#2} } > \c_zero         &&
+            \int_compare_p:nNn { \zhnum_thousands:n {#2} }         > \c_zero &&
             \int_compare_p:nNn { \int_mod:nn {#2} \c_one_hundred } > \c_zero
           }
           { \zhnum_digit_map:n \c_zero }
@@ -105,33 +105,42 @@
 
 \cs_new_nopar:Npn \zhnumber #1
   {
-    \int_compare:nNnTF {#1} = \c_zero
+    \int_compare:nNnTF { \zhnum_trim_comma:n {#1} } = \c_zero
       { \zhnum_null_or_zero: }
       {
-        \int_compare:nNnT {#1} < \c_zero
+        \int_compare:nNnT { \zhnum_trim_comma:n {#1} } < \c_zero
           { \zhnum_digit_map:n \c_minus_one }
-        \zhnum_number:n { \int_abs:n {#1} }
+        \zhnum_number:n { \int_abs:n { \zhnum_trim_comma:n {#1} } }
       }
   }
 
-\cs_new_nopar:Nn \zhnum_digits_aux:N
-  {
-    \int_compare:nNnTF {#1} = \c_zero
-      { \zhnum_null_or_zero: }
-      { \zhnum_digit_map:n #1 }
-  }
+\cs_new_nopar:Nn \zhnum_trim_comma_aux:N
+  { \str_if_eq:xxF {#1} { , } {#1} }
 
-\cs_new_nopar:Nn \zhnum_digits:n
-  { \exp_args:Nf \tl_map_function:nN {#1} \zhnum_digits_aux:N }
+\cs_new_nopar:Nn \zhnum_trim_comma:n
+  { \exp_args:Nf \tl_map_function:nN {#1} \zhnum_trim_comma_aux:N }
 
 \cs_new_nopar:Npn \zhdigits #1
   {
-    \int_compare:nNnTF {#1} < \c_zero
+    \int_compare:nNnTF { \zhnum_trim_comma:n {#1} } < \c_zero
       {
         \zhnum_digit_map:n \c_minus_one
         \zhnum_digits:n { \exp_last_unbraced:Nf \use_none:n #1 }
       }
       { \zhnum_digits:n {#1} }
+  }
+
+\cs_new_nopar:Nn \zhnum_digits:n
+  { \exp_args:Nf \tl_map_function:nN {#1} \zhnum_digits_aux:N }
+
+\cs_new_nopar:Nn \zhnum_digits_aux:N
+  {
+    \str_if_eq:xxF {#1} { , }
+      {
+        \int_compare:nNnTF {#1} = \c_zero
+          { \zhnum_null_or_zero: }
+          { \zhnum_digit_map:n #1 }
+      }
   }
 
 \cs_new_nopar:Npn \zhnum #1
