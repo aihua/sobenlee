@@ -25,7 +25,10 @@
 \cs_new_nopar:Nn \zhnum_process_number:nn
   {
     \int_compare:nNnTF { \zhnum_thousands:n {#2} } = \c_zero
-      { \int_compare:nNnT {#1} = \c_zero { \zhnum_digit_map:n \c_zero } }
+      {
+        \int_compare:nNnT {#1} = \c_zero
+          { \zhnum_digit_map:n \c_zero }
+      }
       {
         \zhnum_digit_map:n { \zhnum_thousands:n {#2} }
         \zhnum_digit_map:n \c_one_thousand
@@ -34,8 +37,8 @@
       {
         \bool_if:nT
           {
-            ! ( \int_compare_p:nNn { \zhnum_thousands:n {#2} } = \c_zero )         &&
-            ! ( \int_compare_p:nNn { \int_mod:nn {#2} \c_one_hundred } = \c_zero )
+            \int_compare_p:nNn { \zhnum_thousands:n {#2} } > \c_zero         &&
+            \int_compare_p:nNn { \int_mod:nn {#2} \c_one_hundred } > \c_zero
           }
           { \zhnum_digit_map:n \c_zero }
       }
@@ -47,8 +50,8 @@
       {
         \bool_if:nT
           {
-            ! ( \int_compare_p:nNn { \zhnum_hundreds:n {#2} } = \c_zero ) &&
-            ! ( \int_compare_p:nNn { \zhnum_units:n {#2} } = \c_zero )
+            \int_compare_p:nNn { \zhnum_hundreds:n {#2} } > \c_zero &&
+            \int_compare_p:nNn { \zhnum_units:n    {#2} } > \c_zero
           }
           { \zhnum_digit_map:n \c_zero }
       }
