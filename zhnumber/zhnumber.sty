@@ -113,7 +113,7 @@
   }
 
 \DeclareExpandableDocumentCommand \zhdigits { s m }
-  { \zhnum_digits:nn { \IfBooleanTF #1 \c_zhnum_null_int \c_zero } {#2} }
+  { \zhnum_digits:nn { \IfBooleanTF #1 \c_zero \c_zhnum_null_int } {#2} }
 
 \cs_new_nopar:Npn \zhnum_digits:nn #1#2
   {
