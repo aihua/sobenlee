@@ -322,10 +322,10 @@ may observe
     \int_set:Nn \l_tmpc_int {#3}
     \prop_if_in:NVTF \g_xeCJK_CJK_class_prop \l_tmpc_int
       { \cs_set_eq:NN \xeCJK_set_catcode:n \char_set_catcode_other:n }
-      { \cs_set_eq:NN \xeCJK_set_catcode:n \use_none:nnnnnnn }
+      { \cs_set_eq:NN \xeCJK_set_catcode:n \use_none:nnnnnnnn }
     \loop
       \xeCJK_set_catcode:n \l_tmpa_int
-      \XeTeXmathcode  \l_tmpa_int = \c_seven \symCJKmath \l_tmpa_int
+      \XeTeXmathcode  \l_tmpa_int = \c_seven \use:c { sym \c_xeCJK_math_tl } \l_tmpa_int
       \XeTeXcharclass \l_tmpa_int = \l_tmpc_int
       \if_int_compare:w \l_tmpa_int < \l_tmpb_int
         \int_incr:N \l_tmpa_int
@@ -336,7 +336,8 @@ may observe
 %
 % 数学公式内的 CJK 字体。
 % \begin{macrocode}
-\DeclareSymbolFont { CJKmath } \f@encoding \f@family \seriesdefault \shapedefault
+\tl_const:Nn \c_xeCJK_math_tl { CJKmath }
+\DeclareSymbolFont \c_xeCJK_math_tl \f@encoding \f@family \seriesdefault \shapedefault
 %    \end{macrocode}
 %
 % \begin{macro}{\xeCJKResetPunctClass}
@@ -1897,6 +1898,7 @@ may observe
 %    \begin{macrocode}
 \cs_generate_variant:Nn \prop_put:Nnn        { Nxx }
 \cs_generate_variant:Nn \prop_get:Nn         { NV  }
+\cs_generate_variant:Nn \prop_get:NnNF       { Nx  }
 \cs_generate_variant:Nn \prop_get:NnNTF      { Nx  }
 \cs_generate_variant:Nn \prop_if_in:NnF      { Nx  }
 \cs_generate_variant:Nn \prop_put_if_new:Nnn { Nxx }
@@ -2161,7 +2163,6 @@ may observe
 % \begin{macro}{\CJKfamily}
 % 用于切换 CJK 字体族。
 %     \begin{macrocode}
-\tl_new:N \l_xeCJK_family_tl
 \NewDocumentCommand \CJKfamily { m }
   {
     \xeCJK_family_if_exist:nTF {#1}
@@ -2289,7 +2290,6 @@ may observe
 % CJK 默认字体族，作用于 |\normalfont|。
 %    \begin{macrocode}
 \cs_if_free:NT \CJKfamilydefault { \tl_set:Nn \CJKfamilydefault { \CJKrmdefault } }
-\tl_new:c { xeCJK/family/\CJKfamilydefault }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -2306,28 +2306,45 @@ may observe
   }
 %    \end{macrocode}
 %
-% 设置实际的 CJK 数学字体，与 |\CJKfamilydefault| 相同。
+% \begin{macro}{\setCJKmathfont}
+% 设置 CJK 数学字体。
+%    \begin{macrocode}
+\NewDocumentCommand \setCJKmathfont { O{} m }
+  { \xeCJK_set_family:nnn \c_xeCJK_math_tl {#1} {#2} }
+%    \end{macrocode}
+%
+% 当没有设置 CJK 数学字体时，使用 |\CJKfamilydefault| 作为数学字体。
 %    \begin{macrocode}
 \tl_put_left:Nn \document
   {
-    \group_end:
-    \normalfont
-    \prop_get:NxNTF \g_xeCJK_family_name_prop
-      \CJKfamilydefault \l_xeCJK_family_default_tl
+    \CJKfamily \c_xeCJK_math_tl
+    \tl_clear:N \l_xeCJK_math_family_tl
+    \prop_get:NxNF \g_xeCJK_family_name_prop
+      \c_xeCJK_math_tl \l_xeCJK_math_family_tl
+      {
+        \normalfont
+        \prop_get:NxNF \g_xeCJK_family_name_prop
+          \CJKfamilydefault \l_xeCJK_math_family_tl \prg_do_nothing:
+      }
+    \tl_if_empty:NF \l_xeCJK_math_family_tl
       {
         \DeclareSymbolFont { CJKmath }       \g_fontspec_encoding_tl
-          \l_xeCJK_family_default_tl \seriesdefault \shapedefault
+          \l_xeCJK_math_family_tl \seriesdefault \shapedefault
         \SetSymbolFont  { CJKmath } { bold } \g_fontspec_encoding_tl
-          \l_xeCJK_family_default_tl \bfdefault \shapedefault
+          \l_xeCJK_math_family_tl \bfdefault \shapedefault
       }
-      { \xeCJK_warning:nx { CJKfamily-Unknown } \CJKfamilydefault }
+    \group_end:
+    \tl_set:Nx \l_xeCJK_family_tl \CJKfamilydefault
+    \normalfont
     \group_begin:
   }
 %    \end{macrocode}
+% \end{macro}
 %
 % 为了保证 CJK 数学字体的正确设置，应在导言区内设置 CJK 字体。
 %    \begin{macrocode}
 \@onlypreamble \setCJKmainfont
+\@onlypreamble \setCJKmathfont
 \@onlypreamble \setCJKsansfont
 \@onlypreamble \setCJKmonofont
 \@onlypreamble \setCJKromanfont

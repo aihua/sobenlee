@@ -112,16 +112,17 @@
     \int_set:Nn \l_tmpc_int {#3}
     \prop_if_in:NVTF \g_xeCJK_CJK_class_prop \l_tmpc_int
       { \cs_set_eq:NN \xeCJK_set_catcode:n \char_set_catcode_other:n }
-      { \cs_set_eq:NN \xeCJK_set_catcode:n \use_none:nnnnnnn }
+      { \cs_set_eq:NN \xeCJK_set_catcode:n \use_none:nnnnnnnn }
     \loop
       \xeCJK_set_catcode:n \l_tmpa_int
-      \XeTeXmathcode  \l_tmpa_int = \c_seven \symCJKmath \l_tmpa_int
+      \XeTeXmathcode  \l_tmpa_int = \c_seven \use:c { sym \c_xeCJK_math_tl } \l_tmpa_int
       \XeTeXcharclass \l_tmpa_int = \l_tmpc_int
       \if_int_compare:w \l_tmpa_int < \l_tmpb_int
         \int_incr:N \l_tmpa_int
     \repeat
   }
-\DeclareSymbolFont { CJKmath } \f@encoding \f@family \seriesdefault \shapedefault
+\tl_const:Nn \c_xeCJK_math_tl { CJKmath }
+\DeclareSymbolFont \c_xeCJK_math_tl \f@encoding \f@family \seriesdefault \shapedefault
 \NewDocumentCommand \xeCJKResetPunctClass { }
   {
     \xeCJKDeclareCharClass { CJK } { "B7 }
@@ -1154,6 +1155,7 @@
 \cs_generate_variant:Nn \xeCJK_add_font_if_new:nn { nx, nc, nV, nv }
 \cs_generate_variant:Nn \prop_put:Nnn        { Nxx }
 \cs_generate_variant:Nn \prop_get:Nn         { NV  }
+\cs_generate_variant:Nn \prop_get:NnNF       { Nx  }
 \cs_generate_variant:Nn \prop_get:NnNTF      { Nx  }
 \cs_generate_variant:Nn \prop_if_in:NnF      { Nx  }
 \cs_generate_variant:Nn \prop_put_if_new:Nnn { Nxx }
@@ -1337,7 +1339,6 @@
 \msg_new:nnn { xeCJK } { CJK-block } { Switch~from~block~'#1'~to~'#2'. }
 \prg_new_conditional:Nnn \xeCJK_family_if_exist:n { T, F, TF }
   { \cs_if_free:cTF { xeCJK/family/#1 } \prg_return_false: \prg_return_true: }
-\tl_new:N \l_xeCJK_family_tl
 \NewDocumentCommand \CJKfamily { m }
   {
     \xeCJK_family_if_exist:nTF {#1}
@@ -1439,7 +1440,6 @@
   { \xeCJK_set_family:nnn \CJKsfdefault {#1} {#2} }
 \cs_if_free:NT \CJKttdefault { \tl_set:Nn \CJKttdefault { tt } }
 \cs_if_free:NT \CJKfamilydefault { \tl_set:Nn \CJKfamilydefault { \CJKrmdefault } }
-\tl_new:c { xeCJK/family/\CJKfamilydefault }
 \AtEndOfPackage
   {
     \etex_protected:D \tl_put_right:Nn \normalfont { \CJKfamily \CJKfamilydefault }
@@ -1448,22 +1448,33 @@
     \etex_protected:D \tl_put_right:Nn \ttfamily   { \CJKfamily \CJKttdefault }
     \cs_set_eq:NN \reset@font \normalfont
   }
+\NewDocumentCommand \setCJKmathfont { O{} m }
+  { \xeCJK_set_family:nnn \c_xeCJK_math_tl {#1} {#2} }
 \tl_put_left:Nn \document
   {
-    \group_end:
-    \normalfont
-    \prop_get:NxNTF \g_xeCJK_family_name_prop
-      \CJKfamilydefault \l_xeCJK_family_default_tl
+    \CJKfamily \c_xeCJK_math_tl
+    \tl_clear:N \l_xeCJK_math_family_tl
+    \prop_get:NxNF \g_xeCJK_family_name_prop
+      \c_xeCJK_math_tl \l_xeCJK_math_family_tl
+      {
+        \normalfont
+        \prop_get:NxNF \g_xeCJK_family_name_prop
+          \CJKfamilydefault \l_xeCJK_math_family_tl \prg_do_nothing:
+      }
+    \tl_if_empty:NF \l_xeCJK_math_family_tl
       {
         \DeclareSymbolFont { CJKmath }       \g_fontspec_encoding_tl
-          \l_xeCJK_family_default_tl \seriesdefault \shapedefault
+          \l_xeCJK_math_family_tl \seriesdefault \shapedefault
         \SetSymbolFont  { CJKmath } { bold } \g_fontspec_encoding_tl
-          \l_xeCJK_family_default_tl \bfdefault \shapedefault
+          \l_xeCJK_math_family_tl \bfdefault \shapedefault
       }
-      { \xeCJK_warning:nx { CJKfamily-Unknown } \CJKfamilydefault }
+    \group_end:
+    \tl_set:Nx \l_xeCJK_family_tl \CJKfamilydefault
+    \normalfont
     \group_begin:
   }
 \@onlypreamble \setCJKmainfont
+\@onlypreamble \setCJKmathfont
 \@onlypreamble \setCJKsansfont
 \@onlypreamble \setCJKmonofont
 \@onlypreamble \setCJKromanfont
