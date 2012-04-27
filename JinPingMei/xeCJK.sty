@@ -98,7 +98,6 @@
   }
 \NewDocumentCommand \xeCJK_setcharclass_aux:nn
   { > { \SplitArgument { 1 } { -> } } m m } { \xeCJKsetcharclass #1 {#2} }
-\@onlypreamble \xeCJKDeclareCharClass
 \NewDocumentCommand \xeCJKsetcharclass { m m m }
   {
     \bool_if:nTF { \tl_if_blank_p:x {#1} || \tl_if_blank_p:x {#2} }
@@ -112,19 +111,12 @@
       }
     \int_set:Nn \l_tmpc_int {#3}
     \prop_if_in:NVTF \g_xeCJK_CJK_class_prop \l_tmpc_int
-      {
-        \cs_set_eq:NN \xeCJK_set_catcode:n \char_set_catcode_other:n
-        \cs_set_eq:NN \xeCJK_XeTeXmathcode:NNNNNN \XeTeXmathcode
-      }
-      {
-        \cs_set_eq:NN \xeCJK_set_catcode:n \use_none:n
-        \cs_set_eq:NN \xeCJK_XeTeXmathcode:NNNNNN \use_none:nnnnnn
-      }
+      { \cs_set_eq:NN \xeCJK_set_catcode:n \char_set_catcode_other:n }
+      { \cs_set_eq:NN \xeCJK_set_catcode:n \use_none:nnnnnnn }
     \loop
       \xeCJK_set_catcode:n \l_tmpa_int
+      \XeTeXmathcode  \l_tmpa_int = \c_seven \symCJKmath \l_tmpa_int
       \XeTeXcharclass \l_tmpa_int = \l_tmpc_int
-      \xeCJK_XeTeXmathcode:NNNNNN
-        \l_tmpa_int = \mathchar@type \mathalpha \symCJKmath \l_tmpa_int
       \if_int_compare:w \l_tmpa_int < \l_tmpb_int
         \int_incr:N \l_tmpa_int
     \repeat
@@ -513,15 +505,17 @@
   }
 \cs_new_nopar:Nn \xeCJK_checksingle_aux:n
   {
-    \tl_set:Nn \l_xeCJK_current_char_tl { \CJKglue \l_xeCJK_last_char_tl #1 }
-    \tl_set:Nn \l_xeCJK_current_nobreak_char_tl { \l_xeCJK_last_char_tl #1 }
     \peek_meaning:NTF \c_space_token
       {
         \peek_meaning_ignore_spaces:NTF \tex_par:D
-          { \l_xeCJK_current_nobreak_char_tl }
-          { \l_xeCJK_current_char_tl \c_space_token }
+          { \l_xeCJK_last_char_tl \nobreak #1 }
+          { \CJKglue \l_xeCJK_last_char_tl #1 \c_space_token }
       }
-      { \l_xeCJK_current_char_tl }
+      {
+        \token_if_eq_meaning:NNTF \l_peek_token \tex_par:D
+          { \l_xeCJK_last_char_tl \nobreak #1 }
+          { \CJKglue \l_xeCJK_last_char_tl #1 }
+      }
   }
 \tl_new:N \xeCJK_UL_subclass_patch_tl
 \clist_new:N \g_xeCJK_CJK_subclass_clist
@@ -582,6 +576,7 @@
       { \clist_gput_right:cx { g_xeCJK_ #1/#2 _range_clist } {#3} }
     \xeCJKDeclareCharClass { #1/#2 } {#3}
   }
+\@onlypreamble \xeCJKDeclareSubCharClass
 \cs_new_nopar:Nn \xeCJK_set_sub_class_toks:nn
   {
     \clist_map_inline:Nn \g_xeCJK_base_class_clist
@@ -904,7 +899,7 @@
   {
     \group_begin:
     \tl_set:Nx \l_xeCJK_family_fb_tl {#1}
-    \prop_get:NVNF \g_xeCJK_family_name_prop \l_xeCJK_family_fb_tl \l_xeCJK_fontname_tl
+    \prop_get:NVNF \g_xeCJK_family_prop \l_xeCJK_family_fb_tl \l_xeCJK_fontname_tl
       { \tl_clear:N \l_xeCJK_fontname_tl }
     \exp_args:Nx \clist_map_inline:nn {#3}
       {
@@ -934,7 +929,7 @@
 \msg_new:nnn { xeCJK } { fallback }
   {
     CJKfamily~'\l_xeCJK_family_tl'~
-    ( \prop_get:NV \g_xeCJK_family_name_prop \l_xeCJK_family_tl )~
+    ( \prop_get:NV \g_xeCJK_family_prop \l_xeCJK_family_tl )~
     does~not~contain~glyph~#1~(U+\int_to_hexadecimal:n {`#1}).\\
     Now~switch~to~the~fallback~font.\\
   }
@@ -1100,8 +1095,8 @@
     \prop_clear:N \l_xeCJK_add_font_prop
     \prop_map_inline:Nn \g_xeCJK_features_id_prop
       {
-        \tl_clear:c     { l_xeCJK_fontname_##1_tl    }
-        \clist_clear:c  { l_xeCJK_fontfeat_##1_clist }
+        \tl_clear:c    { l_xeCJK_fontname_##1_tl    }
+        \clist_clear:c { l_xeCJK_fontfeat_##1_clist }
       }
     \clist_clear:N \l_xeCJK_pass_features_clist
     \clist_clear:N \l_xeCJK_sub_key_clist
@@ -1128,14 +1123,15 @@
     \xeCJK_pass_features:
     \cs_gset_protected_nopar:cpx { xeCJK/family/\l_xeCJK_family_name_tl }
       {
-        \exp_not:N \fontspec [ \l_xeCJK_pass_features_clist ] { \l_xeCJK_fontname_tl }
+        \exp_not:N \fontspec_select:nn
+          { \l_xeCJK_pass_features_clist } { \l_xeCJK_fontname_tl }
         \prop_gput:NnV \exp_not:N \g_xeCJK_family_name_prop
-          { \l_xeCJK_family_name_tl } \exp_not:N \f@family
+          { \l_xeCJK_family_name_tl } \exp_not:N \l_fontspec_family_tl
         \cs_gset_protected_nopar:cpx { xeCJK/family/\l_xeCJK_family_name_tl }
         \exp_not:n
           { {
-            \exp_not:N \fontencoding { \f@encoding }
-            \exp_not:N \fontfamily   { \f@family }
+            \exp_not:N \fontencoding { \g_fontspec_encoding_tl }
+            \exp_not:N \fontfamily   { \l_fontspec_family_tl }
             \exp_not:N \selectfont
           } }
       }
@@ -1157,11 +1153,9 @@
 \cs_generate_variant:Nn \xeCJK_add_font:nn        { nx, nc, nV, nv }
 \cs_generate_variant:Nn \xeCJK_add_font_if_new:nn { nx, nc, nV, nv }
 \cs_generate_variant:Nn \prop_put:Nnn        { Nxx }
-\cs_generate_variant:Nn \prop_gput:Nnn       { Nxx }
 \cs_generate_variant:Nn \prop_get:Nn         { NV  }
 \cs_generate_variant:Nn \prop_get:NnNTF      { Nx  }
 \cs_generate_variant:Nn \prop_if_in:NnF      { Nx  }
-\cs_generate_variant:Nn \prop_if_in:NnTF     { Nx  }
 \cs_generate_variant:Nn \prop_put_if_new:Nnn { Nxx }
 \cs_new_nopar:Nn \xeCJK_add_fake_bold:n
   {
@@ -1300,6 +1294,7 @@
 \cs_new_nopar:Nn \xeCJK_copy_family:nn
   {
     \group_begin:
+    \CJKfamily { #2 }
     \tl_map_inline:nn
       { \g_xeCJK_family_prop \g_xeCJK_family_options_prop \g_xeCJK_family_name_prop }
       { \prop_get:NnNT ##1 {#2} \l_tmpa_tl { \prop_gput:NnV ##1 {#1} \l_tmpa_tl } }
@@ -1336,6 +1331,7 @@
               }
           }
       }
+    \CJKfamily \l_xeCJK_family_tl
     \xeCJK_select_font:
   }
 \msg_new:nnn { xeCJK } { CJK-block } { Switch~from~block~'#1'~to~'#2'. }
@@ -1346,8 +1342,8 @@
   {
     \xeCJK_family_if_exist:nTF {#1}
       {
-        \prop_if_in:NxF \g_xeCJK_family_name_prop
-                        {#1} { \use:c { xeCJK/family/#1 } }
+        \prop_if_in:NxF \g_xeCJK_family_name_prop {#1}
+          { \use:c { xeCJK/family/#1 } }
         \tl_set:Nx \l_xeCJK_family_tl {#1}
       }
       {
@@ -1388,7 +1384,7 @@
         \xeCJK_set_family:nnn \g_xeCJK_family_spec_tl {#1} {#2}
         \tl_gset:cx \l_xeCJK_CJKfontspec_id_tl \g_xeCJK_family_spec_tl
       }
-    \exp_args:Nc \CJKfamily { \l_xeCJK_CJKfontspec_id_tl }
+    \exp_args:Nv \CJKfamily \l_xeCJK_CJKfontspec_id_tl
     \tex_ignorespaces:D
   }
 \clist_new:N \g_xeCJK_default_features_clist
@@ -1401,17 +1397,18 @@
       {
         \group_begin:
         \clist_set:Nx \l_tmpa_clist {#1}
-        \prop_get:NVN \g_xeCJK_family_name_prop \l_xeCJK_family_tl \l_tmpa_tl
+        \prop_get:NVN \g_xeCJK_family_prop \l_xeCJK_family_tl \l_tmpa_tl
         \clist_map_inline:Nn \g_xeCJK_CJK_subclass_clist
           {
             \clist_if_in:NnT \l_tmpa_clist {##1}
               {
                 \clist_remove_all:Nn \l_tmpa_clist {##1}
-                \prop_get:NoNF \g_xeCJK_family_name_prop
+                \prop_get:NoNF \g_xeCJK_family_prop
                   { \l_xeCJK_family_tl/##1 } \l_tmpb_tl
                   {
-                    \prop_get:NoNF \g_xeCJK_family_name_prop { \CJKfamilydefault/##1 }
-                      \l_tmpb_tl { \tl_set:Nx \l_tmpb_tl \l_tmpa_tl }
+                    \prop_get:NoNF \g_xeCJK_family_prop
+                      { \CJKfamilydefault/##1 } \l_tmpb_tl
+                      { \tl_set:Nx \l_tmpb_tl \l_tmpa_tl }
                   }
                 \clist_set:Nx \l_tmpa_clist
                   { ##1 = { [ \l_tmpa_clist ] { \l_tmpb_tl } } }
@@ -1730,7 +1727,6 @@
     \tl_set:Nn \CJK@tenthousand    { 万 }
     \tl_set:Nn \CJK@hundredmillion { 亿 }
   }
-%%
-\endinput
+%% 
 %%
 %% End of file `xeCJK.sty'.
