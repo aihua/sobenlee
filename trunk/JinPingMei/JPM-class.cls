@@ -118,6 +118,9 @@ CJKchecksingle = true,
     PunctStyle = kaiming,
  KaiMingPunct+ = {：；},
 }
+
+\defaultCJKfontfeatures{GB18030=*}
+
 \setCJKmainfont[
      BoldFont=FZHei-B01,
    ItalicFont=FZJKai-Z03S,
