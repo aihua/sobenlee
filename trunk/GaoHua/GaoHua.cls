@@ -134,7 +134,7 @@
 \newrobustcmd*~{\unskip\hskip 0.2em minus 0.05em\ignorespaces}
 
 \xeCJKsetup {
-CJKchecksingle = true,
+   CheckSingle = true,
   AutoFakeBold = false,
  AutoFakeSlant = false,
      CJKecglue = {~},

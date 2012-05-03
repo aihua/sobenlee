@@ -111,7 +111,7 @@
 \ExplSyntaxOff
 
 \xeCJKsetup {
-CJKchecksingle = true,
+   CheckSingle = true,
   AutoFakeBold = false,
  AutoFakeSlant = false,
      CJKecglue = {},
