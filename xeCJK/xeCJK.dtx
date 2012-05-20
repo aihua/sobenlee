@@ -1,4 +1,5 @@
 % \iffalse meta-comment
+% !TEX program  = XeLaTeX
 %<*internal>
 \iffalse
 %</internal>
@@ -16,8 +17,18 @@ CJK scripts easily.
 
 This package is licensed in LPPL.
 
-If you are interested in the process of development you
-may observe
+This package consists of the file  xeCJK.dtx
+             and the derived files xeCJK.pdf,
+                                   xeCJK.sty,
+                                   xeCJK.ins,
+                                   xeCJK-example-autofake.tex,
+                                   xeCJK-example-fallback.tex,
+                                   xeCJK-example-subCJKblock.tex,
+                                   xeCJK-example-CJKecglue.tex,
+                                   xeCJK-example-checksingle.tex and
+                                   README.txt (this file).
+
+If you are interested in the process of development you may observe
 
     http://code.google.com/p/ctex-kit/updates/list
 
@@ -29,10 +40,9 @@ may observe
 %</readme>
 %<*internal>
 \fi
-%</internal>
-%
-%<*internal>
-\begingroup
+\ifnum\strcmp{\fmtname}{plain}=0 \else
+  \expandafter\begingroup
+\fi
 %</internal>
 %<*batchfile>
 
@@ -67,16 +77,16 @@ $URL$
 \endpreamble
 \postamble
 
-This package consists of the file  xeCJK.dtx
-             and the derived files xeCJK.pdf,
-                                   xeCJK.sty,
-                                   xeCJK.ins,
-                                   xeCJK-example-autofake.tex,
-                                   xeCJK-example-fallback.tex,
-                                   xeCJK-example-subCJKblock.tex,
-                                   xeCJK-example-CJKecglue.tex,
-                                   xeCJK-example-checksingle.tex and
-                                   README.txt.
+   This package consists of the file  xeCJK.dtx
+                and the derived files xeCJK.pdf,
+                                      xeCJK.sty,
+                                      xeCJK.ins,
+                                      xeCJK-example-autofake.tex,
+                                      xeCJK-example-fallback.tex,
+                                      xeCJK-example-subCJKblock.tex,
+                                      xeCJK-example-CJKecglue.tex,
+                                      xeCJK-example-checksingle.tex and
+                                      README.txt.
 \endpostamble
 \usedir{tex/xelatex/xecjk}
 \generate{\file{\jobname.sty}{\from{\jobname.dtx}{package}}}
@@ -92,18 +102,19 @@ This package consists of the file  xeCJK.dtx
 %<*internal>
 \usedir{source/xelatex/xecjk}
 \generate{\file{\jobname.ins}{\from{\jobname.dtx}{batchfile}}}
-\nopreamble
+\nopreamble\nopostamble
 \usedir{doc/xelatex/xecjk}
 \generate{\file{README.txt}{\from{\jobname.dtx}{readme}}}
-\ifnum\strcmp{\fmtname}{plain}=0 \aftergroup\bye\fi
-\endgroup
+\ifnum\strcmp{\fmtname}{plain}=0
+  \expandafter\endbatchfile
+\else
+  \expandafter\endgroup
+\fi
 %</internal>
 %
 %<*driver|package>
 \NeedsTeXFormat{LaTeX2e}
-%<*driver>
-\ProvidesFile{xeCJK.dtx}
-%</driver>
+%<driver>\ProvidesFile{xeCJK.dtx}
 \RequirePackage{expl3}
 %</driver|package>
 %

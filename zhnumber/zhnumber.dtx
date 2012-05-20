@@ -1,4 +1,5 @@
 % \iffalse meta-comment
+% !TEX program  = XeLaTeX
 %<*internal>
 \iffalse
 %</internal>
@@ -19,7 +20,16 @@ LaTeX Project Public License (LPPL), either version 1.3c of this license or
 and version 1.3 or later is part of all distributions of LaTeX version
 2005/12/01 or later.
 
-This work has the LPPL maintenance status 'maintained'.
+This work has the LPPL maintenance status "maintained".
+The Current Maintainer of this work is Qing Lee.
+
+This work consists of the file  zhnumber.dtx,
+          and the derived files zhnumber.pdf,
+                                zhnumber.sty,
+                                zhnumber-utf8.cfg,
+                                zhnumber-gbk.cfg,
+                                zhnumber.ins and
+                                README.txt (this file).
 
 Basic Usage
 -----------
@@ -48,14 +58,14 @@ If you are interested in the process of development you may observe
 %</readme>
 %<*internal>
 \fi
-%</internal>
-%
-%<*internal>
-\begingroup
+\ifnum\strcmp{\fmtname}{plain}=0 \else
+  \expandafter\begingroup
+\fi
 %</internal>
 %<*batchfile>
 \input docstrip.tex
 \keepsilent
+\askforoverwritefalse
 \preamble
 
    Copyright (C) 2012 by Qing Lee <sobenlee@gmail.com>
@@ -77,24 +87,23 @@ If you are interested in the process of development you may observe
    This package consists of the file  zhnumber.dtx,
                 and the derived files zhnumber.pdf,
                                       zhnumber.sty,
-                                      zhnum-utf8.cfg,
-                                      zhnum-gbk.cfg,
+                                      zhnumber-utf8.cfg,
+                                      zhnumber-gbk.cfg,
                                       zhnumber.ins and
                                       README.txt.
 \endpostamble
-\askforoverwritefalse
 \ifnum\shellescape=1 \else
   \errmessage{
     Shell escape is disabled. Please use ^^J^^J
     xe(la)tex -shell-escape \jobname.ins(dtx)^^J}
-  \expandafter\endinput
+  \expandafter\endbatchfile
 \fi
 \usedir{tex/latex/zhnumber}
 \generate{\file{\jobname.sty}{\from{\jobname.dtx}{package}}}
 \usedir{tex/latex/zhnumber/config}
 \generate{
-  \file{\jobname-utf8.cfg}{\from{\jobname.dtx}{config,utf8}}
-  \file{\jobname-gbk.cfg}{\from{\jobname.dtx}{config,gbk}}}
+  \file{\jobname-utf8.cfg}{\from{\jobname.dtx}{config-utf8}}
+  \file{\jobname-gbk.cfg}{\from{\jobname.dtx}{config-gbk}}}
 \immediate\write18{iconv -f utf-8 -t gbk \jobname-gbk.cfg > \jobname-gbk.temp}
 \immediate\write18{mv -f \jobname-gbk.temp \jobname-gbk.cfg}
 %</batchfile>
@@ -102,15 +111,29 @@ If you are interested in the process of development you may observe
 %<*internal>
 \usedir{source/latex/zhnumber}
 \generate{\file{\jobname.ins}{\from{\jobname.dtx}{batchfile}}}
-\nopreamble
+\nopreamble\nopostamble
 \usedir{doc/latex/zhnumber}
 \generate{\file{README.txt}{\from{\jobname.dtx}{readme}}}
-\ifnum\strcmp{\fmtname}{plain}=0 \aftergroup\bye\fi
-\endgroup
+\ifnum\strcmp{\fmtname}{plain}=0
+  \expandafter\endbatchfile
+\else
+  \expandafter\endgroup
+\fi
 %</internal>
 %
+%<*driver|package>
+\NeedsTeXFormat{LaTeX2e}
 %<driver>\ProvidesFile{zhnumber.dtx}
-%<package>\NeedsTeXFormat{LaTeX2e}[1999/12/01]
+\RequirePackage{expl3}
+%</driver|package>
+%<config-gbk|config-utf8>\ExplSyntaxOff
+%<package>\ProvidesExplPackage {zhnumber}
+%<config-gbk>\ProvidesExplFile {zhnumber-gbk.cfg}
+%<config-utf8>\ProvidesExplFile {zhnumber-utf8.cfg}
+%<package|config-gbk|config-utf8>  {2012/05/18} {1.3}
+%<package>  {package for typesetting numbers with Chinese glyphs}
+%<config-gbk>  {Chinese numerals with GBK encoding}
+%<config-utf8>  {Chinese numerals with UTF8 encoding}
 %
 %<*driver>
 \documentclass{l3doc}
@@ -285,10 +308,20 @@ If you are interested in the process of development you may observe
 %    \end{macrocode}
 %
 %    \begin{macrocode}
+\msg_new:nnn { zhnumber } { l3-too-old }
+  {
+    Support~package~'expl3'~too~old. \\\\
+    Please~update~an~up~to~date~version~of~the~bundles\\\\
+    'l3kernel'~and~'l3packages'\\\\
+    using~your~TeX~package~manager~or~from~CTAN.
+  }
+\@ifpackagelater { expl3 } { 2012/02/19 } { }
+  { \msg_error:nn  { zhnumber }  { l3-too-old } }
+%    \end{macrocode}
+%
+%    \begin{macrocode}
 \RequirePackage{xparse}
 \RequirePackage{l3keys2e}
-\ProvidesExplPackage {zhnumber} {2012/05/18} {1.3}
-  {package for typesetting numbers with Chinese glyphs}
 %    \end{macrocode}
 %
 % \begin{macro}{\zhnumber}
@@ -824,34 +857,7 @@ If you are interested in the process of development you may observe
 % \subsection{中文数字映射文件}
 %
 %    \begin{macrocode}
-%<*config>
-%    \end{macrocode}
-%
-%    \begin{macrocode}
-\ExplSyntaxOff
-%    \end{macrocode}
-%
-%    \begin{macrocode}
-%<*gbk>
-%    \end{macrocode}
-%
-%    \begin{macrocode}
-\ProvidesExplFile {zhnumber-gbk.cfg} {2012/05/18} {1.3}
-  {Chinese numerals with GBK encoding}
-%    \end{macrocode}
-%
-%    \begin{macrocode}
-%</gbk>
-%<*utf8>
-%    \end{macrocode}
-%
-%    \begin{macrocode}
-\ProvidesExplFile {zhnumber-utf8.cfg} {2012/05/18} {1.3}
-  {Chinese numerals with UTF8 encoding}
-%    \end{macrocode}
-%
-%    \begin{macrocode}
-%</utf8>
+%<*config-gbk|config-utf8>
 %    \end{macrocode}
 %
 %    \begin{macrocode}
@@ -896,7 +902,7 @@ If you are interested in the process of development you may observe
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-%</config>
+%</config-gbk|config-utf8>
 %    \end{macrocode}
 %
 % \end{implementation}
