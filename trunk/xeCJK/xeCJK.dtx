@@ -41,7 +41,7 @@ may observe
 \keepsilent
 \preamble
 
-   Version 3.0.5 (19-May-2012)
+   Version $Revision$ ($Date$)
 -----------------------------------------------------------------
    Author:
             Wenchang Sun    <sunwch@nankai.edu.cn>
@@ -82,9 +82,13 @@ may observe
 \endgroup
 %</internal>
 %
+%<*driver|package>
+\NeedsTeXFormat{LaTeX2e}
 %<*driver>
 \ProvidesFile{xeCJK.dtx}
 %</driver>
+\RequirePackage{expl3}
+%</driver|package>
 %
 %<*driver>
 \documentclass{l3doc}
@@ -124,17 +128,21 @@ may observe
 \@addtoreset{CodelineNo}{section}
 \def\tokslink#1{\hyperlink{#1}{\ding{51}}}
 \makeatother
+%</driver>
+%<*driver|package>
+\GetIdInfo$Id$
+          {package for typesetting CJK scripts with XeLaTeX}
+%</driver|package>
+%<*driver>
 \begin{document}
   \DocInput{\jobname.dtx}
 \end{document}
 %</driver>
 % \fi
 %
-% \GetFileInfo{\jobname.sty}
-%
 % \title{\bfseries\pkg{xeCJK} 宏包}
 % \author{\texttt{ctex.org}\thanks{\url{http://www.ctex.org}}}
-% \date{\filedate\qquad\fileversion}
+% \date{\ExplFileDate\qquad v\ExplFileVersion}
 % \maketitle
 %
 % \tableofcontents
@@ -826,10 +834,20 @@ may observe
 %    \end{macrocode}
 %
 %    \begin{macrocode}
+\ProvidesExplPackage
+  {\ExplFileName}{\ExplFileDate}{\ExplFileVersion}{\ExplFileDescription}
+\@ifpackagelater { expl3 } { 2012/02/19 } { }
+  {
+    \PackageError { xeCJK } { Support~package~l3kernel~too~old. }
+      {
+        Please~install~an~up~to~date~version~of~l3kernel~
+        using~your~TeX~package~manager~or~from~CTAN.\\ \\
+        Loading~xeCJK~will~abort!
+      }
+    \tex_endinput:D
+  }
 \RequirePackage{xparse}
 \RequirePackage{l3keys2e}
-\ProvidesExplPackage {xeCJK} {2012/05/19} {3.0.5}
-  {package for typesetting CJK scripts with XeLaTeX}
 %    \end{macrocode}
 %
 % \begin{macro}[aux]
