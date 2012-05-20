@@ -41,6 +41,7 @@ may observe
 \keepsilent
 \preamble
 
+   Version 3.0.5 ($Date$)
 -----------------------------------------------------------------
    Author:
             Wenchang Sun    <sunwch@nankai.edu.cn>
@@ -139,9 +140,11 @@ may observe
 %</driver>
 % \fi
 %
+% \GetFileInfo{\jobname.sty}
+%
 % \title{\bfseries\pkg{xeCJK} 宏包}
 % \author{\texttt{ctex.org}\thanks{\url{http://www.ctex.org}}}
-% \date{\ExplFileDate\qquad v\ExplFileVersion}
+% \date{\filedate\qquad\fileversion}
 % \maketitle
 %
 % \tableofcontents
@@ -833,20 +836,7 @@ may observe
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\ProvidesExplPackage
-  {\ExplFileName}{\ExplFileDate}{\ExplFileVersion}{\ExplFileDescription}
-\@ifpackagelater { expl3 } { 2012/02/19 } { }
-  {
-    \PackageError { xeCJK } { Support~package~l3kernel~too~old. }
-      {
-        Please~install~an~up~to~date~version~of~l3kernel~
-        using~your~TeX~package~manager~or~from~CTAN.\\ \\
-        Loading~xeCJK~will~abort!
-      }
-    \tex_endinput:D
-  }
-\RequirePackage{xparse}
-\RequirePackage{l3keys2e}
+\ProvidesExplPackage{\ExplFileName}{\ExplFileDate}{3.0.5}{\ExplFileDescription}
 %    \end{macrocode}
 %
 % \begin{macro}[aux]
@@ -866,13 +856,29 @@ may observe
 %
 % \pkg{xeCJK} 必须使用 \XeTeX 引擎的支持。
 %    \begin{macrocode}
-\msg_new:nnn {xeCJK} { Require-XeTeX }
+\xeCJK_msg_new:nn { Require-XeTeX }
   {
     The~xeCJK~package~requires~XeTeX~to~function.\\\\
     You~must~change~your~typesetting~engine~to~"xelatex" \\
     instead~of~plain~"latex"~or~"pdflatex"~or~"lualatex".
   }
 \xetex_if_engine:F { \msg_critical:nn { xeCJK } { Require-XeTeX } }
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\xeCJK_msg_new:nn { l3-too-old }
+  {
+    Support~package~'expl3'~too~old. \\\\
+    Please~update~an~up~to~date~version~of~the~bundles\\\\
+    'l3kernel'~and~'l3packages'\\\\
+    using~your~TeX~package~manager~or~from~CTAN.
+  }
+\@ifpackagelater { expl3 } { 2012/02/19 } { } { \xeCJK_error:n { l3-too-old } }
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\RequirePackage{xparse}
+\RequirePackage{l3keys2e}
 %    \end{macrocode}
 %
 % |\XeTeXglyphbouds| 可以得到一个字符的左右边距，用于标点压缩。
