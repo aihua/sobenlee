@@ -191,8 +191,9 @@ $URL$
 % \end{enumerate}
 %
 % \pkg{xeCJK} 使用了 \XeTeX 的一些最新特性，需要 \XeTeX{} |0.9995.0 [2009/06/29]| 以
-% 后的版本。\pkg{xeCJK} 的依赖 \LaTeX~3 项目的 \pkg{expl3} 宏包，并依赖
-% \pkg{fontspec}\footnote{\url{http://mirrors.ctan.org/macros/latex/contrib/fontspec}}
+% 后的版本。\pkg{xeCJK} 的依赖 \LaTeX~3 项目的 \pkg{expl3}，\pkg{xparse} 和
+%  \pkg{l3keys2e} 宏包，并依赖 \pkg{fontspec}^^A
+% \footnote{\url{http://mirrors.ctan.org/macros/latex/contrib/fontspec}}
 % 宏包来调用系统字体。个别兼容性功能需要 \pkg{CJK} 宏包的支持。
 %
 % \pkg{xeCJK} 的原始作者是孙文昌，2009 年 5 月起宏包被收入
@@ -224,8 +225,8 @@ $URL$
 %
 % \pkg{xeCJK} 只提供了字体和标点控制等基本 CJK 语言支持。对于中文文档，可以使
 % 用更为高层的 \pkg{ctex} 宏包或文档类，它将自动调用 \pkg{xeCJK} 并设置好中文
-% 字体，同时提供了进一步的本地化支持。详细内容参看 \pkg{ctex} 宏包\footnote{%
-% \url{http://mirrors.ctan.org/language/chinese/ctex/}}的说明。
+% 字体，同时提供了进一步的本地化支持。详细内容参看 \pkg{ctex} 宏包^^A
+% \footnote{\url{http://mirrors.ctan.org/language/chinese/ctex/}}的说明。
 %
 % \pkg{xeCJK} 提供了大量选项，可以在宏包调用时作为宏包选项或用 |\xeCJKsetup|
 % 命令进行设置，详见 \ref{subsec:opts}~节。除了 |\setCJKmainfont| 命令，
