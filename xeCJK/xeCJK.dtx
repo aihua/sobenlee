@@ -37,6 +37,25 @@ If you are interested in the process of development you may observe
     Current Maintainers:
             Leo Liu         <leoliu.pku@gmail.com>
             Qing Lee        <sobenlee@gmail.com>
+
+
+Installation
+------------
+The package is supplied in dtx format and as a pre-extracted zip file,
+xecjk.tds.zip. The later is most convenient for most users: simply
+unzip this in your local texmf directory and run texhash to update the
+database of file locations. If you want to unpack the dtx yourself,
+running "xetex xeCJK.dtx" will extract the package whereas
+"xelatex xeCJK.dtx" will extract it and also typeset the documentation.
+
+The package requires LaTeX3 support as provided in the l3kernel and
+l3packages bundles and the fontspec package. All of these are available
+on CTAN as ready-to-install zip files. Suitable versions are available
+in the latest version of MiKTeX and TeX Live (updating the relevant
+packages online may be necessary).
+
+To compile the documentation without error, you will need some specific
+CJK scripts fonts (TrueType or OpenType).
 %</readme>
 %<*internal>
 \fi
@@ -119,6 +138,8 @@ $URL$
 %</driver|package>
 %
 %<*driver>
+\RequirePackage{filehook}
+\AtEndOfPackageFile{hypdoc}{\let\SaveHDtheCodelineNo\theCodelineNo}
 \documentclass{l3doc}
 \hypersetup{pdfstartview=FitH}
 \usepackage{xeCJK}
@@ -155,7 +176,23 @@ $URL$
 \def\argbrace#1{\char`\{#1\char`\}}
 \@addtoreset{CodelineNo}{section}
 \def\tokslink#1{\hyperlink{#1}{\ding{51}}}
+\ExplSyntaxOn
+\let\SaveLDtheCodelineNo\theCodelineNo
+\tl_replace_once:Nnn \SaveHDtheCodelineNo
+ { \HDorg@theCodelineNo } { \SaveLDtheCodelineNo }
+\let \theCodelineNo \SaveHDtheCodelineNo
+\pretocmd { \doc_print_macroname:n } { \HD@target } { }{ }
+\pretocmd { \doc_special_main_index:n } { \HD@target } { } { }
+\patchcmd { \doc_special_main_index:n }
+  { hdpgindex{\thepage} } { hdclindex{\the\c@HD@hypercount} } { } { }
+\ExplSyntaxOff
 \makeatother
+\def\indexname{代码索引}
+\IndexPrologue{%
+  \section*{\indexname}
+  \markboth{\indexname}{\indexname}
+  斜体的数字表示对应项说明所在的页码，下划线的数字表示定义所在的代码行号，而直立体的
+  数字表示对应项使用时所在的行号。}
 %</driver>
 %<*driver|package>
 \GetIdInfo$Id$
@@ -865,7 +902,7 @@ $URL$
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\ProvidesExplPackage{\ExplFileName}{\ExplFileDate}{3.0.5}{\ExplFileDescription}
+\ProvidesExplPackage{\ExplFileName}{\ExplFileDate}{3.0.6}{\ExplFileDescription}
 %    \end{macrocode}
 %
 % \begin{macro}[aux]
@@ -3876,9 +3913,9 @@ $URL$
 %
 % \begin{macro}[internal]{\xeCJKsetemboldenfactor, \xeCJKsetslantfactor}
 %    \begin{macrocode}
-\NewDocumentCommand \xeCJKsetEmboldenFactor { m }
+\NewDocumentCommand \xeCJKsetemboldenfactor { m }
   { \xeCJKsetup { EmboldenFactor = {#1} } }
-\NewDocumentCommand \xeCJKsetSlantFactor { m }
+\NewDocumentCommand \xeCJKsetslantfactor { m }
   { \xeCJKsetup { SlantFactor = {#1} } }
 %    \end{macrocode}
 % \end{macro}
@@ -4352,6 +4389,7 @@ x^2+y^2
 %
 % \end{implementation}
 %
+% \PrintIndex
 % \Finale
 %
 \endinput
