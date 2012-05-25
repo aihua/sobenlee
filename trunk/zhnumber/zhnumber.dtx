@@ -125,13 +125,13 @@ and some specific Chinese Simplified fonts (TrueType or OpenType).
 \generate{\file{\jobname.sty}{\from{\jobname.dtx}{package}}}
 \usedir{tex/latex/zhnumber/config}
 \generate{
-  \file{\jobname-utf8.cfg}{\from{\jobname.dtx}{config-utf8}}
-  \file{\jobname-gbk.cfg}{\from{\jobname.dtx}{config-utf8}}
-  \file{\jobname-big5.cfg}{\from{\jobname.dtx}{config-big5}}}
-\immediate\write18{iconv -f utf-8 -t gbk \jobname-gbk.cfg > \jobname-gbk.temp}
+  \file{\jobname-utf8.cfg}{\from{\jobname.dtx}{config,utf8}}
+  \file{\jobname-big5.cfg}{\from{\jobname.dtx}{config,big5}}
+  \file{\jobname-gbk.cfg}{\from{\jobname.dtx}{config,gbk}}}
 \immediate\write18{iconv -f utf-8 -t big-5 \jobname-big5.cfg > \jobname-big5.temp}
-\immediate\write18{mv -f \jobname-gbk.temp \jobname-gbk.cfg}
+\immediate\write18{iconv -f utf-8 -t gbk \jobname-gbk.cfg > \jobname-gbk.temp}
 \immediate\write18{mv -f \jobname-big5.temp \jobname-big5.cfg}
+\immediate\write18{mv -f \jobname-gbk.temp \jobname-gbk.cfg}
 %</batchfile>
 %<batchfile>\endbatchfile
 %<*internal>
@@ -149,22 +149,22 @@ and some specific Chinese Simplified fonts (TrueType or OpenType).
 %
 %<*driver|package>
 \NeedsTeXFormat{LaTeX2e}
-%<driver>\ProvidesFile{zhnumber.dtx}
+%<*driver>
+\ProvidesFile{zhnumber.dtx}
+%</driver>
 \RequirePackage{expl3}
 %</driver|package>
-%<*package>
-\GetIdInfo$Id$
-          {package for typesetting numbers with Chinese glyphs}
-\ProvidesExplPackage{\ExplFileName}{\ExplFileDate}{1.5}{\ExplFileDescription}
-%</package>
-%<config-utf8|config-gbk|config-big5>\ExplSyntaxOff
-%<config-utf8>\ProvidesExplFile {zhnumber-utf8.cfg}
-%<config-gbk>\ProvidesExplFile {zhnumber-gbk.cfg}
-%<config-big5>\ProvidesExplFile {zhnumber-big5.cfg}
-%<config-utf8|config-gbk|config-big5>  {2012/05/25} {1.5}
-%<config-utf8>  {Chinese numerals with UTF8 encoding}
-%<config-gbk>  {Chinese numerals with GBK encoding}
-%<config-big5>  {Chinese numerals with Big5 encoding}
+%<package|config>\GetIdInfo$Id$
+%<package>          {package for typesetting numbers with Chinese glyphs}
+%<config&utf8>          {Chinese numerals with UTF8 encoding}
+%<config&big5>          {Chinese numerals with Big5 encoding}
+%<config&gbk>          {Chinese numerals with Big5 encoding}
+%<package>\ProvidesExplPackage{\ExplFileName}{\ExplFileDate}{1.5}{\ExplFileDescription}
+%<config>\ProvidesExplFile
+%<config&utf8>  {\ExplFileName-utf8.cfg}
+%<config&big5>  {\ExplFileName-big5.cfg}
+%<config&gbk>  {\ExplFileName-gbk.cfg}
+%<config>  {\ExplFileDate} {1.5} {\ExplFileDescription}
 %
 %<*driver>
 \RequirePackage{filehook}
@@ -1296,24 +1296,24 @@ and some specific Chinese Simplified fonts (TrueType or OpenType).
 % \label{sec:zhnum-map}
 %
 %    \begin{macrocode}
-%<*config-utf8|config-gbk|config-big5>
+%<*config>
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-%<*!config-big5>
+%<*!big5>
 \zhnum_set_digits_map:nnn { minus } { simp }  { 负 }
 \zhnum_set_digits_map:nnn { minus } { trad }  { 負 }
-%</!config-big5>
-%<*config-big5>
+%</!big5>
+%<*big5>
 \zhnum_set_digits_map:nn { minus }       { 負 }
-%</config-big5>
+%</big5>
 \zhnum_set_digits_map:nn { zero }        { 零 }
-%<*!config-big5>
+%<*!big5>
 \zhnum_set_digits_map:nn { null }        { 〇 }
-%</!config-big5>
-%<*config-big5>
+%</!big5>
+%<*big5>
 \zhnum_set_digits_map:nn { null }        { ○ }
-%</config-big5>
+%</big5>
 \zhnum_set_digits_map:nn { one }         { 一 }
 \zhnum_set_digits_map:nn { two }         { 二 }
 \zhnum_set_digits_map:nn { three }       { 三 }
@@ -1330,80 +1330,80 @@ and some specific Chinese Simplified fonts (TrueType or OpenType).
 \zhnum_set_digits_map:nn { thirty }      { 卅 }
 \zhnum_set_digits_map:nn { forty }       { 卌 }
 \zhnum_set_digits_map:nn { two_hundred } { 皕 }
-%<*!config-big5>
+%<*!big5>
 \zhnum_set_digits_map:nnn { dot } { simp } { 点 }
 \zhnum_set_digits_map:nnn { dot } { trad } { 點 }
-%</!config-big5>
-%<*config-big5>
+%</!big5>
+%<*big5>
 \zhnum_set_digits_map:nn { dot }   { 點 }
-%</config-big5>
+%</big5>
 \zhnum_set_digits_map:nn { and }   { 又 }
 \zhnum_set_digits_map:nn { parts } { 分之 }
 \zhnum_set_digits_map:nn { scale_zero }   { }
-%<*!config-big5>
+%<*!big5>
 \zhnum_set_digits_map:nnn { scale_one } { simp } { 万 }
 \zhnum_set_digits_map:nnn { scale_one } { trad } { 萬 }
 \zhnum_set_digits_map:nnn { scale_two } { simp } { 亿 }
 \zhnum_set_digits_map:nnn { scale_two } { trad } { 億 }
-%</!config-big5>
-%<*config-big5>
+%</!big5>
+%<*big5>
 \zhnum_set_digits_map:nn { scale_one }    { 萬 }
 \zhnum_set_digits_map:nn { scale_two }    { 億 }
-%</config-big5>
+%</big5>
 \zhnum_set_digits_map:nn { scale_three }  { 兆 }
 \zhnum_set_digits_map:nn { scale_four }   { 京 }
 \zhnum_set_digits_map:nn { scale_five }   { 垓 }
 \zhnum_set_digits_map:nn { scale_six }    { 秭 }
 \zhnum_set_digits_map:nn { scale_seven }  { 穰 }
-%<*!config-big5>
+%<*!big5>
 \zhnum_set_digits_map:nnn { scale_eight } { simp }  { 沟 }
 \zhnum_set_digits_map:nnn { scale_eight } { trad }  { 溝 }
 \zhnum_set_digits_map:nnn { scale_nine  } { simp }  { 涧 }
 \zhnum_set_digits_map:nnn { scale_nine  } { trad }  { 澗 }
-%</!config-big5>
-%<*config-big5>
+%</!big5>
+%<*big5>
 \zhnum_set_digits_map:nn { scale_eight }  { 澗 }
-%</config-big5>
+%</big5>
 \zhnum_set_digits_map:nn { scale_ten }    { 正 }
-%<*!config-big5>
+%<*!big5>
 \zhnum_set_digits_map:nnn { scale_eleven } { simp } { 载 }
 \zhnum_set_digits_map:nnn { scale_eleven } { trad } { 載 }
-%</!config-big5>
-%<*config-big5>
+%</!big5>
+%<*big5>
 \zhnum_set_digits_map:nn { scale_eleven } { 載 }
-%</config-big5>
+%</big5>
 \zhnum_set_digits_map:nn { year }    { 年 }
 \zhnum_set_digits_map:nn { month }   { 月 }
 \zhnum_set_digits_map:nn { day }     { 日 }
-%<*!config-big5>
+%<*!big5>
 \zhnum_set_digits_map:nnn { hour } { simp } { 时 }
 \zhnum_set_digits_map:nnn { hour } { trad } { 時 }
-%</!config-big5>
-%<*config-big5>
+%</!big5>
+%<*big5>
 \zhnum_set_digits_map:nn { hour }    { 時 }
-%</config-big5>
+%</big5>
 \zhnum_set_digits_map:nn { minute }  { 分 }
 \zhnum_set_digits_map:nn { weekday } { 星期 }
 \zhnum_set_financial_map:nn { null }     { 零 }
 \zhnum_set_financial_map:nn { zero }     { 零 }
 \zhnum_set_financial_map:nn { one }      { 壹 }
 \zhnum_set_financial_map:nn { two }      { 貳 }
-%<*!config-big5>
+%<*!big5>
 \zhnum_set_financial_map:nnn { three } { simp } { 叁 }
 \zhnum_set_financial_map:nnn { three } { trad } { 叄 }
-%</!config-big5>
-%<*config-big5>
+%</!big5>
+%<*big5>
 \zhnum_set_financial_map:nn { three }    { 參 }
-%</config-big5>
+%</big5>
 \zhnum_set_financial_map:nn { four }     { 肆 }
 \zhnum_set_financial_map:nn { five }     { 伍 }
-%<*!config-big5>
+%<*!big5>
 \zhnum_set_financial_map:nnn { six }   { simp } { 陆 }
 \zhnum_set_financial_map:nnn { six }   { trad } { 陸 }
-%</!config-big5>
-%<*config-big5>
+%</!big5>
+%<*big5>
 \zhnum_set_financial_map:nn { six }      { 陸 }
-%</config-big5>
+%</big5>
 \zhnum_set_financial_map:nn { seven }    { 柒 }
 \zhnum_set_financial_map:nn { eight }    { 捌 }
 \zhnum_set_financial_map:nn { nine }     { 玖 }
@@ -1417,7 +1417,7 @@ and some specific Chinese Simplified fonts (TrueType or OpenType).
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-%</config-utf8|config-gbk|config-big5>
+%</config>
 %    \end{macrocode}
 %
 % \end{implementation}
