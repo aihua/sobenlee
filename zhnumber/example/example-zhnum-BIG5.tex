@@ -1,0 +1,45 @@
+
+
+\documentclass{article}
+
+\usepackage{CJK}
+\usepackage[encoding=Bg5]{zhnumber}
+\usepackage[CJKbookmarks]{hyperref}
+
+\zhnumsetup{style={Financial,Traditional}}
+
+\renewcommand*\thesection{\zhnum{section}}
+
+\newcommand*\shownumber{%
+  \zhnumber{0}\quad
+  \zhnum{page}\quad
+  \zhnumber{1000100316}\quad
+  \zhdigits{0123456789}}
+
+\begin{document}
+
+\begin{CJK*}{Bg5}{bsmi}
+
+\section{\zhnum{section}\zhdigits{124}\zhnumber{123}}
+\label{section}
+
+\ref{section}\ref*{section}
+
+\zhnumsetup{null,style}
+\shownumber
+
+\zhnumsetup{null=false}
+\shownumber
+
+\zhnumsetup{null,style=Traditional}
+\shownumber
+
+\zhnumsetup{null,style=Financial}
+\shownumber
+
+\zhnumsetup{null,style=Simplified}
+\shownumber
+
+\clearpage
+\end{CJK*}
+\end{document}
