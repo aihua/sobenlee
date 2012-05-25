@@ -152,13 +152,16 @@ and some specific Chinese Simplified fonts (TrueType or OpenType).
 %<driver>\ProvidesFile{zhnumber.dtx}
 \RequirePackage{expl3}
 %</driver|package>
+%<*package>
+\GetIdInfo$Id$
+          {package for typesetting numbers with Chinese glyphs}
+\ProvidesExplPackage{\ExplFileName}{\ExplFileDate}{1.5}{\ExplFileDescription}
+%</package>
 %<config-utf8|config-gbk|config-big5>\ExplSyntaxOff
-%<package>\ProvidesExplPackage {zhnumber}
 %<config-utf8>\ProvidesExplFile {zhnumber-utf8.cfg}
 %<config-gbk>\ProvidesExplFile {zhnumber-gbk.cfg}
 %<config-big5>\ProvidesExplFile {zhnumber-big5.cfg}
-%<package|config-utf8|config-gbk|config-big5>  {2012/05/25} {1.5}
-%<package>  {package for typesetting numbers with Chinese glyphs}
+%<config-utf8|config-gbk|config-big5>  {2012/05/25} {1.5}
 %<config-utf8>  {Chinese numerals with UTF8 encoding}
 %<config-gbk>  {Chinese numerals with GBK encoding}
 %<config-big5>  {Chinese numerals with Big5 encoding}
@@ -523,7 +526,7 @@ and some specific Chinese Simplified fonts (TrueType or OpenType).
 %    \begin{macrocode}
 \cs_new_nopar:Nn \zhnum_decimal:nn
   {
-    \zhnum_blank_to_zero:f {#1} \l_zhnum_dot_tl
+    \zhnum_blank_to_zero:f {#1} \c_zhnum_dot_tl
     \tl_if_blank:fTF {#2} { \c_zhnum_zero_tl } { \zhdigits * {#2} }
   }
 \cs_generate_variant:Nn \tl_if_blank:nTF { f }
