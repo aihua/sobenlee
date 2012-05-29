@@ -879,7 +879,7 @@ and some specific Chinese Simplified fonts (TrueType or OpenType).
 %   \biggl\lfloor\frac Y4\biggr\rfloor + 6\biggl\lfloor\frac Y{100}\biggr\rfloor
 %   + \biggl\lfloor\frac Y{400}\biggr\rfloor\biggr) \pmod 7
 % \]
-% 其中 $Y$ 为年，$m$ 为月，$q$ 为日；若 $m=1,2$，则令 $m:=m+12$，同时 $Y:=Y-1$。
+% 其中 $Y$ 为年，$m$ 为月，$q$ 为日；若 $m=1,2$，则令 $m\mathbin{{+}{=}}12$，同时 $Y\mathop{--}{}$。
 %    \begin{macrocode}
 \cs_new_nopar:Nn \zhnum_Zeller_Gregorian:nnn
   {
@@ -920,7 +920,7 @@ and some specific Chinese Simplified fonts (TrueType or OpenType).
 % \end{macro}
 %
 % \begin{macro}[internal]{\zhnum_week_day:w}
-% 用 Zeller 公式计算的结果 $h$ 与实际星期的映射。
+% 用 Zeller 公式计算的结果 $h$ 与实际星期的关系是 $d=h+5\pmod7+1$。
 %    \begin{macrocode}
 \cs_new_nopar:Npn \zhnum_week_day:w #1/#2/#3 \q_stop
   {

@@ -1,0 +1,592 @@
+% \iffalse meta-comment
+% !TEX program  = XeLaTeX
+%<*internal>
+\ifnum\strcmp{\fmtname}{plain}=0 \else
+  \expandafter\begingroup
+\fi
+%</internal>
+%<*install>
+\input docstrip.tex
+\keepsilent
+\askforoverwritefalse
+\preamble
+
+   Copyright (C) 2012 by Qing Lee <sobenlee@gmail.com>
+--------------------------------------------------------------------------
+   This work may be distributed and/or modified under the
+   conditions of the LaTeX Project Public License, either version 1.3
+   of this license or (at your option) any later version.
+   The latest version of this license is in
+     http://www.latex-project.org/lppl.txt
+   and version 1.3 or later is part of all distributions of LaTeX
+   version 2005/12/01 or later.
+
+   This work has the LPPL maintenance status "maintained".
+   The Current Maintainer of this work is Qing Lee.
+
+\endpreamble
+\postamble
+
+   This package consists of the file  zhuyin.dtx,
+                                      zhuyin-pinyin.cfg,
+                and the derived files zhuyin.sty,
+                                      zhuyin.pdf and
+                                      zhuyin.ins.
+\endpostamble
+\usedir{tex/latex/zhuyin}
+\generate{\file{\jobname.sty}{\from{\jobname.dtx}{package}}}
+%</install>
+%<install>\endbatchfile
+%<*internal>
+\usedir{source/latex/zhuyin}
+\generate{\file{\jobname.ins}{\from{\jobname.dtx}{install}}}
+\ifnum\strcmp{\fmtname}{plain}=0
+  \expandafter\endbatchfile
+\else
+  \expandafter\endgroup
+\fi
+%</internal>
+%
+%<*driver|package>
+\NeedsTeXFormat{LaTeX2e}
+%<*driver>
+\ProvidesFile{zhuyin.dtx}
+%</driver>
+\RequirePackage{expl3}
+\GetIdInfo$Id$
+          {package for typesetting Chinese phonetic alphabets}
+%</driver|package>
+%
+%<*driver>
+\documentclass{l3doc}
+\usepackage{zhuyin}
+\usepackage{fvrb-ex}
+\usepackage{metalogo}
+\hypersetup{pdfstartview=FitH}
+\fvset{formatcom=\CJKfixedspacing}
+\linespread{1.1}
+\addtolength{\voffset}{-5\baselineskip}
+\addtolength\textheight{8\baselineskip}
+\setmainfont{TeX Gyre Pagella}
+\setmonofont{Inconsolata}
+\setCJKmainfont[BoldFont=Adobe Heiti Std,ItalicFont=Adobe Kaiti Std]{Adobe Song Std}
+\setCJKmonofont{Adobe Kaiti Std}
+\xeCJKsetup{PunctStyle=kaiming}
+\newfontfamily\PinYinFont{FreeSans}
+\zhuyinsetup{font=\PinYinFont}
+\def\MacroFont{\small\normalfont\ttfamily}
+\makeatletter
+\let\orig@meta\meta
+\def\meta#1{\orig@meta{\normalfont\itshape#1}}
+\def\TF{true\orvar{}false}
+\def\TTF{\defaultvar{true}\orvar{}false}
+\def\TFF{true\orvar\defaultvar{false}}
+\def\orvar{\char`\|}
+\let\defaultvar\textbf
+\def\argbrace#1{\char`\{#1\char`\}}
+\makeatother
+\def\indexname{代码索引}
+\IndexPrologue{%
+  \section*{\indexname}
+  \markboth{\indexname}{\indexname}
+  斜体的数字表示对应项说明所在的页码，下划线的数字表示定义所在的代码行号，而直立体的
+  数字表示对应项使用时所在的行号。}
+\begin{document}
+  \DocInput{\jobname.dtx}
+\end{document}
+%</driver>
+% \fi
+%
+% \GetFileInfo{\jobname.sty}
+%
+% \title{\bfseries\pkg{zhuyin} 宏包}
+% \author{李清\\ \path{sobenlee@gmail.com}}
+% \date{\filedate\qquad\fileversion}
+% \maketitle
+%
+% \begin{documentation}
+%
+% \section{简介}
+% \pkg{zhuyin} （注音）是一个 \XeLaTeX 宏包，提供了为汉字自动注音的功能。
+%
+% \pkg{zhuyin} 依赖 \pkg{xeCJK} 宏包。
+%
+% \section{使用方法}
+%
+% \begin{function}{zhuyinscope}
+%   \begin{syntax}
+%     \cs{begin}\argbrace{zhuyinscope}\oarg{options}
+%     .....
+%     \cs{end}\argbrace{zhuyinscope}
+%   \end{syntax}
+%   为 \env{zhuyinscope} 环境中的汉字自动注音。例如
+%   \begin{Example}[frame=single,numbers=left,gobble=5]
+%     \begin{zhuyinscope}
+%     列位看官：你道此书从何而来？说起根由，虽近荒唐，细按则深有趣味。
+%     待在下将此来历注明，方使阅者了然不惑。
+%     \end{zhuyinscope}
+%   \end{Example}
+%   可选项 \meta{options} 用于局部设置拼音的格式，将在下面说明。
+% \end{function}
+%
+% \begin{function}{\zhuyin}
+%   \begin{syntax}
+%     \cs{zhuyin} \oarg{options} \Arg{单个汉字} \Arg{拼音}
+%     \cs{zhuyin*} \oarg{options} \Arg{文字}
+%   \end{syntax}
+%   对于多音字，可以使用 \cs{zhuyin} 为其设置拼音；而 \cs{zhuyin*} 相当于
+%   \env{zhuyinscope} 环境的命令形式。\cs{zhuyin} 可以在 \env{zhuyinscope} 环境和
+%   \cs{zhuyin*} 中使用。例如，\\[1ex]
+%   \begin{SideBySideExample}[frame=single,numbers=left,xrightmargin=.5\linewidth,gobble=5]
+%     \zhuyin{长}{chang1}\\
+%     \zhuyin*{甄士隐梦幻识通灵}\\
+%     \zhuyin*{\zhuyin{重}{zhong4}要}
+%   \end{SideBySideExample}
+% \end{function}
+%
+% \begin{function}{\pinyin}
+%   \begin{syntax}
+%     \cs{pinyin} \oarg{options} \Arg{拼音}
+%   \end{syntax}
+%   用于输出拼音，为了输入的方便 \texttt{\"u} 可以用 |v| 代替。例如，\\[1ex]
+%   \begin{SideBySideExample}[frame=single,numbers=left,xrightmargin=.5\linewidth,gobble=5]
+%     \pinyin{hao3 hao3 xve2 xi2}\\
+%     \pinyin{nv3hai2zi}
+%   \end{SideBySideExample}
+% \end{function}
+%
+% \begin{function}{\setpinyin}
+%   \begin{syntax}
+%     \cs{setpinyin} \Arg{汉字} \Arg{拼音}
+%   \end{syntax}
+%   \pkg{zhuyin} 宏包的拼音数据（\file{zhuyin-pinyin.cfg}）来源于 \texttt{Unicode 6.1.0}
+%   的 \texttt{Unihan} 数据库\footnotemark 中的 \file{Unihan_Readings.txt} 文件。
+%   对于多音字，一般来说这个文件选用的是常用读音。可以使用 \cs{setpinyin} 来设置多音字
+%   的首选读音。
+% \end{function}
+%
+% \footnotetext{\url{http://www.unicode.org/Public/UNIDATA/Unihan.zip}}
+%
+% \begin{function}{\zhuyinsetup}
+%   \begin{syntax}
+%     \cs{zhnumsetup} \argbrace{\meta{key1}=\meta{var1}, \meta{key2}=\meta{var2}, ...}
+%   \end{syntax}
+%   用于在导言区或文档中，设置拼音的格式。目前可以设置的 \meta{key} 如下介绍。
+% \end{function}
+%
+% \begin{function}{ratio}
+%   \begin{syntax}
+%     ratio = \marg{number}
+%   \end{syntax}
+%   设置拼音字体大小与当前正文字体大小的比例，缺省值是 |0.4|。
+% \end{function}
+%
+% \begin{function}{vsep}
+%   \begin{syntax}
+%     vsep = \marg{dimen}
+%   \end{syntax}
+%   设置拼音的基线与汉字顶部的间距，缺省值是 |0.25 ex|。
+% \end{function}
+%
+% \begin{function}{hsep}
+%   \begin{syntax}
+%     hsep = \marg{skip}
+%   \end{syntax}
+%   设置注音汉字之间的间距，缺省值与 \pkg{xeCJK} 的 \cs{CJKglue} 的值相同。
+%   为了断行时行末的对齐，设置的 \meta{skip} 最后有一定的弹性。例如
+%   \begin{Example}[frame=single,numbers=left,gobble=5]
+%     \zhuyin*[ratio={.7}, hsep={.5em plus .1em}, vsep={.5ex}]{贾雨村风尘怀闺秀}
+%   \end{Example}
+% \end{function}
+%
+% \begin{function}{pysep}
+%   \begin{syntax}
+%     pysep = \marg{glue}
+%   \end{syntax}
+%   设置 \cs{pinyin} 输出的相邻两个汉语拼音的空白，缺省值是一个空格。
+% \end{function}
+%
+% \begin{function}{font}
+%   \begin{syntax}
+%     font = \marg{font}
+%   \end{syntax}
+%   设置拼音的字体，缺省值时 \cs{normalfont}，即以正文西文字体相同。可以用
+%   \pkg{fontspec} 宏包提供的 \cs{newfontfamily} 来选定字体。为了保证拼音能正确
+%   输出，最好选用收字量较大的西文字体。
+% \end{function}
+%
+% \begin{function}{format}
+%   \begin{syntax}
+%     format = \marg{format}
+%   \end{syntax}
+%   设置拼音的其它格式，例如颜色等，缺省值为空。
+% \end{function}
+%
+% \end{documentation}
+%
+% \begin{implementation}
+%
+% \section{代码实现}
+%
+% \iffalse
+%<*package>
+% \fi
+%
+%    \begin{macrocode}
+\ProvidesExplPackage{\ExplFileName}{\ExplFileDate}{1.0}{\ExplFileDescription}
+\RequirePackage{xeCJK}
+%    \end{macrocode}
+%
+% \begin{macro}[internal]{\zhuyin_make_box:Nn}
+%    \begin{macrocode}
+\cs_new_nopar:Nn \zhuyin_make_box:Nn
+  {
+    \mode_if_vertical:T { \hbox_unpack:N \c_empty_box }
+    \hbox:n { \zhuyin_save_CJKsymbol:N #1 \zhuyin_make_pinyin_box:Nn {#1} {#2} }
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[internal]{\zhuyin_make_pinyin_box:Nn}
+%    \begin{macrocode}
+\cs_new_nopar:Nn \zhuyin_make_pinyin_box:Nn
+  {
+    \hbox_overlap_left:n
+      {
+        \settowidth \l_tmpa_dim { \CJKglue }
+        \hbox_set:Nn \l_tmpa_box
+          {
+            \makexeCJKinactive
+            \int_set_eq:NN \XeTeXuseglyphmetrics \c_zero
+            \xeCJK_select_font:
+            #1
+          }
+        \hbox_set:Nn \l_tmpb_box
+          { \zhuyin_select_font: \l_zhuyin_format_tl #2 }
+        \dim_compare:nNnT
+          { \box_wd:N \l_tmpb_box } > { \box_wd:N \l_tmpa_box + \l_tmpa_dim }
+          {
+            \box_resize:Nff \l_tmpb_box
+              { \dim_eval:n { \box_wd:N \l_tmpa_box + \l_tmpa_dim } }
+              { \dim_eval:n { \box_ht:N \l_tmpb_box + \box_dp:N \l_tmpb_box } }
+          }
+        \box_move_up:nn { \box_ht:N \l_tmpa_box + ( \l_zhuyin_vsep_tl ) }
+          {
+            \hbox_to_wd:nn { \box_wd:N \l_tmpa_box }
+              {
+                \tex_hss:D
+                \box_use_clear:N \l_tmpb_box
+                \tex_hss:D
+              }
+          }
+      }
+    { \xeCJK_CJK_kern: }
+  }
+\cs_generate_variant:Nn \box_resize:Nnn { Nff }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[internal]{\zhuyin_to_pinyin:N}
+%    \begin{macrocode}
+\cs_new_nopar:Nn \zhuyin_to_pinyin:N
+  { \use:c { c_pinyin_ \int_to_hexadecimal:n {`#1} _tl } }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[internal,var]{\l_zhuyin_coor_tl}
+%    \begin{macrocode}
+\tl_set:Nn \l_zhuyin_coor_tl
+  { ( \cs_meaning:N \l_zhuyin_font_tl ) / \l_xeCJK_font_coor_tl / \l_zhuyin_ratio_tl }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[internal]{\zhuyin_select_font:}
+%    \begin{macrocode}
+\cs_new_nopar:Nn \zhuyin_select_font:
+  {
+    \cs_if_exist_use:cF { \l_zhuyin_coor_tl }
+      {
+        \tl_set:Nx \l_zhuyin_current_coor_tl { \l_zhuyin_coor_tl }
+        \dim_set:Nn \l_tmpa_dim { \f@size \p@ }
+        \fontsize { \l_zhuyin_ratio_tl \l_tmpa_dim } \c_zero_skip
+        \l_zhuyin_font_tl
+        \selectfont
+        \exp_last_unbraced:NNV
+        \cs_gset_eq:cN \l_zhuyin_current_coor_tl \font@name
+      }
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[internal]{\zhuyin_CJKsymbol:N}
+%    \begin{macrocode}
+\cs_new_nopar:Nn \zhuyin_CJKsymbol:N
+  { \zhuyin_make_box:Nn #1 { \zhuyin_to_pinyin:N #1 } }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{zhuyinscope}
+%    \begin{macrocode}
+\NewDocumentEnvironment { zhuyinscope } { O{} }
+  {
+    \keys_set:nn { zhuyin } {#1}
+    \tl_if_empty:NF \l_zhuyin_hsep_tl
+      { \xeCJKsetup { CJKglue = \skip_horizontal:n { \l_zhuyin_hsep_tl } } }
+    \zhuyin_replace_CJKsymbol:
+  }
+  { }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\zhuyin}
+%    \begin{macrocode}
+\NewDocumentCommand \zhuyin { s O{} m }
+  {
+    \IfBooleanTF {#1}
+      {
+        \group_begin:
+        \keys_set:nn { zhuyin } {#2}
+        \tl_if_empty:NF \l_zhuyin_hsep_tl
+          { \xeCJKsetup { CJKglue = \skip_horizontal:n { \l_zhuyin_hsep_tl } } }
+        \zhuyin_replace_CJKsymbol:
+        #3
+        \group_end:
+      }
+      {
+        \group_begin:
+        \keys_set:nn { zhuyin } {#2}
+        \zhuyin_zhuyin_single_aux:Nn {#3}
+      }
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[internal]{\zhuyin_zhuyin_single_aux:Nn}
+%    \begin{macrocode}
+\cs_new_nopar:Nn \zhuyin_zhuyin_single_aux:Nn
+  {
+    \cs_if_eq:NNTF \CJKsymbol \zhuyin_CJKsymbol:N
+      { \cs_set_eq:NN \CJKsymbol \use:n }
+      { \cs_set_eq:NN \zhuyin_save_CJKsymbol:N \use:n }
+    \zhuyin_make_box:Nn {#1} { \zhuyin_pinyin:n {#2} }
+    \group_end:
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\zhuyin_replace_CJKsymbol:}
+%    \begin{macrocode}
+\cs_new_nopar:Nn \zhuyin_replace_CJKsymbol:
+  {
+    \cs_if_eq:NNF \CJKsymbol \zhuyin_CJKsymbol:N
+      {
+        \cs_set_eq:NN \zhuyin_save_CJKsymbol:N \CJKsymbol
+        \cs_set_eq:NN \CJKsymbol \zhuyin_CJKsymbol:N
+      }
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\pinyin}
+%    \begin{macrocode}
+\NewDocumentCommand \pinyin { O{} m }
+  {
+    \group_begin:
+    \keys_set:nn { zhuyin } {#1}
+    \l_zhuyin_font_tl
+    \l_zhuyin_format_tl
+    \selectfont
+    \zhuyin_pinyin:n {#2}
+    \group_end:
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[internal]{\zhuyin_pinyin:n}
+%    \begin{macrocode}
+\cs_new_nopar:Nn \zhuyin_pinyin:n
+  {
+    \zhuyin_pinyin_init:
+    \bool_set_true:N \l_zhuyin_first_bool
+    \zhuyin_pinyin_aux:N #1 \q_recursion_tail
+    \prg_break_point:n
+      {
+        \bool_if:NTF \l_zhuyin_first_bool {#1}
+          { \tl_if_empty:NF \l_tmpc_tl { \l_zhuyin_pysep_tl \l_tmpc_tl } }
+      }
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[internal]{\zhuyin_pinyin_aux:N}
+%    \begin{macrocode}
+\cs_new_nopar:Nn \zhuyin_pinyin_aux:N
+  {
+    \quark_if_recursion_tail_break:N #1
+    \zhuyin_if_number:NTF {#1}
+      {
+        \bool_if:NTF \l_zhuyin_first_bool
+          { \bool_set_false:N \l_zhuyin_first_bool }
+          { \l_zhuyin_pysep_tl }
+        \l_tmpa_tl
+        \zhuyin_accent:Vn \l_zhuyin_accent_tl {#1}
+        \l_tmpb_tl
+        \zhuyin_pinyin_init:
+      }
+      {
+        \int_compare:nNnTF
+          { 0 \use:c { c_zhuyin_ \l_zhuyin_accent_tl _tl } } >
+          { 0 \use:c { c_zhuyin_ #1 _tl } }
+          { \tl_put_right:Nx \l_tmpb_tl { \zhuyin_replace_v:N {#1} } }
+          {
+            \tl_set:Nn \l_zhuyin_accent_tl {#1}
+            \tl_set_eq:NN \l_tmpa_tl \l_tmpc_tl
+            \tl_clear:N \l_tmpb_tl
+          }
+        \tl_put_right:Nx \l_tmpc_tl { \zhuyin_replace_v:N {#1} }
+      }
+    \zhuyin_pinyin_aux:N
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[internal]{\zhuyin_accent:Nn}
+%    \begin{macrocode}
+\cs_new_nopar:Nn \zhuyin_accent:Nn
+  {
+    \str_if_eq:nnTF {#1} { v }
+      { \zhuyin_num_to_accent_v:n {#2} }
+      { \zhuyin_num_to_accent:Nn {#1} {#2} }
+  }
+\cs_generate_variant:Nn \zhuyin_accent:Nn { V }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[internal]{\zhuyin_replace_v:N}
+%    \begin{macrocode}
+\cs_new_nopar:Nn \zhuyin_replace_v:N
+  { \str_if_eq:nnTF {#1} { v } { ü } {#1} }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[internal]{\zhuyin_pinyin_init:}
+%    \begin{macrocode}
+\cs_new_nopar:Nn \zhuyin_pinyin_init:
+  {
+    \tl_clear:N \l_tmpa_tl
+    \tl_clear:N \l_tmpb_tl
+    \tl_clear:N \l_tmpc_tl
+    \tl_clear:N \l_zhuyin_accent_tl
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[internal,pTF]{\zhuyin_if_number:N}
+%    \begin{macrocode}
+\prg_new_conditional:Nnn \zhuyin_if_number:N { p , T , F , TF }
+  {
+    \if_int_compare:w \c_one < 1 #1 \exp_stop_f:
+      \prg_return_true: \else: \prg_return_false: \fi:
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[internal,var]{\l_zhuyin_first_bool}
+%    \begin{macrocode}
+\bool_new:N \l_zhuyin_first_bool
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[internal,var]
+% {\c_zhuyin_a_tl,\c_zhuyin_o_tl,\c_zhuyin_e_tl,\c_zhuyin_i_tl,
+% \c_zhuyin_u_tl,\c_zhuyin_v_tl}
+%    \begin{macrocode}
+\tl_const:Nn \c_zhuyin_a_tl { 3 }
+\tl_const:Nn \c_zhuyin_o_tl { 2 }
+\tl_const:Nn \c_zhuyin_e_tl { 2 }
+\tl_const:Nn \c_zhuyin_i_tl { 1 }
+\tl_const:Nn \c_zhuyin_u_tl { 1 }
+\tl_const:Nn \c_zhuyin_v_tl { 1 }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[internal]{\zhuyin_num_to_accent:Nn,\zhuyin_num_to_accent_v:n}
+%    \begin{macrocode}
+\cs_new_nopar:Nn \zhuyin_num_to_accent:Nn
+  {
+    \if_case:w \int_eval:w #2 \int_eval_end:
+      #1  \or: \= #1  \or: \' #1  \or: \v #1  \or: \` #1
+    \else: #1 \fi:
+  }
+\cs_new_nopar:Nn \zhuyin_num_to_accent_v:n
+  {
+    \if_case:w \int_eval:w #1 \int_eval_end:
+       ü  \or: ǖ  \or: ǘ  \or: ǚ  \or: ǜ
+    \else: ü \fi:
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\zhuyinsetup}
+%    \begin{macrocode}
+\NewDocumentCommand \zhuyinsetup { m } { \keys_set:nn { zhuyin } {#1} }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{ratio,vsep,hsep,pysep,font,format}
+%    \begin{macrocode}
+\keys_define:nn { zhuyin }
+  {
+    ratio  .tl_set:N = \l_zhuyin_ratio_tl  ,
+    vsep   .tl_set:N = \l_zhuyin_vsep_tl   ,
+    hsep   .tl_set:N = \l_zhuyin_hsep_tl   ,
+    pysep  .tl_set:N = \l_zhuyin_pysep_tl  ,
+    font   .tl_set:N = \l_zhuyin_font_tl   ,
+    format .tl_set:N = \l_zhuyin_format_tl ,
+  }
+\keys_set:nn { zhuyin }
+  {
+    ratio = .4 ,
+    vsep  = .25 ex ,
+    pysep = \c_space_tl ,
+    font  = \normalfont
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[internal]{zhuyin-pinyin.cfg}
+%    \begin{macrocode}
+\group_begin:
+\char_set_catcode_active:N \U
+\cs_set_nopar:Npn U+ #1 ~ #2 ~ { \tl_const:cn { c_pinyin_ #1 _ tl } {#2} }
+\char_set_catcode_space:N \
+\file_input:n {zhuyin-pinyin.cfg}
+\group_end:
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\setpinyin}
+%    \begin{macrocode}
+\NewDocumentCommand \setpinyin { m m }
+  {
+    \tl_set:cn
+      { c_pinyin_ \int_to_hexadecimal:n {`#1} _ tl }
+      { \zhuyin_pinyin:n {#2} }
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+%    \begin{macrocode}
+\ProcessKeysOptions { zhuyin }
+%    \end{macrocode}
+%
+% \iffalse
+%</package>
+% \fi
+%
+% \end{implementation}
+%
+% \PrintIndex
+% \Finale
+%
+\endinput
