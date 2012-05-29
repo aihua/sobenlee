@@ -240,10 +240,7 @@
 % \begin{macro}[internal]{\zhuyin_make_box:Nn}
 %    \begin{macrocode}
 \cs_new_nopar:Nn \zhuyin_make_box:Nn
-  {
-    \mode_if_vertical:T { \hbox_unpack:N \c_empty_box }
-    \hbox:n { \zhuyin_save_CJKsymbol:N #1 \zhuyin_make_pinyin_box:Nn {#1} {#2} }
-  }
+  { \zhuyin_save_CJKsymbol:N #1 \zhuyin_make_pinyin_box:Nn {#1} {#2} }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -273,11 +270,7 @@
         \box_move_up:nn { \box_ht:N \l_tmpa_box + ( \l_zhuyin_vsep_tl ) }
           {
             \hbox_to_wd:nn { \box_wd:N \l_tmpa_box }
-              {
-                \tex_hss:D
-                \box_use_clear:N \l_tmpb_box
-                \tex_hss:D
-              }
+              { \tex_hss:D  \box_use_clear:N \l_tmpb_box \tex_hss:D }
           }
       }
     { \xeCJK_CJK_kern: }
