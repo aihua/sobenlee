@@ -11,18 +11,15 @@
   echo  make localinstall - extract packages
   echo  make tds          - create a TDS-ready archive
   echo  make unpack       - extract packages
-  echo.
-  
-  cmd /k
 
   goto :EOF
 
 :init
 
   setlocal
-  set PACKAGE=xeCJK
-  set PKGDIR=xecjk
-  set FORMAT=xelatex
+  set PACKAGE=xpinyin
+  set PKGDIR=xpinyin
+  set FORMAT=latex
   set DTXTEX=xelatex
   set DTXTEXFLAG=
   set INSTEX=xetex
@@ -33,7 +30,7 @@
   set AUXFILES=aux bbl blg cmds dvi glo gls hd idx ilg ind ist log los out tmp toc xdv
   set CLEAN=bib bst cfg cls eps gz ins pdf sty tex txt tds.zip
   set CTANFILES=dtx pdf
-  set TDSFILES=%CTANFILES% ins tex sty
+  set TDSFILES=%CTANFILES% ins cfg sty
   set CTANROOT=ctan
   set CTANDIR=%CTANROOT%\%PKGDIR%
   set TDSROOT=tds
@@ -217,7 +214,7 @@
 
 :zip 
 
-  if not defined ZIPFLAG set ZIPFLAG=-r -q -X
+  if not defined ZIPFLAG set ZIPFLAG=-r -q -X -ll
 
   if defined ZIPEXE (
     goto :EOF
