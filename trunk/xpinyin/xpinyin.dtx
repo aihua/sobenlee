@@ -236,8 +236,7 @@
 %   \begin{syntax}
 %     vsep = \marg{dimen}
 %   \end{syntax}
-%   设置拼音的基线与汉字顶部的间距，缺省值是 |0.1\baselineskip|，即当前正文基线距离的
-%   十分之一。
+%   设置拼音的基线与汉字基线的间距，缺省值是 |1 em|。
 % \end{function}
 %
 % \begin{function}{hsep}
@@ -247,7 +246,7 @@
 %   设置注音汉字之间的间距，缺省值与 \cs{CJKglue} 的值相同。为了断行时行末的对齐，设置
 %   的 \meta{skip} 最后有一定的弹性。例如
 %   \begin{Example}[frame=single,numbers=left,gobble=5]
-%     \xpinyin*[ratio={.7}, hsep={.5em plus .1em}, vsep={.5ex}]{贾雨村风尘怀闺秀}
+%     \xpinyin*[ratio={.7},hsep={.5em plus .1em},vsep={1.1em}]{贾雨村风尘怀闺秀}
 %   \end{Example}
 % \end{function}
 %
@@ -327,9 +326,8 @@
   {
     \hbox_overlap_left:n
       {
-        \settowidth \l_tmpa_dim { \CJKglue }
         \hbox_set:Nn \l_tmpa_box
-          { \xpinyin_CJKsymbol_hook: \xpinyin_save_CJKsymbol:n {#1} \strut }
+          { \xpinyin_CJKsymbol_hook: \xpinyin_save_CJKsymbol:n {#1} }
         \hbox_set:Nn \l_tmpb_box
           {
             \color_group_begin: \color_ensure_current:
@@ -342,13 +340,13 @@
             \color_group_end:
           }
         \dim_compare:nNnT
-          { \box_wd:N \l_tmpb_box } > { \box_wd:N \l_tmpa_box + \l_tmpa_dim }
+          { \box_wd:N \l_tmpb_box } > { \box_wd:N \l_tmpa_box + \l_xpinyin_CJKglue_dim }
           {
             \box_resize:Nff \l_tmpb_box
-              { \dim_eval:n { \box_wd:N \l_tmpa_box + \l_tmpa_dim } }
+              { \dim_eval:n { \box_wd:N \l_tmpa_box + \l_xpinyin_CJKglue_dim } }
               { \dim_eval:n { \box_ht:N \l_tmpb_box + \box_dp:N \l_tmpb_box } }
           }
-        \box_move_up:nn { \box_ht:N \l_tmpa_box + ( \l_xpinyin_vsep_tl ) }
+        \box_move_up:nn { \l_xpinyin_vsep_tl }
           {
             \hbox_to_wd:nn { \box_wd:N \l_tmpa_box }
               { \tex_hss:D  \box_use_clear:N \l_tmpb_box \tex_hss:D }
@@ -381,9 +379,10 @@
     \keys_set:nn { xpinyin } {#1}
     \tl_if_empty:NF \l_xpinyin_hsep_tl
       { \cs_set_nopar:Npn \CJKglue { \skip_horizontal:n { \l_xpinyin_hsep_tl } } }
+    \settowidth \l_xpinyin_CJKglue_dim { \CJKglue }
     \xpinyin_replace_CJKsymbol:
   }
-  { }
+  { \cs_gset_eq:NN \CJKsymbol \xpinyin_save_CJKsymbol:n }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -397,6 +396,7 @@
         \keys_set:nn { xpinyin } {#2}
         \tl_if_empty:NF \l_xpinyin_hsep_tl
           { \cs_set_nopar:Npn \CJKglue { \skip_horizontal:n { \l_xpinyin_hsep_tl } } }
+        \settowidth \l_xpinyin_CJKglue_dim { \CJKglue }
         \xpinyin_replace_CJKsymbol:
         #3
         \group_end:
@@ -404,9 +404,16 @@
       {
         \group_begin:
         \keys_set:nn { xpinyin } {#2}
+        \settowidth \l_xpinyin_CJKglue_dim { \CJKglue }
         \xpinyin_xpinyin_single_aux:nn {#3}
       }
   }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[internal,var]{\l_xpinyin_CJKglue_dim}
+%    \begin{macrocode}
+\dim_new:N \l_xpinyin_CJKglue_dim
 %    \end{macrocode}
 % \end{macro}
 %
@@ -762,7 +769,7 @@
 \keys_set:nn { xpinyin }
   {
     ratio   = .4 ,
-    vsep    = .1 \baselineskip ,
+    vsep    = 1 em ,
     pysep   = \c_space_tl ,
     font    = \normalfont ,
   }
