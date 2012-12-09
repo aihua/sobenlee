@@ -32,6 +32,7 @@
 \author{高\enspace 华}
 
 \hypersetup{
+  linktoc=all,
   pdfinfo={
     Title   = {\@title},
     Author  = {\@author},
@@ -236,6 +237,7 @@
 
 \DeclareRobustCommand*\KG{\kern\ccwd}
 \DeclareRobustCommand*\@cdot{\textcentereddot}
+\pdfstringdefDisableCommands\def\KG{\space\space}
 
 \renewcommand*\contentsname{目\KG 录}
 \newcommand*\prefacename{前\KG 言}
@@ -377,8 +379,8 @@
 \let\orig@footnote\footnote
 \RenewDocumentCommand\footnote{ o +m }{%
   \IfNoValueTF{#1}
-    {\unskip\orig@footnote{#2}\ignorespaces}
-    {\unskip\orig@footnote[#1]{#2}\ignorespaces}}
+    {\unskip\unskip\orig@footnote{#2}\ignorespaces}
+    {\unskip\unskip\orig@footnote[#1]{#2}\ignorespaces}}
 
 \renewenvironment{thebibliography}[1]{%
   \chapter{\bibname}

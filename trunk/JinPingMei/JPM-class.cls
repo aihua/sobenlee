@@ -13,7 +13,7 @@
 \RequirePackage[xetex]{geometry}
 \RequirePackage[pagestyles,clearempty]{titlesec}
 \RequirePackage[titles]{tocloft}
-\RequirePackage{calc}
+\RequirePackage{calc,xcolor}
 \RequirePackage[xetex, bookmarksnumbered, pdfstartview={XYZ null null 1}, pdfborder=001,
                 pdfpagemode=UseNone, pdfprintscaling=None]{hyperref}
 
