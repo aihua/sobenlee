@@ -1,0 +1,717 @@
+﻿% \iffalse meta-comment
+% !TEX program  = XeLaTeX
+%<*internal>
+\begingroup
+  \edef\tempa{\fmtname}
+  \edef\tempb{plain}
+\expandafter\endgroup
+\ifx\tempa\tempb
+\csname fi\endcsname
+%</internal>
+%<*install>
+
+\input l3docstrip.tex
+\keepsilent
+\askforoverwritefalse
+\preamble
+
+   Copyright (C) 2013 by Qing Lee <sobenlee@gmail.com>
+--------------------------------------------------------------------------
+   This work may be distributed and/or modified under the
+   conditions of the LaTeX Project Public License, either version 1.3
+   of this license or (at your option) any later version.
+   The latest version of this license is in
+     http://www.latex-project.org/lppl.txt
+   and version 1.3 or later is part of all distributions of LaTeX
+   version 2005/12/01 or later.
+
+   This work has the LPPL maintenance status "maintained".
+   The Current Maintainer of this work is Qing Lee.
+
+\endpreamble
+\postamble
+
+   This package consists of the file  randques.dtx,
+                and the derived files randques.pdf,
+                                      randques.sty, and
+                                      randques.ins.
+\endpostamble
+
+\generate{
+  \usedir{source/latex/randques}
+  \file{\jobname.ins}{\from{\jobname.dtx}{install}}
+  \usedir{tex/latex/randques}
+  \file{\jobname.sty}{\from{\jobname.dtx}{package}}
+}
+
+\endbatchfile
+%</install>
+%<*internal>
+\fi
+%</internal>
+%
+%<*driver|package>
+\NeedsTeXFormat{LaTeX2e}
+\RequirePackage{expl3}
+\GetIdInfo$Id$
+  {Random question selection.}
+%<*driver>
+\ProvidesExplFile{\ExplFileName.\ExplFileExtension}
+%</driver>
+%<package>\ProvidesExplPackage{\ExplFileName}
+  {\ExplFileDate}{0.1}{\ExplFileDescription}
+%<*driver>
+\ExplSyntaxOff
+%</driver>
+%</driver|package>
+%
+%<*driver>
+\documentclass[full,a4paper]{l3doc}
+\usepackage{xeCJK}
+\usepackage{geometry}
+\hypersetup{pdfstartview=FitH}
+\geometry{includemp,hmargin={0mm,15mm},vmargin=15mm,footskip=7mm}
+\linespread{1.1}
+\setmainfont[Ligatures=TeX]{TeX Gyre Pagella}
+\setmonofont{CMU Typewriter Text}
+\setCJKmainfont[BoldFont=Adobe Heiti Std,ItalicFont=Adobe Kaiti Std]{Adobe Song Std}
+\setCJKmonofont{Adobe Kaiti Std}
+\xeCJKsetup{PunctStyle=kaiming}
+\def\MacroFont{\linespread{1}\small\normalfont\ttfamily}
+\ExplSyntaxOn
+\DeclareDocumentCommand \package { o m }
+  {
+    \href
+      {
+        http://mirrors.ctan.org/help/Catalogue/entries/
+        \IfNoValueTF {#1} { \tl_expandable_lowercase:n {#2} } {#1} .html
+      }
+      { \pkg {#2} }
+  }
+\ExplSyntaxOff
+\def\TeX{\hologo{TeX}}
+\def\LaTeX{\hologo{LaTeX}}
+\def\pdfTeX{\hologo{pdfTeX}}
+\def\pdfLaTeX{\hologo{pdfLaTeX}}
+\def\orvar{\textup{\textbar}}
+\def\indexname{代码索引}
+\def\glossaryname{版本历史}
+\GlossaryPrologue{\section*{\glossaryname}}
+\IndexPrologue{%
+  \section*{\indexname}
+  \markboth{\indexname}{\indexname}
+  斜体的数字表示对应项说明所在的页码，下划线的数字表示定义所在的代码行号，而直立体的
+  数字表示对应项使用时所在的行号。}
+\begin{document}
+  \DocInput{\jobname.dtx}
+  \newgeometry{margin=15mm,footskip=7mm}
+  \PrintChanges
+  \PrintIndex
+\end{document}
+%</driver>
+% \fi
+%
+% \changes{v0.1}{2013/11/03}{初始版本。}
+%
+% \CheckSum{541}
+% \GetFileInfo{\jobname.dtx}
+%
+% \title{\bfseries\pkg{randques} 宏包}
+% \author{李清\\ \path{sobenlee@gmail.com}}
+% \date{\filedate\qquad\fileversion}
+% \maketitle
+%
+% \begin{documentation}
+%
+% \section{简介}
+%
+% \pkg{randques} 是一个 \LaTeX 宏包，提供了在题库文件中随机抽取题目的功能。
+%
+% \section{基本命令}
+%
+% \begin{function}{\RandSelQuestions}
+%   \begin{syntax}
+%     \cs{RandSelQuestions} \oarg{options} \Arg{file}
+%   \end{syntax}
+%   从题库文件 \meta{file} 中随机抽取题目。
+% \end{function}
+%
+% \begin{function}{\RandSelQueSetup}
+%   \begin{syntax}
+%     \cs{RandSelQueSetup} \Arg{options}
+%   \end{syntax}
+% \end{function}
+%
+% \end{documentation}
+%
+% \StopEventually{}
+%
+% \begin{implementation}
+%
+% \section{代码实现}
+%
+%    \begin{macrocode}
+%<*package>
+%<@@=randques>
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\RequirePackage { xparse }
+\RequirePackage { l3keys2e }
+\RequirePackage { l3str }
+\RequirePackage { l3rand }
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\ior_new:N \g_@@_ior
+\iow_new:N \g_@@_iow
+\int_new:N \l_@@_tmp_int
+\int_new:N \l_@@_question_int
+\int_new:N \l_@@_count_int
+\int_new:N \l_@@_state_int
+\int_new:N \g_@@_output_int
+\tl_new:N \g_@@_output_tl
+\tl_new:N \l_@@_output_tl
+\tl_new:N \l_@@_newline_tl
+\tl_new:N \l_@@_question_num_tl
+\prop_new:N \l_@@_question_prop
+\bool_new:N \l_@@_skip_bool
+\bool_new:N \l_@@_subquestion_block_bool
+\bool_new:N \l_@@_option_block_bool
+\bool_new:N \l_@@_all_bool
+\bool_new:N \l_@@_sort_bool
+\bool_new:N \l_@@_auto_name_bool
+\str_new:N \l_@@_before_question_block_str
+\str_new:N \l_@@_before_subquestion_block_str
+\str_new:N \l_@@_before_option_block_str
+\str_new:N \l_@@_before_question_str
+\str_new:N \l_@@_before_subquestion_str
+\str_new:N \l_@@_before_option_str
+\str_new:N \l_@@_after_question_str
+\str_new:N \l_@@_after_subquestion_str
+\str_new:N \l_@@_after_option_str
+\str_new:N \l_@@_after_question_block_str
+\str_new:N \l_@@_after_subquestion_block_str
+\str_new:N \l_@@_after_option_block_str
+%    \end{macrocode}
+%
+%  \begin{macro}[internal]{\@@_rand:nnnNN}
+%    \begin{macrocode}
+\cs_new_protected_nopar:Npn \@@_rand:nnnNN #1#2#3#4#5
+  {
+    \int_compare:nNnTF {#3} > {#2}
+      {
+        \msg_warning:nnxxx { randques } { not-enough-questions }
+          {#1} { \int_eval:n {#2} } { \int_eval:n {#3} }
+        \keys_set:nn { randques }  { all = true }
+      }
+      {
+        \int_zero:N \l_@@_tmp_int
+        \seq_clear_new:N #4
+        \prop_clear_new:N #5
+        \rand_seed_from_time:
+        \int_do_while:nNnn \l_@@_tmp_int < {#3}
+          { \@@_rand_aux:xNN { \rand_range:nn { \c_one } {#2} } #4#5 }
+        \rand_clean:
+      }
+  }
+\msg_new:nnn { randques } { not-enough-questions }
+  {
+    There~are~only~#2~questions~in~file~#1.\\
+    But~you~ask~#3~questions,~so~all~of~them~are~selected.
+  }
+\cs_new_protected_nopar:Npn \@@_rand_aux:nNN #1#2#3
+  {
+    \seq_if_in:NnF \l_@@_rand_seq {#1}
+      {
+        \seq_put_right:Nn #2 {#1}
+        \prop_put:Nnn #3 {#1} { }
+        \int_incr:N \l_@@_tmp_int
+      }
+  }
+\cs_generate_variant:Nn \@@_rand_aux:nNN { x }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[internal]{\@@_update_tester:nNNN}
+%    \begin{macrocode}
+\cs_new_protected_nopar:Npn \@@_update_tester:nNNN #1#2#3#4
+  {
+    \@@_def:Npn #2 ##1 #1 ##2 \q_stop
+      {
+        \if:w \scan_stop: ##1##2 \scan_stop:
+          ?
+        \else:
+          \use_none:n ##1 ?
+        \fi:
+      }
+    \@@_def_conditional:Npnn #3 ##1 { T , F , TF }
+      {
+        \if:w \scan_stop: #2 ##1 #1 \q_stop \scan_stop:
+          \prg_return_true: \else: \prg_return_false: \fi:
+      }
+    \@@_def:Npn #4 #1 ##1 \q_stop {##1}
+  }
+\cs_generate_variant:Nn \@@_update_tester:nNNN { x }
+\cs_new_eq:NN \@@_def:Npn \cs_new:Npn
+\cs_new_eq:NN \@@_def_conditional:Npnn \prg_new_conditional:Npnn
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[internal]{\@@_count:N}
+%    \begin{macrocode}
+\cs_new_protected_nopar:Npn \@@_count:N #1
+  {
+    \int_zero:N #1
+    \ior_str_map_inline:Nn \g_@@_ior
+      {
+        \tl_if_blank:nF {##1}
+          { \@@_tag_is_question:nT {##1} { \int_incr:N #1 } }
+      }
+    \ior_close:N \g_@@_ior
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[internal]{\@@_select:n}
+%    \begin{macrocode}
+\cs_new_protected_nopar:Npn \@@_select:n #1
+  {
+    \int_gincr:N \g_@@_output_int
+    \bool_if:NTF \l_@@_auto_name_bool
+      {
+        \tl_gset:Nx \g_@@_output_tl
+          { \c_job_name_tl - questions - \int_use:N \g_@@_output_int }
+      }
+      { \tl_gset_eq:NN \g_@@_output_tl \l_@@_output_tl }
+    \bool_if:NTF \l_@@_freeze_bool
+      {
+        \file_if_exist:nTF { \g_@@_output_tl }
+          { \use_none:n }
+          { \use:n }
+      }
+      { \use:n }
+      {
+        \@@_count:N \l_@@_count_int
+        \int_compare:nNnTF \l_@@_count_int = \c_zero
+          { \msg_warning:nnx { randques } { no-questions } {#1} }
+          {
+            \bool_if:NF \l_@@_all_bool
+              {
+                \bool_if:NT \l_@@_sort_bool
+                  { \int_set_eq:NN \l_@@_selection_int \l_@@_count_int }
+                \@@_rand:nnnNN {#1}
+                  { \l_@@_count_int } { \l_@@_selection_int }
+                  \l_@@_rand_seq
+                  \l_@@_question_prop
+                \bool_set_false:N \l_@@_skip_bool
+                \tl_clear:N \l_@@_question_num_tl
+              }
+            \@@_select_aux:n {#1}
+          }
+      }
+  }
+\msg_new:nnn { randques } { no-questions }
+  { There~is~no~question~be~found~in~file~#1. }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[internal]{\@@_select_aux:n}
+%    \begin{macrocode}
+\cs_new_protected_nopar:Npn \@@_select_aux:n #1
+  {
+    \tl_clear:N \l_@@_question_block_str
+    \int_zero:N \l_@@_question_int
+    \iow_open:Nn \g_@@_iow { \g_@@_output_tl }
+    \tl_if_empty:NF \l_@@_before_question_block_str
+      {
+        \iow_now:Nx \g_@@_iow
+          { \l_@@_before_question_block_str \iow_newline: }
+      }
+    \ior_open:Nn \g_@@_ior {#1}
+    \ior_str_map_inline:Nn \g_@@_ior
+      {
+        \tl_if_blank:nTF {##1}
+          { \tl_set_eq:NN \l_@@_newline_tl \iow_newline: }
+          { \@@_select_question:n {##1} }
+      }
+    \@@_output:
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[internal]{\@@_select_all:n}
+%    \begin{macrocode}
+\cs_new_protected_nopar:Npn \@@_select_all:n #1
+  {
+    \@@_tag_is_question:nTF {#1}
+      {
+        \@@_output_question_block:
+        \int_set_eq:NN \l_@@_state_int \c_zero
+        \tl_set:Nx \l_@@_question_block_str
+          {
+            \l_@@_before_question_str
+            \@@_remove_question_tag:w #1 \q_stop
+            \iow_newline:
+          }
+        \tl_clear:N \l_@@_newline_tl
+      }
+      { \@@_select_subquestion:n {#1} }
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[internal]{\@@_select_rand:n}
+%    \begin{macrocode}
+\cs_new_protected_nopar:Npn \@@_select_rand:n #1
+  {
+    \@@_tag_is_question:nTF {#1}
+      {
+        \int_incr:N \l_@@_question_int
+        \seq_if_in:NVTF \l_@@_rand_seq \l_@@_question_int
+          {
+            \@@_save_question_block:
+            \tl_set:Nx \l_@@_question_num_tl
+              { \int_use:N \l_@@_question_int }
+            \bool_set_false:N \l_@@_skip_bool
+            \int_set_eq:NN \l_@@_state_int \c_zero
+            \tl_set:Nx \l_@@_question_block_str
+              {
+                \l_@@_before_question_str
+                \@@_remove_question_tag:w #1 \q_stop
+                \iow_newline:
+              }
+            \tl_clear:N \l_@@_newline_tl
+          }
+          { \bool_set_true:N \l_@@_skip_bool }
+      }
+      { \bool_if:NF \l_@@_skip_bool { \@@_select_subquestion:n {#1} } }
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[internal]{\@@_select_sort:n}
+%    \begin{macrocode}
+\cs_new_protected_nopar:Npn \@@_select_sort:n #1
+  {
+    \@@_tag_is_question:nTF {#1}
+      {
+        \int_incr:N \l_@@_question_int
+        \@@_save_question_block:
+        \tl_set:Nx \l_@@_question_num_tl
+          { \int_use:N \l_@@_question_int }
+        \int_set_eq:NN \l_@@_state_int \c_zero
+        \tl_set:Nx \l_@@_question_block_str
+          {
+            \l_@@_before_question_str
+            \@@_remove_question_tag:w #1 \q_stop
+            \iow_newline:
+          }
+        \tl_clear:N \l_@@_newline_tl
+      }
+      { \@@_select_subquestion:n {#1} }
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[internal]{\@@_select_subquestion:n}
+%    \begin{macrocode}
+\cs_new_protected_nopar:Npn \@@_select_subquestion:n #1
+  {
+    \@@_tag_is_option:nTF {#1}
+      {
+        \tl_put_right:Nx \l_@@_question_block_str
+          {
+            \@@_item_tail_str:
+            \l_@@_newline_tl
+            \bool_if:NF \l_@@_option_block_bool
+              { \l_@@_before_option_block_str  \iow_newline: }
+            \l_@@_before_option_str
+            \@@_remove_option_tag:w #1 \q_stop
+            \iow_newline:
+          }
+        \int_set_eq:NN \l_@@_state_int \c_two
+        \bool_set_true:N \l_@@_option_block_bool
+      }
+      {
+        \@@_tag_is_subquestion:nTF {#1}
+          {
+            \tl_put_right:Nx \l_@@_question_block_str
+              {
+                \@@_item_tail_str:
+                \bool_if:NT \l_@@_option_block_bool
+                  { \l_@@_after_option_block_str  \iow_newline: }
+                \l_@@_newline_tl
+                \bool_if:NF \l_@@_subquestion_block_bool
+                  { \l_@@_before_subquestion_block_str  \iow_newline: }
+                \l_@@_before_subquestion_str
+                \@@_remove_subquestion_tag:w #1 \q_stop
+                 \iow_newline:
+              }
+            \bool_set_true:N \l_@@_subquestion_block_bool
+            \bool_set_false:N \l_@@_option_block_bool
+            \int_set_eq:NN \l_@@_state_int \c_one
+          }
+          {
+            \tl_put_right:Nx \l_@@_question_block_str
+              { \l_@@_newline_tl #1  \iow_newline: }
+          }
+      }
+    \tl_clear:N \l_@@_newline_tl
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[internal]{\@@_output_question_block:}
+%    \begin{macrocode}
+\cs_new_protected_nopar:Npn \@@_output_question_block:
+  {
+    \tl_if_empty:NF \l_@@_question_block_str
+      {
+        \iow_now:Nx \g_@@_iow
+          {
+            \l_@@_question_block_str
+            \@@_item_tail_str:
+            \bool_if:NT \l_@@_option_block_bool
+              { \l_@@_after_option_block_str \iow_newline: }
+            \bool_if:NT \l_@@_subquestion_block_bool
+              { \l_@@_after_subquestion_block_str \iow_newline: }
+          }
+        \bool_set_false:N \l_@@_option_block_bool
+        \bool_set_false:N \l_@@_subquestion_block_bool
+      }
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[internal]{\@@_save_question_block:}
+%    \begin{macrocode}
+\cs_new_protected_nopar:Npn \@@_save_question_block:
+  {
+    \tl_if_empty:NF \l_@@_question_num_tl
+      {
+        \prop_put:NVx \l_@@_question_prop \l_@@_question_num_tl
+          {
+            \l_@@_question_block_str
+            \@@_item_tail_str:
+            \bool_if:NT \l_@@_option_block_bool
+              { \l_@@_after_option_block_str \iow_newline: }
+            \bool_if:NT \l_@@_subquestion_block_bool
+              { \l_@@_after_subquestion_block_str \iow_newline: }
+          }
+        \bool_set_false:N \l_@@_option_block_bool
+        \bool_set_false:N \l_@@_subquestion_block_bool
+      }
+  }
+\cs_generate_variant:Nn \prop_put:Nnn { NVx }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[internal]{\@@_item_tail_str:}
+%    \begin{macrocode}
+\cs_new_nopar:Npn \@@_item_tail_str:
+  {
+    \if_case:w \l_@@_state_int
+      \tl_if_empty:NF \l_@@_after_question_str
+        { \l_@@_after_question_str \iow_newline: }
+    \or:
+      \tl_if_empty:NF \l_@@_after_subquestion_str
+        { \l_@@_after_subquestion_str \iow_newline: }
+    \or:
+      \tl_if_empty:NF \l_@@_after_option_str
+        { \l_@@_after_option_str \iow_newline: }
+    \fi:
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[internal]{\@@_output_all:}
+%    \begin{macrocode}
+\cs_new_protected_nopar:Npn \@@_output_all:
+  {
+    \tl_if_empty:NF \l_@@_question_block_str
+      {
+        \iow_now:Nx \g_@@_iow
+          {
+            \l_@@_question_block_str
+            \@@_item_tail_str:
+            \bool_if:NT \l_@@_option_block_bool
+              { \l_@@_after_option_block_str \iow_newline: }
+            \bool_if:NT \l_@@_subquestion_block_bool
+              { \l_@@_after_subquestion_block_str \iow_newline: }
+            \l_@@_after_question_block_str
+          }
+      }
+    \iow_close:N \g_@@_iow
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[internal]{\@@_output_rand:}
+%    \begin{macrocode}
+\cs_new_protected_nopar:Npn \@@_output_rand:
+  {
+    \@@_save_question_block:
+    \tl_if_empty:NF \l_@@_question_num_tl
+      {
+        \prop_map_inline:Nn \l_@@_question_prop
+          { \iow_now:Nn \g_@@_iow {##2} }
+        \tl_if_empty:NF \l_@@_after_question_block_str
+          { \iow_now:Nx \g_@@_iow { \l_@@_after_question_block_str } }
+      }
+    \iow_close:N \g_@@_iow
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[internal]{\@@_input:}
+%    \begin{macrocode}
+\cs_new_protected_nopar:Npn \@@_input:
+  { \file_input:n { \g_@@_output_tl } }
+%    \end{macrocode}
+% \end{macro}
+%
+%    \begin{macrocode}
+\bool_set_true:N \l_@@_auto_name_bool
+\keys_define:nn { randques }
+  {
+    all            .choice: ,
+    all / true     .code:n =
+      {
+        \bool_set_true:N \l_@@_all_bool
+        \cs_set_eq:NN \@@_select_question:n \@@_select_all:n
+        \cs_set_eq:NN \@@_output: \@@_output_all:
+      } ,
+    all / false    .code:n =
+      {
+        \bool_set_false:N \l_@@_all_bool
+        \bool_set_false:N \l_@@_sort_bool
+        \cs_set_eq:NN \@@_select_question:n \@@_select_rand:n
+        \cs_set_eq:NN \@@_output: \@@_output_rand:
+      } ,
+    all / randsort .code:n =
+      {
+        \bool_set_false:N \l_@@_all_bool
+        \bool_set_true:N  \l_@@_sort_bool
+        \cs_set_eq:NN \@@_select_question:n \@@_select_sort:n
+        \cs_set_eq:NN \@@_output: \@@_output_rand:
+      } ,
+    all      .initial:n = { false } ,
+    all      .default:n = { true } ,
+    freeze  .bool_set:N = \l_@@_freeze_bool ,
+    random   .int_set:N = \l_@@_selection_int ,
+    random   .value_required: ,
+    output   .code:n    =
+      {
+        \bool_false:N \l_@@_auto_name_tl
+        \tl_set:Nx \l_@@_output_tl {#1}
+      } ,
+    output   .value_required: ,
+    question-tag       .code:n =
+      {
+        \@@_update_tester:xNNN { \tl_to_str:n {#1} }
+          \@@_tag_is_question:w
+          \@@_tag_is_question:n
+          \@@_remove_question_tag:w
+      } ,
+    subquestion-tag   .code:n =
+      {
+        \@@_update_tester:xNNN { \tl_to_str:n {#1} }
+          \@@_tag_is_subquestion:w
+          \@@_tag_is_subquestion:n
+          \@@_remove_subquestion_tag:w
+      } ,
+    option-tag        .code:n =
+      {
+        \@@_update_tester:xNNN { \tl_to_str:n {#1} }
+          \@@_tag_is_option:w
+          \@@_tag_is_option:n
+          \@@_remove_option_tag:w
+      } ,
+    question-tag    .initial:n = { \question } ,
+    question-tag    .default:n = { \question } ,
+    subquestion-tag .initial:n = { \subquestion } ,
+    subquestion-tag .default:n = { \subquestion } ,
+    option-tag      .initial:n = { \option } ,
+    option-tag      .default:n = { \option } ,
+    before-question-block      .code:n =
+      { \str_set:Nn \l_@@_before_question_block_str {#1} } ,
+    before-subquestion-block   .code:n =
+      { \str_set:Nn \l_@@_before_subquestion_block_str {#1} } ,
+    before-option-block        .code:n =
+      { \str_set:Nn \l_@@_before_option_block_str {#1} } ,
+    before-question            .code:n =
+      { \str_set:Nn \l_@@_before_question_str {#1} } ,
+    before-subquestion         .code:n =
+      { \str_set:Nn \l_@@_before_subquestion_str {#1} } ,
+    before-option              .code:n =
+      { \str_set:Nn \l_@@_before_option_str {#1} } ,
+    after-question             .code:n =
+      { \str_set:Nn \l_@@_after_question_str {#1} } ,
+    after-subquestion          .code:n =
+      { \str_set:Nn \l_@@_after_subquestion_str {#1} } ,
+    after-option               .code:n =
+      { \str_set:Nn \l_@@_after_option_str {#1} } ,
+    after-question-block       .code:n =
+      { \str_set:Nn \l_@@_after_question_block_str {#1} } ,
+    after-subquestion-block    .code:n =
+      { \str_set:Nn \l_@@_after_subquestion_block_str {#1} } ,
+    after-option-block         .code:n =
+      { \str_set:Nn \l_@@_after_option_block_str {#1} } ,
+    before-question-block    .initial:n = { \begin { enumerate } } ,
+    before-subquestion-block .initial:n = { \begin { enumerate } } ,
+    before-option-block      .initial:n = { \begin { enumerate } } ,
+    before-question          .initial:n = { \item } ,
+    before-subquestion       .initial:n = { \item } ,
+    before-option            .initial:n = { \item } ,
+    after-question-block     .initial:n = { \end { enumerate } } ,
+    after-subquestion-block  .initial:n = { \end { enumerate } } ,
+    after-option-block       .initial:n = { \end { enumerate } }
+  }
+\cs_set_eq:NN \@@_def:Npn \cs_set:Npn
+\cs_set_eq:NN \@@_def_conditional:Npnn \prg_set_conditional:Npnn
+%    \end{macrocode}
+%
+% \begin{macro}{\RandSelQuestions}
+%    \begin{macrocode}
+\NewDocumentCommand \RandSelQuestions { o m }
+  {
+    \ior_open:NnTF \g_@@_ior {#2}
+      {
+        \group_begin:
+        \IfNoValueF {#1} { \keys_set:nn { randques } {#1} }
+        \@@_select:n {#2}
+        \ior_close:N \g_@@_ior
+        \group_end:
+        \@@_input:
+      }
+      { \msg_error:nnn { randques } { database-not-found } {#2} }
+  }
+\msg_new:nnn { randques } { database-not-found }
+  {
+    Question~database~`#1'~not~found.\\
+    randques~will~not~work!
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\RandSelQueSetup}
+%    \begin{macrocode}
+\NewDocumentCommand \RandSelQueSetup { m }
+  { \keys_set:nn { randques } {#1} }
+%    \end{macrocode}
+% \end{macro}
+%
+%    \begin{macrocode}
+\ProcessKeysOptions { randques }
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%</package>
+%    \end{macrocode}
+%
+% \end{implementation}
+%
+% \Finale
+%
+\endinput
