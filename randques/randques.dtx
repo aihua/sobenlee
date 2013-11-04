@@ -113,7 +113,7 @@
 %
 % \changes{v0.1}{2013/11/03}{初始版本。}
 %
-% \CheckSum{541}
+% \CheckSum{544}
 % \GetFileInfo{\jobname.dtx}
 %
 % \title{\bfseries\pkg{randques} 宏包}
@@ -159,7 +159,7 @@
 \RequirePackage { xparse }
 \RequirePackage { l3keys2e }
 \RequirePackage { l3str }
-\RequirePackage { l3rand }
+\RequirePackage { pgfmath }
 %    \end{macrocode}
 %
 %    \begin{macrocode}
@@ -173,6 +173,7 @@
 \tl_new:N \g_@@_output_tl
 \tl_new:N \l_@@_output_tl
 \tl_new:N \l_@@_newline_tl
+\tl_new:N \l_@@_randnum_tl
 \tl_new:N \l_@@_question_num_tl
 \prop_new:N \l_@@_question_prop
 \bool_new:N \l_@@_skip_bool
@@ -209,27 +210,28 @@
         \int_zero:N \l_@@_tmp_int
         \seq_clear_new:N #4
         \prop_clear_new:N #5
-        \rand_seed_from_time:
         \int_do_while:nNnn \l_@@_tmp_int < {#3}
-          { \@@_rand_aux:xNN { \rand_range:nn { \c_one } {#2} } #4#5 }
-        \rand_clean:
+          {
+            \pgfmathrandominteger \l_@@_randnum_tl { \c_one } {#2}
+            \__randques_rand_aux:oNN { \l_@@_randnum_tl } #4#5
+          }
       }
   }
 \msg_new:nnn { randques } { not-enough-questions }
   {
-    There~are~only~#2~questions~in~file~#1.\\
+    There~are~only~#2~questions~in~file~`#1'.\\
     But~you~ask~#3~questions,~so~all~of~them~are~selected.
   }
 \cs_new_protected_nopar:Npn \@@_rand_aux:nNN #1#2#3
   {
-    \seq_if_in:NnF \l_@@_rand_seq {#1}
+    \seq_if_in:NnF #2 {#1}
       {
         \seq_put_right:Nn #2 {#1}
         \prop_put:Nnn #3 {#1} { }
         \int_incr:N \l_@@_tmp_int
       }
   }
-\cs_generate_variant:Nn \@@_rand_aux:nNN { x }
+\cs_generate_variant:Nn \@@_rand_aux:nNN { o }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -600,7 +602,8 @@
     all      .default:n = { true } ,
     freeze  .bool_set:N = \l_@@_freeze_bool ,
     random   .int_set:N = \l_@@_selection_int ,
-    random   .value_required: ,
+    random   .initial:n = { \c_one } ,
+    random   .default:n = { \c_one } ,
     output   .code:n    =
       {
         \bool_false:N \l_@@_auto_name_tl
