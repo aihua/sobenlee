@@ -113,7 +113,7 @@
 %
 % \changes{v0.1}{2013/11/03}{初始版本。}
 %
-% \CheckSum{544}
+% \CheckSum{547}
 % \GetFileInfo{\jobname.dtx}
 %
 % \title{\bfseries\pkg{randques} 宏包}
@@ -159,7 +159,7 @@
 \RequirePackage { xparse }
 \RequirePackage { l3keys2e }
 \RequirePackage { l3str }
-\RequirePackage { pgfmath }
+\RequirePackage { tikz }
 %    \end{macrocode}
 %
 %    \begin{macrocode}
@@ -173,7 +173,7 @@
 \tl_new:N \g_@@_output_tl
 \tl_new:N \l_@@_output_tl
 \tl_new:N \l_@@_newline_tl
-\tl_new:N \l_@@_randnum_tl
+\tl_new:N \l_@@_rand_num_tl
 \tl_new:N \l_@@_question_num_tl
 \prop_new:N \l_@@_question_prop
 \bool_new:N \l_@@_skip_bool
@@ -196,6 +196,13 @@
 \str_new:N \l_@@_after_option_block_str
 %    \end{macrocode}
 %
+%  \begin{macro}[internal]{\@@_rand_num:Nnn}
+%    \begin{macrocode}
+\cs_new_protected_nopar:Npn \@@_rand_num:Nnn
+  { \pgfmathrandominteger }
+%    \end{macrocode}
+% \end{macro}
+%
 %  \begin{macro}[internal]{\@@_rand:nnnNN}
 %    \begin{macrocode}
 \cs_new_protected_nopar:Npn \@@_rand:nnnNN #1#2#3#4#5
@@ -212,8 +219,8 @@
         \prop_clear_new:N #5
         \int_do_while:nNnn \l_@@_tmp_int < {#3}
           {
-            \pgfmathrandominteger \l_@@_randnum_tl { \c_one } {#2}
-            \__randques_rand_aux:oNN { \l_@@_randnum_tl } #4#5
+            \@@_rand_num:Nnn \l_@@_rand_num_tl { \c_one } {#2}
+            \@@_rand_aux:oNN { \l_@@_rand_num_tl } #4#5
           }
       }
   }
